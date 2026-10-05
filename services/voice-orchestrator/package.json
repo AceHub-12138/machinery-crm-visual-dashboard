@@ -1,0 +1,10 @@
+{
+  "name": "voice-orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "「小川」语音编排服务(8b 数据通路):WS hub + 预取注入 + LLM 适配器。零 npm 依赖,Node 22+ TS 直跑。",
+  "scripts": {
+    "start": "node --experimental-strip-types src/main.ts"
+  }
+}

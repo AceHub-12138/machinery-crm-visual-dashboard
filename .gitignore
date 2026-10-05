@@ -1,0 +1,21 @@
+node_modules
+.next
+out
+dist
+coverage
+*.log
+.DS_Store
+.env
+.env.local
+tsconfig.tsbuildinfo
+
+# Local review artifacts (screenshots / CDP drivers) — not part of the product
+.review/
+
+# NOTE: src/data/*-raw.json are tracked on purpose.
+# They are the source files for scripts/build-china-map.mjs and
+# scripts/build-china-outline.mjs — without them the committed
+# src/data/china-map.json can never be regenerated.
+
+# voice-orchestrator runtime artifacts (trace JSONL)
+services/voice-orchestrator/logs/

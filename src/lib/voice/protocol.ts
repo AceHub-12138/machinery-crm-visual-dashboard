@@ -1,0 +1,252 @@
+/**
+ * 「小川」语音事件协议(plan §9;8b 起大屏覆盖层与编排服务共用)。
+ *
+ * 两个进程、一条 WS:
+ *   编排服务 services/voice-orchestrator  ── VoiceWireEvent ──▶  大屏 overlay / 文字对话台
+ *   文字对话台 /voice-console             ── ConsoleWireEvent ──▶ 编排服务
+ *
+ * 设计红线(plan §9/§16.2):
+ * - 状态机与粒子层不感知数据来源:数据从哪来(payload 预取 / 平台 MCP /
+ *   8c 实时语音模型)只体现在 `tool.invoke.source` 上,渲染层零感知;
+ * - 8c 换实时语音模型时本协议不变:asr.partial / tts.boundary 已预留;
+ * - wire 事件与 session-machine 的 VoiceEvent 是两层:前者是传输语义,
+ *   后者是覆盖层内部状态机语义,映射在 src/lib/voice/live-source.ts。
+ *
+ * §9 之外仅追加两个控制面事件(hub.hello / trace.turn),只给对话台用,
+ * 大屏解析失败一律丢弃(fail-closed,见 parseWireEvent)。
+ */
+
+import type { AnswerCardData, VoiceStateName } from "./session-machine.ts";
+
+/** 答案卡模板 id(tool.invoke 携带,驱动答案卡选型)。 */
+export type CardTemplateId = AnswerCardData["kind"];
+
+/** 数据来源:主路径=payload 预取注入(零工具轮);长尾=平台 MCP 工具轮。 */
+export type AnswerDataSource = "payload" | "mcp";
+
+/** 错误码(覆盖层按 code 映射降级话术,不感知细节)。 */
+export type VoiceErrorCode =
+  | "llm_timeout" // LLM 思考超 8s(VOICE_TIMING.thinkingMaxMs)
+  | "llm_unavailable" // 适配器连接失败/鉴权失败
+  | "datasource" // payload 预取失败(网络/500/结构不合法)
+  | "mcp" // 平台 MCP 工具轮失败(仅长尾路径)
+  | "rate_limited" // 每连接提问限流(安全审核项)
+  | "internal"; // 编排内部意外错误
+
+/**
+ * 服务端 → 客户端(大屏 + 对话台广播)。
+ * `at` 统一为服务端 Date.now() 域毫秒;客户端只用于展示排序,
+ * 不与本域 performance.now() 混算。
+ */
+export type VoiceWireEvent =
+  | { type: "session.start"; at: number; sessionId: string }
+  | {
+      type: "state.change";
+      at: number;
+      from: VoiceStateName;
+      to: VoiceStateName;
+      /** 本轮接管内的问答轮次(0 起) */
+      turn: number;
+      /** to === "thinking" 时携带最终问题(大屏不依赖,对话台展示用) */
+      question?: string;
+    }
+  | { type: "asr.partial"; at: number; text: string; final: boolean }
+  | {
+      type: "tool.invoke";
+      at: number;
+      /** 卡片模板选型;无数据模板的纯结论回答缺省 */
+      card?: CardTemplateId;
+      source: AnswerDataSource;
+      /** 该来源从发起至就绪的耗时(毫秒;对话台打点展示) */
+      latencyMs: number | null;
+    }
+  | {
+      type: "answer.delta";
+      at: number;
+      /** 流式序号(0 起) */
+      seq: number;
+      /** 本片增量文本 */
+      text: string;
+      /** 末片为 true;此时携带完整答案卡(数字口径由编排侧构造) */
+      full: boolean;
+      card?: AnswerCardData;
+    }
+  | {
+      type: "tts.boundary";
+      at: number;
+      /** 句索引(0 起);8b 由编排侧按句读合成,8c 换 TTS 真边界 */
+      sentenceIndex: number;
+      /** 该句在播报文案中的字符起点 */
+      charIndex: number;
+    }
+  | { type: "session.end"; at: number; reason: SessionEndReason }
+  | { type: "error"; at: number; code: VoiceErrorCode; message: string }
+  /* ---- 以下为 8b 控制面追加(不进 §9 正集;大屏可安全忽略) ---- */
+  | {
+      type: "hub.hello";
+      at: number;
+      /** 当前在连的 大屏 / 对话台 数量 */
+      screens: number;
+      consoles: number;
+    }
+  | {
+      type: "trace.turn";
+      at: number;
+      /** 与 turn 编号对应的一轮完整打点(plan §16.2 B④) */
+      trace: TurnTracePayload;
+
+      turn: number;
+    };
+
+export type SessionEndReason =
+  | "followup_timeout" // 追问 3s 无输入
+  | "decline" // 「没有了/谢谢」
+  | "force" // 运维/对话台强制退场
+  | "error"; // 错误路径走完降级话术后退场
+
+/** 一轮问答的全程打点(plan §16.2 B④;毫秒,相对 question 起点)。 */
+export type TurnTracePayload = {
+  question: string;
+  turn: number;
+  /** 各阶段完成时刻(相对提问 t0;未发生的阶段为 null) */
+  stages: {
+    question: number;
+    prefetch: number | null;
+    llmFirstToken: number | null;
+    toolExec: number | null;
+    answerFull: number | null;
+  };
+  source: AnswerDataSource;
+  /** 答案卡模板;无卡(纯结论)为 null */
+  card: CardTemplateId | null;
+  /** 是否走了降级话术(错误路径 / 覆盖缺口) */
+  degraded: boolean;
+  totalMs: number | null;
+};
+
+/**
+ * 客户端 → 服务端(仅对话台;大屏是纯订阅方,不发任何事件)。
+ */
+export type ConsoleWireEvent =
+  | { type: "console.hello"; at: number; role: "console" | "screen" }
+  | { type: "hub.auth"; at: number; token: string } // 首帧鉴权(审核 H1;仅鉴权模式生效)
+  | { type: "session.wake"; at: number } // 开始一轮接管(等价 8c 唤醒词)
+  | { type: "question.submit"; at: number; text: string }
+  | { type: "session.close"; at: number }; // 强制退场(Esc 语义)
+
+export const WIRE_EVENT_TYPES = [
+  "session.start",
+  "state.change",
+  "asr.partial",
+  "tool.invoke",
+  "answer.delta",
+  "tts.boundary",
+  "session.end",
+  "error",
+  "hub.hello",
+  "trace.turn",
+] as const satisfies readonly VoiceWireEvent["type"][];
+
+/** fail-closed 解析:任何不合法/未知消息一律返回 null(大屏与编排共用)。 */
+export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
+  if (typeof raw !== "string") return null;
+  let data: unknown;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    return null;
+  }
+  if (typeof data !== "object" || data === null) return null;
+  const record = data as Record<string, unknown>;
+  const { type, at } = record;
+  if (typeof type !== "string" || !(WIRE_EVENT_TYPES as readonly string[]).includes(type)) return null;
+  if (typeof at !== "number" || !Number.isFinite(at)) return null;
+
+  const ev = data as VoiceWireEvent;
+  switch (ev.type) {
+    case "session.start":
+      return typeof ev.sessionId === "string" && ev.sessionId.length > 0 ? ev : null;
+    case "state.change":
+      return typeof ev.from === "string" && typeof ev.to === "string" && typeof ev.turn === "number"
+        ? ev
+        : null;
+    case "asr.partial":
+      return typeof ev.text === "string" && typeof ev.final === "boolean" ? ev : null;
+    case "tool.invoke":
+      return typeof ev.source === "string" ? ev : null;
+    case "answer.delta":
+      if (typeof ev.seq !== "number" || typeof ev.text !== "string" || typeof ev.full !== "boolean") {
+        return null;
+      }
+      // 卡片来自网络:逐 kind schema 校验(防原型链/脏字段打崩渲染层)
+      return ev.full && !isValidAnswerCard(ev.card) ? null : ev;
+    case "tts.boundary":
+      return typeof ev.sentenceIndex === "number" && typeof ev.charIndex === "number" ? ev : null;
+    case "session.end":
+      return typeof ev.reason === "string" ? ev : null;
+    case "error":
+      return typeof ev.code === "string" && typeof ev.message === "string" ? ev : null;
+    case "hub.hello":
+      return typeof ev.screens === "number" && typeof ev.consoles === "number" ? ev : null;
+    case "trace.turn":
+      return typeof ev.turn === "number" && typeof ev.trace === "object" && ev.trace !== null ? ev : null;
+    default:
+      return null;
+  }
+}
+
+const isStr = (v: unknown): v is string => typeof v === "string";
+const isNum = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v);
+
+/** 答案卡上限(前端校验与服务端截断共用,只在此处定义) */
+export const ANSWER_TEXT_MAX = 300;
+export const ANSWER_SPOKEN_MAX = 600;
+export const ANSWER_ROWS_MAX = 20;
+const isText = (v: unknown, max = ANSWER_TEXT_MAX): v is string => isStr(v) && v.length <= max;
+/** 百分比:0–1000(允许超额完成) */
+const isPercent = (v: unknown): v is number => isNum(v) && v >= 0 && v <= 1000;
+/** 计数:0–1e9 */
+const isCount = (v: unknown): v is number => isNum(v) && v >= 0 && v <= 1e9;
+
+/** 网络侧答案卡 schema:kind 必须是注册表已知 id,字段逐个验型;
+ *  未知 kind(含 "constructor" 等原型链键)一律拒绝。 */
+export function isValidAnswerCard(card: unknown): card is AnswerCardData {
+  if (typeof card !== "object" || card === null) return false;
+  const c = card as Record<string, unknown>;
+  if (!isText(c.spoken, ANSWER_SPOKEN_MAX) || !isText(c.title)) return false;
+  switch (c.kind) {
+    case "target-progress":
+      return isText(c.actualText) && isText(c.targetText) && isText(c.remainingText) && isPercent(c.completionRate);
+    case "completion-ring":
+      return isPercent(c.ratePercent) && isText(c.collectedText) && isText(c.targetText) && isText(c.remainingText);
+    case "region":
+      return (
+        isText(c.summaryText) &&
+        Array.isArray(c.rows) &&
+        c.rows.length <= ANSWER_ROWS_MAX &&
+        c.rows.every((row): boolean => {
+          if (typeof row !== "object" || row === null) return false;
+          const r = row as Record<string, unknown>;
+          return isText(r.region) && isCount(r.shipments) && isCount(r.units) && isPercent(r.sharePercent);
+        })
+      );
+    case "customers-shipments":
+      return (
+        isText(c.summaryText) &&
+        Array.isArray(c.rows) &&
+        c.rows.length <= ANSWER_ROWS_MAX &&
+        c.rows.every((row): boolean => {
+          if (typeof row !== "object" || row === null) return false;
+          const r = row as Record<string, unknown>;
+          return isText(r.equipmentText) && isText(r.detailText) && isText(r.statusText) && isText(r.dateLabel);
+        })
+      );
+    case "brief":
+      return Array.isArray(c.lines) && c.lines.length <= ANSWER_ROWS_MAX && c.lines.every((line) => isText(line));
+    default:
+      return false;
+  }
+}
+
+/** 编排服务的默认监听端口(与本机大屏 3015 无冲突)。 */
+export const VOICE_HUB_DEFAULT_PORT = 3210;

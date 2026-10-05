@@ -1,0 +1,537 @@
+/* ==========================================================================
+   「小川」语音覆盖层 — overlay 作用域(docs/jarvis-voice-mode-plan.md §2/§5/§7)
+
+   隔离红线:这里只允许 .overlay-* 类与 .overlay-root 内的 CSS 变量,
+   不引用、不覆盖任何 .screen-* / .panel-* / 全局 token;globals.css 零改动。
+   覆盖层挂载时盖住基线(近黑场底 #0A0806 淡入,≈500ms 合成层过渡),
+   卸载后基线轮播在原相位继续——切换本身不做任何基线改动。
+   ========================================================================== */
+
+.overlay-root {
+  /* ---- §2 色板:铜/琥珀,与既有铜色地图同源,不引入青蓝 ---- */
+  --ov-core: #ffb65c; /* 核心/高亮(亮琥珀) */
+  --ov-copper: #c97f3d; /* 主线框、粒子主体、进度条填充(铜) */
+  --ov-ember: #8a4b1f; /* 粒子暗部、氛围(暗铜) */
+  --ov-line: rgba(255, 182, 92, 0.35); /* 细线、环、边框 */
+  --ov-ink: #ffe8c7; /* 覆盖层文字(暖白) */
+  --ov-field: #0a0806; /* 粒子接管期全屏底色(近黑) */
+
+  /* ---- 时序 token(参数化,验收项) ---- */
+  --ov-takeover-ms: 500ms; /* 接管/退场渐隐(plan §5 ≈500ms) */
+  --ov-card-bar-ms: 700ms; /* 进度条填充 */
+
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  background: var(--ov-field);
+  color: var(--ov-ink);
+  /* 接管与退场共用一条透明度过渡;enter=0 / on=1 / exit=0 由 data-phase 驱动 */
+  transition: opacity var(--ov-takeover-ms) ease-out;
+  will-change: opacity;
+}
+
+.overlay-root[data-phase="enter"] {
+  opacity: 0;
+}
+
+.overlay-root[data-phase="on"] {
+  opacity: 1;
+}
+
+.overlay-root[data-phase="exit"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   核心上方的转写区:状态眉标 + ASR 小字(plan §5:转写小字位于核心上方)
+   -------------------------------------------------------------------------- */
+
+.overlay-caption-block {
+  position: absolute;
+  top: 19.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(880px, 76vw);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* A3:状态切换时文案块按 key 重挂载,入场淡现 */
+@keyframes overlay-caption-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlay-caption-appear {
+  animation: overlay-caption-in 240ms ease-out both;
+}
+
+.overlay-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--ov-copper);
+}
+
+.overlay-status::before,
+.overlay-status::after {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: var(--ov-line);
+}
+
+.overlay-en {
+  font-family: var(--font-hud), Rajdhani, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.overlay-partial {
+  margin: 18px 0 0;
+  min-height: 40px;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  color: var(--ov-ink);
+  text-shadow: 0 0 22px rgba(255, 182, 92, 0.22);
+}
+
+.overlay-partial-idle {
+  color: rgba(255, 232, 199, 0.52);
+}
+
+/* --------------------------------------------------------------------------
+   答案卡(plan §7:锚点处先成一条水平细线,随后纵向展开、边框描边绘制)
+   JS 按 launchPhase 逐帧写 transform/stroke-dashoffset,这里只放静态材质。
+   -------------------------------------------------------------------------- */
+
+.overlay-card {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* width/top 由 JS 按几何写入(overlayGeometry.cardAnchor) */
+}
+
+.overlay-card-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform-origin: center;
+  background: linear-gradient(90deg, transparent, var(--ov-core) 18%, var(--ov-core) 82%, transparent);
+  box-shadow: 0 0 18px rgba(255, 182, 92, 0.55);
+}
+
+.overlay-card-body {
+  position: relative;
+  transform-origin: top center; /* 细线是卡的上缘,纵向向下展开 */
+  padding: 20px 32px 18px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(201, 127, 61, 0.10), transparent 58%),
+    linear-gradient(180deg, rgba(26, 16, 8, 0.92), rgba(10, 8, 6, 0.88));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 182, 92, 0.10),
+    0 24px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* SVG 描边边框:铺满卡体,描边进度由 JS 写 stroke-dashoffset */
+.overlay-card-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.overlay-card-frame-rect {
+  fill: none;
+  stroke: var(--ov-copper);
+  stroke-width: 1.5;
+}
+
+/* DataV 风格角括号:展开完成后以 opacity 点亮(铜色,不照抄青色) */
+.overlay-card-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--ov-core);
+  opacity: 0;
+  transition: opacity 260ms ease-out;
+}
+
+.overlay-card-corner-tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+.overlay-card-corner-tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+.overlay-card-corner-bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+.overlay-card-corner-br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+.overlay-card-corner.is-on {
+  opacity: 1;
+}
+
+.overlay-card-title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--ov-copper);
+}
+
+/* 大额黑体数字:延续「黑体金钱」约定,锐利、不透视 */
+.overlay-card-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.overlay-card-amount-main {
+  color: #fff3e0;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 30px rgba(255, 182, 92, 0.28);
+  white-space: nowrap;
+}
+
+.overlay-card-amount-main > .overlay-card-amount-currency {
+  font-size: 40px;
+  font-weight: 700;
+  margin-right: 6px;
+  color: var(--ov-line);
+}
+
+.overlay-card-amount-main > .overlay-card-amount-number {
+  font-size: 66px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.overlay-card-amount-main > .overlay-card-amount-unit {
+  font-size: 32px;
+  font-weight: 700;
+  margin-left: 8px;
+  color: var(--ov-ink);
+}
+
+.overlay-card-rate {
+  text-align: right;
+  font-size: 19px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 232, 199, 0.6);
+  white-space: nowrap;
+}
+
+.overlay-card-rate > strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 34px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  color: var(--ov-core);
+  line-height: 1;
+}
+
+/* 2D 铜色进度条:JS 在展开完成时写入目标宽度,CSS 负责填充过渡 */
+.overlay-card-bar {
+  margin-top: 14px;
+  height: 12px;
+  border-radius: 3px;
+  background: rgba(138, 75, 31, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(255, 182, 92, 0.14);
+  overflow: hidden;
+}
+
+.overlay-card-bar-fill {
+  display: block;
+  width: 0%; /* 目标宽度由 JS 写入 */
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ov-ember), var(--ov-copper) 55%, var(--ov-core));
+  box-shadow: 0 0 16px rgba(255, 182, 92, 0.45);
+  transition: width var(--ov-card-bar-ms) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.overlay-card-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 9px;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 232, 199, 0.66);
+  font-variant-numeric: tabular-nums;
+}
+
+.overlay-card-meta > em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--ov-core);
+}
+
+.overlay-card-spoken {
+  margin: 12px 0 0;
+  min-height: 52px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--ov-ink);
+}
+
+/* --------------------------------------------------------------------------
+   运维提示(F9 / Esc,不面向观众,plan §3 运维后备)
+   -------------------------------------------------------------------------- */
+
+.overlay-hint {
+  position: absolute;
+  left: 22px;
+  bottom: 18px;
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 232, 199, 0.28);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   8b 新增模板:区域对比卡 / 完成率环卡 / 客户发货卡 / 结论卡
+   (同 .overlay-card-* 作用域与色板 token,零新颜色)
+   -------------------------------------------------------------------------- */
+
+.overlay-card-subtitle {
+  margin: 4px 0 0;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 232, 199, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 通用紧凑行列表(区域/发货) */
+.overlay-card-rows {
+  margin-top: 12px;
+  display: grid;
+  gap: 7px;
+}
+
+.overlay-card-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 30px;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.overlay-card-row-region {
+  width: 64px;
+  flex: none;
+  color: var(--ov-ink);
+  letter-spacing: 0.04em;
+}
+
+.overlay-card-row-mini {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(138, 75, 31, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(255, 182, 92, 0.12);
+  overflow: hidden;
+}
+
+.overlay-card-row-mini > i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ov-ember), var(--ov-copper) 55%, var(--ov-core));
+  box-shadow: 0 0 10px rgba(255, 182, 92, 0.4);
+}
+
+.overlay-card-row-value {
+  flex: none;
+  min-width: 200px;
+  text-align: right;
+  color: rgba(255, 232, 199, 0.66);
+}
+
+.overlay-card-row-value > strong {
+  font-size: 24px;
+  font-weight: 900;
+  color: #fff3e0;
+  margin-right: 2px;
+}
+
+.overlay-card-row-share {
+  font-style: normal;
+  margin-left: 10px;
+  font-size: 15px;
+  color: var(--ov-copper);
+}
+
+/* 客户/发货卡行:左主文 + 右徽标 */
+.overlay-card-row-main {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.overlay-card-row-main > strong {
+  font-weight: 700;
+  color: var(--ov-ink);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.overlay-card-row-main > small {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 232, 199, 0.45);
+  font-variant-numeric: tabular-nums;
+}
+
+.overlay-card-row-tail {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.overlay-card-row-tail > em {
+  font-style: normal;
+  font-size: 15px;
+  color: rgba(255, 232, 199, 0.6);
+}
+
+.overlay-card-chip {
+  font-style: normal;
+  padding: 2px 10px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--ov-core);
+  border: 1px solid var(--ov-line);
+  border-radius: 2px;
+  background: rgba(255, 182, 92, 0.08);
+  white-space: nowrap;
+}
+
+/* 完成率环卡:SVG 圆环(填充节奏与进度条同拍,CSS 补间) */
+.overlay-ring-block {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+.overlay-ring-wrap {
+  position: relative;
+  flex: none;
+  width: 150px;
+  height: 150px;
+}
+
+.overlay-ring {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.overlay-ring-track {
+  fill: none;
+  stroke: rgba(138, 75, 31, 0.3);
+  stroke-width: 11;
+}
+
+.overlay-ring-fill {
+  fill: none;
+  stroke: var(--ov-copper);
+  stroke-width: 11;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 8px rgba(255, 182, 92, 0.45));
+  transition: stroke-dashoffset var(--ov-card-bar-ms) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.overlay-ring-value {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+}
+
+.overlay-ring-value > strong {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--ov-core);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 18px rgba(255, 182, 92, 0.3);
+}
+
+.overlay-ring-meta {
+  display: grid;
+  gap: 6px;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 232, 199, 0.66);
+  font-variant-numeric: tabular-nums;
+}
+
+.overlay-ring-meta > em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--ov-core);
+  margin-left: 6px;
+}
+
+/* 结论卡 */
+.overlay-card-brief-lines {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+  font-size: 20px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  color: var(--ov-ink);
+}
+
+.overlay-card-brief-lines > p {
+  margin: 0;
+}
+
+/* 展厅大屏不做任何交互动画降级之外的事情;遵循系统减弱动效偏好时,
+   只保留状态文字,粒子画布由组件层以同条件停帧。 */
+@media (prefers-reduced-motion: reduce) {
+  .overlay-card-bar-fill {
+    transition: none;
+  }
+
+  .overlay-card-corner {
+    transition: none;
+  }
+
+  .overlay-ring-fill {
+    transition: none;
+  }
+}

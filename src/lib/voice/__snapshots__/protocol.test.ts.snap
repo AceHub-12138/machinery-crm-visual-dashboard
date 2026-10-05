@@ -1,0 +1,127 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`protocol — 事件序列快照(单轮:提问→作答→退场) > golden sequence:session.start → … → session.end 1`] = `
+[
+  {
+    "at": 1000,
+    "sessionId": "sess-1",
+    "type": "session.start",
+  },
+  {
+    "at": 1000,
+    "from": "ambient",
+    "to": "waking",
+    "turn": 0,
+    "type": "state.change",
+  },
+  {
+    "at": 1900,
+    "from": "waking",
+    "to": "listening",
+    "turn": 0,
+    "type": "state.change",
+  },
+  {
+    "at": 2000,
+    "final": false,
+    "text": "本月销售",
+    "type": "asr.partial",
+  },
+  {
+    "at": 2080,
+    "final": true,
+    "text": "本月销售情况怎么样?",
+    "type": "asr.partial",
+  },
+  {
+    "at": 2100,
+    "from": "listening",
+    "question": "本月销售情况怎么样?",
+    "to": "thinking",
+    "turn": 0,
+    "type": "state.change",
+  },
+  {
+    "at": 2130,
+    "card": "target-progress",
+    "latencyMs": 12,
+    "source": "payload",
+    "type": "tool.invoke",
+  },
+  {
+    "at": 2140,
+    "full": false,
+    "seq": 0,
+    "text": "先生,2026年9月合同额 ¥1,286.0万",
+    "type": "answer.delta",
+  },
+  {
+    "at": 2160,
+    "card": {
+      "actualText": "¥1,286.0万",
+      "completionRate": 85.7,
+      "kind": "target-progress",
+      "remainingText": "¥214.0万",
+      "spoken": "先生,2026年9月合同额 ¥1,286.0万,完成月度目标的 85.7%,距离目标还差 ¥214.0万。",
+      "targetText": "¥1,500.0万",
+      "title": "2026年9月 · 合同额目标进度",
+    },
+    "full": true,
+    "seq": 1,
+    "text": ",完成月度目标的 85.7%,距离目标还差 ¥214.0万。",
+    "type": "answer.delta",
+  },
+  {
+    "at": 2161,
+    "from": "thinking",
+    "to": "answering",
+    "turn": 1,
+    "type": "state.change",
+  },
+  {
+    "at": 2161,
+    "charIndex": 0,
+    "sentenceIndex": 0,
+    "type": "tts.boundary",
+  },
+  {
+    "at": 8000,
+    "from": "answering",
+    "to": "followup",
+    "turn": 1,
+    "type": "state.change",
+  },
+  {
+    "at": 11000,
+    "from": "followup",
+    "to": "closing",
+    "turn": 1,
+    "type": "state.change",
+  },
+  {
+    "at": 11000,
+    "reason": "followup_timeout",
+    "type": "session.end",
+  },
+  {
+    "at": 2160,
+    "trace": {
+      "card": "target-progress",
+      "degraded": false,
+      "question": "本月销售情况怎么样?",
+      "source": "payload",
+      "stages": {
+        "answerFull": 74,
+        "llmFirstToken": 38,
+        "prefetch": 12,
+        "question": 0,
+        "toolExec": null,
+      },
+      "totalMs": 74,
+      "turn": 0,
+    },
+    "turn": 1,
+    "type": "trace.turn",
+  },
+]
+`;

@@ -1,0 +1,720 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   大川机床 · 经营指挥舱 — 大屏设计令牌
+   Rev 2. 单一事实来源：改这里，不要在各组件里写魔法值。
+   目标观看条件：55–86 吋屏，4–8 m 视距，1920×1080 等比缩放。
+   字号下限由此反推：1px ≈ 0.28 mm @55吋/4m ⇒ 18px ≈ 5.1 mm 字高。
+   ========================================================================== */
+
+:root {
+  /* ---- 品牌 ---- */
+  --brand-orange: #ee7d2c; /* 与平台 --brand-orange 完全一致 */
+  --brand-orange-hot: #ff9d55;
+  --brand-orange-deep: #c25a15;
+
+  /* ---- 底色 / 表面（暖中性，非纯蓝黑） ---- */
+  --stage-0: #03060a;
+  --stage-1: #07101a;
+  --panel: rgba(10, 16, 25, 0.9);
+  --panel-solid: #0b121c;
+  --panel-raise: rgba(126, 151, 184, 0.055);
+  --panel-border: rgba(148, 176, 211, 0.16);
+  --panel-border-strong: rgba(238, 125, 44, 0.44);
+  --hairline: rgba(148, 176, 211, 0.11);
+
+  /* ---- 文字（全部 ≥4.5:1 对比于 --stage-1） ---- */
+  --ink: #eef3fb;
+  --ink-2: #b6c2d4;
+  --ink-3: #8a94a6;
+  --ink-4: #5d6779;
+
+  /* ---- 语义色：一色一义，全部统一明度与饱和度，避免花 ----
+     六个色相在暗底上的感知亮度接近，所以同时出现也不会互相抢。 */
+  --c-contract: #ee7d2c; /* 合同额 / 品牌 / 目标 */
+  --c-collect: #45d8ee; /* 回款 / 地理流动 */
+  --c-received: #46d39a; /* 已收 / 已完成（比 --c-live 柔一档，用于大面积色块） */
+  --c-pending: #e8a33d; /* 未收 / 待办 / 进行中 */
+  --c-growth: #8f8bf0; /* 新增 / 线索 / 增长（唯一冷紫，用于区分「增量」语义） */
+  --c-overdue: #f2555a; /* 逾期 / 风险 */
+  --c-live: #2fd48f; /* 在线 / 健康（仅用于状态点） */
+
+  /* ---- 地图 ---- */
+  --c-neutral-fill: #16202f; /* 中国无数据省 */
+  /* 邻国三档。必须比背景亮得出来，否则「周边国家」等于没画：
+     上一版 #1e2a3c/#182333/#131c29 与 --stage-0 (#05070c) 只差几个色阶，
+     在展厅亮度下整片外围都是黑的。现在接壤档明显亮于无数据省，
+     三档之间也仍有梯度。 */
+  --c-neighbor-0: #33465f; /* 接壤邻国 */
+  --c-neighbor-1: #2b3b53; /* 近邻 */
+  --c-neighbor-2: #1f2b3d; /* 外围 */
+  --c-graticule: rgba(120, 156, 196, 0.14); /* 球面经纬网 */
+
+  /* ---- 地图高度色阶（无数据 → 最高） ---- */
+  --heat-0: #16202f;
+  --heat-1: #2b3040;
+  --heat-2: #57402c;
+  --heat-3: #8f5620;
+  --heat-4: #cc7a20;
+  --heat-5: #ffa451;
+
+  /* ---- 中国边缘光的两个端点色 ---- */
+  --edge-warm: rgba(255, 206, 150, 0.8);
+  --edge-core: #b8f4ff;
+
+  /* ---- 字号标尺：7 级，全部 ≥18px ---- */
+  --fs-display: 56px;
+  --fs-hero: 44px;
+  --fs-metric: 28px;
+  --fs-label: 22px;
+  --fs-caption: 20px;
+  --fs-micro: 18px;
+
+  /* ---- 标尺外的两个特例（都要在这里登记，不能再写裸 px） ----
+     --fs-brand   头部「经营指挥舱」字标：品牌资产，比 panel-title 大一档
+     --fs-brand-sm 头部 DC 徽标
+     --fs-kicker  头部英文小字（14px，跟踪 0.34em）—— 唯一低于 18px 下限
+                   的文字，只做装饰性英文，不承载信息
+     --fs-hero-lg 本期合同额：全屏唯一的主读数，比 --fs-display 略大；
+                   KpiRail 的卡片只有 292px 可用宽，50px 刚好一行放得下 */
+  --fs-brand: 32px;
+  --fs-brand-sm: 24px;
+  --fs-kicker: 14px;
+  --fs-hero-lg: 50px;
+
+  /* ---- 栅格 ---- */
+  --gutter: 14px;
+  --panel-pad: 18px;
+  --panel-head: 56px;
+  --radius: 10px;
+
+  /* ---- 动效预算：同时运行的无限动画 ≤8 ---- */
+  --t-fast: 160ms;
+  --t-base: 280ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --------------------------------------------------------------------------
+   字号标尺必须注册进 Tailwind 的 --text-* 命名空间。
+
+   ⚠️ 这里踩过一个静默的大坑：把字号写成「text + 方括号任意值 + var(--fs-x)」
+   时，Tailwind 4 要判断这个任意值是**字号**还是**颜色**，而它看不出 CSS 变量
+   的类型，于是一律当成颜色 —— 生成的规则是「color: var(--fs-x)」，字号根本
+   没落地。后果是整屏 65 处字号声明全部失效，文字退回继承值（16px 起点，
+   环心那个手写的 46px），设计规范里的 18/20/22/28/44/56px 一个都没生效。
+
+   注册成 --text-* 之后 `text-label` / `text-micro` 这类工具类由令牌直接生成：
+   `@theme inline` 让工具类直接引用 var(--fs-*)，:root 仍是唯一的真源，
+   不复制值，改一处即可。
+
+   ⚠️ 两件事一起守：代码里不要再写那种任意值写法；这段注释里也不要再写出
+   完整的类名 —— Tailwind 的候选扫描器**连注释一起扫**，扫到一个带 * 的
+   非法候选就会让整个 CSS 编译失败（实测报 "./src/app/globals.css: Parsing
+   CSS source code failed"）。守卫在 src/lib/font-scale.test.ts。
+   -------------------------------------------------------------------------- */
+@theme inline {
+  --text-display: var(--fs-display);
+  --text-hero: var(--fs-hero);
+  --text-metric: var(--fs-metric);
+  --text-label: var(--fs-label);
+  --text-caption: var(--fs-caption);
+  --text-micro: var(--fs-micro);
+  --text-brand: var(--fs-brand);
+  --text-brand-sm: var(--fs-brand-sm);
+  --text-kicker: var(--fs-kicker);
+  --text-hero-lg: var(--fs-hero-lg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--stage-0);
+  color: var(--ink);
+  font-family: var(--font-heiti), "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+body {
+  overflow: auto;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.hud-en {
+  font-family: var(--font-hud), Rajdhani, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 数字统一：表格数字 + 紧凑字距，避免动画时宽度抖动 */
+.num {
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.005em;
+}
+
+/* ==========================================================================
+   舞台
+   ========================================================================== */
+
+.screen-shell {
+  min-height: 100dvh;
+  height: 100dvh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--stage-0);
+}
+
+.screen-frame {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+
+.screen-stage {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background:
+    radial-gradient(1000px 520px at 18% -12%, rgba(238, 125, 44, 0.12), transparent 64%),
+    radial-gradient(920px 620px at 68% 108%, rgba(69, 216, 238, 0.075), transparent 62%),
+    linear-gradient(135deg, #0a1019 0%, #060b12 44%, #03070c 100%);
+  color: var(--ink);
+}
+
+/* 极淡技术网格，只在中部可见，不抢内容 */
+.screen-stage::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(150, 168, 196, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(150, 168, 196, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(ellipse 76% 66% at 50% 46%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 76% 66% at 50% 46%, #000 30%, transparent 78%);
+  opacity: 0.42;
+}
+
+/* 顶部品牌渐隐线 */
+.screen-stage::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(238, 125, 44, 0.05) 0%, transparent 18%);
+}
+
+/* ==========================================================================
+   面板材质
+   ========================================================================== */
+
+.panel {
+  position: relative;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 28%),
+    linear-gradient(180deg, rgba(11, 19, 30, 0.94), rgba(7, 13, 21, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 18px 46px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+/* 顶部短光轨：保留展厅需要的科技感，但不再把每块面板框成霓虹盒子。 */
+.panel::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 22px;
+  width: 76px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brand-orange), transparent);
+  box-shadow: 0 0 14px rgba(238, 125, 44, 0.42);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: var(--panel-head);
+  padding: 0 var(--panel-pad);
+  border-bottom: 1px solid rgba(148, 176, 211, 0.1);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.018), transparent 58%);
+}
+
+.status-pill {
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: rgba(7, 13, 21, 0.66);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.status-pill-sample {
+  border-color: rgba(232, 163, 61, 0.25);
+  background: rgba(232, 163, 61, 0.065);
+}
+
+.status-pill-live {
+  border-color: rgba(47, 212, 143, 0.25);
+  background: rgba(47, 212, 143, 0.06);
+}
+
+.map-panel {
+  position: relative;
+  border: 1px solid rgba(112, 157, 199, 0.18);
+  background:
+    radial-gradient(ellipse 70% 60% at 55% 55%, rgba(27, 52, 76, 0.26), transparent 72%),
+    #050b12;
+  box-shadow:
+    inset 0 0 70px rgba(35, 93, 128, 0.08),
+    0 20px 50px rgba(0, 0, 0, 0.24);
+}
+
+.map-panel::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(69, 216, 238, 0.025);
+}
+
+.map-titlebar {
+  min-height: 78px;
+  border-bottom: 1px solid rgba(148, 176, 211, 0.1);
+  background: linear-gradient(180deg, rgba(4, 9, 15, 0.94), rgba(4, 9, 15, 0.62) 72%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.map-titlebar::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  bottom: -1px;
+  left: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(69, 216, 238, 0.24), transparent);
+}
+
+.map-hud {
+  border: 1px solid rgba(123, 157, 194, 0.16);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(10, 20, 32, 0.86), rgba(4, 9, 15, 0.78));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 12px 30px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(8px);
+}
+
+.panel-eyebrow {
+  font-family: var(--font-hud), Rajdhani, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--brand-orange);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.panel-title {
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+/* ==========================================================================
+   地图材质（Rev 3：平面 + 边缘光 + 球面网格）
+   ========================================================================== */
+
+.map-province {
+  stroke: rgba(9, 14, 22, 0.5);
+  stroke-width: 0.65;
+  stroke-linejoin: round;
+  transition: fill var(--t-base) var(--ease-out);
+}
+
+.map-graticule {
+  opacity: 0.72;
+}
+
+/* 邻国：只填色、不描边，逐级变淡形成纵深 */
+.map-neighbor {
+  stroke: none;
+  opacity: 0.72;
+}
+
+/* 球面经纬网：颜色/线宽由 <g> 上的呈现属性给出，这里只做 emphasis 覆盖 */
+.map-graticule-emphasis {
+  stroke: rgba(120, 170, 220, 0.26);
+  stroke-width: 1.3;
+}
+
+/* 球面同心光环：最内圈带发光，把视线收在地图周围 */
+.map-sphere-ring {
+  fill: none;
+  stroke: rgba(96, 142, 190, 0.5);
+  opacity: 0.64;
+}
+
+.map-sphere-ring-glow {
+  filter: url(#edge-glow);
+  stroke: rgba(110, 190, 230, 0.6);
+}
+
+/* 中国边缘发光：内外两条描边叠出「边缘光」而不是硬描边 */
+.map-china-edge-glow {
+  fill: none;
+  stroke: var(--c-collect);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.42;
+  filter: url(#edge-glow);
+}
+
+.map-china-edge-core {
+  fill: none;
+  stroke: #b8f4ff;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.92;
+}
+
+.map-china-edge-warm {
+  fill: none;
+  stroke: var(--brand-orange-hot);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.3;
+  filter: url(#edge-glow);
+}
+
+.map-arc {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.map-flow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 6 22;
+  animation: flow-dash 4.1s linear infinite;
+}
+
+.map-node {
+  transition: r var(--t-fast) var(--ease-out), fill var(--t-fast) var(--ease-out);
+}
+
+.map-label {
+  paint-order: stroke;
+  stroke: rgba(5, 7, 12, 0.85);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  font-weight: 600;
+}
+
+.map-label-city {
+  paint-order: stroke;
+  stroke: rgba(5, 7, 12, 0.92);
+  stroke-width: 3.4px;
+  stroke-linejoin: round;
+  font-weight: 700;
+}
+
+.map-label-neighbor {
+  paint-order: stroke;
+  stroke: rgba(5, 7, 12, 0.8);
+  stroke-width: 2.6px;
+  stroke-linejoin: round;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   KPI 元素
+   ========================================================================== */
+
+.kpi-hero {
+  color: #fff6ec;
+  text-shadow: 0 0 24px rgba(238, 125, 44, 0.24);
+}
+
+.kpi-primary {
+  border: 1px solid rgba(238, 125, 44, 0.3);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(118deg, rgba(238, 125, 44, 0.14), rgba(17, 24, 35, 0.42) 48%, transparent),
+    rgba(126, 151, 184, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.kpi-settlement {
+  border-top: 1px solid rgba(69, 216, 238, 0.18);
+  border-bottom: 1px solid var(--hairline);
+  background: linear-gradient(90deg, rgba(69, 216, 238, 0.055), transparent 72%);
+}
+
+.metric-tile {
+  border-top: 1px solid rgba(148, 176, 211, 0.15);
+  border-radius: 6px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
+}
+
+.attention-strip {
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: rgba(3, 8, 14, 0.38);
+}
+
+.attention-cell + .attention-cell {
+  border-left: 1px solid var(--hairline);
+}
+
+.attention-cell-risk {
+  background: linear-gradient(180deg, rgba(242, 85, 90, 0.06), transparent);
+}
+
+.reminder-group {
+  border-top: 1px solid rgba(148, 176, 211, 0.14);
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.025), transparent 72%);
+}
+
+.reminder-overdue {
+  border-top-color: rgba(242, 85, 90, 0.34);
+  background: linear-gradient(90deg, rgba(242, 85, 90, 0.085), rgba(242, 85, 90, 0.01) 74%);
+}
+
+.collection-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.collection-overview {
+  min-height: 188px;
+}
+
+.collection-numbers {
+  display: grid;
+  gap: 12px;
+}
+
+.collection-number {
+  position: relative;
+  padding: 13px 16px 14px 18px;
+  border-left: 2px solid var(--hairline);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.035), transparent 78%);
+}
+
+.collection-number-received {
+  border-left-color: var(--c-received);
+}
+
+.collection-number-pending {
+  border-left-color: var(--c-pending);
+}
+
+.collection-summary {
+  min-height: 132px;
+  padding: 14px 16px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: rgba(3, 8, 14, 0.34);
+}
+
+.collection-track {
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(148, 176, 211, 0.1);
+  box-shadow: 0 0 16px rgba(69, 216, 238, 0.08);
+}
+
+.collection-track > span:first-child {
+  box-shadow: 0 0 12px rgba(70, 211, 154, 0.3);
+}
+
+.milestone-grid {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.012), transparent);
+}
+
+.milestone-item + .milestone-item {
+  border-left: 1px solid var(--hairline);
+}
+
+/* --------------------------------------------------------------------------
+   金额不许换行。
+
+   字号标尺落地后（56px 的合同额、28px 的未回款）出现过「¥1,286.0 / 万」
+   这种断行 —— 一个数字占两行，卡片高度立刻失控。
+   金额是**一个不可分割的读数**，宽度不够时应该整体缩放/截断，
+   绝不允许折行。窄卡片（KpiRail 的四宫格）由 .money 承担，
+   它的宽度上限是列宽，必要时靠 font-size 微调而不是折行。
+   -------------------------------------------------------------------------- */
+.nowrap-num {
+  white-space: nowrap;
+}
+
+.money {
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   地图视口
+   ========================================================================== */
+
+/* 地图 SVG 的视口要**比面板更高、并且整体上移**，否则中国会偏。
+
+   画布宽高比 1.303，面板可用区 866×852（≈1.016），SVG 按 `meet` 只渲染成
+   866×664 贴在中间，上下各留 94px。而画布的纬度窗口（-2.5°~63.5°，中心
+   30.5°）是为了给球面光环留位置选的，并不等于中国本土的纬度中心（36.3°）
+   —— 两者在画布上差了 75px。结果就是：画布中心在面板正中，中国本土却
+   整体偏下 —— 实测中国包围盒中心落在面板中心下方 28.5px。
+
+   解法：把视口纵向放大到 1204/866 ≈ 1.39 倍（height = 866 × 924/1204
+   ≈ 915.6），再整体上移 28px。这样**仍由宽度定标**，缩放系数与原来
+   完全一致（0.719，中国不会被缩小），只是让视口中心对上中国本土中心
+   （画布 y = 387.1）。28px 由实测标定：CDP 量到中国包围盒中心比面板中心
+   低 6.4px 时再上移 6px，两者对齐到 1px 以内。
+
+   ⚠️ 三个数都由「画布宽高比 + 地图格尺寸（880×866，内缩 6px）」推出。
+   改栅格列宽/行高就要重算，`src/lib/layout.test.ts` 里有算术守卫。
+
+   ⚠️ height 必须写死。带 viewBox 的 SVG 是**替换元素**，浏览器把
+   aspect-ratio = 1204/924 应用在元素盒上，只给 top/left/right 就能定出
+   高度 —— 写 `bottom` 不会拉伸，元素按宽高比算出 664.6px 就停住了
+   （实测 computed height 正是 664.59，这正是第一次改没生效的原因）。
+   显式 height 覆盖这个内在比例，视口才真的变成 915.6px 高。 */
+.map-svg {
+  position: absolute;
+  left: 6px;
+  top: 28px;
+  width: 866px;
+  height: 915.6px;
+}
+
+/* ==========================================================================
+   回款率环
+   ========================================================================== */
+
+/* 环只承载总体回款率，金额与目标都放在外侧。固定正方形可以避免 SVG
+   `xMidYMid meet` 因宽高不等而产生视觉偏心。 */
+.ring-box {
+  flex: 0 0 auto;
+  width: 192px;
+  height: 192px;
+  min-height: 0;
+  max-height: 100%;
+}
+
+.seg-bar {
+  display: flex;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(150, 168, 196, 0.1);
+}
+
+/* 等宽刻度条：比渐变进度条更像仪表 */
+.gauge {
+  display: flex;
+  gap: 3px;
+  height: 12px;
+}
+
+.gauge span {
+  flex: 1;
+  border-radius: 1px;
+  background: rgba(150, 168, 196, 0.13);
+  transition: background var(--t-base) var(--ease-out);
+}
+
+.gauge span.on-brand {
+  background: linear-gradient(180deg, var(--brand-orange-hot), var(--brand-orange));
+  box-shadow: 0 0 7px rgba(238, 125, 44, 0.5);
+}
+
+.gauge span.on-collect {
+  background: linear-gradient(180deg, #8ceaf8, var(--c-collect));
+  box-shadow: 0 0 7px rgba(69, 216, 238, 0.45);
+}
+
+.gauge span.on-overdue {
+  background: linear-gradient(180deg, #ff9ba0, var(--c-overdue));
+  box-shadow: 0 0 7px rgba(242, 85, 90, 0.42);
+}
+
+/* ==========================================================================
+   动效
+   ========================================================================== */
+
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -224;
+  }
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(47, 212, 143, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(47, 212, 143, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(47, 212, 143, 0);
+  }
+}
+
+@keyframes factory-core {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.78);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--c-live);
+  animation: live-pulse 2.4s ease-out infinite;
+}
+
+.factory-core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: factory-core 3.2s ease-in-out infinite;
+}
+
+.kiosk-mode,
+.kiosk-mode * {
+  cursor: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot,
+  .map-flow,
+  .factory-core {
+    animation: none !important;
+  }
+}

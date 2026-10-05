@@ -1,0 +1,372 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-28T01:00:00.000Z",
+  "displayNotice": false,
+  "modules": {},
+  "period": {
+    "label": "2026年9月",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-30"
+  },
+  "kpis": {
+    "totalCustomers": 286,
+    "periodNewCustomers": 18,
+    "todayFollowUp": 9,
+    "overdueFollowUp": 6,
+    "sevenDayFollowUp": 21,
+    "periodNewContracts": 11,
+    "periodContractAmount": "12860000.00",
+    "periodPaidAmount": "7420000.00",
+    "periodUnpaidAmount": "5440000.00",
+    "periodShipments": 7,
+    "unpaidContracts": 8,
+    "partialPaidContracts": 14
+  },
+  "collection": {
+    "totalContractAmount": "48620000.00",
+    "totalPaidAmount": "27900000.00",
+    "totalUnpaidAmount": "20720000.00",
+    "collectionRate": 57.4,
+    "targetAmount": "15000000.00",
+    "actualAmount": "12860000.00",
+    "targetRate": 85.7,
+    "targetVisualRate": 85.7,
+    "remainingAmount": "2140000.00",
+    "exceededAmount": "0.00",
+    "exceeded": false
+  },
+  "delivery": {
+    "summary": {
+      "shipmentCount": 12,
+      "unitCount": 18,
+      "regionCount": 12,
+      "todayDue": 2,
+      "sevenDayDue": 5,
+      "overdueDue": 3
+    },
+    "routes": [
+      {
+        "key": "shp-sh",
+        "province": "上海市",
+        "city": "上海",
+        "centerLat": 31.12,
+        "centerLng": 121.43,
+        "equipmentName": "数控插床 BK5030",
+        "equipmentModel": "BK5030",
+        "shipmentDate": "2026-09-08",
+        "unitCount": 2
+      },
+      {
+        "key": "shp-sz",
+        "province": "江苏省",
+        "city": "苏州",
+        "centerLat": 31.32,
+        "centerLng": 120.73,
+        "equipmentName": "数控插齿机 YK5120",
+        "equipmentModel": "YK5120",
+        "shipmentDate": "2026-09-04",
+        "unitCount": 1
+      },
+      {
+        "key": "shp-nb",
+        "province": "浙江省",
+        "city": "宁波",
+        "centerLat": 29.95,
+        "centerLng": 121.6,
+        "equipmentName": "插齿插键复合机床 B5032",
+        "equipmentModel": "B5032",
+        "shipmentDate": "2026-09-11",
+        "unitCount": 2
+      },
+      {
+        "key": "shp-qd",
+        "province": "山东省",
+        "city": "青岛",
+        "centerLat": 35.96,
+        "centerLng": 120.19,
+        "equipmentName": "数控键槽铣床 X5032",
+        "equipmentModel": "X5032",
+        "shipmentDate": "2026-08-29",
+        "unitCount": 1
+      },
+      {
+        "key": "shp-wh",
+        "province": "湖北省",
+        "city": "武汉",
+        "centerLat": 30.62,
+        "centerLng": 114.14,
+        "equipmentName": "数控插床 BK5040",
+        "equipmentModel": "BK5040",
+        "shipmentDate": "2026-08-21",
+        "unitCount": 1
+      },
+      {
+        "key": "shp-cd",
+        "province": "四川省",
+        "city": "成都",
+        "centerLat": 30.57,
+        "centerLng": 103.95,
+        "equipmentName": "五轴加工中心 DC-VMC650",
+        "equipmentModel": "DC-VMC650",
+        "shipmentDate": "2026-08-12",
+        "unitCount": 1
+      },
+      {
+        "key": "shp-sy",
+        "province": "辽宁省",
+        "city": "沈阳",
+        "centerLat": 41.79,
+        "centerLng": 123.4,
+        "equipmentName": "数控插床 BK5032",
+        "equipmentModel": "BK5032",
+        "shipmentDate": "2026-09-13",
+        "unitCount": 2
+      },
+      {
+        "key": "shp-gz",
+        "province": "广东省",
+        "city": "广州",
+        "centerLat": 22.77,
+        "centerLng": 113.53,
+        "equipmentName": "普通插床 B5032",
+        "equipmentModel": "B5032",
+        "shipmentDate": "2026-07-30",
+        "unitCount": 3
+      },
+      {
+        "key": "shp-xa",
+        "province": "陕西省",
+        "city": "西安",
+        "centerLat": 34.2,
+        "centerLng": 108.89,
+        "equipmentName": "数控插齿机 YK5132",
+        "equipmentModel": "YK5132",
+        "shipmentDate": "2026-08-18",
+        "unitCount": 1
+      },
+      {
+        "key": "shp-zz",
+        "province": "河南省",
+        "city": "郑州",
+        "centerLat": 34.81,
+        "centerLng": 113.18,
+        "equipmentName": "数控键槽铣床 X5040",
+        "equipmentModel": "X5040",
+        "shipmentDate": "2026-08-26",
+        "unitCount": 1
+      },
+      {
+        "key": "shp-cs",
+        "province": "湖南省",
+        "city": "长沙",
+        "centerLat": 28.36,
+        "centerLng": 112.82,
+        "equipmentName": "数控插床 BK5030",
+        "equipmentModel": "BK5030",
+        "shipmentDate": "2026-09-10",
+        "unitCount": 2
+      },
+      {
+        "key": "shp-hrb",
+        "province": "黑龙江省",
+        "city": "哈尔滨",
+        "centerLat": 45.59,
+        "centerLng": 126.62,
+        "equipmentName": "普通刨床 B2016A",
+        "equipmentModel": "B2016A",
+        "shipmentDate": "2026-07-18",
+        "unitCount": 1
+      }
+    ],
+    "reminders": {
+      "today": [
+        {
+          "key": "due-1",
+          "contractNumber": "DC-2026-0342",
+          "equipmentName": "数控插床",
+          "equipmentModel": "BK5030",
+          "estimatedShipmentDate": "2026-09-28",
+          "province": "江苏省",
+          "city": "无锡"
+        },
+        {
+          "key": "due-2",
+          "contractNumber": "DC-2026-0338",
+          "equipmentName": "数控键槽铣床",
+          "equipmentModel": "X5032",
+          "estimatedShipmentDate": "2026-09-28",
+          "province": "安徽省",
+          "city": "合肥"
+        }
+      ],
+      "sevenDays": [
+        {
+          "key": "due-3",
+          "contractNumber": "DC-2026-0348",
+          "equipmentName": "数控插齿机",
+          "equipmentModel": "YK5120",
+          "estimatedShipmentDate": "2026-09-29",
+          "province": "辽宁省",
+          "city": "大连"
+        },
+        {
+          "key": "due-4",
+          "contractNumber": "DC-2026-0351",
+          "equipmentName": "数控插床",
+          "equipmentModel": "BK5040",
+          "estimatedShipmentDate": "2026-10-01",
+          "province": "山西省",
+          "city": "太原"
+        },
+        {
+          "key": "due-5",
+          "contractNumber": "DC-2026-0355",
+          "equipmentName": "普通插床",
+          "equipmentModel": "B5032",
+          "estimatedShipmentDate": "2026-10-01",
+          "province": "江西省",
+          "city": "南昌"
+        }
+      ],
+      "overdue": [
+        {
+          "key": "ov-1",
+          "contractNumber": "DC-2026-0294",
+          "equipmentName": "数控插床",
+          "equipmentModel": "BK5032",
+          "estimatedShipmentDate": "2026-09-24",
+          "province": "甘肃省",
+          "city": "兰州"
+        },
+        {
+          "key": "ov-2",
+          "contractNumber": "DC-2026-0271",
+          "equipmentName": "数控插齿机",
+          "equipmentModel": "YK5132",
+          "estimatedShipmentDate": "2026-09-19",
+          "province": "内蒙古自治区",
+          "city": "包头"
+        },
+        {
+          "key": "ov-3",
+          "contractNumber": "DC-2026-0288",
+          "equipmentName": "数控键槽铣床",
+          "equipmentModel": "X5040",
+          "estimatedShipmentDate": "2026-09-19",
+          "province": "江苏省",
+          "city": "徐州"
+        }
+      ]
+    },
+    "milestones": [
+      {
+        "key": "ms-sh",
+        "contractNumber": "DC-2026-0318",
+        "equipmentName": "数控插床",
+        "equipmentModel": "BK5030",
+        "shipmentDate": "2026-09-08",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 2
+      },
+      {
+        "key": "ms-sz",
+        "contractNumber": "DC-2026-0281",
+        "equipmentName": "数控插齿机",
+        "equipmentModel": "YK5120",
+        "shipmentDate": "2026-09-04",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 1
+      },
+      {
+        "key": "ms-nb",
+        "contractNumber": "DC-2026-0302",
+        "equipmentName": "插齿插键复合机床",
+        "equipmentModel": "B5032",
+        "shipmentDate": "2026-09-11",
+        "shipmentStatus": "PARTIAL_SHIPPED",
+        "unitCount": 2
+      },
+      {
+        "key": "ms-qd",
+        "contractNumber": "DC-2026-0276",
+        "equipmentName": "数控键槽铣床",
+        "equipmentModel": "X5032",
+        "shipmentDate": "2026-08-29",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 1
+      },
+      {
+        "key": "ms-wh",
+        "contractNumber": "DC-2026-0255",
+        "equipmentName": "数控插床",
+        "equipmentModel": "BK5040",
+        "shipmentDate": "2026-08-21",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 1
+      },
+      {
+        "key": "ms-cd",
+        "contractNumber": "DC-2026-0219",
+        "equipmentName": "五轴加工中心",
+        "equipmentModel": "DC-VMC650",
+        "shipmentDate": "2026-08-12",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 1
+      },
+      {
+        "key": "ms-sy",
+        "contractNumber": "DC-2026-0331",
+        "equipmentName": "数控插床",
+        "equipmentModel": "BK5032",
+        "shipmentDate": "2026-09-13",
+        "shipmentStatus": "PARTIAL_SHIPPED",
+        "unitCount": 2
+      },
+      {
+        "key": "ms-gz",
+        "contractNumber": "DC-2026-0198",
+        "equipmentName": "普通插床",
+        "equipmentModel": "B5032",
+        "shipmentDate": "2026-07-30",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 3
+      },
+      {
+        "key": "ms-xa",
+        "contractNumber": "DC-2026-0244",
+        "equipmentName": "数控插齿机",
+        "equipmentModel": "YK5132",
+        "shipmentDate": "2026-08-18",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 1
+      },
+      {
+        "key": "ms-zz",
+        "contractNumber": "DC-2026-0268",
+        "equipmentName": "数控键槽铣床",
+        "equipmentModel": "X5040",
+        "shipmentDate": "2026-08-26",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 1
+      },
+      {
+        "key": "ms-cs",
+        "contractNumber": "DC-2026-0326",
+        "equipmentName": "数控插床",
+        "equipmentModel": "BK5030",
+        "shipmentDate": "2026-09-10",
+        "shipmentStatus": "PARTIAL_SHIPPED",
+        "unitCount": 2
+      },
+      {
+        "key": "ms-hrb",
+        "contractNumber": "DC-2026-0186",
+        "equipmentName": "普通刨床",
+        "equipmentModel": "B2016A",
+        "shipmentDate": "2026-07-18",
+        "shipmentStatus": "SHIPPED",
+        "unitCount": 1
+      }
+    ]
+  }
+}
