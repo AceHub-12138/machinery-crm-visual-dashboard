@@ -2,7 +2,8 @@
 
 import { Panel, PanelHead } from "@/components/screen/Panel";
 import { formatCount, formatShortDate } from "@/lib/format";
-import type { CrmDashboardStats, ShipmentReminderItem } from "@/lib/types";
+import type { CrmDashboardStats } from "@/lib/types";
+import type { PublicReminder } from "@/lib/public-screen-payload";
 
 const TONES = {
   pending: { bar: "var(--c-pending)", text: "text-[var(--c-pending)]" },
@@ -33,7 +34,7 @@ function ReminderGroup({
 }: {
   title: string;
   count: number;
-  items: ShipmentReminderItem[];
+  items: PublicReminder[];
   tone: keyof typeof TONES;
 }) {
   return (
@@ -91,9 +92,9 @@ export function ReminderRail({
 }: {
   stats: CrmDashboardStats;
   reminders: {
-    today: ShipmentReminderItem[];
-    sevenDays: ShipmentReminderItem[];
-    overdue: ShipmentReminderItem[];
+    today: PublicReminder[];
+    sevenDays: PublicReminder[];
+    overdue: PublicReminder[];
   };
 }) {
   const total = stats.todayShipmentDue + stats.sevenDayShipmentDue + stats.overdueShipmentDue;

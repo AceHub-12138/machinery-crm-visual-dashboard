@@ -2,7 +2,8 @@
 
 import { Panel, PanelHead } from "@/components/screen/Panel";
 import { formatMoney } from "@/lib/format";
-import type { CrmDashboardStats, SalesTargetItem, SalesTargetResponse } from "@/lib/types";
+import type { CrmDashboardStats } from "@/lib/types";
+import type { PublicScreenPayload } from "@/lib/public-screen-payload";
 
 /**
  * 累计回款率环。
@@ -81,11 +82,11 @@ export function TargetRing({
   periodLabel,
   stats,
 }: {
-  targets: SalesTargetResponse;
+  targets: PublicScreenPayload["salesTargets"];
   periodLabel: string;
   stats: CrmDashboardStats;
 }) {
-  const company = targets.targets.find((item) => item.salesUserId === null) as SalesTargetItem | undefined;
+  const company = targets.targets.find((item) => item.salesUserId === null);
 
   // 回款率口径与平台一致：已回 / (已回 + 未回)。
   // 优先用销售目标里的金额，没有目标时退回到 dashboard 的累计口径。

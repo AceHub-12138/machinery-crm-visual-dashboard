@@ -10,7 +10,7 @@ import {
   sphereCenter,
   sphereRings,
 } from "@/lib/geo";
-import type { ScreenCrmPayload, ScreenMapRoute } from "@/lib/types";
+import type { PublicScreenPayload, PublicRoute } from "@/lib/public-screen-payload";
 
 /* 高度色阶：0 发货 → 最高发货。用于省级填充。 */
 const HEAT_SCALE = [
@@ -129,7 +129,7 @@ function heatIndex(count: number, max: number) {
   );
 }
 
-export function ShipmentMap({ payload }: { payload: ScreenCrmPayload }) {
+export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
   const provinces = chinaMap.provinces;
   const neighbors = chinaMap.neighbors;
   const factory = payload.map?.factory ?? chinaMap.factory;
@@ -148,7 +148,7 @@ export function ShipmentMap({ payload }: { payload: ScreenCrmPayload }) {
 
   const arcs = useMemo(
     () =>
-      routes.map((route: ScreenMapRoute, index: number) => ({
+      routes.map((route: PublicRoute, index: number) => ({
         route,
         ...createScreenArc(route.origin, route.destination),
         // 错峰 0.06s：整屏读起来是一条呼吸节奏，而不是 12 条各自乱跑

@@ -31,7 +31,7 @@ import {
   takeHubTokenFromHash,
   type LiveSourceContext,
 } from "@/lib/voice/live-source";
-import type { ScreenCrmPayload } from "@/lib/types";
+import type { PublicScreenPayload } from "@/lib/public-screen-payload";
 
 /**
  * 语音覆盖层舞台(plan §5/§11 8a;§16.2 8b 起 double 驱动)。
@@ -65,7 +65,7 @@ export function OverlayStage({
   driver = "demo",
   hubUrl,
 }: {
-  payload: ScreenCrmPayload;
+  payload: PublicScreenPayload;
   /** &lite=1:强制降级档(软件渲染环境预览演示用) */
   lite?: boolean;
   /** demo=8a 脚本回放;live=8b 编排服务事件流 */

@@ -1,7 +1,7 @@
 "use client";
 
 import { matchProvinceKey } from "@/lib/geo";
-import type { CrmDashboardResponse } from "@/lib/types";
+import type { PublicShipment } from "@/lib/public-screen-payload";
 
 /**
  * 交付里程碑。
@@ -55,7 +55,7 @@ function formatDay(value: string) {
   return `${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
-export function DeliveryMilestones({ paths }: { paths: CrmDashboardResponse["shipmentPaths"] }) {
+export function DeliveryMilestones({ paths }: { paths: PublicShipment[] }) {
   // 最近交付在前
   const milestones = [...paths]
     .sort((a, b) => new Date(b.shipmentDate).getTime() - new Date(a.shipmentDate).getTime())

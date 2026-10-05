@@ -7,7 +7,7 @@ import { KpiRail } from "@/components/screen/KpiRail";
 import { ReminderRail } from "@/components/screen/ReminderRail";
 import { ShipmentMap } from "@/components/screen/ShipmentMap";
 import { TargetRing } from "@/components/screen/TargetRing";
-import type { ScreenCrmPayload } from "@/lib/types";
+import type { PublicScreenPayload } from "@/lib/public-screen-payload";
 
 export const STAGE_WIDTH = 1920;
 export const STAGE_HEIGHT = 1080;
@@ -26,7 +26,7 @@ export function ScreenStage({
   kiosk: kioskMode,
   initialFit,
 }: {
-  initialPayload: ScreenCrmPayload;
+  initialPayload: PublicScreenPayload;
   kiosk: boolean;
   initialFit: boolean;
 }) {
@@ -43,7 +43,7 @@ export function ScreenStage({
       try {
         const response = await fetch("/api/screen/crm", { cache: "no-store" });
         if (!response.ok) return;
-        const body = (await response.json()) as ScreenCrmPayload;
+        const body = (await response.json()) as PublicScreenPayload;
         if (!active) return;
         lastGood.current = body;
         setPayload(body);
@@ -114,11 +114,11 @@ export function ScreenStage({
               （这个坑踩过一次）。
               任何面板内容变化后都要重新实测，见 docs/screen-design-spec.md。 */}
           <div className="grid min-h-0 flex-1 grid-cols-[360px_880px_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_112px] gap-[var(--gutter)] p-[var(--gutter)]">
-            <div className="col-start-1 row-start-1 min-h-0">
+            <div data-screen-panel="kpi" className="col-start-1 row-start-1 min-h-0">
               <KpiRail stats={payload.dashboard.stats} targetAmount={targetAmount} />
             </div>
 
-            <div className="map-panel col-start-2 row-start-1 min-h-0 overflow-hidden rounded-[var(--radius)]">
+            <div data-screen-panel="map" className="map-panel col-start-2 row-start-1 min-h-0 overflow-hidden rounded-[var(--radius)]">
               <ShipmentMap payload={payload} />
             </div>
 
@@ -126,14 +126,14 @@ export function ScreenStage({
                 上区需要容纳环、两组金额与合同结构；下区需要容纳三组交付风险。
                 不做 1:1 平分，避免上区拥挤、下区留白。 */}
             <div className="col-start-3 row-start-1 grid min-h-0 grid-rows-[441px_minmax(0,1fr)] gap-[var(--gutter)]">
-              <div className="min-h-0">
+              <div data-screen-panel="collection" className="min-h-0">
                 <TargetRing
                   targets={payload.salesTargets}
                   periodLabel={payload.salesTargets.period.label}
                   stats={payload.dashboard.stats}
                 />
               </div>
-              <div className="min-h-0">
+              <div data-screen-panel="reminders" className="min-h-0">
                 <ReminderRail
                   stats={payload.dashboard.stats}
                   reminders={payload.dashboard.shipmentReminders}
@@ -141,7 +141,7 @@ export function ScreenStage({
               </div>
             </div>
 
-            <div className="col-span-3 col-start-1 row-start-2 min-h-0">
+            <div data-screen-panel="delivery" className="col-span-3 col-start-1 row-start-2 min-h-0">
               <DeliveryMilestones paths={payload.dashboard.shipmentPaths} />
             </div>
           </div>

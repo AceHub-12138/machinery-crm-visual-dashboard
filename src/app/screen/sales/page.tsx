@@ -3,6 +3,7 @@ import { OverlayStage } from "@/components/overlay/OverlayStage";
 import { OverlayErrorBoundary } from "@/components/overlay/OverlayErrorBoundary";
 import { sanitizeHubParam } from "@/lib/voice/live-source";
 import { buildMockScreenPayload } from "@/lib/mock";
+import { toPublicScreenPayload } from "@/lib/public-screen-payload";
 
 /**
  * 大屏入口。
@@ -24,7 +25,7 @@ export default async function SalesScreenPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
-  const payload = buildMockScreenPayload();
+  const payload = toPublicScreenPayload(buildMockScreenPayload());
 
   return (
     <>
