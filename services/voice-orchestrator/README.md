@@ -59,6 +59,22 @@ pnpm --dir services/voice-orchestrator start
   接入真实 LLM 时,注入快照(经营数字)会发往模型服务商,上生产前需确认
   数据外发合规。
 
+## 当前语音与 MCP 边界（2026-10-05 源码复核）
+
+当前交付为文字驱动的 8b 数据/视觉通路。ASR、TTS、麦克风采集和唤醒尚未接入，振幅为合成演示值。
+平台 MCP **未启用，代码保留**：主入口未调用 initialize，编排请求未给 LLM 传工具目录，因此仅打开 feature flag 不能打通长尾路径。保持 `VOICE_MCP_ENABLED=0`；接线、权限验证及真实平台联调须另行验收。
+
+本地 OpenAI 兼容 LLM 配置示例（本地服务无密钥时仍需非空占位值，才能选择真实适配器）：
+
+```dotenv
+VOICE_LLM_BASE_URL=http://127.0.0.1:1234/v1
+VOICE_LLM_API_KEY=local-placeholder
+VOICE_LLM_MODEL=your-loaded-model
+VOICE_MCP_ENABLED=0
+```
+
+这里没有验证已安装模型的推理质量、首 token 延迟、麦克风或扬声器；离线 scripted 数据不能作为真实语音延迟承诺。
+
 ## 配置
 
 见 `.env.example`;红线:key/模型不落仓,日志经 `guard/redaction.ts`

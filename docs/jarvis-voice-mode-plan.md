@@ -283,3 +283,10 @@ services/voice-orchestrator/          # 8b/8c:WS hub + MCP 客户端 + 实时模
 **给 8c 留的接口**:事件协议与渲染层解耦(§9),语音后端在编排服务内被适配器隔离——8c 无论选豆包 S2S、GLM-Realtime 还是 ElevenLabs Agents,大屏与 MCP 层零改动。
 
 > **8b 实施完成(2026-09-28)**:A~F 六任务全交付——`src/lib/voice/protocol.ts`(§9 事件协议+快照单测)、`services/voice-orchestrator/`(零依赖 Node TS 直跑:手写 RFC6455 WS hub、预取+注入、OpenAI 兼容/离线 scripted 双 LLM 适配器、平台 MCP 客户端 flag 默认关、全程打点)、`/voice-console` 验收台、Region/CompletionRing/CustomersShipments/Brief 四卡+模板注册表、防幻觉数字护栏与缺口清单(`docs/voice-coverage-backlog.md`)。验收:8 问全链路数字与 fixture 一致、三条错误路径(数据源500/LLM超时/编排kill)大屏优雅退场、延迟报告见 `docs/voice-8b-latency-report.md`。fixture 字段=平台 `PublicSalesScreenPayload` 逐字段对齐,迁移平台=改 VOICE_PAYLOAD_URL/PUBLIC_ID 两个值。
+
+
+## 2026-10-05 源码复核补充（优先于历史完成描述）
+
+8b 文字主路径已有实现。平台 MCP 未启用，代码保留：缺 initialize 调用与 LLM 工具目录下发，开启 flag 也不会使长尾链路自动工作。采用修复方案 5.2 的方案 B，默认保持关闭，待单独接线和联调。
+8c 的 ASR/TTS/唤醒/真实音频振幅尚未实现；最终本地或云端方案仍需产品决策和设备验收。
+历史 8b 离线报告是 scripted 模拟，不能证明真实模型或端到端语音达到延迟指标。实际运行配置见 services/voice-orchestrator/README.md。
