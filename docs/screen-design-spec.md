@@ -391,3 +391,19 @@ node .review/crop.mjs "<url>" .review/crop.png 300 88 880 880
 - 地图居中：跑 `.review/expr-map.js`，`offsetFromPanelCenter` 的 x/y 都应在 ±8px 内。
 - 改完样式若报 CSS 解析错误而文件明明是对的，先删
   `.next/dev/cache/turbopack`（旧候选缓存）再重启 dev server。
+
+
+## 12. 跨平台验收入口（2026-10-05）
+
+历史第 11 节的 .review 脚本未随仓库交付；当前可复现入口为：
+
+```bash
+pnpm install --frozen-lockfile
+pnpm exec playwright install chromium
+pnpm build
+pnpm test:e2e
+```
+
+Playwright 验证 1920×1080 面板位置/尺寸、1280×720 完整缩放、公开 API 与首屏 HTML 字段边界，并导出截图与失败 trace。负向用例证明列宽改变 5px 能被发现。CI 在 Linux 跑同一组几何断言，结果截图作为 artifact 留存。
+当前采用方案 B 的跨平台 DOM 几何断言和截图审核，不把 macOS 字体渲染生成的图片当 Linux 像素基线。几何测试不能覆盖每个内容裁切和颜色变化；新增视觉设计改动时需审核截图并逐步扩充断言。
+参考：https://playwright.dev/docs/test-snapshots 、https://playwright.dev/docs/test-webserver 。

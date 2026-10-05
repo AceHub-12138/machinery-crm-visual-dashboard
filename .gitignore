@@ -19,3 +19,7 @@ tsconfig.tsbuildinfo
 
 # voice-orchestrator runtime artifacts (trace JSONL)
 services/voice-orchestrator/logs/
+
+# Playwright generated reports and per-run screenshots
+test-results/
+playwright-report/
