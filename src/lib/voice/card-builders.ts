@@ -15,8 +15,6 @@ import { ANSWER_ROWS_MAX, ANSWER_SPOKEN_MAX, ANSWER_TEXT_MAX } from "./protocol.
 import type { PublicSalesScreenPayload, PublicRouteSample } from "./public-payload.ts";
 import type { AnswerCardData } from "./session-machine.ts";
 
-const clampRate = (rate: number): number => Math.min(100, Math.max(0, rate));
-
 /** 超长答案文本截断(留 20 字余量,末尾补 …);保证服务端发出的卡片能通过前端 isValidAnswerCard */
 export function clampAnswerText(text: string, max: number = ANSWER_TEXT_MAX - 20): string {
   if (text.length <= max) return text;
@@ -44,7 +42,7 @@ export function buildTargetProgressCardFromPublic(
     targetText,
     remainingText,
     completionRate: collection.targetRate,
-    spoken: `先生,${periodLabel}合同额 ${actualText},完成月度目标的 ${collection.targetRate}%,距离目标还差 ${remainingText}。`,
+    spoken: `先生,${periodLabel}合同额 ${actualText},完成月度目标的 ${collection.targetRate}%,${collection.exceeded ? remainingText : `距离目标还差 ${remainingText}`}。`,
   };
 }
 
@@ -54,7 +52,8 @@ export function buildCompletionRingCard(
   collection: PublicSalesScreenPayload["collection"],
   periodLabel: string,
 ): AnswerCardData & { kind: "completion-ring" } {
-  const ratePercent = clampRate(collection.targetRate);
+  // 环形图在渲染时限幅，数值与播报保留真实完成率（可超过 100%）。
+  const ratePercent = collection.targetRate;
   const collectedText = formatMoney(Number(collection.actualAmount));
   const targetText = formatMoney(Number(collection.targetAmount));
   const remainingText = collection.exceeded
@@ -68,7 +67,7 @@ export function buildCompletionRingCard(
     collectedText,
     targetText,
     remainingText,
-    spoken: `先生,${periodLabel}合同额目标完成 ${ratePercent}%,已完成 ${collectedText},距离目标还差 ${remainingText}。`,
+    spoken: `先生,${periodLabel}合同额目标完成 ${ratePercent}%,已完成 ${collectedText},${collection.exceeded ? remainingText : `距离目标还差 ${remainingText}`}。`,
   };
 }
 
@@ -134,7 +133,7 @@ export function buildCustomersShipmentsCard(
   delivery: PublicSalesScreenPayload["delivery"],
   periodLabel: string,
 ): AnswerCardData & { kind: "customers-shipments" } {
-  const { today, sevenDays, overdue } = delivery.reminders;
+  const { todayDue, sevenDayDue, overdueDue } = delivery.summary;
   const rows = [...delivery.milestones]
     .sort((a, b) => b.shipmentDate.localeCompare(a.shipmentDate))
     .slice(0, 5)
@@ -145,14 +144,15 @@ export function buildCustomersShipmentsCard(
       dateLabel: formatShortDate(milestone.shipmentDate),
     }));
 
-  const summaryText = `今日到期 ${today.length} · 七日内 ${sevenDays.length} · 逾期 ${overdue.length}`;
+  // reminders 是样本列表，不能用列表长度冒充完整汇总数量。
+  const summaryText = `今日到期 ${todayDue} · 七日内 ${sevenDayDue} · 逾期 ${overdueDue}`;
 
   return {
     kind: "customers-shipments",
     title: `${periodLabel} · 发运与提醒`,
     summaryText,
     rows,
-    spoken: `先生,近期发运台账共 ${delivery.summary.unitCount} 台,今日到期 ${today.length} 台、逾期未发 ${overdue.length} 台,已为您列出发运明细。`,
+    spoken: `先生,近期发运台账共 ${delivery.summary.unitCount} 台,今日到期 ${todayDue} 台、逾期未发 ${overdueDue} 台,已为您列出发运明细。`,
   };
 }
 

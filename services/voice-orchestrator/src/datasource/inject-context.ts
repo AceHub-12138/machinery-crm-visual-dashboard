@@ -1,12 +1,7 @@
 /**
- * 预取 + 注入(plan §16.2 B②——本方案灵魂)与防幻觉护栏(plan §10/F)。
- *
- * 主路径零工具轮:每次提问并行预取 payload,把「大屏同源口径」的
- * 数字快照注入 LLM 上下文,附硬约束,LLM 直接作答;数字护栏在出口处
- * 校验答案中出现的每个数字都能在快照中找到,违规整句替换为降级话术。
- *
- * 快照里所有金额/百分比字符串均由与卡片构造器相同的 format 生成,
- * 因此「卡片数字 == payload 字段 == 注入快照」三者天然同源。
+ * 公开 payload → 本地数字快照与备用护栏。
+ * 8c 主路径不将此快照发送给模型；卡片与播报由代码模板生成。
+ * sanitizeAnswer 保留旧替换语义供兼容调用方使用，编排侧仅记录异常告警。
  */
 
 import { formatMoney, formatShortDate } from "../../../../src/lib/format.ts";
@@ -23,7 +18,7 @@ export const INJECTION_CONSTRAINT = [
   "3. 回答不超过 3 句,先结论后数字;不出现快照以外的业务名词解释。",
 ].join("\n");
 
-/** payload → 注入快照(纯函数;唯一目的:喂 LLM 的全部事实)。 */
+/** payload → 本地校验快照（纯函数，与卡片共用 formatter）。 */
 export function buildInjectedContext(payload: PublicSalesScreenPayload): string {
   const lines: string[] = [];
   const k = payload.kpis;
@@ -108,8 +103,8 @@ function statusText(status: string): string {
 
 /** 提取答案文本中的数字 token(千分位逗号先剥掉)。 */
 export function extractNumbers(text: string): string[] {
-  const normalized = text.replace(/,/g, "");
-  const matches = normalized.match(/\d+(?:\.\d+)?/g);
+  const normalized = text.replace(/(?<=\d),(?=\d{3}(?:\D|$))/g, "");
+  const matches = normalized.match(/(?<![\d.])\d+(?:\.\d+)?(?![\d.])/g);
   return matches ?? [];
 }
 
@@ -118,8 +113,8 @@ export function extractNumbers(text: string): string[] {
  * 年份/日期/台数等都在快照里有原文,因此该约束可严格成立。
  */
 export function verifyAnswerNumbers(answer: string, snapshot: string): { ok: boolean; violations: string[] } {
-  const haystack = snapshot.replace(/,/g, "");
-  const violations = extractNumbers(answer).filter((num) => !haystack.includes(num));
+  const allowed = new Set(extractNumbers(snapshot));
+  const violations = extractNumbers(answer).filter((num) => !allowed.has(num));
   return { ok: violations.length === 0, violations };
 }
 

@@ -7,6 +7,10 @@ import { dataSourceError, type SalesScreenDataSource } from "../src/datasource/i
 import fixture from "../fixtures/public-sales-screen.json";
 import { validatePublicPayload, type PublicSalesScreenPayload } from "../../../src/lib/voice/public-payload.ts";
 import { VOICE_COVERAGE_FALLBACK } from "../../../src/lib/voice/card-builders.ts";
+import { buildIntentAnswer } from "../../../src/lib/voice/intent-answers.ts";
+import { DEMO_QUESTIONS } from "../../../src/lib/voice/demo-questions.ts";
+import { OpenAiCompatibleAdapter } from "../src/llm/zhipu.ts";
+import { classifyScriptedQuestion } from "../../../src/lib/voice/intents.ts";
 import type { VoiceWireEvent } from "../../../src/lib/voice/protocol.ts";
 
 const payload = validatePublicPayload(fixture) as PublicSalesScreenPayload;
@@ -123,10 +127,11 @@ describe("orchestrator — 完整问答链路(脚本适配器,假定时器)", ()
       completionRate: 85.7,
     });
 
-    // 打点齐全:prefetch/firstToken/answerFull 均有值
+    // 非流式分类耗时单独记录，不冒充首 token。
     const trace = events.find((ev) => ev.type === "trace.turn") as Extract<VoiceWireEvent, { type: "trace.turn" }>;
     expect(trace.trace.stages.prefetch).not.toBeNull();
-    expect(trace.trace.stages.llmFirstToken).not.toBeNull();
+    expect(trace.trace.stages.llmFirstToken).toBeNull();
+    expect(trace.trace.classifyMs).toBeGreaterThanOrEqual(0);
     expect(trace.trace.stages.answerFull).not.toBeNull();
     expect(trace.trace.degraded).toBe(false);
   });
@@ -416,13 +421,14 @@ describe("orchestrator — 2026-09-30 审核修复", () => {
     let seen: AbortSignal | undefined;
     const hangingLlm = {
       name: "hanging",
-      async *stream(req: { signal?: AbortSignal }) {
-        seen = req.signal;
+      async classify(_question: string, signal?: AbortSignal) {
+        seen = signal;
         await new Promise((_, reject) => {
-          req.signal?.addEventListener("abort", () => reject(req.signal?.reason));
+          signal?.addEventListener("abort", () => reject(signal?.reason));
         });
-        yield { type: "done", fullText: "", finishReason: "aborted" } as const;
+        return "sales_progress" as const;
       },
+      async *stream() { throw new Error("主路径不得调用 stream"); yield { type: "done", fullText: "", finishReason: "aborted" } as const; },
     };
     const { orch, events } = setup({ llm: hangingLlm });
     const conn = fakeConn();
@@ -530,5 +536,96 @@ describe("orchestrator — 2026-09-30 审核修复", () => {
     expect(conn.role).toBe("unknown");
     orch.handleClientMessage(conn, JSON.stringify({ type: "console.hello", at: 1, role: "console" }));
     expect(conn.role).toBe("console");
+  });
+});
+
+
+describe("orchestrator — 8c 分类与确定性播报", () => {
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => vi.useRealTimers());
+
+  function setup(llm = new OpenAiCompatibleAdapter({
+    baseUrl: "http://local/v1", apiKey: "local", model: "test-model",
+    fetchImpl: vi.fn(async () => Response.json({ choices: [{ message: { content: '{"intent":"sales_progress"}' } }] })),
+  }), data = payload, trace = new TraceSink(null)) {
+    const { hub, events } = fakeHub();
+    const orch = createVoiceOrchestrator({
+      hub, dataSource: fakeSource(async () => data), llm, mcp: null, trace,
+      llmTimeoutMs: 8000, partialPaceMs: 1, partialMaxTotalMs: 100,
+      prefetchTimeoutMs: 5000, questionMinGapMs: 0, questionWindowMs: 60000,
+      questionWindowMax: 100, mcpToolWhitelist: [],
+    });
+    return { orch, events };
+  }
+
+  async function ask(text: string, adapter?: OpenAiCompatibleAdapter, data = payload, trace?: TraceSink) {
+    const { orch, events } = setup(adapter, data, trace);
+    orch.handleClientMessage(fakeConn(), consoleSend(text));
+    await vi.advanceTimersByTimeAsync(3000);
+    return { orch, events, full: events.find((ev) => ev.type === "answer.delta" && ev.full) as Extract<VoiceWireEvent, { type: "answer.delta" }> };
+  }
+
+  for (const demo of DEMO_QUESTIONS) {
+    it(`分类主路径：#${demo.id} 同源播报与数字一致`, async () => {
+      const expected = classifyScriptedQuestion(demo.question);
+      const fetchImpl = vi.fn(async () => Response.json({ choices: [{ message: { content: JSON.stringify({ intent: expected }) } }] }));
+      const adapter = new OpenAiCompatibleAdapter({ baseUrl: "http://local/v1", apiKey: "local", model: "m", fetchImpl });
+      const stream = vi.spyOn(adapter, "stream");
+      const { orch, events, full } = await ask(demo.question, adapter);
+      expect(full.card).toEqual(buildIntentAnswer(expected, payload).card);
+      expect(events.filter((e) => e.type === "answer.delta").map((e) => (e as { text: string }).text).join("")).toBe(full.card?.spoken);
+      expect(stream).not.toHaveBeenCalled();
+      expect(orch.answer?.sentences.map((s) => s.text).join("")).toBe(full.card?.spoken);
+      expect(orch.answer?.sentences.map((s) => s.spokenText).join("")).not.toMatch(/[0-9¥%]/);
+      const record = events.find((ev) => ev.type === "trace.turn") as Extract<VoiceWireEvent, { type: "trace.turn" }>;
+      expect(record.trace.degraded).toBe(expected === "unanswerable");
+      expect(record.trace.numberGuardViolations).toBeUndefined();
+      const [, options] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit];
+      expect(options.body).not.toContain("经营数据快照");
+    });
+  }
+
+  it("模型附带快照外数字3138，严格拒绝额外字段且不播报", async () => {
+    const adapter = new OpenAiCompatibleAdapter({ baseUrl: "http://local", apiKey: "local", model: "m", fetchImpl: async () =>
+      Response.json({ choices: [{ message: { content: '{"intent":"sales_progress","spoken":"共3138件"}' } }] }) });
+    const { events, full } = await ask("本月销售情况怎么样", adapter);
+    expect(full.card?.spoken).toBe(VOICE_COVERAGE_FALLBACK);
+    expect(JSON.stringify(events)).not.toContain("3138");
+  });
+
+  it("业务数值由模板恢复，不使用 reasoning 中的错误数字或触发降级", async () => {
+    const adapter = new OpenAiCompatibleAdapter({ baseUrl: "http://local", apiKey: "local", model: "m", fetchImpl: async () =>
+      Response.json({ choices: [{ message: { content: '{"intent":"sales_progress"}', reasoning_content: "共3138件" } }] }) });
+    const { events, full } = await ask("这个月卖得咋样", adapter);
+    expect(full.card?.spoken).toContain("¥1,286.0万");
+    expect(JSON.stringify(events)).not.toContain("3138");
+    const record = events.find((e) => e.type === "trace.turn") as Extract<VoiceWireEvent, { type: "trace.turn" }>;
+    expect(record.trace.degraded).toBe(false);
+  });
+
+  it("模型误选总览也不能绕过不支持的筛选边界", async () => {
+    const { full } = await ask("广东销售情况怎么样");
+    expect(full.card?.spoken).toBe(VOICE_COVERAGE_FALLBACK);
+  });
+
+  it("模板数字异常记录trace告警，不静默替换整句", async () => {
+    // 故意注入模板 bug，校验备用护栏留下可见告警。
+    const builderSpy = vi.spyOn(await import("../../../src/lib/voice/card-builders.ts"), "buildTargetProgressCardFromPublic");
+    builderSpy.mockReturnValueOnce({ kind: "target-progress", title: "测试", actualText: "¥1,286.0万", targetText: "¥1,500.0万", remainingText: "¥214.0万", completionRate: 0, spoken: "先生,测试模板错误3138。" });
+    const { events, full } = await ask("销售情况");
+    expect(full.card?.spoken).toContain("3138");
+    const record = events.find((e) => e.type === "trace.turn") as Extract<VoiceWireEvent, { type: "trace.turn" }>;
+    expect(record.trace.numberGuardViolations).toContain("3138");
+    expect(record.trace.degraded).toBe(false);
+    builderSpy.mockRestore();
+  });
+
+  it("感谢结束走固定告别话术，直接退场而不是追问", async () => {
+    const adapter = new OpenAiCompatibleAdapter({ baseUrl: "http://local", apiKey: "local", model: "m", fetchImpl: async () =>
+      Response.json({ choices: [{ message: { content: '{"intent":"chitchat_or_end"}' } }] }) });
+    const { events, full } = await ask("好的谢谢没有了", adapter);
+    expect(full.card?.spoken).toBe("为您服务是我的荣幸,先生。");
+    expect(events.some((ev) => ev.type === "session.end" && ev.reason === "decline")).toBe(true);
+    expect(events.some((ev) => ev.type === "state.change" && ev.to === "followup")).toBe(false);
   });
 });

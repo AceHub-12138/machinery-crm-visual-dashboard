@@ -264,6 +264,14 @@ export default function VoiceConsolePage() {
             {trace.totalMs != null ? <span>全程 <b className="tabular-nums text-amber-300">{trace.totalMs}ms</b></span> : null}
           </div>
           <div className="flex flex-wrap gap-2">
+            {trace.classifyMs != null ? (
+              <span className="rounded bg-amber-500/10 px-2 py-1 text-xs tabular-nums text-amber-200">
+                意图分类 {trace.classifyMs.toFixed(1)}ms
+              </span>
+            ) : null}
+            {trace.numberGuardViolations?.length ? (
+              <span className="rounded bg-rose-500/10 px-2 py-1 text-xs text-rose-300">数字模板校验告警</span>
+            ) : null}
             {STAGE_LABELS.map(([key, label]) => {
               const value = trace.stages[key];
               return (

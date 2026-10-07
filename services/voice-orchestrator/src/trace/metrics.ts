@@ -28,6 +28,10 @@ export type TurnTraceRecord = {
   card: string | null;
   degraded: boolean;
   totalMs: number | null;
+  /** 完整结构化分类的耗时；与旧流式首 token 指标分开。 */
+  classifyMs?: number;
+  /** 备用数字护栏异常，仅告警，不用模型文字替换模板。 */
+  numberGuardViolations?: string[];
 };
 
 export class TurnTracer {
@@ -62,7 +66,10 @@ export class TurnTracer {
     };
   }
 
-  finish(options: { source: "payload" | "mcp"; card: string | null; degraded: boolean }, now = Date.now()): TurnTraceRecord {
+  finish(options: {
+    source: "payload" | "mcp"; card: string | null; degraded: boolean;
+    classifyMs?: number; numberGuardViolations?: string[];
+  }, now = Date.now()): TurnTraceRecord {
     const stages = this.elapsed;
     const totalMs = stages.answerFull == null ? null : now - this.startedAt;
     return {
@@ -75,6 +82,8 @@ export class TurnTracer {
       card: options.card,
       degraded: options.degraded,
       totalMs,
+      ...(options.classifyMs !== undefined ? { classifyMs: options.classifyMs } : {}),
+      ...(options.numberGuardViolations?.length ? { numberGuardViolations: options.numberGuardViolations } : {}),
     };
   }
 }

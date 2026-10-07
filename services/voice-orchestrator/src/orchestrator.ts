@@ -1,6 +1,6 @@
 /**
- * 会话编排(plan §16.2 C):提问 → 并行预取 → LLM(注入快照,主路径零
- * 工具轮)→ 卡片选型 → 事件广播;三条降级路径(数据源异常 / LLM 超时或
+ * 会话编排(plan §16.2 C):提问 → 并行预取 → LLM 意图分类(不含快照)
+ * → 确定性卡片与播报 → 事件广播;三条降级路径(数据源异常 / LLM 超时或
  * 不可用 / 编排崩溃——最后者由大屏断链 FORCE_CLOSE 收场)全部收束到
  * error-fallback → closing,基线无感。
  *
@@ -14,9 +14,7 @@
 
 import { randomUUID } from "node:crypto";
 import {
-  buildBriefCard,
   clampAnswerText,
-  VOICE_COVERAGE_FALLBACK,
 } from "../../../src/lib/voice/card-builders.ts";
 import type { PublicSalesScreenPayload } from "../../../src/lib/voice/public-payload.ts";
 import type {
@@ -25,11 +23,13 @@ import type {
   VoiceErrorCode,
   VoiceWireEvent,
 } from "../../../src/lib/voice/protocol.ts";
-import { routeQuestion } from "./llm/scripted.ts";
-import type { LlmAdapter, LlmMessage, LlmToolCall } from "./llm/types.ts";
+import { buildIntentAnswer } from "../../../src/lib/voice/intent-answers.ts";
+import { hasUnsupportedScope, isIntent } from "../../../src/lib/voice/intents.ts";
+import { buildSpokenSentences } from "../../../src/lib/voice/spoken-normalize.ts";
+import type { LlmAdapter } from "./llm/types.ts";
 import { LlmError } from "./llm/types.ts";
 import { tokensMatch } from "./guard/token.ts";
-import { buildInjectedContext, INJECTION_CONSTRAINT, sanitizeAnswer } from "./datasource/inject-context.ts";
+import { buildInjectedContext, sanitizeAnswer, verifyAnswerNumbers } from "./datasource/inject-context.ts";
 import type { SalesScreenDataSource } from "./datasource/index.ts";
 import type { PlatformMcpClient } from "./datasource/platform-mcp.ts";
 import { TurnTracer, type TraceSink, type TurnTraceRecord } from "./trace/metrics.ts";
@@ -98,21 +98,18 @@ export function parseConsoleEvent(raw: string): ConsoleWireEvent | null {
 
 export function createVoiceOrchestrator(options: OrchestratorOptions) {
   const {
-    hub, dataSource, llm, mcp, trace, llmTimeoutMs, partialPaceMs, partialMaxTotalMs,
-    prefetchTimeoutMs, questionMinGapMs, questionWindowMs, questionWindowMax, mcpToolWhitelist,
+    hub, dataSource, llm, trace, llmTimeoutMs, partialPaceMs, partialMaxTotalMs,
+    prefetchTimeoutMs, questionMinGapMs, questionWindowMs, questionWindowMax,
     hubAuth = null,
   } = options;
   const setTimer = options.setTimer ?? ((fn: () => void, ms: number) => setTimeout(fn, ms));
   const clearTimer = options.clearTimer ?? ((handle: unknown) => clearTimeout(handle as NodeJS.Timeout));
 
-  /** scripted 适配器注入预取 payload 的口子(替代真实 LLM 的上下文注入) */
-  const scripted = llm as LlmAdapter & { usePayload?: (p: PublicSalesScreenPayload) => void };
-
   let state: VoiceSessionState = initSessionState(Date.now());
   let sessionId = "";
   let turnSeq = 0; // 每次提问递增;一切延迟回调持有所属 seq,过期即弃
   let pendingQuestion: string | null = null;
-  const history: LlmMessage[] = [];
+  let answer: ReturnType<typeof buildIntentAnswer> | null = null;
   const timers = new Set<{ clear: () => void }>();
 
   /** 进行中的一轮:新问题到来时中止旧轮(LLM 流/死线一并释放) */
@@ -166,6 +163,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           card: record.card as TurnTracePayload["card"],
           degraded: record.degraded,
           totalMs: record.totalMs,
+          ...(record.classifyMs !== undefined ? { classifyMs: record.classifyMs } : {}),
+          ...(record.numberGuardViolations ? { numberGuardViolations: record.numberGuardViolations } : {}),
         },
       },
       (conn) => conn.role === "console",
@@ -191,7 +190,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   function beginSession(): void {
     if (state.name !== "ambient") return;
     sessionId = `sess-${randomUUID().slice(0, 8)}`;
-    history.length = 0; // 跨会话不共享上下文(展厅换人不带上一任的问答)
+    answer = null;
     broadcast({ type: "session.start", at: Date.now(), sessionId });
     dispatch({ type: "WAKE", at: Date.now() });
     later(VOICE_TIMING.wakingMs, () => {
@@ -209,6 +208,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     clearTimers();
     clearActiveTurn(); // 审核 M1:关闭即中止进行中的 LLM 流/预取/死线
     turnSeq += 1;
+    answer = null;
     dispatch({ type: "FORCE_CLOSE", at: Date.now() });
     broadcast({ type: "session.end", at: Date.now(), reason });
     later(VOICE_TIMING.closingMs, () => dispatch({ type: "CLOSED", at: Date.now() }));
@@ -299,7 +299,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         break;
     }
     clearTimers();
-    clearActiveTurn(); // 旧轮的 LLM 流/死线立即释放,不再空跑到死线
+    clearActiveTurn(); // 旧轮的分类/死线立即释放
+    answer = null;
     void runQuestion(question);
   }
 
@@ -379,32 +380,35 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       const payload = await prefetch;
       if (seq !== turnSeq) return;
       tracer.mark("prefetch");
-      scripted.usePayload?.(payload);
-
-      /* ---- LLM 流式(工具轮仅长尾;主路径零工具轮) ---- */
-      const snapshot = buildInjectedContext(payload);
-      const { spoken, source, toolLatencyMs } = await streamAnswer(question, snapshot, controller.signal, tracer);
+      /* ---- LLM 只选意图；不发送快照、不执行工具轮 ---- */
+      const classifyStart = performance.now();
+      const classified = await llm.classify(question, controller.signal);
+      const classifyMs = performance.now() - classifyStart;
       if (seq !== turnSeq) return;
+      if (controller.signal.aborted) throw new LlmError("LLM 分类超时", "llm_timeout");
       clearTimeout(deadlineState.timer ?? undefined);
       activeTurn = null;
-
-      /* ---- 卡片选型 + 数字护栏(防幻觉红线,F) ---- */
-      const routed = routeQuestion(question, payload, payload.period.label);
-      const verdict = sanitizeAnswer(spoken, snapshot);
-      const degraded = verdict.degraded || routed.unanswerable;
-      // 与卡片上限对齐:逐字流与末片卡片用同一份截断后的文本(审核 第 8 步)
-      const finalSpoken = clampAnswerText(degraded ? VOICE_COVERAGE_FALLBACK : verdict.text);
-      const card: AnswerCardData = degraded
-        ? buildBriefCard("小川", [finalSpoken])
-        : (routed.card ?? buildBriefCard("小川", [finalSpoken]));
+      const intent = isIntent(classified) && !hasUnsupportedScope(question) ? classified : "unanswerable";
+      const routed = buildIntentAnswer(intent, payload);
+      const snapshot = buildInjectedContext(payload); // 仅供本地备用护栏，不进入模型
+      const verdict = sanitizeAnswer(routed.spoken, snapshot);
+      const violations = verdict.degraded ? verifyAnswerNumbers(routed.spoken, snapshot).violations : [];
+      const degraded = routed.unanswerable;
+      const finalSpoken = clampAnswerText(routed.spoken);
+      const card: AnswerCardData = { ...routed.card, spoken: finalSpoken };
+      answer = { ...routed, card, spoken: finalSpoken, sentences: buildSpokenSentences(finalSpoken) };
+      const source = "payload" as const;
 
       tracer.mark("answerFull");
       const record = tracer.finish({
         source,
-        card: degraded ? "brief" : (routed.cardId ?? "brief"),
+        card: card.kind,
         degraded,
+        classifyMs,
+        ...(violations.length ? { numberGuardViolations: violations } : {}),
       });
       await trace.append(record);
+      if (seq !== turnSeq) return;
       emitTrace(record);
 
       /* ---- 发射:tool.invoke → answer.delta…(末片携卡)→ ANSWER ---- */
@@ -413,7 +417,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         at: Date.now(),
         card: card.kind,
         source,
-        latencyMs: toolLatencyMs ?? record.stages.prefetch,
+        latencyMs: record.stages.prefetch,
       });
 
       const chunkSize = Math.max(8, Math.ceil(finalSpoken.length / 3));
@@ -439,8 +443,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           if (!isLast) return;
           // 末片落卡:镜像进 answering(大屏由随后的 state.change 驱动 ANSWER)
           dispatch({ type: "ANSWER", at: Date.now(), card });
-          history.push({ role: "user", content: question }, { role: "assistant", content: finalSpoken });
-          if (history.length > 8) history.splice(0, history.length - 8);
+          if (intent === "chitchat_or_end") {
+            forceClose("decline");
+            return;
+          }
 
           /* ---- 播报计时 → 追问 → 退场(与覆盖层同常量) ---- */
           const typeMs = (finalSpoken.length / LAUNCH.typeCps) * 1000;
@@ -463,85 +469,6 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       activeTurn = null;
       await degrade(seq, tracer, classify(err, deadlineState.fired));
     }
-  }
-
-  /** LLM 流式聚合;长尾工具轮在这里发生。 */
-  async function streamAnswer(
-    question: string,
-    snapshot: string,
-    signal: AbortSignal,
-    tracer: TurnTracer,
-  ): Promise<{ spoken: string; source: "payload" | "mcp"; toolLatencyMs: number | null }> {
-    const messages: LlmMessage[] = [
-      { role: "system", content: INJECTION_CONSTRAINT },
-      ...history,
-      { role: "user", content: `【经营数据快照】\n${snapshot}\n\n【先生的问题】${question}` },
-    ];
-
-    let spoken = "";
-    let toolCall: LlmToolCall | null = null;
-    let firstToken = false;
-    for await (const chunk of llm.stream({ messages, signal })) {
-      if (chunk.type === "delta") {
-        if (!firstToken) {
-          firstToken = true;
-          tracer.mark("llmFirstToken");
-        }
-        spoken += chunk.text;
-      } else if (chunk.type === "tool_call") {
-        toolCall = chunk.call;
-      } else if (chunk.type === "done" && chunk.finishReason === "timeout") {
-        throw new LlmError("LLM 思考超时", "llm_timeout");
-      }
-    }
-    if (signal.aborted) throw new LlmError("LLM 思考超时", "llm_timeout");
-
-    let source: "payload" | "mcp" = "payload";
-    let toolLatencyMs: number | null = null;
-    if (toolCall) {
-      if (!mcp) {
-        // 视觉仓阶段 MCP flag 关:长尾问题没有数据来源 → fail-closed 降级
-        return { spoken: VOICE_COVERAGE_FALLBACK, source: "payload", toolLatencyMs: null };
-      }
-      // 工具白名单:工具名/参数来自 LLM,而问题是攻击者可控的(提示词注入),
-      // 只依赖平台端只读 key 不够——不在名单内的工具一律按覆盖缺口降级。
-      if (!mcpToolWhitelist.includes(toolCall.name)) {
-        return { spoken: VOICE_COVERAGE_FALLBACK, source: "payload", toolLatencyMs: null };
-      }
-      const startedAt = Date.now();
-      tracer.mark("toolExec");
-      let toolAnswer = "";
-      try {
-        const result = await mcp.callTool(toolCall.name, safeJson(toolCall.arguments), signal);
-        toolAnswer = result.content.map((part) => part.text ?? "").join("\n");
-      } catch (err) {
-        throw new LlmError(`MCP 工具轮失败: ${(err as Error).message}`, "llm_unavailable");
-      }
-      toolLatencyMs = Date.now() - startedAt;
-      source = "mcp";
-
-      // 带工具结果进行第二轮(同样受死线约束)
-      const secondRound: LlmMessage[] = [
-        ...messages,
-        { role: "assistant", content: "" },
-        { role: "tool", name: toolCall.name, content: toolAnswer },
-      ];
-      let second = "";
-      let secondFirst = false;
-      for await (const chunk of llm.stream({ messages: secondRound, signal })) {
-        if (chunk.type === "delta") {
-          if (!secondFirst) {
-            secondFirst = true;
-            tracer.mark("llmFirstToken");
-          }
-          second += chunk.text;
-        }
-      }
-      if (signal.aborted) throw new LlmError("LLM 思考超时", "llm_timeout");
-      spoken = second;
-    }
-
-    return { spoken, source, toolLatencyMs };
   }
 
   /* ---------- 降级路径(plan §16.2 C) ---------- */
@@ -590,17 +517,12 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     get state(): VoiceSessionState {
       return state;
     },
+    /** 显示文本与中文读法分离，供后续 TTS 管线消费。 */
+    get answer(): ReturnType<typeof buildIntentAnswer> | null {
+      return answer;
+    },
     get sessionId(): string {
       return sessionId;
     },
   };
-}
-
-function safeJson(raw: string): Record<string, unknown> {
-  try {
-    const parsed = JSON.parse(raw);
-    return typeof parsed === "object" && parsed !== null ? (parsed as Record<string, unknown>) : {};
-  } catch {
-    return {};
-  }
 }

@@ -1,6 +1,6 @@
-# voice-orchestrator —— 「小川」语音编排服务(8b 数据通路)
+# voice-orchestrator —— 「小川」语音编排服务（8c Task 1–2）
 
-独立 Node 进程:WS hub + 预取注入 + LLM 适配器 + 会话编排。
+独立 Node 进程：WS hub + payload 预取 + 本地意图分类 + 确定性卡片/播报 + 会话编排。
 零 npm 依赖,Node ≥ 22.6 TS 直跑(`--experimental-strip-types`)。
 
 ## 启动
@@ -13,7 +13,7 @@ pnpm --dir services/voice-orchestrator start
 ```
 
 - 监听 `ws://localhost:3210`(VOICE_HUB_PORT 可改),HTTP GET `/` 为探活端点。
-- 无 `VOICE_LLM_API_KEY` 时自动落到离线 scripted 适配器:答案由注入 fixture
+- 无 `VOICE_LLM_API_KEY` 时自动落到离线 scripted 适配器:意图由离线路由分类，答案由公开 fixture
   口径确定性生成,供 `/voice-console` 全链路演示与验收(无需外网)。
 
 ## 验收路径(plan §16.2 D/F)
@@ -56,24 +56,43 @@ pnpm --dir services/voice-orchestrator start
   error(rate_limited);被新问题顶替的旧轮立即 abort(LLM 流/死线/预取外呼)。
 - **数据策略**:问题原文会写入 trace JSONL 并广播给对话台(展厅大屏本来就要
   展示转写,属产品行为);如需不落盘问题原文,把 `VOICE_TRACE_FILE` 置空即可。
-  接入真实 LLM 时,注入快照(经营数字)会发往模型服务商,上生产前需确认
-  数据外发合规。
+  8c 分类请求只发送当前问题和意图定义，不发送经营快照或历史答案。模型
+  地址默认回环，模型 ID 必须由环境变量显式提供。
 
-## 当前语音与 MCP 边界（2026-10-05 源码复核）
+## 当前交付边界
 
-当前交付为文字驱动的 8b 数据/视觉通路。ASR、TTS、麦克风采集和唤醒尚未接入，振幅为合成演示值。
-平台 MCP **未启用，代码保留**：主入口未调用 initialize，编排请求未给 LLM 传工具目录，因此仅打开 feature flag 不能打通长尾路径。保持 `VOICE_MCP_ENABLED=0`；接线、权限验证及真实平台联调须另行验收。
+8c Task 1–2 已接入：真实本地 LLM 只输出 `{intent}`，strict JSON Schema 加运行时严格解析。
+意图枚举在 `src/lib/voice/intents.ts`；`intent-answers.ts` 将意图映射到卡片 builder，播报取 `card.spoken`。
+`spoken-normalize.ts` 生成汉字读法和句子 UTF-16 偏移，显示原文不变；TTS 管线将在后续任务消费。
 
-本地 OpenAI 兼容 LLM 配置示例（本地服务无密钥时仍需非空占位值，才能选择真实适配器）：
+ASR、TTS、麦克风采集、唤醒、快照缓存和跨机 HTTPS 尚未施工，当前仍是文字驱动的问答。
+平台 MCP 代码保留，但分类主路径不调用工具，不将模型文本用于播报。
+首期不支持库存和指定地区、仓库、客户、型号、历史时期的筛选；覆盖外问题明确降级。
+完成率保留真实值（包括超过 100%），发货提醒计数使用完整 summary，而非样本数组长度。
+
+本地配置（复制 `.env.example` 为 `.env.local`，模型 ID 填 LM Studio 当前已加载的标识）：
 
 ```dotenv
 VOICE_LLM_BASE_URL=http://127.0.0.1:1234/v1
 VOICE_LLM_API_KEY=local-placeholder
 VOICE_LLM_MODEL=your-loaded-model
+VOICE_LLM_REASONING_EFFORT=none
 VOICE_MCP_ENABLED=0
 ```
 
-这里没有验证已安装模型的推理质量、首 token 延迟、麦克风或扬声器；离线 scripted 数据不能作为真实语音延迟承诺。
+本地服务不校验 key 时仍需非空占位值，才能选择真实适配器。缺少 key 时使用 scripted。
+`reasoning_content` 有内容而 `content` 为空时，会明确诊断思考模式。
+数字 token 校验是备用告警：异常记录 `numberGuardViolations`，不静默把整个模板替换掉。
+
+`/voice-console` 显示 `classifyMs`（一次完整分类耗时），旧 `llmFirstToken` 在分类路径为 null。
+运行真实模型验收（Node 22.6+，模型 ID 从环境变量读取）：
+
+```bash
+node --experimental-strip-types scripts/voice-intent-report.mjs docs/voice-8c-intent-latency-report.md
+```
+
+该脚本先预热，再跑 8 条对话台问题和原型 13 条问题各两轮；两条库存问题本阶段预期降级。
+此报告只测完整分类调用，不代表真实语音首音延迟。
 
 ## 配置
 
@@ -87,13 +106,13 @@ VOICE_MCP_ENABLED=0
 src/
   main.ts            入口:hub + 数据源 + LLM + 编排接线
   config.ts          环境变量(.env.local 宽松加载)
-  orchestrator.ts    会话编排(8a 同一 reducer 做镜像;预取→LLM→选卡→广播)
+  orchestrator.ts    会话编排(同一 reducer 做镜像;预取→分类→代码模板→广播)
   ws/codec.ts        RFC6455 帧编解码(纯函数,单测)
   ws/ws-server.ts    最小 WS hub(零依赖)
-  llm/types.ts       LlmAdapter 接口(OpenAI 兼容流式语义)
+  llm/types.ts       LlmAdapter 接口(classify + 保留 stream 兼容)
   llm/scripted.ts    离线确定性适配器(路由=纯函数,fail-closed)
-  llm/zhipu.ts       智谱 GLM(OpenAI 兼容 SSE 流式)
-  datasource/        fixture / http 数据源 + 注入快照 + 防幻觉护栏 + MCP 客户端
+  llm/zhipu.ts       OpenAI 兼容本地分类客户端（历史文件名保留）
+  datasource/        fixture / http 数据源 + 本地数字快照/护栏 + 保留 MCP 客户端
   trace/metrics.ts   打点(question→prefetch→first_token→tool_exec→answer_full)
   guard/redaction.ts 日志脱敏
 fixtures/            公开 payload fixture(字段=平台 PublicSalesScreenPayload)

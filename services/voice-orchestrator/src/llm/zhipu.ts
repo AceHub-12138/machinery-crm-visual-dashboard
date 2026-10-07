@@ -1,5 +1,5 @@
 /**
- * 智谱 GLM 适配器(OpenAI 兼容 chat/completions 流式;8b 默认云端实现)。
+ * OpenAI 兼容适配器（历史文件名保留）：8c 非流式意图分类，兼容旧 SSE 接口。
  *
  * base URL / model / key 全部来自环境变量(config.ts),不落仓。
  * 超时由 orchestrator 统一守(VOICE_TIMING.thinkingMaxMs),本适配器
@@ -8,11 +8,13 @@
 
 import type { LlmAdapter, LlmChunk, LlmCompleteRequest } from "./types.ts";
 import { LlmError } from "./types.ts";
+import { INTENT_SCHEMA, INTENT_SYSTEM, parseIntent, type Intent } from "../../../../src/lib/voice/intents.ts";
 
 type SseChunk = {
   choices?: Array<{
     delta?: {
       content?: string;
+      reasoning_content?: string;
       tool_calls?: Array<{ id?: string; function?: { name?: string; arguments?: string } }>;
     };
     finish_reason?: string;
@@ -23,6 +25,7 @@ export type OpenAiCompatibleOptions = {
   baseUrl: string;
   apiKey: string;
   model: string;
+  reasoningEffort?: string;
   /** 温度等采样参数留给调用方扩展;8b 只用默认 */
   fetchImpl?: typeof fetch;
 };
@@ -34,9 +37,46 @@ export class OpenAiCompatibleAdapter implements LlmAdapter {
   readonly #options: OpenAiCompatibleOptions;
 
   constructor(options: OpenAiCompatibleOptions) {
+    if (!options.model.trim()) throw new LlmError("本地 LLM 需要显式设置 VOICE_LLM_MODEL");
     this.#options = options;
     this.name = `openai-compatible:${options.model}`;
     this.fetchImpl = options.fetchImpl ?? fetch;
+  }
+
+  async classify(question: string, signal?: AbortSignal): Promise<Intent> {
+    let response: Response;
+    try {
+      response = await this.fetchImpl(`${this.#options.baseUrl.replace(/\/+$/, "")}/chat/completions`, {
+        method: "POST", signal,
+        headers: { "content-type": "application/json", authorization: `Bearer ${this.#options.apiKey}` },
+        body: JSON.stringify({
+          model: this.#options.model, stream: false, temperature: 0, max_tokens: 40,
+          ...this.reasoningOptions(),
+          response_format: { type: "json_schema", json_schema: { name: "intent", strict: true, schema: INTENT_SCHEMA } },
+          messages: [{ role: "system", content: INTENT_SYSTEM }, { role: "user", content: question }],
+        }),
+      });
+    } catch (err) {
+      throw new LlmError(`LLM 分类连接失败: ${(err as Error).message}`, signal?.aborted ? "llm_timeout" : "llm_unavailable");
+    }
+    if (!response.ok) throw new LlmError(`LLM 分类响应异常: HTTP ${response.status}`);
+    let body: { choices?: Array<{ message?: { content?: unknown; reasoning_content?: unknown } }> };
+    try {
+      body = await response.json();
+    } catch {
+      throw new LlmError("LLM 分类响应不是有效 JSON", signal?.aborted ? "llm_timeout" : "llm_unavailable");
+    }
+    if (signal?.aborted) throw new LlmError("LLM 分类已中止", "llm_timeout");
+    const message = body?.choices?.[0]?.message;
+    if (!message?.content && message?.reasoning_content) {
+      throw new LlmError("模型处于思考模式，检查 reasoning_effort（收到 reasoning_content，无 content）");
+    }
+    return typeof message?.content === "string" ? parseIntent(message.content) : "unanswerable";
+  }
+
+  private reasoningOptions(): { reasoning_effort?: string } {
+    const effort = this.#options.reasoningEffort ?? "none";
+    return effort ? { reasoning_effort: effort } : {};
   }
 
   async *stream(request: LlmCompleteRequest): AsyncIterable<LlmChunk> {
@@ -52,6 +92,7 @@ export class OpenAiCompatibleAdapter implements LlmAdapter {
         body: JSON.stringify({
           model: this.#options.model,
           stream: true,
+          ...this.reasoningOptions(),
           messages: request.messages.map((m) => ({ role: m.role, content: m.content })),
           ...(request.tools && request.tools.length > 0
             ? {
@@ -75,6 +116,7 @@ export class OpenAiCompatibleAdapter implements LlmAdapter {
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     let buffer = "";
+    let receivedReasoning = false;
 
     for (;;) {
       let chunk: ReadableStreamReadResult<Uint8Array>;
@@ -101,6 +143,7 @@ export class OpenAiCompatibleAdapter implements LlmAdapter {
         }
         const choice = parsed?.choices?.[0];
         const delta = choice?.delta;
+        if (delta?.reasoning_content) receivedReasoning = true;
         if (delta?.content) {
           fullText += delta.content;
           yield { type: "delta", text: delta.content };
@@ -125,6 +168,9 @@ export class OpenAiCompatibleAdapter implements LlmAdapter {
       }
     }
 
+    if (!fullText && receivedReasoning) {
+      throw new LlmError("模型处于思考模式，检查 reasoning_effort（收到 reasoning_content，无 content）", request.signal?.aborted ? "llm_timeout" : "llm_unavailable");
+    }
     yield { type: "done", fullText, finishReason };
   }
 }

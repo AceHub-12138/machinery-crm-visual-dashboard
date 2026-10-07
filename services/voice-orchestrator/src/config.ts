@@ -29,10 +29,11 @@ export type OrchestratorConfig = {
   payloadUrl: string;
   payloadPublicId: string;
   fixturePath: string;
-  /** LLM(OpenAI 兼容;8b 默认智谱)。apiKey 为空 ⇒ 离线 scripted 适配器 */
+  /** 本地 LLM（OpenAI 兼容）。apiKey 为空 ⇒ 离线 scripted；model 必须显式配置 */
   llmBaseUrl: string;
   llmApiKey: string;
   llmModel: string;
+  llmReasoningEffort: string;
   llmTimeoutMs: number;
   /** 平台 MCP(长尾兜底);默认关闭——视觉仓阶段无 Key(plan §16.2) */
   mcpEnabled: boolean;
@@ -81,9 +82,10 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): OrchestratorCo
     payloadUrl: env.VOICE_PAYLOAD_URL ?? "",
     payloadPublicId: env.VOICE_PAYLOAD_PUBLIC_ID ?? "",
     fixturePath: env.VOICE_FIXTURE_PATH ?? defaultFixturePath(),
-    llmBaseUrl: env.VOICE_LLM_BASE_URL ?? "https://open.bigmodel.cn/api/paas/v4",
+    llmBaseUrl: env.VOICE_LLM_BASE_URL ?? "http://127.0.0.1:1234/v1",
     llmApiKey: env.VOICE_LLM_API_KEY ?? "",
-    llmModel: env.VOICE_LLM_MODEL ?? "glm-4-flash",
+    llmModel: env.VOICE_LLM_MODEL ?? "",
+    llmReasoningEffort: env.VOICE_LLM_REASONING_EFFORT ?? "none",
     llmTimeoutMs: int(env.VOICE_LLM_TIMEOUT_MS, 8000),
     mcpEnabled: env.VOICE_MCP_ENABLED === "1" || env.VOICE_MCP_ENABLED === "true",
     mcpUrl: env.VOICE_MCP_URL ?? "",

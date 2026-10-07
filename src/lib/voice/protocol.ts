@@ -106,6 +106,9 @@ export type SessionEndReason =
 
 /** 一轮问答的全程打点(plan §16.2 B④;毫秒,相对 question 起点)。 */
 export type TurnTracePayload = {
+  /** 8c 非流式分类耗时；旧客户端可忽略。 */
+  classifyMs?: number;
+  numberGuardViolations?: string[];
   question: string;
   turn: number;
   /** 各阶段完成时刻(相对提问 t0;未发生的阶段为 null) */

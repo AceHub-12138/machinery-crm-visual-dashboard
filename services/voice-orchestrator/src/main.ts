@@ -71,6 +71,7 @@ const llm = config.llmApiKey
       baseUrl: config.llmBaseUrl,
       apiKey: config.llmApiKey,
       model: config.llmModel,
+      reasoningEffort: config.llmReasoningEffort,
     })
   : new ScriptedAdapter();
 log(`llm adapter: ${llm.name}${config.llmApiKey ? "" : " (no VOICE_LLM_API_KEY → scripted)"}`);

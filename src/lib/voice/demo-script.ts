@@ -71,7 +71,7 @@ export function buildTargetProgressCard(
     targetText,
     remainingText,
     completionRate: progress.completionRate,
-    spoken: `先生,${periodLabel}合同额 ${actualText},完成月度目标的 ${progress.completionRate}%,距离目标还差 ${remainingText}。`,
+    spoken: `先生,${periodLabel}合同额 ${actualText},完成月度目标的 ${progress.completionRate}%,${progress.exceeded ? remainingText : `距离目标还差 ${remainingText}`}。`,
   };
 }
 

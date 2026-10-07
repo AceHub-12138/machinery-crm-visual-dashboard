@@ -73,4 +73,12 @@ describe("inject-context — 防幻觉数字护栏(F 红线)", () => {
     expect(extractNumbers("第 3 名,共 12 项(85.7%)")).toEqual(["3", "12", "85.7"]);
     expect(extractNumbers("没有数字")).toEqual([]);
   });
+  it("完整 token 比对，不允许 3 命中 2026/286，或 85 命中 85.7", () => {
+    expect(verifyAnswerNumbers("3 台", "年份2026，客户286家").ok).toBe(false);
+    expect(verifyAnswerNumbers("85%", "完成率85.7%").ok).toBe(false);
+    expect(verifyAnswerNumbers("85.7%", "完成率85.7%").ok).toBe(true);
+  });
+  it("只移除千分位逗号，正常标点不把两个数拼成一个", () => {
+    expect(extractNumbers("3,12项,金额1,286.0万")).toEqual(["3", "12", "1286.0"]);
+  });
 });

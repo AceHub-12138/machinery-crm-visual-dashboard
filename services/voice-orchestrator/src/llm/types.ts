@@ -6,6 +6,8 @@
  * 决定是否继续——主路径预取注入,零工具轮。
  */
 
+import type { Intent } from "../../../../src/lib/voice/intents.ts";
+
 export type LlmMessage = {
   role: "system" | "user" | "assistant" | "tool";
   content: string;
@@ -34,6 +36,8 @@ export type LlmCompleteRequest = {
 
 export interface LlmAdapter {
   readonly name: string;
+  /** 只接收问题与意图定义，不接收业务快照。 */
+  classify(question: string, signal?: AbortSignal): Promise<Intent>;
   stream(request: LlmCompleteRequest): AsyncIterable<LlmChunk>;
 }
 

@@ -106,12 +106,12 @@ describe("card-builders — 卡片数字 == payload 字段", () => {
     );
   });
 
-  it("客户/发货卡:摘要计数 == reminders 三桶,行 == milestones 最近 5 条", () => {
+  it("客户/发货卡:摘要计数 == summary，行 == milestones 最近 5 条", () => {
     const card = buildCustomersShipmentsCard(payload.delivery, payload.period.label);
     expect(card.summaryText).toBe(
-      `今日到期 ${payload.delivery.reminders.today.length}` +
-        ` · 七日内 ${payload.delivery.reminders.sevenDays.length}` +
-        ` · 逾期 ${payload.delivery.reminders.overdue.length}`,
+      `今日到期 ${payload.delivery.summary.todayDue}` +
+        ` · 七日内 ${payload.delivery.summary.sevenDayDue}` +
+        ` · 逾期 ${payload.delivery.summary.overdueDue}`,
     );
 
     const latest = [...payload.delivery.milestones]
@@ -128,6 +128,23 @@ describe("card-builders — 卡片数字 == payload 字段", () => {
 
   it("覆盖缺口兜底话术为固定原句(防幻觉红线)", () => {
     expect(VOICE_COVERAGE_FALLBACK).toBe("抱歉先生,我暂时无法调取这项数据。");
+  });
+  it("超额完成率不截成100%，超额话术不再说还差", () => {
+    const collection = { ...payload.collection, targetRate: 110.2, exceeded: true, exceededAmount: "1530000.00", remainingAmount: "0.00" };
+    const ring = buildCompletionRingCard(collection, payload.period.label);
+    expect(ring.ratePercent).toBe(110.2);
+    expect(ring.spoken).toContain("110.2%");
+    for (const card of [ring, buildTargetProgressCardFromPublic(collection, payload.period.label)]) {
+      expect(card.spoken).toContain("已超额 ¥153.0万");
+      expect(card.spoken).not.toContain("还差");
+      expect(isValidAnswerCard(card)).toBe(true);
+    }
+  });
+  it("发货完整计数不受提醒样本数量影响", () => {
+    const delivery = { ...payload.delivery, summary: { ...payload.delivery.summary, todayDue: 17, sevenDayDue: 25, overdueDue: 9 } };
+    const card = buildCustomersShipmentsCard(delivery, payload.period.label);
+    expect(card.summaryText).toBe("今日到期 17 · 七日内 25 · 逾期 9");
+    expect(card.spoken).toContain("今日到期 17 台、逾期未发 9 台");
   });
 });
 
