@@ -160,6 +160,8 @@ describe('8c speech descriptor', () => {
     const speech = {turnId:'12345678-1234-1234-1234-123456789abc',sentences:[{index:0,displayStart:0,displayEnd:2}]};
     const full={type:'answer.delta',at:1,seq:0,text:'好的',full:true,card:baseBrief,speech};
     expect(parseWireEvent(JSON.stringify(full))).toEqual(full);
+    expect(parseWireEvent(JSON.stringify({...full,speech:{...speech,fixed:'goodbye'}}))).not.toBeNull();
+    expect(parseWireEvent(JSON.stringify({...full,speech:{...speech,fixed:'unknown'}}))).toBeNull();
     for(const changed of [null,{...speech,turnId:'bad'},{...speech,sentences:[{index:0,displayStart:-1,displayEnd:2}]},{...speech,sentences:[{index:1,displayStart:0,displayEnd:2}]},{...speech,sentences:[{index:0,displayStart:0,displayEnd:2},{index:1,displayStart:1,displayEnd:3}]}]) {
       expect(parseWireEvent(JSON.stringify({...full,speech:changed}))).toBeNull();
     }

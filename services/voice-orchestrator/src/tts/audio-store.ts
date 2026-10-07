@@ -1,5 +1,6 @@
 /** Turn buffers are independent of browsers. Disconnecting a GET does not cancel synthesis;
- * supersession/close explicitly cancel the whole turn. Bounded retention prevents leaks.
+ * supersession/forced close/health invalidation cancel the whole turn; normal
+ * decline and followup timeout leave buffers readable until TTL. Retention is bounded.
  */
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
@@ -8,7 +9,7 @@ import type { SpokenSentence } from "../../../../src/lib/voice/spoken-normalize.
 import { FIXED_LINES, type FixedLineKey } from "./fixed-lines.ts";
 import type { SpeechClient, TtsMetrics } from "./voice-local-client.ts";
 
-export type SpeechDescriptor = { turnId: string; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
+export type SpeechDescriptor = { turnId: string; fixed?: "goodbye"; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
 export type BufferedSentence = {
   chunks: Uint8Array[]; state: "pending" | "done" | "failed"; bytes: number; waiters: Set<() => void>;
 };
@@ -30,9 +31,14 @@ export class AudioStore {
   readonly #ttlMs: number;
   readonly #gone = new Map<string, number>();
   #gc: NodeJS.Timeout | null = null;
+  #healthTimer: NodeJS.Timeout | null = null;
+  #refresh: Promise<void> | null = null;
+  #refHash: string | null = null;
+  #closed = false;
+  readonly #lifecycle = new AbortController();
   #ready = false;
   #reason = "disabled";
-  constructor(options: { client: SpeechClient; cacheDir: string; style?: string; enabled: boolean; warn?: (message: string) => void; maxTurnBytes?: number; ttlMs?: number }) {
+  constructor(options: { client: SpeechClient; cacheDir: string; style?: string; enabled: boolean; warn?: (message: string) => void; maxTurnBytes?: number; ttlMs?: number; healthIntervalMs?: number }) {
     this.#client = options.client; this.#cacheDir = options.cacheDir; this.#style = options.style ?? "default";
     this.#enabled = options.enabled; this.#warn = options.warn ?? (() => {});
     this.#maxBytes = options.maxTurnBytes ?? 8 * 1024 * 1024;
@@ -40,16 +46,31 @@ export class AudioStore {
     if (this.#enabled) {
       this.#gc = setInterval(() => this.sweep(), Math.min(this.#ttlMs, 1000));
       this.#gc.unref();
+      this.#healthTimer = setInterval(() => { void this.initialize(); }, options.healthIntervalMs ?? 30000);
+      this.#healthTimer.unref();
     }
   }
   get ready(): boolean { return this.#ready; }
   get status() { return { enabled: this.#enabled, ready: this.#ready, reason: this.#reason }; }
 
   async initialize(): Promise<void> {
-    if (!this.#enabled) return;
+    if (!this.#enabled || this.#closed) return;
+    if (this.#refresh) return this.#refresh;
+    this.#refresh = this.refresh();
+    try { await this.#refresh; } finally { this.#refresh = null; }
+  }
+
+  private async refresh(): Promise<void> {
     try {
-      const health = await this.#client.health();
+      const health = await this.#client.health(this.#lifecycle.signal);
+      this.#lifecycle.signal.throwIfAborted();
       if (!health.warm || health.selfCheck !== "passed" || !health.styles.includes(this.#style)) throw new Error("self-check or style unavailable");
+      if (this.#ready && this.#refHash === health.refHash) return;
+      this.#ready = false;
+      this.#reason = "refreshing";
+      this.#fixed.clear();
+      for (const id of this.#turns.keys()) this.cancel(id);
+      const fixed = new Map<FixedLineKey, Uint8Array>();
       await mkdir(this.#cacheDir, { recursive: true, mode: 0o700 });
       for (const [key, text] of Object.entries(FIXED_LINES) as Array<[FixedLineKey, string]>) {
         const hash = createHash("sha256").update(JSON.stringify({ version: 1, refHash: health.refHash, style: this.#style, text, format: "s16le/24000/mono" })).digest("hex");
@@ -63,7 +84,8 @@ export class AudioStore {
           const chunks: Uint8Array[] = [];
           let bytes = 0;
           let done = false;
-          for await (const chunk of this.#client.tts(text, this.#style)) {
+          for await (const chunk of this.#client.tts(text, this.#style, this.#lifecycle.signal)) {
+            this.#lifecycle.signal.throwIfAborted();
             if (chunk.type === "audio") {
               bytes += chunk.pcm.length;
               if (bytes > 2 * 1024 * 1024) throw new Error("Fixed speech too large");
@@ -79,19 +101,40 @@ export class AudioStore {
           await writeFile(temporary, pcm, { mode: 0o600, flag: "wx" });
           await rename(temporary, path);
         }
-        this.#fixed.set(key, pcm);
+        this.#lifecycle.signal.throwIfAborted();
+        fixed.set(key, pcm);
       }
+      this.#fixed.clear();
+      for (const [key, pcm] of fixed) this.#fixed.set(key, pcm);
+      this.#refHash = health.refHash;
       this.#ready = true;
       this.#reason = "ready";
     } catch {
-      this.#ready = false; this.#fixed.clear(); this.#reason = "startup_check_failed";
-      this.#warn("TTS startup validation/cache failed; voice muted, cards remain available");
+      const previous = this.#reason;
+      this.#ready = false; this.#fixed.clear(); this.#reason = this.#closed ? "closed" : "health_check_failed";
+      for (const id of this.#turns.keys()) this.cancel(id);
+      if (!this.#closed && previous !== this.#reason) this.#warn("TTS health validation/cache failed; voice muted until recovery, cards remain available");
     }
   }
 
   fixed(key: string): Uint8Array | null { return this.#ready ? this.#fixed.get(key as FixedLineKey) ?? null : null; }
   start(sentences: SpokenSentence[], onMetrics?: (metrics: TtsMetrics) => void): AudioTurn | null {
     if (!this.#ready || !sentences.length) return null;
+    const turn = this.createTurn(sentences);
+    turn.completed = this.produce(turn, sentences, onMetrics);
+    return turn;
+  }
+  /** Cached goodbye participates in turn cancellation without starting GPU synthesis. */
+  startFixed(key: "goodbye", sentences: SpokenSentence[]): AudioTurn | null {
+    const pcm = this.fixed(key);
+    if (!pcm || sentences.length !== 1) return null;
+    const turn = this.createTurn(sentences);
+    turn.descriptor.fixed = key;
+    turn.sentences[0] = { chunks: [pcm], state: "done", bytes: pcm.length, waiters: new Set() };
+    turn.bytes = pcm.length;
+    return turn;
+  }
+  private createTurn(sentences: SpokenSentence[]): AudioTurn {
     this.sweep();
     // Single display: starting a newer turn cancels all earlier jobs.
     for (const turn of this.#turns.values()) if (!turn.cancelled) this.cancel(turn.id);
@@ -103,7 +146,6 @@ export class AudioStore {
       bytes: 0, cancelled: false, created: Date.now(), metrics: { ttsRegenerated: 0, ttsTruncated: 0, ttsFail: 0 }, completed: Promise.resolve(),
     };
     this.#turns.set(id, turn);
-    turn.completed = this.produce(turn, sentences, onMetrics);
     return turn;
   }
   lookup(id: string): AudioTurn | null { this.sweep(); return this.#turns.get(id) ?? null; }
@@ -119,6 +161,11 @@ export class AudioStore {
     for (const sentence of turn.sentences) { sentence.chunks.length = 0; sentence.bytes = 0; notify(sentence); }
   }
   close(): void {
+    this.#closed = true;
+    this.#lifecycle.abort();
+    this.#ready = false; this.#fixed.clear(); this.#reason = "closed";
+    if (this.#healthTimer) clearInterval(this.#healthTimer);
+    this.#healthTimer = null;
     if (this.#gc) clearInterval(this.#gc);
     this.#gc = null;
     for (const id of this.#turns.keys()) this.cancel(id);

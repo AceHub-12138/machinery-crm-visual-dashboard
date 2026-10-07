@@ -121,7 +121,7 @@ test/                vitest(与根仓同一命令:pnpm test)
 
 ## Task 3–4 音频接口
 
-先启动 `services/voice-local/run.py`，再开启编排配置：
+开启编排配置；voice-local 和编排的启动顺序不再影响最终恢复：
 
 ```dotenv
 VOICE_TTS_ENABLED=1
@@ -131,7 +131,7 @@ VOICE_HUB_CONSOLE_TOKEN=your-distinct-console-token
 VOICE_HUB_SCREEN_TOKEN=your-distinct-screen-token
 ```
 
-令牌各至少16字符且不同；开启 TTS 时回环部署也必须配置。默认 TTS 关闭，无额外模型请求。启动自检或固定缓存失败会记录告警、静音，卡片和状态机继续正常工作。
+令牌各至少16字符且不同；开启 TTS 时回环部署也必须配置。默认 TTS 关闭，无额外模型请求。启动自检或固定缓存失败会记录告警、静音，卡片和状态机继续正常工作。启用时每30秒复查健康；恢复后自动重建/加载固定缓存。健康但参考哈希不变时不重复合成；参考哈希变化时取消旧音频轮、刷新全部固定话术，完成后才恢复就绪。并发健康刷新合并，关闭会取消刷新和轮询。
 
 音频通过现有 hub 的 HTTP 端口提供。所有数据 GET 要求 `Authorization: Bearer <screen或console令牌>`，Origin 沿用 WS 白名单。合法 Origin 的浏览器 OPTIONS 预检只返回 GET/Authorization 许可，不返回音频/状态，也不授予数据读取权限。错误 Origin 拒绝；后续 GET 仍校验 Bearer。
 
@@ -141,7 +141,11 @@ VOICE_HUB_SCREEN_TOKEN=your-distinct-screen-token
 
 PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int16 样本。取消后新的 GET 返回410；已发送 HTTP 200 的连接不能改成410，因此立即断开流。无音频的失败句返回204，后续句继续合成。
 
-每轮缓存最多8MiB，保留120秒、最多4轮；被取消轮立即释放音频。固定缓存位于忽略的 `logs/tts-cache/`，键包括参考音频字节、参考文本、模型标识/路径、温度、策略参数、style和话术。更换参考对后重启服务使缓存自然失效。
+每轮缓存最多8MiB，保留120秒、最多4条轮记录；单大屏每次新建轮会取消所有旧轮，最多1轮有效。被取消轮立即释放音频。固定缓存位于忽略的 `logs/tts-cache/`，键包括参考音频字节、参考文本、模型标识/路径、温度、策略参数、style和话术。更换参考对并重启voice-local后，编排将在下一次健康检查识别哈希变化，无需重启编排。
+
+告别回答使用缓存的 `goodbye`，`speech` 保留 `turnId/sentences` 并追加 `fixed: "goodbye"`；同一音频也可按轮ID读取，便于保留顶替、强制取消和TTL语义。告别不新建合成请求，不立即广播退场。Task 5播放器耗尽后通过WS发送 `{type:"playback.drained",at,turnId}`；仅screen角色、当前告别轮且处于answering时生效，错误角色和旧轮回报忽略。尚未接播放器的客户端使用「缓存PCM时长×2+2秒」兜底退场。告别退场和追问超时不取消音频；新问题、强制关闭、TTL、关闭服务及健康失败/参考变化仍会取消。
+
+普通回答目前仍使用原文字计时进入followup；本批仅移除了followup_timeout对音频的误取消。Task 5必须同时接通浏览器和编排的播放完成同步，不能只改覆盖层定时器。
 
 打点增加 `ttsFirstByteMs`、`ttsRegenerated`、`ttsTruncated`、`ttsFail`。首包后立即更新 console trace；整轮合成或取消后只追加一条最终 JSONL 记录，避免重复统计。真实 ASR 输入和浏览器播放尚未接入，`asrMs`、`playbackStartMs` 预留为 null。`classifyMs` 保留真实分类耗时。
 

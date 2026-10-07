@@ -1,4 +1,5 @@
 import io
+import asyncio
 import tempfile
 import threading
 import unittest
@@ -149,6 +150,72 @@ class PolicyTests(unittest.TestCase):
             thread.join(timeout=3)
             listener.close()
             self.assertFalse(thread.is_alive())
+
+    def test_stalled_connected_stream_releases_gpu_and_bounds_retained_jobs(self):
+        async def exercise():
+            app = create_app(self.settings, self.backend)
+            async with app.router.lifespan_context(app):
+                def generate(text, cancel, max_tokens):
+                    for _ in range(30):
+                        check_cancel(cancel)
+                        yield PCM, 6
+                self.backend.generate = generate
+                release = asyncio.Event()
+                tasks, stalled_events, received = [], [], []
+
+                def start_stream():
+                    stalled = asyncio.Event()
+                    stalled_events.append(stalled)
+                    request_sent = False
+                    disconnect = asyncio.Event()
+                    size = [0]
+                    received.append(size)
+                    async def receive():
+                        nonlocal request_sent
+                        if not request_sent:
+                            request_sent = True
+                            return {'type': 'http.request', 'body': b'{"text":"' + ('测'*100).encode() + b'"}', 'more_body': False}
+                        await disconnect.wait()
+                        return {'type': 'http.disconnect'}
+                    async def send(message):
+                        if message['type'] == 'http.response.start':
+                            self.assertEqual(message['status'], 200)
+                        elif message.get('body'):
+                            stalled.set()
+                            await release.wait()  # connected transport, no reading
+                            size[0] += len(message['body'])
+                    scope = {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'},
+                             'http_version': '1.1', 'method': 'POST', 'scheme': 'http', 'path': '/tts',
+                             'raw_path': b'/tts', 'query_string': b'', 'headers': [(b'content-type', b'application/json')],
+                             'client': ('127.0.0.1', 12001), 'server': ('127.0.0.1', 8810)}
+                    task = asyncio.create_task(app(scope, receive, send))
+                    tasks.append(task)
+                    return stalled
+
+                try:
+                    await asyncio.wait_for(start_stream().wait(), 1)
+                    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://local') as client:
+                        result = await asyncio.wait_for(client.post('/asr', content=PCM, headers={'content-type': 'audio/pcm'}), 1)
+                        self.assertEqual(result.status_code, 200)
+                        job = next(j for j in app.state.runtime.jobs.values() if j.streaming)
+                        self.assertTrue(job.future.done())
+                        self.assertGreater(job.queue.qsize(), 4)
+                        self.assertLessEqual(job.stats['bytes'], (100*.4+1.5)*24000*2)
+                        # Completed but undrained streams still consume admission slots.
+                        for _ in range(7):
+                            await asyncio.wait_for(start_stream().wait(), 1)
+                        denied = await client.post('/tts', json={'text': '测试'})
+                        self.assertEqual(denied.status_code, 429)
+                        release.set()
+                        await asyncio.wait_for(asyncio.gather(*tasks), 2)
+                        self.assertTrue(all(size[0] == len(PCM)*30 for size in received))
+                        self.assertTrue(all(not j.streaming and j.queue.empty() for j in app.state.runtime.jobs.values()))
+                        result = await client.post('/asr', content=PCM, headers={'content-type': 'audio/pcm'})
+                        self.assertEqual(result.status_code, 200)
+                finally:
+                    release.set()
+                    await asyncio.wait_for(asyncio.gather(*tasks, return_exceptions=True), 2)
+        asyncio.run(exercise())
 
     def test_failed_self_check_mutes_tts_keeps_asr(self):
         self.backend.recognition='完全不同'

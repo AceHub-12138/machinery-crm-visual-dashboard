@@ -28,7 +28,10 @@ class Job:
     id: str
     cancel: threading.Event = field(default_factory=threading.Event)
     stats: dict = field(default_factory=dict)
-    queue: asyncio.Queue = field(default_factory=lambda: asyncio.Queue(maxsize=4))
+    # guarded_audio caps total PCM bytes per job. Do not backpressure the shared
+    # GPU worker on network consumers; admission also counts undrained streams.
+    queue: asyncio.Queue = field(default_factory=asyncio.Queue)
+    streaming: bool = False
     ready: asyncio.Future | None = None
     future: asyncio.Future | None = None
     finished: bool = False
@@ -76,13 +79,13 @@ class Runtime:
         # Keep completed job metrics briefly, never retain text or audio in this ledger.
         now = time.monotonic()
         for key in list(self.jobs):
-            if self.jobs[key].finished and now - self.jobs[key].created > 120:
+            if self.jobs[key].finished and not self.jobs[key].streaming and now - self.jobs[key].created > 120:
                 del self.jobs[key]
-        if sum(not job.finished for job in self.jobs.values()) >= 8:
+        if sum(not job.finished or job.streaming for job in self.jobs.values()) >= 8:
             raise HTTPException(429, "Speech queue is full")
         if len(self.jobs) >= 256:
             for key, job in list(self.jobs.items()):
-                if job.finished:
+                if job.finished and not job.streaming:
                     del self.jobs[key]
                     break
         job = Job(uuid.uuid4().hex)
@@ -92,6 +95,10 @@ class Runtime:
     async def close(self):
         for job in self.jobs.values():
             job.cancel.set()
+            if job.streaming:
+                while not job.queue.empty():
+                    job.queue.get_nowait()
+                job.queue.put_nowait(None)
         await asyncio.to_thread(self.executor.shutdown, wait=True, cancel_futures=True)
 
     def health(self):
@@ -214,6 +221,7 @@ def create_app(settings=None, backend=None):
             raise HTTPException(400, "Unknown style")
         job = runtime.create_job()
         runtime.counts["ttsRequests"] += 1
+        job.streaming = True
         loop = asyncio.get_running_loop()
         job.ready = loop.create_future()
         def clear_output():
@@ -223,15 +231,17 @@ def create_app(settings=None, backend=None):
             if not job.ready.done():
                 job.ready.set_result(value)
         def put(event):
-            pending = asyncio.run_coroutine_threadsafe(job.queue.put(event), loop)
-            while True:
-                try:
-                    pending.result(timeout=0.02)
-                    return
-                except concurrent.futures.TimeoutError:
-                    if job.cancel.is_set():
-                        pending.cancel()
-                        raise GenerationCancelled()
+            if job.cancel.is_set():
+                raise GenerationCancelled()
+            def enqueue():
+                if not job.cancel.is_set():
+                    job.queue.put_nowait(event)
+            loop.call_soon_threadsafe(enqueue)
+        def finish_output():
+            if job.cancel.is_set():
+                clear_output()
+            if job.streaming:
+                job.queue.put_nowait(None)
         def produce():
             started = time.perf_counter()
             sent = False
@@ -252,37 +262,36 @@ def create_app(settings=None, backend=None):
                 for key in ("ttsRegenerated", "ttsTruncated", "ttsFail"):
                     runtime.counts[key] += job.stats.get(key, 0)
                 loop.call_soon_threadsafe(resolve_ready, sent)
-                if not job.cancel.is_set():
-                    try:
-                        put(None)
-                    except GenerationCancelled:
-                        pass
-                if job.cancel.is_set():
-                    loop.call_soon_threadsafe(clear_output)
+                loop.call_soon_threadsafe(finish_output)
         job.future = loop.run_in_executor(runtime.executor, produce)
         watcher = asyncio.create_task(until_disconnected(request, job))
         try:
             audible = await asyncio.shield(job.ready)
         except asyncio.CancelledError:
             job.cancel.set()
+            job.streaming = False
+            clear_output()
             raise
         finally:
             watcher.cancel()
         if not audible:
+            job.streaming = False
+            clear_output()
             raise HTTPException(503, "Synthesis produced no valid audio")
         async def stream():
             drained = False
             try:
                 while True:
                     pcm = await job.queue.get()
-                    if pcm is None:
+                    if pcm is None or job.cancel.is_set():
                         drained = True
                         break
                     yield pcm
             finally:
+                job.streaming = False
                 if not drained:
                     job.cancel.set()
-                    clear_output()
+                clear_output()
         return StreamingResponse(stream(), media_type="audio/pcm", headers={
             "X-Sample-Rate": "24000", "X-Channels": "1", "X-Sample-Format": "s16le",
             "X-Voice-Job-Id": job.id, "X-TTS-Regenerated": str(job.stats.get("ttsRegenerated", 0)),

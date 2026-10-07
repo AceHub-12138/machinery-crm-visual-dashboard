@@ -12,6 +12,8 @@ import { ScriptedAdapter } from "../src/llm/scripted.ts";
 import { TraceSink } from "../src/trace/metrics.ts";
 import fixture from "../fixtures/public-sales-screen.json";
 import { validatePublicPayload } from "../../../src/lib/voice/public-payload.ts";
+import type { Intent } from "../../../src/lib/voice/intents.ts";
+import type { VoiceWireEvent } from "../../../src/lib/voice/protocol.ts";
 
 const pcm = new Uint8Array(24000); for (let i=0;i<pcm.length;i+=2) { pcm[i]=208;pcm[i+1]=7; }
 const zero = { ttsRegenerated: 0, ttsTruncated: 0, ttsFail: 0 };
@@ -33,6 +35,20 @@ async function http(store: AudioStore) {
   const hub=await startVoiceHub({host:'127.0.0.1',port:0,onMessage:()=>{},onHttpRequest:createAudioHttpHandler({store,consoleToken:'console',screenToken:'screen'})});hubs.push(hub);
   const url=`http://127.0.0.1:${hub.port}`;
   return (path:string,init:RequestInit={})=>fetch(url+path,{...init,headers:{authorization:'Bearer screen',...init.headers}});
+}
+
+function orchestrator(store: AudioStore, intent: Intent) {
+  const events: VoiceWireEvent[] = [];
+  const llm = new ScriptedAdapter();
+  vi.spyOn(llm, 'classify').mockResolvedValue(intent);
+  const orch = createVoiceOrchestrator({
+    hub: { broadcast: (e: VoiceWireEvent) => events.push(e), counts: () => ({ screens: 1, consoles: 1 }) } as unknown as VoiceHubServer,
+    audio: store, dataSource: { name: 'test', fetchPayload: async () => validatePublicPayload(fixture)! }, llm,
+    mcp: null, trace: new TraceSink(null), llmTimeoutMs: 8000, partialPaceMs: 1, partialMaxTotalMs: 1,
+    prefetchTimeoutMs: 5000, questionMinGapMs: 0, questionWindowMs: 60000, questionWindowMax: 100, mcpToolWhitelist: [],
+  });
+  orch.handleClientMessage({ id: 'test', role: 'console', send: () => {}, close: () => {} }, JSON.stringify({ type: 'question.submit', at: Date.now(), text: '谢谢，没有了' }));
+  return { orch, events, full: () => events.find(e => e.type === 'answer.delta' && e.full) as Extract<VoiceWireEvent, { type: 'answer.delta' }> };
 }
 
 describe('voice-local HTTP client',()=>{
@@ -60,6 +76,67 @@ describe('voice-local HTTP client',()=>{
 });
 
 describe('audio cache, stream, cancellation and lifecycle',()=>{
+  it('goodbye is cached, fetchable after decline, and waits for the current screen playback', async () => {
+    const client = new FakeClient(); const { store } = await setup(client); const get = await http(store);
+    vi.useFakeTimers(); const { orch, events, full } = orchestrator(store, 'chitchat_or_end');
+    await vi.advanceTimersByTimeAsync(1100);
+    const speech = full().speech!;
+    expect(speech.fixed).toBe('goodbye'); expect(client.calls).toBe(5); expect(orch.state.name).toBe('answering');
+    const report = (role: 'screen' | 'console' | 'unknown', turnId = speech.turnId) => orch.handleClientMessage({ id: 'report', role, send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.drained', at: Date.now(), turnId }));
+    report('unknown'); report('console'); report('screen', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa');
+    expect(orch.state.name).toBe('answering');
+    report('screen'); expect(orch.state.name).toBe('closing');
+    expect(events.filter(e => e.type === 'session.end' && e.reason === 'decline')).toHaveLength(1);
+    expect(store.lookup(speech.turnId)?.cancelled).toBe(false);
+    await vi.advanceTimersByTimeAsync(10000); expect(orch.state.name).toBe('ambient');
+    vi.useRealTimers();
+    const response = await get(`/voice/audio/${speech.turnId}/0`);
+    expect(response.status).toBe(200); expect(new Uint8Array(await response.arrayBuffer())).toEqual(pcm);
+    orch.forceClose('force'); expect((await get(`/voice/audio/${speech.turnId}/0`)).status).toBe(410);
+  });
+  it('goodbye fallback closes without cancelling and stale playback cannot close a newer turn', async () => {
+    const { store } = await setup(new FakeClient()); vi.useFakeTimers();
+    const { orch, events, full } = orchestrator(store, 'chitchat_or_end'); await vi.advanceTimersByTimeAsync(1100);
+    const oldId = full().speech!.turnId;
+    orch.handleClientMessage({ id: 'test', role: 'console', send: () => {}, close: () => {} }, JSON.stringify({ type: 'question.submit', at: Date.now(), text: '谢谢' }));
+    await vi.advanceTimersByTimeAsync(150);
+    orch.handleClientMessage({ id: 'screen', role: 'screen', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.drained', at: Date.now(), turnId: oldId }));
+    expect(orch.state.name).toBe('answering'); expect(store.lookup(oldId)?.cancelled).toBe(true);
+    const latest = events.filter(e => e.type === 'answer.delta' && e.full).at(-1) as Extract<VoiceWireEvent, { type: 'answer.delta' }>;
+    await vi.advanceTimersByTimeAsync(4000); expect(orch.state.name).toBe('ambient');
+    expect(store.lookup(latest.speech!.turnId)?.cancelled).toBe(false);
+    orch.forceClose('force');
+  });
+  it('followup timeout preserves answer audio until force-close, supersession or TTL', async () => {
+    const { store } = await setup(new FakeClient()); vi.useFakeTimers();
+    const { orch, events, full } = orchestrator(store, 'sales_progress'); await vi.advanceTimersByTimeAsync(3000);
+    const id = full().speech!.turnId; await vi.advanceTimersByTimeAsync(30000);
+    expect(events.some(e => e.type === 'session.end' && e.reason === 'followup_timeout')).toBe(true);
+    expect(store.lookup(id)?.cancelled).toBe(false); expect(store.lookup(id)?.sentences[0].bytes).toBeGreaterThan(0);
+    orch.forceClose('force'); expect(store.lookup(id)?.cancelled).toBe(true);
+  });
+  it('polling recovers late startup and outages, and refreshes changed references once', async () => {
+    vi.useFakeTimers(); const client = new FakeClient(); client.passed = false;
+    const health = vi.spyOn(client, 'health'); const { store } = await setup(client, { healthIntervalMs: 100 });
+    client.passed = true; await vi.advanceTimersByTimeAsync(100); await store.initialize();
+    expect(store.ready).toBe(true); expect(client.calls).toBe(5);
+    await vi.advanceTimersByTimeAsync(100); await store.initialize(); expect(client.calls).toBe(5);
+    const old = store.startFixed('goodbye', buildSpokenSentences('为您服务是我的荣幸,先生。'))!; await old.completed;
+    client.hash = 'b'.repeat(64); await vi.advanceTimersByTimeAsync(100); await Promise.all([store.initialize(), store.initialize()]);
+    expect(client.calls).toBe(10); expect(old.cancelled).toBe(true);
+    client.passed = false; await vi.advanceTimersByTimeAsync(100); await store.initialize(); expect(store.ready).toBe(false); expect(store.fixed('goodbye')).toBeNull();
+    client.passed = true; await vi.advanceTimersByTimeAsync(100); await store.initialize(); expect(store.ready).toBe(true); expect(client.calls).toBe(10);
+    store.close(); const count = health.mock.calls.length; await vi.advanceTimersByTimeAsync(500); await store.initialize(); expect(health).toHaveBeenCalledTimes(count);
+  });
+  it('coalesces health checks and cannot become ready after close during initialization', async () => {
+    const client = new FakeClient(); let resolve!: (value: Awaited<ReturnType<FakeClient['health']>>) => void;
+    const health = vi.spyOn(client, 'health').mockImplementation(() => new Promise(r => { resolve = r; }));
+    const dir = await mkdtemp(join(tmpdir(), 'voice-cache-')); directories.push(dir);
+    const store = new AudioStore({ client, cacheDir: dir, enabled: true }); stores.push(store);
+    const first = store.initialize(); const second = store.initialize(); expect(health).toHaveBeenCalledOnce();
+    store.close(); resolve({ warm: true, selfCheck: 'passed', refHash: client.hash, styles: ['default'] }); await Promise.all([first, second]);
+    expect(store.ready).toBe(false); expect(store.status.reason).toBe('closed'); expect(client.calls).toBe(0);
+  });
   it('fixed lines use disk cache; reference change invalidates all five',async()=>{
     const client=new FakeClient();const {store,cacheDir}=await setup(client);expect(client.calls).toBe(5);
     const get=await http(store);expect((await get('/voice/audio/fixed/wake')).status).toBe(200);expect(client.calls).toBe(5);

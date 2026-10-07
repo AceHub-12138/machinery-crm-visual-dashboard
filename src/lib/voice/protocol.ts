@@ -71,7 +71,7 @@ export type VoiceWireEvent =
       full: boolean;
       card?: AnswerCardData;
       /** 音频资源与显示偏移；播放器由 Task 5 接入。 */
-      speech?: { turnId: string; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
+      speech?: { turnId: string; fixed?: "goodbye"; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
     }
   | {
       type: "tts.boundary";
@@ -137,13 +137,14 @@ export type TurnTracePayload = {
 };
 
 /**
- * 客户端 → 服务端(仅对话台;大屏是纯订阅方,不发任何事件)。
+ * 客户端 → 服务端：对话台控制会话；大屏仅鉴权/声明角色和回报播放耗尽。
  */
 export type ConsoleWireEvent =
   | { type: "console.hello"; at: number; role: "console" | "screen" }
   | { type: "hub.auth"; at: number; token: string } // 首帧鉴权(审核 H1;仅鉴权模式生效)
   | { type: "session.wake"; at: number } // 开始一轮接管(等价 8c 唤醒词)
   | { type: "question.submit"; at: number; text: string }
+  | { type: "playback.drained"; at: number; turnId: string } // 大屏播放器耗尽，必须匹配当前音频轮
   | { type: "session.close"; at: number }; // 强制退场(Esc 语义)
 
 export const WIRE_EVENT_TYPES = [
@@ -192,7 +193,7 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
       }
       if (ev.speech !== undefined) {
         const s = ev.speech;
-        if (!ev.full || !s || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length > 100 ||
+        if (!ev.full || !s || (s.fixed !== undefined && s.fixed !== "goodbye") || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length > 100 ||
           !s.sentences.every((v, i) => v && v.index === i && Number.isInteger(v.displayStart) && Number.isInteger(v.displayEnd) && v.displayStart >= 0 && v.displayEnd > v.displayStart && v.displayEnd <= ANSWER_SPOKEN_MAX && (i === 0 || v.displayStart >= s.sentences[i - 1].displayEnd))) return null;
       }
       // 卡片来自网络:逐 kind schema 校验(防原型链/脏字段打崩渲染层)

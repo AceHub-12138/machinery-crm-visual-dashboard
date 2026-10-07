@@ -72,7 +72,7 @@ export type OrchestratorOptions = {
   clearTimer?: (handle: unknown) => void;
 };
 
-/** console 控制事件 fail-closed 解析(大屏不发任何事件)。 */
+/** 客户端上行 fail-closed 解析；角色权限在处理入口检查。 */
 export function parseConsoleEvent(raw: string): ConsoleWireEvent | null {
   let data: unknown;
   try {
@@ -93,6 +93,8 @@ export function parseConsoleEvent(raw: string): ConsoleWireEvent | null {
       return ev;
     case "question.submit":
       return typeof ev.text === "string" && ev.text.trim().length > 0 && ev.text.length <= 500 ? ev : null;
+    case "playback.drained":
+      return typeof ev.turnId === "string" && /^[a-f0-9-]{36}$/.test(ev.turnId) ? ev : null;
     default:
       return null;
   }
@@ -119,7 +121,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   /** 提问限流账本:全局一份(审核 M4:按连接计可被多连接绕过) */
   let askedAt: number[] = [];
   let audioId: string | null = null;
-  function cancelAudio(): void { if (audioId) options.audio?.cancel(audioId); audioId = null; }
+  let goodbyeId: string | null = null;
+  function cancelAudio(): void { if (audioId) options.audio?.cancel(audioId); audioId = null; goodbyeId = null; }
 
   function clearActiveTurn(): void {
     if (!activeTurn) return;
@@ -212,9 +215,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   }
 
   function forceClose(reason: "force" | "decline"): void {
+    if (reason === "force") cancelAudio();
     if (state.name === "ambient" || state.name === "closing") return;
     clearTimers();
-    cancelAudio();
+    goodbyeId = null;
     clearActiveTurn(); // 审核 M1:关闭即中止进行中的 LLM 流/预取/死线
     turnSeq += 1;
     answer = null;
@@ -229,6 +233,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     const event = parseConsoleEvent(raw);
     if (!event) return;
     switch (event.type) {
+      case "playback.drained":
+        // Screens may report playback, but cannot submit questions or force-close sessions.
+        if (conn.role === "screen" && event.turnId === goodbyeId && state.name === "answering") forceClose("decline");
+        return;
       case "hub.auth": {
         if (!hubAuth || conn.role !== "unknown") return;
         if (tokensMatch(hubAuth.consoleToken, event.token)) conn.role = "console";
@@ -417,7 +425,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         classifyMs,
         ...(violations.length ? { numberGuardViolations: violations } : {}),
       });
-      const audioTurn = options.audio?.start(answer.sentences, (metrics) => {
+      const audioTurn = intent === "chitchat_or_end" ? options.audio?.startFixed("goodbye", answer.sentences) : options.audio?.start(answer.sentences, (metrics) => {
         Object.assign(record, metrics);
         if (seq === turnSeq) emitTrace(record);
       });
@@ -462,7 +470,15 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           // 末片落卡:镜像进 answering(大屏由随后的 state.change 驱动 ANSWER)
           dispatch({ type: "ANSWER", at: Date.now(), card });
           if (intent === "chitchat_or_end") {
-            forceClose("decline");
+            if (!audioTurn) forceClose("decline");
+            else {
+              goodbyeId = audioTurn.id;
+              // Task 5 will send playback.drained. Cached PCM gives a conservative fallback
+              // for old clients, without cancelling audio when the fallback closes the UI.
+              later((audioTurn.bytes / 48000) * 2000 + 2000, () => {
+                if (seq === turnSeq && goodbyeId === audioTurn.id && state.name === "answering") forceClose("decline");
+              });
+            }
             return;
           }
 
@@ -474,7 +490,6 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
             later(VOICE_TIMING.followupMs, () => {
               if (seq !== turnSeq || state.name !== "followup") return;
               dispatch({ type: "FOLLOWUP_TIMEOUT", at: Date.now() });
-              cancelAudio();
               broadcast({ type: "session.end", at: Date.now(), reason: "followup_timeout" });
               later(VOICE_TIMING.closingMs, () => dispatch({ type: "CLOSED", at: Date.now() }));
             });
