@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useLayoutEffect, useRef } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 import {
   clamp01,
   easeInOutCubic,
@@ -33,6 +33,7 @@ export const AnswerCard = memo(function AnswerCard({
   geometry,
   config = LAUNCH,
   foldAt = null,
+  sentenceRef,
 }: {
   card: AnswerCardData;
   /** 发射起点(performance.now 域,由 OverlayStage 在派发 ANSWER 时写下) */
@@ -41,6 +42,7 @@ export const AnswerCard = memo(function AnswerCard({
   config?: LaunchConfig;
   /** 折叠吸回起点(closing 进入时刻,§5);null = 正常展示 */
   foldAt?: number | null;
+  sentenceRef?: RefObject<{ start: number; end: number } | null>;
 }) {
   const lineRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<HTMLDivElement | null>(null);
@@ -84,6 +86,7 @@ export const AnswerCard = memo(function AnswerCard({
     let raf = 0;
     let disposed = false;
     let lastTyped = -1;
+    let lastHighlight = "";
     let barSet = false;
 
     const paint = (now: number) => {
@@ -139,12 +142,22 @@ export const AnswerCard = memo(function AnswerCard({
 
       /* ④⑤ 打字机 + 高亮(8a 近似:金额/文案一体逐字;8b 起全模板通用) */
       {
-        const typed = typedChars(card.spoken, ph.typingMs, config.typeCps);
-        if (typed !== lastTyped) {
-          lastTyped = typed;
-          spoken.textContent = card.spoken.slice(0, typed);
+        const active = sentenceRef?.current;
+        const typed = Math.max(typedChars(card.spoken, ph.typingMs, config.typeCps), active?.end ?? 0);
+        const highlight = active ? `${active.start}:${active.end}` : "";
+        if (typed !== lastTyped || highlight !== lastHighlight) {
+          lastTyped = typed; lastHighlight = highlight;
+          const text = card.spoken.slice(0, typed);
+          if (active) {
+            const mark = document.createElement("span");
+            mark.className = "overlay-sentence-active";
+            mark.dataset.sentenceStart = String(active.start);
+            mark.dataset.sentenceEnd = String(active.end);
+            mark.textContent = text.slice(active.start, active.end);
+            spoken.replaceChildren(document.createTextNode(text.slice(0, active.start)), mark, document.createTextNode(text.slice(active.end)));
+          } else spoken.textContent = text;
         }
-        if (typed >= card.spoken.length) return; // 编排完成,停帧
+        if (typed >= card.spoken.length && !sentenceRef) return; // 编排完成,停帧
       }
 
       raf = requestAnimationFrame(paint);
@@ -155,7 +168,7 @@ export const AnswerCard = memo(function AnswerCard({
       disposed = true;
       cancelAnimationFrame(raf);
     };
-  }, [card, launchAt, config, barWidth, foldAt]);
+  }, [card, launchAt, config, barWidth, foldAt, sentenceRef]);
 
   const anchor = geometry.cardAnchor;
 

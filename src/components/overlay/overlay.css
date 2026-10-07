@@ -535,3 +535,20 @@
     transition: none;
   }
 }
+
+/* Speech boundaries follow scheduled PCM, independent of the typewriter. */
+.overlay-sentence-active {
+  color: #ecfeff;
+  background: rgba(34, 211, 238, 0.14);
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.45);
+  border-radius: 3px;
+}
+.overlay-audio-notice {
+  position: absolute;
+  bottom: 65px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #fcd34d;
+  font-size: 16px;
+}

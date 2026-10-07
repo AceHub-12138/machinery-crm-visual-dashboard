@@ -64,6 +64,11 @@ export function createAudioHttpHandler(options: { store: AudioStore; consoleToke
           else finish(410, { error: "turn_cancelled" });
           return;
         }
+        if (sentence.state === "failed") {
+          if (res.headersSent) res.destroy();
+          else finish(503, { error: "sentence_failed" });
+          return;
+        }
         while (index < sentence.chunks.length) {
           if (!res.headersSent) res.writeHead(200, headers);
           if (!res.write(sentence.chunks[index++])) await drained(res, consumer.signal);
@@ -71,7 +76,7 @@ export function createAudioHttpHandler(options: { store: AudioStore; consoleToke
         }
         if (turn.cancelled) continue;
         if (sentence.state !== "pending") {
-          if (!res.headersSent) res.writeHead(204, { "cache-control": "no-store" });
+          if (!res.headersSent) { finish(503, { error: "empty_audio" }); return; }
           res.end(); return;
         }
         await changed(sentence, consumer.signal);

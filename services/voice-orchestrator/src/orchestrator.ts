@@ -44,6 +44,7 @@ import {
   type VoiceSessionState,
 } from "../../../src/lib/voice/session-machine.ts";
 import { DEMO_TIMING } from "../../../src/lib/voice/demo-script.ts";
+import { playbackFallbackMs } from "../../../src/lib/voice/playback-timing.ts";
 import { LAUNCH } from "../../../src/lib/voice/params.ts";
 
 export type OrchestratorOptions = {
@@ -82,7 +83,7 @@ export function parseConsoleEvent(raw: string): ConsoleWireEvent | null {
   }
   if (typeof data !== "object" || data === null) return null;
   const ev = data as ConsoleWireEvent;
-  if (typeof (ev as { at?: unknown }).at !== "number") return null;
+  if (typeof (ev as { at?: unknown }).at !== "number" || !Number.isFinite(ev.at)) return null;
   switch (ev.type) {
     case "console.hello":
       return ev.role === "console" || ev.role === "screen" ? ev : null;
@@ -93,6 +94,10 @@ export function parseConsoleEvent(raw: string): ConsoleWireEvent | null {
       return ev;
     case "question.submit":
       return typeof ev.text === "string" && ev.text.trim().length > 0 && ev.text.length <= 500 ? ev : null;
+    case "playback.failed":
+      if (!["audio_unavailable", "invalid_audio", "audio_interrupted", "autoplay_blocked", "timeout"].includes(ev.reason)) return null;
+      // fall through
+    case "playback.started":
     case "playback.drained":
       return typeof ev.turnId === "string" && /^[a-f0-9-]{36}$/.test(ev.turnId) ? ev : null;
     default:
@@ -122,7 +127,38 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   let askedAt: number[] = [];
   let audioId: string | null = null;
   let goodbyeId: string | null = null;
-  function cancelAudio(): void { if (audioId) options.audio?.cancel(audioId); audioId = null; goodbyeId = null; }
+  let playback: { id: string; seq: number; record: TurnTraceRecord; synthesisDone: boolean; finished: boolean; written: boolean } | null = null;
+  function persistPlayback(p: NonNullable<typeof playback>): void {
+    if (!p.finished || !p.synthesisDone || p.written) return;
+    p.written = true;
+    void trace.append({ ...p.record });
+  }
+  function endPlayback(outcome: NonNullable<TurnTraceRecord["playbackOutcome"]>): void {
+    if (!playback || playback.finished) return;
+    playback.finished = true;
+    playback.record.playbackOutcome = outcome;
+    emitTrace(playback.record);
+    persistPlayback(playback);
+  }
+  function cancelAudio(): void {
+    if (audioId) options.audio?.cancel(audioId);
+    endPlayback("cancelled");
+    audioId = null; goodbyeId = null; playback = null;
+  }
+  function spoken(seq: number, outcome: "drained" | "failed" | "timeout"): void {
+    if (seq !== turnSeq || state.name !== "answering") return;
+    clearTimers();
+    if ((outcome === "failed" || (outcome === "timeout" && !goodbyeId)) && audioId) options.audio?.cancel(audioId);
+    endPlayback(outcome);
+    if (goodbyeId) { forceClose("decline"); return; }
+    dispatch({ type: "SPOKEN", at: Date.now() });
+    later(VOICE_TIMING.followupMs, () => {
+      if (seq !== turnSeq || state.name !== "followup") return;
+      dispatch({ type: "FOLLOWUP_TIMEOUT", at: Date.now() });
+      broadcast({ type: "session.end", at: Date.now(), reason: "followup_timeout" });
+      later(VOICE_TIMING.closingMs, () => dispatch({ type: "CLOSED", at: Date.now() }));
+    });
+  }
 
   function clearActiveTurn(): void {
     if (!activeTurn) return;
@@ -172,6 +208,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           totalMs: record.totalMs,
           asrMs: record.asrMs ?? null,
           playbackStartMs: record.playbackStartMs ?? null,
+          ...(record.playbackOutcome ? { playbackOutcome: record.playbackOutcome } : {}),
           ...(record.ttsFirstByteMs !== undefined ? { ttsFirstByteMs: record.ttsFirstByteMs } : {}),
           ...(record.ttsRegenerated !== undefined ? { ttsRegenerated: record.ttsRegenerated, ttsTruncated: record.ttsTruncated, ttsFail: record.ttsFail } : {}),
           ...(record.classifyMs !== undefined ? { classifyMs: record.classifyMs } : {}),
@@ -233,9 +270,17 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     const event = parseConsoleEvent(raw);
     if (!event) return;
     switch (event.type) {
+      case "playback.started":
+      case "playback.failed":
       case "playback.drained":
-        // Screens may report playback, but cannot submit questions or force-close sessions.
-        if (conn.role === "screen" && event.turnId === goodbyeId && state.name === "answering") forceClose("decline");
+        if (conn.role !== "screen" || !playback || playback.finished || event.turnId !== audioId || state.name !== "answering") return;
+        if (event.type === "playback.started") {
+          if (playback.record.playbackStartMs == null) {
+            // Hub receipt clock: no subtraction of clocks on different machines.
+            playback.record.playbackStartMs = Math.max(0, Date.now() - Date.parse(playback.record.ts));
+            emitTrace(playback.record);
+          }
+        } else spoken(playback.seq, event.type === "playback.drained" ? "drained" : event.reason === "timeout" ? "timeout" : "failed");
         return;
       case "hub.auth": {
         if (!hubAuth || conn.role !== "unknown") return;
@@ -432,7 +477,13 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       audioId = audioTurn?.id ?? null;
       if (audioTurn) {
         record.asrMs = null; record.playbackStartMs = null;
-        void audioTurn.completed.then(() => trace.append({ ...record, ...audioTurn.metrics }));
+        const p = { id: audioTurn.id, seq, record, synthesisDone: false, finished: false, written: false };
+        playback = p;
+        void audioTurn.completed.then(() => {
+          Object.assign(record, audioTurn.metrics);
+          p.synthesisDone = true;
+          persistPlayback(p);
+        });
       } else await trace.append(record);
       if (seq !== turnSeq) return;
       emitTrace(record);
@@ -469,31 +520,18 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           if (!isLast) return;
           // 末片落卡:镜像进 answering(大屏由随后的 state.change 驱动 ANSWER)
           dispatch({ type: "ANSWER", at: Date.now(), card });
-          if (intent === "chitchat_or_end") {
-            if (!audioTurn) forceClose("decline");
-            else {
-              goodbyeId = audioTurn.id;
-              // Task 5 will send playback.drained. Cached PCM gives a conservative fallback
-              // for old clients, without cancelling audio when the fallback closes the UI.
-              later((audioTurn.bytes / 48000) * 2000 + 2000, () => {
-                if (seq === turnSeq && goodbyeId === audioTurn.id && state.name === "answering") forceClose("decline");
-              });
-            }
-            return;
+          if (audioTurn) {
+            if (intent === "chitchat_or_end") goodbyeId = audioTurn.id;
+            const timeout = audioTurn.descriptor.fixed
+              ? (audioTurn.bytes / 48000) * 2000 + 2000
+              : playbackFallbackMs(finalSpoken);
+            later(timeout, () => spoken(seq, "timeout"));
+          } else if (intent === "chitchat_or_end") forceClose("decline");
+          else {
+            // Text-only installations preserve the original exhibition pacing.
+            const typeMs = (finalSpoken.length / LAUNCH.typeCps) * 1000;
+            later(LAUNCH.unfoldStartMs + LAUNCH.unfoldMs + typeMs + DEMO_TIMING.answerHoldMs, () => spoken(seq, "drained"));
           }
-
-          /* ---- 播报计时 → 追问 → 退场(与覆盖层同常量) ---- */
-          const typeMs = (finalSpoken.length / LAUNCH.typeCps) * 1000;
-          later(LAUNCH.unfoldStartMs + LAUNCH.unfoldMs + typeMs + DEMO_TIMING.answerHoldMs, () => {
-            if (seq !== turnSeq || state.name !== "answering") return;
-            dispatch({ type: "SPOKEN", at: Date.now() });
-            later(VOICE_TIMING.followupMs, () => {
-              if (seq !== turnSeq || state.name !== "followup") return;
-              dispatch({ type: "FOLLOWUP_TIMEOUT", at: Date.now() });
-              broadcast({ type: "session.end", at: Date.now(), reason: "followup_timeout" });
-              later(VOICE_TIMING.closingMs, () => dispatch({ type: "CLOSED", at: Date.now() }));
-            });
-          });
         });
       });
       void turn;

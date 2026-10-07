@@ -22,6 +22,8 @@ import {
   type VoiceStateName,
   type VoiceSessionState,
 } from "@/lib/voice/session-machine";
+import { PcmPlayer, audioBaseUrl, type Speech, type PlaybackFailure } from "@/lib/voice/pcm-player";
+import { playbackFallbackMs } from "@/lib/voice/playback-timing";
 import { parseWireEvent } from "@/lib/voice/protocol";
 import {
   connectionLostEvents,
@@ -73,23 +75,40 @@ export function OverlayStage({
   /** live 模式 hub 地址(缺省同主机 3210) */
   hubUrl?: string;
 }) {
+  const payloadRef = useRef(payload);
+  useEffect(() => { payloadRef.current = payload; }, [payload]);
   const [session, dispatch] = useReducer(sessionReducer, undefined, () => initSessionState());
   const [phase, setPhase] = useState<Phase>("off");
   const [geometry, setGeometry] = useState<OverlayGeometry>(() => overlayGeometry(1920, 1080));
   const [launchAt, setLaunchAt] = useState(0);
+  const [audioNotice, setAudioNotice] = useState<string | null>(null);
+  const playerRef = useRef<PcmPlayer | null>(null);
+  const speechRef = useRef<Speech | null>(null);
+  const sentenceRef = useRef<{ start: number; end: number } | null>(null);
+  const socketRef = useRef<WebSocket | null>(null);
+  const tokenRef = useRef<string | null>(null);
+  const playingIdRef = useRef<string | null>(null);
+  const getPlayer = useCallback(() => playerRef.current ??= new PcmPlayer(), []);
+  const reportPlayback = useCallback((type: "playback.started" | "playback.drained" | "playback.failed", turnId: string, reason?: PlaybackFailure) => {
+    if (socketRef.current?.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify({ type, at: Date.now(), turnId, ...(reason ? { reason } : {}) }));
+    }
+  }, []);
 
   /* ---- 同步镜像:wire 事件可能在同一渲染帧内连发(答案末片与
      state.change answering 同 tick 到达),映射的 prev 必须取即时状态,
      不能等 React 提交。镜像与视图走同一 reducer,事件流一致则必然一致;
-     effect 里再从视图回同步一次作漂移兜底。 ---- */
+     所有派发都先更新镜像,不拿旧的 React 渲染覆盖即时状态。 ---- */
   const mirrorRef = useRef<VoiceSessionState>(initSessionState());
-  useEffect(() => {
-    mirrorRef.current = session;
-  }, [session]);
   const dispatchTracked = useCallback((event: VoiceEvent) => {
-    mirrorRef.current = sessionReducer(mirrorRef.current, event);
+    const next = sessionReducer(mirrorRef.current, event);
+    if (next.name !== "answering" && mirrorRef.current.name === "answering") {
+      if (event.type === "FORCE_CLOSE" && playingIdRef.current) reportPlayback("playback.failed", playingIdRef.current, "audio_interrupted");
+      playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
+    }
+    mirrorRef.current = next;
     dispatch(event);
-  }, []);
+  }, [reportPlayback]);
 
   /* 画布每帧读取的快照;React 状态只在状态机转移时更新,帧内全走 ref */
   const frameRef = useRef<VoiceFrame>({
@@ -117,14 +136,16 @@ export function OverlayStage({
   useEffect(() => {
     frameRef.current.name = session.name;
     frameRef.current.since = session.since;
-    frameRef.current.amplitude = (now: number) => demoAmplitude(session.name, session.since, now);
+    frameRef.current.amplitude = driver === "live"
+      ? () => playerRef.current?.getAmplitude() ?? 0
+      : (now: number) => demoAmplitude(session.name, session.since, now);
     frameRef.current.foldAt = session.name === "closing" ? session.since : null;
     if (session.name !== "answering") frameRef.current.launchAt = null;
-  }, [session.name, session.since]);
+  }, [session.name, session.since, driver]);
 
   /* ---- 驱动器:每个状态排一个动作序列,转移即换排 ----
-     demo:全流程脚本化;live:唤醒/播报/追问/退场用同一套本地节奏常量,
-     只有 聆听转写与思考结果 来自 wire 事件(思考保底 8s+1.5s 兜底超时)。 */
+     demo:全流程脚本化;live:播完和追问倒计时由hub统一驱动,
+     本地只负责动画及思考/音频异常兜底。 */
   const timers = useRef<number[]>([]);
   const at = useCallback((ms: number, fn: () => void) => {
     timers.current.push(window.setTimeout(fn, ms));
@@ -141,21 +162,55 @@ export function OverlayStage({
     // 读同步镜像而非 React state:本回调必须身份稳定——live effect 依赖它,
     // 否则每次状态转移都会重建 WS,答案事件会落在重连空窗里丢包。
     if (mirrorRef.current.name !== "ambient") return;
+    if (live) void getPlayer().resume().catch(() => setAudioNotice("请点击屏幕启用声音。"));
     setPhase("enter"); // 挂载画布(透明),下一帧淡入
     dispatchTracked({ type: "WAKE", at: performance.now() });
-  }, [dispatchTracked]);
+  }, [dispatchTracked, live, getPlayer]);
 
   const fireAnswer = useCallback(
     (card?: AnswerCardData) => {
       const resolved =
         card ??
-        buildTargetProgressCard(payload.salesTargets.targets, payload.salesTargets.period.label);
+        buildTargetProgressCard(payloadRef.current.salesTargets.targets, payloadRef.current.salesTargets.period.label);
       const now = performance.now();
       frameRef.current.launchAt = now;
       setLaunchAt(now);
       dispatchTracked({ type: "ANSWER", at: now, card: resolved });
+      if (live) {
+        sentenceRef.current = null;
+        setAudioNotice(null);
+        const speech = speechRef.current;
+        if (!speech) {
+          setAudioNotice("声音暂不可用，请查看卡片。");
+          return;
+        }
+        playingIdRef.current = speech.turnId;
+        const isCurrent = () => playingIdRef.current === speech.turnId && mirrorRef.current.name === "answering";
+        getPlayer().play(speech, audioBaseUrl(hubUrl ?? `ws://${window.location.hostname}:3210`), tokenRef.current, {
+          onSentenceStart: (index) => {
+            if (!isCurrent()) return;
+            const sentence = speech.sentences[index];
+            sentenceRef.current = { start: sentence.displayStart, end: sentence.displayEnd };
+            if (index === 0) reportPlayback("playback.started", speech.turnId);
+          },
+          onDrained: () => {
+            if (!isCurrent()) return;
+            sentenceRef.current = null;
+            reportPlayback("playback.drained", speech.turnId);
+            playingIdRef.current = null;
+            // Hub owns live state transitions; wait for its followup/closing.
+          },
+          onError: (reason) => {
+            if (!isCurrent()) return;
+            sentenceRef.current = null;
+            setAudioNotice(reason === "autoplay_blocked" ? "请点击屏幕启用声音；本次回答请查看卡片。" : "语音播报中断，请查看卡片。");
+            reportPlayback("playback.failed", speech.turnId, reason);
+            playingIdRef.current = null;
+          },
+        }, playbackFallbackMs(resolved.spoken));
+      }
     },
-    [payload, dispatchTracked],
+    [dispatchTracked, live, hubUrl, getPlayer, reportPlayback],
   );
 
   useEffect(() => {
@@ -196,6 +251,18 @@ export function OverlayStage({
         break;
       }
       case "answering": {
+        if (live && speechRef.current) {
+          // Network loss is handled by the WS close path. A hung browser/hub
+          // still releases the exhibition UI after a conservative audio guard.
+          at(playbackFallbackMs(session.spoken ?? "") + 2000, () => {
+            playerRef.current?.stop();
+            const id = playingIdRef.current;
+            if (id) reportPlayback("playback.failed", id, "timeout");
+            setAudioNotice("语音播报中断，请查看卡片。");
+            dispatchTracked({ type: speechRef.current?.fixed === "goodbye" ? "FORCE_CLOSE" : "SPOKEN", at: now() });
+          });
+          break;
+        }
         // 播报完成 = 打字时长 + 持卡展示,随后进入追问
         // (typeStart = unfoldStart + unfoldMs,与 launchPhase 的打字起点一致)
         const typeMs = session.spoken ? (session.spoken.length / LAUNCH.typeCps) * 1000 : 0;
@@ -204,6 +271,7 @@ export function OverlayStage({
         break;
       }
       case "followup": {
+        if (live) break; // Hub owns the countdown after it receives playback.drained.
         at(VOICE_TIMING.followupMs, () => dispatchTracked({ type: "FOLLOWUP_TIMEOUT", at: now() }));
         break;
       }
@@ -214,7 +282,6 @@ export function OverlayStage({
           dispatchTracked({ type: "CLOSED", at: now() });
           setPhase("exit");
         });
-        at(VOICE_TIMING.closingMs + DEMO_TIMING.exitFadeMs, () => setPhase("off"));
         break;
       }
       case "error-fallback": {
@@ -223,7 +290,7 @@ export function OverlayStage({
       }
     }
     return clearTimers;
-  }, [session.name, session.cycles, session.spoken, at, clearTimers, fireAnswer, wake, live, dispatchTracked]);
+  }, [session.name, session.cycles, session.spoken, at, clearTimers, fireAnswer, wake, live, dispatchTracked, reportPlayback]);
 
   /* ---- live:编排服务事件源(WS;断链优雅退场,重连退火) ---- */
   const liveCtxRef = useRef<LiveSourceContext>(initLiveSourceContext());
@@ -238,6 +305,7 @@ export function OverlayStage({
     const dispatchWire = (raw: string) => {
       const event = parseWireEvent(raw);
       if (!event) return;
+      if (event.type === "answer.delta" && event.full) speechRef.current = event.speech ?? null;
       const prev = mirrorRef.current.name;
       const result = wireToMachineEvents(prev, event, liveCtxRef.current);
       liveCtxRef.current = result.ctx;
@@ -248,7 +316,7 @@ export function OverlayStage({
         } else if (machineEvent.type === "WAKE") {
           wake();
         } else {
-          dispatch({ ...machineEvent, at: performance.now() } as VoiceEvent);
+          dispatchTracked({ ...machineEvent, at: performance.now() } as VoiceEvent);
         }
       }
     };
@@ -266,9 +334,11 @@ export function OverlayStage({
       hubToken = null;
     }
 
+    tokenRef.current = hubToken;
     const connect = () => {
       if (cancelled) return;
       socket = new WebSocket(hubUrl ?? `ws://${window.location.hostname}:3210`);
+      socketRef.current = socket;
       socket.onmessage = (e) => {
         try {
           dispatchWire(String(e.data));
@@ -283,13 +353,13 @@ export function OverlayStage({
       };
       socket.onclose = (e) => {
         if (cancelled) return;
+        playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
+        for (const machineEvent of connectionLostEvents(mirrorRef.current.name)) {
+          dispatchTracked({ ...machineEvent, at: performance.now() } as VoiceEvent);
+        }
         if (e.code === 4401) {
           console.warn("[overlay] hub 令牌无效");
           return;
-        }
-        // 编排崩溃(plan §16.2 C 降级路径 1):活跃会话立即优雅退场
-        for (const machineEvent of connectionLostEvents(mirrorRef.current.name)) {
-          dispatch({ ...machineEvent, at: performance.now() } as VoiceEvent);
         }
         retryTimer = window.setTimeout(connect, retryDelay);
         retryDelay = Math.min(retryDelay * 2, 5000);
@@ -301,15 +371,33 @@ export function OverlayStage({
     return () => {
       cancelled = true;
       window.clearTimeout(retryTimer);
-      socket?.close();
+      socket?.close(); socketRef.current = null;
+      playingIdRef.current = null; sentenceRef.current = null; speechRef.current = null;
+      void playerRef.current?.close(); playerRef.current = null;
     };
   }, [live, hubUrl, fireAnswer, wake, dispatchTracked]);
+
+  useEffect(() => {
+    if (!live) return;
+    const enable = () => { void getPlayer().resume().catch(() => {}); };
+    window.addEventListener("pointerdown", enable);
+    window.addEventListener("keydown", enable);
+    return () => { window.removeEventListener("pointerdown", enable); window.removeEventListener("keydown", enable); };
+  }, [live, getPlayer]);
 
   /* enter → 下一帧进 on,触发 500ms 淡入过渡 */
   useEffect(() => {
     if (phase !== "enter") return;
     const raf = requestAnimationFrame(() => requestAnimationFrame(() => setPhase("on")));
     return () => cancelAnimationFrame(raf);
+  }, [phase]);
+
+  // The closing state timer is cleared when CLOSED moves to ambient. Own the
+  // exit fade separately so that state cleanup cannot leave an invisible overlay.
+  useEffect(() => {
+    if (phase !== "exit") return;
+    const timer = window.setTimeout(() => setPhase("off"), DEMO_TIMING.exitFadeMs);
+    return () => window.clearTimeout(timer);
   }, [phase]);
 
   /* ---- 运维后备:F9 手动唤醒 / Esc 立即退场(plan §3) ---- */
@@ -359,17 +447,20 @@ export function OverlayStage({
         ) : null}
       </div>
 
+      {audioNotice ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}
+
       {session.card ? (
         <AnswerCard
           card={session.card}
           launchAt={launchAt}
           geometry={geometry}
           foldAt={session.name === "closing" ? session.since : null}
+          sentenceRef={live ? sentenceRef : undefined}
         />
       ) : null}
 
       <p className="overlay-hint">
-        {live ? "HUB LIVE · ESC EXIT — XIAOCHUAN 8B" : "F9 WAKE · ESC EXIT — XIAOCHUAN 8A"}
+        {live ? "HUB LIVE · ESC EXIT — XIAOCHUAN 8C" : "F9 WAKE · ESC EXIT — XIAOCHUAN 8A"}
       </p>
     </div>
   );

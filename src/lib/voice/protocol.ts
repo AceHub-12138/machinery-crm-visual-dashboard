@@ -70,7 +70,7 @@ export type VoiceWireEvent =
       /** 末片为 true;此时携带完整答案卡(数字口径由编排侧构造) */
       full: boolean;
       card?: AnswerCardData;
-      /** 音频资源与显示偏移；播放器由 Task 5 接入。 */
+      /** 音频资源与显示偏移；由本地播放器驱动句级高亮。 */
       speech?: { turnId: string; fixed?: "goodbye"; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
     }
   | {
@@ -111,6 +111,7 @@ export type TurnTracePayload = {
   /** 真实语音耗时；尚未接入的采集/播放字段为 null。 */
   asrMs?: number | null;
   playbackStartMs?: number | null;
+  playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
   ttsFirstByteMs?: number;
   ttsRegenerated?: number;
   ttsTruncated?: number;
@@ -137,13 +138,15 @@ export type TurnTracePayload = {
 };
 
 /**
- * 客户端 → 服务端：对话台控制会话；大屏仅鉴权/声明角色和回报播放耗尽。
+ * 客户端 → 服务端：对话台控制会话；大屏仅鉴权/声明角色和回报当前轮播放状态。
  */
 export type ConsoleWireEvent =
   | { type: "console.hello"; at: number; role: "console" | "screen" }
   | { type: "hub.auth"; at: number; token: string } // 首帧鉴权(审核 H1;仅鉴权模式生效)
   | { type: "session.wake"; at: number } // 开始一轮接管(等价 8c 唤醒词)
   | { type: "question.submit"; at: number; text: string }
+  | { type: "playback.started"; at: number; turnId: string }
+  | { type: "playback.failed"; at: number; turnId: string; reason: "audio_unavailable" | "invalid_audio" | "audio_interrupted" | "autoplay_blocked" | "timeout" }
   | { type: "playback.drained"; at: number; turnId: string } // 大屏播放器耗尽，必须匹配当前音频轮
   | { type: "session.close"; at: number }; // 强制退场(Esc 语义)
 
@@ -191,13 +194,14 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
       if (typeof ev.seq !== "number" || typeof ev.text !== "string" || typeof ev.full !== "boolean") {
         return null;
       }
+      if (ev.full && !isValidAnswerCard(ev.card)) return null;
       if (ev.speech !== undefined) {
         const s = ev.speech;
-        if (!ev.full || !s || (s.fixed !== undefined && s.fixed !== "goodbye") || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length > 100 ||
-          !s.sentences.every((v, i) => v && v.index === i && Number.isInteger(v.displayStart) && Number.isInteger(v.displayEnd) && v.displayStart >= 0 && v.displayEnd > v.displayStart && v.displayEnd <= ANSWER_SPOKEN_MAX && (i === 0 || v.displayStart >= s.sentences[i - 1].displayEnd))) return null;
+        if (!ev.full || !s || (s.fixed !== undefined && s.fixed !== "goodbye") || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length === 0 || s.sentences.length > 100 ||
+          !s.sentences.every((v, i) => v && v.index === i && Number.isInteger(v.displayStart) && Number.isInteger(v.displayEnd) && v.displayStart >= 0 && v.displayEnd > v.displayStart && v.displayEnd <= (ev.card?.spoken.length ?? 0) && (i === 0 || v.displayStart >= s.sentences[i - 1].displayEnd))) return null;
       }
       // 卡片来自网络:逐 kind schema 校验(防原型链/脏字段打崩渲染层)
-      return ev.full && !isValidAnswerCard(ev.card) ? null : ev;
+      return ev;
     case "tts.boundary":
       return typeof ev.sentenceIndex === "number" && typeof ev.charIndex === "number" ? ev : null;
     case "session.end":

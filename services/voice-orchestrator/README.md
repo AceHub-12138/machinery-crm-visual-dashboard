@@ -1,4 +1,4 @@
-# voice-orchestrator —— 「小川」语音编排服务（8c Task 1–4）
+# voice-orchestrator —— 「小川」语音编排服务（8c Task 1–5）
 
 独立 Node 进程：WS hub + payload 预取 + 本地意图分类 + 确定性卡片/播报 + 会话编排。
 零 npm 依赖,Node ≥ 22.6 TS 直跑(`--experimental-strip-types`)。
@@ -48,7 +48,7 @@ pnpm --dir services/voice-orchestrator start
   片段读取(读后存 sessionStorage 并从地址栏抹掉),对话台可在页面输入。
   `?hub=` 白名单除本机地址外,可用构建期 `NEXT_PUBLIC_VOICE_HUB_HOSTS`
   (逗号分隔主机名)放行跨机 hub 地址。
-- **角色模型**:只有声明为 console 的连接可发控制事件;screen/未声明角色只读;
+- **角色模型**:只有声明为 console 的连接可发控制事件;screen 仅可回报当前轮播放开始/耗尽/失败，未声明角色只读;
   角色仅允许声明一次(防中途提权)。`trace.turn`(含问题原文)只发 console。
 - **帧层防线**:分片累计总长上限 1MB、客户端帧强制掩码、无起始续帧拒绝
   (1002)、二进制/未知 opcode 关闭(1003)、并发连接上限 32;握手后 5s 内须声明角色(否则 4408)、25s 心跳 / 60s 无入站断开、控制帧 ≤125B 且不分片、RSV 须为 0。
@@ -65,7 +65,7 @@ pnpm --dir services/voice-orchestrator start
 意图枚举在 `src/lib/voice/intents.ts`；`intent-answers.ts` 将意图映射到卡片 builder，播报取 `card.spoken`。
 `spoken-normalize.ts` 生成汉字读法和句子 UTF-16 偏移，显示原文不变；本地 TTS 管线逐句消费。
 
-Task 3–4 已完成本地 ASR/TTS 服务和音频 HTTP 管线。浏览器播放、麦克风采集、唤醒、快照缓存和跨机 HTTPS 属于后续施工，当前界面仍是文字驱动的问答。
+Task 3–4 已完成本地 ASR/TTS 服务和音频 HTTP 管线。Task 5已接入浏览器PCM播放、真实振幅、句级高亮及播放状态同步。麦克风采集、唤醒、快照缓存和跨机HTTPS仍属后续施工；当前通过对话台输入问题。
 平台 MCP 代码保留，但分类主路径不调用工具，不将模型文本用于播报。
 首期不支持库存和指定地区、仓库、客户、型号、历史时期的筛选；覆盖外问题明确降级。
 完成率保留真实值（包括超过 100%），发货提醒计数使用完整 summary，而非样本数组长度。
@@ -139,14 +139,30 @@ VOICE_HUB_SCREEN_TOKEN=your-distinct-screen-token
 - `GET /voice/audio/fixed/:key`：`wake`、`followup`、`goodbye`、`fallback`、`unheard`。启动时从磁盘加载或合成，运行期 GET 不调用模型。
 - `GET /voice/audio/:turnId/:index`：已缓冲内容接续实时 PCM。元信息通过 `answer.delta` 末片的可选 `speech` 字段公布，不改变旧事件顺序。
 
-PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int16 样本。取消后新的 GET 返回410；已发送 HTTP 200 的连接不能改成410，因此立即断开流。无音频的失败句返回204，后续句继续合成。
+PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int16 样本。取消后新的 GET 返回410；已发送 HTTP 200 的连接不能改成410，因此立即断开流。失败/截断句不冒充完整音频：尚未发头时返回503；已发200时断开body，使浏览器停播并显示卡片提示。后续句仍由音频服务继续生成，浏览器失败回报会取消本轮余下合成。
 
 每轮缓存最多8MiB，保留120秒、最多4条轮记录；单大屏每次新建轮会取消所有旧轮，最多1轮有效。被取消轮立即释放音频。固定缓存位于忽略的 `logs/tts-cache/`，键包括参考音频字节、参考文本、模型标识/路径、温度、策略参数、style和话术。更换参考对并重启voice-local后，编排将在下一次健康检查识别哈希变化，无需重启编排。
 
-告别回答使用缓存的 `goodbye`，`speech` 保留 `turnId/sentences` 并追加 `fixed: "goodbye"`；同一音频也可按轮ID读取，便于保留顶替、强制取消和TTL语义。告别不新建合成请求，不立即广播退场。Task 5播放器耗尽后通过WS发送 `{type:"playback.drained",at,turnId}`；仅screen角色、当前告别轮且处于answering时生效，错误角色和旧轮回报忽略。尚未接播放器的客户端使用「缓存PCM时长×2+2秒」兜底退场。告别退场和追问超时不取消音频；新问题、强制关闭、TTL、关闭服务及健康失败/参考变化仍会取消。
+告别回答使用缓存的 `goodbye`，`speech`追加 `fixed: "goodbye"`，仍按轮ID读取，保留顶替/强制取消/TTL语义。告别不新建GPU合成，播完后退场。
 
-普通回答目前仍使用原文字计时进入followup；本批仅移除了followup_timeout对音频的误取消。Task 5必须同时接通浏览器和编排的播放完成同步，不能只改覆盖层定时器。
+## Task 5 浏览器播放与状态同步
 
-打点增加 `ttsFirstByteMs`、`ttsRegenerated`、`ttsTruncated`、`ttsFail`。首包后立即更新 console trace；整轮合成或取消后只追加一条最终 JSONL 记录，避免重复统计。真实 ASR 输入和浏览器播放尚未接入，`asrMs`、`playbackStartMs` 预留为 null。`classifyMs` 保留真实分类耗时。
+- `src/lib/voice/pcm-player.ts`：int16 LE转float32，24kHz AudioBuffer共享AudioContext时间轴与AnalyserNode；首块预缓冲150ms，50ms块连续排程。正在播放第i句时预取下一句。聚合下载限8MiB；停止会abort下载并stop/disconnect所有排程节点。
+- 句级高亮在AudioContext.currentTime到达首块排程时间时触发。只有全部流EOF且currentTime达到末块结束时刻才算播完；断流/503/410/空音频/非法格式/自动播放失败均不发送成功耗尽回报。
+- screen经已鉴权WS回报 `{type:"playback.started"|"playback.drained",at,turnId}`，失败用 `{type:"playback.failed",at,turnId,reason}`。仅当前answering音频轮允许；console、unknown、旧轮与重复终态忽略。不会授予screen提问或强制退场权限。
+- 普通回答等`playback.drained`才进入followup并开始3秒追问倒计时；告别等播完退场。浏览器保持服务端状态镜像，不再按打字速度抢先进入追问。异常保留卡片、提示查看；失败回报进入追问，告别失败退场。
+- 防止挂起：普通音频按归一化文本的保守合成时长（0.4秒/字＋1.5秒/句）×2＋2秒兜底；告别用缓存PCM时长×2＋2秒。播放器独立网络/音频时钟超时；覆盖层另留比播放器多2秒的退场保障。正常播完和追问超时保留PCM；普通播放失败/超时、顶替、强制关闭等取消音频。
+- live粒子振幅来自真实PCM RMS；demo保留模拟驱动；`JarvisCore.tsx`没有修改。高亮只切分显示字符串，不改变卡片数字或读法。
+- 首次唤醒/点击/键盘事件尝试resume AudioContext。展厅启动可用 `bash scripts/start-voice-kiosk.sh`，带 `--autoplay-policy=no-user-gesture-required`；本阶段没有开启麦克风权限。
 
-Task 5 将接入播放器、振幅、高亮及播放结束反馈。本阶段保持现有展示计时，不能用它测语音播放结束或耳朵听到的延迟。
+`/voice-console`显示首音回报与播放结果。`playbackStartMs`使用hub单一时钟，表示「提问到收到浏览器首样本开始回报」，包含回传网络耗时；不与异机Date.now相减，也不等同于Task 6的VAD L1。合成完成及播放终态都确定后，每轮只追加一条JSONL；取消/失败/兜底同样落盘。`asrMs`仍为null。其他固定提示（wake/followup/fallback/unheard）保持缓存接口，收音阶段的提示播放与开麦节拍在Task 6接线。
+
+验证：`pnpm test`、`pnpm test:e2e`。E2E使用真实hub/HTTP鉴权/CORS/Chromium Web Audio，只把GPU换成确定性PCM。
+真实模型验证脚本（先完成production build，voice-local已预热，分类模型配置已提供）：
+
+```bash
+pnpm build
+VOICE_LLM_MODEL=<currently-loaded-model> VOICE_LLM_API_KEY=local-placeholder node --experimental-strip-types scripts/voice-playback-check.mjs
+```
+
+脚本使用公开fixture与独立回环hub/临时Next端口18815；输入对话台8题＋告别，真实分类及TTS，验证卡片、振幅、队列耗尽和回报，结束后关闭临时进程。不接麦克风，不证明音箱现场听感。报告见 `docs/voice-8c-task5-result.md`。

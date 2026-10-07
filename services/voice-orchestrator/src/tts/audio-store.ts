@@ -180,6 +180,7 @@ export class AudioStore {
     for (let i = 0; i < sentences.length && !turn.cancelled; i++) {
       const buffer = turn.sentences[i];
       let done = false;
+      let failed = false;
       try {
         for await (const chunk of this.#client.tts(sentences[i].spokenText, this.#style, turn.controller.signal)) {
           if (turn.cancelled) return;
@@ -197,11 +198,12 @@ export class AudioStore {
             turn.metrics.ttsRegenerated += chunk.metrics.ttsRegenerated;
             turn.metrics.ttsTruncated += chunk.metrics.ttsTruncated;
             turn.metrics.ttsFail += chunk.metrics.ttsFail;
+            failed = Boolean(chunk.metrics.ttsFail || chunk.metrics.ttsTruncated);
             done = true;
           }
         }
         if (!done || !buffer.bytes) throw new Error("Empty or incomplete synthesis");
-        buffer.state = "done";
+        buffer.state = failed ? "failed" : "done";
       } catch {
         if (turn.cancelled) return;
         turn.metrics.ttsFail += 1;

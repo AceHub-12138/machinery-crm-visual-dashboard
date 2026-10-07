@@ -6,9 +6,10 @@
  * 单测里可以用同一条事件序列喂「编排镜像」与「本映射」断言终态一致。
  *
  * 时序分工(两侧共用 VOICE_TIMING / LAUNCH / DEMO_TIMING 常量,不漂移):
- * - waking 成型、answering 播报计时、followup 3s、closing 动画、
+ * - waking 成型、closing 动画、
  *   error-fallback 播报计时 → 覆盖层本地定时(与 8a 回放器同构);
- * - listening 转写、thinking→answering 的答案内容 → wire 事件驱动。
+ * - listening 转写、答案内容、answering→followup 与追问超时 → wire 驱动。
+ *   PCM 队列耗尽上报 hub 后，由 hub 广播状态；不按打字速度估计。
  * 映射对乱序/重复事件保持惰性:非法转移返回空数组,reducer 侧再兜一层。
  */
 

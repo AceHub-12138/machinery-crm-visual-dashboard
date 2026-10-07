@@ -56,6 +56,9 @@ const stages = STAGES.map(([key, label]) => {
 });
 const totals = records.map((r) => r.totalMs).filter((v) => typeof v === "number");
 const degraded = records.filter((r) => r.degraded).length;
+const playback = records.map(r => r.playbackStartMs).filter(v => typeof v === "number" && Number.isFinite(v));
+const playbackRow = `| 提问 → 收到首音回报 | ${percentile(playback,50) ?? "—"} ms | ${percentile(playback,95) ?? "—"} ms | ${playback.length} |`;
+const outcomes = records.reduce((counts,r) => { if (r.playbackOutcome) counts[r.playbackOutcome] = (counts[r.playbackOutcome] ?? 0) + 1; return counts; }, {});
 const rows = stages
   .map(
     (s) =>
@@ -66,10 +69,11 @@ const totalRow = `| 提问 → 全答(端到端) | ${
   percentile(totals, 50) == null ? "—" : `${percentile(totals, 50)} ms`
 } | ${percentile(totals, 95) == null ? "—" : `${percentile(totals, 95)} ms`} | ${totals.length} |`;
 
-const markdown = `# 8b 打点延迟报告(voice-orchestrator)
+const markdown = `# 语音打点延迟报告(voice-orchestrator)
 
 - 数据源:\`${file}\`
 - 采样轮数:${records.length}(其中降级轮 ${degraded})
+- 播放结果:${JSON.stringify(outcomes)}
 - 生成时间:${new Date().toISOString()}
 
 ## 各阶段耗时(相对提问 t0,毫秒)
@@ -78,9 +82,10 @@ const markdown = `# 8b 打点延迟报告(voice-orchestrator)
 | --- | --- | --- | --- |
 ${rows}
 ${totalRow}
+${playbackRow}
 
-> 说明:8b 无真实 TTS;「全答就绪」= 答案卡片数据构造完成并广播的时刻。
-> P95 之后的等待由大屏 thinking 兜底(plan §4:thinking 超 8s 降级)。
+> 「全答就绪」= 答案卡构造完成；不代表首音。「收到首音回报」= 提问到hub收到浏览器首个样本开始回报，含回传耗时，不跨机器混算时钟。
+> Task 6接入VAD/ASR后才能按L1/L2做现场验收；旧记录缺播放字段时不计入首音样本。
 `;
 
 if (outFile) {

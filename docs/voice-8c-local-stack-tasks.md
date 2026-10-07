@@ -309,6 +309,8 @@ ASR 文本 ──▶ LLM 结构化输出 {intent}（JSON Schema 枚举约束，~
 
 ### Task 5：浏览器 PCM 播放器 + 状态同步（v3 重写）
 
+**施工状态（2026-10-07）**：已完成，待复核。交付与验证见 `docs/voice-8c-task5-result.md`。下述“现状”保留为施工前基线。
+
 **现状**：`OverlayStage.tsx:117-123` 振幅为 `demoAmplitude`；`:203` 用定时器判定播报结束；`live-source.ts:129-134` 丢弃 `tts.boundary`；`JarvisCore.tsx:302` 读 `frame.amplitude(now)`（**零改动**）。
 
 **要做**：

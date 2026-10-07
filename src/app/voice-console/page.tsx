@@ -269,6 +269,12 @@ export default function VoiceConsolePage() {
                 意图分类 {trace.classifyMs.toFixed(1)}ms
               </span>
             ) : null}
+            {trace.playbackStartMs != null ? (
+              <span className="rounded bg-cyan-500/10 px-2 py-1 text-xs tabular-nums text-cyan-200">收到首音回报 {trace.playbackStartMs.toFixed(1)}ms</span>
+            ) : null}
+            {trace.playbackOutcome ? (
+              <span className="rounded bg-white/5 px-2 py-1 text-xs text-white/60">播放结果：{{drained:"播完",failed:"中断",timeout:"超时",cancelled:"已取消"}[trace.playbackOutcome]}</span>
+            ) : null}
             {trace.numberGuardViolations?.length ? (
               <span className="rounded bg-rose-500/10 px-2 py-1 text-xs text-rose-300">数字模板校验告警</span>
             ) : null}

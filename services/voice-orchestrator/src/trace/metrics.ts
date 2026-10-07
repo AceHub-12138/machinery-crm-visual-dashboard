@@ -31,6 +31,7 @@ export type TurnTraceRecord = {
   /** 完整结构化分类的耗时；与旧流式首 token 指标分开。 */
   asrMs?: number | null;
   playbackStartMs?: number | null;
+  playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
   ttsFirstByteMs?: number;
   ttsRegenerated?: number;
   ttsTruncated?: number;

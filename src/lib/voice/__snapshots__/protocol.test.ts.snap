@@ -1,5 +1,46 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`8c PCM playback protocol snapshot > full speech descriptor and screen reports have stable additive shapes 1`] = `
+[
+  {
+    "at": 1234,
+    "card": {
+      "kind": "brief",
+      "lines": [
+        "好的",
+      ],
+      "spoken": "好的",
+      "title": "小川",
+    },
+    "full": true,
+    "seq": 2,
+    "speech": {
+      "fixed": "goodbye",
+      "sentences": [
+        {
+          "displayEnd": 2,
+          "displayStart": 0,
+          "index": 0,
+        },
+      ],
+      "turnId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    },
+    "text": "好的",
+    "type": "answer.delta",
+  },
+  {
+    "at": 1500,
+    "turnId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "type": "playback.started",
+  },
+  {
+    "at": 2500,
+    "turnId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "type": "playback.drained",
+  },
+]
+`;
+
 exports[`protocol — 事件序列快照(单轮:提问→作答→退场) > golden sequence:session.start → … → session.end 1`] = `
 [
   {

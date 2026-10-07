@@ -160,11 +160,24 @@ describe('8c speech descriptor', () => {
     const speech = {turnId:'12345678-1234-1234-1234-123456789abc',sentences:[{index:0,displayStart:0,displayEnd:2}]};
     const full={type:'answer.delta',at:1,seq:0,text:'好的',full:true,card:baseBrief,speech};
     expect(parseWireEvent(JSON.stringify(full))).toEqual(full);
+    expect(parseWireEvent(JSON.stringify({...full,card:{kind:"brief"}}))).toBeNull();
     expect(parseWireEvent(JSON.stringify({...full,speech:{...speech,fixed:'goodbye'}}))).not.toBeNull();
     expect(parseWireEvent(JSON.stringify({...full,speech:{...speech,fixed:'unknown'}}))).toBeNull();
-    for(const changed of [null,{...speech,turnId:'bad'},{...speech,sentences:[{index:0,displayStart:-1,displayEnd:2}]},{...speech,sentences:[{index:1,displayStart:0,displayEnd:2}]},{...speech,sentences:[{index:0,displayStart:0,displayEnd:2},{index:1,displayStart:1,displayEnd:3}]}]) {
+    for(const changed of [null,{...speech,sentences:[]},{...speech,sentences:[{index:0,displayStart:0,displayEnd:3}]},{...speech,turnId:'bad'},{...speech,sentences:[{index:0,displayStart:-1,displayEnd:2}]},{...speech,sentences:[{index:1,displayStart:0,displayEnd:2}]},{...speech,sentences:[{index:0,displayStart:0,displayEnd:2},{index:1,displayStart:1,displayEnd:3}]}]) {
       expect(parseWireEvent(JSON.stringify({...full,speech:changed}))).toBeNull();
     }
     expect(parseWireEvent(JSON.stringify({...full,full:false}))).toBeNull();
+  });
+});
+
+// Legacy sequence above stays compatible; 8c uses local sentence boundaries.
+describe("8c PCM playback protocol snapshot", () => {
+  it("full speech descriptor and screen reports have stable additive shapes", () => {
+    const event: VoiceWireEvent = { type: "answer.delta", at: 1234, seq: 2, text: "好的", full: true,
+      card: {kind:"brief",title:"小川",spoken:"好的",lines:["好的"]},
+      speech: {turnId:"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",fixed:"goodbye",sentences:[{index:0,displayStart:0,displayEnd:2}]},
+    };
+    expect(parseWireEvent(JSON.stringify(event))).toEqual(event);
+    expect([event, {type:"playback.started",at:1500,turnId:event.speech!.turnId}, {type:"playback.drained",at:2500,turnId:event.speech!.turnId}]).toMatchSnapshot();
   });
 });
