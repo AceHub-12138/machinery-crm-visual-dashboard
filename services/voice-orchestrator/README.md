@@ -1,4 +1,4 @@
-# voice-orchestrator —— 「小川」语音编排服务（8c Task 1–2）
+# voice-orchestrator —— 「小川」语音编排服务（8c Task 1–4）
 
 独立 Node 进程：WS hub + payload 预取 + 本地意图分类 + 确定性卡片/播报 + 会话编排。
 零 npm 依赖,Node ≥ 22.6 TS 直跑(`--experimental-strip-types`)。
@@ -63,9 +63,9 @@ pnpm --dir services/voice-orchestrator start
 
 8c Task 1–2 已接入：真实本地 LLM 只输出 `{intent}`，strict JSON Schema 加运行时严格解析。
 意图枚举在 `src/lib/voice/intents.ts`；`intent-answers.ts` 将意图映射到卡片 builder，播报取 `card.spoken`。
-`spoken-normalize.ts` 生成汉字读法和句子 UTF-16 偏移，显示原文不变；TTS 管线将在后续任务消费。
+`spoken-normalize.ts` 生成汉字读法和句子 UTF-16 偏移，显示原文不变；本地 TTS 管线逐句消费。
 
-ASR、TTS、麦克风采集、唤醒、快照缓存和跨机 HTTPS 尚未施工，当前仍是文字驱动的问答。
+Task 3–4 已完成本地 ASR/TTS 服务和音频 HTTP 管线。浏览器播放、麦克风采集、唤醒、快照缓存和跨机 HTTPS 属于后续施工，当前界面仍是文字驱动的问答。
 平台 MCP 代码保留，但分类主路径不调用工具，不将模型文本用于播报。
 首期不支持库存和指定地区、仓库、客户、型号、历史时期的筛选；覆盖外问题明确降级。
 完成率保留真实值（包括超过 100%），发货提醒计数使用完整 summary，而非样本数组长度。
@@ -118,3 +118,31 @@ src/
 fixtures/            公开 payload fixture(字段=平台 PublicSalesScreenPayload)
 test/                vitest(与根仓同一命令:pnpm test)
 ```
+
+## Task 3–4 音频接口
+
+先启动 `services/voice-local/run.py`，再开启编排配置：
+
+```dotenv
+VOICE_TTS_ENABLED=1
+VOICE_LOCAL_URL=http://127.0.0.1:8810
+VOICE_TTS_STYLE=default
+VOICE_HUB_CONSOLE_TOKEN=your-distinct-console-token
+VOICE_HUB_SCREEN_TOKEN=your-distinct-screen-token
+```
+
+令牌各至少16字符且不同；开启 TTS 时回环部署也必须配置。默认 TTS 关闭，无额外模型请求。启动自检或固定缓存失败会记录告警、静音，卡片和状态机继续正常工作。
+
+音频通过现有 hub 的 HTTP 端口提供。所有数据 GET 要求 `Authorization: Bearer <screen或console令牌>`，Origin 沿用 WS 白名单。合法 Origin 的浏览器 OPTIONS 预检只返回 GET/Authorization 许可，不返回音频/状态，也不授予数据读取权限。错误 Origin 拒绝；后续 GET 仍校验 Bearer。
+
+- `GET /voice/health`：音频是否启用/就绪与静音原因。
+- `GET /voice/audio/fixed/:key`：`wake`、`followup`、`goodbye`、`fallback`、`unheard`。启动时从磁盘加载或合成，运行期 GET 不调用模型。
+- `GET /voice/audio/:turnId/:index`：已缓冲内容接续实时 PCM。元信息通过 `answer.delta` 末片的可选 `speech` 字段公布，不改变旧事件顺序。
+
+PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int16 样本。取消后新的 GET 返回410；已发送 HTTP 200 的连接不能改成410，因此立即断开流。无音频的失败句返回204，后续句继续合成。
+
+每轮缓存最多8MiB，保留120秒、最多4轮；被取消轮立即释放音频。固定缓存位于忽略的 `logs/tts-cache/`，键包括参考音频字节、参考文本、模型标识/路径、温度、策略参数、style和话术。更换参考对后重启服务使缓存自然失效。
+
+打点增加 `ttsFirstByteMs`、`ttsRegenerated`、`ttsTruncated`、`ttsFail`。首包后立即更新 console trace；整轮合成或取消后只追加一条最终 JSONL 记录，避免重复统计。真实 ASR 输入和浏览器播放尚未接入，`asrMs`、`playbackStartMs` 预留为 null。`classifyMs` 保留真实分类耗时。
+
+Task 5 将接入播放器、振幅、高亮及播放结束反馈。本阶段保持现有展示计时，不能用它测语音播放结束或耳朵听到的延迟。

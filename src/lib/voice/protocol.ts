@@ -70,6 +70,8 @@ export type VoiceWireEvent =
       /** 末片为 true;此时携带完整答案卡(数字口径由编排侧构造) */
       full: boolean;
       card?: AnswerCardData;
+      /** 音频资源与显示偏移；播放器由 Task 5 接入。 */
+      speech?: { turnId: string; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
     }
   | {
       type: "tts.boundary";
@@ -106,7 +108,14 @@ export type SessionEndReason =
 
 /** 一轮问答的全程打点(plan §16.2 B④;毫秒,相对 question 起点)。 */
 export type TurnTracePayload = {
-  /** 8c 非流式分类耗时；旧客户端可忽略。 */
+  /** 真实语音耗时；尚未接入的采集/播放字段为 null。 */
+  asrMs?: number | null;
+  playbackStartMs?: number | null;
+  ttsFirstByteMs?: number;
+  ttsRegenerated?: number;
+  ttsTruncated?: number;
+  ttsFail?: number;
+  /** 8c 完整分类调用耗时。 */
   classifyMs?: number;
   numberGuardViolations?: string[];
   question: string;
@@ -180,6 +189,11 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
     case "answer.delta":
       if (typeof ev.seq !== "number" || typeof ev.text !== "string" || typeof ev.full !== "boolean") {
         return null;
+      }
+      if (ev.speech !== undefined) {
+        const s = ev.speech;
+        if (!ev.full || !s || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length > 100 ||
+          !s.sentences.every((v, i) => v && v.index === i && Number.isInteger(v.displayStart) && Number.isInteger(v.displayEnd) && v.displayStart >= 0 && v.displayEnd > v.displayStart && v.displayEnd <= ANSWER_SPOKEN_MAX && (i === 0 || v.displayStart >= s.sentences[i - 1].displayEnd))) return null;
       }
       // 卡片来自网络:逐 kind schema 校验(防原型链/脏字段打崩渲染层)
       return ev.full && !isValidAnswerCard(ev.card) ? null : ev;

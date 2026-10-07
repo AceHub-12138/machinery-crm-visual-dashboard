@@ -29,6 +29,12 @@ export type TurnTraceRecord = {
   degraded: boolean;
   totalMs: number | null;
   /** 完整结构化分类的耗时；与旧流式首 token 指标分开。 */
+  asrMs?: number | null;
+  playbackStartMs?: number | null;
+  ttsFirstByteMs?: number;
+  ttsRegenerated?: number;
+  ttsTruncated?: number;
+  ttsFail?: number;
   classifyMs?: number;
   /** 备用数字护栏异常，仅告警，不用模型文字替换模板。 */
   numberGuardViolations?: string[];

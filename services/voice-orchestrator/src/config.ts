@@ -52,6 +52,10 @@ export type OrchestratorConfig = {
   questionWindowMs: number;
   questionWindowMax: number;
   prefetchTimeoutMs: number;
+  voiceLocalUrl: string;
+  ttsEnabled: boolean;
+  ttsStyle: string;
+  ttsCacheDir: string;
 };
 
 export function loadEnvFileExplicit(dir: string, names = [".env.local", ".env"]): void {
@@ -98,6 +102,10 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): OrchestratorCo
     questionWindowMs: int(env.VOICE_QUESTION_WINDOW_MS, 60_000),
     questionWindowMax: int(env.VOICE_QUESTION_WINDOW_MAX, 8),
     prefetchTimeoutMs: int(env.VOICE_PREFETCH_TIMEOUT_MS, 5000),
+    voiceLocalUrl: env.VOICE_LOCAL_URL ?? "http://127.0.0.1:8810",
+    ttsEnabled: env.VOICE_TTS_ENABLED === "1" || env.VOICE_TTS_ENABLED === "true",
+    ttsStyle: env.VOICE_TTS_STYLE ?? "default",
+    ttsCacheDir: env.VOICE_TTS_CACHE_DIR ?? join(serviceRoot(), "logs", "tts-cache"),
   };
 }
 
@@ -114,11 +122,12 @@ export function isLoopbackHost(host: string): boolean {
 
 /** 启动前暴露面校验(审核 H1):不通过即抛错,main.ts 负责退出 */
 export function assertHubExposureSafe(
-  cfg: Pick<OrchestratorConfig, "host" | "hubConsoleToken" | "hubScreenToken">,
+  cfg: Pick<OrchestratorConfig, "host" | "hubConsoleToken" | "hubScreenToken"> & { ttsEnabled?: boolean },
 ): void {
   const c = cfg.hubConsoleToken;
   const s = cfg.hubScreenToken;
   if (!c && !s) {
+    if (cfg.ttsEnabled) throw new Error("VOICE_TTS_ENABLED requires both hub tokens for HTTP audio authentication");
     if (!isLoopbackHost(cfg.host)) {
       throw new Error(
         `VOICE_HUB_HOST=${cfg.host} 不是回环地址,必须同时设置 VOICE_HUB_CONSOLE_TOKEN 与 VOICE_HUB_SCREEN_TOKEN`,

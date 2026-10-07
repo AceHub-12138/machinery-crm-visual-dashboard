@@ -154,3 +154,15 @@ describe("isValidAnswerCard — 数值与长度上限(审核 L5)", () => {
     expect(isValidAnswerCard({ ...baseTargetProgress, completionRate: 135.2 })).toBe(true);
   });
 });
+
+describe('8c speech descriptor', () => {
+  it('accepts optional sentence offsets and rejects malformed or non-full descriptors', () => {
+    const speech = {turnId:'12345678-1234-1234-1234-123456789abc',sentences:[{index:0,displayStart:0,displayEnd:2}]};
+    const full={type:'answer.delta',at:1,seq:0,text:'好的',full:true,card:baseBrief,speech};
+    expect(parseWireEvent(JSON.stringify(full))).toEqual(full);
+    for(const changed of [null,{...speech,turnId:'bad'},{...speech,sentences:[{index:0,displayStart:-1,displayEnd:2}]},{...speech,sentences:[{index:1,displayStart:0,displayEnd:2}]},{...speech,sentences:[{index:0,displayStart:0,displayEnd:2},{index:1,displayStart:1,displayEnd:3}]}]) {
+      expect(parseWireEvent(JSON.stringify({...full,speech:changed}))).toBeNull();
+    }
+    expect(parseWireEvent(JSON.stringify({...full,full:false}))).toBeNull();
+  });
+});

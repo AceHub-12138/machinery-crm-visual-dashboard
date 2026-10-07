@@ -32,3 +32,13 @@ describe("config — hub 暴露面校验(审核 H1)", () => {
     expect(c.hubScreenToken).toBe(T2);
   });
 });
+
+describe('8c local speech configuration', () => {
+  it('remains disabled by default and requires both tokens when enabled', () => {
+    const defaults = loadConfig({} as NodeJS.ProcessEnv);
+    expect(defaults.ttsEnabled).toBe(false);
+    expect(defaults.voiceLocalUrl).toBe('http://127.0.0.1:8810');
+    expect(() => assertHubExposureSafe({host:'127.0.0.1',hubConsoleToken:'',hubScreenToken:'',ttsEnabled:true})).toThrow('both hub tokens');
+    expect(() => assertHubExposureSafe({host:'127.0.0.1',hubConsoleToken:T1,hubScreenToken:T2,ttsEnabled:true})).not.toThrow();
+  });
+});

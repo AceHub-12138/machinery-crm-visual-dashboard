@@ -21,6 +21,9 @@ import { TraceSink } from "./trace/metrics.ts";
 import { createVoiceOrchestrator } from "./orchestrator.ts";
 import { ScriptedAdapter } from "./llm/scripted.ts";
 import { OpenAiCompatibleAdapter } from "./llm/zhipu.ts";
+import { AudioStore } from "./tts/audio-store.ts";
+import { VoiceLocalClient } from "./tts/voice-local-client.ts";
+import { createAudioHttpHandler } from "./tts/http-audio.ts";
 import { redactText } from "./guard/redaction.ts";
 
 const serviceRoot = fileURLToPath(new URL("..", import.meta.url));
@@ -42,6 +45,11 @@ try {
   process.exit(1);
 }
 
+const audio = new AudioStore({ client: new VoiceLocalClient(config.voiceLocalUrl),
+  cacheDir: config.ttsCacheDir, style: config.ttsStyle, enabled: config.ttsEnabled, warn: log });
+await audio.initialize();
+log(`tts: ${audio.status.reason}`);
+
 // hub 先起、orchestrator 后建:用一层间接引用接通连接/消息回调
 let attachFn: ((conn: import("./ws/ws-server.ts").HubConnection) => void) | null = null;
 let messageFn: ((conn: import("./ws/ws-server.ts").HubConnection, raw: string) => void) | null = null;
@@ -51,6 +59,7 @@ const hub = await startVoiceHub({
   host: config.host,
   allowedOrigins: config.hubAllowedOrigins.length > 0 ? config.hubAllowedOrigins : undefined,
   maxConnections: config.hubMaxConnections,
+  onHttpRequest: createAudioHttpHandler({ store: audio, consoleToken: config.hubConsoleToken, screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined }),
   onConnection: (conn) => attachFn?.(conn),
   onMessage: (conn, raw) => messageFn?.(conn, raw),
   onError: (err) => log(`hub: ${err.message}`),
@@ -87,6 +96,7 @@ const trace = new TraceSink(config.traceFile);
 
 const orchestrator = createVoiceOrchestrator({
   hub,
+  audio,
   dataSource,
   llm,
   mcp,
@@ -114,3 +124,5 @@ process.on("uncaughtException", (err) => {
 process.on("unhandledRejection", (reason) => {
   log(`unhandled rejection: ${redactText(String(reason))}(进程保活)`);
 });
+
+for (const signal of ["SIGINT", "SIGTERM"] as const) process.once(signal, () => { audio.close(); void hub.close().finally(() => process.exit(0)); });

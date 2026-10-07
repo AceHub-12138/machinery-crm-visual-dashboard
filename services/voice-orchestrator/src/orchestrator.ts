@@ -12,6 +12,7 @@
  * 携卡)→ state.change(answering);大屏映射依赖该顺序取卡。
  */
 
+import type { AudioStore } from "./tts/audio-store.ts";
 import { randomUUID } from "node:crypto";
 import {
   clampAnswerText,
@@ -47,6 +48,7 @@ import { LAUNCH } from "../../../src/lib/voice/params.ts";
 
 export type OrchestratorOptions = {
   hub: VoiceHubServer;
+  audio?: AudioStore;
   dataSource: SalesScreenDataSource;
   llm: LlmAdapter;
   mcp: PlatformMcpClient | null;
@@ -116,6 +118,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   let activeTurn: { controller: AbortController; deadline: NodeJS.Timeout | null } | null = null;
   /** 提问限流账本:全局一份(审核 M4:按连接计可被多连接绕过) */
   let askedAt: number[] = [];
+  let audioId: string | null = null;
+  function cancelAudio(): void { if (audioId) options.audio?.cancel(audioId); audioId = null; }
 
   function clearActiveTurn(): void {
     if (!activeTurn) return;
@@ -163,6 +167,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           card: record.card as TurnTracePayload["card"],
           degraded: record.degraded,
           totalMs: record.totalMs,
+          asrMs: record.asrMs ?? null,
+          playbackStartMs: record.playbackStartMs ?? null,
+          ...(record.ttsFirstByteMs !== undefined ? { ttsFirstByteMs: record.ttsFirstByteMs } : {}),
+          ...(record.ttsRegenerated !== undefined ? { ttsRegenerated: record.ttsRegenerated, ttsTruncated: record.ttsTruncated, ttsFail: record.ttsFail } : {}),
           ...(record.classifyMs !== undefined ? { classifyMs: record.classifyMs } : {}),
           ...(record.numberGuardViolations ? { numberGuardViolations: record.numberGuardViolations } : {}),
         },
@@ -206,6 +214,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   function forceClose(reason: "force" | "decline"): void {
     if (state.name === "ambient" || state.name === "closing") return;
     clearTimers();
+    cancelAudio();
     clearActiveTurn(); // 审核 M1:关闭即中止进行中的 LLM 流/预取/死线
     turnSeq += 1;
     answer = null;
@@ -299,6 +308,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         break;
     }
     clearTimers();
+    cancelAudio();
     clearActiveTurn(); // 旧轮的分类/死线立即释放
     answer = null;
     void runQuestion(question);
@@ -407,7 +417,15 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         classifyMs,
         ...(violations.length ? { numberGuardViolations: violations } : {}),
       });
-      await trace.append(record);
+      const audioTurn = options.audio?.start(answer.sentences, (metrics) => {
+        Object.assign(record, metrics);
+        if (seq === turnSeq) emitTrace(record);
+      });
+      audioId = audioTurn?.id ?? null;
+      if (audioTurn) {
+        record.asrMs = null; record.playbackStartMs = null;
+        void audioTurn.completed.then(() => trace.append({ ...record, ...audioTurn.metrics }));
+      } else await trace.append(record);
       if (seq !== turnSeq) return;
       emitTrace(record);
 
@@ -438,7 +456,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
             seq: index,
             text,
             full: isLast,
-            ...(isLast ? { card } : {}),
+            ...(isLast ? { card, ...(audioTurn ? { speech: audioTurn.descriptor } : {}) } : {}),
           });
           if (!isLast) return;
           // 末片落卡:镜像进 answering(大屏由随后的 state.change 驱动 ANSWER)
@@ -456,6 +474,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
             later(VOICE_TIMING.followupMs, () => {
               if (seq !== turnSeq || state.name !== "followup") return;
               dispatch({ type: "FOLLOWUP_TIMEOUT", at: Date.now() });
+              cancelAudio();
               broadcast({ type: "session.end", at: Date.now(), reason: "followup_timeout" });
               later(VOICE_TIMING.closingMs, () => dispatch({ type: "CLOSED", at: Date.now() }));
             });
@@ -487,6 +506,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     tracer: TurnTracer,
     err: { code: VoiceErrorCode; message: string },
   ): Promise<void> {
+    cancelAudio();
     const record = tracer.finish({ source: "payload", card: null, degraded: true });
     await trace.append(record);
     emitTrace(record);

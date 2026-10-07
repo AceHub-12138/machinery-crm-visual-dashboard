@@ -14,7 +14,7 @@
  * - 2026-09-30:hello 截止(4408)、心跳空闲断开、控制帧 ≤125B 且不分片、RSV 必须为 0。
  */
 
-import { createServer, type IncomingMessage, type Server } from "node:http";
+import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { randomUUID } from "node:crypto";
 import type { Duplex } from "node:stream";
 import {
@@ -54,6 +54,8 @@ export type VoiceHubCallbacks = {
 };
 
 export type VoiceHubOptions = {
+  /** HTTP audio only; websocket frame handling remains unchanged. */
+  onHttpRequest?: (req: IncomingMessage, res: ServerResponse) => void | Promise<void>;
   port: number;
   /** 默认 127.0.0.1:本机大屏/对话台即全部合法用途;跨机必须显式放开 */
   host?: string;
@@ -81,6 +83,10 @@ function isLocalOrigin(origin: string): boolean {
   }
 }
 
+export function isAllowedOrigin(origin: string, allowedOrigins?: string[]): boolean {
+  return allowedOrigins ? allowedOrigins.includes(origin) : isLocalOrigin(origin);
+}
+
 export function startVoiceHub(options: VoiceHubOptions): Promise<VoiceHubServer> {
   const {
     port,
@@ -97,6 +103,15 @@ export function startVoiceHub(options: VoiceHubOptions): Promise<VoiceHubServer>
   } = options;
   const connections = new Set<HubConnection>();
   const httpServer: Server = createServer((req, res) => {
+    if ((req.url ?? "").split("?")[0].startsWith("/voice/")) {
+      if (!options.onHttpRequest) { res.writeHead(404); res.end(); return; }
+      Promise.resolve().then(() => options.onHttpRequest!(req, res)).catch((err) => {
+        onError?.(err as Error);
+        if (res.headersSent) res.destroy();
+        else { res.writeHead(500); res.end(); }
+      });
+      return;
+    }
     // 纯 WS 服务;HTTP GET 仅给运维一个探活端点(不回显配置细节)
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify({ ok: true, service: "voice-orchestrator", screens: counts().screens, consoles: counts().consoles }));
@@ -129,7 +144,7 @@ export function startVoiceHub(options: VoiceHubOptions): Promise<VoiceHubServer>
       const origin = req.headers.origin;
       if (origin) {
         const ok =
-          (allowedOrigins ? allowedOrigins.includes(origin) : isLocalOrigin(origin));
+          isAllowedOrigin(origin, allowedOrigins);
         if (!ok) {
           rejectUpgrade(socket, "403 Forbidden");
           onError?.(new Error(`ws origin rejected: ${origin}`));

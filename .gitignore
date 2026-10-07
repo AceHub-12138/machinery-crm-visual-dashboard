@@ -23,3 +23,9 @@ services/voice-orchestrator/logs/
 # Playwright generated reports and per-run screenshots
 test-results/
 playwright-report/
+
+# Local speech runtime
+__pycache__/
+*.pyc
+services/voice-local/.venv/
+services/voice-local/logs/

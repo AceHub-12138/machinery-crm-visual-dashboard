@@ -1,0 +1,10 @@
+# Validated local runtime; install only into a dedicated venv.
+mlx-audio==0.5.8
+mlx==0.32.3
+numpy==2.5.3
+fastapi==0.142.2
+starlette==1.7.0
+pydantic==2.13.5
+uvicorn==0.54.0
+# HTTP integration tests / local calibration
+httpx==0.28.1
