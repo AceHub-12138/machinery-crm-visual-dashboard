@@ -21,6 +21,20 @@ from core import Settings, MlxBackend, GenerationCancelled, SAMPLE_RATE, SELF_CH
 LOG = logging.getLogger("voice-local")
 MAX_BODY = 524288
 MAX_TEXT = 400
+JOB_TTL_SECONDS = 120
+
+
+class FinalizingStreamingResponse(StreamingResponse):
+    """Generator finally cannot run if response headers fail before iteration."""
+    def __init__(self, *args, on_close, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.on_close = on_close
+
+    async def __call__(self, scope, receive, send):
+        try:
+            await super().__call__(scope, receive, send)
+        finally:
+            self.on_close()
 
 
 @dataclass
@@ -79,7 +93,14 @@ class Runtime:
         # Keep completed job metrics briefly, never retain text or audio in this ledger.
         now = time.monotonic()
         for key in list(self.jobs):
-            if self.jobs[key].finished and not self.jobs[key].streaming and now - self.jobs[key].created > 120:
+            job = self.jobs[key]
+            if job.finished and now - job.created > JOB_TTL_SECONDS:
+                if job.streaming:
+                    job.cancel.set()
+                    job.streaming = False
+                    while not job.queue.empty():
+                        job.queue.get_nowait()
+                    job.queue.put_nowait(None)  # release a waiting stream iterator
                 del self.jobs[key]
         if sum(not job.finished or job.streaming for job in self.jobs.values()) >= 8:
             raise HTTPException(429, "Speech queue is full")
@@ -278,8 +299,15 @@ def create_app(settings=None, backend=None):
             job.streaming = False
             clear_output()
             raise HTTPException(503, "Synthesis produced no valid audio")
+        drained = False
+        def close_stream():
+            job.streaming = False
+            if not drained:
+                job.cancel.set()
+            clear_output()
+
         async def stream():
-            drained = False
+            nonlocal drained
             try:
                 while True:
                     pcm = await job.queue.get()
@@ -288,11 +316,8 @@ def create_app(settings=None, backend=None):
                         break
                     yield pcm
             finally:
-                job.streaming = False
-                if not drained:
-                    job.cancel.set()
-                clear_output()
-        return StreamingResponse(stream(), media_type="audio/pcm", headers={
+                close_stream()
+        return FinalizingStreamingResponse(stream(), on_close=close_stream, media_type="audio/pcm", headers={
             "X-Sample-Rate": "24000", "X-Channels": "1", "X-Sample-Format": "s16le",
             "X-Voice-Job-Id": job.id, "X-TTS-Regenerated": str(job.stats.get("ttsRegenerated", 0)),
             "Cache-Control": "no-store",

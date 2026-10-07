@@ -9,6 +9,7 @@
 import { mkdir, appendFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { redactRecord } from "../guard/redaction.ts";
+import type { SkippedPlaybackSentence } from "../../../../src/lib/voice/protocol.ts";
 
 export type TurnStage = "question" | "prefetch" | "llmFirstToken" | "toolExec" | "answerFull";
 
@@ -32,6 +33,7 @@ export type TurnTraceRecord = {
   asrMs?: number | null;
   playbackStartMs?: number | null;
   playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
+  playbackSkipped?: SkippedPlaybackSentence[];
   ttsFirstByteMs?: number;
   ttsRegenerated?: number;
   ttsTruncated?: number;

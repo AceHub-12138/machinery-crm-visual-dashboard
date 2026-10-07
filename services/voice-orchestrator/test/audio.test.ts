@@ -15,6 +15,8 @@ import fixture from "../fixtures/public-sales-screen.json";
 import { validatePublicPayload } from "../../../src/lib/voice/public-payload.ts";
 import type { Intent } from "../../../src/lib/voice/intents.ts";
 import type { VoiceWireEvent } from "../../../src/lib/voice/protocol.ts";
+import { LAUNCH } from "../../../src/lib/voice/params.ts";
+import { DEMO_TIMING } from "../../../src/lib/voice/demo-script.ts";
 
 const pcm = new Uint8Array(24000); for (let i=0;i<pcm.length;i+=2) { pcm[i]=208;pcm[i+1]=7; }
 const zero = { ttsRegenerated: 0, ttsTruncated: 0, ttsFail: 0 };
@@ -38,18 +40,18 @@ async function http(store: AudioStore) {
   return (path:string,init:RequestInit={})=>fetch(url+path,{...init,headers:{authorization:'Bearer screen',...init.headers}});
 }
 
-function orchestrator(store: AudioStore, intent: Intent) {
+function orchestrator(store: AudioStore, intent: Intent, screens = 1, trace = new TraceSink(null)) {
   const events: VoiceWireEvent[] = [];
   const llm = new ScriptedAdapter();
   vi.spyOn(llm, 'classify').mockResolvedValue(intent);
   const orch = createVoiceOrchestrator({
-    hub: { broadcast: (e: VoiceWireEvent) => events.push(e), counts: () => ({ screens: 1, consoles: 1 }) } as unknown as VoiceHubServer,
+    hub: { broadcast: (e: VoiceWireEvent) => events.push(e), counts: () => ({ screens, consoles: 1 }) } as unknown as VoiceHubServer,
     audio: store, dataSource: { name: 'test', fetchPayload: async () => validatePublicPayload(fixture)! }, llm,
-    mcp: null, trace: new TraceSink(null), llmTimeoutMs: 8000, partialPaceMs: 1, partialMaxTotalMs: 1,
+    mcp: null, trace, llmTimeoutMs: 8000, partialPaceMs: 1, partialMaxTotalMs: 1,
     prefetchTimeoutMs: 5000, questionMinGapMs: 0, questionWindowMs: 60000, questionWindowMax: 100, mcpToolWhitelist: [],
   });
   orch.handleClientMessage({ id: 'test', role: 'console', send: () => {}, close: () => {} }, JSON.stringify({ type: 'question.submit', at: Date.now(), text: '谢谢，没有了' }));
-  return { orch, events, full: () => events.find(e => e.type === 'answer.delta' && e.full) as Extract<VoiceWireEvent, { type: 'answer.delta' }> };
+  return { orch, events, setScreens: (value: number) => { screens = value; }, full: () => events.find(e => e.type === 'answer.delta' && e.full) as Extract<VoiceWireEvent, { type: 'answer.delta' }> };
 }
 
 describe('voice-local HTTP client',()=>{
@@ -77,6 +79,58 @@ describe('voice-local HTTP client',()=>{
 });
 
 describe('audio cache, stream, cancellation and lifecycle',()=>{
+  it('no-screen answers use text pacing and keep synthesis and cached audio alive', async () => {
+    const { store } = await setup(new FakeClient()); vi.useFakeTimers();
+    const { orch, full } = orchestrator(store, 'sales_progress', 0); await vi.advanceTimersByTimeAsync(1100);
+    const card = full(); const id = card.speech!.turnId;
+    const textMs = LAUNCH.unfoldStartMs + LAUNCH.unfoldMs + card.card!.spoken.length / LAUNCH.typeCps * 1000 + DEMO_TIMING.answerHoldMs;
+    expect(textMs).toBeLessThan(playbackFallbackMs(card.card!.spoken));
+    await vi.advanceTimersByTimeAsync(Math.ceil(textMs - (Date.now() - card.at)));
+    expect(orch.state.name).toBe('followup'); expect(store.lookup(id)?.cancelled).toBe(false);
+    expect(store.lookup(id)?.sentences.every(s => s.state === 'done')).toBe(true); orch.forceClose('force');
+  });
+  it('the last screen disconnect drains the wait without cancelling ongoing synthesis', async () => {
+    const client = new FakeClient(); const { store } = await setup(client);
+    let release!: () => void; const gate = new Promise<void>(r => release = r);
+    client.tts = async function* (_text, _style, signal) { yield { type: 'audio', pcm, sampleRate: 24000 }; await gate; signal?.throwIfAborted(); yield { type: 'done', metrics: zero }; };
+    const trace = new TraceSink(null); const append = vi.spyOn(trace, 'append'); vi.useFakeTimers();
+    const { orch, full, setScreens } = orchestrator(store, 'sales_progress', 2, trace); await vi.advanceTimersByTimeAsync(1100);
+    const id = full().speech!.turnId;
+    const screen = { id: 'screen', role: 'screen' as const, send: () => {}, close: () => {} };
+    setScreens(1); orch.detach(screen); expect(orch.state.name).toBe('answering');
+    setScreens(0); orch.detach({ ...screen, role: 'console' }); expect(orch.state.name).toBe('answering');
+    orch.detach(screen); expect(orch.state.name).toBe('followup'); expect(store.lookup(id)?.controller.signal.aborted).toBe(false);
+    expect(append).not.toHaveBeenCalled(); orch.detach(screen);
+    release(); await store.lookup(id)!.completed;
+    expect(append).toHaveBeenCalledOnce(); expect(append.mock.calls[0][0].playbackOutcome).toBe('drained');
+    await vi.advanceTimersByTimeAsync(2999); expect(orch.state.name).toBe('followup');
+    await vi.advanceTimersByTimeAsync(1); expect(orch.state.name).toBe('closing'); expect(store.lookup(id)?.cancelled).toBe(false); orch.forceClose('force');
+  });
+  it.each(['answering', 'followup'])('current screen dismissal closes %s and rejects other roles and stale turns', async (phase) => {
+    const { store } = await setup(new FakeClient()); const trace = new TraceSink(null); const append = vi.spyOn(trace, 'append'); vi.useFakeTimers();
+    const { orch, full, events } = orchestrator(store, 'sales_progress', 1, trace); await vi.advanceTimersByTimeAsync(1100);
+    const id = full().speech!.turnId;
+    const send = (reason: string, role = 'screen', turnId = id) => orch.handleClientMessage({ id: 'report', role: role as 'screen' | 'console' | 'unknown', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.failed', at: Date.now(), turnId, reason }));
+    if (phase === 'followup') orch.handleClientMessage({ id: 'screen', role: 'screen', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.drained', at: Date.now(), turnId: id }));
+    send('dismissed', 'console'); send('dismissed', 'unknown'); send('dismissed', 'screen', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb');
+    expect(orch.state.name).toBe(phase);
+    send('dismissed'); expect(orch.state.name).toBe('closing'); expect(store.lookup(id)?.cancelled).toBe(true);
+    expect(append).toHaveBeenCalledOnce(); expect(append.mock.calls[0][0].playbackOutcome).toBe(phase === 'answering' ? 'cancelled' : 'drained');
+    send('dismissed'); expect(events.filter(e => e.type === 'session.end' && e.reason === 'force')).toHaveLength(1);
+    await vi.advanceTimersByTimeAsync(1000); expect(orch.state.name).toBe('ambient');
+  });
+  it('skipped sentence reports are bounded, current-screen-only, deduplicated and persisted with drained once', async () => {
+    const { store } = await setup(new FakeClient()); const trace = new TraceSink(null); const append = vi.spyOn(trace, 'append'); vi.useFakeTimers();
+    const { orch, full, events } = orchestrator(store, 'sales_progress', 1, trace); await vi.advanceTimersByTimeAsync(1100);
+    const id = full().speech!.turnId;
+    const report = (sentenceIndex: number, role = 'screen', turnId = id) => orch.handleClientMessage({ id: 'report', role: role as 'screen' | 'console', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.skipped', at: Date.now(), turnId, sentenceIndex, reason: 'audio_unavailable' }));
+    report(0, 'console'); report(0, 'screen', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'); report(full().speech!.sentences.length);
+    expect(events.some(e => e.type === 'trace.turn' && e.trace.playbackSkipped)).toBe(false);
+    report(0); report(0);
+    orch.handleClientMessage({ id: 'screen', role: 'screen', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.drained', at: Date.now(), turnId: id }));
+    report(1); expect(append).toHaveBeenCalledOnce(); expect(append.mock.calls[0][0]).toMatchObject({ playbackOutcome: 'drained', playbackSkipped: [{ sentenceIndex: 0, reason: 'audio_unavailable' }] });
+    orch.forceClose('force');
+  });
   it('goodbye is cached, fetchable after decline, and waits for the current screen playback', async () => {
     const client = new FakeClient(); const { store } = await setup(client); const get = await http(store);
     vi.useFakeTimers(); const { orch, events, full } = orchestrator(store, 'chitchat_or_end');
@@ -140,7 +194,8 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     orch.handleClientMessage({ id:'console', role:'console', send:()=>{}, close:()=>{} }, JSON.stringify({type:'question.submit',at:Date.now(),text:'本月销售情况'}));
     await vi.advanceTimersByTimeAsync(200);
     const latest = events.filter(e => e.type === 'answer.delta' && e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>;
-    for (const type of ['playback.started','playback.drained','playback.failed']) orch.handleClientMessage({id:'screen',role:'screen',send:()=>{},close:()=>{}},JSON.stringify({type,at:Date.now(),turnId:old,reason:'audio_interrupted'}));
+    for (const type of ['playback.started','playback.drained','playback.failed','playback.skipped']) orch.handleClientMessage({id:'screen',role:'screen',send:()=>{},close:()=>{}},JSON.stringify({type,at:Date.now(),turnId:old,reason:'audio_interrupted',sentenceIndex:0}));
+    orch.handleClientMessage({id:'screen',role:'screen',send:()=>{},close:()=>{}},JSON.stringify({type:'playback.failed',at:Date.now(),turnId:old,reason:'dismissed'}));
     expect(orch.state.name).toBe('answering'); expect(store.lookup(old)?.cancelled).toBe(true);
     await vi.advanceTimersByTimeAsync(playbackFallbackMs(latest.card!.spoken)); expect(orch.state.name).toBe('followup');
     expect(store.lookup(latest.speech!.turnId)?.cancelled).toBe(true);
@@ -148,7 +203,7 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     orch.forceClose('force');
   });
   it('fails closed for malformed playback reports', () => {
-    for (const report of [{type:'playback.failed',reason:'made_up'}, {type:'playback.started',at:Infinity}, {type:'playback.drained',turnId:'bad'}]) {
+    for (const report of [{type:'playback.failed',reason:'made_up'}, {type:'playback.started',at:Infinity}, {type:'playback.drained',turnId:'bad'}, ...[-1, 100, 0.5].map(sentenceIndex => ({type:'playback.skipped',sentenceIndex,reason:'audio_unavailable'})), {type:'playback.skipped',sentenceIndex:0,reason:'dismissed'}]) {
       expect(parseConsoleEvent(JSON.stringify({at:1,turnId:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',...report}))).toBeNull();
     }
   });

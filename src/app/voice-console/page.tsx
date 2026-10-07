@@ -275,6 +275,9 @@ export default function VoiceConsolePage() {
             {trace.playbackOutcome ? (
               <span className="rounded bg-white/5 px-2 py-1 text-xs text-white/60">播放结果：{{drained:"播完",failed:"中断",timeout:"超时",cancelled:"已取消"}[trace.playbackOutcome]}</span>
             ) : null}
+            {trace.playbackSkipped?.length ? (
+              <span className="rounded bg-amber-500/10 px-2 py-1 text-xs text-amber-200">跳过播报：第 {trace.playbackSkipped.map(s => s.sentenceIndex + 1).join("、")} 句</span>
+            ) : null}
             {trace.numberGuardViolations?.length ? (
               <span className="rounded bg-rose-500/10 px-2 py-1 text-xs text-rose-300">数字模板校验告警</span>
             ) : null}

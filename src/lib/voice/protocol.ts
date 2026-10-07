@@ -106,12 +106,19 @@ export type SessionEndReason =
   | "force" // 运维/对话台强制退场
   | "error"; // 错误路径走完降级话术后退场
 
+/** 跳过的播报句；索引与 answer.delta.speech.sentences 对齐。 */
+export type SkippedPlaybackSentence = {
+  sentenceIndex: number;
+  reason: "audio_unavailable" | "invalid_audio" | "audio_interrupted";
+};
+
 /** 一轮问答的全程打点(plan §16.2 B④;毫秒,相对 question 起点)。 */
 export type TurnTracePayload = {
   /** 真实语音耗时；尚未接入的采集/播放字段为 null。 */
   asrMs?: number | null;
   playbackStartMs?: number | null;
   playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
+  playbackSkipped?: SkippedPlaybackSentence[];
   ttsFirstByteMs?: number;
   ttsRegenerated?: number;
   ttsTruncated?: number;
@@ -146,7 +153,8 @@ export type ConsoleWireEvent =
   | { type: "session.wake"; at: number } // 开始一轮接管(等价 8c 唤醒词)
   | { type: "question.submit"; at: number; text: string }
   | { type: "playback.started"; at: number; turnId: string }
-  | { type: "playback.failed"; at: number; turnId: string; reason: "audio_unavailable" | "invalid_audio" | "audio_interrupted" | "autoplay_blocked" | "timeout" }
+  | { type: "playback.failed"; at: number; turnId: string; reason: "audio_unavailable" | "invalid_audio" | "audio_interrupted" | "autoplay_blocked" | "timeout" | "dismissed" }
+  | ({ type: "playback.skipped"; at: number; turnId: string } & SkippedPlaybackSentence)
   | { type: "playback.drained"; at: number; turnId: string } // 大屏播放器耗尽，必须匹配当前音频轮
   | { type: "session.close"; at: number }; // 强制退场(Esc 语义)
 

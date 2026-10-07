@@ -14,7 +14,8 @@ from dataclasses import replace
 import numpy as np
 from fastapi.testclient import TestClient
 from core import Settings, SELF_CHECK_TEXT, GenerationCancelled, check_cancel, cer, pcm_peak, guarded_audio, max_tokens_for
-from server import create_app, decode_audio
+from server import create_app, decode_audio, JOB_TTL_SECONDS
+from starlette.requests import ClientDisconnect
 
 PCM = np.full(12000, 2000, dtype='<i2').tobytes()
 
@@ -223,5 +224,79 @@ class PolicyTests(unittest.TestCase):
             self.assertEqual(client.get('/health').json()['selfCheck'],'failed')
             self.assertEqual(client.post('/tts',json={'text':'测试'}).status_code,503)
             self.assertEqual(client.post('/asr',content=PCM,headers={'content-type':'audio/pcm'}).status_code,200)
+
+    def test_response_header_failure_and_cancellation_release_stream_slots(self):
+        async def exercise():
+            app = create_app(self.settings, self.backend)
+            async with app.router.lifespan_context(app):
+                original_generate = self.backend.generate
+                def generate_until_cancelled(text, cancel, max_tokens):
+                    yield PCM, 6
+                    cancel.wait(3)  # worker is still running when headers fail
+                    check_cancel(cancel)
+                    yield PCM, 6
+                for spec, error in [('2.4', OSError), ('2.3', asyncio.CancelledError)]:
+                    self.backend.generate = generate_until_cancelled
+                    for _ in range(8):
+                        sent = False
+                        async def receive():
+                            nonlocal sent
+                            if not sent:
+                                sent = True
+                                return {'type': 'http.request', 'body': b'{"text":"test"}', 'more_body': False}
+                            await asyncio.Event().wait()
+                        async def send(message):
+                            if message['type'] == 'http.response.start':
+                                self.assertEqual(message['status'], 200)
+                                self.assertFalse(list(app.state.runtime.jobs.values())[-1].finished)
+                                raise error('injected before stream iteration')
+                        scope = {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': spec},
+                                 'http_version': '1.1', 'method': 'POST', 'scheme': 'http', 'path': '/tts',
+                                 'raw_path': b'/tts', 'query_string': b'', 'headers': [(b'content-type', b'application/json')],
+                                 'client': ('127.0.0.1', 12001), 'server': ('127.0.0.1', 8810)}
+                        try:
+                            await asyncio.wait_for(app(scope, receive, send), 1)
+                        except (ClientDisconnect, asyncio.CancelledError):
+                            pass
+                        job = list(app.state.runtime.jobs.values())[-1]
+                        await asyncio.wait_for(job.future, 1)
+                        await asyncio.sleep(0)
+                        self.assertFalse(job.streaming)
+                        self.assertTrue(job.cancel.is_set())
+                        self.assertTrue(job.queue.empty())
+                    self.backend.generate = original_generate
+                    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://local') as client:
+                        result = await client.post('/tts', json={'text': '测试'})
+                        self.assertEqual(result.status_code, 200)
+                        self.assertGreater(len(result.content), 0)
+        asyncio.run(exercise())
+
+    def test_ttl_reclaims_finished_abandoned_streams_but_not_running_jobs(self):
+        async def exercise():
+            runtime = create_app(self.settings, self.backend).state.runtime
+            try:
+                stale = []
+                for _ in range(8):
+                    job = runtime.create_job()
+                    job.finished = True
+                    job.streaming = True
+                    job.queue.put_nowait(PCM)
+                    stale.append(job)
+                for job in stale:
+                    job.created = time.monotonic() - JOB_TTL_SECONDS - 1
+                fresh = runtime.create_job()
+                self.assertEqual(list(runtime.jobs), [fresh.id])
+                for job in stale:
+                    self.assertTrue(job.cancel.is_set())
+                    self.assertFalse(job.streaming)
+                    self.assertIsNone(job.queue.get_nowait())
+                    self.assertTrue(job.queue.empty())
+                fresh.created = time.monotonic() - JOB_TTL_SECONDS - 1
+                runtime.create_job()
+                self.assertIn(fresh.id, runtime.jobs)
+                self.assertFalse(fresh.cancel.is_set())
+            finally:
+                await runtime.close()
+        asyncio.run(exercise())
 
 if __name__=='__main__': unittest.main()

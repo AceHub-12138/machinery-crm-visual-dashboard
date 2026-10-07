@@ -48,7 +48,7 @@ pnpm --dir services/voice-orchestrator start
   片段读取(读后存 sessionStorage 并从地址栏抹掉),对话台可在页面输入。
   `?hub=` 白名单除本机地址外,可用构建期 `NEXT_PUBLIC_VOICE_HUB_HOSTS`
   (逗号分隔主机名)放行跨机 hub 地址。
-- **角色模型**:只有声明为 console 的连接可发控制事件;screen 仅可回报当前轮播放开始/耗尽/失败，未声明角色只读;
+- **角色模型**:只有声明为 console 的连接可提问或唤醒；screen 仅可回报当前轮播放开始/耗尽/失败/跳句，以及当前回答或追问阶段的 Esc 退场（`playback.failed` 的 `reason: "dismissed"`）；不允许 screen 发通用 `session.close`，未声明角色只读;
   角色仅允许声明一次(防中途提权)。`trace.turn`(含问题原文)只发 console。
 - **帧层防线**:分片累计总长上限 1MB、客户端帧强制掩码、无起始续帧拒绝
   (1002)、二进制/未知 opcode 关闭(1003)、并发连接上限 32;握手后 5s 内须声明角色(否则 4408)、25s 心跳 / 60s 无入站断开、控制帧 ≤125B 且不分片、RSV 须为 0。
@@ -139,7 +139,7 @@ VOICE_HUB_SCREEN_TOKEN=your-distinct-screen-token
 - `GET /voice/audio/fixed/:key`：`wake`、`followup`、`goodbye`、`fallback`、`unheard`。启动时从磁盘加载或合成，运行期 GET 不调用模型。
 - `GET /voice/audio/:turnId/:index`：已缓冲内容接续实时 PCM。元信息通过 `answer.delta` 末片的可选 `speech` 字段公布，不改变旧事件顺序。
 
-PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int16 样本。取消后新的 GET 返回410；已发送 HTTP 200 的连接不能改成410，因此立即断开流。失败/截断句不冒充完整音频：尚未发头时返回503；已发200时断开body，使浏览器停播并显示卡片提示。后续句仍由音频服务继续生成，浏览器失败回报会取消本轮余下合成。
+PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int16 样本。取消后新的 GET 返回410；已发送 HTTP 200 的连接不能改成410，因此立即断开流。失败/截断句不冒充完整音频：尚未发头时返回503；已发200时断开body。浏览器保留已经排程的音频，跳过失败句的剩余部分并继续后续句，显示卡片提示，并回报跳过句索引与原因。有完整成功句时，在全部流结束及末样本播放结束后回报 drained；没有完整成功句时，等待已排程部分播完后回报 failed；没有音频则立即失败。整轮超时、自动播放受限或超过8MiB下载上限仍直接失败。只有整轮失败回报会取消服务端余下合成，单句跳过不取消。
 
 每轮缓存最多8MiB，保留120秒、最多4条轮记录；单大屏每次新建轮会取消所有旧轮，最多1轮有效。被取消轮立即释放音频。固定缓存位于忽略的 `logs/tts-cache/`，键包括参考音频字节、参考文本、模型标识/路径、温度、策略参数、style和话术。更换参考对并重启voice-local后，编排将在下一次健康检查识别哈希变化，无需重启编排。
 
@@ -148,14 +148,15 @@ PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int
 ## Task 5 浏览器播放与状态同步
 
 - `src/lib/voice/pcm-player.ts`：int16 LE转float32，24kHz AudioBuffer共享AudioContext时间轴与AnalyserNode；首块预缓冲150ms，50ms块连续排程。正在播放第i句时预取下一句。聚合下载限8MiB；停止会abort下载并stop/disconnect所有排程节点。
-- 句级高亮在AudioContext.currentTime到达首块排程时间时触发。只有全部流EOF且currentTime达到末块结束时刻才算播完；断流/503/410/空音频/非法格式/自动播放失败均不发送成功耗尽回报。
-- screen经已鉴权WS回报 `{type:"playback.started"|"playback.drained",at,turnId}`，失败用 `{type:"playback.failed",at,turnId,reason}`。仅当前answering音频轮允许；console、unknown、旧轮与重复终态忽略。不会授予screen提问或强制退场权限。
+- 句级高亮在AudioContext.currentTime到达首块排程时间时触发。全部句子流正常或异常结束且currentTime达到末块结束时刻才完成。单句下载失败采用“跳过并记录、继续后续句”策略；至少一整句成功才能回报 drained，全部失败不能伪装成功。
+- screen经已鉴权WS回报 `{type:"playback.started"|"playback.drained",at,turnId}`，失败用 `{type:"playback.failed",at,turnId,reason}`，跳句用 `{type:"playback.skipped",at,turnId,sentenceIndex,reason}`。普通回报仅当前answering轮有效；console、unknown、旧轮、重复终态与越界/重复跳句忽略。Esc 使用 `reason:"dismissed"`，仅当前回答/追问轮可触发 hub 强制退场；普通故障仍保留卡片进入追问。已耗尽轮在追问时按 Esc 不把原来的 drained trace 改成失败。
 - 普通回答等`playback.drained`才进入followup并开始3秒追问倒计时；告别等播完退场。浏览器保持服务端状态镜像，不再按打字速度抢先进入追问。异常保留卡片、提示查看；失败回报进入追问，告别失败退场。
+- 出卡时没有在线大屏，用原打字/持卡节奏完成展示；等待播放期间最后一台大屏断开，hub 立即按 drained 结束等待。两种情况均保留合成/缓存。多屏时还有其他 screen 在线，不提前结束等待。
 - 防止挂起：普通音频按归一化文本的保守合成时长（0.4秒/字＋1.5秒/句）×2＋2秒兜底；告别用缓存PCM时长×2＋2秒。播放器独立网络/音频时钟超时；覆盖层另留比播放器多2秒的退场保障。正常播完和追问超时保留PCM；普通播放失败/超时、顶替、强制关闭等取消音频。
 - live粒子振幅来自真实PCM RMS；demo保留模拟驱动；`JarvisCore.tsx`没有修改。高亮只切分显示字符串，不改变卡片数字或读法。
 - 首次唤醒/点击/键盘事件尝试resume AudioContext。展厅启动可用 `bash scripts/start-voice-kiosk.sh`，带 `--autoplay-policy=no-user-gesture-required`；本阶段没有开启麦克风权限。
 
-`/voice-console`显示首音回报与播放结果。`playbackStartMs`使用hub单一时钟，表示「提问到收到浏览器首样本开始回报」，包含回传网络耗时；不与异机Date.now相减，也不等同于Task 6的VAD L1。合成完成及播放终态都确定后，每轮只追加一条JSONL；取消/失败/兜底同样落盘。`asrMs`仍为null。其他固定提示（wake/followup/fallback/unheard）保持缓存接口，收音阶段的提示播放与开麦节拍在Task 6接线。
+`/voice-console`显示首音回报、播放结果和被跳过的句子。`playbackSkipped` 在最终 JSONL 中记录句子索引及失败原因；无屏/断屏按 drained 完成状态等待，`playbackStartMs` 可为 null，不作为真实播放验收样本。`playbackStartMs`使用hub单一时钟，表示「提问到收到浏览器首样本开始回报」，包含回传网络耗时；第一句被跳过时以首个实际播放句子为准。不与异机Date.now相减，也不等同于Task 6的VAD L1。合成完成及播放终态都确定后，每轮只追加一条JSONL；取消/失败/兜底同样落盘。`asrMs`仍为null。其他固定提示（wake/followup/fallback/unheard）保持缓存接口，收音阶段的提示播放与开麦节拍在Task 6接线。
 
 验证：`pnpm test`、`pnpm test:e2e`。E2E使用真实hub/HTTP鉴权/CORS/Chromium Web Audio，只把GPU换成确定性PCM。
 真实模型验证脚本（先完成production build，voice-local已预热，分类模型配置已提供）：

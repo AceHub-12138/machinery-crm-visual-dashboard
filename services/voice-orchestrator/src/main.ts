@@ -53,6 +53,7 @@ log(`tts: ${audio.status.reason}`);
 // hub 先起、orchestrator 后建:用一层间接引用接通连接/消息回调
 let attachFn: ((conn: import("./ws/ws-server.ts").HubConnection) => void) | null = null;
 let messageFn: ((conn: import("./ws/ws-server.ts").HubConnection, raw: string) => void) | null = null;
+let detachFn: ((conn: import("./ws/ws-server.ts").HubConnection) => void) | null = null;
 
 const hub = await startVoiceHub({
   port: config.port,
@@ -62,6 +63,7 @@ const hub = await startVoiceHub({
   onHttpRequest: createAudioHttpHandler({ store: audio, consoleToken: config.hubConsoleToken, screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined }),
   onConnection: (conn) => attachFn?.(conn),
   onMessage: (conn, raw) => messageFn?.(conn, raw),
+  onClose: (conn) => detachFn?.(conn),
   onError: (err) => log(`hub: ${err.message}`),
 });
 log(`WS hub listening on ws://${config.host}:${hub.port} (origin policy: ${config.hubAllowedOrigins.length > 0 ? "allowlist" : "local-only"}, auth: ${config.hubConsoleToken ? "enabled" : "disabled"})`);
@@ -116,6 +118,7 @@ const orchestrator = createVoiceOrchestrator({
 
 attachFn = (conn) => orchestrator.attach(conn);
 messageFn = (conn, raw) => orchestrator.handleClientMessage(conn, raw);
+detachFn = (conn) => orchestrator.detach(conn);
 for (const conn of hub.connections) orchestrator.attach(conn);
 
 process.on("uncaughtException", (err) => {

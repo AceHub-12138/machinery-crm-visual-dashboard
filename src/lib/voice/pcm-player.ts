@@ -2,7 +2,7 @@
  * Every source shares one AudioContext timeline and one analyser. Downloads are
  * bounded to the current sentence + one prefetched sentence, and 8 MiB per turn.
  */
-import type { VoiceWireEvent } from "./protocol.ts";
+import type { SkippedPlaybackSentence, VoiceWireEvent } from "./protocol.ts";
 
 export type Speech = NonNullable<Extract<VoiceWireEvent, { type: "answer.delta" }>["speech"]>;
 export type PlaybackFailure = "audio_unavailable" | "invalid_audio" | "audio_interrupted" | "autoplay_blocked" | "timeout";
@@ -10,9 +10,10 @@ export type PcmEvents = {
   onSentenceStart?: (index: number, contextTime: number) => void;
   onDrained?: () => void;
   onError?: (reason: PlaybackFailure) => void;
+  onSentenceSkipped?: (index: number, reason: SkippedPlaybackSentence["reason"]) => void;
 };
 class PlaybackError extends Error {
-  constructor(readonly reason: PlaybackFailure) { super(reason); }
+  constructor(readonly reason: PlaybackFailure, readonly fatal = false) { super(reason); }
 }
 export function audioBaseUrl(hubUrl: string): string {
   const url = new URL(hubUrl);
@@ -33,6 +34,7 @@ export class PcmPlayer {
   private events: PcmEvents = {};
   private tail = 0;
   private streamsEnded = false;
+  private completionError: PlaybackFailure | null = null;
   private receivedBytes = 0;
   private active = false;
   private first = true;
@@ -62,6 +64,7 @@ export class PcmPlayer {
     this.controller = controller;
     this.events = events; this.active = true; this.first = true;
     this.receivedBytes = 0; this.tail = 0; this.streamsEnded = false;
+    this.completionError = null;
     const deadline = setTimeout(() => this.fail("timeout", controller), timeoutMs);
     const resumeDeadline = setTimeout(() => {
       if (this.context?.state !== "running") this.fail("autoplay_blocked", controller);
@@ -82,22 +85,40 @@ export class PcmPlayer {
     const headers: HeadersInit = token ? { authorization: `Bearer ${token}` } : {};
     const download = (index: number) => this.download(`${baseUrl}/voice/audio/${speech.turnId}/${index}`, headers, controller, request);
     let current = download(0);
+    let completedSentences = 0;
+    let lastError: PlaybackFailure = "audio_unavailable";
     this.timer = setInterval(() => this.tick(controller), 10);
     for (let i = 0; i < speech.sentences.length; i++) {
       let next: ReturnType<PcmPlayer["download"]> | null = null;
       let started = false;
-      for await (const bytes of current.chunks()) {
-        controller.signal.throwIfAborted();
-        if (!started) {
-          // Start downloading the next sentence while this sentence plays.
-          if (i + 1 < speech.sentences.length) next = download(i + 1);
-          started = true;
+      try {
+        for await (const bytes of current.chunks()) {
+          controller.signal.throwIfAborted();
+          if (!started) {
+            // Start downloading the next sentence while this sentence plays.
+            if (i + 1 < speech.sentences.length) next = download(i + 1);
+            started = true;
+          }
+          this.schedule(bytes, i, ctx);
         }
-        this.schedule(bytes, i, ctx);
+        if (!started) throw new PlaybackError("audio_unavailable");
+        completedSentences++;
+      } catch (err) {
+        controller.signal.throwIfAborted();
+        if (err instanceof PlaybackError && err.fatal) throw err;
+        const reason = err instanceof PlaybackError ? err.reason : "audio_interrupted";
+        if (reason === "autoplay_blocked" || reason === "timeout") throw err;
+        lastError = reason;
+        this.events.onSentenceSkipped?.(i, reason);
       }
-      if (!started) throw new PlaybackError("audio_unavailable");
+      controller.signal.throwIfAborted();
+      // A failed/empty sentence may never have started its prefetch.
+      if (!next && i + 1 < speech.sentences.length) next = download(i + 1);
       if (next) current = next;
     }
+    // Preserve already scheduled samples even when every sentence was partial.
+    // With no complete sentence the turn is failed, never a false success.
+    this.completionError = completedSentences === 0 ? lastError : null;
     this.streamsEnded = true;
     this.tick(controller);
   }
@@ -121,7 +142,7 @@ export class PcmPlayer {
           controller.signal.throwIfAborted();
           if (part.done) break;
           this.receivedBytes += part.value.length;
-          if (this.receivedBytes > (this.options.maxBytes ?? 8 * 1024 * 1024)) throw new PlaybackError("invalid_audio");
+          if (this.receivedBytes > (this.options.maxBytes ?? 8 * 1024 * 1024)) throw new PlaybackError("invalid_audio", true);
           const joined: Uint8Array<ArrayBuffer> = new Uint8Array(pending.length + part.value.length + (carry === null ? 0 : 1));
           joined.set(pending);
           if (carry !== null) joined[pending.length] = carry;
@@ -147,8 +168,9 @@ export class PcmPlayer {
     return { chunks: async function* () {
       for (;;) {
         controller.signal.throwIfAborted();
-        if (error) throw error;
+        if (error instanceof PlaybackError && error.fatal) throw error;
         if (queue.length) { yield queue.shift()!; continue; }
+        if (error) throw error;
         if (done) return;
         await new Promise<void>(resolve => { wake = resolve; });
       }
@@ -182,6 +204,7 @@ export class PcmPlayer {
       this.events.onSentenceStart?.(b.index, b.time);
     }
     if (this.streamsEnded && now >= this.tail) {
+      if (this.completionError) { this.fail(this.completionError, controller); return; }
       const drained = this.events.onDrained;
       this.stop(); drained?.();
     }

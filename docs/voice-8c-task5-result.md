@@ -1,5 +1,7 @@
 # 8c Task 5：浏览器 PCM 播放与状态同步交付
 
+> 本文记录 `232bc85` 的原始交付结果。Claude 复核后发现 3 个中优先级问题及 1 个遗漏的容量泄漏问题，修复及最新验证见 [Task 5 审核修复报告](./voice-8c-task5-repair-result.md)。下述原报告中的 Esc/顶替 E2E 仅覆盖操作、停播及 DOM 退场，未直接断言 hub 退场或浏览器 fetch 取消；本次修复批已补强。上轮要求补修的 voice-local 容量泄漏与首包延迟拆解此前遗漏说明，前者在修复批处理，后者明确留给 Task 6。
+
 - 日期：2026-10-07（施工于10月6日开始）。
 - 仓库：`/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard`。
 - 施工分支：`codex/voice-8c-task5-playback`，起点 `ea888fb`（Task 1–4 修复批）。

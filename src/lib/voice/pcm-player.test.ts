@@ -27,8 +27,8 @@ class ClockContext {
 function setup(request: typeof fetch, options: { maxBytes?: number } = {}) {
   vi.useFakeTimers(); const ctx = new ClockContext();
   const player = new PcmPlayer({ createContext: () => ctx as unknown as AudioContext, fetch: request, ...options }); players.push(player);
-  const started = vi.fn(); const drained = vi.fn(); const error = vi.fn();
-  return { ctx, player, started, drained, error, play: (s = speech, timeout = 5000) => player.play(s, "https://hub.test", "secret", { onSentenceStart: started, onDrained: drained, onError: error }, timeout) };
+  const started = vi.fn(); const drained = vi.fn(); const error = vi.fn(); const skipped = vi.fn();
+  return { ctx, player, started, drained, error, skipped, play: (s = speech, timeout = 5000) => player.play(s, "https://hub.test", "secret", { onSentenceStart: started, onDrained: drained, onError: error, onSentenceSkipped: skipped }, timeout) };
 }
 async function flush() { for (let i = 0; i < 50; i++) await Promise.resolve(); }
 
@@ -76,12 +76,43 @@ describe("PCM streaming timeline", () => {
   ] as const)("rejects invalid or empty streams", async (make, reason) => {
     const s = setup(vi.fn(async () => make())); s.play(one); await flush(); expect(s.error).toHaveBeenCalledWith(reason); expect(s.drained).not.toHaveBeenCalled();
   });
-  it("bounds aggregate downloads and stops already scheduled audio on a read failure", async () => {
+  it("bounds aggregate downloads but lets scheduled partial audio finish after a read failure", async () => {
     const limited = setup(vi.fn(async () => response()), { maxBytes: 100 }); limited.play(one); await flush(); expect(limited.error).toHaveBeenCalledWith("invalid_audio");
     let input!: ReadableStreamDefaultController<Uint8Array>;
     const s = setup(vi.fn(async () => new Response(new ReadableStream({ start(c) { input = c; c.enqueue(pcm()); } }), { headers }))); s.play(one); await flush();
     input.error(new Error("connection reset")); await flush();
-    expect(s.error).toHaveBeenCalledWith("audio_interrupted"); expect(s.ctx.nodes.every(n => n.stop.mock.calls.length === 1)).toBe(true); expect(s.drained).not.toHaveBeenCalled();
+    expect(s.skipped).toHaveBeenCalledWith(0, "audio_interrupted");
+    expect(s.error).not.toHaveBeenCalled(); expect(s.ctx.nodes.every(n => n.stop.mock.calls.length === 0)).toBe(true);
+    s.ctx.currentTime = 0.251; await vi.advanceTimersByTimeAsync(10);
+    expect(s.error).toHaveBeenCalledWith("audio_interrupted"); expect(s.drained).not.toHaveBeenCalled();
+  });
+  it("a second-sentence 503 preserves the complete first sentence and plays the third before drained", async () => {
+    let rejectNext!: (response: Response) => void;
+    const second = new Promise<Response>(resolve => { rejectNext = resolve; });
+    const request = vi.fn(async (url: string | URL | Request) => String(url).endsWith("/0") ? response(pcm(24000)) : String(url).endsWith("/1") ? second : response());
+    const s = setup(request); s.play({ ...speech, sentences: [...speech.sentences, { index: 2, displayStart: 6, displayEnd: 9 }] }); await flush();
+    const firstNodes = [...s.ctx.nodes]; expect(firstNodes).toHaveLength(20);
+    s.ctx.currentTime = 0.35; rejectNext(new Response(null, { status: 503 })); await flush();
+    expect(s.skipped).toHaveBeenCalledExactlyOnceWith(1, "audio_unavailable");
+    expect(request).toHaveBeenCalledTimes(3);
+    expect(firstNodes.every(n => n.stop.mock.calls.length === 0)).toBe(true);
+    expect(s.ctx.nodes[20].start.mock.calls[0][0]).toBeCloseTo(1.15, 5);
+    expect(s.drained).not.toHaveBeenCalled(); expect(s.error).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(10); expect(s.started).toHaveBeenCalledExactlyOnceWith(0, 0.15);
+    s.ctx.currentTime = 1.151; await vi.advanceTimersByTimeAsync(10); expect(s.started.mock.calls.at(-1)![0]).toBe(2);
+    expect(s.drained).not.toHaveBeenCalled();
+    s.ctx.currentTime = 1.251; await vi.advanceTimersByTimeAsync(10); expect(s.drained).toHaveBeenCalledOnce(); expect(s.error).not.toHaveBeenCalled();
+  });
+  it("a failed first sentence advances to the next and starts at its actual index", async () => {
+    const s = setup(vi.fn(async (url: string | URL | Request) => String(url).endsWith("/0") ? new Response(null, { status: 503 }) : response()));
+    s.play(); await flush(); expect(s.skipped).toHaveBeenCalledExactlyOnceWith(0, "audio_unavailable");
+    s.ctx.currentTime = 0.15; await vi.advanceTimersByTimeAsync(10); expect(s.started).toHaveBeenCalledExactlyOnceWith(1, 0.15);
+    s.ctx.currentTime = 0.251; await vi.advanceTimersByTimeAsync(10); expect(s.drained).toHaveBeenCalledOnce(); expect(s.error).not.toHaveBeenCalled();
+  });
+  it("all failed sentences report one failure, never drained", async () => {
+    const s = setup(vi.fn(async () => new Response(null, { status: 503 }))); s.play(); await flush();
+    expect(s.skipped.mock.calls).toEqual([[0, "audio_unavailable"], [1, "audio_unavailable"]]);
+    expect(s.error).toHaveBeenCalledExactlyOnceWith("audio_unavailable"); expect(s.drained).not.toHaveBeenCalled();
   });
   it("stop aborts both downloads, scheduled audio and callbacks; newer playback stays independent", async () => {
     const signals: AbortSignal[] = [];

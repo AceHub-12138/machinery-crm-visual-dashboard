@@ -89,7 +89,7 @@ export function OverlayStage({
   const tokenRef = useRef<string | null>(null);
   const playingIdRef = useRef<string | null>(null);
   const getPlayer = useCallback(() => playerRef.current ??= new PcmPlayer(), []);
-  const reportPlayback = useCallback((type: "playback.started" | "playback.drained" | "playback.failed", turnId: string, reason?: PlaybackFailure) => {
+  const reportPlayback = useCallback((type: "playback.started" | "playback.drained" | "playback.failed", turnId: string, reason?: PlaybackFailure | "dismissed") => {
     if (socketRef.current?.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({ type, at: Date.now(), turnId, ...(reason ? { reason } : {}) }));
     }
@@ -103,12 +103,11 @@ export function OverlayStage({
   const dispatchTracked = useCallback((event: VoiceEvent) => {
     const next = sessionReducer(mirrorRef.current, event);
     if (next.name !== "answering" && mirrorRef.current.name === "answering") {
-      if (event.type === "FORCE_CLOSE" && playingIdRef.current) reportPlayback("playback.failed", playingIdRef.current, "audio_interrupted");
       playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
     }
     mirrorRef.current = next;
     dispatch(event);
-  }, [reportPlayback]);
+  }, []);
 
   /* 画布每帧读取的快照;React 状态只在状态机转移时更新,帧内全走 ref */
   const frameRef = useRef<VoiceFrame>({
@@ -185,13 +184,21 @@ export function OverlayStage({
           return;
         }
         playingIdRef.current = speech.turnId;
+        let reportedStart = false;
         const isCurrent = () => playingIdRef.current === speech.turnId && mirrorRef.current.name === "answering";
         getPlayer().play(speech, audioBaseUrl(hubUrl ?? `ws://${window.location.hostname}:3210`), tokenRef.current, {
           onSentenceStart: (index) => {
             if (!isCurrent()) return;
             const sentence = speech.sentences[index];
             sentenceRef.current = { start: sentence.displayStart, end: sentence.displayEnd };
-            if (index === 0) reportPlayback("playback.started", speech.turnId);
+            if (!reportedStart) { reportedStart = true; reportPlayback("playback.started", speech.turnId); }
+          },
+          onSentenceSkipped: (sentenceIndex, reason) => {
+            if (!isCurrent()) return;
+            setAudioNotice("部分语音播报中断，请查看卡片。");
+            if (socketRef.current?.readyState === WebSocket.OPEN) {
+              socketRef.current.send(JSON.stringify({ type: "playback.skipped", at: Date.now(), turnId: speech.turnId, sentenceIndex, reason }));
+            }
           },
           onDrained: () => {
             if (!isCurrent()) return;
@@ -407,12 +414,15 @@ export function OverlayStage({
         e.preventDefault();
         wake();
       } else if (e.key === "Escape") {
+        const state = mirrorRef.current.name;
+        const id = speechRef.current?.turnId;
+        if (live && id && (state === "answering" || state === "followup")) reportPlayback("playback.failed", id, "dismissed");
         dispatchTracked({ type: "FORCE_CLOSE", at: performance.now() });
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [wake, dispatchTracked]);
+  }, [wake, dispatchTracked, live, reportPlayback]);
 
   /* ---- A3 文案过渡:状态词/转写按状态名 key 重挂载,CSS 淡入(240ms);
      同状态内的 ASR 打字就地刷新,不经任何 effect/setState ---- */

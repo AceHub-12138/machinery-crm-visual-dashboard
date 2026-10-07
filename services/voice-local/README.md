@@ -30,7 +30,7 @@ services/voice-local/.venv/bin/python services/voice-local/run.py
 
 首片完整模型输出先检查峰值，静音丢弃后仅重试一次；发送音频后不重试。按 `ceil((字数×0.4+1.5)×12)` 限制 codec token，并限制 PCM 总时长。模型每个采样步骤检查取消，断开连接也会释放阻塞的输出队列；不能中断正在执行的单个 GPU kernel。
 
-最多8个未完成或尚未消费完的流任务；消费者保持连接但停止读取时，GPU 工作线程仍能结束合成并继续执行 ASR。输出缓冲由单 job 的 PCM 总时长预算限制：默认400字最多约7.75MB，8个任务约62MB的PCM（不含模型及对象开销；秒/字配置最大1时约154MB）。指标账本最多256条、已完成且流已结束的记录保留120秒。断开清空缓冲，取消和关停会唤醒等待输出的流。模型实际释放 GPU 后才结束生成器。原始 PCM 不包含重试或截断指标，编排客户端通过任务 ID 读取最终指标。
+最多8个未完成或尚未消费完的流任务；消费者保持连接但停止读取时，GPU 工作线程仍能结束合成并继续执行 ASR。输出缓冲由单 job 的 PCM 总时长预算限制：默认400字最多约7.75MB，8个任务约62MB的PCM（不含模型及对象开销；秒/字配置最大1时约154MB）。指标账本最多256条；已完成任务在创建后120秒到期，下次准入时回收，包括遗留的未耗尽流，回收时取消并唤醒迭代器；仍在运行的 GPU job 不按 TTL 回收。响应发送由 finally 统一清理，响应头阶段断开或被取消、生成器尚未开始时也释放流名额。断开清空缓冲，取消和关停会唤醒等待输出的流。模型实际释放 GPU 后才结束生成器。原始 PCM 不包含重试或截断指标，编排客户端通过任务 ID 读取最终指标。
 
 此服务无对外鉴权，只允许同机编排调用；需要部署到其他机器时须另行设计网络边界。浏览器通过编排服务带 Bearer 的音频接口访问。
 
@@ -42,4 +42,4 @@ services/voice-local/.venv/bin/python -m unittest discover -s services/voice-loc
 services/voice-local/.venv/bin/python services/voice-local/calibrate.py --out services/voice-local/logs/calibration.json
 ```
 
-故障测试覆盖首片静音重试、两次静音拒绝、已发送后失败不重试、失控封顶、取消、参考哈希失效、PCM/WAV格式、请求上限、自检失败，以及停读但不断开的消费者、后续ASR和8流容量限制。实测结果见仓库 `docs/voice-8c-stage34-result.md` 与 `docs/voice-8c-task14-repair-result.md`。
+故障测试覆盖首片静音重试、两次静音拒绝、已发送后失败不重试、失控封顶、取消、参考哈希失效、PCM/WAV格式、请求上限、自检失败，以及停读但不断开的消费者、后续ASR、8流容量限制、响应头阶段失败/取消后的名额恢复、TTL 回收。实测结果见仓库 `docs/voice-8c-stage34-result.md`、`docs/voice-8c-task14-repair-result.md` 与 `docs/voice-8c-task5-repair-result.md`。

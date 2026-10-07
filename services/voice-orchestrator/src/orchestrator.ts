@@ -95,7 +95,10 @@ export function parseConsoleEvent(raw: string): ConsoleWireEvent | null {
     case "question.submit":
       return typeof ev.text === "string" && ev.text.trim().length > 0 && ev.text.length <= 500 ? ev : null;
     case "playback.failed":
-      if (!["audio_unavailable", "invalid_audio", "audio_interrupted", "autoplay_blocked", "timeout"].includes(ev.reason)) return null;
+      if (!["audio_unavailable", "invalid_audio", "audio_interrupted", "autoplay_blocked", "timeout", "dismissed"].includes(ev.reason)) return null;
+      // fall through
+    case "playback.skipped":
+      if (ev.type === "playback.skipped" && (!Number.isInteger(ev.sentenceIndex) || ev.sentenceIndex < 0 || ev.sentenceIndex >= 100 || !["audio_unavailable", "invalid_audio", "audio_interrupted"].includes(ev.reason))) return null;
       // fall through
     case "playback.started":
     case "playback.drained":
@@ -127,7 +130,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   let askedAt: number[] = [];
   let audioId: string | null = null;
   let goodbyeId: string | null = null;
-  let playback: { id: string; seq: number; record: TurnTraceRecord; synthesisDone: boolean; finished: boolean; written: boolean } | null = null;
+  let playback: { id: string; seq: number; record: TurnTraceRecord; synthesisDone: boolean; finished: boolean; written: boolean; waitingForScreens: boolean } | null = null;
   function persistPlayback(p: NonNullable<typeof playback>): void {
     if (!p.finished || !p.synthesisDone || p.written) return;
     p.written = true;
@@ -136,6 +139,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   function endPlayback(outcome: NonNullable<TurnTraceRecord["playbackOutcome"]>): void {
     if (!playback || playback.finished) return;
     playback.finished = true;
+    playback.waitingForScreens = false;
     playback.record.playbackOutcome = outcome;
     emitTrace(playback.record);
     persistPlayback(playback);
@@ -209,6 +213,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           asrMs: record.asrMs ?? null,
           playbackStartMs: record.playbackStartMs ?? null,
           ...(record.playbackOutcome ? { playbackOutcome: record.playbackOutcome } : {}),
+          ...(record.playbackSkipped ? { playbackSkipped: record.playbackSkipped.map(s => ({ ...s })) } : {}),
           ...(record.ttsFirstByteMs !== undefined ? { ttsFirstByteMs: record.ttsFirstByteMs } : {}),
           ...(record.ttsRegenerated !== undefined ? { ttsRegenerated: record.ttsRegenerated, ttsTruncated: record.ttsTruncated, ttsFail: record.ttsFail } : {}),
           ...(record.classifyMs !== undefined ? { classifyMs: record.classifyMs } : {}),
@@ -273,7 +278,22 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       case "playback.started":
       case "playback.failed":
       case "playback.drained":
-        if (conn.role !== "screen" || !playback || playback.finished || event.turnId !== audioId || state.name !== "answering") return;
+      case "playback.skipped":
+        if (conn.role !== "screen" || !playback || event.turnId !== audioId || playback.seq !== turnSeq) return;
+        // Esc remains meaningful after drained, throughout the current followup.
+        if (event.type === "playback.failed" && event.reason === "dismissed") {
+          if (state.name === "answering" || state.name === "followup") forceClose("force");
+          return;
+        }
+        if (playback.finished || state.name !== "answering") return;
+        if (event.type === "playback.skipped") {
+          if (event.sentenceIndex >= (answer?.sentences.length ?? 0)) return;
+          const skipped = playback.record.playbackSkipped ??= [];
+          if (skipped.some(s => s.sentenceIndex === event.sentenceIndex)) return;
+          skipped.push({ sentenceIndex: event.sentenceIndex, reason: event.reason });
+          emitTrace(playback.record);
+          return;
+        }
         if (event.type === "playback.started") {
           if (playback.record.playbackStartMs == null) {
             // Hub receipt clock: no subtraction of clocks on different machines.
@@ -477,7 +497,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       audioId = audioTurn?.id ?? null;
       if (audioTurn) {
         record.asrMs = null; record.playbackStartMs = null;
-        const p = { id: audioTurn.id, seq, record, synthesisDone: false, finished: false, written: false };
+        const p = { id: audioTurn.id, seq, record, synthesisDone: false, finished: false, written: false, waitingForScreens: false };
         playback = p;
         void audioTurn.completed.then(() => {
           Object.assign(record, audioTurn.metrics);
@@ -520,15 +540,17 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           if (!isLast) return;
           // 末片落卡:镜像进 answering(大屏由随后的 state.change 驱动 ANSWER)
           dispatch({ type: "ANSWER", at: Date.now(), card });
-          if (audioTurn) {
-            if (intent === "chitchat_or_end") goodbyeId = audioTurn.id;
+          if (audioTurn && intent === "chitchat_or_end") goodbyeId = audioTurn.id;
+          if (audioTurn && hub.counts().screens > 0) {
+            if (playback) playback.waitingForScreens = true;
             const timeout = audioTurn.descriptor.fixed
               ? (audioTurn.bytes / 48000) * 2000 + 2000
               : playbackFallbackMs(finalSpoken);
             later(timeout, () => spoken(seq, "timeout"));
-          } else if (intent === "chitchat_or_end") forceClose("decline");
+          } else if (!audioTurn && intent === "chitchat_or_end") forceClose("decline");
           else {
-            // Text-only installations preserve the original exhibition pacing.
+            // Text-only/no-screen installations preserve exhibition pacing and
+            // keep synthesis/cache alive; nobody can acknowledge browser audio.
             const typeMs = (finalSpoken.length / LAUNCH.typeCps) * 1000;
             later(LAUNCH.unfoldStartMs + LAUNCH.unfoldMs + typeMs + DEMO_TIMING.answerHoldMs, () => spoken(seq, "drained"));
           }
@@ -586,6 +608,11 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     forceClose,
     attach(conn: HubConnection): void {
       conn.send({ type: "hub.hello", at: Date.now(), ...hub.counts() });
+    },
+    detach(conn: HubConnection): void {
+      if (conn.role === "screen" && hub.counts().screens === 0 && playback?.waitingForScreens && !playback.finished) {
+        spoken(playback.seq, "drained");
+      }
     },
     get state(): VoiceSessionState {
       return state;
