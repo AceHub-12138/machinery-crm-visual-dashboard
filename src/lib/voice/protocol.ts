@@ -39,6 +39,7 @@ export type VoiceErrorCode =
  * 不与本域 performance.now() 混算。
  */
 export type VoiceWireEvent =
+  | { type: "speech.fixed"; at: number; text: string; speech: { turnId: string; fixed?: "wake" | "followup" | "goodbye" | "fallback" | "unheard"; style?: string; sentences: { index: number; displayStart: number; displayEnd: number }[] } }
   | { type: "session.start"; at: number; sessionId: string }
   | {
       type: "state.change";
@@ -71,7 +72,8 @@ export type VoiceWireEvent =
       full: boolean;
       card?: AnswerCardData;
       /** 音频资源与显示偏移；由本地播放器驱动句级高亮。 */
-      speech?: { turnId: string; fixed?: "goodbye"; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
+      speech?: { turnId: string; fixed?: "wake" | "followup" | "goodbye" | "fallback" | "unheard";
+        style?: string; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
     }
   | {
       type: "tts.boundary";
@@ -114,6 +116,8 @@ export type SkippedPlaybackSentence = {
 
 /** 一轮问答的全程打点(plan §16.2 B④;毫秒,相对 question 起点)。 */
 export type TurnTracePayload = {
+  style?: string;
+  styleFallback?: string;
   /** 真实语音耗时；尚未接入的采集/播放字段为 null。 */
   asrMs?: number | null;
   playbackStartMs?: number | null;
@@ -159,6 +163,7 @@ export type ConsoleWireEvent =
   | { type: "session.close"; at: number }; // 强制退场(Esc 语义)
 
 export const WIRE_EVENT_TYPES = [
+  "speech.fixed",
   "session.start",
   "state.change",
   "asr.partial",
@@ -188,6 +193,9 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
 
   const ev = data as VoiceWireEvent;
   switch (ev.type) {
+    case "speech.fixed":
+      if (typeof ev.text !== "string" || !ev.speech?.fixed || !["wake", "followup", "unheard", "goodbye", "fallback"].includes(ev.speech.fixed)) return null;
+      return parseWireEvent(JSON.stringify({ ...ev, type: "answer.delta", seq: 0, full: true, card: { kind: "brief", title: "小川", lines: [], spoken: ev.text } })) ? ev : null;
     case "session.start":
       return typeof ev.sessionId === "string" && ev.sessionId.length > 0 ? ev : null;
     case "state.change":
@@ -205,7 +213,7 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
       if (ev.full && !isValidAnswerCard(ev.card)) return null;
       if (ev.speech !== undefined) {
         const s = ev.speech;
-        if (!ev.full || !s || (s.fixed !== undefined && s.fixed !== "goodbye") || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length === 0 || s.sentences.length > 100 ||
+        if (!ev.full || !s || (s.fixed !== undefined && !["wake", "followup", "goodbye", "fallback", "unheard"].includes(s.fixed)) || (s.style !== undefined && (typeof s.style !== "string" || !/^[a-z_]{1,32}$/.test(s.style))) || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length === 0 || s.sentences.length > 100 ||
           !s.sentences.every((v, i) => v && v.index === i && Number.isInteger(v.displayStart) && Number.isInteger(v.displayEnd) && v.displayStart >= 0 && v.displayEnd > v.displayStart && v.displayEnd <= (ev.card?.spoken.length ?? 0) && (i === 0 || v.displayStart >= s.sentences[i - 1].displayEnd))) return null;
       }
       // 卡片来自网络:逐 kind schema 校验(防原型链/脏字段打崩渲染层)

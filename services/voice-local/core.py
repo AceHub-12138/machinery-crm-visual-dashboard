@@ -1,6 +1,7 @@
 """Local speech policy and pinned MLX backend. No reference material is embedded here."""
 from __future__ import annotations
 
+import io
 import hashlib
 import json
 import math
@@ -8,7 +9,7 @@ import os
 import re
 import threading
 import unicodedata
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 import numpy as np
@@ -37,6 +38,8 @@ class Settings:
     silence_peak: float = 0.001
     seconds_per_char: float = 0.4
     hotwords: tuple[str, ...] = ()
+    styles_dir: str = ""
+    ref_bytes: bytes | None = None
 
     @classmethod
     def from_env(cls):
@@ -53,6 +56,7 @@ class Settings:
             style=os.environ.get("VOICE_TTS_STYLE", "default"),
             silence_peak=float(os.environ.get("VOICE_TTS_SILENCE_PEAK", "0.001")),
             seconds_per_char=float(os.environ.get("VOICE_TTS_SECONDS_PER_CHAR", "0.4")),
+            styles_dir=os.environ.get("VOICE_TTS_STYLES_DIR", ""),
             hotwords=tuple(word.strip() for word in os.environ.get("VOICE_ASR_HOTWORDS", "回款,跟进待办,成品仓,原材料仓,半成品仓,物料,库存预警,发货,完成率,合同额").split(",") if word.strip()),
         )
         if not 0 <= settings.temperature <= 2 or not 0 < settings.silence_peak < 1 or not 0.1 <= settings.seconds_per_char <= 1:
@@ -67,8 +71,35 @@ class Settings:
                                   "temperature": self.temperature, "style": self.style,
                                   "silencePeak": self.silence_peak, "secondsPerChar": self.seconds_per_char,
                                   "format": "s16le/24000/mono", "version": 1}, ensure_ascii=False, sort_keys=True).encode())
-        digest.update(Path(self.ref_audio).read_bytes())
+        digest.update(self.ref_bytes if self.ref_bytes is not None else Path(self.ref_audio).read_bytes())
         return digest.hexdigest()
+
+
+def load_style_settings(settings):
+    """Immutable byte snapshots: no path reads during synthesis or hashing."""
+    default = replace(settings, style="default", ref_bytes=Path(settings.ref_audio).read_bytes())
+    styles = {"default": default}
+    if not settings.styles_dir:
+        return styles
+    directory = Path(settings.styles_dir).expanduser()
+    if not directory.is_dir():
+        raise ValueError("VOICE_TTS_STYLES_DIR must be a directory")
+    ids = {p.stem for p in directory.glob("*.wav")} | {p.stem for p in directory.glob("*.txt")}
+    for style in sorted(ids):
+        if not re.fullmatch(r"[a-z_]{1,32}", style):
+            raise ValueError("Invalid style id")
+        wav, txt = directory / f"{style}.wav", directory / f"{style}.txt"
+        if not wav.is_file() or not txt.is_file():
+            raise ValueError(f"Missing reference pair: {style}")
+        data, text = wav.read_bytes(), txt.read_text().strip()
+        if not text:
+            raise ValueError(f"Empty reference text: {style}")
+        if style == "default":
+            if data != default.ref_bytes or text != default.ref_text:
+                raise ValueError("Directory default reference differs from VOICE_TTS_REF_AUDIO/TEXT")
+        else:
+            styles[style] = replace(default, style=style, ref_audio=str(wav), ref_bytes=data, ref_text=text)
+    return styles
 
 
 def max_tokens_for(text: str, seconds_per_char=0.4):
@@ -131,11 +162,32 @@ class MlxBackend:
             return single_chunk(*args, **kwargs)
         object.__setattr__(self.asr, "_generate_single_chunk", checked_asr)
 
+    def set_reference(self, settings):
+        import wave
+        if not hasattr(self, "references"):
+            self.references = {}
+        if settings.style not in self.references:
+            with wave.open(io.BytesIO(settings.ref_bytes)) as wav:
+                if wav.getsampwidth() != 2 or wav.getcomptype() != "NONE":
+                    raise ValueError("Reference WAV requires int16 PCM")
+                rate = wav.getframerate()
+                audio = np.frombuffer(wav.readframes(wav.getnframes()), dtype="<i2").astype(np.float32) / 32768
+                if wav.getnchannels() > 1:
+                    audio = audio.reshape(-1, wav.getnchannels()).mean(axis=1)
+            if rate != SAMPLE_RATE:
+                audio = np.interp(np.arange(round(len(audio) * SAMPLE_RATE / rate)) * rate / SAMPLE_RATE,
+                                  np.arange(len(audio)), audio).astype(np.float32)
+            if not len(audio) or not np.all(np.isfinite(audio)):
+                raise ValueError("Invalid reference audio")
+            self.references[settings.style] = self.mx.array(audio)
+        self.reference = self.references[settings.style]
+        self.reference_text = settings.ref_text
+
     def generate(self, text: str, cancel: threading.Event, max_tokens: int):
         self.cancel = cancel
         check_cancel(cancel)
         generator = self.tts.generate(
-            text=text, ref_audio=self.settings.ref_audio, ref_text=self.settings.ref_text,
+            text=text, ref_audio=self.reference, ref_text=self.reference_text,
             lang_code="Chinese", temperature=self.settings.temperature, max_tokens=max_tokens,
             stream=True, streaming_interval=0.5, verbose=False,
         )
@@ -164,6 +216,8 @@ class MlxBackend:
 
 def guarded_audio(backend, settings: Settings, text: str, cancel: threading.Event, stats: dict):
     """Retry only before the first audible bytes; stop at both frame and sample budgets."""
+    if hasattr(backend, "set_reference"):
+        backend.set_reference(settings)
     limit = max_tokens_for(text, settings.seconds_per_char)
     max_bytes = math.ceil((len(text) * settings.seconds_per_char + 1.5) * SAMPLE_RATE) * 2
     stats.update(ttsRegenerated=0, ttsTruncated=0, ttsFail=0, tokens=0, bytes=0)

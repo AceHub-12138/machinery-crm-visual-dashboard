@@ -56,7 +56,7 @@ describe("protocol — fail-closed 解析(plan §10 风格)", () => {
   });
 
   it("类型清单与联合完全同步(satisfies 锁定)", () => {
-    expect(WIRE_EVENT_TYPES).toHaveLength(10);
+    expect(WIRE_EVENT_TYPES).toHaveLength(11);
   });
 });
 
@@ -180,4 +180,10 @@ describe("8c PCM playback protocol snapshot", () => {
     expect(parseWireEvent(JSON.stringify(event))).toEqual(event);
     expect([event, {type:"playback.started",at:1500,turnId:event.speech!.turnId}, {type:"playback.drained",at:2500,turnId:event.speech!.turnId}]).toMatchSnapshot();
   });
+});
+
+it('cached wake metadata is valid without being an answer card, rejects missing boundaries',()=>{
+  const event={type:'speech.fixed',at:1,text:'我在,先生。请讲。',speech:{turnId:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',fixed:'wake',style:'cheerful',sentences:[{index:0,displayStart:0,displayEnd:9}]}};
+  expect(parseWireEvent(JSON.stringify(event))).toMatchObject(event);
+  expect(parseWireEvent(JSON.stringify({...event,speech:{...event.speech,sentences:[]}}))).toBeNull();
 });

@@ -1,0 +1,1 @@
+These two synthetic Mandarin speech fixtures are from the local macOS Tingting ASR benchmark (`本月销售情况怎么样` / `本月目标完成率是多少`). They contain no real microphone recording or company business data. Used to exercise actual browser resampling and Silero VAD while GPU models are mocked. They do not prove exhibit speech accuracy.

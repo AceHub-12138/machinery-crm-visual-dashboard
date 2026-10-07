@@ -261,6 +261,8 @@ export default function VoiceConsolePage() {
               {trace.degraded ? "降级应答" : trace.source === "mcp" ? "MCP 长尾" : "预取主路径"}
             </span>
             <span>卡片:{trace.card ?? "—"}</span>
+            {trace.style ? <span>风格：{trace.style}{trace.styleFallback ? `（${trace.styleFallback}不可用，回落默认）` : ""}</span> : null}
+            {trace.asrMs != null ? <span>识别 {trace.asrMs.toFixed(1)}ms</span> : null}
             {trace.totalMs != null ? <span>全程 <b className="tabular-nums text-amber-300">{trace.totalMs}ms</b></span> : null}
           </div>
           <div className="flex flex-wrap gap-2">

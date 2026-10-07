@@ -14,6 +14,10 @@ import type { SkippedPlaybackSentence } from "../../../../src/lib/voice/protocol
 export type TurnStage = "question" | "prefetch" | "llmFirstToken" | "toolExec" | "answerFull";
 
 export type TurnTraceRecord = {
+  style?: string;
+  styleFallback?: string;
+  uploadMs?: number;
+  asrRoundTripMs?: number;
   ts: string;
   sessionId: string;
   turn: number;
@@ -35,6 +39,7 @@ export type TurnTraceRecord = {
   playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
   playbackSkipped?: SkippedPlaybackSentence[];
   ttsFirstByteMs?: number;
+  voiceLocalFirstByteMs?: number;
   ttsRegenerated?: number;
   ttsTruncated?: number;
   ttsFail?: number;

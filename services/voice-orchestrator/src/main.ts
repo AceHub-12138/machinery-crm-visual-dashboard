@@ -23,6 +23,7 @@ import { ScriptedAdapter } from "./llm/scripted.ts";
 import { OpenAiCompatibleAdapter } from "./llm/zhipu.ts";
 import { AudioStore } from "./tts/audio-store.ts";
 import { VoiceLocalClient } from "./tts/voice-local-client.ts";
+import { createInputHttpHandler } from "./http-input.ts";
 import { createAudioHttpHandler } from "./tts/http-audio.ts";
 import { redactText } from "./guard/redaction.ts";
 
@@ -45,7 +46,8 @@ try {
   process.exit(1);
 }
 
-const audio = new AudioStore({ client: new VoiceLocalClient(config.voiceLocalUrl),
+const speechClient = new VoiceLocalClient(config.voiceLocalUrl);
+const audio = new AudioStore({ client: speechClient,
   cacheDir: config.ttsCacheDir, style: config.ttsStyle, enabled: config.ttsEnabled, warn: log });
 await audio.initialize();
 log(`tts: ${audio.status.reason}`);
@@ -60,7 +62,11 @@ const hub = await startVoiceHub({
   host: config.host,
   allowedOrigins: config.hubAllowedOrigins.length > 0 ? config.hubAllowedOrigins : undefined,
   maxConnections: config.hubMaxConnections,
-  onHttpRequest: createAudioHttpHandler({ store: audio, consoleToken: config.hubConsoleToken, screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined }),
+  onHttpRequest: async (req, res) => {
+    const path = new URL(req.url ?? "/", "http://localhost").pathname;
+    if (["/voice/wake", "/voice/utterance", "/voice/input-config"].includes(path)) { await inputHandler(req, res); return; }
+    await createAudioHttpHandler({ store: audio, consoleToken: config.hubConsoleToken, screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined })(req, res);
+  },
   onConnection: (conn) => attachFn?.(conn),
   onMessage: (conn, raw) => messageFn?.(conn, raw),
   onClose: (conn) => detachFn?.(conn),
@@ -99,6 +105,8 @@ const trace = new TraceSink(config.traceFile);
 const orchestrator = createVoiceOrchestrator({
   hub,
   audio,
+  speechClient,
+  styleOverrides: config.styleOverrides,
   dataSource,
   llm,
   mcp,
@@ -115,6 +123,8 @@ const orchestrator = createVoiceOrchestrator({
     ? { consoleToken: config.hubConsoleToken, screenToken: config.hubScreenToken }
     : null,
 });
+
+const inputHandler = createInputHttpHandler({ screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined, wake: (followup) => followup ? orchestrator.beginListening() : orchestrator.beginSession(true), utterance: (pcm, signal, ms) => orchestrator.submitUtterance(pcm, signal, ms), config: () => config.inputConfig });
 
 attachFn = (conn) => orchestrator.attach(conn);
 messageFn = (conn, raw) => orchestrator.handleClientMessage(conn, raw);

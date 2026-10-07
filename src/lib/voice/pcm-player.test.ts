@@ -55,8 +55,8 @@ describe("PCM streaming timeline", () => {
     const s = setup(vi.fn(async () => new Response(new ReadableStream({ start(c) { input = c; c.enqueue(pcm()); } }), { headers }))); s.play(one); await flush();
     s.ctx.currentTime = 0.4; await vi.advanceTimersByTimeAsync(10);
     expect(s.drained).not.toHaveBeenCalled(); input.enqueue(pcm()); input.close(); await flush();
-    expect(s.ctx.nodes[2].start).toHaveBeenCalledWith(0.405);
-    s.ctx.currentTime = 0.51; await vi.advanceTimersByTimeAsync(10);
+    expect(s.ctx.nodes[2].start).toHaveBeenCalledWith(0.55);
+    s.ctx.currentTime = 0.66; await vi.advanceTimersByTimeAsync(10);
     expect(s.drained).toHaveBeenCalledOnce(); expect(s.started).toHaveBeenCalledOnce();
   });
   it("carries arbitrary half samples, including signed PCM", async () => {

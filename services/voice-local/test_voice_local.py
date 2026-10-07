@@ -299,4 +299,43 @@ class PolicyTests(unittest.TestCase):
                 await runtime.close()
         asyncio.run(exercise())
 
+
+class StyleTests(unittest.TestCase):
+    def test_byte_snapshot_pair_validation_and_style_health(self):
+        from core import load_style_settings
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            ref = root/'external.wav'; ref.write_bytes(b'original')
+            root = root/'styles'; root.mkdir()
+            (root/'default.wav').write_bytes(b'original')
+            (root/'default.txt').write_text('reference')
+            (root/'warm.wav').write_bytes(b'warm')
+            (root/'warm.txt').write_text('暖心问候。')
+            settings = Settings('tts', 'asr', str(ref), 'reference', styles_dir=str(root))
+            styles = load_style_settings(settings); before = styles['default'].ref_hash()
+            ref.write_bytes(b'changed')
+            self.assertEqual(styles['default'].ref_hash(), before)
+            self.assertEqual(styles['warm'].ref_bytes, b'warm')
+            with self.assertRaises(ValueError): load_style_settings(settings)
+            (root/'default.txt').write_text('changed text')
+            (root/'warm.txt').unlink()
+            with self.assertRaises(ValueError): load_style_settings(settings)
+    def test_single_style_failure_keeps_default_and_rejects_failed_style(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'default.wav').write_bytes(b'ref');(root/'default.txt').write_text('reference')
+            (root/'warm.wav').write_bytes(b'warm');(root/'warm.txt').write_text('这是一句暖心问候。')
+            backend=Backend()
+            settings=Settings('tts','asr',str(root/'default.wav'),'reference',styles_dir=directory)
+            with TestClient(create_app(settings,backend)) as client:
+                health=client.get('/health').json()
+                self.assertEqual(health['styles'],['default'])
+                self.assertEqual(health['failedStyles'],['warm'])
+                self.assertEqual(health['selfCheck'],'passed')
+                self.assertEqual(client.post('/tts',json={'text':'你好','style':'warm'}).status_code,400)
+    def test_missing_style_directory_configuration_retains_default(self):
+        from core import load_style_settings
+        with tempfile.TemporaryDirectory() as directory:
+            ref=Path(directory)/'ref.wav';ref.write_bytes(b'ref')
+            self.assertEqual(list(load_style_settings(Settings('tts','asr',str(ref),'reference'))),['default'])
+
 if __name__=='__main__': unittest.main()

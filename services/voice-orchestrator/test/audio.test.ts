@@ -302,3 +302,30 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     expect(orch.state.name).toBe('followup');orch.forceClose('force');expect(store.lookup(full.speech.turnId)?.cancelled).toBe(true);
   });
 });
+
+it('emotion caches invalidate only the changed reference and absent styles fall back to default',async()=>{
+  const hashes:Record<string,string>={default:'a'.repeat(64),cheerful:'b'.repeat(64),warm:'c'.repeat(64),apologetic:'d'.repeat(64)};
+  const calls:string[]=[];
+  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',styles:Object.keys(hashes),refHash:hashes.default,styleHashes:{...hashes}}),asr:async()=>({text:'',ms:0}),tts:async function*(_text,style){calls.push(style);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:zero};}};
+  const {store}=await setup(client);
+  expect(calls).toEqual(['cheerful','warm','warm','apologetic','apologetic']);
+  hashes.apologetic='e'.repeat(64);await store.initialize();
+  expect(calls.slice(5)).toEqual(['apologetic','apologetic']);
+  const turn=store.start(buildSpokenSentences('先生,本月销售情况正常。'),undefined,'serious_long')!;
+  await turn.completed;expect(turn.descriptor.style).toBe('default');expect(calls.at(-1)).toBe('default');
+});
+it('runtime style failure falls back for the whole turn only before any audible byte',async()=>{
+  const calls:string[]=[];
+  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',styles:['default','serious_long'],refHash:'a'.repeat(64)}),asr:async()=>({text:'',ms:0}),tts:async function*(_text,style){calls.push(style);if(style==='serious_long')throw new Error('silent reference');yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:zero};}};
+  const {store}=await setup(client);calls.length=0;
+  const turn=store.start(buildSpokenSentences('先生,有待办。请及时跟进。'),undefined,'serious_long')!;
+  await turn.completed;expect(calls).toEqual(['serious_long','default','default']);expect(turn.descriptor.style).toBe('default');expect(turn.metrics.styleFallback).toBe('serious_long');expect(turn.sentences.every(s=>s.state==='done')).toBe(true);
+});
+it('a failed emotional fixed line uses a separate default cache without muting healthy speech',async()=>{
+  const calls:string[]=[];const warn=vi.fn();
+  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',styles:['default','warm'],refHash:'a'.repeat(64),styleHashes:{default:'a'.repeat(64),warm:'b'.repeat(64)}}),asr:async()=>({text:'',ms:0}),tts:async function*(_text,style){calls.push(style);if(style==='warm')throw new Error('short emotional speech failed');yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:zero};}};
+  const {store}=await setup(client,{warn});expect(store.ready).toBe(true);
+  const goodbye=store.startFixed('goodbye',buildSpokenSentences('先生,再见。'))!;
+  expect(goodbye.descriptor.style).toBe('default');expect(store.fixedStyle('followup')).toBe('default');expect(warn).toHaveBeenCalledTimes(2);
+  const count=calls.length;await store.initialize();expect(calls).toHaveLength(count);
+});

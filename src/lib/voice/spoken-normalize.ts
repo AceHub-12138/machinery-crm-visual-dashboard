@@ -61,7 +61,7 @@ export function normalizeSpokenText(display: string): string {
   text = text.replace(/-?\d+(?:\.\d+)?/g, (value, offset: number, source: string) => {
     const ordinal = source[offset - 1] === "第";
     const following = source.slice(offset + value.length);
-    if (!ordinal && value === "2" && /^\s*(?:台|家|项|个|条|件|千|万|亿)/.test(following)) return "两";
+    if (!ordinal && value === "2" && /^\s*(?:台|家|项|个|条|件|天|周|次|位|名|人|种|批|份|套|千|万|亿)/.test(following)) return "两";
     return readNumber(value, false, !ordinal && !value.includes("."));
   });
   return text.replace(/\s+/g, "");

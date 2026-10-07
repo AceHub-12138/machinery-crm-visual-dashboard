@@ -29,3 +29,6 @@ __pycache__/
 *.pyc
 services/voice-local/.venv/
 services/voice-local/logs/
+
+# Reproducibly copied from pinned npm packages before dev/build.
+public/voice/vad/

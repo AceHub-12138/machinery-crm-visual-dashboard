@@ -127,6 +127,7 @@ export function wireToMachineEvents(
         ? { events: [{ type: "FORCE_CLOSE" }], ctx }
         : keep;
 
+    case "speech.fixed": return keep;
     /* 不驱动状态机的事件 */
     case "tool.invoke":
     case "tts.boundary":

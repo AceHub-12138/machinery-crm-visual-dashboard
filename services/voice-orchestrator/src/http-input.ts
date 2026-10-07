@@ -1,0 +1,49 @@
+import type { IncomingMessage, ServerResponse } from "node:http";
+import { tokensMatch } from "./guard/token.ts";
+import { isAllowedOrigin } from "./ws/ws-server.ts";
+export class InputError extends Error { readonly status: number; constructor(status: number, message: string) { super(message); this.status = status; } }
+export function createInputHttpHandler(options: {
+  screenToken: string; allowedOrigins?: string[];
+  wake: (followup: boolean) => void;
+  utterance: (pcm: Uint8Array, signal: AbortSignal, uploadMs: number) => Promise<void>;
+  config: () => unknown;
+}) {
+  return async (req: IncomingMessage, res: ServerResponse) => {
+    const finish = (status: number, body: unknown) => { res.writeHead(status, { "content-type": "application/json", "cache-control": "no-store" }); res.end(JSON.stringify(body)); };
+    const origin = req.headers.origin;
+    if (origin && !isAllowedOrigin(origin, options.allowedOrigins)) { finish(403, { error: "origin_rejected" }); return; }
+    if (origin) { res.setHeader("access-control-allow-origin", origin); res.setHeader("vary", "Origin"); }
+    const path = new URL(req.url ?? "/", "http://localhost").pathname;
+    if (req.method === "OPTIONS") {
+      const method = req.headers["access-control-request-method"];
+      const headers = String(req.headers["access-control-request-headers"] ?? "").toLowerCase().split(",").map(h => h.trim()).filter(Boolean);
+      if (!origin || method !== (path === "/voice/input-config" ? "GET" : "POST") || headers.some(h => !["authorization", "content-type"].includes(h))) { finish(403, { error: "preflight_rejected" }); return; }
+      res.writeHead(204, { "access-control-allow-methods": "GET, POST", "access-control-allow-headers": "Authorization, Content-Type", "access-control-max-age": "600" }); res.end(); return;
+    }
+    const token = String(req.headers.authorization ?? "").replace(/^Bearer /, "");
+    if (!options.screenToken || !token || token.length > 256 || !tokensMatch(token, options.screenToken)) { finish(401, { error: "unauthorized" }); return; }
+    if (path === "/voice/input-config" && req.method === "GET") { finish(200, options.config()); return; }
+    if (req.method !== "POST") { finish(405, { error: "method_not_allowed" }); return; }
+    const controller = new AbortController();
+    const abort = () => { if (!res.writableEnded) controller.abort(); };
+    res.once("close", abort);
+    const timer = setTimeout(() => { controller.abort(); if (!res.headersSent) finish(408, { error: "request_timeout" }); }, 20000);
+    try {
+      const expected = path === "/voice/wake" ? 0 : 480000;
+      if (req.headers["content-length"] && (!/^\d+$/.test(req.headers["content-length"]) || Number(req.headers["content-length"]) > expected)) throw new InputError(413, "request_too_large");
+      if (path === "/voice/utterance" && req.headers["content-type"]?.split(";")[0] !== "audio/pcm") throw new InputError(415, "expected_pcm");
+      const started = performance.now();
+      const parts: Buffer[] = []; let size = 0;
+      for await (const part of req) { controller.signal.throwIfAborted(); size += part.length; if (size > expected) throw new InputError(413, "request_too_large"); parts.push(part); }
+      controller.signal.throwIfAborted();
+      if (path === "/voice/wake") options.wake(new URL(req.url ?? "/", "http://localhost").searchParams.get("followup") === "1");
+      else if (path === "/voice/utterance") {
+        if (size < 9600 || size % 2) throw new InputError(400, "pcm_requires_300ms_to_15s_aligned_s16le_16khz_mono");
+        await options.utterance(Buffer.concat(parts), controller.signal, performance.now() - started);
+      } else throw new InputError(404, "unknown_input_route");
+      if (!controller.signal.aborted && !res.headersSent) finish(202, { accepted: true });
+    } catch (error) {
+      if (!res.headersSent && !res.destroyed) finish(error instanceof InputError ? error.status : controller.signal.aborted ? 408 : 503, { error: error instanceof InputError ? error.message : "recognition_unavailable" });
+    } finally { clearTimeout(timer); res.off("close", abort); }
+  };
+}

@@ -1,7 +1,7 @@
 /** 8c 首期支持的意图。库存意图在库存投影接入后再增加。 */
 export const VOICE_INTENTS = [
   "sales_progress", "target_rate", "region_shipments", "upcoming_shipments",
-  "new_customers", "followup_todo", "collection", "unanswerable", "chitchat_or_end",
+  "new_customers", "followup_todo", "collection", "greeting", "unanswerable", "chitchat_or_end",
 ] as const;
 
 export type Intent = (typeof VOICE_INTENTS)[number];
@@ -18,7 +18,7 @@ export const INTENT_SYSTEM = [
   "sales_progress=本期销售/合同额；target_rate=目标完成率；",
   "region_shipments=各省发货分布/哪省最多；upcoming_shipments=近期发货安排；",
   "new_customers=新增客户/客户总数；followup_todo=跟进待办；collection=累计回款；",
-  "chitchat_or_end=寒暄/致谢/结束；unanswerable=其他问题。",
+  "greeting=纯问候如你好/您好/早上好；chitchat_or_end=致谢/结束/再见；unanswerable=其他问题。",
   "仅支持总览。指定地区/仓库/客户/型号/历史时期，或库存/利润/成本/退货问题，选unanswerable。",
 ].join("\n");
 
@@ -41,6 +41,7 @@ export function parseIntent(content: string): Intent {
 /** 无模型的演示路由也遵守首期覆盖边界。 */
 export function classifyScriptedQuestion(question: string): Intent {
   const q = question.toLowerCase();
+  if (/^(你好|您好|早上好|下午好|晚上好)[\s，,。.!！?？]*$/.test(q.trim())) return "greeting";
   if (hasUnsupportedScope(q)) return "unanswerable";
   const has = (words: string[]) => words.some((word) => q.includes(word));
   // 完成率先于销售，避免“销售目标完成率”错进销售总览。
@@ -51,7 +52,7 @@ export function classifyScriptedQuestion(question: string): Intent {
   if (has(["待办", "跟进", "回访"])) return "followup_todo";
   if (has(["回款", "收款", "货款", "钱收回来"])) return "collection";
   if (q.includes("客户") && has(["新增", "多少", "几家", "客户总数", "新客户"])) return "new_customers";
-  if (has(["没有了", "不用了", "结束", "再见", "谢谢", "你好"])) return "chitchat_or_end";
+  if (has(["没有了", "不用了", "结束", "再见", "谢谢"])) return "chitchat_or_end";
   return "unanswerable";
 }
 

@@ -32,6 +32,7 @@ export function buildIntentAnswer(intent: Intent, payload: PublicSalesScreenPayl
       card = buildBriefCard(`${periodLabel} · 累计回款概览`, [
         `先生,累计回款率 ${payload.collection.collectionRate}%,已回 ${formatMoney(Number(payload.collection.totalPaidAmount))},未回 ${formatMoney(Number(payload.collection.totalUnpaidAmount))}。`,
       ]); break;
+    case "greeting": card = buildBriefCard("小川", ["我在,先生。请讲。"]); break;
     case "chitchat_or_end": card = buildBriefCard("小川", [VOICE_GOODBYE]); break;
     default: card = buildBriefCard("小川", [VOICE_COVERAGE_FALLBACK]); break;
   }

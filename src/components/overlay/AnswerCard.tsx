@@ -34,6 +34,7 @@ export const AnswerCard = memo(function AnswerCard({
   config = LAUNCH,
   foldAt = null,
   sentenceRef,
+  sentenceVersion = 0,
 }: {
   card: AnswerCardData;
   /** 发射起点(performance.now 域,由 OverlayStage 在派发 ANSWER 时写下) */
@@ -42,6 +43,7 @@ export const AnswerCard = memo(function AnswerCard({
   config?: LaunchConfig;
   /** 折叠吸回起点(closing 进入时刻,§5);null = 正常展示 */
   foldAt?: number | null;
+  sentenceVersion?: number;
   sentenceRef?: RefObject<{ start: number; end: number } | null>;
 }) {
   const lineRef = useRef<HTMLDivElement | null>(null);
@@ -157,7 +159,7 @@ export const AnswerCard = memo(function AnswerCard({
             spoken.replaceChildren(document.createTextNode(text.slice(0, active.start)), mark, document.createTextNode(text.slice(active.end)));
           } else spoken.textContent = text;
         }
-        if (typed >= card.spoken.length && !sentenceRef) return; // 编排完成,停帧
+        if (typed >= card.spoken.length) return; // 编排完成,停帧
       }
 
       raf = requestAnimationFrame(paint);
@@ -168,7 +170,7 @@ export const AnswerCard = memo(function AnswerCard({
       disposed = true;
       cancelAnimationFrame(raf);
     };
-  }, [card, launchAt, config, barWidth, foldAt, sentenceRef]);
+  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion]);
 
   const anchor = geometry.cardAnchor;
 

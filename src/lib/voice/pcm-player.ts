@@ -58,6 +58,9 @@ export class PcmPlayer {
   /** Called at wake or a real keyboard/pointer gesture, before speech arrives. */
   async resume(): Promise<void> { await this.ensureContext().resume(); }
 
+  get outputLatencyMs(): number { return Math.max(0, (this.context?.outputLatency ?? 0) * 1000); }
+  async suspend(): Promise<void> { if (!this.active) await this.context?.suspend(); }
+
   play(speech: Speech, baseUrl: string, token: string | null, events: PcmEvents, timeoutMs: number): void {
     this.stop();
     const controller = new AbortController();
@@ -186,7 +189,7 @@ export class PcmPlayer {
     source.buffer = buffer; source.connect(this.analyser!);
     const when = this.first
       ? ctx.currentTime + (this.options.prebufferMs ?? 150) / 1000
-      : Math.max(this.tail, ctx.currentTime + 0.005);
+      : this.tail >= ctx.currentTime ? this.tail : ctx.currentTime + (this.options.prebufferMs ?? 150) / 1000;
     // tick consumes boundaries while later chunks can still arrive.
     if (this.lastScheduledIndex !== index) this.boundaries.push({ index, time: when });
     this.lastScheduledIndex = index; this.first = false;

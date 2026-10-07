@@ -16,7 +16,7 @@ import numpy as np
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse
 
-from core import Settings, MlxBackend, GenerationCancelled, SAMPLE_RATE, SELF_CHECK_TEXT, cer, guarded_audio, pcm_peak
+from core import Settings, MlxBackend, GenerationCancelled, SAMPLE_RATE, SELF_CHECK_TEXT, cer, guarded_audio, pcm_peak, load_style_settings
 
 LOG = logging.getLogger("voice-local")
 MAX_BODY = 524288
@@ -61,33 +61,50 @@ class Runtime:
         self.self_check = "pending"
         self.self_check_cer = None
         self.ref_hash = ""
+        self.styles = {}
+        self.style_hashes = {}
+        self.failed_styles = []
+        self.style_checks = {}
         self.counts = {"ttsRequests": 0, "asrRequests": 0, "ttsRegenerated": 0, "ttsTruncated": 0, "ttsFail": 0, "cancelled": 0}
 
     def initialize(self):
         self.backend.load()
-        self.ref_hash = self.settings.ref_hash()
-        cancel = threading.Event()
-        stats = {}
-        try:
-            pcm = b"".join(guarded_audio(self.backend, self.settings, SELF_CHECK_TEXT, cancel, stats))
-            self.warm = True
-            if stats.get("ttsFail") or stats.get("ttsTruncated") or len(pcm) < SAMPLE_RATE * 2 * 0.3 or pcm_peak(pcm) < self.settings.silence_peak:
-                raise ValueError("Silent self check")
-            audio = np.frombuffer(pcm, dtype="<i2").astype(np.float32) / 32768
-            resampled = np.interp(np.arange(round(len(audio) * 16000 / SAMPLE_RATE)) * SAMPLE_RATE / 16000, np.arange(len(audio)), audio).astype(np.float32)
-            recognized = self.backend.recognize(resampled, cancel)
-            self.self_check_cer = cer(SELF_CHECK_TEXT, recognized)
-            self.self_check = "passed" if self.self_check_cer <= 0.2 else "failed"
-        except Exception:
-            # Keep ASR warm even when synthesis or its reference pair fails.
+        configured = load_style_settings(self.settings)
+        for style, settings in configured.items():
+            cancel, stats = threading.Event(), {}
+            # Preserve the original default startup probe; emotional styles use their own first clause.
+            clauses = __import__("re").split(r"[，,。！？!?]", settings.ref_text)
+            probe = clauses[0]
+            for clause in clauses[1:]:
+                if len(probe) >= 8:
+                    break
+                if clause:
+                    probe += "," + clause
+            text = SELF_CHECK_TEXT if style == "default" else probe + "。"
             try:
-                self.backend.recognize(np.zeros(1600, dtype=np.float32), cancel)
+                pcm = b"".join(guarded_audio(self.backend, settings, text, cancel, stats))
+                if stats.get("ttsFail") or stats.get("ttsTruncated") or len(pcm) < SAMPLE_RATE * 2 * .3 or pcm_peak(pcm) < settings.silence_peak:
+                    raise ValueError("Silent self check")
+                audio = np.frombuffer(pcm, dtype="<i2").astype(np.float32) / 32768
+                resampled = np.interp(np.arange(round(len(audio) * 16000 / SAMPLE_RATE)) * SAMPLE_RATE / 16000, np.arange(len(audio)), audio).astype(np.float32)
+                value = cer(text, self.backend.recognize(resampled, cancel))
+                self.style_checks[style] = value
+                if value > .2:
+                    raise ValueError("Self check CER exceeds 20%")
+                self.styles[style] = settings
+                self.style_hashes[style] = settings.ref_hash()
+            except Exception:
+                self.failed_styles.append(style)
+                LOG.error("TTS style self-check failed: %s", style)
+        self.ref_hash = configured["default"].ref_hash()
+        self.self_check_cer = self.style_checks.get("default")
+        self.self_check = "passed" if "default" in self.styles else "failed"
+        self.warm = True
+        if self.self_check == "failed":
+            try:
+                self.backend.recognize(np.zeros(1600, dtype=np.float32), threading.Event())
             except Exception:
                 LOG.error("ASR warmup failed")
-            self.warm = True
-            self.self_check = "failed"
-        if self.self_check == "failed":
-            LOG.error("TTS self-check failed; ASR remains available and TTS is muted")
 
     def create_job(self):
         # Keep completed job metrics briefly, never retain text or audio in this ledger.
@@ -125,7 +142,8 @@ class Runtime:
     def health(self):
         return {"warm": self.warm, "selfCheck": self.self_check, "selfCheckCer": self.self_check_cer,
                 "models": {"tts": self.settings.tts_model.rsplit("/", 1)[-1], "asr": self.settings.asr_model.rsplit("/", 1)[-1]},
-                "refHash": self.ref_hash, "styles": [self.settings.style], "metrics": self.counts,
+                "refHash": self.ref_hash, "styles": list(self.styles), "styleHashes": self.style_hashes, "failedStyles": self.failed_styles,
+                "styleChecks": self.style_checks, "metrics": self.counts,
                 "activeJobs": sum(not job.finished for job in self.jobs.values())}
 
 
@@ -238,8 +256,10 @@ def create_app(settings=None, backend=None):
         text = body.get("text")
         if not isinstance(text, str) or not text.strip() or len(text) > MAX_TEXT:
             raise HTTPException(400, "Text must contain 1–400 characters")
-        if body.get("style", settings.style) != settings.style:
-            raise HTTPException(400, "Unknown style")
+        style = body.get("style", "default")
+        if not isinstance(style, str) or style not in runtime.styles:
+            raise HTTPException(400, "Unknown or failed style")
+        style_settings = runtime.styles[style]
         job = runtime.create_job()
         runtime.counts["ttsRequests"] += 1
         job.streaming = True
@@ -267,7 +287,7 @@ def create_app(settings=None, backend=None):
             started = time.perf_counter()
             sent = False
             try:
-                for pcm in guarded_audio(runtime.backend, settings, text.strip(), job.cancel, job.stats):
+                for pcm in guarded_audio(runtime.backend, style_settings, text.strip(), job.cancel, job.stats):
                     if not sent:
                         sent = True
                         job.stats["ttsFirstByteMs"] = round((time.perf_counter() - started) * 1000, 1)

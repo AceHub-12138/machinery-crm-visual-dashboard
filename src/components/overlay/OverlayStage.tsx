@@ -22,6 +22,7 @@ import {
   type VoiceStateName,
   type VoiceSessionState,
 } from "@/lib/voice/session-machine";
+import { VoiceMicrophone } from "@/lib/voice/microphone";
 import { PcmPlayer, audioBaseUrl, type Speech, type PlaybackFailure } from "@/lib/voice/pcm-player";
 import { playbackFallbackMs } from "@/lib/voice/playback-timing";
 import { parseWireEvent } from "@/lib/voice/protocol";
@@ -82,6 +83,9 @@ export function OverlayStage({
   const [geometry, setGeometry] = useState<OverlayGeometry>(() => overlayGeometry(1920, 1080));
   const [launchAt, setLaunchAt] = useState(0);
   const [audioNotice, setAudioNotice] = useState<string | null>(null);
+  const micRef = useRef<VoiceMicrophone | null>(null);
+  const fixedIdRef = useRef<string | null>(null);
+  const [sentenceVersion, setSentenceVersion] = useState(0);
   const playerRef = useRef<PcmPlayer | null>(null);
   const speechRef = useRef<Speech | null>(null);
   const sentenceRef = useRef<{ start: number; end: number } | null>(null);
@@ -104,6 +108,10 @@ export function OverlayStage({
     const next = sessionReducer(mirrorRef.current, event);
     if (next.name !== "answering" && mirrorRef.current.name === "answering") {
       playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
+    }
+    if (["closing", "ambient", "error-fallback"].includes(next.name) && next.name !== mirrorRef.current.name && fixedIdRef.current) {
+      playerRef.current?.stop(); fixedIdRef.current = null;
+      micRef.current?.playbackEnded(playerRef.current?.outputLatencyMs ?? 0);
     }
     mirrorRef.current = next;
     dispatch(event);
@@ -183,6 +191,7 @@ export function OverlayStage({
           setAudioNotice("声音暂不可用，请查看卡片。");
           return;
         }
+        micRef.current?.playbackStarted();
         playingIdRef.current = speech.turnId;
         let reportedStart = false;
         const isCurrent = () => playingIdRef.current === speech.turnId && mirrorRef.current.name === "answering";
@@ -190,7 +199,7 @@ export function OverlayStage({
           onSentenceStart: (index) => {
             if (!isCurrent()) return;
             const sentence = speech.sentences[index];
-            sentenceRef.current = { start: sentence.displayStart, end: sentence.displayEnd };
+            sentenceRef.current = { start: sentence.displayStart, end: sentence.displayEnd }; setSentenceVersion(v => v + 1);
             if (!reportedStart) { reportedStart = true; reportPlayback("playback.started", speech.turnId); }
           },
           onSentenceSkipped: (sentenceIndex, reason) => {
@@ -202,14 +211,16 @@ export function OverlayStage({
           },
           onDrained: () => {
             if (!isCurrent()) return;
-            sentenceRef.current = null;
+            sentenceRef.current = null; setSentenceVersion(v => v + 1);
+            micRef.current?.playbackEnded(getPlayer().outputLatencyMs);
             reportPlayback("playback.drained", speech.turnId);
             playingIdRef.current = null;
             // Hub owns live state transitions; wait for its followup/closing.
           },
           onError: (reason) => {
             if (!isCurrent()) return;
-            sentenceRef.current = null;
+            sentenceRef.current = null; setSentenceVersion(v => v + 1);
+            micRef.current?.playbackEnded(getPlayer().outputLatencyMs);
             setAudioNotice(reason === "autoplay_blocked" ? "请点击屏幕启用声音；本次回答请查看卡片。" : "语音播报中断，请查看卡片。");
             reportPlayback("playback.failed", speech.turnId, reason);
             playingIdRef.current = null;
@@ -226,11 +237,13 @@ export function OverlayStage({
 
     switch (session.name) {
       case "ambient": {
+        if (live) void playerRef.current?.suspend().catch(() => {});
         // demo:基线停留后开始下一轮演示;live:等 hub 的 session.start
         if (!live) at(DEMO_TIMING.ambientHoldMs, wake);
         break;
       }
       case "waking": {
+        if (live) break;
         at(VOICE_TIMING.wakingMs, () => dispatchTracked({ type: "WOKEN", at: now() }));
         break;
       }
@@ -313,6 +326,15 @@ export function OverlayStage({
       const event = parseWireEvent(raw);
       if (!event) return;
       if (event.type === "answer.delta" && event.full) speechRef.current = event.speech ?? null;
+      if (event.type === "speech.fixed") {
+        const id = event.speech.turnId; fixedIdRef.current = id;
+        micRef.current?.playbackStarted();
+        getPlayer().play(event.speech, audioBaseUrl(hubUrl ?? `ws://${window.location.hostname}:3210`), tokenRef.current, {
+          onSentenceStart: () => reportPlayback("playback.started", id),
+          onDrained: () => { if (fixedIdRef.current !== id) return; micRef.current?.playbackEnded(getPlayer().outputLatencyMs); fixedIdRef.current = null; reportPlayback("playback.drained", id); },
+          onError: (reason) => { if (fixedIdRef.current !== id) return; micRef.current?.playbackEnded(getPlayer().outputLatencyMs); fixedIdRef.current = null; reportPlayback("playback.failed", id, reason); },
+        }, playbackFallbackMs(event.text)); return;
+      }
       const prev = mirrorRef.current.name;
       const result = wireToMachineEvents(prev, event, liveCtxRef.current);
       liveCtxRef.current = result.ctx;
@@ -342,6 +364,10 @@ export function OverlayStage({
     }
 
     tokenRef.current = hubToken;
+    if (hubToken) {
+      const mic = new VoiceMicrophone({ hubUrl: hubUrl ?? `ws://${window.location.hostname}:3210`, token: hubToken, state: () => mirrorRef.current.name, notice: setAudioNotice });
+      micRef.current = mic; void mic.start();
+    }
     const connect = () => {
       if (cancelled) return;
       socket = new WebSocket(hubUrl ?? `ws://${window.location.hostname}:3210`);
@@ -354,12 +380,14 @@ export function OverlayStage({
         }
       };
       socket.onopen = () => {
+        micRef.current?.setConnected(true);
         retryDelay = 800;
         if (hubToken) socket?.send(JSON.stringify({ type: "hub.auth", at: Date.now(), token: hubToken }));
         socket?.send(JSON.stringify({ type: "console.hello", at: Date.now(), role: "screen" }));
       };
       socket.onclose = (e) => {
         if (cancelled) return;
+        micRef.current?.setConnected(false);
         playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
         for (const machineEvent of connectionLostEvents(mirrorRef.current.name)) {
           dispatchTracked({ ...machineEvent, at: performance.now() } as VoiceEvent);
@@ -377,16 +405,17 @@ export function OverlayStage({
 
     return () => {
       cancelled = true;
+      void micRef.current?.close(); micRef.current = null;
       window.clearTimeout(retryTimer);
       socket?.close(); socketRef.current = null;
       playingIdRef.current = null; sentenceRef.current = null; speechRef.current = null;
       void playerRef.current?.close(); playerRef.current = null;
     };
-  }, [live, hubUrl, fireAnswer, wake, dispatchTracked]);
+  }, [live, hubUrl, fireAnswer, wake, dispatchTracked, getPlayer, reportPlayback]);
 
   useEffect(() => {
     if (!live) return;
-    const enable = () => { void getPlayer().resume().catch(() => {}); };
+    const enable = () => { if (mirrorRef.current.name !== "ambient") void getPlayer().resume().catch(() => {}); void micRef.current?.resume().catch(() => {}); };
     window.addEventListener("pointerdown", enable);
     window.addEventListener("keydown", enable);
     return () => { window.removeEventListener("pointerdown", enable); window.removeEventListener("keydown", enable); };
@@ -412,17 +441,17 @@ export function OverlayStage({
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "F9") {
         e.preventDefault();
-        wake();
+        if (live) { void getPlayer().resume(); void micRef.current?.wake(); } else wake();
       } else if (e.key === "Escape") {
         const state = mirrorRef.current.name;
-        const id = speechRef.current?.turnId;
-        if (live && id && (state === "answering" || state === "followup")) reportPlayback("playback.failed", id, "dismissed");
+        const id = fixedIdRef.current ?? speechRef.current?.turnId;
+        if (live && id && (state === "answering" || state === "followup" || state === "waking")) reportPlayback("playback.failed", id, "dismissed");
         dispatchTracked({ type: "FORCE_CLOSE", at: performance.now() });
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [wake, dispatchTracked, live, reportPlayback]);
+  }, [wake, dispatchTracked, live, reportPlayback, getPlayer]);
 
   /* ---- A3 文案过渡:状态词/转写按状态名 key 重挂载,CSS 淡入(240ms);
      同状态内的 ASR 打字就地刷新,不经任何 effect/setState ---- */
@@ -466,6 +495,7 @@ export function OverlayStage({
           geometry={geometry}
           foldAt={session.name === "closing" ? session.since : null}
           sentenceRef={live ? sentenceRef : undefined}
+          sentenceVersion={sentenceVersion}
         />
       ) : null}
 

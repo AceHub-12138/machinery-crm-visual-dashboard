@@ -1,0 +1,17 @@
+{
+  "sherpaCommit": "99ddefaa92129858b80a71a426903dd4215c83fa",
+  "source": "https://github.com/k2-fsa/sherpa-onnx",
+  "emscripten": "4.0.23",
+  "model": "sherpa-onnx-kws-zipformer-wenetspeech-3.3M-2024-01-01",
+  "modelSource": "https://github.com/k2-fsa/sherpa-onnx/releases/tag/kws-models",
+  "keywordGenerator": "sherpa-onnx-cli 1.13.8 text2token --tokens-type ppinyin",
+  "filesSha256": {
+    "keywords.txt": "50931f23e4b0298dbbbe35fb16483fa5e66172baa280d71bf9045eadb9042bc4",
+    "sherpa-onnx-wasm-kws-main.wasm": "d2221ddd6763520d47431dc61514ee873b88af696537bc7e5b68845033d55815",
+    "LICENSE.sherpa-onnx": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "sherpa-onnx-wasm-kws-main.js": "671f96e2010eba97c452237186ca0d3e1b59fb069eb3da26c00efb1a5fd13791",
+    "tokens.txt": "72316508d9119696145abc6f1f8cdc46287535c34e5ce7e595f845cb1499cf2e",
+    "sherpa-onnx-kws.js": "03b44e372795fd907e84eecd29419e1d052dc6704ac06935c9bf9fe19b3e3434",
+    "sherpa-onnx-wasm-kws-main.data": "1333803cb1cb3033dd4711a686a3aa6954e9f7865fd2d0bb283a95cf0c8de6ef"
+  }
+}

@@ -1,11 +1,14 @@
 /** Loopback-only client. PCM reads may split a sample at any HTTP boundary. */
 export type TtsMetrics = {
+  style?: string;
+  styleFallback?: string;
   ttsFirstByteMs?: number;
+  voiceLocalFirstByteMs?: number;
   ttsRegenerated: number;
   ttsTruncated: number;
   ttsFail: number;
 };
-export type VoiceLocalHealth = { warm: boolean; selfCheck: "pending" | "passed" | "failed"; refHash: string; styles: string[] };
+export type VoiceLocalHealth = { warm: boolean; selfCheck: "pending" | "passed" | "failed"; refHash: string; styles: string[]; styleHashes?: Record<string, string>; failedStyles?: string[] };
 export type TtsChunk = { type: "audio"; pcm: Uint8Array; sampleRate: 24000 } | { type: "done"; metrics: TtsMetrics };
 export interface SpeechClient {
   health(signal?: AbortSignal): Promise<VoiceLocalHealth>;
@@ -94,7 +97,7 @@ export class VoiceLocalClient implements SpeechClient {
       if (!statsResponse.ok) throw new Error("TTS metrics unavailable");
       const stats = await statsResponse.json() as TtsMetrics;
       if (![stats.ttsRegenerated, stats.ttsTruncated, stats.ttsFail].every((v) => Number.isInteger(v) && v >= 0 && v <= 1)) throw new Error("Invalid TTS metrics");
-      yield { type: "done", metrics: { ttsFirstByteMs: firstByte, ttsRegenerated: stats.ttsRegenerated, ttsTruncated: stats.ttsTruncated, ttsFail: stats.ttsFail } };
+      yield { type: "done", metrics: { ttsFirstByteMs: firstByte, ...(Number.isFinite(stats.ttsFirstByteMs) ? { voiceLocalFirstByteMs: stats.ttsFirstByteMs } : {}), ttsRegenerated: stats.ttsRegenerated, ttsTruncated: stats.ttsTruncated, ttsFail: stats.ttsFail } };
     } finally {
       await reader.cancel().catch(() => {});
       reader.releaseLock();

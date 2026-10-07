@@ -12,6 +12,12 @@
  * 携卡)→ state.change(answering);大屏映射依赖该顺序取卡。
  */
 
+import { stripWakePrefix, isUnheard } from "../../../src/lib/voice/asr-text.ts";
+import { speechStyleFor } from "../../../src/lib/voice/speech-style.ts";
+import type { SpeechClient } from "./tts/voice-local-client.ts";
+import { FIXED_LINES, type FixedLineKey } from "./tts/fixed-lines.ts";
+import { buildBriefCard } from "../../../src/lib/voice/card-builders.ts";
+import { InputError } from "./http-input.ts";
 import type { AudioStore } from "./tts/audio-store.ts";
 import { randomUUID } from "node:crypto";
 import {
@@ -50,6 +56,8 @@ import { LAUNCH } from "../../../src/lib/voice/params.ts";
 export type OrchestratorOptions = {
   hub: VoiceHubServer;
   audio?: AudioStore;
+  speechClient?: SpeechClient;
+  styleOverrides?: Record<string, string>;
   dataSource: SalesScreenDataSource;
   llm: LlmAdapter;
   mcp: PlatformMcpClient | null;
@@ -119,12 +127,16 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   let state: VoiceSessionState = initSessionState(Date.now());
   let sessionId = "";
+  let voiceSession = false;
   let turnSeq = 0; // 每次提问递增;一切延迟回调持有所属 seq,过期即弃
   let pendingQuestion: string | null = null;
   let answer: ReturnType<typeof buildIntentAnswer> | null = null;
   const timers = new Set<{ clear: () => void }>();
 
   /** 进行中的一轮:新问题到来时中止旧轮(LLM 流/死线一并释放) */
+  let inputController: AbortController | null = null;
+  let inputMeta: { asrMs: number; uploadMs: number; asrRoundTripMs: number; started: number } | null = null;
+  let fixedPlayback: { id: string; next: "listening" | "followup" | "close"; seq: number; started: number } | null = null;
   let activeTurn: { controller: AbortController; deadline: NodeJS.Timeout | null } | null = null;
   /** 提问限流账本:全局一份(审核 M4:按连接计可被多连接绕过) */
   let askedAt: number[] = [];
@@ -148,6 +160,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if (audioId) options.audio?.cancel(audioId);
     endPlayback("cancelled");
     audioId = null; goodbyeId = null; playback = null;
+    if (fixedPlayback) options.audio?.cancel(fixedPlayback.id);
+    fixedPlayback = null;
   }
   function spoken(seq: number, outcome: "drained" | "failed" | "timeout"): void {
     if (seq !== turnSeq || state.name !== "answering") return;
@@ -155,7 +169,16 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if ((outcome === "failed" || (outcome === "timeout" && !goodbyeId)) && audioId) options.audio?.cancel(audioId);
     endPlayback(outcome);
     if (goodbyeId) { forceClose("decline"); return; }
+    if (answer?.card.spoken === "我在,先生。请讲。") {
+      dispatch({ type: "SPOKEN", at: Date.now() });
+      dispatch({ type: "SPEAK", at: Date.now() }); return;
+    }
     dispatch({ type: "SPOKEN", at: Date.now() });
+    if (voiceSession && playFixed("followup", "followup")) return;
+    followupTimeout(seq);
+  }
+
+  function followupTimeout(seq: number): void {
     later(VOICE_TIMING.followupMs, () => {
       if (seq !== turnSeq || state.name !== "followup") return;
       dispatch({ type: "FOLLOWUP_TIMEOUT", at: Date.now() });
@@ -210,6 +233,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           card: record.card as TurnTracePayload["card"],
           degraded: record.degraded,
           totalMs: record.totalMs,
+          ...(record.style ? { style: record.style, ...(record.styleFallback ? { styleFallback: record.styleFallback } : {}) } : {}),
           asrMs: record.asrMs ?? null,
           playbackStartMs: record.playbackStartMs ?? null,
           ...(record.playbackOutcome ? { playbackOutcome: record.playbackOutcome } : {}),
@@ -240,12 +264,14 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   /* ---------- 会话生命周期 ---------- */
 
-  function beginSession(): void {
+  function beginSession(withVoice = false): void {
     if (state.name !== "ambient") return;
+    voiceSession = withVoice;
     sessionId = `sess-${randomUUID().slice(0, 8)}`;
     answer = null;
     broadcast({ type: "session.start", at: Date.now(), sessionId });
     dispatch({ type: "WAKE", at: Date.now() });
+    if (withVoice && playFixed("wake", "listening")) return;
     later(VOICE_TIMING.wakingMs, () => {
       dispatch({ type: "WOKEN", at: Date.now() });
       if (pendingQuestion) {
@@ -256,7 +282,81 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     });
   }
 
+  function playFixed(key: FixedLineKey, next: "listening" | "followup" | "close"): boolean {
+    const text = FIXED_LINES[key];
+    const sentence = [{ index: 0, text, spokenText: text, displayStart: 0, displayEnd: text.length }];
+    if (!options.audio?.ready || hub.counts().screens < 1) return false;
+    const turn = options.audio.startFixed(key, sentence);
+    if (!turn) return false;
+    fixedPlayback = { id: turn.id, next, seq: turnSeq, started: Date.now() };
+    broadcast({ type: "speech.fixed", at: Date.now(), text, speech: turn.descriptor });
+    later(turn.bytes / 48000 * 2000 + 2000, () => completeFixed(turn.id));
+    return true;
+  }
+  function completeFixed(id: string): void {
+    const p = fixedPlayback;
+    if (!p || p.id !== id || p.seq !== turnSeq) return;
+    fixedPlayback = null;
+    clearTimers();
+    const finish = () => {
+      if (p.seq !== turnSeq) return;
+      if (p.next === "listening") {
+        if (state.name === "waking") dispatch({ type: "WOKEN", at: Date.now() });
+        else if (state.name === "followup") dispatch({ type: "SPEAK", at: Date.now() });
+        if (pendingQuestion) { const q = pendingQuestion; pendingQuestion = null; acceptQuestion(q); }
+      } else if (p.next === "close" && state.name === "error-fallback") {
+        dispatch({ type: "ERROR_SPOKEN", at: Date.now() });
+        broadcast({ type: "session.end", at: Date.now(), reason: "error" });
+        later(VOICE_TIMING.closingMs, () => dispatch({ type: "CLOSED", at: Date.now() }));
+      } else if (state.name === "followup") followupTimeout(p.seq);
+    };
+    later(Math.max(0, VOICE_TIMING.wakingMs - (Date.now() - p.started)), finish);
+  }
+
+  async function submitUtterance(pcm: Uint8Array, signal: AbortSignal, uploadMs = 0): Promise<void> {
+    if (!["listening", "followup"].includes(state.name) || fixedPlayback || inputController) throw new InputError(409, "microphone_closed");
+    if (rateLimited()) throw new InputError(429, "rate_limited");
+    const controller = new AbortController(); inputController = controller;
+    const seq = turnSeq; const started = Date.now();
+    const combined = AbortSignal.any([signal, controller.signal]);
+    try {
+      if (!options.speechClient) throw new InputError(503, "asr_unavailable");
+      clearTimers();
+      if (state.name === "followup") dispatch({ type: "SPEAK", at: Date.now() });
+      const result = await options.speechClient.asr(pcm, combined);
+      combined.throwIfAborted();
+      if (seq !== turnSeq || state.name !== "listening") throw new InputError(409, "session_changed");
+      const text = stripWakePrefix(result.text).slice(0, 500);
+      inputMeta = { asrMs: result.ms, uploadMs, asrRoundTripMs: Date.now() - started, started };
+      if (isUnheard(text)) answerUnheard(started, result.ms);
+      else acceptQuestion(text);
+    } catch (error) {
+      if (!combined.aborted && state.name === "listening") {
+        answerUnheard(started, 0);
+      } else if (combined.aborted && state.name === "listening") forceClose("force");
+      throw error;
+    } finally { if (inputController === controller) inputController = null; }
+  }
+
+  function answerUnheard(started: number, asrMs: number): void {
+    dispatch({ type: "SUBMIT", at: Date.now(), question: "未听清" });
+    answer = { card: buildBriefCard("小川", [FIXED_LINES.unheard]), cardId: "brief", spoken: FIXED_LINES.unheard, sentences: [], unanswerable: false };
+    answer.sentences = [{ index: 0, text: FIXED_LINES.unheard, spokenText: FIXED_LINES.unheard, displayStart: 0, displayEnd: FIXED_LINES.unheard.length }];
+    const turn = options.audio?.startFixed("unheard", answer.sentences);
+    audioId = turn?.id ?? null;
+    const record = new TurnTracer(sessionId, state.turns, "未听清", started).finish({ source: "payload", card: "brief", degraded: false });
+    record.asrMs = asrMs; record.style = turn?.descriptor.style ?? "apologetic";
+    if (record.style !== "apologetic") record.styleFallback = "apologetic";
+    if (turn) playback = { id: turn.id, seq: turnSeq, record, synthesisDone: true, finished: false, written: false, waitingForScreens: true };
+    broadcast({ type: "answer.delta", at: Date.now(), seq: 0, text: answer.spoken, full: true, card: answer.card, ...(turn ? { speech: turn.descriptor } : {}) });
+    dispatch({ type: "ANSWER", at: Date.now(), card: answer.card });
+    later(turn ? turn.bytes / 48000 * 2000 + 2000 : 2000, () => spoken(turnSeq, "timeout"));
+    inputMeta = null;
+    if (!playback) void trace.append(record);
+  }
+
   function forceClose(reason: "force" | "decline"): void {
+    inputController?.abort(); inputController = null; inputMeta = null; pendingQuestion = null;
     if (reason === "force") cancelAudio();
     if (state.name === "ambient" || state.name === "closing") return;
     clearTimers();
@@ -274,6 +374,11 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   function handleClientMessage(conn: HubConnection, raw: string): void {
     const event = parseConsoleEvent(raw);
     if (!event) return;
+    if (event.type.startsWith("playback.") && "turnId" in event && fixedPlayback?.id === event.turnId && conn.role === "screen") {
+      if (event.type === "playback.failed" && event.reason === "dismissed") forceClose("force");
+      else if (event.type === "playback.drained" || event.type === "playback.failed") completeFixed(event.turnId);
+      return;
+    }
     switch (event.type) {
       case "playback.started":
       case "playback.failed":
@@ -340,6 +445,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           conn.send({ type: "error", at: Date.now(), code: "rate_limited", message: "提问太频繁,请稍候。" });
           return;
         }
+        inputController?.abort(); inputController = null;
         acceptQuestion(event.text.trim());
         return;
       }
@@ -390,6 +496,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   /* ---------- 提问主链路:预取并行于 ASR 视觉节奏 ---------- */
 
   function runQuestion(question: string): void {
+    const voiceInput = inputMeta !== null;
     const seq = ++turnSeq;
 
     // 预取立刻启动(方案灵魂:与逐字/思考并行,主路径零工具轮)。
@@ -402,6 +509,12 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     prefetch.catch(() => {}); // 拒绝在 answerPhase 接手前不触发 unhandledRejection
     runQuestionTurn(seq, question, prefetch, controller);
 
+    if (voiceInput) {
+      dispatch({ type: "PARTIAL", at: Date.now(), text: question });
+      broadcast({ type: "asr.partial", at: Date.now(), text: question, final: true });
+      dispatch({ type: "SUBMIT", at: Date.now(), question });
+      return;
+    }
     const pace = Math.min(
       partialPaceMs,
       Math.max(1, Math.floor(partialMaxTotalMs / Math.max(1, question.length))),
@@ -430,7 +543,9 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     prefetch: Promise<PublicSalesScreenPayload>,
     controller: AbortController,
   ): void {
-    const tracer = new TurnTracer(sessionId, state.turns, question);
+    const meta = inputMeta; inputMeta = null;
+    const tracer = new TurnTracer(sessionId, state.turns, question, meta?.started);
+    if (meta) Object.assign(tracer, { voiceMeta: meta });
     const pace = Math.min(
       partialPaceMs,
       Math.max(1, Math.floor(partialMaxTotalMs / Math.max(1, question.length))),
@@ -442,6 +557,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     }, llmTimeoutMs);
     activeTurn = { controller, deadline: deadlineState.timer! };
 
+    if (meta) {
+      later(0, () => { if (seq === turnSeq) void answerPhase(seq, tracer, question, prefetch, controller, deadlineState); });
+      return;
+    }
     // partial 视觉节奏(pace*len)走完并 SUBMIT(typeDoneMs)后再起 LLM 阶段
     later(pace * question.length + pace * 2, () => {
       if (seq !== turnSeq) return;
@@ -490,13 +609,21 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         classifyMs,
         ...(violations.length ? { numberGuardViolations: violations } : {}),
       });
-      const audioTurn = intent === "chitchat_or_end" ? options.audio?.startFixed("goodbye", answer.sentences) : options.audio?.start(answer.sentences, (metrics) => {
+      const requestedStyle = speechStyleFor(intent, payload, options.styleOverrides);
+      const style = options.audio?.resolveStyle(requestedStyle) ?? requestedStyle;
+      record.style = style;
+      if (style !== requestedStyle) record.styleFallback = requestedStyle;
+      Object.assign(record, (tracer as TurnTracer & { voiceMeta?: object }).voiceMeta ?? {});
+      const fixedKey = intent === "chitchat_or_end" ? "goodbye" : intent === "greeting" ? "wake" : null;
+      const fixedSentences = [{ index: 0, text: finalSpoken, spokenText: finalSpoken, displayStart: 0, displayEnd: finalSpoken.length }];
+      const audioTurn = fixedKey ? options.audio?.startFixed(fixedKey, fixedSentences) : options.audio?.start(answer.sentences, (metrics) => {
         Object.assign(record, metrics);
         if (seq === turnSeq) emitTrace(record);
-      });
+      }, requestedStyle);
+      if (audioTurn?.descriptor.style) { record.style = audioTurn.descriptor.style; if (record.style !== requestedStyle) record.styleFallback = requestedStyle; }
       audioId = audioTurn?.id ?? null;
       if (audioTurn) {
-        record.asrMs = null; record.playbackStartMs = null;
+        record.asrMs ??= null; record.playbackStartMs = null;
         const p = { id: audioTurn.id, seq, record, synthesisDone: false, finished: false, written: false, waitingForScreens: false };
         playback = p;
         void audioTurn.completed.then(() => {
@@ -527,7 +654,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       const turn = state.turns + 1;
       pieces.forEach((text, index) => {
         const isLast = index === pieces.length - 1;
-        later(index * 40, () => {
+        later(record.asrMs != null ? 0 : index * 40, () => {
           if (seq !== turnSeq) return;
           broadcast({
             type: "answer.delta",
@@ -594,6 +721,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       message: "抱歉先生,数据暂时无法调取,请稍后再试。",
     });
     dispatch({ type: "ERROR", at: Date.now(), message: err.code });
+    if (voiceSession && playFixed("fallback", "close")) return;
     later(DEMO_TIMING.errorHoldMs, () => {
       if (seq !== turnSeq || state.name !== "error-fallback") return;
       dispatch({ type: "ERROR_SPOKEN", at: Date.now() });
@@ -604,6 +732,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   return {
     handleClientMessage,
+    submitUtterance,
+    beginListening(): void { if (state.name === "followup" && !fixedPlayback) { clearTimers(); dispatch({ type: "SPEAK", at: Date.now() }); } },
     beginSession,
     forceClose,
     attach(conn: HubConnection): void {

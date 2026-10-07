@@ -56,6 +56,8 @@ export type OrchestratorConfig = {
   ttsEnabled: boolean;
   ttsStyle: string;
   ttsCacheDir: string;
+  styleOverrides: Record<string, string>;
+  inputConfig: { hangoverMs: number; micReopenDelayMs: number; kwsThreshold: number; kwsScore: number; kwsEnergy: number; wakePhrase: string };
 };
 
 export function loadEnvFileExplicit(dir: string, names = [".env.local", ".env"]): void {
@@ -105,6 +107,8 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): OrchestratorCo
     voiceLocalUrl: env.VOICE_LOCAL_URL ?? "http://127.0.0.1:8810",
     ttsEnabled: env.VOICE_TTS_ENABLED === "1" || env.VOICE_TTS_ENABLED === "true",
     ttsStyle: env.VOICE_TTS_STYLE ?? "default",
+    styleOverrides: parseStyles(env.VOICE_SPEECH_STYLE_MAP),
+    inputConfig: { hangoverMs: Math.min(1500, int(env.VOICE_VAD_HANGOVER_MS, 500)), micReopenDelayMs: int(env.VOICE_MIC_REOPEN_DELAY_MS, 300), kwsThreshold: Math.min(1, int(env.VOICE_KWS_THRESHOLD, .25)), kwsScore: int(env.VOICE_KWS_SCORE, 1), kwsEnergy: int(env.VOICE_KWS_ENERGY, .01), wakePhrase: env.VOICE_WAKE_PHRASE ?? "你好，小川" },
     ttsCacheDir: env.VOICE_TTS_CACHE_DIR ?? join(serviceRoot(), "logs", "tts-cache"),
   };
 }
@@ -156,4 +160,11 @@ function defaultFixturePath(): string {
 
 function defaultTraceFile(): string {
   return join(serviceRoot(), "logs", "voice-trace.jsonl");
+}
+
+function parseStyles(raw: string | undefined): Record<string, string> {
+  if (!raw) return {};
+  const value = JSON.parse(raw);
+  if (!value || typeof value !== "object" || Array.isArray(value) || Object.entries(value).some(([k,v]) => !/^[a-z_]+$/.test(k) || typeof v !== "string" || !/^[a-z_]{1,32}$/.test(v))) throw new Error("Invalid VOICE_SPEECH_STYLE_MAP");
+  return value;
 }
