@@ -1,0 +1,321 @@
+{
+  "scope": "real Mac speaker → KZ microphone → native AudioWorklet/Silero; not Windows exhibit",
+  "input": "默认 - KZ Acoustics M2 (31b2:0311)",
+  "output": "Mac Studio扬声器 (Built-in)",
+  "settings": {
+    "sampleRate": 48000,
+    "channelCount": 1,
+    "echoCancellation": true,
+    "noiseSuppression": true,
+    "autoGainControl": true
+  },
+  "userConfirmedQuiet": true,
+  "thresholds": {
+    "positive": 0.8,
+    "minimumMs": 300,
+    "confirmationMs": 500
+  },
+  "method": "first SpeechStart ducks to .2 in 80ms; confirmation counted without pausing, preserving full acoustic exposure; no microphone samples stored/uploaded",
+  "rounds": [
+    {
+      "path": "direct",
+      "rows": [
+        {
+          "index": 1,
+          "seconds": 8.24,
+          "frames": 284,
+          "maxRms": 0.0006112865738094372,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 2,
+          "seconds": 8.08,
+          "frames": 280,
+          "maxRms": 0.0006585923481477395,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 3,
+          "seconds": 7.76,
+          "frames": 270,
+          "maxRms": 0.0011840523899545043,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 4,
+          "seconds": 8.24,
+          "frames": 285,
+          "maxRms": 0.0009026558254091547,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 5,
+          "seconds": 7.92,
+          "frames": 274,
+          "maxRms": 0.0006779700709059595,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 6,
+          "seconds": 7.52,
+          "frames": 263,
+          "maxRms": 0.0010504891576152823,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 7,
+          "seconds": 7.68,
+          "frames": 267,
+          "maxRms": 0.005075232943403377,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 8,
+          "seconds": 7.84,
+          "frames": 272,
+          "maxRms": 0.0012836994646503472,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 9,
+          "seconds": 7.52,
+          "frames": 262,
+          "maxRms": 0.0018902848763235433,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 10,
+          "seconds": 8.4,
+          "frames": 290,
+          "maxRms": 0.0006372617794582077,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        }
+      ],
+      "duck": 0,
+      "confirms": 0,
+      "passed": true
+    },
+    {
+      "path": "media-element",
+      "rows": [
+        {
+          "index": 1,
+          "seconds": 8.24,
+          "frames": 285,
+          "maxRms": 0.001545621137217615,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 2,
+          "seconds": 8.08,
+          "frames": 279,
+          "maxRms": 0.00111730822036138,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 3,
+          "seconds": 7.76,
+          "frames": 270,
+          "maxRms": 0.0036822985207839096,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 4,
+          "seconds": 8.24,
+          "frames": 285,
+          "maxRms": 0.00181739741428004,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 5,
+          "seconds": 7.92,
+          "frames": 274,
+          "maxRms": 0.005152538240088802,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 6,
+          "seconds": 7.52,
+          "frames": 263,
+          "maxRms": 0.0025097940107946986,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 7,
+          "seconds": 7.68,
+          "frames": 267,
+          "maxRms": 0.001995436486889225,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 8,
+          "seconds": 7.84,
+          "frames": 272,
+          "maxRms": 0.010217328996721616,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 9,
+          "seconds": 7.52,
+          "frames": 262,
+          "maxRms": 0.001969631071059613,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        },
+        {
+          "index": 10,
+          "seconds": 8.4,
+          "frames": 289,
+          "maxRms": 0.02333059674730816,
+          "starts": 0,
+          "realStarts": 0,
+          "confirms": 0,
+          "misfires": 0,
+          "ends": 0,
+          "queuedMax": 1
+        }
+      ],
+      "duck": 0,
+      "confirms": 0,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "at": "2026-10-08T03:15:33.808Z",
+  "clips": [
+    {
+      "id": "echo-0",
+      "seconds": 8.24
+    },
+    {
+      "id": "echo-1",
+      "seconds": 8.08
+    },
+    {
+      "id": "echo-2",
+      "seconds": 7.76
+    },
+    {
+      "id": "echo-3",
+      "seconds": 8.24
+    },
+    {
+      "id": "echo-4",
+      "seconds": 7.92
+    },
+    {
+      "id": "echo-5",
+      "seconds": 7.52
+    },
+    {
+      "id": "echo-6",
+      "seconds": 7.68
+    },
+    {
+      "id": "echo-7",
+      "seconds": 7.84
+    },
+    {
+      "id": "echo-8",
+      "seconds": 7.52
+    },
+    {
+      "id": "echo-9",
+      "seconds": 8.4
+    }
+  ]
+}
