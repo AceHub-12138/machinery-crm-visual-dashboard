@@ -1,0 +1,121 @@
+{
+  "scope": "two local service startups, no reference files or thresholds changed; original failure preserved",
+  "at": "2026-10-08T01:26:37.932571+00:00",
+  "attempts": [
+    {
+      "number": 1,
+      "health": {
+        "warm": true,
+        "selfCheck": "passed",
+        "selfCheckCer": 0.0,
+        "models": {
+          "tts": "qwen3-tts-1.7b-base",
+          "asr": "qwen3-asr-0.6b"
+        },
+        "refHash": "d6e0137839e69c5da2abc11fc2968ea55b7f2b3a90e5560b498015cd85899d18",
+        "styles": [
+          "default",
+          "advise",
+          "apologetic",
+          "cheerful",
+          "serious_long",
+          "warm"
+        ],
+        "styleHashes": {
+          "default": "d6e0137839e69c5da2abc11fc2968ea55b7f2b3a90e5560b498015cd85899d18",
+          "advise": "6ffee3b2dc362415aaae984d84be88fb21984b3dc78cde6d3a404a97d70285a3",
+          "apologetic": "91cce154adbab4926cf76d572ada967b5bdc2b3d61e4488f883f64234ec94e2b",
+          "cheerful": "f534cd11b7968ce97302a63e2c00c5b0a79b63c142dc2aeeb7c9373838cc0e4a",
+          "serious_long": "bcd464c24ae2e20fc7cd7a6c6d5625cd085e6395669dde6c52e4148df00ae9db",
+          "warm": "7d7a4d3e559a499fd6ce9780266c99aa7317be4238cdbf3bcf04107177e907d6"
+        },
+        "failedStyles": [
+          "serious"
+        ],
+        "styleChecks": {
+          "default": 0.0,
+          "advise": 0.0,
+          "apologetic": 0.0,
+          "cheerful": 0.0,
+          "serious_long": 0.0,
+          "warm": 0.0
+        },
+        "metrics": {
+          "ttsRequests": 0,
+          "asrRequests": 0,
+          "ttsRegenerated": 0,
+          "ttsTruncated": 0,
+          "ttsFail": 0,
+          "cancelled": 0
+        },
+        "activeJobs": 0
+      },
+      "failureReason": "not captured by original server; diagnostics added afterwards"
+    },
+    {
+      "number": 2,
+      "health": {
+        "warm": true,
+        "selfCheck": "passed",
+        "selfCheckCer": 0.0,
+        "models": {
+          "tts": "qwen3-tts-1.7b-base",
+          "asr": "qwen3-asr-0.6b"
+        },
+        "refHash": "d6e0137839e69c5da2abc11fc2968ea55b7f2b3a90e5560b498015cd85899d18",
+        "styles": [
+          "default",
+          "advise",
+          "apologetic",
+          "cheerful",
+          "serious",
+          "serious_long",
+          "warm"
+        ],
+        "styleHashes": {
+          "default": "d6e0137839e69c5da2abc11fc2968ea55b7f2b3a90e5560b498015cd85899d18",
+          "advise": "6ffee3b2dc362415aaae984d84be88fb21984b3dc78cde6d3a404a97d70285a3",
+          "apologetic": "91cce154adbab4926cf76d572ada967b5bdc2b3d61e4488f883f64234ec94e2b",
+          "cheerful": "f534cd11b7968ce97302a63e2c00c5b0a79b63c142dc2aeeb7c9373838cc0e4a",
+          "serious": "4034213baef97267f6808bd450e8130601061402948520379dfe48d32b0350bf",
+          "serious_long": "bcd464c24ae2e20fc7cd7a6c6d5625cd085e6395669dde6c52e4148df00ae9db",
+          "warm": "7d7a4d3e559a499fd6ce9780266c99aa7317be4238cdbf3bcf04107177e907d6"
+        },
+        "failedStyles": [],
+        "styleFailures": {},
+        "styleChecks": {
+          "default": 0.0,
+          "advise": 0.0,
+          "apologetic": 0.0,
+          "cheerful": 0.0,
+          "serious": 0.0,
+          "serious_long": 0.0,
+          "warm": 0.0
+        },
+        "metrics": {
+          "ttsRequests": 16,
+          "asrRequests": 4,
+          "ttsRegenerated": 0,
+          "ttsTruncated": 0,
+          "ttsFail": 0,
+          "cancelled": 0
+        },
+        "activeJobs": 0
+      }
+    }
+  ],
+  "priorF0RecomputedFrom": "docs/voice-8c-task10-style-calibration.json",
+  "referenceF0": 104.3,
+  "priorF0Medians": {
+    "default": {
+      "samples": 15,
+      "medianHz": 97.76007964161275,
+      "within15Percent": true
+    },
+    "apologetic": {
+      "samples": 15,
+      "medianHz": 104.80349344978166,
+      "within15Percent": true
+    }
+  }
+}

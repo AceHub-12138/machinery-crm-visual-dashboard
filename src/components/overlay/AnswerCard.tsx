@@ -159,7 +159,7 @@ export const AnswerCard = memo(function AnswerCard({
             spoken.replaceChildren(document.createTextNode(text.slice(0, active.start)), mark, document.createTextNode(text.slice(active.end)));
           } else spoken.textContent = text;
         }
-        if (typed >= card.spoken.length) return; // 编排完成,停帧
+        if (typed >= card.spoken.length && u >= 1) return; // 编排完成,停帧
       }
 
       raf = requestAnimationFrame(paint);

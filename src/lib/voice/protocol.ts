@@ -39,7 +39,8 @@ export type VoiceErrorCode =
  * 不与本域 performance.now() 混算。
  */
 export type VoiceWireEvent =
-  | { type: "speech.fixed"; at: number; text: string; speech: { turnId: string; fixed?: "wake" | "followup" | "goodbye" | "fallback" | "unheard"; style?: string; sentences: { index: number; displayStart: number; displayEnd: number }[] } }
+  | { type: "speech.fixed"; at: number; text: string; speech: { turnId: string; fixed?: "wake" | "followup" | "goodbye" | "fallback" | "unheard" | "idle_exit"; style?: string; sentences: { index: number; displayStart: number; displayEnd: number }[] } }
+  | { type: "input.listen"; at: number; sessionId: string; listenId: string; mode: "listening" | "followup" }
   | { type: "session.start"; at: number; sessionId: string }
   | {
       type: "state.change";
@@ -72,7 +73,7 @@ export type VoiceWireEvent =
       full: boolean;
       card?: AnswerCardData;
       /** 音频资源与显示偏移；由本地播放器驱动句级高亮。 */
-      speech?: { turnId: string; fixed?: "wake" | "followup" | "goodbye" | "fallback" | "unheard";
+      speech?: { turnId: string; fixed?: "wake" | "followup" | "goodbye" | "fallback" | "unheard" | "idle_exit";
         style?: string; sentences: Array<{ index: number; displayStart: number; displayEnd: number }> };
     }
   | {
@@ -103,6 +104,7 @@ export type VoiceWireEvent =
     };
 
 export type SessionEndReason =
+  | "listen_timeout"
   | "followup_timeout" // 追问 3s 无输入
   | "decline" // 「没有了/谢谢」
   | "force" // 运维/对话台强制退场
@@ -118,6 +120,7 @@ export type SkippedPlaybackSentence = {
 export type TurnTracePayload = {
   style?: string;
   styleFallback?: string;
+  speculative?: "hit" | "miss" | "none";
   /** 真实语音耗时；尚未接入的采集/播放字段为 null。 */
   asrMs?: number | null;
   playbackStartMs?: number | null;
@@ -160,9 +163,11 @@ export type ConsoleWireEvent =
   | { type: "playback.failed"; at: number; turnId: string; reason: "audio_unavailable" | "invalid_audio" | "audio_interrupted" | "autoplay_blocked" | "timeout" | "dismissed" }
   | ({ type: "playback.skipped"; at: number; turnId: string } & SkippedPlaybackSentence)
   | { type: "playback.drained"; at: number; turnId: string } // 大屏播放器耗尽，必须匹配当前音频轮
+  | { type: "session.dismiss"; at: number; sessionId: string }
   | { type: "session.close"; at: number }; // 强制退场(Esc 语义)
 
 export const WIRE_EVENT_TYPES = [
+  "input.listen",
   "speech.fixed",
   "session.start",
   "state.change",
@@ -193,8 +198,10 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
 
   const ev = data as VoiceWireEvent;
   switch (ev.type) {
+    case "input.listen":
+      return typeof ev.sessionId === "string" && ev.sessionId.length <= 64 && /^sess-[a-f0-9-]+$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && ["listening", "followup"].includes(ev.mode) ? ev : null;
     case "speech.fixed":
-      if (typeof ev.text !== "string" || !ev.speech?.fixed || !["wake", "followup", "unheard", "goodbye", "fallback"].includes(ev.speech.fixed)) return null;
+      if (typeof ev.text !== "string" || !ev.speech?.fixed || !["wake", "followup", "unheard", "goodbye", "fallback", "idle_exit"].includes(ev.speech.fixed)) return null;
       return parseWireEvent(JSON.stringify({ ...ev, type: "answer.delta", seq: 0, full: true, card: { kind: "brief", title: "小川", lines: [], spoken: ev.text } })) ? ev : null;
     case "session.start":
       return typeof ev.sessionId === "string" && ev.sessionId.length > 0 ? ev : null;
@@ -213,7 +220,7 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
       if (ev.full && !isValidAnswerCard(ev.card)) return null;
       if (ev.speech !== undefined) {
         const s = ev.speech;
-        if (!ev.full || !s || (s.fixed !== undefined && !["wake", "followup", "goodbye", "fallback", "unheard"].includes(s.fixed)) || (s.style !== undefined && (typeof s.style !== "string" || !/^[a-z_]{1,32}$/.test(s.style))) || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length === 0 || s.sentences.length > 100 ||
+        if (!ev.full || !s || (s.fixed !== undefined && !["wake", "followup", "goodbye", "fallback", "idle_exit", "unheard"].includes(s.fixed)) || (s.style !== undefined && (typeof s.style !== "string" || !/^[a-z_]{1,32}$/.test(s.style))) || typeof s.turnId !== "string" || !/^[a-f0-9-]{36}$/.test(s.turnId) || !Array.isArray(s.sentences) || s.sentences.length === 0 || s.sentences.length > 100 ||
           !s.sentences.every((v, i) => v && v.index === i && Number.isInteger(v.displayStart) && Number.isInteger(v.displayEnd) && v.displayStart >= 0 && v.displayEnd > v.displayStart && v.displayEnd <= (ev.card?.spoken.length ?? 0) && (i === 0 || v.displayStart >= s.sentences[i - 1].displayEnd))) return null;
       }
       // 卡片来自网络:逐 kind schema 校验(防原型链/脏字段打崩渲染层)

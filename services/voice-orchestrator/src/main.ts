@@ -64,7 +64,7 @@ const hub = await startVoiceHub({
   maxConnections: config.hubMaxConnections,
   onHttpRequest: async (req, res) => {
     const path = new URL(req.url ?? "/", "http://localhost").pathname;
-    if (["/voice/wake", "/voice/utterance", "/voice/input-config"].includes(path)) { await inputHandler(req, res); return; }
+    if (["/voice/wake", "/voice/utterance", "/voice/input-config", "/voice/listen"].includes(path)) { await inputHandler(req, res); return; }
     await createAudioHttpHandler({ store: audio, consoleToken: config.hubConsoleToken, screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined })(req, res);
   },
   onConnection: (conn) => attachFn?.(conn),
@@ -107,6 +107,7 @@ const orchestrator = createVoiceOrchestrator({
   audio,
   speechClient,
   styleOverrides: config.styleOverrides,
+  listenTimeoutMs: config.listenTimeoutMs,
   dataSource,
   llm,
   mcp,
@@ -124,7 +125,7 @@ const orchestrator = createVoiceOrchestrator({
     : null,
 });
 
-const inputHandler = createInputHttpHandler({ screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined, wake: (followup) => followup ? orchestrator.beginListening() : orchestrator.beginSession(true), utterance: (pcm, signal, ms) => orchestrator.submitUtterance(pcm, signal, ms), config: () => config.inputConfig });
+const inputHandler = createInputHttpHandler({ screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined, activity: orchestrator.inputActivity, wake: () => orchestrator.beginSession(true), utterance: (pcm, signal, ms, lease) => orchestrator.submitUtterance(pcm, signal, ms, lease), config: () => config.inputConfig });
 
 attachFn = (conn) => orchestrator.attach(conn);
 messageFn = (conn, raw) => orchestrator.handleClientMessage(conn, raw);

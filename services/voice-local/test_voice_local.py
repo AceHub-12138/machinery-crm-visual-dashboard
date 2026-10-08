@@ -330,6 +330,7 @@ class StyleTests(unittest.TestCase):
                 health=client.get('/health').json()
                 self.assertEqual(health['styles'],['default'])
                 self.assertEqual(health['failedStyles'],['warm'])
+                self.assertEqual(health['styleFailures']['warm']['reason'], 'Self check CER exceeds 20%')
                 self.assertEqual(health['selfCheck'],'passed')
                 self.assertEqual(client.post('/tts',json={'text':'你好','style':'warm'}).status_code,400)
     def test_missing_style_directory_configuration_retains_default(self):

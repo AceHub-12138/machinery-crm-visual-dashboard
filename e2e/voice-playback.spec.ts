@@ -48,7 +48,7 @@ test.beforeAll(async () => {
   store = new AudioStore({ client, cacheDir, enabled: true }); await store.initialize();
   hub = await startVoiceHub({ host: "127.0.0.1", port: 0,
     onHttpRequest: createAudioHttpHandler({ store, screenToken, consoleToken }),
-    onMessage: (conn, raw) => { const ev = JSON.parse(raw); if (ev.type.startsWith("playback.")) reports.push(ev); orch.handleClientMessage(conn, raw); },
+    onMessage: (conn, raw) => { const ev = JSON.parse(raw); if (ev.type.startsWith("playback.") || ev.type === "session.dismiss") reports.push(ev); orch.handleClientMessage(conn, raw); },
     onClose: (conn) => orch?.detach(conn),
   });
   orch = createVoiceOrchestrator({ hub, audio: store, dataSource: { name: "test", fetchPayload: async () => validatePublicPayload(fixture)! },
@@ -171,7 +171,7 @@ test("Escape and hub disconnect stop audio immediately and restore the baseline"
   await page.keyboard.press("Escape");
   const dismissedSession = orch.sessionId;
   await expect.poll(() => orch.state.name).toBe("ambient");
-  expect(reports.some(r => r.type === "playback.failed" && r.reason === "dismissed")).toBe(true);
+  expect(reports.some(r => r.type === "session.dismiss")).toBe(true);
   await expect.poll(async () => (await traces(dismissedSession)).map(r => r.playbackOutcome)).toEqual(["cancelled"]);
   await expect.poll(async () => (await metrics(page)).stopped).toBeGreaterThan(0);
   await expect(page.locator(".overlay-root")).toHaveCount(0);
@@ -191,7 +191,7 @@ test("Escape during followup closes the hub and a fresh question wakes the scree
   await page.keyboard.press("Escape");
   await expect.poll(() => orch.state.name).toBe("ambient");
   await expect(page.locator(".overlay-root")).toHaveCount(0);
-  expect(reports.filter(r => r.type === "playback.failed" && r.reason === "dismissed")).toHaveLength(1);
+  expect(reports.filter(r => r.type === "session.dismiss")).toHaveLength(1);
   await expect.poll(async () => (await traces(dismissedSession)).map(r => r.playbackOutcome)).toEqual(["drained"]);
   reports.length = 0; ask("谢谢，没有了");
   await expect.poll(() => reports.some(r => r.type === "playback.started")).toBe(true);

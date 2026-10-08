@@ -56,7 +56,7 @@ describe("protocol — fail-closed 解析(plan §10 风格)", () => {
   });
 
   it("类型清单与联合完全同步(satisfies 锁定)", () => {
-    expect(WIRE_EVENT_TYPES).toHaveLength(11);
+    expect(WIRE_EVENT_TYPES).toHaveLength(12);
   });
 });
 

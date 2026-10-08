@@ -1,0 +1,616 @@
+{
+  "scope": "injected macOS synthesized speech → real browser AudioWorklet/Silero VAD → loopback HTTP → real ASR/LLM/TTS → first scheduled sample; not exhibit/real microphone/LAN",
+  "model": "qwen/qwen3.6-35b-a3b",
+  "errors": [],
+  "summary": {
+    "L1": {
+      "samples": 22,
+      "p50": 930.4,
+      "p95": 1229
+    },
+    "L2": {
+      "samples": 22,
+      "p50": 1466.5,
+      "p95": 1774.4
+    },
+    "asrMs": {
+      "samples": 22,
+      "p50": 232.5,
+      "p95": 266.1
+    },
+    "asrRoundTripMs": {
+      "samples": 22,
+      "p50": 235.5,
+      "p95": 267.9
+    },
+    "classifyMs": {
+      "samples": 22,
+      "p50": 525.6,
+      "p95": 555.4
+    },
+    "ttsFirstByteMs": {
+      "samples": 20,
+      "p50": 517.6,
+      "p95": 526.2
+    },
+    "voiceLocalFirstByteMs": {
+      "samples": 20,
+      "p50": 512.3,
+      "p95": 520.9
+    },
+    "browserBufferMs": {
+      "samples": 22,
+      "p50": 150.2,
+      "p95": 150.2
+    }
+  },
+  "speculative": {
+    "hit": {
+      "rounds": 14,
+      "L1": {
+        "samples": 14,
+        "p50": 920.1,
+        "p95": 958.7
+      },
+      "L2": {
+        "samples": 14,
+        "p50": 1446.9,
+        "p95": 1496.4
+      },
+      "asrMs": {
+        "samples": 14,
+        "p50": 227.3,
+        "p95": 247.4
+      },
+      "asrRoundTripMs": {
+        "samples": 14,
+        "p50": 230,
+        "p95": 250.8
+      },
+      "classifyMs": {
+        "samples": 14,
+        "p50": 524.9,
+        "p95": 549.3
+      },
+      "ttsFirstByteMs": {
+        "samples": 14,
+        "p50": 522.7,
+        "p95": 528.5
+      },
+      "voiceLocalFirstByteMs": {
+        "samples": 14,
+        "p50": 517.4,
+        "p95": 523.1
+      },
+      "browserBufferMs": {
+        "samples": 14,
+        "p50": 150.1,
+        "p95": 150.2
+      }
+    },
+    "miss": {
+      "rounds": 6,
+      "L1": {
+        "samples": 6,
+        "p50": 1208.1,
+        "p95": 1253.5
+      },
+      "L2": {
+        "samples": 6,
+        "p50": 1736.8,
+        "p95": 1791.9
+      },
+      "asrMs": {
+        "samples": 6,
+        "p50": 249.6,
+        "p95": 267.9
+      },
+      "asrRoundTripMs": {
+        "samples": 6,
+        "p50": 252.5,
+        "p95": 270.3
+      },
+      "classifyMs": {
+        "samples": 6,
+        "p50": 529.9,
+        "p95": 563.3
+      },
+      "ttsFirstByteMs": {
+        "samples": 4,
+        "p50": 277.9,
+        "p95": 342.7
+      },
+      "voiceLocalFirstByteMs": {
+        "samples": 4,
+        "p50": 251.2,
+        "p95": 252.9
+      },
+      "browserBufferMs": {
+        "samples": 6,
+        "p50": 150.2,
+        "p95": 150.2
+      }
+    },
+    "none": {
+      "rounds": 2,
+      "L1": {
+        "samples": 2,
+        "p50": 1188.6,
+        "p95": 1194.2
+      },
+      "L2": {
+        "samples": 2,
+        "p50": 1718.8,
+        "p95": 1731
+      },
+      "asrMs": {
+        "samples": 2,
+        "p50": 243,
+        "p95": 246.1
+      },
+      "asrRoundTripMs": {
+        "samples": 2,
+        "p50": 246,
+        "p95": 248.7
+      },
+      "classifyMs": {
+        "samples": 2,
+        "p50": 446.5,
+        "p95": 448.3
+      },
+      "ttsFirstByteMs": {
+        "samples": 2,
+        "p50": 341.3,
+        "p95": 345.1
+      },
+      "voiceLocalFirstByteMs": {
+        "samples": 2,
+        "p50": 335.3,
+        "p95": 338.4
+      },
+      "browserBufferMs": {
+        "samples": 2,
+        "p50": 150.1,
+        "p95": 150.1
+      }
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "fixture": "q1",
+      "question": "本月销售情况怎么样？",
+      "authoritativeIntent": "sales_progress",
+      "L1": 978.3000000044703,
+      "L2": 1514.6916666726274,
+      "asrMs": 245.3,
+      "asrRoundTripMs": 249,
+      "uploadBodyMs": 0.20750000000043656,
+      "classifyMs": 542.5827080000017,
+      "ttsFirstByteMs": 533.2804170000018,
+      "voiceLocalFirstByteMs": 527.9,
+      "ttsForwardingMs": 5.380417000001785,
+      "browserBufferMs": 150.20000000298023,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 2,
+      "fixture": "q2",
+      "question": "本月目标完成率是多少？",
+      "authoritativeIntent": "target_rate",
+      "L1": 930,
+      "L2": 1464.6833333348222,
+      "asrMs": 244.7,
+      "asrRoundTripMs": 248,
+      "uploadBodyMs": 0.2557500000038999,
+      "classifyMs": 504.8818749999991,
+      "ttsFirstByteMs": 525.8794170000037,
+      "voiceLocalFirstByteMs": 520.5,
+      "ttsForwardingMs": 5.379417000003741,
+      "browserBufferMs": 150.10000000149012,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 3,
+      "fixture": "q3",
+      "question": "各区域发货分布怎么样？",
+      "authoritativeIntent": "region_shipments",
+      "L1": 899.3999999985099,
+      "L2": 1446.491666662194,
+      "asrMs": 201.3,
+      "asrRoundTripMs": 204,
+      "uploadBodyMs": 0.09858299999905284,
+      "classifyMs": 528.3061660000021,
+      "ttsFirstByteMs": 523.9513749999969,
+      "voiceLocalFirstByteMs": 518.6,
+      "ttsForwardingMs": 5.351374999996892,
+      "browserBufferMs": 150.10000000149012,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 4,
+      "fixture": "q4",
+      "question": "近期有哪些发货安排？",
+      "authoritativeIntent": "upcoming_shipments",
+      "L1": 948.2000000029802,
+      "L2": 1468.8791666651741,
+      "asrMs": 233,
+      "asrRoundTripMs": 236,
+      "uploadBodyMs": 0.2626659999950789,
+      "classifyMs": 555.1646250000049,
+      "ttsFirstByteMs": 523.7756660000014,
+      "voiceLocalFirstByteMs": 518.2,
+      "ttsForwardingMs": 5.57566600000132,
+      "browserBufferMs": 150,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 5,
+      "fixture": "q5",
+      "question": "本月新增了多少客户？",
+      "authoritativeIntent": "new_customers",
+      "L1": 912.7999999970198,
+      "L2": 1447.3791666651814,
+      "asrMs": 219.9,
+      "asrRoundTripMs": 222,
+      "uploadBodyMs": 0.11954099999275059,
+      "classifyMs": 533.0816250000062,
+      "ttsFirstByteMs": 516.3620419999934,
+      "voiceLocalFirstByteMs": 510.9,
+      "ttsForwardingMs": 5.462041999993403,
+      "browserBufferMs": 150.19999999552965,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 6,
+      "fixture": "q6",
+      "question": "今天有多少跟进待办？",
+      "authoritativeIntent": "followup_todo",
+      "L1": 926.7999999970198,
+      "L2": 1450.1999999955297,
+      "asrMs": 251.2,
+      "asrRoundTripMs": 254,
+      "uploadBodyMs": 0.13262499999837019,
+      "classifyMs": 515.6123329999973,
+      "ttsFirstByteMs": 498.90879199998744,
+      "voiceLocalFirstByteMs": 492.8,
+      "ttsForwardingMs": 6.108791999987432,
+      "browserBufferMs": 150.19999999552965,
+      "speculative": "hit",
+      "style": "serious",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 7,
+      "fixture": "q7",
+      "question": "本月回款情况怎么样？",
+      "authoritativeIntent": "collection",
+      "L1": 897.1999999955297,
+      "L2": 1403.7124999985099,
+      "asrMs": 221.3,
+      "asrRoundTripMs": 223,
+      "uploadBodyMs": 0.09549999999580905,
+      "classifyMs": 485.226874999993,
+      "ttsFirstByteMs": 518.8256669999973,
+      "voiceLocalFirstByteMs": 513.6,
+      "ttsForwardingMs": 5.2256669999973155,
+      "browserBufferMs": 150.09999999403954,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 8,
+      "fixture": "q8",
+      "question": "成品仓还有多少台库存？",
+      "authoritativeIntent": "unanswerable",
+      "L1": 1182.3000000044703,
+      "L2": 1705.254166672632,
+      "asrMs": 239.6,
+      "asrRoundTripMs": 243,
+      "uploadBodyMs": 0.25524999998742715,
+      "classifyMs": 448.53758299999754,
+      "ttsFirstByteMs": 336.98783299999195,
+      "voiceLocalFirstByteMs": 331.8,
+      "ttsForwardingMs": 5.18783299999194,
+      "browserBufferMs": 150.10000000149012,
+      "speculative": "none",
+      "style": "apologetic",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 9,
+      "fixture": "m1",
+      "question": "张三这个月业绩怎么样？",
+      "authoritativeIntent": "unanswerable",
+      "L1": 1261.6000000014901,
+      "L2": 1797.2791666636767,
+      "asrMs": 217.4,
+      "asrRoundTripMs": 220,
+      "uploadBodyMs": 0.09133399999700487,
+      "classifyMs": 529.9170830000076,
+      "ttsFirstByteMs": 354.0871249999909,
+      "voiceLocalFirstByteMs": 251.5,
+      "ttsForwardingMs": 102.58712499999092,
+      "browserBufferMs": 150.10000000149012,
+      "speculative": "miss",
+      "style": "apologetic",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 10,
+      "fixture": "m2",
+      "question": "销售部最近忙不忙？",
+      "authoritativeIntent": "chitchat_or_end",
+      "L1": 989.1999999955297,
+      "L2": 1493.1833333273826,
+      "asrMs": 261.7,
+      "asrRoundTripMs": 265,
+      "uploadBodyMs": 0.10016699999687262,
+      "classifyMs": 565.9656670000113,
+      "ttsForwardingMs": null,
+      "browserBufferMs": 150.19999999552965,
+      "speculative": "miss",
+      "style": "warm",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 11,
+      "fixture": "m3",
+      "question": "回款最慢的客户是谁？",
+      "authoritativeIntent": "unanswerable",
+      "L1": 1223.7999999970198,
+      "L2": 1750.3250000029802,
+      "asrMs": 268.5,
+      "asrRoundTripMs": 271,
+      "uploadBodyMs": 0.09270799998193979,
+      "classifyMs": 521.2469169999822,
+      "ttsFirstByteMs": 277.0782080000208,
+      "voiceLocalFirstByteMs": 248.7,
+      "ttsForwardingMs": 28.378208000020834,
+      "browserBufferMs": 150.20000000298023,
+      "speculative": "miss",
+      "style": "apologetic",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 12,
+      "fixture": "q1",
+      "question": "本月销售情况怎么样？",
+      "authoritativeIntent": "sales_progress",
+      "L1": 906.7999999970198,
+      "L2": 1421.291666666657,
+      "asrMs": 225.7,
+      "asrRoundTripMs": 228,
+      "uploadBodyMs": 0.11770800000522286,
+      "classifyMs": 521.466791999992,
+      "ttsFirstByteMs": 523.5435409999918,
+      "voiceLocalFirstByteMs": 518,
+      "ttsForwardingMs": 5.543540999991819,
+      "browserBufferMs": 150,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 13,
+      "fixture": "q2",
+      "question": "本月目标完成率是多少？",
+      "authoritativeIntent": "target_rate",
+      "L1": 892.8999999985099,
+      "L2": 1427.083333333343,
+      "asrMs": 211.1,
+      "asrRoundTripMs": 214,
+      "uploadBodyMs": 0.28804200000013225,
+      "classifyMs": 512.4846250000119,
+      "ttsFirstByteMs": 523.6353329999838,
+      "voiceLocalFirstByteMs": 517.6,
+      "ttsForwardingMs": 6.03533299998378,
+      "browserBufferMs": 150.10000000149012,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 14,
+      "fixture": "q3",
+      "question": "各区域发货分布怎么样？",
+      "authoritativeIntent": "region_shipments",
+      "L1": 930.8999999985099,
+      "L2": 1486.4916666696372,
+      "asrMs": 232,
+      "asrRoundTripMs": 235,
+      "uploadBodyMs": 0.1688330000033602,
+      "classifyMs": 538.5082079999847,
+      "ttsFirstByteMs": 520.0635839999886,
+      "voiceLocalFirstByteMs": 514.6,
+      "ttsForwardingMs": 5.4635839999886,
+      "browserBufferMs": 150.10000000149012,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 15,
+      "fixture": "q4",
+      "question": "近期有哪些发货安排？",
+      "authoritativeIntent": "upcoming_shipments",
+      "L1": 928.3999999985099,
+      "L2": 1456.979166666657,
+      "asrMs": 222.1,
+      "asrRoundTripMs": 224,
+      "uploadBodyMs": 0.19174999999813735,
+      "classifyMs": 546.2080410000053,
+      "ttsFirstByteMs": 522.0968750000175,
+      "voiceLocalFirstByteMs": 517.1,
+      "ttsForwardingMs": 4.99687500001744,
+      "browserBufferMs": 150.19999999552965,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 16,
+      "fixture": "q5",
+      "question": "本月新增了多少客户？",
+      "authoritativeIntent": "new_customers",
+      "L1": 921.2999999970198,
+      "L2": 1420.7791666636767,
+      "asrMs": 229,
+      "asrRoundTripMs": 232,
+      "uploadBodyMs": 0.09133399999700487,
+      "classifyMs": 533.7649580000143,
+      "ttsFirstByteMs": 514.6100000000151,
+      "voiceLocalFirstByteMs": 509.6,
+      "ttsForwardingMs": 5.010000000015111,
+      "browserBufferMs": 150.29999999701977,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 17,
+      "fixture": "q6",
+      "question": "今天有多少跟进待办？",
+      "authoritativeIntent": "followup_todo",
+      "L1": 918.9000000059605,
+      "L2": 1442.2000000029802,
+      "asrMs": 242.4,
+      "asrRoundTripMs": 245,
+      "uploadBodyMs": 0.09429100004490465,
+      "classifyMs": 516.3340839999728,
+      "ttsFirstByteMs": 497.5502919999999,
+      "voiceLocalFirstByteMs": 491.9,
+      "ttsForwardingMs": 5.650291999999922,
+      "browserBufferMs": 150.20000000298023,
+      "speculative": "hit",
+      "style": "serious",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 18,
+      "fixture": "q7",
+      "question": "本月回款情况怎么样？",
+      "authoritativeIntent": "collection",
+      "L1": 881.6000000014901,
+      "L2": 1388.3125,
+      "asrMs": 195.5,
+      "asrRoundTripMs": 198,
+      "uploadBodyMs": 0.11437500000465661,
+      "classifyMs": 489.311166999978,
+      "ttsFirstByteMs": 523.2571250000037,
+      "voiceLocalFirstByteMs": 518.1,
+      "ttsForwardingMs": 5.1571250000037026,
+      "browserBufferMs": 150.20000000298023,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 19,
+      "fixture": "q8",
+      "question": "成品仓还有多少台库存？",
+      "authoritativeIntent": "unanswerable",
+      "L1": 1194.7999999970198,
+      "L2": 1732.354166666686,
+      "asrMs": 246.4,
+      "asrRoundTripMs": 249,
+      "uploadBodyMs": 0.19166700000641868,
+      "classifyMs": 444.50470900000073,
+      "ttsFirstByteMs": 345.539582999947,
+      "voiceLocalFirstByteMs": 338.7,
+      "ttsForwardingMs": 6.839582999947027,
+      "browserBufferMs": 150.09999999403954,
+      "speculative": "none",
+      "style": "apologetic",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 20,
+      "fixture": "m1",
+      "question": "张三这个月业绩怎么样？",
+      "authoritativeIntent": "unanswerable",
+      "L1": 1192.5,
+      "L2": 1723.1791666696663,
+      "asrMs": 228.2,
+      "asrRoundTripMs": 230,
+      "uploadBodyMs": 0.09000000002561137,
+      "classifyMs": 529.8736659999704,
+      "ttsFirstByteMs": 278.0016249999753,
+      "voiceLocalFirstByteMs": 253.1,
+      "ttsForwardingMs": 24.901624999975326,
+      "browserBufferMs": 150.20000000298023,
+      "speculative": "miss",
+      "style": "apologetic",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 21,
+      "fixture": "m2",
+      "question": "销售部最近忙不忙？",
+      "authoritativeIntent": "chitchat_or_end",
+      "L1": 952.5,
+      "L2": 1468.3833333377843,
+      "asrMs": 237.5,
+      "asrRoundTripMs": 240,
+      "uploadBodyMs": 0.1130000000121072,
+      "classifyMs": 555.4072499999893,
+      "ttsForwardingMs": null,
+      "browserBufferMs": 150.20000000298023,
+      "speculative": "miss",
+      "style": "warm",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 22,
+      "fixture": "m3",
+      "question": "回款最慢的客户是谁？",
+      "authoritativeIntent": "unanswerable",
+      "L1": 1229.2999999970198,
+      "L2": 1775.625,
+      "asrMs": 266.3,
+      "asrRoundTripMs": 268,
+      "uploadBodyMs": 0.22233300004154444,
+      "classifyMs": 522.8470419999794,
+      "ttsFirstByteMs": 277.7855420000269,
+      "voiceLocalFirstByteMs": 250.9,
+      "ttsForwardingMs": 26.885542000026902,
+      "browserBufferMs": 150.19999999552965,
+      "speculative": "miss",
+      "style": "apologetic",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    }
+  ]
+}

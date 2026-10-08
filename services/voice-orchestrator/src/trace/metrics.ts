@@ -16,6 +16,7 @@ export type TurnStage = "question" | "prefetch" | "llmFirstToken" | "toolExec" |
 export type TurnTraceRecord = {
   style?: string;
   styleFallback?: string;
+  speculative?: "hit" | "miss" | "none";
   uploadMs?: number;
   asrRoundTripMs?: number;
   ts: string;

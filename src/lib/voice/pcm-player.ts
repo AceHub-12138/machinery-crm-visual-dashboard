@@ -43,6 +43,8 @@ export class PcmPlayer {
     fetch?: typeof fetch;
     prebufferMs?: number;
     maxBytes?: number;
+    onActive?: () => void;
+    onIdle?: (outputLatencyMs: number) => void;
   } = {}) {}
 
   private ensureContext(): AudioContext {
@@ -66,6 +68,7 @@ export class PcmPlayer {
     const controller = new AbortController();
     this.controller = controller;
     this.events = events; this.active = true; this.first = true;
+    this.options.onActive?.();
     this.receivedBytes = 0; this.tail = 0; this.streamsEnded = false;
     this.completionError = null;
     const deadline = setTimeout(() => this.fail("timeout", controller), timeoutMs);
@@ -224,11 +227,13 @@ export class PcmPlayer {
     return Math.min(1, Math.sqrt(sum / this.samples.length) * 4);
   }
   stop(): void {
+    const wasActive = this.active;
     this.active = false; this.controller?.abort(); this.controller = null;
     if (this.timer !== null) clearInterval(this.timer);
     this.timer = null; this.boundaries = []; this.lastScheduledIndex = -1;
     for (const source of this.sources) { source.onended = null; try { source.stop(); } catch { /* already ended */ } source.disconnect(); source.buffer = null; }
     this.sources.clear(); this.events = {};
+    if (wasActive) this.options.onIdle?.(this.outputLatencyMs);
   }
   async close(): Promise<void> {
     this.stop(); this.analyser?.disconnect();

@@ -64,6 +64,7 @@ class Runtime:
         self.styles = {}
         self.style_hashes = {}
         self.failed_styles = []
+        self.style_failures = {}
         self.style_checks = {}
         self.counts = {"ttsRequests": 0, "asrRequests": 0, "ttsRegenerated": 0, "ttsTruncated": 0, "ttsFail": 0, "cancelled": 0}
 
@@ -93,9 +94,10 @@ class Runtime:
                     raise ValueError("Self check CER exceeds 20%")
                 self.styles[style] = settings
                 self.style_hashes[style] = settings.ref_hash()
-            except Exception:
+            except Exception as error:
                 self.failed_styles.append(style)
-                LOG.error("TTS style self-check failed: %s", style)
+                self.style_failures[style] = {"reason": str(error), "stats": dict(stats)}
+                LOG.error("TTS style self-check failed: %s (%s, stats=%s)", style, error, stats)
         self.ref_hash = configured["default"].ref_hash()
         self.self_check_cer = self.style_checks.get("default")
         self.self_check = "passed" if "default" in self.styles else "failed"
@@ -143,6 +145,7 @@ class Runtime:
         return {"warm": self.warm, "selfCheck": self.self_check, "selfCheckCer": self.self_check_cer,
                 "models": {"tts": self.settings.tts_model.rsplit("/", 1)[-1], "asr": self.settings.asr_model.rsplit("/", 1)[-1]},
                 "refHash": self.ref_hash, "styles": list(self.styles), "styleHashes": self.style_hashes, "failedStyles": self.failed_styles,
+                "styleFailures": self.style_failures,
                 "styleChecks": self.style_checks, "metrics": self.counts,
                 "activeJobs": sum(not job.finished for job in self.jobs.values())}
 

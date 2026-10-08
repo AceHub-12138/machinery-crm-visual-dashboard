@@ -1,5 +1,6 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { AudioStore } from "../services/voice-orchestrator/src/tts/audio-store";
@@ -10,34 +11,84 @@ import { createVoiceOrchestrator } from "../services/voice-orchestrator/src/orch
 import { ScriptedAdapter } from "../services/voice-orchestrator/src/llm/scripted";
 import { TraceSink } from "../services/voice-orchestrator/src/trace/metrics";
 import { validatePublicPayload } from "../src/lib/voice/public-payload";
+import { buildIntentAnswer } from "../src/lib/voice/intent-answers";
+import { playbackFallbackMs } from "../src/lib/voice/playback-timing";
 import type { SpeechClient } from "../services/voice-orchestrator/src/tts/voice-local-client";
-import { readFileSync } from "node:fs";
 const fixture=validatePublicPayload(JSON.parse(readFileSync(new URL("../services/voice-orchestrator/fixtures/public-sales-screen.json",import.meta.url),'utf8')))!;
+type BrowserFixture={context:AudioContext;destination:MediaStreamAudioDestinationNode;ready:boolean;kwsReady:boolean;deadlineMs:number;sockets:WebSocket[]};
+declare global { interface Window { voiceFixture:BrowserFixture } }
+const screenToken='voice-input-screen-token',consoleToken='voice-input-console-token';
 test.use({launchOptions:{args:['--autoplay-policy=no-user-gesture-required']}});
-test('AudioWorklet + local Silero: F9 wake, half duplex, and followup voice longer than 3s',async({page})=>{
-  test.setTimeout(45000);
-  let calls=0;const cache=await mkdtemp(join(tmpdir(),'voice-input-e2e-'));const screenToken='voice-input-screen-token',consoleToken='voice-input-console-token';
-  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',refHash:'a'.repeat(64),styles:['default']}),asr:async()=>({text:++calls===1?'你好小川，本月销售怎么样':'本月目标完成率是多少',ms:1}),tts:async function*(){const pcm=new Uint8Array(48000);const view=new DataView(pcm.buffer);for(let i=0;i<24000;i++)view.setInt16(i*2,Math.round(3000*Math.sin(i*2*Math.PI*220/24000)),true);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:{ttsRegenerated:0,ttsTruncated:0,ttsFail:0}};}};
+async function setup(page:Page){
+  const cache=await mkdtemp(join(tmpdir(),'voice-input-e2e-'));
+  let calls=0;const questions:string[]=[],requests:string[]=[];let ready=0;let readyAt=0;
+  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',refHash:'a'.repeat(64),styles:['default']}),asr:async()=>({text:++calls===1?'您好晓川，本月销售怎么样':'本月目标完成率是多少',ms:1}),tts:async function*(){const pcm=new Uint8Array(96000);const view=new DataView(pcm.buffer);for(let i=0;i<48000;i++)view.setInt16(i*2,Math.round(3000*Math.sin(i*2*Math.PI*220/24000)),true);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:{ttsRegenerated:0,ttsTruncated:0,ttsFail:0}};}};
   const store=new AudioStore({client,enabled:true,cacheDir:cache});await store.initialize();
   const audio=createAudioHttpHandler({store,screenToken,consoleToken});
-  const hub=await startVoiceHub({host:'127.0.0.1',port:0,onHttpRequest:(req,res)=>['/voice/wake','/voice/utterance','/voice/input-config'].includes(new URL(req.url!,'http://localhost').pathname)?input(req,res):audio(req,res),onMessage:(conn,raw)=>orch.handleClientMessage(conn,raw)});
-  const orch:ReturnType<typeof createVoiceOrchestrator>=createVoiceOrchestrator({hub,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>fixture},llm:new ScriptedAdapter({firstTokenDelayMs:0}),mcp:null,trace:new TraceSink(null),hubAuth:{screenToken,consoleToken},llmTimeoutMs:8000,partialPaceMs:45,partialMaxTotalMs:1200,prefetchTimeoutMs:5000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:100,mcpToolWhitelist:[]});
-  const input:ReturnType<typeof createInputHttpHandler>=createInputHttpHandler({screenToken,wake:f=>f?orch.beginListening():orch.beginSession(true),utterance:(pcm,signal,ms)=>orch.submitUtterance(pcm,signal,ms),config:()=>({hangoverMs:500,micReopenDelayMs:300,kwsThreshold:.25,kwsScore:1,kwsEnergy:.01,wakePhrase:'你好，小川'})});
-  try{
-    await page.addInitScript(()=>{const context=new AudioContext(),destination=context.createMediaStreamDestination();Object.assign(window,{micFixture:{context,destination,ready:false}});navigator.mediaDevices.getUserMedia=async()=>{(window as unknown as {micFixture:{ready:boolean}}).micFixture.ready=true;return destination.stream;};});
-    await page.goto(`/screen/sales?voiceLive=1&lite=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}#hubToken=${screenToken}`);
-    await page.waitForFunction(()=>(window as unknown as {micFixture:{ready:boolean}}).micFixture.ready);
-    const play=async(name:string)=>page.evaluate(async b64=>{const m=(window as unknown as {micFixture:{context:AudioContext,destination:MediaStreamAudioDestinationNode}}).micFixture;await m.context.resume();const bytes=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));const node=m.context.createBufferSource();node.buffer=await m.context.decodeAudioData(bytes.buffer);node.connect(m.destination);node.start();},(await readFile(new URL(`fixtures/${name}`,import.meta.url))).toString('base64'));
-    await page.keyboard.press('F9');await expect.poll(()=>orch.state.name).toBe('waking');
-    await expect.poll(()=>orch.state.name).toBe('listening');await page.waitForTimeout(600);
-    await play('sales-question.wav');await expect.poll(()=>calls,{timeout:10000}).toBe(1);
-    await expect.poll(()=>orch.state.name).toBe('answering');
-    await page.waitForFunction(()=>!(window as unknown as {micFixture:{destination:MediaStreamAudioDestinationNode}}).micFixture.destination.stream.getAudioTracks()[0].enabled);
-    // Speech during the first answer must produce no new ASR request.
-    await play('rate-question.wav');await page.waitForTimeout(1000);expect(calls).toBe(1);
-    await expect.poll(()=>orch.state.name,{timeout:10000}).toBe('followup');
-    await page.waitForFunction(()=>(window as unknown as {micFixture:{destination:MediaStreamAudioDestinationNode}}).micFixture.destination.stream.getAudioTracks()[0].enabled);
-    await play('sales-question.wav');
-    await expect.poll(()=>calls,{timeout:10000}).toBe(2);expect(orch.state.name).not.toBe('closing');
-  }finally{orch.forceClose('force');store.close();await hub.close();await rm(cache,{recursive:true,force:true});}
+  const hub=await startVoiceHub({host:'127.0.0.1',port:0,onHttpRequest:(req,res)=>['/voice/wake','/voice/utterance','/voice/input-config','/voice/listen'].includes(new URL(req.url!,'http://localhost').pathname)?input(req,res):audio(req,res),onMessage:(conn,raw)=>orch.handleClientMessage(conn,raw),onClose:conn=>orch.detach(conn)});
+  const llm=new ScriptedAdapter({firstTokenDelayMs:0});const classify=llm.classify.bind(llm);llm.classify=(q,s)=>{questions.push(q);return classify(q,s);};
+  const orch:ReturnType<typeof createVoiceOrchestrator>=createVoiceOrchestrator({hub,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>fixture},llm,mcp:null,trace:new TraceSink(null),hubAuth:{screenToken,consoleToken},llmTimeoutMs:8000,partialPaceMs:45,partialMaxTotalMs:1200,prefetchTimeoutMs:5000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:100,mcpToolWhitelist:[]});
+  const input:ReturnType<typeof createInputHttpHandler>=createInputHttpHandler({screenToken,activity:orch.inputActivity,wake:()=>orch.beginSession(true),utterance:(pcm,signal,ms,lease)=>orch.submitUtterance(pcm,signal,ms,lease),config:()=>({hangoverMs:500,micReopenDelayMs:300,kwsThreshold:.25,kwsScore:1,kwsEnergy:.01,wakePhrase:'你好，小川'})});
+  page.on('request',r=>{if(r.method()==='POST'&&r.url().includes('/voice/utterance'))requests.push(r.url());});
+  page.on('response',r=>{if(r.url().includes('/voice/listen?action=ready')&&r.status()===202){ready++;readyAt=Date.now();}});
+  await page.addInitScript(()=>{
+    const context=new AudioContext(),destination=context.createMediaStreamDestination();window.voiceFixture={context,destination,ready:false,kwsReady:false,deadlineMs:0,sockets:[]};
+    navigator.mediaDevices.getUserMedia=async()=>{window.voiceFixture.ready=true;return destination.stream;};
+    const OriginalWorker=Worker;window.Worker=class extends OriginalWorker{constructor(url:string|URL,options?:WorkerOptions){super(url,options);if(String(url).includes('kws-worker'))this.addEventListener('message',e=>{if(e.data.type==='ready')window.voiceFixture.kwsReady=true;});}};
+    const OriginalSocket=WebSocket;window.WebSocket=class extends OriginalSocket{constructor(url:string|URL,protocols?:string|string[]){super(url,protocols);window.voiceFixture.sockets.push(this);}};
+    const timer=window.setTimeout.bind(window);window.setTimeout=((fn:TimerHandler,ms?:number,...args:unknown[])=>timer(fn,window.voiceFixture.deadlineMs>0&&ms===window.voiceFixture.deadlineMs?1000:ms,...args)) as typeof window.setTimeout;
+  });
+  await page.goto(`/screen/sales?voiceLive=1&lite=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}#hubToken=${screenToken}`);
+  await page.waitForFunction(()=>window.voiceFixture.ready&&window.voiceFixture.kwsReady);
+  const play=async(name:string)=>page.evaluate(async b64=>{const m=window.voiceFixture;await m.context.resume();const bytes=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));const node=m.context.createBufferSource();node.buffer=await m.context.decodeAudioData(bytes.buffer);node.connect(m.destination);node.start();},(await readFile(new URL(`fixtures/${name}`,import.meta.url))).toString('base64'));
+  const open=async()=>{const before=ready;await page.keyboard.press('F9');await expect.poll(()=>orch.state.name,{timeout:10000}).toBe('listening');await expect.poll(()=>ready).toBeGreaterThan(before);};
+  const kwsWake=async()=>{await expect.poll(()=>orch.state.name,{timeout:10000}).toBe('ambient');await page.waitForTimeout(5600);const previous=orch.sessionId;await play('wake.wav');await expect.poll(()=>orch.sessionId,{timeout:10000}).not.toBe(previous);};
+  return {orch,client,questions,requests,play,open,kwsWake,ready:()=>ready,readyAt:()=>readyAt,close:async()=>{orch.forceClose('force');store.close();await hub.close();await rm(cache,{recursive:true,force:true});}};
+}
+test('real worklet/VAD: no uploads during playback, strips prefix, and >4s followup survives 3s window',async({page})=>{
+  test.setTimeout(60000);const s=await setup(page);try{
+    await s.open();await s.play('sales-question.wav');await expect.poll(()=>s.requests.length,{timeout:10000}).toBe(1);
+    await expect.poll(()=>s.orch.state.name).toBe('answering');expect(s.questions[0]).toBe('本月销售怎么样');
+    await s.play('rate-question.wav');await page.waitForTimeout(1200);expect(s.requests).toHaveLength(1);
+    const before=s.ready();await expect.poll(()=>s.orch.state.name,{timeout:15000}).toBe('followup');await expect.poll(()=>s.ready(),{timeout:5000}).toBeGreaterThan(before);
+    const wav=await readFile(new URL('fixtures/followup-long.wav',import.meta.url));expect(wav.length).toBeGreaterThan(4*16000*2);
+    await s.play('followup-long.wav');await page.waitForTimeout(4000);expect(s.orch.state.name).toBe('followup');expect(s.requests).toHaveLength(1);
+    await expect.poll(()=>s.requests.length,{timeout:15000}).toBe(2);expect(s.orch.state.name).not.toBe('closing');
+  }finally{await s.close();}
+});
+test('silence is counted from actual open microphone; cached idle_exit then ambient',async({page})=>{
+  test.setTimeout(35000);const s=await setup(page);try{
+    await s.open();const at=s.readyAt();await page.waitForTimeout(4500);expect(s.orch.state.name).toBe('listening');
+    await expect.poll(()=>s.orch.inputLease,{timeout:2000}).toBeNull();expect(Date.now()-at).toBeGreaterThanOrEqual(4900);
+    await expect.poll(()=>s.orch.state.name,{timeout:7000}).toBe('ambient');expect(s.requests).toHaveLength(0);
+  }finally{await s.close();}
+});
+test('speech beginning at second 4 survives the listening deadline and becomes an answer',async({page})=>{
+  test.setTimeout(35000);const s=await setup(page);try{
+    await s.open();await page.waitForTimeout(3900);await s.play('followup-long.wav');await page.waitForTimeout(2500);expect(s.orch.state.name).toBe('listening');
+    await expect.poll(()=>s.requests.length,{timeout:15000}).toBe(1);await expect.poll(()=>s.orch.state.name).toBe('answering');
+  }finally{await s.close();}
+});
+test('Esc while listening closes server session and F9 starts a fresh session',async({page})=>{
+  test.setTimeout(30000);const s=await setup(page);try{await s.open();const id=s.orch.sessionId;await page.keyboard.press('Escape');await expect.poll(()=>s.orch.state.name).toBe('ambient');await s.open();expect(s.orch.sessionId).not.toBe(id);}finally{await s.close();}
+});
+for(const interruption of ['Escape','disconnect','supersede','timeout'] as const)test(`real KWS works after answering interruption: ${interruption}`,async({page})=>{
+  test.setTimeout(50000);const s=await setup(page);try{
+    await s.open();
+    if(interruption==='timeout')await page.evaluate(ms=>window.voiceFixture.deadlineMs=ms,playbackFallbackMs(buildIntentAnswer('sales_progress',fixture).spoken));
+    await s.play('sales-question.wav');await expect.poll(()=>s.orch.state.name).toBe('answering');
+    if(interruption==='disconnect')await page.evaluate(()=>window.voiceFixture.sockets.forEach(socket=>socket.close()));
+    else if(interruption==='supersede'){s.orch.handleClientMessage({id:'console',role:'console',send:()=>{},close:()=>{}},JSON.stringify({type:'question.submit',at:Date.now(),text:'本月回款情况怎么样'}));await expect.poll(()=>s.orch.answer?.spoken).toContain('回款');await page.keyboard.press('Escape');}
+    else if(interruption==='timeout'){await expect.poll(()=>s.orch.state.name,{timeout:4000}).toBe('followup');await page.keyboard.press('Escape');}
+    else await page.keyboard.press('Escape');
+    await s.kwsWake();
+  }finally{await s.close();}
+});
+
+test('one-sentence greeting card finishes unfolding during speech',async({page})=>{
+  test.setTimeout(30000);const s=await setup(page);try{
+    s.client.asr=async()=>({text:'你好',ms:1});await s.open();await s.play('sales-question.wav');await expect.poll(()=>s.orch.state.name).toBe('answering');
+    await expect(page.locator('.overlay-card-corners')).toHaveClass(/is-on/,{timeout:1800});
+    await expect.poll(()=>s.orch.state.name,{timeout:5000}).toBe('listening');
+  }finally{await s.close();}
 });

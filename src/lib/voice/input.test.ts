@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { stripWakePrefix, isUnheard } from "./asr-text";
-import { captureMode, toPcm16 } from "./microphone";
+import { captureMode, toPcm16, VoiceMicrophone } from "./microphone";
 import { classifyScriptedQuestion, parseIntent } from "./intents";
 import { speechStyleFor } from "./speech-style";
 import fixture from "../../../services/voice-orchestrator/fixtures/public-sales-screen.json";
@@ -35,7 +35,7 @@ describe("spoken input and scene policy", () => {
   it("selects one style from intent/data and supports explicit overrides", () => {
     expect(speechStyleFor("sales_progress", { ...payload, collection: { ...payload.collection, exceeded: false } })).toBe("default");
     expect(speechStyleFor("collection", { ...payload, collection: { ...payload.collection, exceeded: true } })).toBe("cheerful");
-    expect(speechStyleFor("followup_todo", { ...payload, kpis: { ...payload.kpis, overdueFollowUp: 1 } })).toBe("serious_long");
+    expect(speechStyleFor("followup_todo", { ...payload, kpis: { ...payload.kpis, overdueFollowUp: 1 } })).toBe("serious");
     expect(speechStyleFor("unanswerable", payload)).toBe("apologetic");
     expect(speechStyleFor("chitchat_or_end", payload)).toBe("warm");
     expect(speechStyleFor("greeting", payload)).toBe("cheerful");
@@ -68,4 +68,19 @@ it("the actual worklet resamples 48kHz and 44.1kHz across packet boundaries and 
     mic.port.onmessage({ data: { enabled: false } }); mic.process([[new Float32Array(48000)]]);
     expect(frames.length).toBe(31);
   }
+});
+
+it.each(["您好小川，本月销售怎么样", "小船，本月销售怎么样", "晓川，本月销售怎么样", "您好晓川，本月销售怎么样"])("ASR address variant %s strips only prefix",text=>{expect(stripWakePrefix(text)).toBe("本月销售怎么样");expect(stripWakePrefix("请问小船和晓川的订单")).toBe("请问小船和晓川的订单");});
+
+it('listen ready waits for initialized microphone and running context; track is enabled first',async()=>{
+  const track={enabled:false},context={state:'suspended'};
+  const request=vi.spyOn(globalThis,'fetch').mockImplementation(async()=>{expect(track.enabled).toBe(true);return new Response(null,{status:202});});
+  try{
+    const mic=new VoiceMicrophone({hubUrl:'ws://localhost:3210',token:'screen',state:()=> 'listening',notice:()=>{}});
+    mic.setConnected(true);mic.setSession('sess-aaaaaaaa');mic.setListen({sessionId:'sess-aaaaaaaa',listenId:'a'.repeat(36)});expect(request).not.toHaveBeenCalled();
+    Object.assign(mic,{mode:'off',stream:{getAudioTracks:()=>[track]},context,worklet:{port:{postMessage:()=>{}}}});
+    mic.setConnected(true);expect(request).not.toHaveBeenCalled();context.state='running';mic.setConnected(true);mic.setConnected(true);
+    expect(request).toHaveBeenCalledTimes(1);expect(String(request.mock.calls[0][0])).toContain('/voice/listen?action=ready');
+    await Promise.resolve();
+  }finally{request.mockRestore();}
 });

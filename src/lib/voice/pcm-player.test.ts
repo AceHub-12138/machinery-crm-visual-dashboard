@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { audioBaseUrl, PcmPlayer, type Speech } from "./pcm-player";
+import { VoiceMicrophone } from "./microphone";
 import { playbackFallbackMs } from "./playback-timing";
 
 const players: PcmPlayer[] = [];
@@ -24,7 +25,7 @@ class ClockContext {
     this.nodes.push(node); return node;
   }
 }
-function setup(request: typeof fetch, options: { maxBytes?: number } = {}) {
+function setup(request: typeof fetch, options: { maxBytes?: number; onActive?: () => void; onIdle?: (latency: number) => void } = {}) {
   vi.useFakeTimers(); const ctx = new ClockContext();
   const player = new PcmPlayer({ createContext: () => ctx as unknown as AudioContext, fetch: request, ...options }); players.push(player);
   const started = vi.fn(); const drained = vi.fn(); const error = vi.fn(); const skipped = vi.fn();
@@ -137,4 +138,16 @@ describe("PCM streaming timeline", () => {
     expect(() => audioBaseUrl("https://hub.test")).toThrow();
     expect(playbackFallbackMs("2790万元。" )).toBeGreaterThan(playbackFallbackMs("你好。"));
   });
+});
+
+it.each(['stop','timeout','drained','error','supersede'])('player lifecycle releases microphone on %s',async reason=>{
+ const mic=new VoiceMicrophone({hubUrl:'ws://localhost:3210',token:'test-token',state:()=> 'ambient',notice:()=>{}});mic.setConnected(true);
+ const idle=vi.fn((latency:number)=>mic.playbackEnded(latency));
+ const s=setup(vi.fn(async()=>reason==='error'?new Response(null,{status:503}):response()),{onActive:()=>mic.playbackStarted(),onIdle:idle});s.play(one,500);await flush();
+ if(reason==='timeout')await vi.advanceTimersByTimeAsync(500);
+ else if(reason==='drained'){s.ctx.currentTime=.3;await vi.advanceTimersByTimeAsync(10);}
+ else if(reason==='supersede'){s.play(one);await flush();expect(idle).toHaveBeenCalledOnce();s.player.stop();}
+ else s.player.stop();
+ expect(idle).toHaveBeenCalledTimes(reason==='supersede'?2:1);await vi.advanceTimersByTimeAsync(350);mic.setConnected(true);
+ expect((mic as unknown as {mode:string}).mode).toBe('kws');await mic.close();
 });

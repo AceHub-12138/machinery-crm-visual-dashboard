@@ -136,7 +136,7 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     vi.useFakeTimers(); const { orch, events, full } = orchestrator(store, 'chitchat_or_end');
     await vi.advanceTimersByTimeAsync(1100);
     const speech = full().speech!;
-    expect(speech.fixed).toBe('goodbye'); expect(client.calls).toBe(5); expect(orch.state.name).toBe('answering');
+    expect(speech.fixed).toBe('goodbye'); expect(client.calls).toBe(6); expect(orch.state.name).toBe('answering');
     const report = (role: 'screen' | 'console' | 'unknown', turnId = speech.turnId) => orch.handleClientMessage({ id: 'report', role, send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.drained', at: Date.now(), turnId }));
     report('unknown'); report('console'); report('screen', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa');
     expect(orch.state.name).toBe('answering');
@@ -219,13 +219,13 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     vi.useFakeTimers(); const client = new FakeClient(); client.passed = false;
     const health = vi.spyOn(client, 'health'); const { store } = await setup(client, { healthIntervalMs: 100 });
     client.passed = true; await vi.advanceTimersByTimeAsync(100); await store.initialize();
-    expect(store.ready).toBe(true); expect(client.calls).toBe(5);
-    await vi.advanceTimersByTimeAsync(100); await store.initialize(); expect(client.calls).toBe(5);
+    expect(store.ready).toBe(true); expect(client.calls).toBe(6);
+    await vi.advanceTimersByTimeAsync(100); await store.initialize(); expect(client.calls).toBe(6);
     const old = store.startFixed('goodbye', buildSpokenSentences('为您服务是我的荣幸,先生。'))!; await old.completed;
     client.hash = 'b'.repeat(64); await vi.advanceTimersByTimeAsync(100); await Promise.all([store.initialize(), store.initialize()]);
-    expect(client.calls).toBe(10); expect(old.cancelled).toBe(true);
+    expect(client.calls).toBe(12); expect(old.cancelled).toBe(true);
     client.passed = false; await vi.advanceTimersByTimeAsync(100); await store.initialize(); expect(store.ready).toBe(false); expect(store.fixed('goodbye')).toBeNull();
-    client.passed = true; await vi.advanceTimersByTimeAsync(100); await store.initialize(); expect(store.ready).toBe(true); expect(client.calls).toBe(10);
+    client.passed = true; await vi.advanceTimersByTimeAsync(100); await store.initialize(); expect(store.ready).toBe(true); expect(client.calls).toBe(12);
     store.close(); const count = health.mock.calls.length; await vi.advanceTimersByTimeAsync(500); await store.initialize(); expect(health).toHaveBeenCalledTimes(count);
   });
   it('coalesces health checks and cannot become ready after close during initialization', async () => {
@@ -237,11 +237,11 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     store.close(); resolve({ warm: true, selfCheck: 'passed', refHash: client.hash, styles: ['default'] }); await Promise.all([first, second]);
     expect(store.ready).toBe(false); expect(store.status.reason).toBe('closed'); expect(client.calls).toBe(0);
   });
-  it('fixed lines use disk cache; reference change invalidates all five',async()=>{
-    const client=new FakeClient();const {store,cacheDir}=await setup(client);expect(client.calls).toBe(5);
-    const get=await http(store);expect((await get('/voice/audio/fixed/wake')).status).toBe(200);expect(client.calls).toBe(5);
-    const second=new AudioStore({client,cacheDir,enabled:true});stores.push(second);await second.initialize();expect(client.calls).toBe(5);
-    client.hash='b'.repeat(64);const third=new AudioStore({client,cacheDir,enabled:true});stores.push(third);await third.initialize();expect(client.calls).toBe(10);
+  it('fixed lines use disk cache; reference change invalidates all six',async()=>{
+    const client=new FakeClient();const {store,cacheDir}=await setup(client);expect(client.calls).toBe(6);
+    const get=await http(store);expect((await get('/voice/audio/fixed/wake')).status).toBe(200);expect(client.calls).toBe(6);
+    const second=new AudioStore({client,cacheDir,enabled:true});stores.push(second);await second.initialize();expect(client.calls).toBe(6);
+    client.hash='b'.repeat(64);const third=new AudioStore({client,cacheDir,enabled:true});stores.push(third);await third.initialize();expect(client.calls).toBe(12);
   });
   it('requires bearer and shared Origin policy on all voice routes',async()=>{
     const {store}=await setup(new FakeClient());const get=await http(store);
@@ -308,9 +308,9 @@ it('emotion caches invalidate only the changed reference and absent styles fall 
   const calls:string[]=[];
   const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',styles:Object.keys(hashes),refHash:hashes.default,styleHashes:{...hashes}}),asr:async()=>({text:'',ms:0}),tts:async function*(_text,style){calls.push(style);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:zero};}};
   const {store}=await setup(client);
-  expect(calls).toEqual(['cheerful','warm','warm','apologetic','apologetic']);
+  expect(calls).toEqual(['cheerful','warm','warm','apologetic','apologetic','warm']);
   hashes.apologetic='e'.repeat(64);await store.initialize();
-  expect(calls.slice(5)).toEqual(['apologetic','apologetic']);
+  expect(calls.slice(6)).toEqual(['apologetic','apologetic']);
   const turn=store.start(buildSpokenSentences('先生,本月销售情况正常。'),undefined,'serious_long')!;
   await turn.completed;expect(turn.descriptor.style).toBe('default');expect(calls.at(-1)).toBe('default');
 });
@@ -326,6 +326,6 @@ it('a failed emotional fixed line uses a separate default cache without muting h
   const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',styles:['default','warm'],refHash:'a'.repeat(64),styleHashes:{default:'a'.repeat(64),warm:'b'.repeat(64)}}),asr:async()=>({text:'',ms:0}),tts:async function*(_text,style){calls.push(style);if(style==='warm')throw new Error('short emotional speech failed');yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:zero};}};
   const {store}=await setup(client,{warn});expect(store.ready).toBe(true);
   const goodbye=store.startFixed('goodbye',buildSpokenSentences('先生,再见。'))!;
-  expect(goodbye.descriptor.style).toBe('default');expect(store.fixedStyle('followup')).toBe('default');expect(warn).toHaveBeenCalledTimes(2);
+  expect(goodbye.descriptor.style).toBe('default');expect(store.fixedStyle('followup')).toBe('default');expect(warn).toHaveBeenCalledTimes(3);
   const count=calls.length;await store.initialize();expect(calls).toHaveLength(count);
 });

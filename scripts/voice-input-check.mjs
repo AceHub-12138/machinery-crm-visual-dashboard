@@ -21,13 +21,16 @@ import { loadConfig } from "../services/voice-orchestrator/src/config.ts";
 import { createDataSource } from "../services/voice-orchestrator/src/datasource/index.ts";
 import { OpenAiCompatibleAdapter } from "../services/voice-orchestrator/src/llm/zhipu.ts";
 import { TraceSink } from "../services/voice-orchestrator/src/trace/metrics.ts";
+import { percentile } from "../services/voice-orchestrator/src/trace/metrics.ts";
 const root = fileURLToPath(new URL("..", import.meta.url));
 const cfg = loadConfig();
 assert(cfg.llmApiKey && cfg.llmModel && process.env.VOICE_TEST_AUDIO_DIR, "Local model and test recording directory required");
 const output = process.argv[2] ?? "docs/voice-8c-task6-browser-calibration.json";
 const cache = await mkdtemp(join(tmpdir(), "voice-input-"));
 const screenToken = randomBytes(24).toString("hex"), consoleToken = randomBytes(24).toString("hex");
-const records=[], events=[], questions=[], rounds=[], errors=[];
+const records=[], events=[], questions=[], classifications=[], rounds=[], errors=[];
+const summarize=rows=>Object.fromEntries(['L1','L2','asrMs','asrRoundTripMs','classifyMs','ttsFirstByteMs','voiceLocalFirstByteMs','browserBufferMs'].map(key=>{const values=rows.map(r=>r[key]).filter(v=>typeof v==='number');return [key,{samples:values.length,p50:percentile(values,50),p95:percentile(values,95)}];}));
+const save=async()=>writeFile(output,JSON.stringify({scope:"injected macOS synthesized speech → real browser AudioWorklet/Silero VAD → loopback HTTP → real ASR/LLM/TTS → first scheduled sample; not exhibit/real microphone/LAN",model:cfg.llmModel,errors,summary:summarize(rounds),speculative:Object.fromEntries(['hit','miss','none'].map(group=>{const rows=rounds.filter(r=>r.speculative===group);return [group,{rounds:rows.length,...summarize(rows)}];})),rounds},null,2));
 const delay = ms => new Promise(r=>setTimeout(r,ms));
 async function wait(fn,timeout=90000) { const end=Date.now()+timeout; while(!fn()) { assert(Date.now()<end,"capture verification timeout"); await delay(25); } }
 class Sink extends TraceSink { async append(r) { records.push(structuredClone(r)); } }
@@ -37,13 +40,13 @@ try {
   store=new AudioStore({client,cacheDir:cache,enabled:true});await store.initialize();assert(store.ready);
   const audioHandler=createAudioHttpHandler({store,screenToken,consoleToken});
   let inputHandler;
-  hub=await startVoiceHub({host:"127.0.0.1",port:0,onHttpRequest:(req,res)=>["/voice/wake","/voice/utterance","/voice/input-config"].includes(new URL(req.url,"http://localhost").pathname)?inputHandler(req,res):audioHandler(req,res),onMessage:(conn,raw)=>orch.handleClientMessage(conn,raw)});
+  hub=await startVoiceHub({host:"127.0.0.1",port:0,onHttpRequest:(req,res)=>["/voice/wake","/voice/utterance","/voice/input-config","/voice/listen"].includes(new URL(req.url,"http://localhost").pathname)?inputHandler(req,res):audioHandler(req,res),onMessage:(conn,raw)=>orch.handleClientMessage(conn,raw)});
   const broadcast=hub.broadcast.bind(hub);
   hub.broadcast=(ev,filter)=>{events.push(structuredClone(ev));broadcast(ev,filter);};
   const adapter=new OpenAiCompatibleAdapter({baseUrl:cfg.llmBaseUrl,apiKey:cfg.llmApiKey,model:cfg.llmModel,reasoningEffort:"none"});
-  const llm={name:adapter.name,stream:adapter.stream.bind(adapter),classify:async(text,signal)=>{questions.push(text);return adapter.classify(text,signal);}};
+  const llm={name:adapter.name,stream:adapter.stream.bind(adapter),classify:async(text,signal)=>{questions.push(text);const intent=await adapter.classify(text,signal);classifications.push(intent);return intent;}};
   orch=createVoiceOrchestrator({hub,audio:store,speechClient:client,dataSource:createDataSource({mode:"fixture",fixturePath:cfg.fixturePath,baseUrl:"",publicId:""}),llm,mcp:null,trace:new Sink(null),hubAuth:{screenToken,consoleToken},llmTimeoutMs:8000,partialPaceMs:45,partialMaxTotalMs:1200,prefetchTimeoutMs:5000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:100,mcpToolWhitelist:[]});
-  inputHandler=createInputHttpHandler({screenToken,wake:followup=>followup?orch.beginListening():orch.beginSession(true),utterance:(pcm,signal,ms)=>orch.submitUtterance(pcm,signal,ms),config:()=>cfg.inputConfig});
+  inputHandler=createInputHttpHandler({screenToken,activity:orch.inputActivity,wake:()=>orch.beginSession(true),utterance:(pcm,signal,ms,lease)=>orch.submitUtterance(pcm,signal,ms,lease),config:()=>cfg.inputConfig});
   next=spawn(process.execPath,[join(root,"node_modules/next/dist/bin/next"),"start","--hostname","127.0.0.1","--port","18815"],{cwd:root,stdio:"ignore"});
   let ready=false;for(let i=0;i<100&&!ready;i++){try{ready=(await fetch("http://127.0.0.1:18815/screen/sales")).ok;}catch{} if(!ready)await delay(100);}assert(ready);
   browser=await chromium.launch({headless:true,args:["--autoplay-policy=no-user-gesture-required"]});
@@ -70,7 +73,7 @@ try {
   await delay(2000);
   const count=Number(process.env.VOICE_TEST_ROUNDS??20);
   for(let index=0;index<count;index++){
-    const q=index%8+1;const wav=await readFile(join(process.env.VOICE_TEST_AUDIO_DIR,`q${q}.wav`));
+    const fixtures=(process.env.VOICE_TEST_FIXTURES??"q1,q2,q3,q4,q5,q6,q7,q8").split(",");const q=fixtures[index%fixtures.length];const wav=await readFile(join(process.env.VOICE_TEST_AUDIO_DIR,`${q}.wav`));
     const before=records.length;
     await page.keyboard.press("F9");await wait(()=>orch.state.name==="listening",10000);console.log("listening",index+1);await delay(700);
     await page.evaluate(async base64=>{
@@ -80,9 +83,10 @@ try {
     },wav.toString("base64"));
     await wait(()=>records.length>before,120000);
     const metrics=await page.evaluate(()=>({utteranceAt:window.captureTest.utteranceAt,firstSampleAt:window.captureTest.firstSampleAt,lastSpeechAt:window.captureTest.lastSpeechAt,outputScheduled:window.captureTest.outputScheduled,audioFirstByteAt:window.captureTest.audioFirstByteAt}));
-    const record=records.at(-1);assert.equal(record.playbackOutcome,"drained");assert(metrics.utteranceAt>0&&metrics.firstSampleAt>metrics.utteranceAt);
-    rounds.push({round:index+1,fixture:`q${q}`,question:questions.at(-1),L1:metrics.firstSampleAt-metrics.utteranceAt,L2:metrics.firstSampleAt-metrics.lastSpeechAt,asrMs:record.asrMs,asrRoundTripMs:record.asrRoundTripMs,uploadBodyMs:record.uploadMs,classifyMs:record.classifyMs,ttsFirstByteMs:record.ttsFirstByteMs,voiceLocalFirstByteMs:record.voiceLocalFirstByteMs,ttsForwardingMs:record.voiceLocalFirstByteMs==null?null:record.ttsFirstByteMs-record.voiceLocalFirstByteMs,browserBufferMs:metrics.firstSampleAt-metrics.audioFirstByteAt,style:record.style,styleFallback:record.styleFallback??null,playbackOutcome:record.playbackOutcome});
-    await writeFile(output,JSON.stringify({scope:"injected macOS synthesized speech → real browser AudioWorklet/Silero VAD → loopback HTTP → real ASR/LLM/TTS → first scheduled sample; not exhibit/real microphone/LAN",errors,rounds},null,2));
+    const record=records.at(-1);
+    rounds.push({round:index+1,fixture:q,question:questions.at(-1),authoritativeIntent:classifications.at(-1),L1:metrics.firstSampleAt?metrics.firstSampleAt-metrics.utteranceAt:null,L2:metrics.firstSampleAt?metrics.firstSampleAt-metrics.lastSpeechAt:null,asrMs:record.asrMs,asrRoundTripMs:record.asrRoundTripMs,uploadBodyMs:record.uploadMs,classifyMs:record.classifyMs,ttsFirstByteMs:record.ttsFirstByteMs,voiceLocalFirstByteMs:record.voiceLocalFirstByteMs,ttsForwardingMs:record.voiceLocalFirstByteMs==null?null:record.ttsFirstByteMs-record.voiceLocalFirstByteMs,browserBufferMs:metrics.firstSampleAt?metrics.firstSampleAt-metrics.audioFirstByteAt:null,speculative:record.speculative??"none",style:record.style,styleFallback:record.styleFallback??null,playbackOutcome:record.playbackOutcome});
+    await save();
+    assert.equal(record.playbackOutcome,"drained");assert(metrics.utteranceAt>0&&metrics.firstSampleAt>metrics.utteranceAt);
     console.log(JSON.stringify(rounds.at(-1)));
     orch.forceClose("force");await wait(()=>orch.state.name==="ambient",5000);await delay(500);
   }

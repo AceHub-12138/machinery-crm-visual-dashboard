@@ -32,7 +32,8 @@ def pitch(audio, sr=24000):
         if region[index]>=.3: values.append(sr/(lo+index))
     return float(np.median(values)) if len(values)>=5 else None
 if __name__ == "__main__":
-    p=argparse.ArgumentParser();p.add_argument("--url",default="http://127.0.0.1:18810");p.add_argument("--whisper-model",required=True);p.add_argument("--out",required=True);args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument("--url",default="http://127.0.0.1:18810");p.add_argument("--whisper-model",required=True);p.add_argument("--out",required=True);p.add_argument("--reference-f0",type=float,default=104.3);args=p.parse_args()
+    if args.reference_f0 <= 0: p.error("reference-f0 must be positive")
     os.environ["HF_HUB_OFFLINE"]="1";out=Path(args.out);out.parent.mkdir(parents=True,exist_ok=True)
     report={"scope":"production HTTP TTS, Whisper CER and pitch; no human listening or exhibit microphone", "health":{}, "rounds":[], "styles":{}}
     if out.exists(): report=json.loads(out.read_text())
@@ -61,6 +62,9 @@ if __name__ == "__main__":
                     rows.append(row);report["rounds"].append(row)
                     print(json.dumps({"style":style,"round":len(rows),"cer":row["cer"],"firstByteMs":row["firstByteMs"]}),flush=True)
                     out.write_text(json.dumps(report,ensure_ascii=False,indent=2))
-            report["styles"][style]={"under10Percent":sum(r["cer"]<=.1 for r in rows),"f0Within15Percent":sum(r["f0"] is not None and abs(r["f0"]-104.3)/104.3<=.15 for r in rows),"silent":sum(r["silent"] for r in rows),"failed":sum(r["ttsFail"] for r in rows),"truncated":sum(r["ttsTruncated"] for r in rows),"regenerated":sum(r["ttsRegenerated"] for r in rows),"firstByteP50":float(np.percentile([r["firstByteMs"] for r in rows if r["firstByteMs"] is not None],50)),"firstByteP95":float(np.percentile([r["firstByteMs"] for r in rows if r["firstByteMs"] is not None],95))}
+            pitches=[r["f0"] for r in rows if r["f0"] is not None]
+            median=float(np.median(pitches)) if pitches else None
+            report["referenceF0"]=args.reference_f0
+            report["styles"][style]={"under10Percent":sum(r["cer"]<=.1 for r in rows),"f0Median":median,"f0MedianWithin15Percent":median is not None and abs(median-args.reference_f0)/args.reference_f0<=.15,"f0Within15Percent":sum(abs(v-args.reference_f0)/args.reference_f0<=.15 for v in pitches),"silent":sum(r["silent"] for r in rows),"failed":sum(r["ttsFail"] for r in rows),"truncated":sum(r["ttsTruncated"] for r in rows),"regenerated":sum(r["ttsRegenerated"] for r in rows),"firstByteP50":float(np.percentile([r["firstByteMs"] for r in rows if r["firstByteMs"] is not None],50)),"firstByteP95":float(np.percentile([r["firstByteMs"] for r in rows if r["firstByteMs"] is not None],95))}
             out.write_text(json.dumps(report,ensure_ascii=False,indent=2))
     (out.parent/"style-probe.wav").unlink(missing_ok=True)

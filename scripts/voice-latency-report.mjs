@@ -59,6 +59,11 @@ const degraded = records.filter((r) => r.degraded).length;
 const playback = records.map(r => r.playbackStartMs).filter(v => typeof v === "number" && Number.isFinite(v));
 const playbackRow = `| 提问 → 收到首音回报 | ${percentile(playback,50) ?? "—"} ms | ${percentile(playback,95) ?? "—"} ms | ${playback.length} |`;
 const outcomes = records.reduce((counts,r) => { if (r.playbackOutcome) counts[r.playbackOutcome] = (counts[r.playbackOutcome] ?? 0) + 1; return counts; }, {});
+const predictionRows = ["hit", "miss", "none"].map(group => {
+  const rows=records.filter(r=>(r.speculative??"none")===group);
+  const samples=rows.map(r=>r.playbackStartMs).filter(v=>typeof v==='number'&&Number.isFinite(v));
+  return `| ${group} | ${rows.length} | ${percentile(samples,50)??"—"} ms | ${percentile(samples,95)??"—"} ms | ${samples.length} |`;
+}).join("\n");
 const rows = stages
   .map(
     (s) =>
@@ -84,7 +89,14 @@ ${rows}
 ${totalRow}
 ${playbackRow}
 
+## 预测性合成分组
+
+| 分组 | 记录数 | 上传后 → 首音回报 P50 | P95 | 有首音样本 |
+| --- | --- | --- | --- | --- |
+${predictionRows}
+
 > 「全答就绪」= 答案卡构造完成；不代表首音。「收到首音回报」= 提问到hub收到浏览器首个样本开始回报，含回传耗时，不跨机器混算时钟。
+> 语音上传轮的首音回报是 L1 的服务端观察值，含回传；文字提问轮不能算 VAD L1。真实 L1/L2 以浏览器或同步现场计时为准，分类与预测 TTS 并行，阶段耗时不能直接相加。
 > Task 6接入VAD/ASR后才能按L1/L2做现场验收；旧记录缺播放字段时不计入首音样本。
 `;
 

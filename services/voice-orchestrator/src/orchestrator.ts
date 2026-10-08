@@ -12,6 +12,10 @@
  * 携卡)→ state.change(answering);大屏映射依赖该顺序取卡。
  */
 
+import { ListenWindow, type InputLease, type ListenAction } from "./listen-window.ts";
+import { classifyScriptedQuestion } from "../../../src/lib/voice/intents.ts";
+import type { Intent } from "../../../src/lib/voice/intents.ts";
+import type { AudioTurn } from "./tts/audio-store.ts";
 import { stripWakePrefix, isUnheard } from "../../../src/lib/voice/asr-text.ts";
 import { speechStyleFor } from "../../../src/lib/voice/speech-style.ts";
 import type { SpeechClient } from "./tts/voice-local-client.ts";
@@ -55,6 +59,7 @@ import { LAUNCH } from "../../../src/lib/voice/params.ts";
 
 export type OrchestratorOptions = {
   hub: VoiceHubServer;
+  listenTimeoutMs?: number;
   audio?: AudioStore;
   speechClient?: SpeechClient;
   styleOverrides?: Record<string, string>;
@@ -97,6 +102,8 @@ export function parseConsoleEvent(raw: string): ConsoleWireEvent | null {
       return ev.role === "console" || ev.role === "screen" ? ev : null;
     case "hub.auth":
       return typeof ev.token === "string" && ev.token.length > 0 && ev.token.length <= 256 ? ev : null;
+    case "session.dismiss":
+      return typeof ev.sessionId === "string" && /^sess-[a-f0-9-]{1,40}$/.test(ev.sessionId) ? ev : null;
     case "session.wake":
     case "session.close":
       return ev;
@@ -128,6 +135,11 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   let state: VoiceSessionState = initSessionState(Date.now());
   let sessionId = "";
   let voiceSession = false;
+  let listenWindow: ListenWindow | null = null;
+  let wakeGuard: unknown = null;
+  let failures = 0;
+  let answerIntent: Intent | "unheard" | null = null;
+  let wakeAt: number[] = [];
   let turnSeq = 0; // 每次提问递增;一切延迟回调持有所属 seq,过期即弃
   let pendingQuestion: string | null = null;
   let answer: ReturnType<typeof buildIntentAnswer> | null = null;
@@ -136,7 +148,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   /** 进行中的一轮:新问题到来时中止旧轮(LLM 流/死线一并释放) */
   let inputController: AbortController | null = null;
   let inputMeta: { asrMs: number; uploadMs: number; asrRoundTripMs: number; started: number } | null = null;
-  let fixedPlayback: { id: string; next: "listening" | "followup" | "close"; seq: number; started: number } | null = null;
+  let fixedPlayback: { id: string; next: "listening" | "followup" | "close" | "exit"; seq: number; started: number } | null = null;
   let activeTurn: { controller: AbortController; deadline: NodeJS.Timeout | null } | null = null;
   /** 提问限流账本:全局一份(审核 M4:按连接计可被多连接绕过) */
   let askedAt: number[] = [];
@@ -169,13 +181,16 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if ((outcome === "failed" || (outcome === "timeout" && !goodbyeId)) && audioId) options.audio?.cancel(audioId);
     endPlayback(outcome);
     if (goodbyeId) { forceClose("decline"); return; }
-    if (answer?.card.spoken === "我在,先生。请讲。") {
+    if (voiceSession && failures >= 2) { idleExit(); return; }
+    if (answerIntent === "greeting" || answerIntent === "unheard") {
       dispatch({ type: "SPOKEN", at: Date.now() });
-      dispatch({ type: "SPEAK", at: Date.now() }); return;
+      dispatch({ type: "SPEAK", at: Date.now() });
+      if (voiceSession) startListen("listening"); return;
     }
     dispatch({ type: "SPOKEN", at: Date.now() });
     if (voiceSession && playFixed("followup", "followup")) return;
-    followupTimeout(seq);
+    if (voiceSession) startListen("followup");
+    else followupTimeout(seq);
   }
 
   function followupTimeout(seq: number): void {
@@ -202,6 +217,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if (next === state) return; // 非法转移(镜像与覆盖层同守)
     state = next;
     if (next.name !== from) {
+      listenWindow?.stop(); listenWindow = null;
+      if (next.name === "closing" || next.name === "ambient") clearWakeGuard();
+    }
+    if (next.name !== from) {
       broadcast({
         type: "state.change",
         at: Date.now(),
@@ -211,6 +230,28 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         ...(next.name === "thinking" && next.question ? { question: next.question } : {}),
       });
     }
+  }
+
+  // Listening starts only after the browser reports its actual open microphone.
+  function clearWakeGuard(): void { if (wakeGuard !== null) clearTimer(wakeGuard); wakeGuard = null; }
+  function startListen(mode: "listening" | "followup"): void {
+    listenWindow?.stop();
+    const lease = { sessionId, listenId: randomUUID() };
+    listenWindow = new ListenWindow(lease, mode, { timeoutMs: mode === "listening" ? options.listenTimeoutMs ?? 5000 : VOICE_TIMING.followupMs, setTimer, clearTimer, expire: missing => {
+      if (lease.sessionId !== sessionId || !["listening", "followup"].includes(state.name)) return;
+      if (mode === "followup") { forceClose("followup_timeout"); return; }
+      if (missing) forceClose("listen_timeout"); else idleExit();
+    } });
+    broadcast({ type: "input.listen", at: Date.now(), ...lease, mode });
+  }
+  function inputActivity(lease: InputLease, action: ListenAction): void {
+    if (!listenWindow || lease.sessionId !== sessionId || lease.listenId !== listenWindow.lease.listenId || fixedPlayback || !["listening", "followup"].includes(state.name)) throw new InputError(409, "stale_listen_window");
+    if (action === "ready") clearWakeGuard();
+    listenWindow.report(action);
+  }
+  function idleExit(): void {
+    listenWindow?.stop(); listenWindow = null; clearWakeGuard(); clearTimers();
+    if (!voiceSession || !playFixed("idle_exit", "exit")) forceClose("listen_timeout");
   }
 
   /** 业务事件只发给已声明角色的连接(审核 M6:未声明连接不得旁听问题原文/回答流) */
@@ -234,6 +275,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           degraded: record.degraded,
           totalMs: record.totalMs,
           ...(record.style ? { style: record.style, ...(record.styleFallback ? { styleFallback: record.styleFallback } : {}) } : {}),
+          speculative: record.speculative ?? "none",
           asrMs: record.asrMs ?? null,
           playbackStartMs: record.playbackStartMs ?? null,
           ...(record.playbackOutcome ? { playbackOutcome: record.playbackOutcome } : {}),
@@ -264,30 +306,43 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   /* ---------- 会话生命周期 ---------- */
 
-  function beginSession(withVoice = false): void {
-    if (state.name !== "ambient") return;
+  function beginSession(withVoice = false): boolean {
+    if (state.name !== "ambient") return false;
+    if (withVoice) {
+      const now = Date.now(); wakeAt = wakeAt.filter(t => now - t < questionWindowMs);
+      if (wakeAt.length >= questionWindowMax || (wakeAt.length && now - wakeAt.at(-1)! < questionMinGapMs)) throw new InputError(429, "wake_rate_limited");
+      wakeAt.push(now);
+    }
+    failures = 0; answerIntent = null; clearWakeGuard();
     voiceSession = withVoice;
     sessionId = `sess-${randomUUID().slice(0, 8)}`;
     answer = null;
     broadcast({ type: "session.start", at: Date.now(), sessionId });
     dispatch({ type: "WAKE", at: Date.now() });
-    if (withVoice && playFixed("wake", "listening")) return;
+    if (withVoice && playFixed("wake", "listening")) {
+      const ms = options.audio?.lookup(fixedPlayback!.id)?.bytes ?? 0;
+      wakeGuard = setTimer(() => forceClose("listen_timeout"), ms / 48 + (options.listenTimeoutMs ?? 5000) + 1000);
+      return true;
+    }
     later(VOICE_TIMING.wakingMs, () => {
       dispatch({ type: "WOKEN", at: Date.now() });
+      if (voiceSession) startListen("listening");
       if (pendingQuestion) {
         const question = pendingQuestion;
         pendingQuestion = null;
         acceptQuestion(question);
       }
     });
+    return true;
   }
 
-  function playFixed(key: FixedLineKey, next: "listening" | "followup" | "close"): boolean {
+  function playFixed(key: FixedLineKey, next: "listening" | "followup" | "close" | "exit"): boolean {
     const text = FIXED_LINES[key];
     const sentence = [{ index: 0, text, spokenText: text, displayStart: 0, displayEnd: text.length }];
     if (!options.audio?.ready || hub.counts().screens < 1) return false;
     const turn = options.audio.startFixed(key, sentence);
     if (!turn) return false;
+    listenWindow?.stop(); listenWindow = null;
     fixedPlayback = { id: turn.id, next, seq: turnSeq, started: Date.now() };
     broadcast({ type: "speech.fixed", at: Date.now(), text, speech: turn.descriptor });
     later(turn.bytes / 48000 * 2000 + 2000, () => completeFixed(turn.id));
@@ -303,25 +358,28 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       if (p.next === "listening") {
         if (state.name === "waking") dispatch({ type: "WOKEN", at: Date.now() });
         else if (state.name === "followup") dispatch({ type: "SPEAK", at: Date.now() });
+        startListen("listening");
         if (pendingQuestion) { const q = pendingQuestion; pendingQuestion = null; acceptQuestion(q); }
+      } else if (p.next === "exit") { forceClose("listen_timeout");
       } else if (p.next === "close" && state.name === "error-fallback") {
         dispatch({ type: "ERROR_SPOKEN", at: Date.now() });
         broadcast({ type: "session.end", at: Date.now(), reason: "error" });
         later(VOICE_TIMING.closingMs, () => dispatch({ type: "CLOSED", at: Date.now() }));
-      } else if (state.name === "followup") followupTimeout(p.seq);
+      } else if (state.name === "followup") { if (voiceSession) startListen("followup"); else followupTimeout(p.seq); }
     };
     later(Math.max(0, VOICE_TIMING.wakingMs - (Date.now() - p.started)), finish);
   }
 
-  async function submitUtterance(pcm: Uint8Array, signal: AbortSignal, uploadMs = 0): Promise<void> {
+  async function submitUtterance(pcm: Uint8Array, signal: AbortSignal, uploadMs = 0, lease?: InputLease): Promise<void> {
+    if (lease && (lease.sessionId !== sessionId || lease.listenId !== listenWindow?.lease.listenId)) throw new InputError(409, "stale_listen_window");
     if (!["listening", "followup"].includes(state.name) || fixedPlayback || inputController) throw new InputError(409, "microphone_closed");
-    if (rateLimited()) throw new InputError(429, "rate_limited");
+    if (rateLimited()) { if (voiceSession) idleExit(); throw new InputError(429, "rate_limited"); }
     const controller = new AbortController(); inputController = controller;
     const seq = turnSeq; const started = Date.now();
     const combined = AbortSignal.any([signal, controller.signal]);
     try {
       if (!options.speechClient) throw new InputError(503, "asr_unavailable");
-      clearTimers();
+      clearTimers(); listenWindow?.stop(); listenWindow = null; clearWakeGuard();
       if (state.name === "followup") dispatch({ type: "SPEAK", at: Date.now() });
       const result = await options.speechClient.asr(pcm, combined);
       combined.throwIfAborted();
@@ -339,6 +397,9 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   }
 
   function answerUnheard(started: number, asrMs: number): void {
+    answerIntent = "unheard"; failures++;
+    if (voiceSession && failures >= 2) { inputMeta = null; idleExit(); return; }
+    const seq = turnSeq;
     dispatch({ type: "SUBMIT", at: Date.now(), question: "未听清" });
     answer = { card: buildBriefCard("小川", [FIXED_LINES.unheard]), cardId: "brief", spoken: FIXED_LINES.unheard, sentences: [], unanswerable: false };
     answer.sentences = [{ index: 0, text: FIXED_LINES.unheard, spokenText: FIXED_LINES.unheard, displayStart: 0, displayEnd: FIXED_LINES.unheard.length }];
@@ -350,14 +411,16 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if (turn) playback = { id: turn.id, seq: turnSeq, record, synthesisDone: true, finished: false, written: false, waitingForScreens: true };
     broadcast({ type: "answer.delta", at: Date.now(), seq: 0, text: answer.spoken, full: true, card: answer.card, ...(turn ? { speech: turn.descriptor } : {}) });
     dispatch({ type: "ANSWER", at: Date.now(), card: answer.card });
-    later(turn ? turn.bytes / 48000 * 2000 + 2000 : 2000, () => spoken(turnSeq, "timeout"));
+    clearWakeGuard(); wakeGuard = setTimer(() => forceClose("listen_timeout"), (turn?.bytes ?? 0) / 48 + (options.listenTimeoutMs ?? 5000) + 1000);
+    later(turn ? turn.bytes / 48000 * 2000 + 2000 : 2000, () => spoken(seq, "timeout"));
     inputMeta = null;
     if (!playback) void trace.append(record);
   }
 
-  function forceClose(reason: "force" | "decline"): void {
+  function forceClose(reason: import("../../../src/lib/voice/protocol.ts").SessionEndReason): void {
+    listenWindow?.stop(); listenWindow = null; clearWakeGuard();
     inputController?.abort(); inputController = null; inputMeta = null; pendingQuestion = null;
-    if (reason === "force") cancelAudio();
+    if (reason !== "decline") cancelAudio();
     if (state.name === "ambient" || state.name === "closing") return;
     clearTimers();
     goodbyeId = null;
@@ -374,6 +437,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   function handleClientMessage(conn: HubConnection, raw: string): void {
     const event = parseConsoleEvent(raw);
     if (!event) return;
+    if (event.type === "session.dismiss") {
+      if (conn.role === "screen" && event.sessionId === sessionId && state.name !== "ambient") forceClose("force");
+      return;
+    }
     if (event.type.startsWith("playback.") && "turnId" in event && fixedPlayback?.id === event.turnId && conn.role === "screen") {
       if (event.type === "playback.failed" && event.reason === "dismissed") forceClose("force");
       else if (event.type === "playback.drained" || event.type === "playback.failed") completeFixed(event.turnId);
@@ -486,7 +553,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         dispatch({ type: "SPEAK", at: Date.now() });
         break;
     }
-    clearTimers();
+    clearTimers(); listenWindow?.stop(); listenWindow = null; clearWakeGuard();
     cancelAudio();
     clearActiveTurn(); // 旧轮的分类/死线立即释放
     answer = null;
@@ -576,21 +643,44 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     controller: AbortController,
     deadlineState: { fired: boolean; timer: NodeJS.Timeout | null },
   ): Promise<void> {
-
+    let predicted: AudioTurn | null = null;
+    let predictionAccepted = false;
+    let speculativeRecord: TurnTraceRecord | null = null;
+    const cancelPrediction = () => { if (predicted) options.audio?.cancel(predicted.id); };
+    controller.signal.addEventListener("abort", cancelPrediction, { once: true });
     try {
       /* ---- 预取 ---- */
       const payload = await prefetch;
-      if (seq !== turnSeq) return;
+      if (seq !== turnSeq || controller.signal.aborted) { controller.signal.removeEventListener("abort", cancelPrediction); return; }
       tracer.mark("prefetch");
       /* ---- LLM 只选意图；不发送快照、不执行工具轮 ---- */
       const classifyStart = performance.now();
-      const classified = await llm.classify(question, controller.signal);
+      const classification = llm.classify(question, controller.signal);
+      classification.catch(() => {});
+      const guess = classifyScriptedQuestion(question);
+      if (options.audio?.ready && !["unanswerable", "greeting", "chitchat_or_end"].includes(guess) && !controller.signal.aborted) {
+        const draft = buildIntentAnswer(guess, payload);
+        predicted = options.audio?.start(buildSpokenSentences(clampAnswerText(draft.spoken)), metrics => {
+          if (predictionAccepted && speculativeRecord && seq === turnSeq) { Object.assign(speculativeRecord, metrics); emitTrace(speculativeRecord); }
+        }, speechStyleFor(guess, payload, options.styleOverrides)) ?? null;
+      }
+      const classified = await classification;
       const classifyMs = performance.now() - classifyStart;
-      if (seq !== turnSeq) return;
+      if (seq !== turnSeq) { cancelPrediction(); controller.signal.removeEventListener("abort", cancelPrediction); return; }
       if (controller.signal.aborted) throw new LlmError("LLM 分类超时", "llm_timeout");
       clearTimeout(deadlineState.timer ?? undefined);
       activeTurn = null;
       const intent = isIntent(classified) && !hasUnsupportedScope(question) ? classified : "unanswerable";
+      const speculative = predicted ? intent === guess ? "hit" : "miss" : "none";
+      predictionAccepted = speculative === "hit";
+      if (predicted && speculative === "miss") { cancelPrediction(); predicted = null; }
+      controller.signal.removeEventListener("abort", cancelPrediction);
+      answerIntent = intent;
+      failures = intent === "unanswerable" ? failures + 1 : 0;
+      if (voiceSession && failures >= 2) {
+        const record = tracer.finish({ source: "payload", card: null, degraded: true, classifyMs });
+        record.speculative = speculative; await trace.append(record); emitTrace(record); idleExit(); return;
+      }
       const routed = buildIntentAnswer(intent, payload);
       const snapshot = buildInjectedContext(payload); // 仅供本地备用护栏，不进入模型
       const verdict = sanitizeAnswer(routed.spoken, snapshot);
@@ -611,15 +701,18 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       });
       const requestedStyle = speechStyleFor(intent, payload, options.styleOverrides);
       const style = options.audio?.resolveStyle(requestedStyle) ?? requestedStyle;
+      record.speculative = speculative;
       record.style = style;
       if (style !== requestedStyle) record.styleFallback = requestedStyle;
       Object.assign(record, (tracer as TurnTracer & { voiceMeta?: object }).voiceMeta ?? {});
       const fixedKey = intent === "chitchat_or_end" ? "goodbye" : intent === "greeting" ? "wake" : null;
       const fixedSentences = [{ index: 0, text: finalSpoken, spokenText: finalSpoken, displayStart: 0, displayEnd: finalSpoken.length }];
-      const audioTurn = fixedKey ? options.audio?.startFixed(fixedKey, fixedSentences) : options.audio?.start(answer.sentences, (metrics) => {
+      speculativeRecord = record;
+      const audioTurn = predicted ?? (fixedKey ? options.audio?.startFixed(fixedKey, fixedSentences) : options.audio?.start(answer.sentences, (metrics) => {
         Object.assign(record, metrics);
         if (seq === turnSeq) emitTrace(record);
-      }, requestedStyle);
+      }, requestedStyle));
+      if (predicted) Object.assign(record, predicted.metrics);
       if (audioTurn?.descriptor.style) { record.style = audioTurn.descriptor.style; if (record.style !== requestedStyle) record.styleFallback = requestedStyle; }
       audioId = audioTurn?.id ?? null;
       if (audioTurn) {
@@ -667,6 +760,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           if (!isLast) return;
           // 末片落卡:镜像进 answering(大屏由随后的 state.change 驱动 ANSWER)
           dispatch({ type: "ANSWER", at: Date.now(), card });
+          if (voiceSession && intent === "greeting") { clearWakeGuard(); wakeGuard = setTimer(() => forceClose("listen_timeout"), (audioTurn?.bytes ?? 0) / 48 + (options.listenTimeoutMs ?? 5000) + 1000); }
           if (audioTurn && intent === "chitchat_or_end") goodbyeId = audioTurn.id;
           if (audioTurn && hub.counts().screens > 0) {
             if (playback) playback.waitingForScreens = true;
@@ -685,6 +779,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       });
       void turn;
     } catch (err) {
+      cancelPrediction(); controller.signal.removeEventListener("abort", cancelPrediction);
       if (seq !== turnSeq) return;
       clearTimeout(deadlineState.timer ?? undefined);
       activeTurn = null;
@@ -708,7 +803,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     tracer: TurnTracer,
     err: { code: VoiceErrorCode; message: string },
   ): Promise<void> {
-    cancelAudio();
+    cancelAudio(); failures++;
+    if (voiceSession && failures >= 2) { idleExit(); return; }
     const record = tracer.finish({ source: "payload", card: null, degraded: true });
     await trace.append(record);
     emitTrace(record);
@@ -732,8 +828,9 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   return {
     handleClientMessage,
+    inputActivity,
     submitUtterance,
-    beginListening(): void { if (state.name === "followup" && !fixedPlayback) { clearTimers(); dispatch({ type: "SPEAK", at: Date.now() }); } },
+    beginListening(): boolean { if (state.name !== "followup" || fixedPlayback) return false; clearTimers(); dispatch({ type: "SPEAK", at: Date.now() }); if (voiceSession) startListen("listening"); return true; },
     beginSession,
     forceClose,
     attach(conn: HubConnection): void {
@@ -751,6 +848,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     get answer(): ReturnType<typeof buildIntentAnswer> | null {
       return answer;
     },
+    get inputLease(): InputLease | null { return listenWindow?.lease ?? null; },
     get sessionId(): string {
       return sessionId;
     },

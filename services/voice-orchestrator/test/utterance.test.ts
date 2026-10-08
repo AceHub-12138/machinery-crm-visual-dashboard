@@ -27,10 +27,10 @@ describe('ASR session safety and immediate classification',()=>{
     await vi.advanceTimersByTimeAsync(1);expect(s.classify).toHaveBeenCalledWith('本月销售怎么样',expect.any(AbortSignal));
     await expect(s.orch.submitUtterance(pcm,new AbortController().signal)).rejects.toMatchObject({status:409});s.orch.forceClose('force');
   });
-  it('empty recognition produces unheard and keeps a followup window',async()=>{
+  it('empty recognition produces unheard and reopens a listening window',async()=>{
     const s=setup('小川');s.orch.beginSession(true);await vi.advanceTimersByTimeAsync(VOICE_TIMING.wakingMs);
     await s.orch.submitUtterance(pcm,new AbortController().signal);expect(s.orch.answer?.spoken).toContain('没有听清');expect(s.classify).not.toHaveBeenCalled();
-    await vi.advanceTimersByTimeAsync(2000);expect(s.orch.state.name).toBe('followup');s.orch.beginListening();expect(s.orch.state.name).toBe('listening');
+    await vi.advanceTimersByTimeAsync(2000);expect(s.orch.state.name).toBe('listening');expect(s.orch.state.name).toBe('listening');
     await expect(s.orch.submitUtterance(pcm,new AbortController().signal)).resolves.toBeUndefined();s.orch.forceClose('force');
   });
   it('shares the global question limit with console input',async()=>{
