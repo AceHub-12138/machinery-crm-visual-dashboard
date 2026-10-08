@@ -208,10 +208,10 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
   const ev = data as VoiceWireEvent;
   switch (ev.type) {
     case "input.listen":
-      return typeof ev.sessionId === "string" && ev.sessionId.length <= 64 && /^sess-[a-f0-9-]+$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && ["listening", "followup", "barge", "off"].includes(ev.mode) && (ev.mode !== "barge" || /^[a-f0-9-]{36}$/.test(ev.turnId ?? "")) && (ev.timeoutMs === undefined || [5000, 8000].includes(ev.timeoutMs)) && (ev.phase === undefined || ["long", "short"].includes(ev.phase)) ? ev : null;
+      return typeof ev.sessionId === "string" && ev.sessionId.length <= 64 && /^sess-[a-f0-9-]+$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && ["listening", "followup", "barge", "off"].includes(ev.mode) && (ev.mode !== "barge" || /^[a-f0-9-]{36}$/.test(ev.turnId ?? "")) && (ev.timeoutMs === undefined || (Number.isFinite(ev.timeoutMs) && ev.timeoutMs > 0 && ev.timeoutMs <= 60000)) && (ev.phase === undefined || ["long", "short"].includes(ev.phase)) ? ev : null;
     case "input.open":
     case "input.progress":
-      return /^sess-[a-f0-9-]{1,40}$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && [5000,8000].includes(ev.timeoutMs) && Number.isFinite(ev.remainingMs) && ev.remainingMs >= 0 && ev.remainingMs <= ev.timeoutMs && typeof ev.paused === "boolean" ? ev : null;
+      return /^sess-[a-f0-9-]{1,40}$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && (Number.isFinite(ev.timeoutMs) && ev.timeoutMs > 0 && ev.timeoutMs <= 60000) && Number.isFinite(ev.remainingMs) && ev.remainingMs >= 0 && ev.remainingMs <= ev.timeoutMs && typeof ev.paused === "boolean" ? ev : null;
     case "barge.result":
       return /^sess-[a-f0-9-]{1,40}$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && /^[a-f0-9-]{36}$/.test(ev.attemptId) && typeof ev.accepted === "boolean" && ev.accepted === (ev.reason === "question") && ["question","echo","unheard","timeout","misfire","rate_limited"].includes(ev.reason) ? ev : null;
     case "speech.fixed":

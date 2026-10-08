@@ -343,7 +343,10 @@ export function OverlayStage({
       if (event.type === "session.start") { sessionIdRef.current = event.sessionId; ownsSessionRef.current = !event.screenId || event.screenId === screenIdRef.current; micRef.current?.setSession(event.sessionId, ownsSessionRef.current); }
       if (event.type === "session.end") { micRef.current?.setListen(null); frameRef.current.listenClock = null; setBargePaused(false); }
       if (event.type === "input.listen") {
-        frameRef.current.listenClock = null; listenIdRef.current = event.listenId;
+        frameRef.current.listenClock = event.mode === "listening" || event.mode === "followup"
+          ? { receivedAt: performance.now(), remainingMs: event.timeoutMs ?? VOICE_TIMING.shortListenMs, timeoutMs: event.timeoutMs ?? VOICE_TIMING.shortListenMs, paused: true }
+          : null;
+        listenIdRef.current = event.listenId;
         if (event.phase === "long" || event.mode === "off") setPromptCaption(null);
         if (ownsSessionRef.current) micRef.current?.setListen(event); return;
       }
@@ -354,8 +357,8 @@ export function OverlayStage({
       }
       if (event.type === "barge.result") {
         if (event.sessionId !== sessionIdRef.current) return;
-        if (!micRef.current?.bargeResult(event.attemptId, event.accepted)) return;
-        if (event.accepted) { getPlayer().stop(); fixedIdRef.current = null; playingIdRef.current = null; setBargePaused(false); }
+        if (!micRef.current?.bargeResult(event.attemptId, event.accepted, event.reason === "rate_limited" ? "rate_limited" : undefined)) return;
+        if (event.accepted || event.reason === "rate_limited") { getPlayer().stop(); fixedIdRef.current = null; playingIdRef.current = null; setBargePaused(false); }
         return;
       }
       if (event.type === "state.change" && ["thinking", "closing", "error-fallback"].includes(event.to)) { micRef.current?.setListen(null); frameRef.current.listenClock = null; }

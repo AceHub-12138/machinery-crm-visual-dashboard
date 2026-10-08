@@ -374,7 +374,9 @@ export type CoreVisual = {
   pulseRing: number;
 };
 
+export type ListenClock = { receivedAt: number; remainingMs: number; timeoutMs: number; paused: boolean };
 export type CoreVisualInput = {
+  listenClock?: ListenClock | null;
   name: VoiceStateName;
   /** 当前状态进入时刻(ms,performance.now 域) */
   since: number;
@@ -387,6 +389,14 @@ export type CoreVisualInput = {
 
 /** §6 表:六状态行为映射的唯一实现。 */
 export function coreVisual(input: CoreVisualInput): CoreVisual {
+  const visual = stateVisual(input);
+  if (input.listenClock !== undefined) {
+    const clock = input.listenClock;
+    visual.countdown = clock ? clamp01((clock.remainingMs - (clock.paused ? 0 : input.now - clock.receivedAt)) / clock.timeoutMs) : null;
+  }
+  return visual;
+}
+function stateVisual(input: CoreVisualInput): CoreVisual {
   const { name, since, now, amplitude } = input;
   const base: CoreVisual = {
     formation: name === "ambient" ? 0 : 1,
@@ -500,7 +510,7 @@ export function coreVisual(input: CoreVisualInput): CoreVisual {
 
 /** 会话快照:回放器每帧喂给画布的最小状态(避免画布感知 reducer 细节)。 */
 export type VoiceFrame = {
-  listenClock?: { receivedAt: number; remainingMs: number; timeoutMs: number; paused: boolean } | null;
+  listenClock?: ListenClock | null;
   name: VoiceStateName;
   since: number;
   /** 返回当前振幅(0..1) */

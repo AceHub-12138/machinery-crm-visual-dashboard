@@ -356,3 +356,13 @@ describe("lerp/边界", () => {
     expect(lerp(0.2, 1, 1)).toBeCloseTo(1, 10);
   });
 });
+
+it('live countdown uses the received listen clock for full/pause/resume/hide',()=>{
+  const input={name:'followup' as const,since:0,now:100000,amplitude:.5,launchElapsedMs:null};
+  const clock={receivedAt:99900,remainingMs:8000,timeoutMs:8000,paused:true};
+  expect(coreVisual({...input,listenClock:clock}).countdown).toBe(1);
+  expect(coreVisual({...input,listenClock:{...clock,paused:false}}).countdown).toBeCloseTo(.9875);
+  expect(coreVisual({...input,listenClock:{...clock,remainingMs:4000}}).countdown).toBe(.5);
+  expect(coreVisual({...input,listenClock:null}).countdown).toBeNull();
+  expect(coreVisual({...input,name:'listening',listenClock:{...clock,timeoutMs:5000,remainingMs:5000}}).countdown).toBe(1);
+});

@@ -199,3 +199,12 @@ it("listen and barge diagnostics reject invalid budgets, modes, attempts and con
   expect(read({...base,type:'barge.result',attemptId:base.listenId,accepted:true,reason:'echo'})).toBeNull();
   expect(read({...base,type:'barge.result',attemptId:base.listenId,accepted:false,reason:'echo'})).not.toBeNull();
 });
+
+it('accepts configured ordinary listen budgets, rejects absent or invalid countdown budgets',()=>{
+  const base={at:1,sessionId:'sess-aaaaaaaa',listenId:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'};
+  for(const timeoutMs of [1,2000,5000,8000,60000]){
+    expect(parseWireEvent(JSON.stringify({...base,type:'input.listen',mode:'listening',timeoutMs}))).not.toBeNull();
+    expect(parseWireEvent(JSON.stringify({...base,type:'input.open',timeoutMs,remainingMs:timeoutMs,paused:false}))).not.toBeNull();
+  }
+  for(const timeoutMs of [0,-1,60001,Infinity])expect(parseWireEvent(JSON.stringify({...base,type:'input.open',timeoutMs,remainingMs:0,paused:false}))).toBeNull();
+});

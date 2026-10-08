@@ -8,6 +8,7 @@ import { createAudioHttpHandler } from "../services/voice-orchestrator/src/tts/h
 import { createInputHttpHandler } from "../services/voice-orchestrator/src/http-input";
 import { startVoiceHub } from "../services/voice-orchestrator/src/ws/ws-server";
 import { createVoiceOrchestrator } from "../services/voice-orchestrator/src/orchestrator";
+import { FIXED_LINES } from "../services/voice-orchestrator/src/tts/fixed-lines";
 import { ScriptedAdapter } from "../services/voice-orchestrator/src/llm/scripted";
 import { TraceSink } from "../services/voice-orchestrator/src/trace/metrics";
 import { validatePublicPayload } from "../src/lib/voice/public-payload";
@@ -19,15 +20,15 @@ type BrowserFixture={context:AudioContext;destination:MediaStreamAudioDestinatio
 declare global { interface Window { voiceFixture:BrowserFixture } }
 const screenToken='voice-input-screen-token',consoleToken='voice-input-console-token';
 test.use({launchOptions:{args:['--autoplay-policy=no-user-gesture-required']}});
-async function setup(page:Page){
+async function setup(page:Page,options:{listenTimeoutMs?:number;questionWindowMax?:number}={}){
   const cache=await mkdtemp(join(tmpdir(),'voice-input-e2e-'));
   let calls=0;const questions:string[]=[],requests:string[]=[];let ready=0;let readyAt=0;
-  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',refHash:'a'.repeat(64),styles:['default']}),asr:async()=>({text:++calls===1?'您好晓川，本月销售怎么样':'本月目标完成率是多少',ms:1}),tts:async function*(){const pcm=new Uint8Array(96000);const view=new DataView(pcm.buffer);for(let i=0;i<48000;i++)view.setInt16(i*2,Math.round(3000*Math.sin(i*2*Math.PI*220/24000)),true);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:{ttsRegenerated:0,ttsTruncated:0,ttsFail:0}};}};
+  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',refHash:'a'.repeat(64),styles:['default','apologetic','warm']}),asr:async()=>({text:++calls===1?'您好晓川，本月销售怎么样':'本月目标完成率是多少',ms:1}),tts:async function*(){const pcm=new Uint8Array(96000);const view=new DataView(pcm.buffer);for(let i=0;i<48000;i++)view.setInt16(i*2,Math.round(3000*Math.sin(i*2*Math.PI*220/24000)),true);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:{ttsRegenerated:0,ttsTruncated:0,ttsFail:0}};}};
   const store=new AudioStore({client,enabled:true,cacheDir:cache});await store.initialize();
   const audio=createAudioHttpHandler({store,screenToken,consoleToken});
   const hub=await startVoiceHub({host:'127.0.0.1',port:0,onHttpRequest:(req,res)=>['/voice/wake','/voice/utterance','/voice/input-config','/voice/listen'].includes(new URL(req.url!,'http://localhost').pathname)?input(req,res):audio(req,res),onMessage:(conn,raw)=>orch.handleClientMessage(conn,raw),onClose:conn=>orch.detach(conn)});
   const llm=new ScriptedAdapter({firstTokenDelayMs:0});const classify=llm.classify.bind(llm);llm.classify=(q,s)=>{questions.push(q);return classify(q,s);};
-  const orch:ReturnType<typeof createVoiceOrchestrator>=createVoiceOrchestrator({hub,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>fixture},llm,mcp:null,trace:new TraceSink(null),hubAuth:{screenToken,consoleToken},llmTimeoutMs:8000,partialPaceMs:45,partialMaxTotalMs:1200,prefetchTimeoutMs:5000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:100,mcpToolWhitelist:[]});
+  const orch:ReturnType<typeof createVoiceOrchestrator>=createVoiceOrchestrator({hub,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>fixture},llm,mcp:null,trace:new TraceSink(null),hubAuth:{screenToken,consoleToken},llmTimeoutMs:8000,partialPaceMs:45,partialMaxTotalMs:1200,prefetchTimeoutMs:5000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:options.questionWindowMax??100,listenTimeoutMs:options.listenTimeoutMs,mcpToolWhitelist:[]});
   const input:ReturnType<typeof createInputHttpHandler>=createInputHttpHandler({screenToken,activity:orch.inputActivity,wake:(_followup,screenId)=>orch.beginSession(true,screenId),utterance:(pcm,signal,ms,lease)=>orch.submitUtterance(pcm,signal,ms,lease),config:()=>({hangoverMs:500,micReopenDelayMs:300,kwsThreshold:.25,kwsScore:1,kwsEnergy:.01,wakePhrase:'你好，小川'})});
   page.on('request',r=>{if(r.method()==='POST'&&r.url().includes('/voice/utterance'))requests.push(r.url());});
   page.on('response',r=>{if(r.url().includes('/voice/listen?action=ready')&&r.status()===202){ready++;readyAt=Date.now();}});
@@ -157,5 +158,22 @@ test('200ms prerecorded speech cannot confirm a barge or submit a business quest
     },(await readFile(new URL('fixtures/rate-question.wav',import.meta.url))).toString('base64'));
     await page.waitForTimeout(1200);expect(s.requests).toHaveLength(1);expect(s.questions).toHaveLength(1);await expect(page.locator('.overlay-root')).toHaveAttribute('data-barge-paused','false');
     await expect.poll(()=>s.orch.state.name,{timeout:10000}).toBe('followup');
+  }finally{await s.close();}
+});
+
+test('configured 2s ordinary window reaches the browser and expires from actual ready',async({page})=>{
+  test.setTimeout(20000);const s=await setup(page,{listenTimeoutMs:2000});try{
+    await s.open();const at=s.readyAt();await page.waitForTimeout(1200);expect(s.orch.state.name).toBe('listening');
+    await expect.poll(()=>s.orch.inputLease,{timeout:2000}).toBeNull();expect(Date.now()-at).toBeGreaterThanOrEqual(1900);
+    await expect.poll(()=>s.orch.state.name,{timeout:7000}).toBe('ambient');expect(s.requests).toHaveLength(0);
+  }finally{await s.close();}
+});
+test('ordinary rate limit plays an apology and reopens instead of leaving the session',async({page})=>{
+  test.setTimeout(35000);const s=await setup(page,{questionWindowMax:1});try{
+    await s.open();await s.play('sales-question.wav');await expect.poll(()=>s.questions.length,{timeout:10000}).toBe(1);
+    await expect.poll(()=>s.orch.state.name,{timeout:15000}).toBe('followup');
+    await s.play('rate-question.wav');await expect.poll(()=>s.requests.length,{timeout:10000}).toBe(2);
+    await expect.poll(()=>s.orch.state.name,{timeout:5000}).toBe('listening');expect(s.questions).toHaveLength(1);
+    expect(s.orch.answer?.spoken).toBe(FIXED_LINES.unheard);
   }finally{await s.close();}
 });

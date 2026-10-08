@@ -4,6 +4,7 @@ export type ListenAction = "ready" | "speech_start" | "misfire" | "duck" | "paus
 export type InputLease = { sessionId: string; listenId: string; screenId?: string; turnId?: string; attemptId?: string; sentenceIndex?: number };
 type ListenOptions = {
   progress?: (remainingMs: number, paused: boolean, opened: boolean) => void;
+  speechTimeout?: () => boolean;
   timeoutMs: number; expire: (missingReport: boolean) => void;
   setTimer: (fn: () => void, ms: number) => unknown; clearTimer: (handle: unknown) => void;
 };
@@ -25,7 +26,11 @@ export class ListenWindow {
   private arm(ms: number, missingReport = false): void {
     if (this.timer !== null) this.options.clearTimer(this.timer);
     this.since = Date.now();
-    this.timer = this.options.setTimer(() => { this.stop(); this.options.expire(missingReport); }, Math.max(0, ms));
+    this.timer = this.options.setTimer(() => {
+      // An overlapping barge attempt has its own bounded rejection/continuation.
+      if (this.speaking && this.options.speechTimeout?.()) return;
+      this.stop(); this.options.expire(missingReport);
+    }, Math.max(0, ms));
   }
   report(action: ListenAction): void {
     if (this.ended) return;

@@ -42,3 +42,10 @@ describe('8c local speech configuration', () => {
     expect(() => assertHubExposureSafe({host:'127.0.0.1',hubConsoleToken:T1,hubScreenToken:T2,ttsEnabled:true})).not.toThrow();
   });
 });
+
+it('ordinary and barge minimum speech are independent configurations',()=>{
+  const c=loadConfig({VOICE_BARGE_MIN_SPEECH_MS:'600',VOICE_VAD_MIN_SPEECH_MS:'200'} as unknown as NodeJS.ProcessEnv);
+  expect(c.inputConfig.bargeMinSpeechMs).toBe(600);expect(c.inputConfig.vadMinSpeechMs).toBe(200);
+  const onlyBarge=loadConfig({VOICE_BARGE_MIN_SPEECH_MS:'600'} as unknown as NodeJS.ProcessEnv);
+  expect(onlyBarge.inputConfig.vadMinSpeechMs).toBe(300);
+});

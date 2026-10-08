@@ -273,9 +273,13 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     listenWindow?.stop();
 
     const lease = { sessionId, listenId: randomUUID(), ...(sessionScreenId ? { screenId: sessionScreenId } : {}) };
-    const timeoutMs = phase === "long" ? VOICE_TIMING.longListenMs : VOICE_TIMING.shortListenMs;
+    const timeoutMs = mode === "listening" ? options.listenTimeoutMs ?? VOICE_TIMING.shortListenMs : phase === "long" ? VOICE_TIMING.longListenMs : VOICE_TIMING.shortListenMs;
     let opened = false;
     listenWindow = new ListenWindow(lease, mode, { timeoutMs, setTimer, clearTimer,
+      speechTimeout: () => {
+        if (!candidate) return false;
+        rejectBarge("timeout"); return true;
+      },
       progress: (remainingMs, paused, isOpen) => {
         if (!isOpen) return;
         broadcast({ type: opened ? "input.progress" : "input.open", at: Date.now(), ...lease, remainingMs, paused, timeoutMs });
@@ -295,6 +299,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if (candidate) { clearTimer(candidate.watchdog); candidate.controller?.abort(); }
     if (candidate?.lease.attemptId) finishedAttempts.add(candidate.lease.attemptId);
     candidate = null; bargeLease = null; deferredFixed = null;
+    for (const timer of timers) timer.resume();
   }
   function startBarge(turnId: string): void {
     if (!voiceSession) return;
@@ -317,9 +322,9 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if (lease.sessionId !== sessionId || (sessionScreenId && lease.screenId !== sessionScreenId)) throw new InputError(409, "stale_listen_window");
     if (bargeLease?.listenId === lease.listenId) {
       if (lease.attemptId && finishedAttempts.has(lease.attemptId)) throw new InputError(409, "stale_attempt");
-      if (finishedAttempts.size >= 128) throw new InputError(429, "attempt_limit");
       if (!lease.attemptId) throw new InputError(400, "attempt_identity_required");
       if (action === "duck") {
+        if (!candidate && finishedAttempts.size >= 128) throw new InputError(429, "attempt_limit");
         if (candidate) { if (candidate.lease.attemptId !== lease.attemptId) throw new InputError(409, "barge_busy"); return; }
         const count = options.audio?.lookup(bargeLease.turnId!)?.descriptor.sentences.length ?? 0;
         if (!Number.isInteger(lease.sentenceIndex) || lease.sentenceIndex! >= count || lease.sentenceIndex! < 0) throw new InputError(400, "invalid_sentence");
@@ -354,16 +359,20 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       const text = stripWakePrefix(result.text).slice(0, 500);
       const sentences = options.audio?.lookup(attempt.lease.turnId!)?.spokenSentences ?? [];
       const index = attempt.lease.sentenceIndex!;
-      const similarity = Math.max(...[sentences[index], sentences[index - 1]].filter(Boolean).map(sentence => echoSimilarity(text, sentence.spokenText)), 0);
+      const reference = [sentences[index - 1], sentences[index], sentences[index + 1]].filter(Boolean).map(sentence => sentence.spokenText).join("");
+      const similarity = echoSimilarity(text, reference);
       interaction("barge.asr", attempt.lease, { asrMs: result.ms, asrQueueMs: result.asrQueueMs });
       if (isUnheard(text)) { rejectBarge("unheard"); return; }
       if (similarity >= .5) { rejectBarge("echo"); return; }
       if (rateLimited()) {
-        rejectBarge("rate_limited"); clearTimers(); cancelAudio();
+        // This branch replaces playback with an apology, so it must not resume it.
+        clearTimers(); cancelAudio();
+        broadcast({ type: "barge.result", at: Date.now(), sessionId, listenId: attempt.lease.listenId, attemptId: attempt.lease.attemptId!, accepted: false, reason: "rate_limited" });
+        interaction("barge.rejected", attempt.lease, { reason: "rate_limited" });
         if (state.name === "waking") dispatch({ type: "WOKEN", at: Date.now() });
         if (state.name === "answering") dispatch({ type: "BARGE_IN", at: Date.now() });
         if (state.name === "followup") dispatch({ type: "SPEAK", at: Date.now() });
-        failures = Math.max(0, failures - 1); answerUnheard(started, result.ms); return;
+        answerUnheard(started, result.ms, false); return;
       }
       clearTimer(attempt.watchdog); finishedAttempts.add(attempt.lease.attemptId!); candidate = null; bargeLease = null; deferredFixed = null;
       broadcast({ type: "barge.result", at: Date.now(), sessionId, listenId: lease.listenId, attemptId: lease.attemptId!, accepted: true, reason: "question" });
@@ -506,7 +515,6 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if (candidate) throw new InputError(409, "barge_busy");
     if (lease && (lease.sessionId !== sessionId || lease.listenId !== listenWindow?.lease.listenId)) throw new InputError(409, "stale_listen_window");
     if (!["listening", "followup"].includes(state.name) || fixedPlayback || inputController) throw new InputError(409, "microphone_closed");
-    if (rateLimited()) { if (voiceSession) idleExit(); throw new InputError(429, "rate_limited"); }
     const controller = new AbortController(); inputController = controller;
     const seq = turnSeq; const started = Date.now();
     const combined = AbortSignal.any([signal, controller.signal]);
@@ -521,6 +529,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       const text = stripWakePrefix(result.text).slice(0, 500);
       inputMeta = { asrMs: result.ms, ...(result.asrQueueMs !== undefined ? { asrQueueMs: result.asrQueueMs } : {}), uploadMs, asrRoundTripMs: Date.now() - started, started };
       if (isUnheard(text)) answerUnheard(started, result.ms);
+      else if (rateLimited()) answerUnheard(started, result.ms, false);
       else acceptQuestion(text);
     } catch (error) {
       if (!combined.aborted && state.name === "listening") {
@@ -530,8 +539,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     } finally { if (inputController === controller) inputController = null; }
   }
 
-  function answerUnheard(started: number, asrMs: number): void {
-    answerIntent = "unheard"; failures++;
+  function answerUnheard(started: number, asrMs: number, countFailure = true): void {
+    answerIntent = "unheard"; if (countFailure) failures++;
     if (voiceSession && failures >= 2) { inputMeta = null; idleExit(); return; }
     const seq = turnSeq;
     dispatch({ type: "SUBMIT", at: Date.now(), question: "未听清" });

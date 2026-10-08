@@ -17,19 +17,26 @@ beforeEach(()=>vi.useFakeTimers());
 afterEach(async()=>{closes.splice(0).forEach(f=>f());stores.splice(0).forEach(s=>s.close());vi.useRealTimers();await Promise.all(dirs.splice(0).map(d=>rm(d,{recursive:true,force:true})));});
 const pcm=new Uint8Array(24000);for(let i=0;i<pcm.length;i+=2)pcm[i]=100;
 const screen={id:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',role:'screen' as const,send:()=>{},close:()=>{}};
-async function setup(text='本月销售怎么样', max=100, connectedScreens=false){
+async function setup(text='本月销售怎么样', max=100, connectedScreens=false, listenTimeoutMs?:number){
   const events:VoiceWireEvent[]=[];
+  const limitedCancellation:boolean[]=[];
   const signals:AbortSignal[]=[];
-  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',refHash:'a'.repeat(64),styles:['default','warm','serious']}),asr:vi.fn(async()=>({text,ms:100})),tts:async function*(_t,_s,signal){if(signal)signals.push(signal);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:{ttsFail:0,ttsTruncated:0,ttsRegenerated:0}};}};
+  const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',refHash:'a'.repeat(64),styles:['default','warm','serious','apologetic']}),asr:vi.fn(async()=>({text,ms:100})),tts:async function*(_t,_s,signal){if(signal)signals.push(signal);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:{ttsFail:0,ttsTruncated:0,ttsRegenerated:0}};}};
   const dir=await mkdtemp(join(tmpdir(),'listen-repair-'));dirs.push(dir);
   const store=new AudioStore({client,cacheDir:dir,enabled:true});stores.push(store);await store.initialize();
   const llm=new ScriptedAdapter({firstTokenDelayMs:0});
-  const orch=createVoiceOrchestrator({hub:{broadcast:(e:VoiceWireEvent)=>events.push(structuredClone(e)),connections:connectedScreens?new Set([screen,{...screen,id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'}]):undefined,counts:()=>({screens:connectedScreens?2:1,consoles:0})} as unknown as VoiceHubServer,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>validatePublicPayload(fixture)!},llm,mcp:null,trace:new TraceSink(null),llmTimeoutMs:8000,partialPaceMs:1,partialMaxTotalMs:1,prefetchTimeoutMs:1000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:max,mcpToolWhitelist:[]});
+  const orch=createVoiceOrchestrator({hub:{broadcast:(e:VoiceWireEvent)=>{
+    if(e.type==='barge.result'&&e.reason==='rate_limited'){
+      const prior=events.filter(e=>e.type==='answer.delta'&&e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>;
+      limitedCancellation.push(store.lookup(prior.speech!.turnId)?.cancelled===true);
+    }
+    events.push(structuredClone(e));
+  },connections:connectedScreens?new Set([screen,{...screen,id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'}]):undefined,counts:()=>({screens:connectedScreens?2:1,consoles:0})} as unknown as VoiceHubServer,listenTimeoutMs,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>validatePublicPayload(fixture)!},llm,mcp:null,trace:new TraceSink(null),llmTimeoutMs:8000,partialPaceMs:1,partialMaxTotalMs:1,prefetchTimeoutMs:1000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:max,mcpToolWhitelist:[]});
   closes.push(()=>orch.forceClose('force'));
   const ack=(turnId:string)=>orch.handleClientMessage(screen,JSON.stringify({type:'playback.drained',at:Date.now(),turnId}));
   const fixed=()=>events.filter(e=>e.type==='speech.fixed').at(-1) as Extract<VoiceWireEvent,{type:'speech.fixed'}>;
   const open=async()=>{orch.beginSession(true);await vi.advanceTimersByTimeAsync(1000);ack(fixed().speech.turnId);await vi.advanceTimersByTimeAsync(1);orch.inputActivity(orch.inputLease!,'ready');};
-  return {orch,client,llm,events,signals,store,ack,fixed,open};
+  return {orch,client,llm,events,signals,store,ack,fixed,open,limitedCancellation};
 }
 it('starts 5s at actual ready; emits warm idle exit and permits another wake',async()=>{
   const s=await setup();await s.open();await vi.advanceTimersByTimeAsync(4999);expect(s.orch.state.name).toBe('listening');
@@ -214,4 +221,93 @@ it('valid but limited barge gives apologetic unheard then reopens, without an id
   expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({accepted:false,reason:'rate_limited'});
   const full=s.events.filter(e=>e.type==='answer.delta'&&e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>;
   expect(full.speech?.fixed).toBe('unheard');s.ack(full.speech!.turnId);expect(s.orch.state.name).toBe('listening');expect(s.fixed().speech.fixed).toBe('wake');
+});
+
+it('ordinary noise does not consume the last business quota',async()=>{
+  const s=await setup('',1,true);await s.open();
+  await s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);
+  const unheard=s.events.filter(e=>e.type==='answer.delta'&&e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>;
+  s.ack(unheard.speech!.turnId);s.orch.inputActivity(s.orch.inputLease!,'ready');
+  vi.mocked(s.client.asr).mockResolvedValue({text:'本月销售怎么样',ms:1});
+  await s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);await vi.advanceTimersByTimeAsync(2);
+  expect(s.orch.state.name).toBe('answering');expect(s.orch.answer?.card.kind).toBe('target-progress');
+});
+it('ordinary limit apologizes and reopens without counting a recognition failure',async()=>{
+  const s=await setup(undefined,1,true),id=await spokenAnswer(s);s.ack(id);s.orch.inputActivity(s.orch.inputLease!,'ready');
+  await s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);
+  const limited=s.events.filter(e=>e.type==='answer.delta'&&e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>;
+  expect(limited.speech!.style).toBe('apologetic');s.ack(limited.speech!.turnId);expect(s.orch.state.name).toBe('listening');
+  s.orch.inputActivity(s.orch.inputLease!,'ready');vi.mocked(s.client.asr).mockResolvedValue({text:'',ms:1});
+  await s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);
+  expect(s.fixed().speech.fixed).not.toBe('idle_exit');
+});
+it('barge limit cancels old audio before publishing rejection and preserves failure count',async()=>{
+  const s=await setup(undefined,1,true),id=await spokenAnswer(s),lease=attempt(s);
+  s.orch.inputActivity(lease,'duck');s.orch.inputActivity(lease,'pause');vi.mocked(s.client.asr).mockResolvedValue({text:'客户有多少',ms:1});
+  await s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);
+  expect(s.store.lookup(id)?.cancelled).toBe(true);expect(s.limitedCancellation).toEqual([true]);expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({reason:'rate_limited'});
+  const limited=s.events.filter(e=>e.type==='answer.delta'&&e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>;
+  s.ack(limited.speech!.turnId);s.orch.inputActivity(s.orch.inputLease!,'ready');vi.mocked(s.client.asr).mockResolvedValue({text:'',ms:1});
+  await s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);expect(s.fixed().speech.fixed).not.toBe('idle_exit');
+});
+it('cross-drain 16s speech timeout rejects only the candidate and keeps the long window',async()=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s),lease=attempt(s);
+  s.orch.inputActivity(lease,'duck');s.ack(id);s.orch.inputActivity(s.orch.inputLease!,'ready');
+  await vi.advanceTimersByTimeAsync(16000);
+  expect(s.orch.state.name).toBe('followup');expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({reason:'timeout'});
+  expect(s.events.some(e=>e.type==='session.end')).toBe(false);
+  await vi.advanceTimersByTimeAsync(8000);expect(s.fixed().speech.fixed).toBe('followup');
+});
+it('new fixed-exit fallback resumes when a candidate overlaps ordinary ASR completion',async()=>{
+  const s=await setup('',100,true);await s.open();
+  await s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);
+  const first=s.events.filter(e=>e.type==='answer.delta'&&e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>;
+  s.ack(first.speech!.turnId);
+  // A normal tail upload and an old barge report can cross before ready invalidates it.
+  let resolve!:(value:{text:string;ms:number})=>void;
+  vi.mocked(s.client.asr).mockImplementation(()=>new Promise(r=>resolve=r));
+  const pending=s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);
+  s.orch.inputActivity(attempt(s),'duck');resolve({text:'',ms:1});await pending;
+  expect(s.fixed().speech.fixed).toBe('idle_exit');
+  // No playback ack: the newly created failFixed deadline must still run.
+  await vi.advanceTimersByTimeAsync(5000);expect(s.orch.state.name).toBe('ambient');
+});
+it('cross-drain speech watchdog rejects a judge in progress instead of closing the session',async()=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s),lease=attempt(s);
+  s.orch.inputActivity(lease,'duck');s.ack(id);s.orch.inputActivity(s.orch.inputLease!,'ready');await vi.advanceTimersByTimeAsync(15000);
+  let resolve!:(value:{text:string;ms:number})=>void;vi.mocked(s.client.asr).mockImplementation(()=>new Promise(r=>resolve=r));
+  const pending=s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);
+  await vi.advanceTimersByTimeAsync(1000);expect(s.orch.state.name).toBe('followup');
+  expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({reason:'timeout'});expect(s.events.some(e=>e.type==='session.end')).toBe(false);
+  resolve({text:'本月销售怎么样',ms:1});await pending;
+  await vi.advanceTimersByTimeAsync(8000);expect(s.fixed().speech.fixed).toBe('followup');
+});
+it('129th attempt is refused but a normal utterance is still accepted after drain',async()=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s);
+  for(let i=0;i<128;i++){const lease=attempt(s);s.orch.inputActivity(lease,'duck');s.orch.inputActivity(lease,'misfire');}
+  expect(()=>s.orch.inputActivity(attempt(s),'duck')).toThrow('attempt_limit');
+  s.ack(id);s.orch.inputActivity(s.orch.inputLease!,'ready');vi.mocked(s.client.asr).mockResolvedValue({text:'本月销售怎么样',ms:1});
+  await s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);await vi.advanceTimersByTimeAsync(2);
+  expect(s.orch.state.name).toBe('answering');expect(s.orch.answer?.card.kind).toBe('target-progress');
+});
+it('configured ordinary timeout does not change 8s followup long window',async()=>{
+  const s=await setup(undefined,100,true,2000);await s.open();
+  await vi.advanceTimersByTimeAsync(1999);expect(s.fixed().speech.fixed).toBe('wake');await vi.advanceTimersByTimeAsync(1);expect(s.fixed().speech.fixed).toBe('idle_exit');
+  s.orch.forceClose('force');await vi.advanceTimersByTimeAsync(1000);const id=await spokenAnswer(s);s.ack(id);s.orch.inputActivity(s.orch.inputLease!,'ready');
+  await vi.advanceTimersByTimeAsync(7999);expect(s.fixed().speech.fixed).toBe('wake');await vi.advanceTimersByTimeAsync(1);expect(s.fixed().speech.fixed).toBe('followup');
+});
+it('next sentence and cross-sentence fragments are rejected as echo',async()=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s);
+  const sentences=['本月销售一千二百万元。','年度目标完成百分之六十二。'].map((spokenText,index)=>({index,spokenText,text:spokenText,displayStart:0,displayEnd:spokenText.length}));
+  s.store.lookup(id)!.spokenSentences=sentences;
+  for(const text of [sentences[1].spokenText, sentences[0].spokenText.slice(-5)+sentences[1].spokenText.slice(0,6)]){
+    const lease=attempt(s,0);s.orch.inputActivity(lease,'duck');s.orch.inputActivity(lease,'pause');vi.mocked(s.client.asr).mockResolvedValue({text,ms:1});
+    await s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({reason:'echo'});
+  }
+});
+it('listen speech watchdog delegates overlapping barge timeout and preserves remainder',async()=>{
+  let expired=false,rejected=false;
+  const window=new ListenWindow({sessionId:'sess-aaaaaaaa',listenId:'a'.repeat(36)},'followup',{timeoutMs:8000,expire:()=>expired=true,speechTimeout:()=>{rejected=true;window.report('misfire');return true;},setTimer:(f,t)=>setTimeout(f,t),clearTimer:h=>clearTimeout(h as ReturnType<typeof setTimeout>)});
+  window.report('ready');await vi.advanceTimersByTimeAsync(1000);window.report('speech_start');await vi.advanceTimersByTimeAsync(16000);
+  expect(rejected).toBe(true);expect(expired).toBe(false);await vi.advanceTimersByTimeAsync(6999);expect(expired).toBe(false);await vi.advanceTimersByTimeAsync(1);expect(expired).toBe(true);
 });
