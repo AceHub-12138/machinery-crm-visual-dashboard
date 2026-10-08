@@ -66,3 +66,13 @@ node --experimental-strip-types scripts/voice-echo-check.mjs --run
 真人组完成：5次问题全部出现SpeechStart、SpeechRealStart及确认事件，成功 **5/5**。最大RMS分别为-13.94、-14.66、-15.88、-13.11、-14.48dBFS；各次5秒底噪均完整、无SpeechRealStart。三组达到本机门槛，允许进入ASR插队。当前摆位仍是非展厅摆位，未测距离，不宣称展厅通过。
 
 最终证据：`docs/voice-8c-interaction-echo-controls-human-first.json`，内含三组数据、前序文件SHA256、判定聚合修正原因和5次真人结果。日志 `/tmp/voice-echo-controls-human-first.log`；实验浏览器/回环服务器已正常退出，正式大屏未改动。确认的是检测阳性，不是实际打断暂停/ASR回答；后两项属于随后施工与验收。
+
+## Step 1：单GPU线程ASR优先调度
+
+新增协作优先队列，在TTS采样及PCM输出检查点执行待识别ASR，再回到原TTS生成器；仍只有一个GPU线程。ASR/TTS取消对象分离，任务异常、排队取消和关闭不遗留future。返回并记录asrQueueMs，另记interleavedTts，验证识别确实发生在合成内。不可中断的预填充/kernel不宣称可强抢占。
+
+真模型10次全部在TTS进行中执行ASR：排队P50 **19.65ms**、P95 **24.165ms**；ASR执行约184–193ms。10轮TTS均完整、0失败、0截断、0重生成。原始 `docs/voice-8c-asr-priority-calibration.json`；脚本 `scripts/voice-asr-priority-check.mjs`；日志 `/tmp/voice-asr-priority-real.log`。使用合成WAV测队列，不作为真人交互或展厅延迟验收。
+
+24项Python测试、406项TS测试、tsc、Lint和production build通过。日志 `/tmp/voice-asr-priority-python3.log`、`/tmp/voice-asr-priority-ts-tests.log`、`/tmp/voice-asr-priority-tsc.log`、`/tmp/voice-asr-priority-full-lint.log`、`/tmp/voice-asr-priority-build.log`。重启本机voice-local加载新实现，7种风格自检均通过，未改模型/参考/阈值。Stage0本地提交 `0cf0ecb`；未合并、未推送。
+
+下一阶段施工打断闭环和长短聆听窗口；当前正式播放交互尚未改版。

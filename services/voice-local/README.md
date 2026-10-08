@@ -43,3 +43,8 @@ services/voice-local/.venv/bin/python services/voice-local/calibrate.py --out se
 ```
 
 故障测试覆盖首片静音重试、两次静音拒绝、已发送后失败不重试、失控封顶、取消、参考哈希失效、PCM/WAV格式、请求上限、自检失败，以及停读但不断开的消费者、后续ASR、8流容量限制、响应头阶段失败/取消后的名额恢复、TTL 回收。实测结果见仓库 `docs/voice-8c-stage34-result.md`、`docs/voice-8c-task14-repair-result.md` 与 `docs/voice-8c-task5-repair-result.md`。
+# ASR协作优先调度（2026-10-07）
+
+仍只有一个GPU线程。`gpu_queue.py`在TTS采样和PCM输出检查点处理有界ASR优先队列，识别结束后续生成；空闲时直接处理ASR。TTS/ASR取消对象独立，排队取消、异常和关闭均完成future。`/asr`追加 `asrQueueMs`（入队到执行，不含识别）及 `interleavedTts`（开始识别时有TTS正在合成）。原有 `ms`仍是识别执行耗时。
+
+GPU预填充及kernel不可强抢占，指标由真实测量确认。10次合成中ASR排队P95为24.165ms，原始记录在视觉仓 `docs/voice-8c-asr-priority-calibration.json`。不代替麦克风/展厅验收。

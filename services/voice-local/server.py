@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import asyncio
-import concurrent.futures
 import io
 import logging
 import threading
@@ -17,6 +16,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse
 
 from core import Settings, MlxBackend, GenerationCancelled, SAMPLE_RATE, SELF_CHECK_TEXT, cer, guarded_audio, pcm_peak, load_style_settings
+from gpu_queue import CooperativeGpuExecutor
 
 LOG = logging.getLogger("voice-local")
 MAX_BODY = 524288
@@ -55,9 +55,11 @@ class Job:
 class Runtime:
     def __init__(self, settings, backend):
         self.settings, self.backend = settings, backend
-        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=1, thread_name_prefix="speech-gpu")
+        self.executor = CooperativeGpuExecutor()
+        self.backend.cooperate = self.executor.checkpoint
         self.jobs = {}
         self.warm = False
+        self.current_tts_job = None
         self.self_check = "pending"
         self.self_check_cer = None
         self.ref_hash = ""
@@ -227,15 +229,23 @@ def create_app(settings=None, backend=None):
             return {"text": "", "ms": 0}
         job = runtime.create_job()
         runtime.counts["asrRequests"] += 1
+        enqueued = time.perf_counter()
         def recognize():
             started = time.perf_counter()
             try:
-                return {"text": runtime.backend.recognize(audio, job.cancel), "ms": round((time.perf_counter() - started) * 1000, 1)}
+                queue_ms = round((started - enqueued) * 1000, 1)
+                interleaved = runtime.current_tts_job is not None
+                result = runtime.backend.recognize(audio, job.cancel)
+                job.stats["asrQueueMs"] = queue_ms
+                job.stats["interleavedTts"] = interleaved
+                return {"text": result, "ms": round((time.perf_counter() - started) * 1000, 1), "asrQueueMs": queue_ms, "interleavedTts": interleaved}
             finally:
                 job.finished = True
         watcher = asyncio.create_task(until_disconnected(request, job))
         try:
-            job.future = asyncio.get_running_loop().run_in_executor(runtime.executor, recognize)
+            future = runtime.executor.submit_priority(recognize)
+            future.add_done_callback(lambda f: setattr(job, "finished", True) if f.cancelled() else None)
+            job.future = asyncio.wrap_future(future)
             return await asyncio.shield(job.future)
         except GenerationCancelled:
             raise HTTPException(499, "Recognition cancelled")
@@ -288,9 +298,11 @@ def create_app(settings=None, backend=None):
                 job.queue.put_nowait(None)
         def produce():
             started = time.perf_counter()
+            runtime.current_tts_job = job.id
             sent = False
             try:
                 for pcm in guarded_audio(runtime.backend, style_settings, text.strip(), job.cancel, job.stats):
+                    runtime.executor.checkpoint()
                     if not sent:
                         sent = True
                         job.stats["ttsFirstByteMs"] = round((time.perf_counter() - started) * 1000, 1)
@@ -301,6 +313,7 @@ def create_app(settings=None, backend=None):
             except Exception:
                 job.stats["ttsFail"] = 1
             finally:
+                runtime.current_tts_job = None
                 job.finished = True
                 job.stats["durationMs"] = round((time.perf_counter() - started) * 1000, 1)
                 for key in ("ttsRegenerated", "ttsTruncated", "ttsFail"):

@@ -151,7 +151,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   /** 进行中的一轮:新问题到来时中止旧轮(LLM 流/死线一并释放) */
   let inputController: AbortController | null = null;
-  let inputMeta: { asrMs: number; uploadMs: number; asrRoundTripMs: number; started: number } | null = null;
+  let inputMeta: { asrMs: number; asrQueueMs?: number; uploadMs: number; asrRoundTripMs: number; started: number } | null = null;
   let fixedPlayback: { id: string; next: "listening" | "followup" | "close" | "exit"; seq: number; started: number } | null = null;
   let activeTurn: { controller: AbortController; deadline: NodeJS.Timeout | null } | null = null;
   /** 提问限流账本:全局一份(审核 M4:按连接计可被多连接绕过) */
@@ -300,6 +300,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           ...(record.style ? { style: record.style, ...(record.styleFallback ? { styleFallback: record.styleFallback } : {}) } : {}),
           speculative: record.speculative ?? "none",
           asrMs: record.asrMs ?? null,
+          ...(record.asrQueueMs !== undefined ? { asrQueueMs: record.asrQueueMs } : {}),
           playbackStartMs: record.playbackStartMs ?? null,
           ...(record.playbackOutcome ? { playbackOutcome: record.playbackOutcome } : {}),
           ...(record.playbackFailureReason ? { playbackFailureReason: record.playbackFailureReason } : {}),
@@ -422,7 +423,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       combined.throwIfAborted();
       if (seq !== turnSeq || state.name !== "listening") throw new InputError(409, "session_changed");
       const text = stripWakePrefix(result.text).slice(0, 500);
-      inputMeta = { asrMs: result.ms, uploadMs, asrRoundTripMs: Date.now() - started, started };
+      inputMeta = { asrMs: result.ms, ...(result.asrQueueMs !== undefined ? { asrQueueMs: result.asrQueueMs } : {}), uploadMs, asrRoundTripMs: Date.now() - started, started };
       if (isUnheard(text)) answerUnheard(started, result.ms);
       else acceptQuestion(text);
     } catch (error) {

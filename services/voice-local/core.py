@@ -135,7 +135,9 @@ class MlxBackend:
     """
     def __init__(self, settings: Settings):
         self.settings = settings
-        self.cancel = threading.Event()
+        self.tts_cancel = threading.Event()
+        self.asr_cancel = threading.Event()
+        self.cooperate = lambda: None
 
     def load(self):
         os.environ["HF_HUB_OFFLINE"] = "1"
@@ -150,13 +152,15 @@ class MlxBackend:
             raise ValueError("TTS requires a complete 24kHz model with speech tokenizer")
         sampler = self.tts._sample_token
         def checked_sampler(*args, **kwargs):
-            check_cancel(self.cancel)
+            check_cancel(self.tts_cancel)
+            self.cooperate()
+            check_cancel(self.tts_cancel)
             return sampler(*args, **kwargs)
         object.__setattr__(self.tts, "_sample_token", checked_sampler)
         single_chunk = self.asr._generate_single_chunk
         def checked_asr(*args, **kwargs):
             def processor(_tokens, logits):
-                check_cancel(self.cancel)
+                check_cancel(self.asr_cancel)
                 return logits
             kwargs["logits_processors"] = [*(kwargs.get("logits_processors") or []), processor]
             return single_chunk(*args, **kwargs)
@@ -184,7 +188,7 @@ class MlxBackend:
         self.reference_text = settings.ref_text
 
     def generate(self, text: str, cancel: threading.Event, max_tokens: int):
-        self.cancel = cancel
+        self.tts_cancel = cancel
         check_cancel(cancel)
         generator = self.tts.generate(
             text=text, ref_audio=self.reference, ref_text=self.reference_text,
@@ -206,7 +210,7 @@ class MlxBackend:
             self.mx.synchronize()
 
     def recognize(self, audio: np.ndarray, cancel: threading.Event):
-        self.cancel = cancel
+        self.asr_cancel = cancel
         check_cancel(cancel)
         output = self.asr.generate(audio, language="Chinese", hotwords=list(self.settings.hotwords), max_tokens=256)
         check_cancel(cancel)

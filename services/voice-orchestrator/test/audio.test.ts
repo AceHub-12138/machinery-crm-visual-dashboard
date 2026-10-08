@@ -69,6 +69,14 @@ describe('voice-local HTTP client',()=>{
     await expect((async()=>{for await(const chunk of client.tts('测试','default'))void chunk;})()).rejects.toThrow('Incomplete PCM');
     expect(mock).toHaveBeenCalledTimes(1);
   });
+  it('keeps queue time separate from ASR execution and rejects invalid timing',async()=>{
+    const client=new VoiceLocalClient('http://127.0.0.1',async()=>Response.json({text:'问题',ms:200,asrQueueMs:15,interleavedTts:true}));
+    expect(await client.asr(new Uint8Array(3200))).toMatchObject({ms:200,asrQueueMs:15,interleavedTts:true});
+    for(const fields of [{asrQueueMs:-1},{interleavedTts:'yes'}]){
+      const invalid=new VoiceLocalClient('http://127.0.0.1',async()=>Response.json({text:'问题',ms:200,...fields}));
+      await expect(invalid.asr(new Uint8Array(3200))).rejects.toThrow('Invalid ASR');
+    }
+  });
   it('rejects remote endpoints, unaligned/oversized ASR, and invalid health',async()=>{
     expect(()=>new VoiceLocalClient('https://example.com')).toThrow('loopback');
     const client=new VoiceLocalClient('http://127.0.0.1',async()=>Response.json({warm:true}) as Response);

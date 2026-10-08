@@ -124,6 +124,7 @@ export type TurnTracePayload = {
   speculative?: "hit" | "miss" | "none";
   /** 真实语音耗时；尚未接入的采集/播放字段为 null。 */
   asrMs?: number | null;
+  asrQueueMs?: number;
   playbackStartMs?: number | null;
   playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
   playbackFailureReason?: string;

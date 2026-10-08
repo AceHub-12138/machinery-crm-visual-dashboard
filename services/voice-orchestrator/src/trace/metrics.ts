@@ -36,6 +36,7 @@ export type TurnTraceRecord = {
   totalMs: number | null;
   /** 完整结构化分类的耗时；与旧流式首 token 指标分开。 */
   asrMs?: number | null;
+  asrQueueMs?: number;
   playbackStartMs?: number | null;
   playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
   playbackFailureReason?: string;

@@ -10,9 +10,10 @@ export type TtsMetrics = {
 };
 export type VoiceLocalHealth = { warm: boolean; selfCheck: "pending" | "passed" | "failed"; refHash: string; styles: string[]; styleHashes?: Record<string, string>; failedStyles?: string[] };
 export type TtsChunk = { type: "audio"; pcm: Uint8Array; sampleRate: 24000 } | { type: "done"; metrics: TtsMetrics };
+export type AsrResult = { text: string; ms: number; asrQueueMs?: number; interleavedTts?: boolean };
 export interface SpeechClient {
   health(signal?: AbortSignal): Promise<VoiceLocalHealth>;
-  asr(pcm: Uint8Array, signal?: AbortSignal): Promise<{ text: string; ms: number }>;
+  asr(pcm: Uint8Array, signal?: AbortSignal): Promise<AsrResult>;
   tts(text: string, style: string, signal?: AbortSignal): AsyncIterable<TtsChunk>;
 }
 
@@ -41,15 +42,15 @@ export class VoiceLocalClient implements SpeechClient {
     }
     return value;
   }
-  async asr(pcm: Uint8Array, signal?: AbortSignal): Promise<{ text: string; ms: number }> {
+  async asr(pcm: Uint8Array, signal?: AbortSignal): Promise<AsrResult> {
     if (!pcm.byteLength || pcm.byteLength % 2 || pcm.byteLength > 480000) throw new Error("ASR requires aligned PCM up to 15 seconds");
     const response = await this.#fetch(`${this.#baseUrl}/asr`, {
       method: "POST", headers: { "content-type": "audio/pcm" }, body: Buffer.from(pcm),
       signal: this.signal(signal, 15000), redirect: "error",
     });
     if (!response.ok) throw new Error(`ASR HTTP ${response.status}`);
-    const value = await response.json() as { text: string; ms: number };
-    if (typeof value?.text !== "string" || !Number.isFinite(value.ms) || value.ms < 0) throw new Error("Invalid ASR response");
+    const value = await response.json() as AsrResult;
+    if (typeof value?.text !== "string" || !Number.isFinite(value.ms) || value.ms < 0 || (value.asrQueueMs !== undefined && (!Number.isFinite(value.asrQueueMs) || value.asrQueueMs < 0)) || (value.interleavedTts !== undefined && typeof value.interleavedTts !== "boolean")) throw new Error("Invalid ASR response");
     return value;
   }
   async *tts(text: string, style: string, signal?: AbortSignal): AsyncIterable<TtsChunk> {
