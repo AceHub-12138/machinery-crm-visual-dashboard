@@ -46,7 +46,7 @@ try {
   const adapter=new OpenAiCompatibleAdapter({baseUrl:cfg.llmBaseUrl,apiKey:cfg.llmApiKey,model:cfg.llmModel,reasoningEffort:"none"});
   const llm={name:adapter.name,stream:adapter.stream.bind(adapter),classify:async(text,signal)=>{questions.push(text);const intent=await adapter.classify(text,signal);classifications.push(intent);return intent;}};
   orch=createVoiceOrchestrator({hub,audio:store,speechClient:client,dataSource:createDataSource({mode:"fixture",fixturePath:cfg.fixturePath,baseUrl:"",publicId:""}),llm,mcp:null,trace:new Sink(null),hubAuth:{screenToken,consoleToken},llmTimeoutMs:8000,partialPaceMs:45,partialMaxTotalMs:1200,prefetchTimeoutMs:5000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:100,mcpToolWhitelist:[]});
-  inputHandler=createInputHttpHandler({screenToken,activity:orch.inputActivity,wake:()=>orch.beginSession(true),utterance:(pcm,signal,ms,lease)=>orch.submitUtterance(pcm,signal,ms,lease),config:()=>cfg.inputConfig});
+  inputHandler=createInputHttpHandler({screenToken,activity:orch.inputActivity,wake:(_followup,screenId)=>orch.beginSession(true,screenId),utterance:(pcm,signal,ms,lease)=>orch.submitUtterance(pcm,signal,ms,lease),config:()=>cfg.inputConfig});
   next=spawn(process.execPath,[join(root,"node_modules/next/dist/bin/next"),"start","--hostname","127.0.0.1","--port","18815"],{cwd:root,stdio:"ignore"});
   let ready=false;for(let i=0;i<100&&!ready;i++){try{ready=(await fetch("http://127.0.0.1:18815/screen/sales")).ok;}catch{} if(!ready)await delay(100);}assert(ready);
   browser=await chromium.launch({headless:true,args:["--autoplay-policy=no-user-gesture-required"]});

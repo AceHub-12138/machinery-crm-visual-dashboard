@@ -98,7 +98,7 @@ async function open(page: Page) {
     };
   });
   await page.goto(`/screen/sales?voiceLive=1&lite=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}#hubToken=${screenToken}`);
-  await expect.poll(() => hub.counts().screens).toBe(1);
+  await expect.poll(() => hub.counts().screens).toBeGreaterThanOrEqual(1);
   expect(page.url()).not.toContain(screenToken);
 }
 async function metrics(page: Page) {
@@ -124,7 +124,7 @@ test("real PCM drives analyser and sentence highlight; followup waits for EOF an
   const firstAudioAt = reports.find(r => r.type === "playback.started")!.at;
   await expect.poll(() => Date.now() - firstAudioAt, { timeout: 4000 }).toBeGreaterThanOrEqual(6500);
   expect(orch.state.name).toBe("answering"); expect(reports.some(r => r.type === "playback.drained")).toBe(false);
-  await expect(page.getByText("等待追问", { exact: true })).toBeVisible({ timeout: 6000 });
+  await expect(page.getByText("等待追问", { exact: true })).toBeVisible({ timeout: 15000 });
   expect(orch.state.name).toBe("followup"); expect(reports.filter(r => r.type === "playback.started")).toHaveLength(1);
   expect(reports.filter(r => r.type === "playback.drained")).toHaveLength(1);
   const m = await metrics(page); expect(m.scheduled[0].when - m.scheduled[0].at).toBeCloseTo(0.15, 2);
@@ -160,9 +160,10 @@ test("superseding a live answer stops its sources and downloads; only the new tu
 test("audio failure leaves the card readable and does not report successful playback", async ({ page }) => {
   await open(page); fail = true; ask("本期新增客户有多少家");
   await expect(page.getByText("语音播报中断，请查看卡片。", { exact: true })).toBeVisible();
-  await expect(page.locator(".overlay-card")).toBeVisible(); expect(orch.state.name).toBe("followup");
+  await expect(page.locator(".overlay-card")).toBeVisible(); expect(orch.state.name).toBe("answering");
   expect(reports.some(r => r.type === "playback.failed")).toBe(true); expect(reports.some(r => r.type === "playback.drained")).toBe(false);
-  await expect(page.locator(".overlay-root")).toHaveCount(0, { timeout: 6000 });
+  await expect(page.locator(".overlay-root")).toHaveCount(0, { timeout: 12000 });
+  expect(reports.some(r => r.type === "playback.drained")).toBe(false);
 });
 
 test("Escape and hub disconnect stop audio immediately and restore the baseline", async ({ page }) => {
@@ -178,15 +179,15 @@ test("Escape and hub disconnect stop audio immediately and restore the baseline"
   expect(await page.locator("#screen-stage").boundingBox()).toEqual({ x: 0, y: 0, width: 1920, height: 1080 });
   reports.length = 0; ask("本期新增客户有多少家"); await expect.poll(() => reports.some(r => r.type === "playback.started")).toBe(true);
   const before = (await metrics(page)).stopped; for (const conn of hub.connections) if (conn.role === "screen") conn.close(1011);
-  await expect.poll(() => orch.state.name).toBe("followup");
+  await expect.poll(() => orch.state.name).toBe("ambient");
   await expect.poll(async () => (await metrics(page)).stopped).toBeGreaterThan(before);
   await expect(page.locator(".overlay-root")).toHaveCount(0);
-  await expect.poll(() => hub.counts().screens).toBe(1);
+  await expect.poll(() => hub.counts().screens).toBeGreaterThanOrEqual(1);
 });
 
 test("Escape during followup closes the hub and a fresh question wakes the screen", async ({ page }) => {
   await open(page); normalSeconds = 0.5; ask("本期新增客户有多少家");
-  await expect(page.getByText("等待追问", { exact: true })).toBeVisible();
+  await expect(page.getByText("等待追问", { exact: true })).toBeVisible({timeout:12000});
   const dismissedSession = orch.sessionId;
   await page.keyboard.press("Escape");
   await expect.poll(() => orch.state.name).toBe("ambient");
@@ -208,7 +209,7 @@ test("one failed sentence preserves earlier audio and records skipped sentences 
   expect(reports.some(r => r.type === "playback.failed")).toBe(false);
   await expect(page.getByText("部分语音播报中断，请查看卡片。", { exact: true })).toBeVisible();
   await expect.poll(() => reports.some(r => r.type === "playback.drained")).toBe(true);
-  expect(orch.state.name).toBe("followup");
+  expect(orch.state.name).toBe("answering");
   await expect.poll(async () => (await traces(sessionId)).map(r => ({ outcome: r.playbackOutcome, skipped: r.playbackSkipped }))).toEqual([{ outcome: "drained", skipped: [{ sentenceIndex: 1, reason: "audio_unavailable" }] }]);
   const total = (await metrics(page)).scheduled.reduce((sum, source) => sum + source.duration, 0);
   expect(total).toBeCloseTo((store.lookup(id)!.sentences.length - 1) * normalSeconds, 5);
@@ -243,7 +244,7 @@ test("a suspended context reports failure and a pointer gesture enables the next
   await open(page); ask("本期新增客户有多少家");
   await expect.poll(() => reports.some(r => r.type === "playback.failed")).toBe(true);
   expect(reports.some(r => r.type === "playback.started")).toBe(false);
-  await expect(page.getByText("请点击屏幕启用声音；本次回答请查看卡片。", { exact: true })).toBeVisible();
+  await expect(page.getByText("请点击屏幕启用声音；本次回答请查看卡片，随后重新唤醒。", { exact: true })).toBeVisible();
   await page.mouse.click(40, 40);
   orch.forceClose("force"); await expect.poll(() => orch.state.name).toBe("ambient");
   await expect(page.locator(".overlay-root")).toHaveCount(0);

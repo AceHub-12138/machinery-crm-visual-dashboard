@@ -85,7 +85,7 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     const card = full(); const id = card.speech!.turnId;
     const textMs = LAUNCH.unfoldStartMs + LAUNCH.unfoldMs + card.card!.spoken.length / LAUNCH.typeCps * 1000 + DEMO_TIMING.answerHoldMs;
     expect(textMs).toBeLessThan(playbackFallbackMs(card.card!.spoken));
-    await vi.advanceTimersByTimeAsync(Math.ceil(textMs - (Date.now() - card.at)));
+    await vi.advanceTimersByTimeAsync(Math.ceil(textMs - (Date.now() - card.at)) + 8000);
     expect(orch.state.name).toBe('followup'); expect(store.lookup(id)?.cancelled).toBe(false);
     expect(store.lookup(id)?.sentences.every(s => s.state === 'done')).toBe(true); orch.forceClose('force');
   });
@@ -99,11 +99,11 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     const screen = { id: 'screen', role: 'screen' as const, send: () => {}, close: () => {} };
     setScreens(1); orch.detach(screen); expect(orch.state.name).toBe('answering');
     setScreens(0); orch.detach({ ...screen, role: 'console' }); expect(orch.state.name).toBe('answering');
-    orch.detach(screen); expect(orch.state.name).toBe('followup'); expect(store.lookup(id)?.controller.signal.aborted).toBe(false);
+    orch.detach(screen); expect(orch.state.name).toBe('answering'); expect(store.lookup(id)?.controller.signal.aborted).toBe(false);
     expect(append).not.toHaveBeenCalled(); orch.detach(screen);
     release(); await store.lookup(id)!.completed;
     expect(append).toHaveBeenCalledOnce(); expect(append.mock.calls[0][0].playbackOutcome).toBe('drained');
-    await vi.advanceTimersByTimeAsync(2999); expect(orch.state.name).toBe('followup');
+    await vi.advanceTimersByTimeAsync(8000 + 2999); expect(orch.state.name).toBe('followup');
     await vi.advanceTimersByTimeAsync(1); expect(orch.state.name).toBe('closing'); expect(store.lookup(id)?.cancelled).toBe(false); orch.forceClose('force');
   });
   it.each(['answering', 'followup'])('current screen dismissal closes %s and rejects other roles and stale turns', async (phase) => {
@@ -111,7 +111,7 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     const { orch, full, events } = orchestrator(store, 'sales_progress', 1, trace); await vi.advanceTimersByTimeAsync(1100);
     const id = full().speech!.turnId;
     const send = (reason: string, role = 'screen', turnId = id) => orch.handleClientMessage({ id: 'report', role: role as 'screen' | 'console' | 'unknown', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.failed', at: Date.now(), turnId, reason }));
-    if (phase === 'followup') orch.handleClientMessage({ id: 'screen', role: 'screen', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.drained', at: Date.now(), turnId: id }));
+    if (phase === 'followup') { orch.handleClientMessage({ id: 'screen', role: 'screen', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.drained', at: Date.now(), turnId: id })); await vi.advanceTimersByTimeAsync(8000); }
     send('dismissed', 'console'); send('dismissed', 'unknown'); send('dismissed', 'screen', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb');
     expect(orch.state.name).toBe(phase);
     send('dismissed'); expect(orch.state.name).toBe('closing'); expect(store.lookup(id)?.cancelled).toBe(true);
@@ -149,7 +149,7 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     expect(response.status).toBe(200); expect(new Uint8Array(await response.arrayBuffer())).toEqual(pcm);
     orch.forceClose('force'); expect((await get(`/voice/audio/${speech.turnId}/0`)).status).toBe(410);
   });
-  it('goodbye fallback closes without cancelling and stale playback cannot close a newer turn', async () => {
+  it('goodbye timeout holds the card then closes with error and cancelling and stale playback cannot close a newer turn', async () => {
     const { store } = await setup(new FakeClient()); vi.useFakeTimers();
     const { orch, events, full } = orchestrator(store, 'chitchat_or_end'); await vi.advanceTimersByTimeAsync(1100);
     const oldId = full().speech!.turnId;
@@ -158,8 +158,10 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     orch.handleClientMessage({ id: 'screen', role: 'screen', send: () => {}, close: () => {} }, JSON.stringify({ type: 'playback.drained', at: Date.now(), turnId: oldId }));
     expect(orch.state.name).toBe('answering'); expect(store.lookup(oldId)?.cancelled).toBe(true);
     const latest = events.filter(e => e.type === 'answer.delta' && e.full).at(-1) as Extract<VoiceWireEvent, { type: 'answer.delta' }>;
-    await vi.advanceTimersByTimeAsync(4000); expect(orch.state.name).toBe('ambient');
-    expect(store.lookup(latest.speech!.turnId)?.cancelled).toBe(false);
+    await vi.advanceTimersByTimeAsync(4000); expect(orch.state.name).toBe('answering');
+    await vi.advanceTimersByTimeAsync(9000); expect(orch.state.name).toBe('ambient');
+    expect(events.some(e => e.type === 'session.end' && e.reason === 'error')).toBe(true);
+    expect(store.lookup(latest.speech!.turnId)?.cancelled).toBe(true);
     orch.forceClose('force');
   });
   it('followup timeout preserves answer audio until force-close, supersession or TTL', async () => {
@@ -182,8 +184,8 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     report('playback.started'); const first = events.filter(e => e.type === 'trace.turn').at(-1) as Extract<VoiceWireEvent, { type: 'trace.turn' }>;
     expect(first.trace.playbackStartMs).toBeGreaterThan(0);
     const count = events.filter(e => e.type === 'trace.turn').length; report('playback.started'); expect(events.filter(e => e.type === 'trace.turn')).toHaveLength(count);
-    report('playback.drained'); expect(orch.state.name).toBe('followup'); report('playback.drained');
-    await vi.advanceTimersByTimeAsync(2999); expect(orch.state.name).toBe('followup');
+    report('playback.drained'); expect(orch.state.name).toBe('answering'); report('playback.drained');
+    await vi.advanceTimersByTimeAsync(8000 + 2999); expect(orch.state.name).toBe('followup');
     await vi.advanceTimersByTimeAsync(1); expect(orch.state.name).toBe('closing'); expect(store.lookup(id)?.cancelled).toBe(false);
     orch.forceClose('force');
   });
@@ -197,7 +199,7 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     for (const type of ['playback.started','playback.drained','playback.failed','playback.skipped']) orch.handleClientMessage({id:'screen',role:'screen',send:()=>{},close:()=>{}},JSON.stringify({type,at:Date.now(),turnId:old,reason:'audio_interrupted',sentenceIndex:0}));
     orch.handleClientMessage({id:'screen',role:'screen',send:()=>{},close:()=>{}},JSON.stringify({type:'playback.failed',at:Date.now(),turnId:old,reason:'dismissed'}));
     expect(orch.state.name).toBe('answering'); expect(store.lookup(old)?.cancelled).toBe(true);
-    await vi.advanceTimersByTimeAsync(playbackFallbackMs(latest.card!.spoken)); expect(orch.state.name).toBe('followup');
+    await vi.advanceTimersByTimeAsync(playbackFallbackMs(latest.card!.spoken)); expect(orch.state.name).toBe('answering');
     expect(store.lookup(latest.speech!.turnId)?.cancelled).toBe(true);
     expect((events.filter(e => e.type==='trace.turn').at(-1) as Extract<VoiceWireEvent,{type:'trace.turn'}>).trace.playbackOutcome).toBe('timeout');
     orch.forceClose('force');
@@ -288,7 +290,7 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     expect(turn.sentences[0].chunks).toHaveLength(0);expect(turn.metrics.ttsFail).toBe(1);
     await new Promise(r=>setTimeout(r,60));expect(store.lookup(turn.id)).toBeNull();expect(turn.controller.signal.aborted).toBe(true);
   });
-  it('audio faults leave the card and enter followup on browser failure; trace includes outcome once',async()=>{
+  it('audio faults leave the card readable without a followup on browser failure; trace includes outcome once',async()=>{
     const client=new FakeClient();const {store}=await setup(client);let n=0;
     client.tts=async function*(){n++;if(n===1)throw Error('silent');yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:{...zero,ttsRegenerated:1,ttsTruncated:1}};};
     vi.useFakeTimers();const events:unknown[]=[];const sink=new TraceSink(null);const append=vi.spyOn(sink,'append');
@@ -299,7 +301,11 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     expect(append).not.toHaveBeenCalled();
     orch.handleClientMessage({id:'screen',role:'screen',send:()=>{},close:()=>{}},JSON.stringify({type:'playback.failed',at:Date.now(),turnId:full.speech.turnId,reason:'audio_unavailable'}));
     expect(append).toHaveBeenCalledOnce();expect(append.mock.calls[0][0]).toMatchObject({ttsFail:1,playbackOutcome:'failed'});
-    expect(orch.state.name).toBe('followup');orch.forceClose('force');expect(store.lookup(full.speech.turnId)?.cancelled).toBe(true);
+    expect(orch.state.name).toBe('answering');
+    expect(append.mock.calls[0][0].playbackFailureReason).toBe('audio_unavailable');
+    await vi.advanceTimersByTimeAsync(8000);expect(orch.state.name).toBe('closing');
+    expect(events.some(e => (e as VoiceWireEvent).type === 'state.change' && (e as Extract<VoiceWireEvent,{type:'state.change'}>).to === 'followup')).toBe(false);
+    orch.forceClose('force');expect(store.lookup(full.speech.turnId)?.cancelled).toBe(true);
   });
 });
 

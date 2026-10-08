@@ -38,6 +38,11 @@ export type TurnTraceRecord = {
   asrMs?: number | null;
   playbackStartMs?: number | null;
   playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
+  playbackFailureReason?: string;
+  playbackScreenId?: string;
+  playbackEndMs?: number;
+  playbackScreenCount?: number;
+  followupDelayMs?: number;
   playbackSkipped?: SkippedPlaybackSentence[];
   ttsFirstByteMs?: number;
   voiceLocalFirstByteMs?: number;

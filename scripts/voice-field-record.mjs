@@ -28,7 +28,7 @@ socket.addEventListener('message',async message=>{
   if(!started||finished)return;
   if(event.type==='session.start')data.wakes.push({at:new Date().toISOString(),sessionId:event.sessionId});
   if(event.type==='session.end')data.ends.push({at:new Date().toISOString(),reason:event.reason});
-  if(event.type==='trace.turn'&&event.trace.playbackOutcome){const t=event.trace;const row={at:event.at,turn:event.turn,speculative:t.speculative??'none',playbackOutcome:t.playbackOutcome,playbackStartMs:t.playbackStartMs,asrMs:t.asrMs,classifyMs:t.classifyMs,ttsFirstByteMs:t.ttsFirstByteMs,style:t.style,styleFallback:t.styleFallback};if(!data.turns.some(r=>r.turn===row.turn&&r.at===row.at))data.turns.push(row);}
+  if(event.type==='trace.turn'&&event.trace.playbackOutcome){const t=event.trace;const row={at:event.at,turn:event.turn,speculative:t.speculative??'none',playbackOutcome:t.playbackOutcome,playbackFailureReason:t.playbackFailureReason,playbackScreenId:t.playbackScreenId,playbackEndMs:t.playbackEndMs,playbackScreenCount:t.playbackScreenCount,followupDelayMs:t.followupDelayMs,playbackStartMs:t.playbackStartMs,asrMs:t.asrMs,classifyMs:t.classifyMs,ttsFirstByteMs:t.ttsFirstByteMs,style:t.style,styleFallback:t.styleFallback};if(!data.turns.some(r=>r.turn===row.turn&&r.at===row.at))data.turns.push(row);}
 });
 socket.addEventListener('error',()=>{console.error('编排服务连接失败，记录未完成。');process.exitCode=1;void finish();});
 socket.addEventListener('close',()=>{if(!finished){console.error('编排连接已断开，记录未完成。');process.exitCode=1;void finish();}});

@@ -15,7 +15,7 @@ import { buildIntentAnswer } from "../src/lib/voice/intent-answers";
 import { playbackFallbackMs } from "../src/lib/voice/playback-timing";
 import type { SpeechClient } from "../services/voice-orchestrator/src/tts/voice-local-client";
 const fixture=validatePublicPayload(JSON.parse(readFileSync(new URL("../services/voice-orchestrator/fixtures/public-sales-screen.json",import.meta.url),'utf8')))!;
-type BrowserFixture={context:AudioContext;destination:MediaStreamAudioDestinationNode;ready:boolean;kwsReady:boolean;deadlineMs:number;sockets:WebSocket[]};
+type BrowserFixture={context:AudioContext;destination:MediaStreamAudioDestinationNode;ready:boolean;kwsReady:boolean;deadlineMs:number;sockets:WebSocket[];kwsDebug:{frames:number;resetEpoch:number;keywords:unknown[];wakeStatuses:number[];peak:number;energetic:number;resets:Array<{epoch:number;at:number}>}};
 declare global { interface Window { voiceFixture:BrowserFixture } }
 const screenToken='voice-input-screen-token',consoleToken='voice-input-console-token';
 test.use({launchOptions:{args:['--autoplay-policy=no-user-gesture-required']}});
@@ -28,13 +28,13 @@ async function setup(page:Page){
   const hub=await startVoiceHub({host:'127.0.0.1',port:0,onHttpRequest:(req,res)=>['/voice/wake','/voice/utterance','/voice/input-config','/voice/listen'].includes(new URL(req.url!,'http://localhost').pathname)?input(req,res):audio(req,res),onMessage:(conn,raw)=>orch.handleClientMessage(conn,raw),onClose:conn=>orch.detach(conn)});
   const llm=new ScriptedAdapter({firstTokenDelayMs:0});const classify=llm.classify.bind(llm);llm.classify=(q,s)=>{questions.push(q);return classify(q,s);};
   const orch:ReturnType<typeof createVoiceOrchestrator>=createVoiceOrchestrator({hub,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>fixture},llm,mcp:null,trace:new TraceSink(null),hubAuth:{screenToken,consoleToken},llmTimeoutMs:8000,partialPaceMs:45,partialMaxTotalMs:1200,prefetchTimeoutMs:5000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:100,mcpToolWhitelist:[]});
-  const input:ReturnType<typeof createInputHttpHandler>=createInputHttpHandler({screenToken,activity:orch.inputActivity,wake:()=>orch.beginSession(true),utterance:(pcm,signal,ms,lease)=>orch.submitUtterance(pcm,signal,ms,lease),config:()=>({hangoverMs:500,micReopenDelayMs:300,kwsThreshold:.25,kwsScore:1,kwsEnergy:.01,wakePhrase:'你好，小川'})});
+  const input:ReturnType<typeof createInputHttpHandler>=createInputHttpHandler({screenToken,activity:orch.inputActivity,wake:(_followup,screenId)=>orch.beginSession(true,screenId),utterance:(pcm,signal,ms,lease)=>orch.submitUtterance(pcm,signal,ms,lease),config:()=>({hangoverMs:500,micReopenDelayMs:300,kwsThreshold:.25,kwsScore:1,kwsEnergy:.01,wakePhrase:'你好，小川'})});
   page.on('request',r=>{if(r.method()==='POST'&&r.url().includes('/voice/utterance'))requests.push(r.url());});
   page.on('response',r=>{if(r.url().includes('/voice/listen?action=ready')&&r.status()===202){ready++;readyAt=Date.now();}});
   await page.addInitScript(()=>{
-    const context=new AudioContext(),destination=context.createMediaStreamDestination();window.voiceFixture={context,destination,ready:false,kwsReady:false,deadlineMs:0,sockets:[]};
+    const context=new AudioContext(),destination=context.createMediaStreamDestination();window.voiceFixture={context,destination,ready:false,kwsReady:false,deadlineMs:0,sockets:[],kwsDebug:{frames:0,resetEpoch:0,keywords:[],wakeStatuses:[],peak:0,energetic:0,resets:[]}};
     navigator.mediaDevices.getUserMedia=async()=>{window.voiceFixture.ready=true;return destination.stream;};
-    const OriginalWorker=Worker;window.Worker=class extends OriginalWorker{constructor(url:string|URL,options?:WorkerOptions){super(url,options);if(String(url).includes('kws-worker'))this.addEventListener('message',e=>{if(e.data.type==='ready')window.voiceFixture.kwsReady=true;});}};
+    const OriginalWorker=Worker;window.Worker=class extends OriginalWorker{constructor(url:string|URL,options?:WorkerOptions){super(url,options);if(String(url).includes('kws-worker')){const post=this.postMessage.bind(this);this.postMessage=(data:{type:string;epoch?:number;samples?:Float32Array},transfer?:Transferable[]|StructuredSerializeOptions)=>{if(data.type==='audio'){const debug=window.voiceFixture.kwsDebug;debug.frames++;const rms=Math.sqrt(data.samples!.reduce((sum,x)=>sum+x*x,0)/data.samples!.length);debug.peak=Math.max(debug.peak,rms);if(rms>.01)debug.energetic++;}if(data.type==='reset'){window.voiceFixture.kwsDebug.resetEpoch=data.epoch!;window.voiceFixture.kwsDebug.resets.push({epoch:data.epoch!,at:performance.now()});}post(data,Array.isArray(transfer)?transfer:transfer?.transfer??[]);};this.addEventListener('message',e=>{if(e.data.type==='ready')window.voiceFixture.kwsReady=true;if(e.data.type==='keyword')window.voiceFixture.kwsDebug.keywords.push(e.data);});}}};
     const OriginalSocket=WebSocket;window.WebSocket=class extends OriginalSocket{constructor(url:string|URL,protocols?:string|string[]){super(url,protocols);window.voiceFixture.sockets.push(this);}};
     const timer=window.setTimeout.bind(window);window.setTimeout=((fn:TimerHandler,ms?:number,...args:unknown[])=>timer(fn,window.voiceFixture.deadlineMs>0&&ms===window.voiceFixture.deadlineMs?1000:ms,...args)) as typeof window.setTimeout;
   });
@@ -42,7 +42,7 @@ async function setup(page:Page){
   await page.waitForFunction(()=>window.voiceFixture.ready&&window.voiceFixture.kwsReady);
   const play=async(name:string)=>page.evaluate(async b64=>{const m=window.voiceFixture;await m.context.resume();const bytes=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));const node=m.context.createBufferSource();node.buffer=await m.context.decodeAudioData(bytes.buffer);node.connect(m.destination);node.start();},(await readFile(new URL(`fixtures/${name}`,import.meta.url))).toString('base64'));
   const open=async()=>{const before=ready;await page.keyboard.press('F9');await expect.poll(()=>orch.state.name,{timeout:10000}).toBe('listening');await expect.poll(()=>ready).toBeGreaterThan(before);};
-  const kwsWake=async()=>{await expect.poll(()=>orch.state.name,{timeout:10000}).toBe('ambient');await page.waitForTimeout(5600);const previous=orch.sessionId;await play('wake.wav');await expect.poll(()=>orch.sessionId,{timeout:10000}).not.toBe(previous);};
+  const kwsWake=async()=>{await expect.poll(()=>orch.state.name,{timeout:10000}).toBe('ambient');await page.waitForTimeout(5600);const previous=orch.sessionId;await play('wake.wav');try{await expect.poll(()=>orch.sessionId,{timeout:10000}).not.toBe(previous);}catch(error){console.log('KWS recovery diagnostic',await page.evaluate(()=>({debug:window.voiceFixture.kwsDebug,inputState:window.voiceFixture.context.state,text:document.querySelector('.overlay-root')?.textContent})));throw error;}};
   return {orch,client,questions,requests,play,open,kwsWake,ready:()=>ready,readyAt:()=>readyAt,close:async()=>{orch.forceClose('force');store.close();await hub.close();await rm(cache,{recursive:true,force:true});}};
 }
 test('real worklet/VAD: no uploads during playback, strips prefix, and >4s followup survives 3s window',async({page})=>{
@@ -79,7 +79,7 @@ for(const interruption of ['Escape','disconnect','supersede','timeout'] as const
     await s.play('sales-question.wav');await expect.poll(()=>s.orch.state.name).toBe('answering');
     if(interruption==='disconnect')await page.evaluate(()=>window.voiceFixture.sockets.forEach(socket=>socket.close()));
     else if(interruption==='supersede'){s.orch.handleClientMessage({id:'console',role:'console',send:()=>{},close:()=>{}},JSON.stringify({type:'question.submit',at:Date.now(),text:'本月回款情况怎么样'}));await expect.poll(()=>s.orch.answer?.spoken).toContain('回款');await page.keyboard.press('Escape');}
-    else if(interruption==='timeout'){await expect.poll(()=>s.orch.state.name,{timeout:4000}).toBe('followup');await page.keyboard.press('Escape');}
+    else if(interruption==='timeout'){await expect.poll(()=>s.orch.state.name,{timeout:4000}).toBe('answering');await expect.poll(()=>s.orch.state.name,{timeout:14000}).toBe('ambient');}
     else await page.keyboard.press('Escape');
     await s.kwsWake();
   }finally{await s.close();}

@@ -16,15 +16,15 @@ const stores:AudioStore[]=[], dirs:string[]=[], closes:Array<()=>void>=[];
 beforeEach(()=>vi.useFakeTimers());
 afterEach(async()=>{closes.splice(0).forEach(f=>f());stores.splice(0).forEach(s=>s.close());vi.useRealTimers();await Promise.all(dirs.splice(0).map(d=>rm(d,{recursive:true,force:true})));});
 const pcm=new Uint8Array(24000);for(let i=0;i<pcm.length;i+=2)pcm[i]=100;
-const screen={id:'screen',role:'screen' as const,send:()=>{},close:()=>{}};
-async function setup(text='本月销售怎么样', max=100){
+const screen={id:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',role:'screen' as const,send:()=>{},close:()=>{}};
+async function setup(text='本月销售怎么样', max=100, connectedScreens=false){
   const events:VoiceWireEvent[]=[];
   const signals:AbortSignal[]=[];
   const client:SpeechClient={health:async()=>({warm:true,selfCheck:'passed',refHash:'a'.repeat(64),styles:['default','warm','serious']}),asr:vi.fn(async()=>({text,ms:100})),tts:async function*(_t,_s,signal){if(signal)signals.push(signal);yield {type:'audio',pcm,sampleRate:24000};yield {type:'done',metrics:{ttsFail:0,ttsTruncated:0,ttsRegenerated:0}};}};
   const dir=await mkdtemp(join(tmpdir(),'listen-repair-'));dirs.push(dir);
   const store=new AudioStore({client,cacheDir:dir,enabled:true});stores.push(store);await store.initialize();
   const llm=new ScriptedAdapter({firstTokenDelayMs:0});
-  const orch=createVoiceOrchestrator({hub:{broadcast:(e:VoiceWireEvent)=>events.push(structuredClone(e)),counts:()=>({screens:1,consoles:0})} as unknown as VoiceHubServer,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>validatePublicPayload(fixture)!},llm,mcp:null,trace:new TraceSink(null),llmTimeoutMs:8000,partialPaceMs:1,partialMaxTotalMs:1,prefetchTimeoutMs:1000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:max,mcpToolWhitelist:[]});
+  const orch=createVoiceOrchestrator({hub:{broadcast:(e:VoiceWireEvent)=>events.push(structuredClone(e)),connections:connectedScreens?new Set([screen,{...screen,id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'}]):undefined,counts:()=>({screens:connectedScreens?2:1,consoles:0})} as unknown as VoiceHubServer,audio:store,speechClient:client,dataSource:{name:'fixture',fetchPayload:async()=>validatePublicPayload(fixture)!},llm,mcp:null,trace:new TraceSink(null),llmTimeoutMs:8000,partialPaceMs:1,partialMaxTotalMs:1,prefetchTimeoutMs:1000,questionMinGapMs:0,questionWindowMs:60000,questionWindowMax:max,mcpToolWhitelist:[]});
   closes.push(()=>orch.forceClose('force'));
   const ack=(turnId:string)=>orch.handleClientMessage(screen,JSON.stringify({type:'playback.drained',at:Date.now(),turnId}));
   const fixed=()=>events.filter(e=>e.type==='speech.fixed').at(-1) as Extract<VoiceWireEvent,{type:'speech.fixed'}>;
@@ -45,9 +45,9 @@ it('confirmed speech at second 4 protects a long utterance; misfire resumes rema
   s.orch.inputActivity(lease,'misfire');await vi.advanceTimersByTimeAsync(999);expect(s.fixed().speech.fixed).toBe('wake');
   await vi.advanceTimersByTimeAsync(1);expect(s.fixed().speech.fixed).toBe('idle_exit');
 });
-it('without browser playback/ready reports the server forces exit at cached duration + 5s + 1s',async()=>{
-  const s=await setup();s.orch.beginSession(true);await vi.advanceTimersByTimeAsync(6500);
-  expect(s.orch.state.name).toBe('closing');await vi.advanceTimersByTimeAsync(1000);expect(s.orch.state.name).toBe('ambient');
+it('missing cached playback ack exits with error and never opens the microphone',async()=>{
+  const s=await setup();s.orch.beginSession(true);await vi.advanceTimersByTimeAsync(3000);
+  expect(s.orch.state.name).toBe('closing');expect(s.orch.inputLease).toBeNull();expect(s.events.some(e=>e.type==='session.end'&&e.reason==='error')).toBe(true);await vi.advanceTimersByTimeAsync(1000);expect(s.orch.state.name).toBe('ambient');
 });
 it('dismissal is screen/current-session-only; stale utterances never reach ASR',async()=>{
   const s=await setup();await s.open();const old=s.orch.inputLease!;
@@ -89,4 +89,64 @@ it.each(['close','deadline'] as const)('cancels hidden GPU prediction on %s befo
   const signal=s.signals.at(-1)!;expect(signal.aborted).toBe(false);
   if(why==='close')s.orch.forceClose('force');else await vi.advanceTimersByTimeAsync(8000);
   expect(signal.aborted).toBe(true);expect(s.events.some(e=>e.type==='answer.delta')).toBe(false);
+});
+
+const secondScreen={...screen,id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'};
+function report(s:Awaited<ReturnType<typeof setup>>,conn:typeof screen,type:string,turnId:string,reason?:string){
+  s.orch.handleClientMessage(conn,JSON.stringify({type,at:Date.now(),turnId,...(reason?{reason}:{})}));
+}
+async function spokenAnswer(s:Awaited<ReturnType<typeof setup>>){
+  await s.open();await s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,s.orch.inputLease!);await vi.advanceTimersByTimeAsync(2);
+  return (s.events.filter(e=>e.type==='answer.delta'&&e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>).speech!.turnId;
+}
+it('the HTTP wake screen owns cached speech and input, even when it connected second',async()=>{
+  const s=await setup(undefined,100,true);
+  expect(()=>s.orch.beginSession(true,'cccccccc-cccc-cccc-cccc-cccccccccccc')).toThrow('screen_not_connected');
+  s.orch.beginSession(true,secondScreen.id);await vi.advanceTimersByTimeAsync(1000);
+  expect(s.events.find(e=>e.type==='session.start')).toMatchObject({screenId:secondScreen.id});
+  s.ack(s.fixed().speech.turnId);expect(s.orch.state.name).toBe('waking');
+  report(s,secondScreen,'playback.drained',s.fixed().speech.turnId);await vi.advanceTimersByTimeAsync(1);
+  expect(s.orch.inputLease).toMatchObject({screenId:secondScreen.id});
+  const lease=s.orch.inputLease!;
+  expect(()=>s.orch.inputActivity({...lease,screenId:screen.id},'ready')).toThrow('stale_listen_window');
+  await expect(s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,{...lease,screenId:screen.id})).rejects.toMatchObject({status:409,message:'screen_not_session_owner'});
+  expect(s.client.asr).not.toHaveBeenCalled();s.orch.inputActivity(lease,'ready');
+});
+it('a second screen cannot stop an answer or its fixed followup; delay is exactly 8s from owner drain',async()=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s);
+  report(s,screen,'playback.started',id);
+  for(const type of ['playback.failed','playback.drained','playback.skipped'])report(s,secondScreen,type,id,'autoplay_blocked');
+  s.orch.handleClientMessage(secondScreen,JSON.stringify({type:'session.dismiss',at:Date.now(),sessionId:s.orch.sessionId}));
+  expect(s.orch.state.name).toBe('answering');expect(s.store.lookup(id)?.cancelled).toBe(false);
+  s.ack(id);expect(s.orch.state.name).toBe('answering');expect(s.orch.inputLease).toBeNull();
+  await vi.advanceTimersByTimeAsync(4000);s.ack(id);
+  await vi.advanceTimersByTimeAsync(3999);expect(s.orch.state.name).toBe('answering');expect(s.fixed().speech.fixed).toBe('wake');
+  await vi.advanceTimersByTimeAsync(1);expect(s.orch.state.name).toBe('followup');expect(s.fixed().speech.fixed).toBe('followup');
+  report(s,secondScreen,'playback.failed',s.fixed().speech.turnId,'autoplay_blocked');expect(s.orch.inputLease).toBeNull();
+  s.ack(s.fixed().speech.turnId);await vi.advanceTimersByTimeAsync(900);expect(s.orch.inputLease).toMatchObject({screenId:screen.id});
+  s.orch.inputActivity(s.orch.inputLease!,'ready');await vi.advanceTimersByTimeAsync(2999);expect(s.orch.state.name).toBe('followup');
+  await vi.advanceTimersByTimeAsync(1);expect(s.orch.state.name).toBe('closing');
+});
+it.each(['autoplay_blocked','audio_interrupted','audio_unavailable','timeout'])('owner failure %s keeps the card and exits without spoken followup, with diagnostic identity',async reason=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s);
+  report(s,screen,'playback.failed',id,reason);expect(s.orch.state.name).toBe('answering');expect(s.orch.answer?.card.kind).toBe('target-progress');
+  const trace=s.events.filter(e=>e.type==='trace.turn').at(-1) as Extract<VoiceWireEvent,{type:'trace.turn'}>;
+  expect(trace.trace).toMatchObject({playbackOutcome:reason==='timeout'?'timeout':'failed',playbackFailureReason:reason,playbackScreenId:screen.id,playbackScreenCount:2});
+  expect(trace.trace.playbackEndMs).toBeGreaterThanOrEqual(0);
+  await vi.advanceTimersByTimeAsync(7999);expect(s.orch.state.name).toBe('answering');
+  await vi.advanceTimersByTimeAsync(1);expect(s.orch.state.name).toBe('closing');expect(s.events.some(e=>e.type==='speech.fixed'&&e.speech.fixed==='followup')).toBe(false);
+});
+it.each(['disconnect','supersede'] as const)('pending 8s followup is cancelled on owner %s',async why=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s);s.ack(id);await vi.advanceTimersByTimeAsync(4000);
+  if(why==='disconnect'){s.orch.detach(secondScreen);expect(s.orch.state.name).toBe('answering');s.orch.detach(screen);expect(s.orch.state.name).toBe('closing');}
+  else{s.orch.handleClientMessage({...screen,role:'console'},JSON.stringify({type:'question.submit',at:Date.now(),text:'客户有多少'}));}
+  await vi.advanceTimersByTimeAsync(4000);
+  expect(s.events.some(e=>e.type==='speech.fixed'&&e.speech.fixed==='followup')).toBe(false);
+  if(why==='supersede')expect(s.orch.state.name).toBe('answering');
+});
+it('owner fixed wake/followup failure never opens a microphone lease',async()=>{
+  const s=await setup(undefined,100,true);s.orch.beginSession(true);report(s,screen,'playback.failed',s.fixed().speech.turnId,'autoplay_blocked');
+  expect(s.orch.state.name).toBe('closing');expect(s.orch.inputLease).toBeNull();await vi.advanceTimersByTimeAsync(1000);
+  const id=await spokenAnswer(s);s.ack(id);await vi.advanceTimersByTimeAsync(8000);
+  report(s,screen,'playback.failed',s.fixed().speech.turnId,'audio_unavailable');expect(s.orch.state.name).toBe('closing');expect(s.orch.inputLease).toBeNull();
 });

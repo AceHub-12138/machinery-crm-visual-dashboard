@@ -14,6 +14,7 @@ export const VOICE_TIMING = {
   wakingMs: 900,
   thinkingMaxMs: 8000,
   followupMs: 3000,
+  followupDelayMs: 8000, // 成功播完答案后，保留答案 8 秒再播追问
   closingMs: 800,
   foldMs: 200, // §5 退场第一步:答案卡折叠吸回核心
 } as const;

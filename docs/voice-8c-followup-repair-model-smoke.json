@@ -1,0 +1,220 @@
+{
+  "scope": "injected macOS synthesized speech → real browser AudioWorklet/Silero VAD → loopback HTTP → real ASR/LLM/TTS → first scheduled sample; not exhibit/real microphone/LAN",
+  "model": "qwen/qwen3.6-35b-a3b",
+  "errors": [],
+  "summary": {
+    "L1": {
+      "samples": 2,
+      "p50": 952.7,
+      "p95": 969
+    },
+    "L2": {
+      "samples": 2,
+      "p50": 1476.9,
+      "p95": 1496.5
+    },
+    "asrMs": {
+      "samples": 2,
+      "p50": 218.9,
+      "p95": 226.3
+    },
+    "asrRoundTripMs": {
+      "samples": 2,
+      "p50": 222.5,
+      "p95": 229.3
+    },
+    "classifyMs": {
+      "samples": 2,
+      "p50": 552.4,
+      "p95": 561.5
+    },
+    "ttsFirstByteMs": {
+      "samples": 2,
+      "p50": 536.3,
+      "p95": 550
+    },
+    "voiceLocalFirstByteMs": {
+      "samples": 2,
+      "p50": 528.3,
+      "p95": 540.5
+    },
+    "browserBufferMs": {
+      "samples": 2,
+      "p50": 150.2,
+      "p95": 150.3
+    }
+  },
+  "speculative": {
+    "hit": {
+      "rounds": 2,
+      "L1": {
+        "samples": 2,
+        "p50": 952.7,
+        "p95": 969
+      },
+      "L2": {
+        "samples": 2,
+        "p50": 1476.9,
+        "p95": 1496.5
+      },
+      "asrMs": {
+        "samples": 2,
+        "p50": 218.9,
+        "p95": 226.3
+      },
+      "asrRoundTripMs": {
+        "samples": 2,
+        "p50": 222.5,
+        "p95": 229.3
+      },
+      "classifyMs": {
+        "samples": 2,
+        "p50": 552.4,
+        "p95": 561.5
+      },
+      "ttsFirstByteMs": {
+        "samples": 2,
+        "p50": 536.3,
+        "p95": 550
+      },
+      "voiceLocalFirstByteMs": {
+        "samples": 2,
+        "p50": 528.3,
+        "p95": 540.5
+      },
+      "browserBufferMs": {
+        "samples": 2,
+        "p50": 150.2,
+        "p95": 150.3
+      }
+    },
+    "miss": {
+      "rounds": 0,
+      "L1": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "L2": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "asrMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "asrRoundTripMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "classifyMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "ttsFirstByteMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "voiceLocalFirstByteMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "browserBufferMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "none": {
+      "rounds": 0,
+      "L1": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "L2": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "asrMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "asrRoundTripMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "classifyMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "ttsFirstByteMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "voiceLocalFirstByteMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      },
+      "browserBufferMs": {
+        "samples": 0,
+        "p50": null,
+        "p95": null
+      }
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "fixture": "q1",
+      "question": "本月销售情况怎么样？",
+      "authoritativeIntent": "sales_progress",
+      "L1": 970.7999999970198,
+      "L2": 1498.6916666651769,
+      "asrMs": 210.8,
+      "asrRoundTripMs": 215,
+      "uploadBodyMs": 0.19575000000259024,
+      "classifyMs": 562.474457999997,
+      "ttsFirstByteMs": 551.5207910000026,
+      "voiceLocalFirstByteMs": 541.9,
+      "ttsForwardingMs": 9.620791000002669,
+      "browserBufferMs": 150.19999999552965,
+      "speculative": "hit",
+      "style": "default",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    },
+    {
+      "round": 2,
+      "fixture": "q6",
+      "question": "今天有多少跟进待办？",
+      "authoritativeIntent": "followup_todo",
+      "L1": 934.6000000014901,
+      "L2": 1455.1000000014901,
+      "asrMs": 227.1,
+      "asrRoundTripMs": 230,
+      "uploadBodyMs": 0.2807920000050217,
+      "classifyMs": 542.3057919999992,
+      "ttsFirstByteMs": 521.100916000003,
+      "voiceLocalFirstByteMs": 514.8,
+      "ttsForwardingMs": 6.300916000003099,
+      "browserBufferMs": 150.29999999701977,
+      "speculative": "hit",
+      "style": "serious",
+      "styleFallback": null,
+      "playbackOutcome": "drained"
+    }
+  ]
+}

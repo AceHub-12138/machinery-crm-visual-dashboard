@@ -93,6 +93,8 @@ export function OverlayStage({
   const tokenRef = useRef<string | null>(null);
   const playingIdRef = useRef<string | null>(null);
   const sessionIdRef = useRef<string | null>(null);
+  const screenIdRef = useRef<string | null>(null);
+  const ownsSessionRef = useRef(false);
   const getPlayer = useCallback(() => playerRef.current ??= new PcmPlayer({ onActive: () => micRef.current?.playbackStarted(), onIdle: latency => micRef.current?.playbackEnded(latency) }), []);
   const reportPlayback = useCallback((type: "playback.started" | "playback.drained" | "playback.failed", turnId: string, reason?: PlaybackFailure | "dismissed") => {
     if (socketRef.current?.readyState === WebSocket.OPEN) {
@@ -187,6 +189,7 @@ export function OverlayStage({
         sentenceRef.current = null;
         setAudioNotice(null);
         const speech = speechRef.current;
+        if (!ownsSessionRef.current) return;
         if (!speech) {
           setAudioNotice("声音暂不可用，请查看卡片。");
           return;
@@ -218,7 +221,7 @@ export function OverlayStage({
           onError: (reason) => {
             if (!isCurrent()) return;
             sentenceRef.current = null; setSentenceVersion(v => v + 1);
-            setAudioNotice(reason === "autoplay_blocked" ? "请点击屏幕启用声音；本次回答请查看卡片。" : "语音播报中断，请查看卡片。");
+            setAudioNotice(reason === "autoplay_blocked" ? "请点击屏幕启用声音；本次回答请查看卡片，随后重新唤醒。" : "语音播报中断，请查看卡片。");
             reportPlayback("playback.failed", speech.turnId, reason);
             playingIdRef.current = null;
           },
@@ -268,15 +271,15 @@ export function OverlayStage({
         break;
       }
       case "answering": {
-        if (live && speechRef.current) {
+        if (live) {
           // Network loss is handled by the WS close path. A hung browser/hub
           // still releases the exhibition UI after a conservative audio guard.
-          at(playbackFallbackMs(session.spoken ?? "") + 2000, () => {
+          at(playbackFallbackMs(session.spoken ?? "") + VOICE_TIMING.followupDelayMs + 2000, () => {
             playerRef.current?.stop();
             const id = playingIdRef.current;
             if (id) reportPlayback("playback.failed", id, "timeout");
             setAudioNotice("语音播报中断，请查看卡片。");
-            dispatchTracked({ type: speechRef.current?.fixed === "goodbye" ? "FORCE_CLOSE" : "SPOKEN", at: now() });
+            dispatchTracked({ type: "FORCE_CLOSE", at: now() });
           });
           break;
         }
@@ -322,11 +325,13 @@ export function OverlayStage({
     const dispatchWire = (raw: string) => {
       const event = parseWireEvent(raw);
       if (!event) return;
-      if (event.type === "session.start") { sessionIdRef.current = event.sessionId; micRef.current?.setSession(event.sessionId); }
+      if (event.type === "hub.hello" && event.screenId) { screenIdRef.current = event.screenId; micRef.current?.setScreen(event.screenId); }
+      if (event.type === "session.start") { sessionIdRef.current = event.sessionId; ownsSessionRef.current = !event.screenId || event.screenId === screenIdRef.current; micRef.current?.setSession(event.sessionId, ownsSessionRef.current); }
       if (event.type === "session.end") micRef.current?.setListen(null);
-      if (event.type === "input.listen") { micRef.current?.setListen(event); return; }
+      if (event.type === "input.listen") { if (ownsSessionRef.current) micRef.current?.setListen(event); return; }
       if (event.type === "answer.delta" && event.full) speechRef.current = event.speech ?? null;
       if (event.type === "speech.fixed") {
+        if (!ownsSessionRef.current) return;
         const id = event.speech.turnId; fixedIdRef.current = id;
         getPlayer().play(event.speech, audioBaseUrl(hubUrl ?? `ws://${window.location.hostname}:3210`), tokenRef.current, {
           onSentenceStart: () => reportPlayback("playback.started", id),
@@ -386,7 +391,7 @@ export function OverlayStage({
       };
       socket.onclose = (e) => {
         if (cancelled) return;
-        micRef.current?.setConnected(false);
+        micRef.current?.setConnected(false); micRef.current?.setScreen(null); screenIdRef.current = null;
         playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
         for (const machineEvent of connectionLostEvents(mirrorRef.current.name)) {
           dispatchTracked({ ...machineEvent, at: performance.now() } as VoiceEvent);
@@ -414,7 +419,7 @@ export function OverlayStage({
 
   useEffect(() => {
     if (!live) return;
-    const enable = () => { if (mirrorRef.current.name !== "ambient") void getPlayer().resume().catch(() => {}); void micRef.current?.resume().catch(() => {}); };
+    const enable = () => { void getPlayer().resume().catch(() => {}); void micRef.current?.resume().catch(() => {}); };
     window.addEventListener("pointerdown", enable);
     window.addEventListener("keydown", enable);
     return () => { window.removeEventListener("pointerdown", enable); window.removeEventListener("keydown", enable); };
@@ -444,8 +449,8 @@ export function OverlayStage({
       } else if (e.key === "Escape") {
         const state = mirrorRef.current.name;
         const id = fixedIdRef.current ?? speechRef.current?.turnId;
-        if (live && state !== "ambient" && sessionIdRef.current && socketRef.current?.readyState === WebSocket.OPEN) socketRef.current.send(JSON.stringify({ type: "session.dismiss", at: Date.now(), sessionId: sessionIdRef.current }));
-        else if (live && id) reportPlayback("playback.failed", id, "dismissed");
+        if (live && ownsSessionRef.current && state !== "ambient" && sessionIdRef.current && socketRef.current?.readyState === WebSocket.OPEN) socketRef.current.send(JSON.stringify({ type: "session.dismiss", at: Date.now(), sessionId: sessionIdRef.current }));
+        else if (live && ownsSessionRef.current && id) reportPlayback("playback.failed", id, "dismissed");
         dispatchTracked({ type: "FORCE_CLOSE", at: performance.now() });
       }
     };

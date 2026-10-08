@@ -41,7 +41,7 @@ export type VoiceErrorCode =
 export type VoiceWireEvent =
   | { type: "speech.fixed"; at: number; text: string; speech: { turnId: string; fixed?: "wake" | "followup" | "goodbye" | "fallback" | "unheard" | "idle_exit"; style?: string; sentences: { index: number; displayStart: number; displayEnd: number }[] } }
   | { type: "input.listen"; at: number; sessionId: string; listenId: string; mode: "listening" | "followup" }
-  | { type: "session.start"; at: number; sessionId: string }
+  | { type: "session.start"; at: number; sessionId: string; screenId?: string }
   | {
       type: "state.change";
       at: number;
@@ -91,6 +91,7 @@ export type VoiceWireEvent =
       type: "hub.hello";
       at: number;
       /** 当前在连的 大屏 / 对话台 数量 */
+      screenId?: string; // 仅直接 hello 携带本连接身份
       screens: number;
       consoles: number;
     }
@@ -125,6 +126,11 @@ export type TurnTracePayload = {
   asrMs?: number | null;
   playbackStartMs?: number | null;
   playbackOutcome?: "drained" | "failed" | "timeout" | "cancelled";
+  playbackFailureReason?: string;
+  playbackScreenId?: string;
+  playbackEndMs?: number;
+  playbackScreenCount?: number;
+  followupDelayMs?: number;
   playbackSkipped?: SkippedPlaybackSentence[];
   ttsFirstByteMs?: number;
   ttsRegenerated?: number;
@@ -204,7 +210,7 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
       if (typeof ev.text !== "string" || !ev.speech?.fixed || !["wake", "followup", "unheard", "goodbye", "fallback", "idle_exit"].includes(ev.speech.fixed)) return null;
       return parseWireEvent(JSON.stringify({ ...ev, type: "answer.delta", seq: 0, full: true, card: { kind: "brief", title: "小川", lines: [], spoken: ev.text } })) ? ev : null;
     case "session.start":
-      return typeof ev.sessionId === "string" && ev.sessionId.length > 0 ? ev : null;
+      return typeof ev.sessionId === "string" && ev.sessionId.length > 0 && (ev.screenId === undefined || (typeof ev.screenId === "string" && /^[a-f0-9-]{36}$/.test(ev.screenId))) ? ev : null;
     case "state.change":
       return typeof ev.from === "string" && typeof ev.to === "string" && typeof ev.turn === "number"
         ? ev
@@ -232,7 +238,7 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
     case "error":
       return typeof ev.code === "string" && typeof ev.message === "string" ? ev : null;
     case "hub.hello":
-      return typeof ev.screens === "number" && typeof ev.consoles === "number" ? ev : null;
+      return typeof ev.screens === "number" && typeof ev.consoles === "number" && (ev.screenId === undefined || (typeof ev.screenId === "string" && /^[a-f0-9-]{36}$/.test(ev.screenId))) ? ev : null;
     case "trace.turn":
       return typeof ev.turn === "number" && typeof ev.trace === "object" && ev.trace !== null ? ev : null;
     default:

@@ -84,3 +84,17 @@ it('listen ready waits for initialized microphone and running context; track is 
     await Promise.resolve();
   }finally{request.mockRestore();}
 });
+
+it('a passive screen never opens or reports a microphone lease from another screen session',async()=>{
+ const track={enabled:false};const request=vi.spyOn(globalThis,'fetch').mockResolvedValue(new Response(null,{status:202}));
+ try{
+  const mic=new VoiceMicrophone({hubUrl:'ws://localhost:3210',token:'screen',state:()=> 'listening',notice:()=>{}});
+  Object.assign(mic,{stream:{getAudioTracks:()=>[track]},context:{state:'running'},worklet:{port:{postMessage:()=>{}}}});
+  mic.setConnected(true);mic.setScreen('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb');mic.setSession('sess-aaaaaaaa',false);mic.setListen({sessionId:'sess-aaaaaaaa',listenId:'a'.repeat(36)});
+  expect(track.enabled).toBe(false);expect(request).not.toHaveBeenCalled();
+  mic.setSession('sess-aaaaaaaa',true);mic.setListen({sessionId:'sess-aaaaaaaa',listenId:'c'.repeat(36)});
+  expect(track.enabled).toBe(true);expect(request).toHaveBeenCalledOnce();
+  expect(request.mock.calls[0][1]?.headers).toMatchObject({'x-voice-screen':'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'});
+  await Promise.resolve();
+ }finally{request.mockRestore();}
+});

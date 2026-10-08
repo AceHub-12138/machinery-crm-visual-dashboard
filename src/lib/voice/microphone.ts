@@ -31,20 +31,23 @@ export class VoiceMicrophone {
   private timer: ReturnType<typeof setInterval> | null = null;
   private requests = new AbortController();
   private sessionId: string | null = null;
+  private screenId: string | null = null;
+  private sessionOwner = true;
+  setScreen(id: string | null): void { this.screenId = id; this.update(); }
   private listen: { sessionId: string; listenId: string } | null = null;
   private resetLease = false;
   private readyListenId: string | null = null;
-  setSession(id: string): void { this.sessionId = id; this.setListen(null); }
+  setSession(id: string, ownsSession = true): void { this.sessionOwner = ownsSession; this.sessionId = id; this.setListen(null); }
   setListen(lease: { sessionId: string; listenId: string } | null): void { if (lease && lease.sessionId !== this.sessionId) return; if (this.listen?.listenId === lease?.listenId) return; this.listen = lease; this.readyListenId = null; this.resetLease = true; this.update(); }
   private activity(action: "ready" | "speech_start" | "misfire"): Promise<void> { return this.request(`/voice/listen?action=${action}`, undefined, this.listen); }
   private config: InputConfig = { hangoverMs: 500, micReopenDelayMs: 300, kwsThreshold: .25, kwsScore: 1, kwsEnergy: .01, wakePhrase: "你好，小川" };
   constructor(private readonly options: { hubUrl: string; token: string; state: () => VoiceStateName; notice: (text: string) => void }) {}
   private async request(path: string, body?: Uint8Array<ArrayBuffer>, lease?: { sessionId: string; listenId: string } | null): Promise<void> {
-    const res = await fetch(`${audioBaseUrl(this.options.hubUrl)}${path}`, { method: "POST", headers: { authorization: `Bearer ${this.options.token}`, ...(lease ? { "x-voice-session": lease.sessionId, "x-voice-listen": lease.listenId } : {}), ...(body ? { "content-type": "audio/pcm" } : {}) }, body, signal: AbortSignal.any([this.requests.signal, AbortSignal.timeout(20000)]) });
+    const res = await fetch(`${audioBaseUrl(this.options.hubUrl)}${path}`, { method: "POST", headers: { authorization: `Bearer ${this.options.token}`, ...(this.screenId ? { "x-voice-screen": this.screenId } : {}), ...(lease ? { "x-voice-session": lease.sessionId, "x-voice-listen": lease.listenId } : {}), ...(body ? { "content-type": "audio/pcm" } : {}) }, body, signal: AbortSignal.any([this.requests.signal, AbortSignal.timeout(20000)]) });
     if (!res.ok) throw new Error(`voice HTTP ${res.status}`);
   }
   async wake(): Promise<void> {
-    if (this.options.state() !== "ambient" || this.busy || !this.connected) return;
+    if (this.options.state() !== "ambient" || this.busy || !this.connected || !this.screenId) return;
     this.busy = true; this.update();
     try { await this.request("/voice/wake"); this.cooldownUntil = performance.now() + 5000; }
     catch { this.options.notice("唤醒暂不可用，请检查语音服务。"); }
@@ -54,7 +57,7 @@ export class VoiceMicrophone {
   playbackStarted(): void { this.fixedPlaying = true; this.update(); }
   playbackEnded(outputLatencyMs: number): void { this.fixedPlaying = false; this.blockedUntil = performance.now() + outputLatencyMs + this.config.micReopenDelayMs; this.cooldownUntil = performance.now() + 5000; this.update(); }
   private update(): void {
-    const mode = captureMode(this.options.state(), this.connected, this.busy || this.fixedPlaying || performance.now() < this.blockedUntil || (["listening", "followup"].includes(this.options.state()) && !this.listen));
+    const mode = captureMode(this.options.state(), this.connected, (this.options.state() !== "ambient" && !this.sessionOwner) || this.busy || this.fixedPlaying || performance.now() < this.blockedUntil || (["listening", "followup"].includes(this.options.state()) && !this.listen));
     if (mode !== this.mode || this.resetLease) {
       this.resetLease = false;
       this.mode = mode; this.epoch++;

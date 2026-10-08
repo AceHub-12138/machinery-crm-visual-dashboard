@@ -1,7 +1,7 @@
 /** One bounded listen lease. Duplicate reports never extend a timer; only a
  * confirmed VAD start pauses the remaining time, with a 16s speech watchdog. */
 export type ListenAction = "ready" | "speech_start" | "misfire";
-export type InputLease = { sessionId: string; listenId: string };
+export type InputLease = { sessionId: string; listenId: string; screenId?: string };
 type ListenOptions = {
   timeoutMs: number; expire: (missingReport: boolean) => void;
   setTimer: (fn: () => void, ms: number) => unknown; clearTimer: (handle: unknown) => void;

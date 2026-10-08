@@ -59,6 +59,7 @@ import { LAUNCH } from "../../../src/lib/voice/params.ts";
 
 export type OrchestratorOptions = {
   hub: VoiceHubServer;
+  warn?: (message: string) => void;
   listenTimeoutMs?: number;
   audio?: AudioStore;
   speechClient?: SpeechClient;
@@ -135,6 +136,9 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   let state: VoiceSessionState = initSessionState(Date.now());
   let sessionId = "";
   let voiceSession = false;
+  let sessionScreenId: string | null = null;
+  let answerShownAt = 0;
+  const ownsSession = (conn: HubConnection) => !sessionScreenId || conn.id === sessionScreenId;
   let listenWindow: ListenWindow | null = null;
   let wakeGuard: unknown = null;
   let failures = 0;
@@ -165,6 +169,9 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     playback.finished = true;
     playback.waitingForScreens = false;
     playback.record.playbackOutcome = outcome;
+    playback.record.playbackEndMs = Math.max(0, Date.now() - Date.parse(playback.record.ts));
+    playback.record.playbackScreenCount = hub.counts().screens;
+    if (sessionScreenId) playback.record.playbackScreenId = sessionScreenId;
     emitTrace(playback.record);
     persistPlayback(playback);
   }
@@ -176,10 +183,22 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     fixedPlayback = null;
   }
   function spoken(seq: number, outcome: "drained" | "failed" | "timeout"): void {
-    if (seq !== turnSeq || state.name !== "answering") return;
+    if (seq !== turnSeq || state.name !== "answering" || playback?.finished) return;
     clearTimers();
     if ((outcome === "failed" || (outcome === "timeout" && !goodbyeId)) && audioId) options.audio?.cancel(audioId);
+    if (playback && outcome === "timeout") playback.record.playbackFailureReason ??= "timeout";
+    if (playback && outcome === "drained" && !goodbyeId && !["greeting", "unheard"].includes(answerIntent ?? "")) playback.record.followupDelayMs = VOICE_TIMING.followupDelayMs;
     endPlayback(outcome);
+    if (outcome !== "drained") {
+      clearWakeGuard();
+      // Keep the complete card readable; failure must never manufacture a
+      // spoken followup. Leave enough time for the card's remaining reveal.
+      const revealMs = LAUNCH.unfoldStartMs + LAUNCH.unfoldMs + (answer?.spoken.length ?? 0) / LAUNCH.typeCps * 1000 + 2000;
+      later(Math.max(VOICE_TIMING.followupDelayMs, revealMs - (Date.now() - answerShownAt)), () => {
+        if (seq === turnSeq && state.name === "answering") forceClose("error");
+      });
+      return;
+    }
     if (goodbyeId) { forceClose("decline"); return; }
     if (voiceSession && failures >= 2) { idleExit(); return; }
     if (answerIntent === "greeting" || answerIntent === "unheard") {
@@ -187,10 +206,13 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       dispatch({ type: "SPEAK", at: Date.now() });
       if (voiceSession) startListen("listening"); return;
     }
-    dispatch({ type: "SPOKEN", at: Date.now() });
-    if (voiceSession && playFixed("followup", "followup")) return;
-    if (voiceSession) startListen("followup");
-    else followupTimeout(seq);
+    later(VOICE_TIMING.followupDelayMs, () => {
+      if (seq !== turnSeq || state.name !== "answering") return;
+      dispatch({ type: "SPOKEN", at: Date.now() });
+      if (voiceSession && playFixed("followup", "followup")) return;
+      if (voiceSession) startListen("followup");
+      else followupTimeout(seq);
+    });
   }
 
   function followupTimeout(seq: number): void {
@@ -216,6 +238,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     const next = sessionReducer(state, event);
     if (next === state) return; // 非法转移(镜像与覆盖层同守)
     state = next;
+    if (next.name === "answering" && from !== "answering") answerShownAt = Date.now();
     if (next.name !== from) {
       listenWindow?.stop(); listenWindow = null;
       if (next.name === "closing" || next.name === "ambient") clearWakeGuard();
@@ -236,7 +259,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   function clearWakeGuard(): void { if (wakeGuard !== null) clearTimer(wakeGuard); wakeGuard = null; }
   function startListen(mode: "listening" | "followup"): void {
     listenWindow?.stop();
-    const lease = { sessionId, listenId: randomUUID() };
+    const lease = { sessionId, listenId: randomUUID(), ...(sessionScreenId ? { screenId: sessionScreenId } : {}) };
     listenWindow = new ListenWindow(lease, mode, { timeoutMs: mode === "listening" ? options.listenTimeoutMs ?? 5000 : VOICE_TIMING.followupMs, setTimer, clearTimer, expire: missing => {
       if (lease.sessionId !== sessionId || !["listening", "followup"].includes(state.name)) return;
       if (mode === "followup") { forceClose("followup_timeout"); return; }
@@ -245,7 +268,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     broadcast({ type: "input.listen", at: Date.now(), ...lease, mode });
   }
   function inputActivity(lease: InputLease, action: ListenAction): void {
-    if (!listenWindow || lease.sessionId !== sessionId || lease.listenId !== listenWindow.lease.listenId || fixedPlayback || !["listening", "followup"].includes(state.name)) throw new InputError(409, "stale_listen_window");
+    if ((sessionScreenId && lease.screenId !== sessionScreenId) || !listenWindow || lease.sessionId !== sessionId || lease.listenId !== listenWindow.lease.listenId || fixedPlayback || !["listening", "followup"].includes(state.name)) throw new InputError(409, "stale_listen_window");
     if (action === "ready") clearWakeGuard();
     listenWindow.report(action);
   }
@@ -279,6 +302,11 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           asrMs: record.asrMs ?? null,
           playbackStartMs: record.playbackStartMs ?? null,
           ...(record.playbackOutcome ? { playbackOutcome: record.playbackOutcome } : {}),
+          ...(record.playbackFailureReason ? { playbackFailureReason: record.playbackFailureReason } : {}),
+          ...(record.playbackScreenId ? { playbackScreenId: record.playbackScreenId } : {}),
+          ...(record.playbackEndMs !== undefined ? { playbackEndMs: record.playbackEndMs } : {}),
+          ...(record.playbackScreenCount !== undefined ? { playbackScreenCount: record.playbackScreenCount } : {}),
+          ...(record.followupDelayMs !== undefined ? { followupDelayMs: record.followupDelayMs } : {}),
           ...(record.playbackSkipped ? { playbackSkipped: record.playbackSkipped.map(s => ({ ...s })) } : {}),
           ...(record.ttsFirstByteMs !== undefined ? { ttsFirstByteMs: record.ttsFirstByteMs } : {}),
           ...(record.ttsRegenerated !== undefined ? { ttsRegenerated: record.ttsRegenerated, ttsTruncated: record.ttsTruncated, ttsFail: record.ttsFail } : {}),
@@ -306,7 +334,9 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   /* ---------- 会话生命周期 ---------- */
 
-  function beginSession(withVoice = false): boolean {
+  function beginSession(withVoice = false, screenId?: string): boolean {
+    const screens = [...(hub.connections ?? [])].filter(c => c.role === "screen");
+    if (screenId && !screens.some(c => c.id === screenId)) throw new InputError(409, "screen_not_connected");
     if (state.name !== "ambient") return false;
     if (withVoice) {
       const now = Date.now(); wakeAt = wakeAt.filter(t => now - t < questionWindowMs);
@@ -315,9 +345,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     }
     failures = 0; answerIntent = null; clearWakeGuard();
     voiceSession = withVoice;
+    sessionScreenId = screenId ?? screens[0]?.id ?? null;
     sessionId = `sess-${randomUUID().slice(0, 8)}`;
     answer = null;
-    broadcast({ type: "session.start", at: Date.now(), sessionId });
+    broadcast({ type: "session.start", at: Date.now(), sessionId, ...(sessionScreenId ? { screenId: sessionScreenId } : {}) });
     dispatch({ type: "WAKE", at: Date.now() });
     if (withVoice && playFixed("wake", "listening")) {
       const ms = options.audio?.lookup(fixedPlayback!.id)?.bytes ?? 0;
@@ -345,8 +376,13 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     listenWindow?.stop(); listenWindow = null;
     fixedPlayback = { id: turn.id, next, seq: turnSeq, started: Date.now() };
     broadcast({ type: "speech.fixed", at: Date.now(), text, speech: turn.descriptor });
-    later(turn.bytes / 48000 * 2000 + 2000, () => completeFixed(turn.id));
+    later(turn.bytes / 48000 * 2000 + 2000, () => failFixed(turn.id));
     return true;
+  }
+  function failFixed(id: string, reason = "timeout"): void {
+    if (fixedPlayback?.id !== id) return;
+    options.warn?.(`fixed playback failed: ${JSON.stringify({reason,screenId:sessionScreenId,screens:hub.counts().screens,fixed:options.audio?.lookup(id)?.descriptor.fixed})}`);
+    forceClose("error");
   }
   function completeFixed(id: string): void {
     const p = fixedPlayback;
@@ -371,6 +407,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   }
 
   async function submitUtterance(pcm: Uint8Array, signal: AbortSignal, uploadMs = 0, lease?: InputLease): Promise<void> {
+    if (sessionScreenId && lease?.screenId !== sessionScreenId) throw new InputError(409, "screen_not_session_owner");
     if (lease && (lease.sessionId !== sessionId || lease.listenId !== listenWindow?.lease.listenId)) throw new InputError(409, "stale_listen_window");
     if (!["listening", "followup"].includes(state.name) || fixedPlayback || inputController) throw new InputError(409, "microphone_closed");
     if (rateLimited()) { if (voiceSession) idleExit(); throw new InputError(429, "rate_limited"); }
@@ -412,7 +449,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     broadcast({ type: "answer.delta", at: Date.now(), seq: 0, text: answer.spoken, full: true, card: answer.card, ...(turn ? { speech: turn.descriptor } : {}) });
     dispatch({ type: "ANSWER", at: Date.now(), card: answer.card });
     clearWakeGuard(); wakeGuard = setTimer(() => forceClose("listen_timeout"), (turn?.bytes ?? 0) / 48 + (options.listenTimeoutMs ?? 5000) + 1000);
-    later(turn ? turn.bytes / 48000 * 2000 + 2000 : 2000, () => spoken(seq, "timeout"));
+    later(turn ? turn.bytes / 48000 * 2000 + 2000 : 2000, () => spoken(seq, turn ? "timeout" : "drained"));
     inputMeta = null;
     if (!playback) void trace.append(record);
   }
@@ -438,12 +475,13 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     const event = parseConsoleEvent(raw);
     if (!event) return;
     if (event.type === "session.dismiss") {
-      if (conn.role === "screen" && event.sessionId === sessionId && state.name !== "ambient") forceClose("force");
+      if (conn.role === "screen" && ownsSession(conn) && event.sessionId === sessionId && state.name !== "ambient") forceClose("force");
       return;
     }
-    if (event.type.startsWith("playback.") && "turnId" in event && fixedPlayback?.id === event.turnId && conn.role === "screen") {
+    if (event.type.startsWith("playback.") && "turnId" in event && fixedPlayback?.id === event.turnId && conn.role === "screen" && ownsSession(conn)) {
       if (event.type === "playback.failed" && event.reason === "dismissed") forceClose("force");
-      else if (event.type === "playback.drained" || event.type === "playback.failed") completeFixed(event.turnId);
+      else if (event.type === "playback.drained") completeFixed(event.turnId);
+      else if (event.type === "playback.failed") failFixed(event.turnId, event.reason);
       return;
     }
     switch (event.type) {
@@ -451,7 +489,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       case "playback.failed":
       case "playback.drained":
       case "playback.skipped":
-        if (conn.role !== "screen" || !playback || event.turnId !== audioId || playback.seq !== turnSeq) return;
+        if (conn.role !== "screen" || !ownsSession(conn) || !playback || event.turnId !== audioId || playback.seq !== turnSeq) return;
         // Esc remains meaningful after drained, throughout the current followup.
         if (event.type === "playback.failed" && event.reason === "dismissed") {
           if (state.name === "answering" || state.name === "followup") forceClose("force");
@@ -472,7 +510,10 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
             playback.record.playbackStartMs = Math.max(0, Date.now() - Date.parse(playback.record.ts));
             emitTrace(playback.record);
           }
-        } else spoken(playback.seq, event.type === "playback.drained" ? "drained" : event.reason === "timeout" ? "timeout" : "failed");
+        } else {
+          if (event.type === "playback.failed") playback.record.playbackFailureReason = event.reason;
+          spoken(playback.seq, event.type === "playback.drained" ? "drained" : event.reason === "timeout" ? "timeout" : "failed");
+        }
         return;
       case "hub.auth": {
         if (!hubAuth || conn.role !== "unknown") return;
@@ -482,6 +523,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           conn.close(4401);
           return;
         }
+        conn.send({ type: "hub.hello", at: Date.now(), ...hub.counts(), ...(conn.role === "screen" ? { screenId: conn.id } : {}) });
         broadcast({ type: "hub.hello", at: Date.now(), ...hub.counts() });
         return;
       }
@@ -491,6 +533,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
         // 重复 hello 直接忽略,不再广播(审核 L6)
         if (conn.role !== "unknown") return;
         conn.role = event.role;
+        conn.send({ type: "hub.hello", at: Date.now(), ...hub.counts(), ...(conn.role === "screen" ? { screenId: conn.id } : {}) });
         broadcast({ type: "hub.hello", at: Date.now(), ...hub.counts() });
         return;
       case "session.wake":
@@ -837,6 +880,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       conn.send({ type: "hub.hello", at: Date.now(), ...hub.counts() });
     },
     detach(conn: HubConnection): void {
+      if (conn.role === "screen" && conn.id === sessionScreenId && state.name !== "ambient") { if (playback && !playback.finished) playback.record.playbackFailureReason = "screen_disconnected"; forceClose("error"); return; }
       if (conn.role === "screen" && hub.counts().screens === 0 && playback?.waitingForScreens && !playback.finished) {
         spoken(playback.seq, "drained");
       }

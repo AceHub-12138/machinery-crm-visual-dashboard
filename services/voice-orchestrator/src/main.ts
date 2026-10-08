@@ -105,6 +105,7 @@ const trace = new TraceSink(config.traceFile);
 const orchestrator = createVoiceOrchestrator({
   hub,
   audio,
+  warn: log,
   speechClient,
   styleOverrides: config.styleOverrides,
   listenTimeoutMs: config.listenTimeoutMs,
@@ -125,7 +126,7 @@ const orchestrator = createVoiceOrchestrator({
     : null,
 });
 
-const inputHandler = createInputHttpHandler({ screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined, activity: orchestrator.inputActivity, wake: () => orchestrator.beginSession(true), utterance: (pcm, signal, ms, lease) => orchestrator.submitUtterance(pcm, signal, ms, lease), config: () => config.inputConfig });
+const inputHandler = createInputHttpHandler({ screenToken: config.hubScreenToken, allowedOrigins: config.hubAllowedOrigins.length ? config.hubAllowedOrigins : undefined, activity: orchestrator.inputActivity, wake: (_followup, screenId) => orchestrator.beginSession(true, screenId), utterance: (pcm, signal, ms, lease) => orchestrator.submitUtterance(pcm, signal, ms, lease), config: () => config.inputConfig });
 
 attachFn = (conn) => orchestrator.attach(conn);
 messageFn = (conn, raw) => orchestrator.handleClientMessage(conn, raw);
