@@ -110,7 +110,13 @@ export class TurnTracer {
 }
 
 /** JSONL 追加落盘;文件不可写时静默放弃(打点永不能弄垮编排)。 */
+export type InteractionTrace = { ts: string; sessionId: string; turn: number; event: string; listenId: string; attemptId?: string; turnId?: string; sentenceIndex?: number; remainingMs?: number; paused?: boolean; phase?: string; reason?: string; asrMs?: number; asrQueueMs?: number };
+
 export class TraceSink {
+  async appendInteraction(record: InteractionTrace): Promise<void> {
+    if (!this.filePath) return;
+    try { await mkdir(dirname(this.filePath), { recursive: true }); await appendFile(`${this.filePath}.interaction.jsonl`, `${JSON.stringify(record)}\n`, "utf8"); } catch { /* diagnostics never block speech */ }
+  }
   private readonly filePath: string | null;
 
   constructor(filePath: string | null) {

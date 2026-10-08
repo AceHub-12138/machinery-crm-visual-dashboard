@@ -12,6 +12,8 @@
  * 携卡)→ state.change(answering);大屏映射依赖该顺序取卡。
  */
 
+import { PausableDeadline } from "../../../src/lib/voice/deadline.ts";
+import { echoSimilarity } from "../../../src/lib/voice/echo-similarity.ts";
 import { ListenWindow, type InputLease, type ListenAction } from "./listen-window.ts";
 import { classifyScriptedQuestion } from "../../../src/lib/voice/intents.ts";
 import type { Intent } from "../../../src/lib/voice/intents.ts";
@@ -147,7 +149,11 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   let turnSeq = 0; // 每次提问递增;一切延迟回调持有所属 seq,过期即弃
   let pendingQuestion: string | null = null;
   let answer: ReturnType<typeof buildIntentAnswer> | null = null;
-  const timers = new Set<{ clear: () => void }>();
+  const timers = new Set<PausableDeadline>();
+  let bargeLease: InputLease | null = null;
+  let candidate: { lease: InputLease; watchdog: unknown; judging: boolean; controller: AbortController | null } | null = null;
+  let deferredFixed: string | null = null;
+  const finishedAttempts = new Set<string>();
 
   /** 进行中的一轮:新问题到来时中止旧轮(LLM 流/死线一并释放) */
   let inputController: AbortController | null = null;
@@ -176,6 +182,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     persistPlayback(playback);
   }
   function cancelAudio(): void {
+    clearBarge();
     if (audioId) options.audio?.cancel(audioId);
     endPlayback("cancelled");
     audioId = null; goodbyeId = null; playback = null;
@@ -187,14 +194,15 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     clearTimers();
     if ((outcome === "failed" || (outcome === "timeout" && !goodbyeId)) && audioId) options.audio?.cancel(audioId);
     if (playback && outcome === "timeout") playback.record.playbackFailureReason ??= "timeout";
-    if (playback && outcome === "drained" && !goodbyeId && !["greeting", "unheard"].includes(answerIntent ?? "")) playback.record.followupDelayMs = VOICE_TIMING.followupDelayMs;
     endPlayback(outcome);
     if (outcome !== "drained") {
+      clearBarge();
+      broadcast({ type: "input.listen", at: Date.now(), sessionId, listenId: randomUUID(), mode: "off" });
       clearWakeGuard();
       // Keep the complete card readable; failure must never manufacture a
       // spoken followup. Leave enough time for the card's remaining reveal.
       const revealMs = LAUNCH.unfoldStartMs + LAUNCH.unfoldMs + (answer?.spoken.length ?? 0) / LAUNCH.typeCps * 1000 + 2000;
-      later(Math.max(VOICE_TIMING.followupDelayMs, revealMs - (Date.now() - answerShownAt)), () => {
+      later(Math.max(VOICE_TIMING.failedCardHoldMs, revealMs - (Date.now() - answerShownAt)), () => {
         if (seq === turnSeq && state.name === "answering") forceClose("error");
       });
       return;
@@ -206,17 +214,18 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       dispatch({ type: "SPEAK", at: Date.now() });
       if (voiceSession) startListen("listening"); return;
     }
-    later(VOICE_TIMING.followupDelayMs, () => {
-      if (seq !== turnSeq || state.name !== "answering") return;
-      dispatch({ type: "SPOKEN", at: Date.now() });
-      if (voiceSession && playFixed("followup", "followup")) return;
-      if (voiceSession) startListen("followup");
-      else followupTimeout(seq);
-    });
+    dispatch({ type: "SPOKEN", at: Date.now() });
+    if (voiceSession) startListen("followup", "long");
+    else {
+      later(VOICE_TIMING.longListenMs, () => {
+        if (seq !== turnSeq || state.name !== "followup") return;
+        followupTimeout(seq);
+      });
+    }
   }
 
   function followupTimeout(seq: number): void {
-    later(VOICE_TIMING.followupMs, () => {
+    later(VOICE_TIMING.shortListenMs, () => {
       if (seq !== turnSeq || state.name !== "followup") return;
       dispatch({ type: "FOLLOWUP_TIMEOUT", at: Date.now() });
       broadcast({ type: "session.end", at: Date.now(), reason: "followup_timeout" });
@@ -257,20 +266,112 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   // Listening starts only after the browser reports its actual open microphone.
   function clearWakeGuard(): void { if (wakeGuard !== null) clearTimer(wakeGuard); wakeGuard = null; }
-  function startListen(mode: "listening" | "followup"): void {
+  function interaction(event: string, lease: InputLease, extra: Partial<import("./trace/metrics.ts").InteractionTrace> = {}): void {
+    void trace.appendInteraction?.({ ts: new Date().toISOString(), sessionId, turn: state.turns, event, listenId: lease.listenId, ...(lease.turnId ? { turnId: lease.turnId } : {}), ...(lease.attemptId ? { attemptId: lease.attemptId } : {}), ...extra });
+  }
+  function startListen(mode: "listening" | "followup", phase: "long" | "short" = "short"): void {
     listenWindow?.stop();
+
     const lease = { sessionId, listenId: randomUUID(), ...(sessionScreenId ? { screenId: sessionScreenId } : {}) };
-    listenWindow = new ListenWindow(lease, mode, { timeoutMs: mode === "listening" ? options.listenTimeoutMs ?? 5000 : VOICE_TIMING.followupMs, setTimer, clearTimer, expire: missing => {
-      if (lease.sessionId !== sessionId || !["listening", "followup"].includes(state.name)) return;
-      if (mode === "followup") { forceClose("followup_timeout"); return; }
-      if (missing) forceClose("listen_timeout"); else idleExit();
-    } });
-    broadcast({ type: "input.listen", at: Date.now(), ...lease, mode });
+    const timeoutMs = phase === "long" ? VOICE_TIMING.longListenMs : VOICE_TIMING.shortListenMs;
+    let opened = false;
+    listenWindow = new ListenWindow(lease, mode, { timeoutMs, setTimer, clearTimer,
+      progress: (remainingMs, paused, isOpen) => {
+        if (!isOpen) return;
+        broadcast({ type: opened ? "input.progress" : "input.open", at: Date.now(), ...lease, remainingMs, paused, timeoutMs });
+        interaction(opened ? "listen.progress" : "listen.open", lease, { phase, remainingMs, paused }); opened = true;
+      }, expire: missing => {
+        if (lease.sessionId !== sessionId || !["listening", "followup"].includes(state.name)) return;
+        interaction("listen.expire", lease, { phase, reason: missing ? "missing_report" : "silence" });
+        if (missing) { forceClose("listen_timeout"); return; }
+        if (phase === "long") {
+          if (!playFixed("followup", "followup")) startListen("followup", "short");
+        } else idleExit();
+      } });
+    if (candidate) listenWindow.report("speech_start");
+    broadcast({ type: "input.listen", at: Date.now(), ...lease, mode, phase, timeoutMs });
+  }
+  function clearBarge(): void {
+    if (candidate) { clearTimer(candidate.watchdog); candidate.controller?.abort(); }
+    if (candidate?.lease.attemptId) finishedAttempts.add(candidate.lease.attemptId);
+    candidate = null; bargeLease = null; deferredFixed = null;
+  }
+  function startBarge(turnId: string): void {
+    if (!voiceSession) return;
+    clearBarge();
+    bargeLease = { sessionId, listenId: randomUUID(), turnId, ...(sessionScreenId ? { screenId: sessionScreenId } : {}) };
+    broadcast({ type: "input.listen", at: Date.now(), ...bargeLease, mode: "barge" });
+  }
+  function rejectBarge(reason: Extract<VoiceWireEvent, { type: "barge.result" }>["reason"]): void {
+    const attempt = candidate;
+    if (!attempt) return;
+    clearTimer(attempt.watchdog); attempt.controller?.abort(); finishedAttempts.add(attempt.lease.attemptId!); candidate = null;
+    broadcast({ type: "barge.result", at: Date.now(), sessionId, listenId: attempt.lease.listenId, attemptId: attempt.lease.attemptId!, accepted: false, reason });
+    interaction("barge.rejected", attempt.lease, { reason });
+    for (const timer of timers) timer.resume();
+    listenWindow?.report("misfire");
+    if (deferredFixed) { const id = deferredFixed; deferredFixed = null; completeFixed(id); }
+    else if (listenWindow) bargeLease = null;
   }
   function inputActivity(lease: InputLease, action: ListenAction): void {
-    if ((sessionScreenId && lease.screenId !== sessionScreenId) || !listenWindow || lease.sessionId !== sessionId || lease.listenId !== listenWindow.lease.listenId || fixedPlayback || !["listening", "followup"].includes(state.name)) throw new InputError(409, "stale_listen_window");
-    if (action === "ready") clearWakeGuard();
+    if (lease.sessionId !== sessionId || (sessionScreenId && lease.screenId !== sessionScreenId)) throw new InputError(409, "stale_listen_window");
+    if (bargeLease?.listenId === lease.listenId) {
+      if (lease.attemptId && finishedAttempts.has(lease.attemptId)) throw new InputError(409, "stale_attempt");
+      if (finishedAttempts.size >= 128) throw new InputError(429, "attempt_limit");
+      if (!lease.attemptId) throw new InputError(400, "attempt_identity_required");
+      if (action === "duck") {
+        if (candidate) { if (candidate.lease.attemptId !== lease.attemptId) throw new InputError(409, "barge_busy"); return; }
+        const count = options.audio?.lookup(bargeLease.turnId!)?.descriptor.sentences.length ?? 0;
+        if (!Number.isInteger(lease.sentenceIndex) || lease.sentenceIndex! >= count || lease.sentenceIndex! < 0) throw new InputError(400, "invalid_sentence");
+        candidate = { lease: { ...bargeLease, attemptId: lease.attemptId, sentenceIndex: lease.sentenceIndex }, judging: false, controller: null, watchdog: setTimer(() => rejectBarge("timeout"), 16000) };
+        for (const timer of timers) timer.pause();
+        listenWindow?.report("speech_start");
+        interaction("barge.duck", candidate.lease, { sentenceIndex: lease.sentenceIndex });
+      } else {
+        if (!candidate || candidate.lease.attemptId !== lease.attemptId) throw new InputError(409, "stale_attempt");
+        if (action === "misfire") rejectBarge("misfire");
+        else if (action === "pause") interaction("barge.pause", candidate.lease);
+      }
+      return;
+    }
+    if (!listenWindow || lease.listenId !== listenWindow.lease.listenId || fixedPlayback || !["listening", "followup"].includes(state.name) || !["ready","speech_start","misfire"].includes(action)) throw new InputError(409, "stale_listen_window");
+    if (action === "ready") { clearWakeGuard(); if (!candidate) bargeLease = null; }
     listenWindow.report(action);
+  }
+  async function submitBarge(pcm: Uint8Array, signal: AbortSignal, uploadMs: number, lease: InputLease): Promise<void> {
+    const attempt = candidate;
+    if (!attempt || attempt.judging || lease.attemptId !== attempt.lease.attemptId || lease.listenId !== attempt.lease.listenId) throw new InputError(409, "stale_attempt");
+    attempt.judging = true; interaction("barge.speech_end", attempt.lease, { sentenceIndex: attempt.lease.sentenceIndex }); clearTimer(attempt.watchdog);
+    const controller = new AbortController(); attempt.controller = controller;
+    attempt.watchdog = setTimer(() => rejectBarge("timeout"), 6000);
+    const started = Date.now(); const seq = turnSeq;
+    const combined = AbortSignal.any([signal, controller.signal]);
+    try {
+      if (!options.speechClient) throw new InputError(503, "asr_unavailable");
+      const result = await options.speechClient.asr(pcm, combined);
+      combined.throwIfAborted();
+      if (candidate !== attempt || seq !== turnSeq) return;
+      const text = stripWakePrefix(result.text).slice(0, 500);
+      const sentences = options.audio?.lookup(attempt.lease.turnId!)?.spokenSentences ?? [];
+      const index = attempt.lease.sentenceIndex!;
+      const similarity = Math.max(...[sentences[index], sentences[index - 1]].filter(Boolean).map(sentence => echoSimilarity(text, sentence.spokenText)), 0);
+      interaction("barge.asr", attempt.lease, { asrMs: result.ms, asrQueueMs: result.asrQueueMs });
+      if (isUnheard(text)) { rejectBarge("unheard"); return; }
+      if (similarity >= .5) { rejectBarge("echo"); return; }
+      if (rateLimited()) {
+        rejectBarge("rate_limited"); clearTimers(); cancelAudio();
+        if (state.name === "waking") dispatch({ type: "WOKEN", at: Date.now() });
+        if (state.name === "answering") dispatch({ type: "BARGE_IN", at: Date.now() });
+        if (state.name === "followup") dispatch({ type: "SPEAK", at: Date.now() });
+        failures = Math.max(0, failures - 1); answerUnheard(started, result.ms); return;
+      }
+      clearTimer(attempt.watchdog); finishedAttempts.add(attempt.lease.attemptId!); candidate = null; bargeLease = null; deferredFixed = null;
+      broadcast({ type: "barge.result", at: Date.now(), sessionId, listenId: lease.listenId, attemptId: lease.attemptId!, accepted: true, reason: "question" });
+      interaction("barge.accepted", attempt.lease);
+      inputMeta = { asrMs: result.ms, asrQueueMs: result.asrQueueMs, uploadMs, asrRoundTripMs: Date.now() - started, started };
+      if (state.name === "waking") dispatch({ type: "WOKEN", at: Date.now() });
+      acceptQuestion(text);
+    } catch { if (candidate === attempt) rejectBarge(combined.aborted ? "timeout" : "unheard"); }
   }
   function idleExit(): void {
     listenWindow?.stop(); listenWindow = null; clearWakeGuard(); clearTimers();
@@ -307,7 +408,6 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           ...(record.playbackScreenId ? { playbackScreenId: record.playbackScreenId } : {}),
           ...(record.playbackEndMs !== undefined ? { playbackEndMs: record.playbackEndMs } : {}),
           ...(record.playbackScreenCount !== undefined ? { playbackScreenCount: record.playbackScreenCount } : {}),
-          ...(record.followupDelayMs !== undefined ? { followupDelayMs: record.followupDelayMs } : {}),
           ...(record.playbackSkipped ? { playbackSkipped: record.playbackSkipped.map(s => ({ ...s })) } : {}),
           ...(record.ttsFirstByteMs !== undefined ? { ttsFirstByteMs: record.ttsFirstByteMs } : {}),
           ...(record.ttsRegenerated !== undefined ? { ttsRegenerated: record.ttsRegenerated, ttsTruncated: record.ttsTruncated, ttsFail: record.ttsFail } : {}),
@@ -320,18 +420,11 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   }
 
   function later(ms: number, fn: () => void): void {
-    const handle = { clear: () => clearTimer(t) };
-    const t = setTimer(() => {
-      timers.delete(handle);
-      fn();
-    }, Math.max(0, ms));
+    const handle = new PausableDeadline(Math.max(0, ms), () => { timers.delete(handle); fn(); }, setTimer, clearTimer);
     timers.add(handle);
+    if (candidate) handle.pause();
   }
-
-  function clearTimers(): void {
-    for (const handle of timers) handle.clear();
-    timers.clear();
-  }
+  function clearTimers(): void { for (const handle of timers) handle.cancel(); timers.clear(); }
 
   /* ---------- 会话生命周期 ---------- */
 
@@ -344,7 +437,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       if (wakeAt.length >= questionWindowMax || (wakeAt.length && now - wakeAt.at(-1)! < questionMinGapMs)) throw new InputError(429, "wake_rate_limited");
       wakeAt.push(now);
     }
-    failures = 0; answerIntent = null; clearWakeGuard();
+    failures = 0; answerIntent = null; finishedAttempts.clear(); clearWakeGuard();
     voiceSession = withVoice;
     sessionScreenId = screenId ?? screens[0]?.id ?? null;
     sessionId = `sess-${randomUUID().slice(0, 8)}`;
@@ -352,8 +445,6 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     broadcast({ type: "session.start", at: Date.now(), sessionId, ...(sessionScreenId ? { screenId: sessionScreenId } : {}) });
     dispatch({ type: "WAKE", at: Date.now() });
     if (withVoice && playFixed("wake", "listening")) {
-      const ms = options.audio?.lookup(fixedPlayback!.id)?.bytes ?? 0;
-      wakeGuard = setTimer(() => forceClose("listen_timeout"), ms / 48 + (options.listenTimeoutMs ?? 5000) + 1000);
       return true;
     }
     later(VOICE_TIMING.wakingMs, () => {
@@ -378,6 +469,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     fixedPlayback = { id: turn.id, next, seq: turnSeq, started: Date.now() };
     broadcast({ type: "speech.fixed", at: Date.now(), text, speech: turn.descriptor });
     later(turn.bytes / 48000 * 2000 + 2000, () => failFixed(turn.id));
+    if (!["goodbye", "fallback"].includes(key)) startBarge(turn.id);
     return true;
   }
   function failFixed(id: string, reason = "timeout"): void {
@@ -388,6 +480,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
   function completeFixed(id: string): void {
     const p = fixedPlayback;
     if (!p || p.id !== id || p.seq !== turnSeq) return;
+    if (candidate) { deferredFixed = id; return; }
     fixedPlayback = null;
     clearTimers();
     const finish = () => {
@@ -409,6 +502,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
 
   async function submitUtterance(pcm: Uint8Array, signal: AbortSignal, uploadMs = 0, lease?: InputLease): Promise<void> {
     if (sessionScreenId && lease?.screenId !== sessionScreenId) throw new InputError(409, "screen_not_session_owner");
+    if (lease && lease.listenId === bargeLease?.listenId) { await submitBarge(pcm, signal, uploadMs, lease); return; }
+    if (candidate) throw new InputError(409, "barge_busy");
     if (lease && (lease.sessionId !== sessionId || lease.listenId !== listenWindow?.lease.listenId)) throw new InputError(409, "stale_listen_window");
     if (!["listening", "followup"].includes(state.name) || fixedPlayback || inputController) throw new InputError(409, "microphone_closed");
     if (rateLimited()) { if (voiceSession) idleExit(); throw new InputError(429, "rate_limited"); }
@@ -417,6 +512,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     const combined = AbortSignal.any([signal, controller.signal]);
     try {
       if (!options.speechClient) throw new InputError(503, "asr_unavailable");
+      if (listenWindow) interaction("listen.complete", listenWindow.lease, { reason: "utterance" });
       clearTimers(); listenWindow?.stop(); listenWindow = null; clearWakeGuard();
       if (state.name === "followup") dispatch({ type: "SPEAK", at: Date.now() });
       const result = await options.speechClient.asr(pcm, combined);
@@ -449,13 +545,15 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
     if (turn) playback = { id: turn.id, seq: turnSeq, record, synthesisDone: true, finished: false, written: false, waitingForScreens: true };
     broadcast({ type: "answer.delta", at: Date.now(), seq: 0, text: answer.spoken, full: true, card: answer.card, ...(turn ? { speech: turn.descriptor } : {}) });
     dispatch({ type: "ANSWER", at: Date.now(), card: answer.card });
-    clearWakeGuard(); wakeGuard = setTimer(() => forceClose("listen_timeout"), (turn?.bytes ?? 0) / 48 + (options.listenTimeoutMs ?? 5000) + 1000);
+    clearWakeGuard();
+    if (turn) startBarge(turn.id);
     later(turn ? turn.bytes / 48000 * 2000 + 2000 : 2000, () => spoken(seq, turn ? "timeout" : "drained"));
     inputMeta = null;
     if (!playback) void trace.append(record);
   }
 
   function forceClose(reason: import("../../../src/lib/voice/protocol.ts").SessionEndReason): void {
+    if (listenWindow) interaction("listen.complete", listenWindow.lease, { reason });
     listenWindow?.stop(); listenWindow = null; clearWakeGuard();
     inputController?.abort(); inputController = null; inputMeta = null; pendingQuestion = null;
     if (reason !== "decline") cancelAudio();
@@ -804,7 +902,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           if (!isLast) return;
           // 末片落卡:镜像进 answering(大屏由随后的 state.change 驱动 ANSWER)
           dispatch({ type: "ANSWER", at: Date.now(), card });
-          if (voiceSession && intent === "greeting") { clearWakeGuard(); wakeGuard = setTimer(() => forceClose("listen_timeout"), (audioTurn?.bytes ?? 0) / 48 + (options.listenTimeoutMs ?? 5000) + 1000); }
+          if (audioTurn && intent !== "chitchat_or_end") startBarge(audioTurn.id);
           if (audioTurn && intent === "chitchat_or_end") goodbyeId = audioTurn.id;
           if (audioTurn && hub.counts().screens > 0) {
             if (playback) playback.waitingForScreens = true;

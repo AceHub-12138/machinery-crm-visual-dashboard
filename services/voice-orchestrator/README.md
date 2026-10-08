@@ -150,11 +150,11 @@ PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int
 - `src/lib/voice/pcm-player.ts`：int16 LE转float32，24kHz AudioBuffer共享AudioContext时间轴与AnalyserNode；首块预缓冲150ms，50ms块连续排程。正在播放第i句时预取下一句。聚合下载限8MiB；停止会abort下载并stop/disconnect所有排程节点。
 - 句级高亮在AudioContext.currentTime到达首块排程时间时触发。全部句子流正常或异常结束且currentTime达到末块结束时刻才完成。单句下载失败采用“跳过并记录、继续后续句”策略；至少一整句成功才能回报 drained，全部失败不能伪装成功。
 - screen经已鉴权WS回报 `{type:"playback.started"|"playback.drained",at,turnId}`，失败用 `{type:"playback.failed",at,turnId,reason}`，跳句用 `{type:"playback.skipped",at,turnId,sentenceIndex,reason}`。仅所属大屏的当前轮回报有效；console、unknown、其他大屏、旧轮、重复终态与越界/重复跳句忽略。Esc仅所属大屏可触发当前会话退场；不会把此前drained记录改成失败。
-- 普通答案实际播完后等待8秒再进入followup；语音追问提示播完、麦克风实际打开后开始3秒静默窗口。问候/没听清直接重新聆听，告别播完退场。失败/超时保留完整可读卡片至少8秒后异常退场，不播追问。
+- 普通答案实际播完即进入followup，保持采集并开启8秒长聆听窗；静默后播追问，麦克风实际就绪后开启5秒短窗。问候/没听清直接重新聆听，告别播完退场。失败/超时保留完整可读卡片至少8秒后异常退场，不播追问。
 - 出卡时没有在线大屏，用原打字/持卡节奏完成展示，再等待8秒；保留合成/缓存。所属大屏断开取消会话，不伪装播完或转交其他标签。
 - 防止挂起：普通音频按归一化文本的保守合成时长（0.4秒/字＋1.5秒/句）×2＋2秒兜底；告别用缓存PCM时长×2＋2秒。播放器独立网络/音频时钟超时；覆盖层另留8秒持卡时间和2秒退场保障，仅异常退场，不自行进入追问。正常播完和追问超时保留PCM；普通播放失败/超时、顶替、强制关闭等取消音频。
-- live粒子振幅来自真实PCM RMS；demo保留模拟驱动；`JarvisCore.tsx`没有修改。高亮只切分显示字符串，不改变卡片数字或读法。
-- 首次唤醒/点击/键盘事件尝试resume AudioContext。展厅启动可用 `bash scripts/start-voice-kiosk.sh`，带 `--autoplay-policy=no-user-gesture-required`；本阶段没有开启麦克风权限。
+- live粒子振幅来自真实PCM RMS；demo采用同样的8秒/5秒窗口常量并模拟提示播放阶段。高亮只切分显示字符串，不改变卡片数字或读法。
+- 首次唤醒/点击/键盘事件尝试resume AudioContext。展厅启动可用 `bash scripts/start-voice-kiosk.sh`，带 `--autoplay-policy=no-user-gesture-required`；语音输入需要本机或HTTPS页面、麦克风权限。
 
 `/voice-console`显示首音回报、播放结果和被跳过的句子。`playbackSkipped` 在最终 JSONL 中记录句子索引及失败原因；无屏按文字展示节奏完成状态等待，所属屏断开取消会话。`playbackStartMs` 可为 null，不作为真实播放验收样本。`playbackStartMs`使用hub单一时钟，表示「提问到收到浏览器首样本开始回报」，包含回传网络耗时；第一句被跳过时以首个实际播放句子为准。不与异机Date.now相减，也不等同于Task 6的VAD L1。合成完成及播放终态都确定后，每轮只追加一条JSONL；取消/失败/兜底同样落盘。语音输入记录实际ASR耗时，文字输入不产生ASR样本。其他固定提示（wake/followup/fallback/unheard）保持缓存接口，收音阶段的提示播放与开麦节拍在Task 6接线。
 
@@ -164,10 +164,10 @@ PCM 格式为 int16 LE、24kHz、mono。客户端合并跨网络块的半个 int
 
 - 鉴权成功的直接 `hub.hello` 返回本连接的 `screenId`；`session.start.screenId` 指定负责收音和播音的大屏。语音唤醒选择发起请求的大屏，文字对话台选择第一个在线大屏。其他标签只显示；其播放回报、Esc和收音不能推进会话。所属大屏断开即取消，不假报播完或交给其他标签。
 - `POST /voice/wake`、`/voice/listen`、`/voice/utterance` 必须附 `X-Voice-Screen`；后两者仍需 `X-Voice-Session` 和 `X-Voice-Listen`。唤醒验证连接在线且已鉴权，收音验证会话归属。重连取得新id，旧请求失效。
-- 正常答案实际播完后保留答案 **8秒**，不开麦、不显示追问；然后进入followup。语音会话播完追问提示，等待输出延迟+300ms、麦克风实际打开后，开始原有3秒静默窗口。问候/没听清仍直接重新聆听，告别仍播完退场。顶替、Esc、断线取消待触发追问。
+- 正常答案实际播完即进入followup；尾音保护保持barge采集，转vad后上报ready，以此开启 **8秒长窗**。长窗静默则播追问；提示播完、实际vad就绪后开启 **5秒短窗**，再静默播warm的idle_exit后退场。问候/没听清仍直接重新聆听，告别仍播完退场。顶替、Esc、断线取消待触发追问。
 - 整轮播放失败或超时不进入追问。卡片至少保留8秒；长答案保证剩余打字时间+2秒，随后error退场。自动播放被阻止时，点击启用后续声音，等退场后再唤醒。固定唤醒/追问失败直接error退场，不打开麦克风。
 - 无屏用文字展示节奏完成后再等8秒；所属屏断开记cancelled及screen_disconnected原因。前端异常兜底只退场，不自行进入followup。
-- trace追加 `playbackFailureReason`、`playbackScreenId`、`playbackEndMs`、`playbackScreenCount`、`followupDelayMs`。固定提示失败的原因和类型写入编排日志，不记录令牌。
+- trace追加 `playbackFailureReason`、`playbackScreenId`、`playbackEndMs`、`playbackScreenCount`。聆听与打断诊断追加到同目录的 `.interaction.jsonl`，不增加转写文本或录音落盘。固定提示失败的原因和类型写入编排日志，不记录令牌。
 
 真实模型验证脚本（先完成production build，voice-local已预热，分类模型配置已提供）：
 
@@ -177,3 +177,15 @@ VOICE_LLM_MODEL=<currently-loaded-model> VOICE_LLM_API_KEY=local-placeholder nod
 ```
 
 脚本使用公开fixture与独立回环hub/临时Next端口18815；输入对话台8题＋告别，真实分类及TTS，验证卡片、振幅、队列耗尽和回报，结束后关闭临时进程。不接麦克风，不证明音箱现场听感。报告见 `docs/voice-8c-task5-result.md`。
+
+### 交互改版：打断与真实聆听倒计时
+
+- 允许打断：普通答案、wake、followup、unheard、idle_exit。goodbye与fallback关闭输入，thinking关闭输入；所属屏独占采集与播放。
+- Silero候选先让声到0.2（15ms时间常数，80ms内收敛），300ms资格、累计500ms语音确认后暂停原生AudioContext。保持已排队节点、PCM下载和句边界；播放器、编排、覆盖层的播放期限同时冻结，误触发按剩余预算恢复。
+- `input.listen.mode=barge` 绑定当前turn和listenId；`/voice/listen`与`/voice/utterance`查询携带attemptId、sentenceIndex，原三项身份头仍必需。正文继续仅16kHz s16le PCM。旧尝试重放、跨屏与旧会话均拒绝。
+- 语音结束上传后给ASR判定6秒；说话本身另有16秒看门狗。ASR空白、失败、超时或与当前／上一播报句的字符相似度≥0.5，拒绝并续播，不占业务提问额度、不增加unheard次数。有效且受业务限流则apologetic提示后重新聆听。
+- barge↔vad及listenId变更不重置VAD。保留500ms句首缓冲；播完尾音期间不关麦，跨越最终样本的语音保持原尝试身份。
+- `input.open`与`input.progress`以服务端剩余时间同步倒计时，浏览器仅用事件到达后的本地经过时间推进。候选语音冻结、误触发恢复剩余时间；提示播放时隐藏环。整轮播放失败的8秒可读卡片时间使用独立常量。
+- `voice-trace.jsonl.interaction.jsonl`追加窗口、duck、pause、SpeechEnd、ASR阶段及accepted/rejected历史；一轮可有多次尝试，原turn记录仍只写一次。
+
+本机校准：先构建并启动voice-local和LM Studio，执行 `node --experimental-strip-types scripts/voice-barge-check.mjs`。脚本读取本机配置，独立hub/临时Next端口18816；注入仓库预录音，经真实AudioWorklet/Silero/ASR/分类/TTS与Web Audio测量10次。输出图保持真实时钟但静音，结果不替代真人或展厅拾音验收。证据与真人检查表见 `docs/voice-8c-interaction-redesign-result.md`。

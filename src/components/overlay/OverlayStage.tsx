@@ -22,6 +22,7 @@ import {
   type VoiceStateName,
   type VoiceSessionState,
 } from "@/lib/voice/session-machine";
+import { PausableDeadline } from "@/lib/voice/deadline";
 import { VoiceMicrophone } from "@/lib/voice/microphone";
 import { PcmPlayer, audioBaseUrl, type Speech, type PlaybackFailure } from "@/lib/voice/pcm-player";
 import { playbackFallbackMs } from "@/lib/voice/playback-timing";
@@ -82,7 +83,10 @@ export function OverlayStage({
   const [phase, setPhase] = useState<Phase>("off");
   const [geometry, setGeometry] = useState<OverlayGeometry>(() => overlayGeometry(1920, 1080));
   const [launchAt, setLaunchAt] = useState(0);
+  const [promptCaption, setPromptCaption] = useState<string | null>(null);
   const [audioNotice, setAudioNotice] = useState<string | null>(null);
+  const [bargePaused, setBargePaused] = useState(false);
+  const playbackGuardRef = useRef<PausableDeadline | null>(null);
   const micRef = useRef<VoiceMicrophone | null>(null);
   const fixedIdRef = useRef<string | null>(null);
   const [sentenceVersion, setSentenceVersion] = useState(0);
@@ -92,6 +96,7 @@ export function OverlayStage({
   const socketRef = useRef<WebSocket | null>(null);
   const tokenRef = useRef<string | null>(null);
   const playingIdRef = useRef<string | null>(null);
+  const listenIdRef = useRef<string | null>(null);
   const sessionIdRef = useRef<string | null>(null);
   const screenIdRef = useRef<string | null>(null);
   const ownsSessionRef = useRef(false);
@@ -102,6 +107,17 @@ export function OverlayStage({
     }
   }, []);
 
+  /* 画布每帧读取的快照;React 状态只在状态机转移时更新,帧内全走 ref */
+  const frameRef = useRef<VoiceFrame>({
+    name: "ambient",
+    listenClock: driver === "live" ? null : undefined,
+    since: 0,
+    amplitude: () => 0.4,
+    launchAt: null,
+    foldAt: null,
+    geometry: overlayGeometry(1920, 1080),
+  });
+
   /* ---- 同步镜像:wire 事件可能在同一渲染帧内连发(答案末片与
      state.change answering 同 tick 到达),映射的 prev 必须取即时状态,
      不能等 React 提交。镜像与视图走同一 reducer,事件流一致则必然一致;
@@ -109,6 +125,7 @@ export function OverlayStage({
   const mirrorRef = useRef<VoiceSessionState>(initSessionState());
   const dispatchTracked = useCallback((event: VoiceEvent) => {
     const next = sessionReducer(mirrorRef.current, event);
+    if (["thinking", "closing", "ambient", "error-fallback"].includes(next.name)) { setBargePaused(false); frameRef.current.listenClock = null; setPromptCaption(null); }
     if (next.name !== "answering" && mirrorRef.current.name === "answering") {
       playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
     }
@@ -118,16 +135,6 @@ export function OverlayStage({
     mirrorRef.current = next;
     dispatch(event);
   }, []);
-
-  /* 画布每帧读取的快照;React 状态只在状态机转移时更新,帧内全走 ref */
-  const frameRef = useRef<VoiceFrame>({
-    name: "ambient",
-    since: 0,
-    amplitude: () => 0.4,
-    launchAt: null,
-    foldAt: null,
-    geometry: overlayGeometry(1920, 1080),
-  });
 
   /* ---- 几何:核心/锚点随视口换算(1080p 全屏即方案落位) ---- */
   useEffect(() => {
@@ -143,14 +150,14 @@ export function OverlayStage({
 
   /* ---- 状态机 → 画布快照(名字/相位/振幅源/折叠起点) ---- */
   useEffect(() => {
-    frameRef.current.name = session.name;
+    frameRef.current.name = bargePaused ? "listening" : session.name;
     frameRef.current.since = session.since;
     frameRef.current.amplitude = driver === "live"
       ? () => playerRef.current?.getAmplitude() ?? 0
       : (now: number) => demoAmplitude(session.name, session.since, now);
     frameRef.current.foldAt = session.name === "closing" ? session.since : null;
     if (session.name !== "answering") frameRef.current.launchAt = null;
-  }, [session.name, session.since, driver]);
+  }, [session.name, session.since, driver, bargePaused]);
 
   /* ---- 驱动器:每个状态排一个动作序列,转移即换排 ----
      demo:全流程脚本化;live:播完和追问倒计时由hub统一驱动,
@@ -274,7 +281,7 @@ export function OverlayStage({
         if (live) {
           // Network loss is handled by the WS close path. A hung browser/hub
           // still releases the exhibition UI after a conservative audio guard.
-          at(playbackFallbackMs(session.spoken ?? "") + VOICE_TIMING.followupDelayMs + 2000, () => {
+          playbackGuardRef.current = new PausableDeadline(playbackFallbackMs(session.spoken ?? "") + VOICE_TIMING.failedCardHoldMs + 2000, () => {
             playerRef.current?.stop();
             const id = playingIdRef.current;
             if (id) reportPlayback("playback.failed", id, "timeout");
@@ -292,7 +299,13 @@ export function OverlayStage({
       }
       case "followup": {
         if (live) break; // Hub owns the countdown after it receives playback.drained.
-        at(VOICE_TIMING.followupMs, () => dispatchTracked({ type: "FOLLOWUP_TIMEOUT", at: now() }));
+        frameRef.current.listenClock = { receivedAt: now(), remainingMs: VOICE_TIMING.longListenMs, timeoutMs: VOICE_TIMING.longListenMs, paused: false };
+        at(0, () => setPromptCaption(null));
+        at(VOICE_TIMING.longListenMs, () => { frameRef.current.listenClock = null; setPromptCaption(DEMO_LINES.followup); });
+        const shortAt = VOICE_TIMING.longListenMs + DEMO_TIMING.followupPromptMs;
+        at(shortAt, () => { frameRef.current.listenClock = { receivedAt: now(), remainingMs: VOICE_TIMING.shortListenMs, timeoutMs: VOICE_TIMING.shortListenMs, paused: false }; });
+        at(shortAt + VOICE_TIMING.shortListenMs, () => { frameRef.current.listenClock = null; setPromptCaption(DEMO_LINES.decline); });
+        at(shortAt + VOICE_TIMING.shortListenMs + DEMO_TIMING.idleExitMs, () => dispatchTracked({ type: "FOLLOWUP_TIMEOUT", at: now() }));
         break;
       }
       case "closing": {
@@ -305,11 +318,12 @@ export function OverlayStage({
         break;
       }
       case "error-fallback": {
+        if (live) break;
         at(DEMO_TIMING.errorHoldMs, () => dispatchTracked({ type: "ERROR_SPOKEN", at: now() }));
         break;
       }
     }
-    return clearTimers;
+    return () => { clearTimers(); playbackGuardRef.current?.cancel(); playbackGuardRef.current = null; };
   }, [session.name, session.cycles, session.spoken, at, clearTimers, fireAnswer, wake, live, dispatchTracked, reportPlayback]);
 
   /* ---- live:编排服务事件源(WS;断链优雅退场,重连退火) ---- */
@@ -327,11 +341,28 @@ export function OverlayStage({
       if (!event) return;
       if (event.type === "hub.hello" && event.screenId) { screenIdRef.current = event.screenId; micRef.current?.setScreen(event.screenId); }
       if (event.type === "session.start") { sessionIdRef.current = event.sessionId; ownsSessionRef.current = !event.screenId || event.screenId === screenIdRef.current; micRef.current?.setSession(event.sessionId, ownsSessionRef.current); }
-      if (event.type === "session.end") micRef.current?.setListen(null);
-      if (event.type === "input.listen") { if (ownsSessionRef.current) micRef.current?.setListen(event); return; }
+      if (event.type === "session.end") { micRef.current?.setListen(null); frameRef.current.listenClock = null; setBargePaused(false); }
+      if (event.type === "input.listen") {
+        frameRef.current.listenClock = null; listenIdRef.current = event.listenId;
+        if (event.phase === "long" || event.mode === "off") setPromptCaption(null);
+        if (ownsSessionRef.current) micRef.current?.setListen(event); return;
+      }
+      if (event.type === "input.open" || event.type === "input.progress") {
+        if (event.sessionId !== sessionIdRef.current || event.listenId !== listenIdRef.current) return;
+        frameRef.current.listenClock = { receivedAt: performance.now(), remainingMs: event.remainingMs, timeoutMs: event.timeoutMs, paused: event.paused };
+        return;
+      }
+      if (event.type === "barge.result") {
+        if (event.sessionId !== sessionIdRef.current) return;
+        if (!micRef.current?.bargeResult(event.attemptId, event.accepted)) return;
+        if (event.accepted) { getPlayer().stop(); fixedIdRef.current = null; playingIdRef.current = null; setBargePaused(false); }
+        return;
+      }
+      if (event.type === "state.change" && ["thinking", "closing", "error-fallback"].includes(event.to)) { micRef.current?.setListen(null); frameRef.current.listenClock = null; }
       if (event.type === "answer.delta" && event.full) speechRef.current = event.speech ?? null;
       if (event.type === "speech.fixed") {
         if (!ownsSessionRef.current) return;
+        frameRef.current.listenClock = null; setPromptCaption(event.text);
         const id = event.speech.turnId; fixedIdRef.current = id;
         getPlayer().play(event.speech, audioBaseUrl(hubUrl ?? `ws://${window.location.hostname}:3210`), tokenRef.current, {
           onSentenceStart: () => reportPlayback("playback.started", id),
@@ -369,7 +400,15 @@ export function OverlayStage({
 
     tokenRef.current = hubToken;
     if (hubToken) {
-      const mic = new VoiceMicrophone({ hubUrl: hubUrl ?? `ws://${window.location.hostname}:3210`, token: hubToken, state: () => mirrorRef.current.name, notice: setAudioNotice });
+      const mic = new VoiceMicrophone({ hubUrl: hubUrl ?? `ws://${window.location.hostname}:3210`, token: hubToken, state: () => mirrorRef.current.name, notice: setAudioNotice,
+        sentenceIndex: () => getPlayer().currentSentence,
+        barge: (action, turnId) => {
+          const currentId = playingIdRef.current ?? fixedIdRef.current;
+          if (turnId && currentId && turnId !== currentId) return;
+          if (action === "duck") { getPlayer().duck(); playbackGuardRef.current?.pause(); }
+          else if (action === "pause") { setBargePaused(true); void getPlayer().pausePlayback(); }
+          else { setBargePaused(false); playbackGuardRef.current?.resume(); void getPlayer().continuePlayback(); }
+        } });
       micRef.current = mic; void mic.start();
     }
     const connect = () => {
@@ -391,6 +430,7 @@ export function OverlayStage({
       };
       socket.onclose = (e) => {
         if (cancelled) return;
+        setBargePaused(false); frameRef.current.listenClock = null;
         micRef.current?.setConnected(false); micRef.current?.setScreen(null); screenIdRef.current = null;
         playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
         for (const machineEvent of connectionLostEvents(mirrorRef.current.name)) {
@@ -466,7 +506,7 @@ export function OverlayStage({
       : session.name === "listening"
         ? session.partial
         : session.name === "followup"
-          ? DEMO_LINES.followup
+          ? promptCaption
           : session.name === "error-fallback"
             ? DEMO_LINES.fallback
             : null;
@@ -476,14 +516,14 @@ export function OverlayStage({
   if (phase === "off") return null;
 
   return (
-    <div className="overlay-root" data-phase={phase}>
+    <div className="overlay-root" data-phase={phase} data-barge-paused={bargePaused}>
       <JarvisCore frameRef={frameRef} quality={lite ? "lite" : "high"} />
 
       <div key={session.name} className="overlay-caption-block overlay-caption-appear">
         {statusNow ? (
           <p className="overlay-status">
-            <span className="overlay-en">{statusNow.en}</span>
-            <span aria-hidden="true">{statusNow.zh}</span>
+            <span className="overlay-en">{bargePaused ? "Listening" : statusNow.en}</span>
+            <span aria-hidden="true">{bargePaused ? "聆听中" : statusNow.zh}</span>
           </p>
         ) : null}
         {captionText ? (

@@ -112,20 +112,20 @@ it('the HTTP wake screen owns cached speech and input, even when it connected se
   await expect(s.orch.submitUtterance(new Uint8Array(9600),new AbortController().signal,0,{...lease,screenId:screen.id})).rejects.toMatchObject({status:409,message:'screen_not_session_owner'});
   expect(s.client.asr).not.toHaveBeenCalled();s.orch.inputActivity(lease,'ready');
 });
-it('a second screen cannot stop an answer or its fixed followup; delay is exactly 8s from owner drain',async()=>{
+it('owner drain opens 8s long window; only owner ready starts it, then 5s short window and warm exit',async()=>{
   const s=await setup(undefined,100,true),id=await spokenAnswer(s);
-  report(s,screen,'playback.started',id);
-  for(const type of ['playback.failed','playback.drained','playback.skipped'])report(s,secondScreen,type,id,'autoplay_blocked');
-  s.orch.handleClientMessage(secondScreen,JSON.stringify({type:'session.dismiss',at:Date.now(),sessionId:s.orch.sessionId}));
-  expect(s.orch.state.name).toBe('answering');expect(s.store.lookup(id)?.cancelled).toBe(false);
-  s.ack(id);expect(s.orch.state.name).toBe('answering');expect(s.orch.inputLease).toBeNull();
-  await vi.advanceTimersByTimeAsync(4000);s.ack(id);
-  await vi.advanceTimersByTimeAsync(3999);expect(s.orch.state.name).toBe('answering');expect(s.fixed().speech.fixed).toBe('wake');
-  await vi.advanceTimersByTimeAsync(1);expect(s.orch.state.name).toBe('followup');expect(s.fixed().speech.fixed).toBe('followup');
-  report(s,secondScreen,'playback.failed',s.fixed().speech.turnId,'autoplay_blocked');expect(s.orch.inputLease).toBeNull();
-  s.ack(s.fixed().speech.turnId);await vi.advanceTimersByTimeAsync(900);expect(s.orch.inputLease).toMatchObject({screenId:screen.id});
-  s.orch.inputActivity(s.orch.inputLease!,'ready');await vi.advanceTimersByTimeAsync(2999);expect(s.orch.state.name).toBe('followup');
-  await vi.advanceTimersByTimeAsync(1);expect(s.orch.state.name).toBe('closing');
+  report(s,secondScreen,'playback.drained',id);expect(s.orch.state.name).toBe('answering');
+  s.ack(id);expect(s.orch.state.name).toBe('followup');
+  const lease=s.orch.inputLease!;
+  expect(()=>s.orch.inputActivity({...lease,screenId:secondScreen.id},'ready')).toThrow('stale_listen_window');
+  await vi.advanceTimersByTimeAsync(200);s.orch.inputActivity(lease,'ready');s.ack(id);
+  await vi.advanceTimersByTimeAsync(7999);expect(s.fixed().speech.fixed).toBe('wake');
+  await vi.advanceTimersByTimeAsync(1);expect(s.fixed().speech.fixed).toBe('followup');expect(s.orch.inputLease).toBeNull();
+  report(s,secondScreen,'playback.drained',s.fixed().speech.turnId);expect(s.orch.inputLease).toBeNull();
+  s.ack(s.fixed().speech.turnId);await vi.advanceTimersByTimeAsync(900);
+  s.orch.inputActivity(s.orch.inputLease!,'ready');await vi.advanceTimersByTimeAsync(4999);expect(s.fixed().speech.fixed).toBe('followup');
+  await vi.advanceTimersByTimeAsync(1);expect(s.fixed().speech.fixed).toBe('idle_exit');
+  s.ack(s.fixed().speech.turnId);await vi.advanceTimersByTimeAsync(1800);expect(s.orch.state.name).toBe('ambient');
 });
 it.each(['autoplay_blocked','audio_interrupted','audio_unavailable','timeout'])('owner failure %s keeps the card and exits without spoken followup, with diagnostic identity',async reason=>{
   const s=await setup(undefined,100,true),id=await spokenAnswer(s);
@@ -138,7 +138,7 @@ it.each(['autoplay_blocked','audio_interrupted','audio_unavailable','timeout'])(
 });
 it.each(['disconnect','supersede'] as const)('pending 8s followup is cancelled on owner %s',async why=>{
   const s=await setup(undefined,100,true),id=await spokenAnswer(s);s.ack(id);await vi.advanceTimersByTimeAsync(4000);
-  if(why==='disconnect'){s.orch.detach(secondScreen);expect(s.orch.state.name).toBe('answering');s.orch.detach(screen);expect(s.orch.state.name).toBe('closing');}
+  if(why==='disconnect'){s.orch.detach(secondScreen);expect(s.orch.state.name).toBe('followup');s.orch.detach(screen);expect(s.orch.state.name).toBe('closing');}
   else{s.orch.handleClientMessage({...screen,role:'console'},JSON.stringify({type:'question.submit',at:Date.now(),text:'客户有多少'}));}
   await vi.advanceTimersByTimeAsync(4000);
   expect(s.events.some(e=>e.type==='speech.fixed'&&e.speech.fixed==='followup')).toBe(false);
@@ -147,6 +147,71 @@ it.each(['disconnect','supersede'] as const)('pending 8s followup is cancelled o
 it('owner fixed wake/followup failure never opens a microphone lease',async()=>{
   const s=await setup(undefined,100,true);s.orch.beginSession(true);report(s,screen,'playback.failed',s.fixed().speech.turnId,'autoplay_blocked');
   expect(s.orch.state.name).toBe('closing');expect(s.orch.inputLease).toBeNull();await vi.advanceTimersByTimeAsync(1000);
-  const id=await spokenAnswer(s);s.ack(id);await vi.advanceTimersByTimeAsync(8000);
+  const id=await spokenAnswer(s);s.ack(id);s.orch.inputActivity(s.orch.inputLease!,'ready');await vi.advanceTimersByTimeAsync(8000);
   report(s,screen,'playback.failed',s.fixed().speech.turnId,'audio_unavailable');expect(s.orch.state.name).toBe('closing');expect(s.orch.inputLease).toBeNull();
+});
+
+function attempt(s: Awaited<ReturnType<typeof setup>>, index=0) {
+  const lease = s.events.filter(e=>e.type==='input.listen'&&e.mode==='barge').at(-1) as Extract<VoiceWireEvent,{type:'input.listen'}>;
+  return {...lease,screenId:screen.id,attemptId:crypto.randomUUID(),sentenceIndex:index};
+}
+it.each(['echo','unheard'] as const)('rejects %s without cancelling old audio or using business quota',async reason=>{
+  const s=await setup(undefined,1,true),id=await spokenAnswer(s),lease=attempt(s);
+  vi.mocked(s.client.asr).mockResolvedValue({text:reason==='echo'?s.store.lookup(id)!.spokenSentences[0].spokenText:'',ms:100});
+  s.orch.inputActivity(lease,'duck');s.orch.inputActivity(lease,'pause');
+  await s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);
+  expect(s.orch.state.name).toBe('answering');expect(s.store.lookup(id)?.cancelled).toBe(false);
+  expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({accepted:false,reason});
+  expect(()=>s.orch.inputActivity(lease,'duck')).toThrow('stale_attempt');
+});
+it('valid wake interruption cancels its exit callback and accepts a new question',async()=>{
+  const s=await setup(undefined,100,true);s.orch.beginSession(true);const id=s.fixed().speech.turnId,lease=attempt(s);
+  s.orch.inputActivity(lease,'duck');s.orch.inputActivity(lease,'pause');await s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);
+  await vi.advanceTimersByTimeAsync(2);expect(s.store.lookup(id)?.cancelled).toBe(true);expect(s.orch.state.name).toBe('answering');
+  s.ack(id);expect(s.orch.state.name).toBe('answering');
+});
+it('a valid question pauses for 15s; judge timeout starts at upload and late ASR cannot cancel a replacement',async()=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s),lease=attempt(s);
+  s.orch.inputActivity(lease,'duck');await vi.advanceTimersByTimeAsync(15000);expect(s.orch.state.name).toBe('answering');
+  let resolve!: (value:{text:string;ms:number})=>void;vi.mocked(s.client.asr).mockImplementation(()=>new Promise(r=>resolve=r));
+  const pending=s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);
+  await vi.advanceTimersByTimeAsync(5999);expect(s.events.some(e=>e.type==='barge.result')).toBe(false);
+  await vi.advanceTimersByTimeAsync(1);expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({reason:'timeout'});
+  s.orch.handleClientMessage({...screen,role:'console'},JSON.stringify({type:'question.submit',at:Date.now(),text:'客户有多少'}));await vi.advanceTimersByTimeAsync(300);
+  resolve({text:'本月销量',ms:100});await pending;expect(s.orch.state.name).toBe('answering');expect(s.store.lookup(id)?.cancelled).toBe(true);
+});
+it('cross-drain candidate pauses long window and misfire resumes exactly its remaining budget',async()=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s),lease=attempt(s);
+  s.orch.inputActivity(lease,'duck');s.ack(id);s.orch.inputActivity(s.orch.inputLease!,'ready');
+  await vi.advanceTimersByTimeAsync(7000);expect(s.fixed().speech.fixed).toBe('wake');s.orch.inputActivity(lease,'misfire');
+  await vi.advanceTimersByTimeAsync(7999);expect(s.fixed().speech.fixed).toBe('wake');await vi.advanceTimersByTimeAsync(1);expect(s.fixed().speech.fixed).toBe('followup');
+});
+it('foreign and previous barge leases cannot reach ASR or pause playback',async()=>{
+  const s=await setup(undefined,100,true);await spokenAnswer(s);const lease=attempt(s);
+  expect(()=>s.orch.inputActivity({...lease,screenId:secondScreen.id},'duck')).toThrow('stale_listen_window');
+  s.orch.forceClose('force');await vi.advanceTimersByTimeAsync(1000);await s.open();
+  await expect(s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease)).rejects.toMatchObject({status:409});
+});
+it.each(['followup','idle_exit'] as const)('fixed %s can be interrupted before it completes',async key=>{
+  const s=await setup(undefined,100,true),id=await spokenAnswer(s);s.ack(id);s.orch.inputActivity(s.orch.inputLease!,'ready');await vi.advanceTimersByTimeAsync(8000);
+  if(key==='idle_exit'){s.ack(s.fixed().speech.turnId);await vi.advanceTimersByTimeAsync(900);s.orch.inputActivity(s.orch.inputLease!,'ready');await vi.advanceTimersByTimeAsync(5000);}
+  const old=s.fixed().speech.turnId,lease=attempt(s);s.orch.inputActivity(lease,'duck');s.orch.inputActivity(lease,'pause');
+  vi.mocked(s.client.asr).mockResolvedValue({text:'客户有多少',ms:100});await s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);await vi.advanceTimersByTimeAsync(2);
+  s.ack(old);expect(s.orch.state.name).toBe('answering');expect(s.store.lookup(old)?.cancelled).toBe(true);
+});
+
+it('multiple rejected attempts retain a separate history and leave room for the next valid business question',async()=>{
+  const s=await setup(undefined,2,true),id=await spokenAnswer(s);
+  for(let i=0;i<2;i++){
+    const lease=attempt(s);vi.mocked(s.client.asr).mockResolvedValue({text:'',ms:100});s.orch.inputActivity(lease,'duck');await s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);
+  }
+  const lease=attempt(s);vi.mocked(s.client.asr).mockResolvedValue({text:'客户有多少',ms:100});s.orch.inputActivity(lease,'duck');s.orch.inputActivity(lease,'pause');await s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);await vi.advanceTimersByTimeAsync(2);
+  expect(s.events.filter(e=>e.type==='barge.result')).toHaveLength(3);expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({accepted:true});expect(s.store.lookup(id)?.cancelled).toBe(true);
+});
+it('valid but limited barge gives apologetic unheard then reopens, without an idle exit',async()=>{
+  const s=await setup(undefined,1,true);await spokenAnswer(s);const lease=attempt(s);vi.mocked(s.client.asr).mockResolvedValue({text:'客户有多少',ms:100});
+  s.orch.inputActivity(lease,'duck');s.orch.inputActivity(lease,'pause');await s.orch.submitUtterance(new Uint8Array(16000),new AbortController().signal,0,lease);
+  expect(s.events.filter(e=>e.type==='barge.result').at(-1)).toMatchObject({accepted:false,reason:'rate_limited'});
+  const full=s.events.filter(e=>e.type==='answer.delta'&&e.full).at(-1) as Extract<VoiceWireEvent,{type:'answer.delta'}>;
+  expect(full.speech?.fixed).toBe('unheard');s.ack(full.speech!.turnId);expect(s.orch.state.name).toBe('listening');expect(s.fixed().speech.fixed).toBe('wake');
 });

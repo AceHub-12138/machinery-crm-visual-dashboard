@@ -4,7 +4,7 @@
  * 「状态 + 振幅 + 时钟 → 渲染参数」的全部映射都收在这里,
  * JarvisCore/AnswerCard 只消费结果,不做任何数学。
  * 每个函数都可独立单测;规格数字(±12% 呼吸、3 倍自转、8% 内收、
- * 3s 倒计时、约 700ms 发射)以常量+断言固定,防止视觉回退。
+ * 8s/5s 倒计时、约 700ms 发射)以常量+断言固定,防止视觉回退。
  */
 
 import type { VoiceStateName } from "./session-machine.ts";
@@ -458,9 +458,9 @@ export function coreVisual(input: CoreVisualInput): CoreVisual {
     }
 
     case "followup": {
-      // 回落缓慢呼吸;外圈能量环 3s 递减(§6)
+      // 回落缓慢呼吸;外圈能量环随真实聆听窗口递减(§6)
       const countdown = clamp01(
-        1 - (now - since) / VOICE_TIMING.followupMs,
+        1 - (now - since) / VOICE_TIMING.longListenMs,
       );
       const slow = 0.5 + 0.5 * Math.sin((now - since) / 1000 * 1.6);
       return {
@@ -500,6 +500,7 @@ export function coreVisual(input: CoreVisualInput): CoreVisual {
 
 /** 会话快照:回放器每帧喂给画布的最小状态(避免画布感知 reducer 细节)。 */
 export type VoiceFrame = {
+  listenClock?: { receivedAt: number; remainingMs: number; timeoutMs: number; paused: boolean } | null;
   name: VoiceStateName;
   since: number;
   /** 返回当前振幅(0..1) */

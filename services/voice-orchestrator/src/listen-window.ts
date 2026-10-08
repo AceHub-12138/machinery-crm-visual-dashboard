@@ -1,8 +1,9 @@
 /** One bounded listen lease. Duplicate reports never extend a timer; only a
- * confirmed VAD start pauses the remaining time, with a 16s speech watchdog. */
-export type ListenAction = "ready" | "speech_start" | "misfire";
-export type InputLease = { sessionId: string; listenId: string; screenId?: string };
+ * VAD candidate start (misfires restore the remainder) pauses the remaining time, with a 16s speech watchdog. */
+export type ListenAction = "ready" | "speech_start" | "misfire" | "duck" | "pause";
+export type InputLease = { sessionId: string; listenId: string; screenId?: string; turnId?: string; attemptId?: string; sentenceIndex?: number };
 type ListenOptions = {
+  progress?: (remainingMs: number, paused: boolean, opened: boolean) => void;
   timeoutMs: number; expire: (missingReport: boolean) => void;
   setTimer: (fn: () => void, ms: number) => unknown; clearTimer: (handle: unknown) => void;
 };
@@ -30,13 +31,16 @@ export class ListenWindow {
     if (this.ended) return;
     if (action === "ready") {
       if (this.opened) return;
-      this.opened = true; this.arm(this.remaining);
+      this.opened = true; this.arm(this.speaking ? 16000 : this.remaining, this.speaking);
+      this.options.progress?.(this.remaining, this.speaking, true);
     } else if (action === "speech_start") {
-      if (!this.opened || this.speaking) return;
-      this.remaining = Math.max(0, this.remaining - (Date.now() - this.since));
+      if (this.speaking) return;
+      if (this.opened) this.remaining = Math.max(0, this.remaining - (Date.now() - this.since));
       this.speaking = true; this.arm(16000, true);
-    } else if (this.speaking) {
-      this.speaking = false; this.arm(this.remaining);
+      this.options.progress?.(this.remaining, true, this.opened);
+    } else if (action === "misfire" && this.speaking) {
+      this.speaking = false; this.arm(this.opened ? this.remaining : this.remaining + 1000, !this.opened);
+      this.options.progress?.(this.remaining, false, this.opened);
     }
   }
   stop(): void { this.ended = true; if (this.timer !== null) this.options.clearTimer(this.timer); this.timer = null; }

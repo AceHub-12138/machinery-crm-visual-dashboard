@@ -112,7 +112,7 @@ async function traces(sessionId: string): Promise<TurnTraceRecord[]> {
   return raw.split("\n").filter(Boolean).map(line => JSON.parse(line) as TurnTraceRecord).filter(record => record.sessionId === sessionId);
 }
 
-  test('only the owner plays; a second screen failure cannot cut off audio; followup waits 8 seconds',async({page,context})=>{
+  test('only the owner plays; a second screen failure cannot cut off audio; followup begins at actual drain',async({page,context})=>{
     test.setTimeout(40000);await open(page);await page.mouse.click(40,40);
     const passive=await context.newPage();
     await passive.addInitScript(()=>{
@@ -136,11 +136,11 @@ async function traces(sessionId: string): Promise<TurnTraceRecord[]> {
       expect((await metrics(passive)).scheduled).toHaveLength(0);
       const sessionId=orch.sessionId;
       await expect.poll(async()=>(await traces(sessionId)).some(r=>r.playbackOutcome==='drained'),{timeout:10000}).toBe(true);
-      const trace=(await traces(sessionId))[0];const drainedAt=Date.parse(trace.ts)+trace.playbackEndMs!;expect(orch.state.name).toBe('answering');
-      await page.waitForTimeout(6500);expect(orch.state.name).toBe('answering');
+      const trace=(await traces(sessionId))[0];const drainedAt=Date.parse(trace.ts)+trace.playbackEndMs!;expect(orch.state.name).toBe('followup');
+      await page.waitForTimeout(500);expect(orch.state.name).toBe('followup');
       await expect(page.getByText('等待追问',{exact:true})).toBeVisible({timeout:4000});
-      expect(stateChanges.find(e=>e.to==='followup')!.at-drainedAt).toBeGreaterThanOrEqual(8000);
-      expect((await traces(sessionId))[0]).toMatchObject({playbackOutcome:'drained',followupDelayMs:8000,playbackScreenCount:2});
+      expect(stateChanges.find(e=>e.to==='followup')!.at-drainedAt).toBeLessThan(100);
+      expect((await traces(sessionId))[0]).toMatchObject({playbackOutcome:'drained',playbackScreenCount:2});
       expect((await metrics(passive)).scheduled).toHaveLength(0);
     }finally{await passive.close();}
   });

@@ -40,7 +40,9 @@ export type VoiceErrorCode =
  */
 export type VoiceWireEvent =
   | { type: "speech.fixed"; at: number; text: string; speech: { turnId: string; fixed?: "wake" | "followup" | "goodbye" | "fallback" | "unheard" | "idle_exit"; style?: string; sentences: { index: number; displayStart: number; displayEnd: number }[] } }
-  | { type: "input.listen"; at: number; sessionId: string; listenId: string; mode: "listening" | "followup" }
+  | { type: "input.listen"; at: number; sessionId: string; listenId: string; mode: "listening" | "followup" | "barge" | "off"; turnId?: string; phase?: "long" | "short"; timeoutMs?: number }
+  | { type: "input.open" | "input.progress"; at: number; sessionId: string; listenId: string; remainingMs: number; timeoutMs: number; paused: boolean }
+  | { type: "barge.result"; at: number; sessionId: string; listenId: string; attemptId: string; accepted: boolean; reason: "question" | "echo" | "unheard" | "timeout" | "misfire" | "rate_limited" }
   | { type: "session.start"; at: number; sessionId: string; screenId?: string }
   | {
       type: "state.change";
@@ -174,7 +176,7 @@ export type ConsoleWireEvent =
   | { type: "session.close"; at: number }; // 强制退场(Esc 语义)
 
 export const WIRE_EVENT_TYPES = [
-  "input.listen",
+  "input.listen", "input.open", "input.progress", "barge.result",
   "speech.fixed",
   "session.start",
   "state.change",
@@ -206,7 +208,12 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
   const ev = data as VoiceWireEvent;
   switch (ev.type) {
     case "input.listen":
-      return typeof ev.sessionId === "string" && ev.sessionId.length <= 64 && /^sess-[a-f0-9-]+$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && ["listening", "followup"].includes(ev.mode) ? ev : null;
+      return typeof ev.sessionId === "string" && ev.sessionId.length <= 64 && /^sess-[a-f0-9-]+$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && ["listening", "followup", "barge", "off"].includes(ev.mode) && (ev.mode !== "barge" || /^[a-f0-9-]{36}$/.test(ev.turnId ?? "")) && (ev.timeoutMs === undefined || [5000, 8000].includes(ev.timeoutMs)) && (ev.phase === undefined || ["long", "short"].includes(ev.phase)) ? ev : null;
+    case "input.open":
+    case "input.progress":
+      return /^sess-[a-f0-9-]{1,40}$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && [5000,8000].includes(ev.timeoutMs) && Number.isFinite(ev.remainingMs) && ev.remainingMs >= 0 && ev.remainingMs <= ev.timeoutMs && typeof ev.paused === "boolean" ? ev : null;
+    case "barge.result":
+      return /^sess-[a-f0-9-]{1,40}$/.test(ev.sessionId) && /^[a-f0-9-]{36}$/.test(ev.listenId) && /^[a-f0-9-]{36}$/.test(ev.attemptId) && typeof ev.accepted === "boolean" && ev.accepted === (ev.reason === "question") && ["question","echo","unheard","timeout","misfire","rate_limited"].includes(ev.reason) ? ev : null;
     case "speech.fixed":
       if (typeof ev.text !== "string" || !ev.speech?.fixed || !["wake", "followup", "unheard", "goodbye", "fallback", "idle_exit"].includes(ev.speech.fixed)) return null;
       return parseWireEvent(JSON.stringify({ ...ev, type: "answer.delta", seq: 0, full: true, card: { kind: "brief", title: "小川", lines: [], spoken: ev.text } })) ? ev : null;

@@ -1,6 +1,6 @@
 # 语音交互改版修复批2：施工记录
 
-施工中；基线 `codex/voice-8c-task6-7-10` @ `04edf6f`。按Claude的桌面修复文件及Codex施工方案执行。保留当前v6任务书、架构文档、next-env及设计文件原有修改，不合并、不推送，Mac保持开机。
+本批功能施工已完成，等待Claude复核和完整真人验收；基线 `codex/voice-8c-task6-7-10` @ `04edf6f`。按Claude的桌面修复文件及Codex施工方案执行。保留当前v6任务书、架构文档、next-env及设计文件原有修改，不合并、不推送，Mac保持开机。
 
 ## Step 0：Mac物理回声预实验
 
@@ -21,7 +21,7 @@
 
 Windows展厅配置仍须Task9复测。这组安静回声实验也不证明真实用户打断成功率或延迟。
 
-## 当前状态
+## Step 0首轮时的历史状态
 
 已完成独立Step0工具和首轮A/B实测；按用户新要求补三组配对复测。ASR优先调度、产品打断闭环、8秒/5秒窗口、倒计时和新交互验收尚未施工。正式大屏仍运行 `04edf6f` 的原交互。
 
@@ -75,4 +75,43 @@ node --experimental-strip-types scripts/voice-echo-check.mjs --run
 
 24项Python测试、406项TS测试、tsc、Lint和production build通过。日志 `/tmp/voice-asr-priority-python3.log`、`/tmp/voice-asr-priority-ts-tests.log`、`/tmp/voice-asr-priority-tsc.log`、`/tmp/voice-asr-priority-full-lint.log`、`/tmp/voice-asr-priority-build.log`。重启本机voice-local加载新实现，7种风格自检均通过，未改模型/参考/阈值。Stage0本地提交 `0cf0ecb`；未合并、未推送。
 
-下一阶段施工打断闭环和长短聆听窗口；当前正式播放交互尚未改版。
+以上为Step 1阶段记录；后续打断与长短窗已在本批接通，最新状态见下文。
+
+## Step 2–3：播放器打断与长短聆听窗口
+
+完成以下正式交互：
+
+- 答案真正耗尽后即进入followup，连续采集；尾音保护期保留barge，随后vad实际ready开启8秒长窗。长窗静默才播追问；提示播完、vad就绪开启5秒短窗，继续静默播warm的idle_exit后退出。
+- 普通答案、wake、followup、unheard、idle_exit可打断；goodbye、fallback及thinking不收音。候选SpeechStart将增益降到0.2，累计500ms语音确认后挂起原生AudioContext；保持源节点、PCM、句边界。300ms以下误触发不上传ASR；300–500ms候选未达到暂停资格也恢复原播放。
+- 播放器、编排播放期限及覆盖层播放看门狗冻结／按剩余预算恢复。说话最长16秒、ASR判定另给6秒，从语音结束上传后计，不从暂停时计。
+- Barge租约绑定所属屏、会话、当前音频轮；每次尝试使用UUID及实际播放句索引。旧尝试重放、跨屏、旧会话、并发判定均拒绝。有效问题才取消旧音频、接受新问题；无效／空识别／回声／超时续播，不增加unheard次数或业务提问额度。有效但受限则歉意提示后再听。
+- 文本按NFKC、去标点、转小写后计算字符编辑相似度，分母为两者最大长度；与当前句及上一句任一相似度≥0.5则视为回声。新请求不额外落盘原始ASR文本或麦克风录音。
+- barge↔vad及租约变化保留VAD段与500ms句首缓冲；只有会话边界、thinking／关闭等真实结束和被拒绝的尝试才重置。跨越最终样本的语音沿用原尝试。
+- `input.open`／`input.progress`同步真实开启、剩余时间和暂停状态；浏览器从本机事件到达时刻推进，不相减异机时钟。提示播放隐藏倒计时；8秒长窗不会提前显示追问文字。局部暂停保留并调暗答案卡、核心呈聆听状态，没有新全局状态。
+- 窗口／打断事件写入 `voice-trace.jsonl.interaction.jsonl`，保留一轮多次尝试及拒绝原因。原turn记录仍只追加一次。失败卡片独立保留至少8秒，无声安装与demo都有有界收尾。
+
+## Step 4：验证与延迟证据
+
+常规检查：420项TS单元／服务测试、24项Python测试、TypeScript、全仓ESLint和production build通过。浏览器完整语音回归26项通过；最终小改后再定向复测6项（含新增200ms短语音、尾音交界、暂停中Esc／断线、不可打断的告别／降级、连续长问题）。两批合计覆盖27个独立语音浏览器场景；不把重复执行计作新增场景。
+
+实测采用仓库预录音注入MediaStream，经真实AudioWorklet、Silero、loopback HTTP、Qwen ASR、LM Studio分类、Qwen TTS与Web Audio时钟；音频输出图保持时钟但静音。包含约500ms VAD尾部静音和150ms预缓冲，不能等同真人拾音或展厅验证。测试LLM、参考音色及KWS门槛未改变。
+
+| 组别 | 次数／接受数 | 让声P95 | 暂停P95 | 末音→新首音P95 | ASR排队P95 | 结果 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 首组，与浏览器回归并行 | 10／10 | 67.9ms | 580.8ms | 1463.1ms | 45.8ms | 当组达标 |
+| 第二组，与浏览器回归并行 | 10／10 | 80.3ms | 591.7ms | **1617.8ms** | 38.3ms | **延迟门槛未通过** |
+| 回归结束后的单页对照 | 10／10 | 70.7ms | 583.9ms | **1450.3ms** | 41.4ms | 正常单页条件达标 |
+
+第二组最慢一轮末音→首音1731.4ms，ASR执行321ms；常见ASR约190–210ms。第二组并行执行了浏览器回归，含额外VAD、KWS与多标签；顺序执行对照消除了这项测试负载，但不足以证明所有慢尾都由它导致，也不宣称高负载下稳定达标。不能删除失败轮、降低门槛或把计时起点移到SpeechEnd之后。
+
+三组原始记录分别为 `voice-8c-barge-calibration-first.json`、`voice-8c-barge-calibration-parallel.json`、`voice-8c-barge-calibration.json`。最后一组另保留80条窗口／打断阶段事件、classifyMs／ttsFirstByteMs／预缓冲等分项。浏览器取消旧流时出现的ERR_INCOMPLETE_CHUNKED_ENCODING网络提示保留在原始errors中；所有10次旧轮均被取消，新轮首音实际排入Web Audio，未把取消提示当作ASR有效性证据。
+
+验证日志：`/tmp/voice-redesign-unit8.log`、`/tmp/voice-redesign-python.log`、`/tmp/voice-redesign-tsc8.log`、`/tmp/voice-redesign-lint8.log`、`/tmp/voice-redesign-build-final2.log`、`/tmp/voice-redesign-e2e-final.log`、`/tmp/voice-redesign-e2e-target-final.log`。本地临时日志可能在重启后消失，核心数字与原始JSON已保存在仓库。
+
+## 交付边界与真人测试
+
+本机Step0物理回声门槛已通过（非展厅摆位）；ASR插队及单页打断延迟实测达标；交互功能自动检查通过。并行负载组延迟仍失败，完整真人问答与Windows展厅验收未通过／未执行，不将这些阶段混为“全部通过”。真人步骤见 `docs/voice-8c-interaction-human-checklist.md`。
+
+本轮发现本机旧服务未运行，已按原本机配置恢复LM Studio 1234、voice-local 8810、编排3210与最新构建网页3015。voice-local七种风格warm/selfCheck=passed；编排开启原有TTS，数据源仍fixture，未修改平台或部署到服务器。默认系统音频设备未改，Step0的扬声器选择仅属于独立实验。
+
+施工分支 `codex/voice-8c-task6-7-10`；已有Step0提交 `0cf0ecb`、Step1提交 `195b3c4`，本阶段单独本地提交。未合并、未推送、未部署。保留v6任务书、架构文档、next-env和设计目录原有修改，前三文件哈希检查一致。Mac保持开机，供Claude复核后完整真人测试。

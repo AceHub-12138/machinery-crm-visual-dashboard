@@ -3,7 +3,7 @@
  *
  * 纯 reducer:不碰时钟、不碰 DOM、不发请求。所有事件都带 `at`
  * (performance.now() 域的毫秒数),由调用方(回放器 / 8b 编排服务)注入,
- * 这样单测可以精确推演「3s 超时」「8s 思考超时」而不依赖真实等待。
+ * 这样单测可以精确推演「聆听窗超时」「8s 思考超时」而不依赖真实等待。
  *
  * 超时不在 reducer 内部判定:导出 followupRemaining / thinkingExpired
  * 两个纯判定,驱动层每帧(或低频轮询)检查后再派发超时事件。
@@ -13,8 +13,9 @@
 export const VOICE_TIMING = {
   wakingMs: 900,
   thinkingMaxMs: 8000,
-  followupMs: 3000,
-  followupDelayMs: 8000, // 成功播完答案后，保留答案 8 秒再播追问
+  longListenMs: 8000,
+  shortListenMs: 5000,
+  failedCardHoldMs: 8000,
   closingMs: 800,
   foldMs: 200, // §5 退场第一步:答案卡折叠吸回核心
 } as const;
@@ -25,7 +26,7 @@ export type VoiceStateName =
   | "listening" // 核心随振幅呼吸,收集提问
   | "thinking" // 自转加速、粒子内收,琥珀火花上飘
   | "answering" // 粒子中心发射答案卡,关键数字随播报高亮
-  | "followup" // 卡片保持,外圈能量环 3s 递减
+  | "followup" // 卡片保持,外圈能量环随真实聆听窗口递减
   | "closing" // 卡片折叠吸回 → 粒子散场 → 基线淡回(~800ms)
   | "error-fallback"; // 任意状态出错:播报降级话术后退场
 
@@ -123,7 +124,7 @@ export type VoiceEvent =
   | { type: "BARGE_IN"; at: number } // answering 打断(8c 实装,状态机先行支持)
   | { type: "SPEAK"; at: number } // followup 再开口 → listening(旧卡折叠回收)
   | { type: "DECLINE"; at: number } // 「没有了/谢谢」→ 直接退场
-  | { type: "FOLLOWUP_TIMEOUT"; at: number } // 追问 3s 无输入 → closing
+  | { type: "FOLLOWUP_TIMEOUT"; at: number } // 短窗 5s 无输入 → closing
   | { type: "THINK_TIMEOUT"; at: number } // thinking 超 8s → 降级
   | { type: "FORCE_CLOSE"; at: number } // 运维(Esc):任何会话态立即退场
   | { type: "CLOSED"; at: number } // 退场动画结束 → ambient
@@ -234,7 +235,7 @@ export function sessionReducer(state: VoiceSessionState, event: VoiceEvent): Voi
 export function followupRemaining(
   state: VoiceSessionState,
   now: number,
-  followupMs: number = VOICE_TIMING.followupMs,
+  followupMs: number = VOICE_TIMING.longListenMs,
 ): number | null {
   if (state.name !== "followup") return null;
   return Math.max(0, state.since + followupMs - now);

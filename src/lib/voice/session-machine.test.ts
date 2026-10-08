@@ -56,7 +56,7 @@ describe("voice session machine — 全生命周期(plan §4)", () => {
     s = step(s, { type: "SPOKEN" }, 9000);
     expect(s.name).toBe("followup");
 
-    s = step(s, { type: "FOLLOWUP_TIMEOUT" }, 9000 + VOICE_TIMING.followupMs);
+    s = step(s, { type: "FOLLOWUP_TIMEOUT" }, 9000 + VOICE_TIMING.longListenMs);
     expect(s.name).toBe("closing");
 
     s = step(s, { type: "CLOSED" }, 9800 + VOICE_TIMING.closingMs);
@@ -95,7 +95,7 @@ describe("voice session machine — 全生命周期(plan §4)", () => {
 });
 
 describe("voice session machine — 超时规则", () => {
-  it("followup 3s 能量环倒计时:走完前不为负,3s 整归零,随后派发 FOLLOWUP_TIMEOUT", () => {
+  it("followup 8s 能量环倒计时:走完前不为负,8s 整归零,随后派发 FOLLOWUP_TIMEOUT", () => {
     let s = initSessionState(0);
     s = step(s, { type: "WAKE" }, 0);
     s = step(s, { type: "WOKEN" }, 900);
@@ -105,10 +105,10 @@ describe("voice session machine — 超时规则", () => {
     expect(s.name).toBe("followup");
     expect(s.since).toBe(3000);
 
-    expect(followupRemaining(s, 3000)).toBe(VOICE_TIMING.followupMs);
-    expect(followupRemaining(s, 5999)).toBe(1);
-    expect(followupRemaining(s, 6000)).toBe(0);
-    expect(followupRemaining(s, 9999)).toBe(0); // 不为负
+    expect(followupRemaining(s, 3000)).toBe(VOICE_TIMING.longListenMs);
+    expect(followupRemaining(s, 10999)).toBe(1);
+    expect(followupRemaining(s, 11000)).toBe(0);
+    expect(followupRemaining(s, 15000)).toBe(0); // 不为负
     expect(followupRemaining({ ...s, name: "answering" }, 6000)).toBeNull();
 
     s = step(s, { type: "FOLLOWUP_TIMEOUT" }, 6000);

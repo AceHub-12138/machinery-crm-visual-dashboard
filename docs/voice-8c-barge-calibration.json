@@ -1,0 +1,1002 @@
+{
+  "startedAt": "2026-10-08T06:27:53.453Z",
+  "buildId": "woEQFs841nCpAcBZ0oXIG",
+  "conditions": "isolated-after-browser-regression",
+  "scope": "injected prerecorded speech → actual AudioWorklet/Silero → real ASR/LLM/TTS → Web Audio; input/output muted, not human or exhibit pickup",
+  "model": "qwen/qwen3.6-35b-a3b",
+  "errors": [
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING"
+  ],
+  "thresholds": {
+    "duckMs": 150,
+    "pauseMs": 700,
+    "lastSpeechToNewSampleMs": 1500
+  },
+  "passed": true,
+  "summary": {
+    "duckMs": {
+      "samples": 10,
+      "p50": 62.1,
+      "p95": 70.7
+    },
+    "pauseMs": {
+      "samples": 10,
+      "p50": 577.3,
+      "p95": 583.9
+    },
+    "lastSpeechToNewSampleMs": {
+      "samples": 10,
+      "p50": 1436.5,
+      "p95": 1450.3
+    },
+    "uploadToNewSampleMs": {
+      "samples": 10,
+      "p50": 910.4,
+      "p95": 938.7
+    },
+    "asrQueueMs": {
+      "samples": 10,
+      "p50": 23.6,
+      "p95": 41.4
+    },
+    "asrMs": {
+      "samples": 10,
+      "p50": 196.5,
+      "p95": 208.6
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 58.37916666703859,
+      "pauseMs": 570.1791666668523,
+      "lastSpeechToNewSampleMs": 1426.4833333337046,
+      "uploadToNewSampleMs": 906,
+      "hangoverAndUploadMs": 520.4833333337046,
+      "asrMs": 197.4,
+      "asrQueueMs": 17,
+      "classifyMs": 518.6099580000009,
+      "ttsFirstByteMs": 518.8537079999987,
+      "speculative": "hit",
+      "browserPrebufferMs": 150.1000000005588,
+      "bargeListenId": "44d3930f-43fb-4902-af0f-4041bcad4d33"
+    },
+    {
+      "round": 2,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 58.179166666854144,
+      "pauseMs": 574.8791666670404,
+      "lastSpeechToNewSampleMs": 1413.9833333337046,
+      "uploadToNewSampleMs": 897.4000000003725,
+      "hangoverAndUploadMs": 516.5833333333321,
+      "asrMs": 191.3,
+      "asrQueueMs": 7.2,
+      "classifyMs": 527.9678750000021,
+      "ttsFirstByteMs": 529.119749999998,
+      "speculative": "hit",
+      "browserPrebufferMs": 150.20000000018626,
+      "bargeListenId": "f542fc43-ffaa-40bf-8b6e-682349e30869"
+    },
+    {
+      "round": 3,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 65.87916666704041,
+      "pauseMs": 579.6791666668541,
+      "lastSpeechToNewSampleMs": 1436.1833333338946,
+      "uploadToNewSampleMs": 910.5,
+      "hangoverAndUploadMs": 525.6833333338946,
+      "asrMs": 195.6,
+      "asrQueueMs": 23,
+      "classifyMs": 522.1888749999998,
+      "ttsFirstByteMs": 523.5955410000024,
+      "speculative": "hit",
+      "browserPrebufferMs": 150.1000000005588,
+      "bargeListenId": "5f19d62f-f172-439f-8e0b-ec62b5cf03ef"
+    },
+    {
+      "round": 4,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 53.17916666591918,
+      "pauseMs": 566.0791666662917,
+      "lastSpeechToNewSampleMs": 1439.8833333331495,
+      "uploadToNewSampleMs": 926.2999999998137,
+      "hangoverAndUploadMs": 513.5833333333358,
+      "asrMs": 204.9,
+      "asrQueueMs": 32.3,
+      "classifyMs": 515.4317079999964,
+      "ttsFirstByteMs": 517.5905419999981,
+      "speculative": "hit",
+      "browserPrebufferMs": 150.1000000005588,
+      "bargeListenId": "3364485c-f806-4f7a-b1fb-0011e7f1411b"
+    },
+    {
+      "round": 5,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 57.27916666647798,
+      "pauseMs": 574.0791666662917,
+      "lastSpeechToNewSampleMs": 1446.5833333333358,
+      "uploadToNewSampleMs": 930,
+      "hangoverAndUploadMs": 516.5833333333358,
+      "asrMs": 209.1,
+      "asrQueueMs": 30.2,
+      "classifyMs": 516.429833000002,
+      "ttsFirstByteMs": 515.6534169999941,
+      "speculative": "hit",
+      "browserPrebufferMs": 150,
+      "bargeListenId": "1c747437-cee6-434b-bf63-31690fe22600"
+    },
+    {
+      "round": 6,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 66.27916666648525,
+      "pauseMs": 582.8791666661127,
+      "lastSpeechToNewSampleMs": 1405.4833333327697,
+      "uploadToNewSampleMs": 880,
+      "hangoverAndUploadMs": 525.4833333327697,
+      "asrMs": 193.2,
+      "asrQueueMs": 1.8,
+      "classifyMs": 516.6136669999978,
+      "ttsFirstByteMs": 518.7538749999949,
+      "speculative": "hit",
+      "browserPrebufferMs": 150.09999999962747,
+      "bargeListenId": "e0bb6689-a2e9-4650-a8de-c38e34e2d8ae"
+    },
+    {
+      "round": 7,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 67.07916666723031,
+      "pauseMs": 580.379166667044,
+      "lastSpeechToNewSampleMs": 1436.8833333331422,
+      "uploadToNewSampleMs": 910.2999999998137,
+      "hangoverAndUploadMs": 526.5833333333285,
+      "asrMs": 198.7,
+      "asrQueueMs": 24.3,
+      "classifyMs": 516.900708000001,
+      "ttsFirstByteMs": 518.3073339999974,
+      "speculative": "hit",
+      "browserPrebufferMs": 150,
+      "bargeListenId": "a5a2b9e2-c8e7-43eb-865e-aa677f81fc6c"
+    },
+    {
+      "round": 8,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 67.97916666667152,
+      "pauseMs": 581.079166666299,
+      "lastSpeechToNewSampleMs": 1442.5833333333285,
+      "uploadToNewSampleMs": 915.0999999996275,
+      "hangoverAndUploadMs": 527.483333333701,
+      "asrMs": 188.4,
+      "asrQueueMs": 25,
+      "classifyMs": 532.2200830000074,
+      "ttsFirstByteMs": 532.666584000006,
+      "speculative": "hit",
+      "browserPrebufferMs": 150,
+      "bargeListenId": "2aadc41f-5bbd-47c1-8694-3a965607ad6f"
+    },
+    {
+      "round": 9,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 72.97916666667152,
+      "pauseMs": 584.7791666664853,
+      "lastSpeechToNewSampleMs": 1427.3833333331422,
+      "uploadToNewSampleMs": 888.4000000003725,
+      "hangoverAndUploadMs": 538.9833333327697,
+      "asrMs": 189.8,
+      "asrQueueMs": 18.1,
+      "classifyMs": 514.6790000000037,
+      "ttsFirstByteMs": 519.8925829999935,
+      "speculative": "hit",
+      "browserPrebufferMs": 150,
+      "bargeListenId": "1ab24061-2e91-4ba1-8350-fed163a6e6d5"
+    },
+    {
+      "round": 10,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 48.27916666648525,
+      "pauseMs": 562.4791666666715,
+      "lastSpeechToNewSampleMs": 1453.2833333325834,
+      "uploadToNewSampleMs": 945.7999999998137,
+      "hangoverAndUploadMs": 507.4833333327697,
+      "asrMs": 208,
+      "asrQueueMs": 48.8,
+      "classifyMs": 522.2751250000001,
+      "ttsFirstByteMs": 522.9639590000006,
+      "speculative": "hit",
+      "browserPrebufferMs": 150.09999999962747,
+      "bargeListenId": "2672c1dc-9a77-4db5-b2a7-700a65108a37"
+    }
+  ],
+  "interactions": [
+    {
+      "ts": "2026-10-08T06:28:07.794Z",
+      "sessionId": "sess-a868bfc8",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "2e3b520d-990b-40d9-9dd8-5f00eea5f6c0",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:28:07.885Z",
+      "sessionId": "sess-a868bfc8",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "2e3b520d-990b-40d9-9dd8-5f00eea5f6c0",
+      "phase": "short",
+      "remainingMs": 4910,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:28:10.230Z",
+      "sessionId": "sess-a868bfc8",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "2e3b520d-990b-40d9-9dd8-5f00eea5f6c0",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:28:11.736Z",
+      "sessionId": "sess-a868bfc8",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "44d3930f-43fb-4902-af0f-4041bcad4d33",
+      "turnId": "4a034210-0609-4b01-a63f-0e385599903e",
+      "attemptId": "2f401ae6-79a2-4adc-a3bd-cd1388119de9",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:12.248Z",
+      "sessionId": "sess-a868bfc8",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "44d3930f-43fb-4902-af0f-4041bcad4d33",
+      "turnId": "4a034210-0609-4b01-a63f-0e385599903e",
+      "attemptId": "2f401ae6-79a2-4adc-a3bd-cd1388119de9"
+    },
+    {
+      "ts": "2026-10-08T06:28:14.463Z",
+      "sessionId": "sess-a868bfc8",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "44d3930f-43fb-4902-af0f-4041bcad4d33",
+      "turnId": "4a034210-0609-4b01-a63f-0e385599903e",
+      "attemptId": "2f401ae6-79a2-4adc-a3bd-cd1388119de9",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:14.684Z",
+      "sessionId": "sess-a868bfc8",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "44d3930f-43fb-4902-af0f-4041bcad4d33",
+      "turnId": "4a034210-0609-4b01-a63f-0e385599903e",
+      "attemptId": "2f401ae6-79a2-4adc-a3bd-cd1388119de9",
+      "asrMs": 197.4,
+      "asrQueueMs": 17
+    },
+    {
+      "ts": "2026-10-08T06:28:14.684Z",
+      "sessionId": "sess-a868bfc8",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "44d3930f-43fb-4902-af0f-4041bcad4d33",
+      "turnId": "4a034210-0609-4b01-a63f-0e385599903e",
+      "attemptId": "2f401ae6-79a2-4adc-a3bd-cd1388119de9"
+    },
+    {
+      "ts": "2026-10-08T06:28:19.250Z",
+      "sessionId": "sess-9cce3900",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "2445b358-61d6-464b-aae7-af43d08fa9f7",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:28:19.314Z",
+      "sessionId": "sess-9cce3900",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "2445b358-61d6-464b-aae7-af43d08fa9f7",
+      "phase": "short",
+      "remainingMs": 4936,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:28:21.652Z",
+      "sessionId": "sess-9cce3900",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "2445b358-61d6-464b-aae7-af43d08fa9f7",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:28:23.177Z",
+      "sessionId": "sess-9cce3900",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "f542fc43-ffaa-40bf-8b6e-682349e30869",
+      "turnId": "36f33d85-4dd3-43d1-bda4-28f8f8b2ecbc",
+      "attemptId": "18fd1912-e32e-48af-99a6-e5a73c169760",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:23.694Z",
+      "sessionId": "sess-9cce3900",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "f542fc43-ffaa-40bf-8b6e-682349e30869",
+      "turnId": "36f33d85-4dd3-43d1-bda4-28f8f8b2ecbc",
+      "attemptId": "18fd1912-e32e-48af-99a6-e5a73c169760"
+    },
+    {
+      "ts": "2026-10-08T06:28:25.899Z",
+      "sessionId": "sess-9cce3900",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "f542fc43-ffaa-40bf-8b6e-682349e30869",
+      "turnId": "36f33d85-4dd3-43d1-bda4-28f8f8b2ecbc",
+      "attemptId": "18fd1912-e32e-48af-99a6-e5a73c169760",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:26.104Z",
+      "sessionId": "sess-9cce3900",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "f542fc43-ffaa-40bf-8b6e-682349e30869",
+      "turnId": "36f33d85-4dd3-43d1-bda4-28f8f8b2ecbc",
+      "attemptId": "18fd1912-e32e-48af-99a6-e5a73c169760",
+      "asrMs": 191.3,
+      "asrQueueMs": 7.2
+    },
+    {
+      "ts": "2026-10-08T06:28:26.104Z",
+      "sessionId": "sess-9cce3900",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "f542fc43-ffaa-40bf-8b6e-682349e30869",
+      "turnId": "36f33d85-4dd3-43d1-bda4-28f8f8b2ecbc",
+      "attemptId": "18fd1912-e32e-48af-99a6-e5a73c169760"
+    },
+    {
+      "ts": "2026-10-08T06:28:30.652Z",
+      "sessionId": "sess-9e0beead",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "e69b22ea-b188-4315-b859-16ce94feb56f",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:28:30.743Z",
+      "sessionId": "sess-9e0beead",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "e69b22ea-b188-4315-b859-16ce94feb56f",
+      "phase": "short",
+      "remainingMs": 4909,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:28:33.078Z",
+      "sessionId": "sess-9e0beead",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "e69b22ea-b188-4315-b859-16ce94feb56f",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:28:34.596Z",
+      "sessionId": "sess-9e0beead",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "5f19d62f-f172-439f-8e0b-ec62b5cf03ef",
+      "turnId": "f65c0638-042b-4a9a-bc93-b7427db577bf",
+      "attemptId": "04da0249-457d-4421-b3ce-bdc5a6979612",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:35.110Z",
+      "sessionId": "sess-9e0beead",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "5f19d62f-f172-439f-8e0b-ec62b5cf03ef",
+      "turnId": "f65c0638-042b-4a9a-bc93-b7427db577bf",
+      "attemptId": "04da0249-457d-4421-b3ce-bdc5a6979612"
+    },
+    {
+      "ts": "2026-10-08T06:28:37.320Z",
+      "sessionId": "sess-9e0beead",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "5f19d62f-f172-439f-8e0b-ec62b5cf03ef",
+      "turnId": "f65c0638-042b-4a9a-bc93-b7427db577bf",
+      "attemptId": "04da0249-457d-4421-b3ce-bdc5a6979612",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:37.545Z",
+      "sessionId": "sess-9e0beead",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "5f19d62f-f172-439f-8e0b-ec62b5cf03ef",
+      "turnId": "f65c0638-042b-4a9a-bc93-b7427db577bf",
+      "attemptId": "04da0249-457d-4421-b3ce-bdc5a6979612",
+      "asrMs": 195.6,
+      "asrQueueMs": 23
+    },
+    {
+      "ts": "2026-10-08T06:28:37.545Z",
+      "sessionId": "sess-9e0beead",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "5f19d62f-f172-439f-8e0b-ec62b5cf03ef",
+      "turnId": "f65c0638-042b-4a9a-bc93-b7427db577bf",
+      "attemptId": "04da0249-457d-4421-b3ce-bdc5a6979612"
+    },
+    {
+      "ts": "2026-10-08T06:28:42.127Z",
+      "sessionId": "sess-345a9e7c",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "7a119c8b-694c-4450-8352-61efa5eace15",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:28:42.226Z",
+      "sessionId": "sess-345a9e7c",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "7a119c8b-694c-4450-8352-61efa5eace15",
+      "phase": "short",
+      "remainingMs": 4901,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:28:44.560Z",
+      "sessionId": "sess-345a9e7c",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "7a119c8b-694c-4450-8352-61efa5eace15",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:28:46.047Z",
+      "sessionId": "sess-345a9e7c",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "3364485c-f806-4f7a-b1fb-0011e7f1411b",
+      "turnId": "73cc6320-2beb-42f8-b7f1-5790472d7239",
+      "attemptId": "447f50dd-0f7e-483f-9b08-b8909da32095",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:46.560Z",
+      "sessionId": "sess-345a9e7c",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "3364485c-f806-4f7a-b1fb-0011e7f1411b",
+      "turnId": "73cc6320-2beb-42f8-b7f1-5790472d7239",
+      "attemptId": "447f50dd-0f7e-483f-9b08-b8909da32095"
+    },
+    {
+      "ts": "2026-10-08T06:28:48.771Z",
+      "sessionId": "sess-345a9e7c",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "3364485c-f806-4f7a-b1fb-0011e7f1411b",
+      "turnId": "73cc6320-2beb-42f8-b7f1-5790472d7239",
+      "attemptId": "447f50dd-0f7e-483f-9b08-b8909da32095",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:49.014Z",
+      "sessionId": "sess-345a9e7c",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "3364485c-f806-4f7a-b1fb-0011e7f1411b",
+      "turnId": "73cc6320-2beb-42f8-b7f1-5790472d7239",
+      "attemptId": "447f50dd-0f7e-483f-9b08-b8909da32095",
+      "asrMs": 204.9,
+      "asrQueueMs": 32.3
+    },
+    {
+      "ts": "2026-10-08T06:28:49.014Z",
+      "sessionId": "sess-345a9e7c",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "3364485c-f806-4f7a-b1fb-0011e7f1411b",
+      "turnId": "73cc6320-2beb-42f8-b7f1-5790472d7239",
+      "attemptId": "447f50dd-0f7e-483f-9b08-b8909da32095"
+    },
+    {
+      "ts": "2026-10-08T06:28:53.558Z",
+      "sessionId": "sess-5926c8c3",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "cab952d9-c6ac-40cc-8ba1-48fb39bb9779",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:28:53.658Z",
+      "sessionId": "sess-5926c8c3",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "cab952d9-c6ac-40cc-8ba1-48fb39bb9779",
+      "phase": "short",
+      "remainingMs": 4900,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:28:55.993Z",
+      "sessionId": "sess-5926c8c3",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "cab952d9-c6ac-40cc-8ba1-48fb39bb9779",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:28:57.509Z",
+      "sessionId": "sess-5926c8c3",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "1c747437-cee6-434b-bf63-31690fe22600",
+      "turnId": "994defef-d2b4-4cc0-a892-55c29013e234",
+      "attemptId": "7ca4abd8-8b42-4dc7-a940-f7da3d9f485d",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:28:58.026Z",
+      "sessionId": "sess-5926c8c3",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "1c747437-cee6-434b-bf63-31690fe22600",
+      "turnId": "994defef-d2b4-4cc0-a892-55c29013e234",
+      "attemptId": "7ca4abd8-8b42-4dc7-a940-f7da3d9f485d"
+    },
+    {
+      "ts": "2026-10-08T06:29:00.232Z",
+      "sessionId": "sess-5926c8c3",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "1c747437-cee6-434b-bf63-31690fe22600",
+      "turnId": "994defef-d2b4-4cc0-a892-55c29013e234",
+      "attemptId": "7ca4abd8-8b42-4dc7-a940-f7da3d9f485d",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:00.478Z",
+      "sessionId": "sess-5926c8c3",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "1c747437-cee6-434b-bf63-31690fe22600",
+      "turnId": "994defef-d2b4-4cc0-a892-55c29013e234",
+      "attemptId": "7ca4abd8-8b42-4dc7-a940-f7da3d9f485d",
+      "asrMs": 209.1,
+      "asrQueueMs": 30.2
+    },
+    {
+      "ts": "2026-10-08T06:29:00.478Z",
+      "sessionId": "sess-5926c8c3",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "1c747437-cee6-434b-bf63-31690fe22600",
+      "turnId": "994defef-d2b4-4cc0-a892-55c29013e234",
+      "attemptId": "7ca4abd8-8b42-4dc7-a940-f7da3d9f485d"
+    },
+    {
+      "ts": "2026-10-08T06:29:05.008Z",
+      "sessionId": "sess-8ed954a9",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "536c7b2a-c9f4-4c36-a3c7-624d6fb6d6de",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:29:05.109Z",
+      "sessionId": "sess-8ed954a9",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "536c7b2a-c9f4-4c36-a3c7-624d6fb6d6de",
+      "phase": "short",
+      "remainingMs": 4899,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:29:07.444Z",
+      "sessionId": "sess-8ed954a9",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "536c7b2a-c9f4-4c36-a3c7-624d6fb6d6de",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:29:08.960Z",
+      "sessionId": "sess-8ed954a9",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "e0bb6689-a2e9-4650-a8de-c38e34e2d8ae",
+      "turnId": "b8100e09-aa34-428f-a3db-403d8628d8b7",
+      "attemptId": "fbeeff0d-563f-4b53-8744-58ee70493b85",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:09.477Z",
+      "sessionId": "sess-8ed954a9",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "e0bb6689-a2e9-4650-a8de-c38e34e2d8ae",
+      "turnId": "b8100e09-aa34-428f-a3db-403d8628d8b7",
+      "attemptId": "fbeeff0d-563f-4b53-8744-58ee70493b85"
+    },
+    {
+      "ts": "2026-10-08T06:29:11.683Z",
+      "sessionId": "sess-8ed954a9",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "e0bb6689-a2e9-4650-a8de-c38e34e2d8ae",
+      "turnId": "b8100e09-aa34-428f-a3db-403d8628d8b7",
+      "attemptId": "fbeeff0d-563f-4b53-8744-58ee70493b85",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:11.884Z",
+      "sessionId": "sess-8ed954a9",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "e0bb6689-a2e9-4650-a8de-c38e34e2d8ae",
+      "turnId": "b8100e09-aa34-428f-a3db-403d8628d8b7",
+      "attemptId": "fbeeff0d-563f-4b53-8744-58ee70493b85",
+      "asrMs": 193.2,
+      "asrQueueMs": 1.8
+    },
+    {
+      "ts": "2026-10-08T06:29:11.884Z",
+      "sessionId": "sess-8ed954a9",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "e0bb6689-a2e9-4650-a8de-c38e34e2d8ae",
+      "turnId": "b8100e09-aa34-428f-a3db-403d8628d8b7",
+      "attemptId": "fbeeff0d-563f-4b53-8744-58ee70493b85"
+    },
+    {
+      "ts": "2026-10-08T06:29:16.442Z",
+      "sessionId": "sess-9bb156c0",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "30c4b155-fbe2-4f52-8a34-7965ae96326a",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:29:16.541Z",
+      "sessionId": "sess-9bb156c0",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "30c4b155-fbe2-4f52-8a34-7965ae96326a",
+      "phase": "short",
+      "remainingMs": 4901,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:29:18.877Z",
+      "sessionId": "sess-9bb156c0",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "30c4b155-fbe2-4f52-8a34-7965ae96326a",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:29:20.347Z",
+      "sessionId": "sess-9bb156c0",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "a5a2b9e2-c8e7-43eb-865e-aa677f81fc6c",
+      "turnId": "0b4f4fdd-0f3c-49e0-b446-9d6014bb355c",
+      "attemptId": "563cf6d0-1a2e-4965-b959-789901bac5e9",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:20.860Z",
+      "sessionId": "sess-9bb156c0",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "a5a2b9e2-c8e7-43eb-865e-aa677f81fc6c",
+      "turnId": "0b4f4fdd-0f3c-49e0-b446-9d6014bb355c",
+      "attemptId": "563cf6d0-1a2e-4965-b959-789901bac5e9"
+    },
+    {
+      "ts": "2026-10-08T06:29:23.070Z",
+      "sessionId": "sess-9bb156c0",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "a5a2b9e2-c8e7-43eb-865e-aa677f81fc6c",
+      "turnId": "0b4f4fdd-0f3c-49e0-b446-9d6014bb355c",
+      "attemptId": "563cf6d0-1a2e-4965-b959-789901bac5e9",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:23.300Z",
+      "sessionId": "sess-9bb156c0",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "a5a2b9e2-c8e7-43eb-865e-aa677f81fc6c",
+      "turnId": "0b4f4fdd-0f3c-49e0-b446-9d6014bb355c",
+      "attemptId": "563cf6d0-1a2e-4965-b959-789901bac5e9",
+      "asrMs": 198.7,
+      "asrQueueMs": 24.3
+    },
+    {
+      "ts": "2026-10-08T06:29:23.300Z",
+      "sessionId": "sess-9bb156c0",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "a5a2b9e2-c8e7-43eb-865e-aa677f81fc6c",
+      "turnId": "0b4f4fdd-0f3c-49e0-b446-9d6014bb355c",
+      "attemptId": "563cf6d0-1a2e-4965-b959-789901bac5e9"
+    },
+    {
+      "ts": "2026-10-08T06:29:27.858Z",
+      "sessionId": "sess-1e71e742",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "87ddda1c-c83e-4734-b32d-600d7987faba",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:29:27.958Z",
+      "sessionId": "sess-1e71e742",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "87ddda1c-c83e-4734-b32d-600d7987faba",
+      "phase": "short",
+      "remainingMs": 4900,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:29:30.294Z",
+      "sessionId": "sess-1e71e742",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "87ddda1c-c83e-4734-b32d-600d7987faba",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:29:31.797Z",
+      "sessionId": "sess-1e71e742",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "2aadc41f-5bbd-47c1-8694-3a965607ad6f",
+      "turnId": "699e3fba-8d4d-4922-8d12-8c3b3a8e9ce3",
+      "attemptId": "1dd4311d-7498-4a2c-9944-591a59e8d72c",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:32.310Z",
+      "sessionId": "sess-1e71e742",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "2aadc41f-5bbd-47c1-8694-3a965607ad6f",
+      "turnId": "699e3fba-8d4d-4922-8d12-8c3b3a8e9ce3",
+      "attemptId": "1dd4311d-7498-4a2c-9944-591a59e8d72c"
+    },
+    {
+      "ts": "2026-10-08T06:29:34.521Z",
+      "sessionId": "sess-1e71e742",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "2aadc41f-5bbd-47c1-8694-3a965607ad6f",
+      "turnId": "699e3fba-8d4d-4922-8d12-8c3b3a8e9ce3",
+      "attemptId": "1dd4311d-7498-4a2c-9944-591a59e8d72c",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:34.740Z",
+      "sessionId": "sess-1e71e742",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "2aadc41f-5bbd-47c1-8694-3a965607ad6f",
+      "turnId": "699e3fba-8d4d-4922-8d12-8c3b3a8e9ce3",
+      "attemptId": "1dd4311d-7498-4a2c-9944-591a59e8d72c",
+      "asrMs": 188.4,
+      "asrQueueMs": 25
+    },
+    {
+      "ts": "2026-10-08T06:29:34.740Z",
+      "sessionId": "sess-1e71e742",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "2aadc41f-5bbd-47c1-8694-3a965607ad6f",
+      "turnId": "699e3fba-8d4d-4922-8d12-8c3b3a8e9ce3",
+      "attemptId": "1dd4311d-7498-4a2c-9944-591a59e8d72c"
+    },
+    {
+      "ts": "2026-10-08T06:29:39.279Z",
+      "sessionId": "sess-5409f599",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "faf45548-31a2-49c2-81d2-54c88f12dcad",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:29:39.375Z",
+      "sessionId": "sess-5409f599",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "faf45548-31a2-49c2-81d2-54c88f12dcad",
+      "phase": "short",
+      "remainingMs": 4904,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:29:41.710Z",
+      "sessionId": "sess-5409f599",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "faf45548-31a2-49c2-81d2-54c88f12dcad",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:29:43.233Z",
+      "sessionId": "sess-5409f599",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "1ab24061-2e91-4ba1-8350-fed163a6e6d5",
+      "turnId": "8b7b785b-6893-479f-9364-84482bde12d8",
+      "attemptId": "133f3c34-eabc-4b53-89e2-02272ef0be69",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:43.745Z",
+      "sessionId": "sess-5409f599",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "1ab24061-2e91-4ba1-8350-fed163a6e6d5",
+      "turnId": "8b7b785b-6893-479f-9364-84482bde12d8",
+      "attemptId": "133f3c34-eabc-4b53-89e2-02272ef0be69"
+    },
+    {
+      "ts": "2026-10-08T06:29:45.963Z",
+      "sessionId": "sess-5409f599",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "1ab24061-2e91-4ba1-8350-fed163a6e6d5",
+      "turnId": "8b7b785b-6893-479f-9364-84482bde12d8",
+      "attemptId": "133f3c34-eabc-4b53-89e2-02272ef0be69",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:46.176Z",
+      "sessionId": "sess-5409f599",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "1ab24061-2e91-4ba1-8350-fed163a6e6d5",
+      "turnId": "8b7b785b-6893-479f-9364-84482bde12d8",
+      "attemptId": "133f3c34-eabc-4b53-89e2-02272ef0be69",
+      "asrMs": 189.8,
+      "asrQueueMs": 18.1
+    },
+    {
+      "ts": "2026-10-08T06:29:46.177Z",
+      "sessionId": "sess-5409f599",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "1ab24061-2e91-4ba1-8350-fed163a6e6d5",
+      "turnId": "8b7b785b-6893-479f-9364-84482bde12d8",
+      "attemptId": "133f3c34-eabc-4b53-89e2-02272ef0be69"
+    },
+    {
+      "ts": "2026-10-08T06:29:50.758Z",
+      "sessionId": "sess-e49923fe",
+      "turn": 0,
+      "event": "listen.open",
+      "listenId": "d16b86d3-7445-4bfa-9d70-f79f4cff1143",
+      "phase": "short",
+      "remainingMs": 5000,
+      "paused": false
+    },
+    {
+      "ts": "2026-10-08T06:29:50.858Z",
+      "sessionId": "sess-e49923fe",
+      "turn": 0,
+      "event": "listen.progress",
+      "listenId": "d16b86d3-7445-4bfa-9d70-f79f4cff1143",
+      "phase": "short",
+      "remainingMs": 4900,
+      "paused": true
+    },
+    {
+      "ts": "2026-10-08T06:29:53.193Z",
+      "sessionId": "sess-e49923fe",
+      "turn": 0,
+      "event": "listen.complete",
+      "listenId": "d16b86d3-7445-4bfa-9d70-f79f4cff1143",
+      "reason": "utterance"
+    },
+    {
+      "ts": "2026-10-08T06:29:54.695Z",
+      "sessionId": "sess-e49923fe",
+      "turn": 1,
+      "event": "barge.duck",
+      "listenId": "2672c1dc-9a77-4db5-b2a7-700a65108a37",
+      "turnId": "87816890-9960-4cb0-9add-0c904a88f8b2",
+      "attemptId": "a2c727d3-c634-4d62-aaf4-5c63b89a4c73",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:55.209Z",
+      "sessionId": "sess-e49923fe",
+      "turn": 1,
+      "event": "barge.pause",
+      "listenId": "2672c1dc-9a77-4db5-b2a7-700a65108a37",
+      "turnId": "87816890-9960-4cb0-9add-0c904a88f8b2",
+      "attemptId": "a2c727d3-c634-4d62-aaf4-5c63b89a4c73"
+    },
+    {
+      "ts": "2026-10-08T06:29:57.418Z",
+      "sessionId": "sess-e49923fe",
+      "turn": 1,
+      "event": "barge.speech_end",
+      "listenId": "2672c1dc-9a77-4db5-b2a7-700a65108a37",
+      "turnId": "87816890-9960-4cb0-9add-0c904a88f8b2",
+      "attemptId": "a2c727d3-c634-4d62-aaf4-5c63b89a4c73",
+      "sentenceIndex": 0
+    },
+    {
+      "ts": "2026-10-08T06:29:57.681Z",
+      "sessionId": "sess-e49923fe",
+      "turn": 1,
+      "event": "barge.asr",
+      "listenId": "2672c1dc-9a77-4db5-b2a7-700a65108a37",
+      "turnId": "87816890-9960-4cb0-9add-0c904a88f8b2",
+      "attemptId": "a2c727d3-c634-4d62-aaf4-5c63b89a4c73",
+      "asrMs": 208,
+      "asrQueueMs": 48.8
+    },
+    {
+      "ts": "2026-10-08T06:29:57.681Z",
+      "sessionId": "sess-e49923fe",
+      "turn": 1,
+      "event": "barge.accepted",
+      "listenId": "2672c1dc-9a77-4db5-b2a7-700a65108a37",
+      "turnId": "87816890-9960-4cb0-9add-0c904a88f8b2",
+      "attemptId": "a2c727d3-c634-4d62-aaf4-5c63b89a4c73"
+    }
+  ]
+}

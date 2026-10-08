@@ -16,7 +16,7 @@ export type BufferedSentence = {
 };
 export type AudioTurn = {
   id: string; descriptor: SpeechDescriptor; controller: AbortController;
-  sentences: BufferedSentence[]; bytes: number; cancelled: boolean; created: number;
+  spokenSentences: SpokenSentence[]; sentences: BufferedSentence[]; bytes: number; cancelled: boolean; created: number;
   metrics: TtsMetrics; completed: Promise<void>;
 };
 
@@ -153,7 +153,7 @@ export class AudioStore {
     const id = randomUUID();
     const turn: AudioTurn = {
       id, descriptor: { turnId: id, sentences: sentences.map(({ index, displayStart, displayEnd }) => ({ index, displayStart, displayEnd })) },
-      controller: new AbortController(), sentences: sentences.map(() => ({ chunks: [], state: "pending", bytes: 0, waiters: new Set() })),
+      controller: new AbortController(), spokenSentences: sentences, sentences: sentences.map(() => ({ chunks: [], state: "pending", bytes: 0, waiters: new Set() })),
       bytes: 0, cancelled: false, created: Date.now(), metrics: { ttsRegenerated: 0, ttsTruncated: 0, ttsFail: 0 }, completed: Promise.resolve(),
     };
     this.#turns.set(id, turn);

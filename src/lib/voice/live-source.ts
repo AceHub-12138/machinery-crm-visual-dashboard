@@ -127,6 +127,9 @@ export function wireToMachineEvents(
         ? { events: [{ type: "FORCE_CLOSE" }], ctx }
         : keep;
 
+    case "input.open":
+    case "input.progress":
+    case "barge.result":
     case "input.listen":
     case "speech.fixed": return keep;
     /* 不驱动状态机的事件 */

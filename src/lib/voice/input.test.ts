@@ -80,7 +80,7 @@ it('listen ready waits for initialized microphone and running context; track is 
     mic.setConnected(true);mic.setSession('sess-aaaaaaaa');mic.setListen({sessionId:'sess-aaaaaaaa',listenId:'a'.repeat(36)});expect(request).not.toHaveBeenCalled();
     Object.assign(mic,{mode:'off',stream:{getAudioTracks:()=>[track]},context,worklet:{port:{postMessage:()=>{}}}});
     mic.setConnected(true);expect(request).not.toHaveBeenCalled();context.state='running';mic.setConnected(true);mic.setConnected(true);
-    expect(request).toHaveBeenCalledTimes(1);expect(String(request.mock.calls[0][0])).toContain('/voice/listen?action=ready');
+    await Promise.resolve(); expect(request).toHaveBeenCalledTimes(1);expect(String(request.mock.calls[0][0])).toContain('/voice/listen?action=ready');
     await Promise.resolve();
   }finally{request.mockRestore();}
 });
@@ -93,7 +93,7 @@ it('a passive screen never opens or reports a microphone lease from another scre
   mic.setConnected(true);mic.setScreen('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb');mic.setSession('sess-aaaaaaaa',false);mic.setListen({sessionId:'sess-aaaaaaaa',listenId:'a'.repeat(36)});
   expect(track.enabled).toBe(false);expect(request).not.toHaveBeenCalled();
   mic.setSession('sess-aaaaaaaa',true);mic.setListen({sessionId:'sess-aaaaaaaa',listenId:'c'.repeat(36)});
-  expect(track.enabled).toBe(true);expect(request).toHaveBeenCalledOnce();
+  expect(track.enabled).toBe(true); await Promise.resolve(); expect(request).toHaveBeenCalledOnce();
   expect(request.mock.calls[0][1]?.headers).toMatchObject({'x-voice-screen':'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'});
   await Promise.resolve();
  }finally{request.mockRestore();}

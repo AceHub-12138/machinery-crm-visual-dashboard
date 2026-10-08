@@ -552,3 +552,5 @@
   color: #fcd34d;
   font-size: 16px;
 }
+
+.overlay-root[data-barge-paused="true"] .overlay-card { opacity: .45; transition: opacity 80ms linear; }

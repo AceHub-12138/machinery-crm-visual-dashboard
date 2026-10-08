@@ -56,7 +56,7 @@ describe("protocol — fail-closed 解析(plan §10 风格)", () => {
   });
 
   it("类型清单与联合完全同步(satisfies 锁定)", () => {
-    expect(WIRE_EVENT_TYPES).toHaveLength(12);
+    expect(WIRE_EVENT_TYPES).toHaveLength(15);
   });
 });
 
@@ -186,4 +186,16 @@ it('cached wake metadata is valid without being an answer card, rejects missing 
   const event={type:'speech.fixed',at:1,text:'我在,先生。请讲。',speech:{turnId:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',fixed:'wake',style:'cheerful',sentences:[{index:0,displayStart:0,displayEnd:9}]}};
   expect(parseWireEvent(JSON.stringify(event))).toMatchObject(event);
   expect(parseWireEvent(JSON.stringify({...event,speech:{...event.speech,sentences:[]}}))).toBeNull();
+});
+
+it("listen and barge diagnostics reject invalid budgets, modes, attempts and contradictory decisions", () => {
+  const base={at:1,sessionId:'sess-aaaaaaaa',listenId:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'};
+  const read=(event:unknown)=>parseWireEvent(JSON.stringify(event));
+  expect(read({...base,type:'input.listen',mode:'barge'})).toBeNull();
+  expect(read({...base,type:'input.listen',mode:'barge',turnId:base.listenId})).not.toBeNull();
+  expect(read({...base,type:'input.listen',mode:'off'})).not.toBeNull();
+  for(const remainingMs of [-1,5001,Infinity])expect(read({...base,type:'input.open',remainingMs,timeoutMs:5000,paused:false})).toBeNull();
+  expect(read({...base,type:'input.progress',remainingMs:1234,timeoutMs:8000,paused:true})).not.toBeNull();
+  expect(read({...base,type:'barge.result',attemptId:base.listenId,accepted:true,reason:'echo'})).toBeNull();
+  expect(read({...base,type:'barge.result',attemptId:base.listenId,accepted:false,reason:'echo'})).not.toBeNull();
 });

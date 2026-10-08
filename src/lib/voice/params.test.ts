@@ -230,12 +230,12 @@ describe("coreVisual — §6 六状态行为映射", () => {
     expect(at("answering", 0, 100, 1, 0).coreRadius).toBeCloseTo(1.04, 5);
   });
 
-  it("followup:能量环 3s 线性递减,3s 整归零", () => {
+  it("followup:能量环 8s 线性递减,8s 整归零", () => {
     const start = at("followup", 5000, 5000);
     expect(start.countdown).toBe(1);
-    expect(at("followup", 5000, 5000 + VOICE_TIMING.followupMs / 2).countdown).toBeCloseTo(0.5, 5);
-    expect(at("followup", 5000, 5000 + VOICE_TIMING.followupMs).countdown).toBe(0);
-    expect(at("followup", 5000, 9000).countdown).toBe(0); // 不为负
+    expect(at("followup", 5000, 5000 + VOICE_TIMING.longListenMs / 2).countdown).toBeCloseTo(0.5, 5);
+    expect(at("followup", 5000, 5000 + VOICE_TIMING.longListenMs).countdown).toBe(0);
+    expect(at("followup", 5000, 15000).countdown).toBe(0); // 不为负
     expect(start.ringAlpha).toBeGreaterThan(0);
   });
 

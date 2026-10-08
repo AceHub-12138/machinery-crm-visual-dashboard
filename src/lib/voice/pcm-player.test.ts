@@ -17,7 +17,9 @@ function response(bytes = pcm()) { return new Response(bytes, { headers }); }
 class ClockContext {
   currentTime = 0; state = "running"; destination = {}; fftSize = 512;
   nodes: Array<{ buffer: { duration: number; data: Float32Array } | null; start: ReturnType<typeof vi.fn>; stop: ReturnType<typeof vi.fn>; connect: ReturnType<typeof vi.fn>; disconnect: ReturnType<typeof vi.fn>; onended: (() => void) | null }> = [];
-  resume = vi.fn(async () => {}); close = vi.fn(async () => { this.state = "closed"; });
+  resume = vi.fn(async () => {}); suspend = vi.fn(async () => { this.state = "suspended"; });
+  gain = { setTargetAtTime: vi.fn(), setValueAtTime: vi.fn() };
+  createGain = vi.fn(() => ({ gain: this.gain, connect: vi.fn(), disconnect: vi.fn() })); close = vi.fn(async () => { this.state = "closed"; });
   createAnalyser = vi.fn(() => ({ fftSize: 512, connect: vi.fn(), disconnect: vi.fn(), getFloatTimeDomainData: (data: Float32Array) => data.fill(0.125) }));
   createBuffer(_channels: number, length: number, rate: number) { const data = new Float32Array(length); return { duration: length / rate, data, getChannelData: () => data }; }
   createBufferSource() {
@@ -150,4 +152,17 @@ it.each(['stop','timeout','drained','error','supersede'])('player lifecycle rele
  else s.player.stop();
  expect(idle).toHaveBeenCalledTimes(reason==='supersede'?2:1);await vi.advanceTimersByTimeAsync(350);mic.setConnected(true);
  expect((mic as unknown as {mode:string}).mode).toBe('kws');await mic.close();
+});
+
+it("duck and native pause keep sources, sentence boundaries, downloads and the remaining deadline", async () => {
+  const s = setup(vi.fn(async () => response(pcm(240000)))); s.play(one, 2000); await flush();
+  await vi.advanceTimersByTimeAsync(400);
+  const sources = [...s.ctx.nodes]; s.ctx.currentTime = .2;
+  s.player.duck(); expect(s.ctx.gain.setTargetAtTime).toHaveBeenCalledWith(.2, .2, .015);
+  await s.player.pausePlayback(); await vi.advanceTimersByTimeAsync(7000);
+  expect(s.error).not.toHaveBeenCalled(); expect(sources.every(n => n.stop.mock.calls.length === 0)).toBe(true);
+  s.ctx.resume.mockImplementation(async () => { s.ctx.state = "running"; });
+  await s.player.continuePlayback(); expect(s.ctx.gain.setTargetAtTime).toHaveBeenLastCalledWith(1, .2, .015);
+  await vi.advanceTimersByTimeAsync(1599); expect(s.error).not.toHaveBeenCalled();
+  await vi.advanceTimersByTimeAsync(1); expect(s.error).toHaveBeenCalledExactlyOnceWith("timeout");
 });

@@ -44,12 +44,16 @@ export function createInputHttpHandler(options: {
       const lease = () => {
         const sessionId = req.headers["x-voice-session"], listenId = req.headers["x-voice-listen"];
         if (typeof sessionId !== "string" || !/^sess-[a-f0-9-]{1,40}$/.test(sessionId) || typeof listenId !== "string" || !/^[a-f0-9-]{36}$/.test(listenId)) throw new InputError(400, "listen_identity_required");
-        return { sessionId, listenId, screenId };
+        const attemptId = query.get("attemptId") ?? undefined;
+        const rawIndex = query.get("sentenceIndex");
+        if (attemptId && !/^[a-f0-9-]{36}$/.test(attemptId)) throw new InputError(400, "invalid_attempt");
+        if (rawIndex !== null && (!/^\d{1,2}$/.test(rawIndex))) throw new InputError(400, "invalid_sentence");
+        return { sessionId, listenId, screenId, ...(attemptId ? { attemptId } : {}), ...(rawIndex !== null ? { sentenceIndex: Number(rawIndex) } : {}) };
       };
       if (path === "/voice/wake") { if (options.wake(query.get("followup") === "1", screenId) === false) throw new InputError(409, "wake_not_accepted"); }
       else if (path === "/voice/listen") {
         const action = query.get("action");
-        if (!["ready", "speech_start", "misfire"].includes(action ?? "")) throw new InputError(400, "invalid_listen_action");
+        if (!["ready", "speech_start", "misfire", "duck", "pause"].includes(action ?? "")) throw new InputError(400, "invalid_listen_action");
         if (!options.activity) throw new InputError(503, "input_unavailable");
         options.activity(lease(), action as ListenAction);
       }

@@ -2,6 +2,7 @@
  * Every source shares one AudioContext timeline and one analyser. Downloads are
  * bounded to the current sentence + one prefetched sentence, and 8 MiB per turn.
  */
+import { PausableDeadline } from "./deadline.ts";
 import type { SkippedPlaybackSentence, VoiceWireEvent } from "./protocol.ts";
 
 export type Speech = NonNullable<Extract<VoiceWireEvent, { type: "answer.delta" }>["speech"]>;
@@ -25,6 +26,11 @@ export function audioBaseUrl(hubUrl: string): string {
 
 export class PcmPlayer {
   private context: AudioContext | null = null;
+  private gain: GainNode | null = null;
+  private deadline: PausableDeadline | null = null;
+  private interrupted = false;
+  private sentenceIndex = 0;
+  get currentSentence(): number { return this.sentenceIndex; }
   private analyser: AnalyserNode | null = null;
   private samples: Float32Array<ArrayBuffer> | null = null;
   private controller: AbortController | null = null;
@@ -52,13 +58,26 @@ export class PcmPlayer {
       this.context = (this.options.createContext ?? (() => new AudioContext()))();
       this.analyser = this.context.createAnalyser();
       this.analyser.fftSize = 512;
-      this.analyser.connect(this.context.destination);
+      this.gain = this.context.createGain();
+      this.analyser.connect(this.gain); this.gain.connect(this.context.destination);
       this.samples = new Float32Array(this.analyser.fftSize);
     }
     return this.context;
   }
   /** Called at wake or a real keyboard/pointer gesture, before speech arrives. */
-  async resume(): Promise<void> { await this.ensureContext().resume(); }
+  async resume(): Promise<void> { if (!this.interrupted) await this.ensureContext().resume(); }
+  duck(): void {
+    if (!this.active || this.interrupted) return;
+    this.interrupted = true; this.deadline?.pause();
+    this.gain?.gain.setTargetAtTime(.2, this.context!.currentTime, .015);
+  }
+  async pausePlayback(): Promise<void> { if (this.active && this.interrupted) await this.context?.suspend(); }
+  async continuePlayback(): Promise<void> {
+    if (!this.active || !this.interrupted) return;
+    this.interrupted = false;
+    this.gain?.gain.setTargetAtTime(1, this.context!.currentTime, .015);
+    this.deadline?.resume(); await this.context?.resume();
+  }
 
   get outputLatencyMs(): number { return Math.max(0, (this.context?.outputLatency ?? 0) * 1000); }
   async suspend(): Promise<void> { if (!this.active) await this.context?.suspend(); }
@@ -67,15 +86,15 @@ export class PcmPlayer {
     this.stop();
     const controller = new AbortController();
     this.controller = controller;
-    this.events = events; this.active = true; this.first = true;
+    this.events = events; this.active = true; this.first = true; this.sentenceIndex = 0;
     this.options.onActive?.();
     this.receivedBytes = 0; this.tail = 0; this.streamsEnded = false;
     this.completionError = null;
-    const deadline = setTimeout(() => this.fail("timeout", controller), timeoutMs);
+    this.deadline = new PausableDeadline(timeoutMs, () => this.fail("timeout", controller));
     const resumeDeadline = setTimeout(() => {
-      if (this.context?.state !== "running") this.fail("autoplay_blocked", controller);
+      if (!this.interrupted && this.context?.state !== "running") this.fail("autoplay_blocked", controller);
     }, 1500);
-    controller.signal.addEventListener("abort", () => { clearTimeout(deadline); clearTimeout(resumeDeadline); }, { once: true });
+    controller.signal.addEventListener("abort", () => { this.deadline?.cancel(); clearTimeout(resumeDeadline); }, { once: true });
     void this.run(speech, baseUrl, token, controller).catch((err: unknown) => {
       if (!controller.signal.aborted) this.fail(err instanceof PlaybackError ? err.reason : "audio_interrupted", controller);
     });
@@ -207,6 +226,7 @@ export class PcmPlayer {
     const now = this.context.currentTime;
     while (this.boundaries[0] && now >= this.boundaries[0].time) {
       const b = this.boundaries.shift()!;
+      this.sentenceIndex = b.index;
       this.events.onSentenceStart?.(b.index, b.time);
     }
     if (this.streamsEnded && now >= this.tail) {
@@ -228,6 +248,8 @@ export class PcmPlayer {
   }
   stop(): void {
     const wasActive = this.active;
+    this.interrupted = false; this.deadline?.cancel(); this.deadline = null;
+    if (this.gain && this.context) this.gain.gain.setValueAtTime(1, this.context.currentTime);
     this.active = false; this.controller?.abort(); this.controller = null;
     if (this.timer !== null) clearInterval(this.timer);
     this.timer = null; this.boundaries = []; this.lastScheduledIndex = -1;
@@ -236,7 +258,7 @@ export class PcmPlayer {
     if (wasActive) this.options.onIdle?.(this.outputLatencyMs);
   }
   async close(): Promise<void> {
-    this.stop(); this.analyser?.disconnect();
+    this.stop(); this.analyser?.disconnect(); this.gain?.disconnect();
     await this.context?.close(); this.context = null; this.analyser = null; this.samples = null;
   }
 }

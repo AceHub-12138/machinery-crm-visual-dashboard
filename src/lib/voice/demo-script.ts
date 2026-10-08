@@ -38,6 +38,8 @@ export const DEMO_TIMING = {
   thinkTimeoutMs: 3200,
   /** 播报完到追问的持卡时长 */
   answerHoldMs: 4200,
+  followupPromptMs: 2400,
+  idleExitMs: 1800,
   /** 降级话术播报时长 */
   errorHoldMs: 3200,
   /** 退场渐隐接回基线(≥方案 500ms 过渡) */

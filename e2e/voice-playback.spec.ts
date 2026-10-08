@@ -129,7 +129,7 @@ test("real PCM drives analyser and sentence highlight; followup waits for EOF an
   expect(reports.filter(r => r.type === "playback.drained")).toHaveLength(1);
   const m = await metrics(page); expect(m.scheduled[0].when - m.scheduled[0].at).toBeCloseTo(0.15, 2);
   for (let i = 1; i < m.scheduled.length; i++) expect(m.scheduled[i].when).toBeCloseTo(m.scheduled[i - 1].when + m.scheduled[i - 1].duration, 5);
-  await expect(page.locator(".overlay-root")).toHaveCount(0, { timeout: 6000 });
+  await expect(page.locator(".overlay-root")).toHaveCount(0, { timeout: 16000 });
   expect(await page.locator("#screen-stage").boundingBox()).toEqual({ x: 0, y: 0, width: 1920, height: 1080 });
 });
 
@@ -209,7 +209,7 @@ test("one failed sentence preserves earlier audio and records skipped sentences 
   expect(reports.some(r => r.type === "playback.failed")).toBe(false);
   await expect(page.getByText("部分语音播报中断，请查看卡片。", { exact: true })).toBeVisible();
   await expect.poll(() => reports.some(r => r.type === "playback.drained")).toBe(true);
-  expect(orch.state.name).toBe("answering");
+  expect(orch.state.name).toBe("followup");
   await expect.poll(async () => (await traces(sessionId)).map(r => ({ outcome: r.playbackOutcome, skipped: r.playbackSkipped }))).toEqual([{ outcome: "drained", skipped: [{ sentenceIndex: 1, reason: "audio_unavailable" }] }]);
   const total = (await metrics(page)).scheduled.reduce((sum, source) => sum + source.duration, 0);
   expect(total).toBeCloseTo((store.lookup(id)!.sentences.length - 1) * normalSeconds, 5);

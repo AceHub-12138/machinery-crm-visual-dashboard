@@ -58,7 +58,7 @@ export type OrchestratorConfig = {
   ttsCacheDir: string;
   styleOverrides: Record<string, string>;
   listenTimeoutMs: number;
-  inputConfig: { hangoverMs: number; micReopenDelayMs: number; kwsThreshold: number; kwsScore: number; kwsEnergy: number; wakePhrase: string };
+  inputConfig: { bargeThreshold: number; bargeMinSpeechMs: number; bargeConfirmMs: number; preSpeechPadMs: number; hangoverMs: number; micReopenDelayMs: number; kwsThreshold: number; kwsScore: number; kwsEnergy: number; wakePhrase: string };
 };
 
 export function loadEnvFileExplicit(dir: string, names = [".env.local", ".env"]): void {
@@ -110,7 +110,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): OrchestratorCo
     ttsStyle: env.VOICE_TTS_STYLE ?? "default",
     listenTimeoutMs: Math.min(60000, int(env.VOICE_LISTEN_TIMEOUT_MS, 5000)),
     styleOverrides: parseStyles(env.VOICE_SPEECH_STYLE_MAP),
-    inputConfig: { hangoverMs: Math.min(1500, int(env.VOICE_VAD_HANGOVER_MS, 500)), micReopenDelayMs: int(env.VOICE_MIC_REOPEN_DELAY_MS, 300), kwsThreshold: Math.min(1, int(env.VOICE_KWS_THRESHOLD, .25)), kwsScore: int(env.VOICE_KWS_SCORE, 1), kwsEnergy: int(env.VOICE_KWS_ENERGY, .01), wakePhrase: env.VOICE_WAKE_PHRASE ?? "你好，小川" },
+    inputConfig: { bargeThreshold: Math.min(1, int(env.VOICE_BARGE_THRESHOLD, .8)), bargeMinSpeechMs: int(env.VOICE_BARGE_MIN_SPEECH_MS, 300), bargeConfirmMs: int(env.VOICE_BARGE_CONFIRM_MS, 500), preSpeechPadMs: int(env.VOICE_VAD_PRE_PAD_MS, 500), hangoverMs: Math.min(1500, int(env.VOICE_VAD_HANGOVER_MS, 500)), micReopenDelayMs: int(env.VOICE_MIC_REOPEN_DELAY_MS, 300), kwsThreshold: Math.min(1, int(env.VOICE_KWS_THRESHOLD, .25)), kwsScore: int(env.VOICE_KWS_SCORE, 1), kwsEnergy: int(env.VOICE_KWS_ENERGY, .01), wakePhrase: env.VOICE_WAKE_PHRASE ?? "你好，小川" },
     ttsCacheDir: env.VOICE_TTS_CACHE_DIR ?? join(serviceRoot(), "logs", "tts-cache"),
   };
 }

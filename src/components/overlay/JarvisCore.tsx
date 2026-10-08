@@ -303,6 +303,11 @@ export const JarvisCore = memo(function JarvisCore({
         launchElapsedMs: frame.launchAt == null ? null : now - frame.launchAt,
       });
 
+      if (frame.listenClock !== undefined) {
+        const clock = frame.listenClock;
+        target.countdown = clock ? clamp01((clock.remainingMs - (clock.paused ? 0 : now - clock.receivedAt)) / clock.timeoutMs) : null;
+      }
+
       /* A1:标量滑行(τ 按感知调);发射时序与倒计时数值保持精确不平滑 */
       const dtMs = dt * 1000;
       smooth.coreRadius = approach(smooth.coreRadius, target.coreRadius, dtMs, 220);

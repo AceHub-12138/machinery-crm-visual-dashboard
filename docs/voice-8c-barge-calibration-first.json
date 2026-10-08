@@ -1,0 +1,177 @@
+{
+  "scope": "injected prerecorded speech → actual AudioWorklet/Silero → real ASR/LLM/TTS → Web Audio; input/output muted, not human or exhibit pickup",
+  "model": "qwen/qwen3.6-35b-a3b",
+  "errors": [
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING"
+  ],
+  "summary": {
+    "duckMs": {
+      "samples": 10,
+      "p50": 60.3,
+      "p95": 67.9
+    },
+    "pauseMs": {
+      "samples": 10,
+      "p50": 574.5,
+      "p95": 580.8
+    },
+    "lastSpeechToNewSampleMs": {
+      "samples": 10,
+      "p50": 1425.9,
+      "p95": 1463.1
+    },
+    "uploadToNewSampleMs": {
+      "samples": 10,
+      "p50": 910.8,
+      "p95": 941.4
+    },
+    "asrQueueMs": {
+      "samples": 10,
+      "p50": 17.6,
+      "p95": 45.8
+    },
+    "asrMs": {
+      "samples": 10,
+      "p50": 195.2,
+      "p95": 208.3
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 65.07916666675919,
+      "pauseMs": 579.0791666667592,
+      "lastSpeechToNewSampleMs": 1472.983333333239,
+      "uploadToNewSampleMs": 949.5,
+      "hangoverAndUploadMs": 523.483333333239,
+      "asrMs": 212.5,
+      "asrQueueMs": 0.1,
+      "bargeListenId": "611cc3d8-032e-4b50-86d7-66b3c1ae2eb0"
+    },
+    {
+      "round": 2,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 70.27916666648161,
+      "pauseMs": 582.1791666668541,
+      "lastSpeechToNewSampleMs": 1407.1833333334253,
+      "uploadToNewSampleMs": 906.1000000000931,
+      "hangoverAndUploadMs": 501.0833333333321,
+      "asrMs": 194.4,
+      "asrQueueMs": 24.9,
+      "bargeListenId": "c8712bd2-f834-41df-985a-1f8be69431a2"
+    },
+    {
+      "round": 3,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 50.77916666694364,
+      "pauseMs": 566.6791666668505,
+      "lastSpeechToNewSampleMs": 1419.9833333337083,
+      "uploadToNewSampleMs": 909,
+      "hangoverAndUploadMs": 510.9833333337083,
+      "asrMs": 202.8,
+      "asrQueueMs": 14,
+      "bargeListenId": "2aa194a8-dd05-4396-89da-5ec7330ac535"
+    },
+    {
+      "round": 4,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 59.97916666666424,
+      "pauseMs": 573.6791666663848,
+      "lastSpeechToNewSampleMs": 1451.0833333333358,
+      "uploadToNewSampleMs": 931.5,
+      "hangoverAndUploadMs": 519.5833333333358,
+      "asrMs": 192.7,
+      "asrQueueMs": 51.2,
+      "bargeListenId": "93fda208-70bc-4acb-9ce2-d9c1ddc9a068"
+    },
+    {
+      "round": 5,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 53.079166666757374,
+      "pauseMs": 565.9791666666642,
+      "lastSpeechToNewSampleMs": 1424.183333333429,
+      "uploadToNewSampleMs": 911.1000000000931,
+      "hangoverAndUploadMs": 513.0833333333358,
+      "asrMs": 195.9,
+      "asrQueueMs": 19.6,
+      "bargeListenId": "417f10a4-349a-4dd5-863f-4df6d4030551"
+    },
+    {
+      "round": 6,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 53.67916666639212,
+      "pauseMs": 565.7791666664853,
+      "lastSpeechToNewSampleMs": 1423.5833333333285,
+      "uploadToNewSampleMs": 910.3999999999069,
+      "hangoverAndUploadMs": 513.1833333334216,
+      "asrMs": 193.2,
+      "asrQueueMs": 19.4,
+      "bargeListenId": "d83063cb-cecc-4b3b-9233-211042db3cfe"
+    },
+    {
+      "round": 7,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 58.27916666648525,
+      "pauseMs": 574.2791666664853,
+      "lastSpeechToNewSampleMs": 1411.8833333331422,
+      "uploadToNewSampleMs": 894.2999999998137,
+      "hangoverAndUploadMs": 517.5833333333285,
+      "asrMs": 194.4,
+      "asrQueueMs": 7.6,
+      "bargeListenId": "b0bc2890-2bc9-4a8f-97c0-b08a35c45706"
+    },
+    {
+      "round": 8,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 60.67916666685778,
+      "pauseMs": 574.7791666669509,
+      "lastSpeechToNewSampleMs": 1427.6833333334216,
+      "uploadToNewSampleMs": 906.8999999999069,
+      "hangoverAndUploadMs": 520.7833333335147,
+      "asrMs": 203.2,
+      "asrQueueMs": 3.5,
+      "bargeListenId": "06259479-306f-4c1a-ad70-e4735eca31f3"
+    },
+    {
+      "round": 9,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 62.67916666685778,
+      "pauseMs": 574.7791666669509,
+      "lastSpeechToNewSampleMs": 1435.5833333333285,
+      "uploadToNewSampleMs": 913.3999999999069,
+      "hangoverAndUploadMs": 522.1833333334216,
+      "asrMs": 198.3,
+      "asrQueueMs": 15.8,
+      "bargeListenId": "57c66808-be2b-45fd-acf4-01c26982582f"
+    },
+    {
+      "round": 10,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 63.07916666676465,
+      "pauseMs": 574.9791666666715,
+      "lastSpeechToNewSampleMs": 1448.2833333335147,
+      "uploadToNewSampleMs": 918.1000000000931,
+      "hangoverAndUploadMs": 530.1833333334216,
+      "asrMs": 193.2,
+      "asrQueueMs": 39.1,
+      "bargeListenId": "6c8d817b-1e1c-42f0-bed0-57021a8516bc"
+    }
+  ]
+}

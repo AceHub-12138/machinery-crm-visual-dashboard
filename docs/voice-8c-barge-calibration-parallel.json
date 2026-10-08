@@ -1,0 +1,188 @@
+{
+  "scope": "injected prerecorded speech → actual AudioWorklet/Silero → real ASR/LLM/TTS → Web Audio; input/output muted, not human or exhibit pickup",
+  "model": "qwen/qwen3.6-35b-a3b",
+  "errors": [
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING",
+    "Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING"
+  ],
+  "thresholds": {
+    "duckMs": 150,
+    "pauseMs": 700,
+    "lastSpeechToNewSampleMs": 1500
+  },
+  "passed": false,
+  "summary": {
+    "duckMs": {
+      "samples": 10,
+      "p50": 60.9,
+      "p95": 80.3
+    },
+    "pauseMs": {
+      "samples": 10,
+      "p50": 574.8,
+      "p95": 591.7
+    },
+    "lastSpeechToNewSampleMs": {
+      "samples": 10,
+      "p50": 1426.8,
+      "p95": 1617.8
+    },
+    "uploadToNewSampleMs": {
+      "samples": 10,
+      "p50": 911.7,
+      "p95": 1096.5
+    },
+    "asrQueueMs": {
+      "samples": 10,
+      "p50": 11.7,
+      "p95": 38.3
+    },
+    "asrMs": {
+      "samples": 10,
+      "p50": 201.3,
+      "p95": 276.3
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 77.77916666741112,
+      "pauseMs": 591.1791666668523,
+      "lastSpeechToNewSampleMs": 1435.9833333337046,
+      "uploadToNewSampleMs": 932.0999999996275,
+      "hangoverAndUploadMs": 503.8833333340772,
+      "asrMs": 212.1,
+      "asrQueueMs": 18.8,
+      "bargeListenId": "45fce018-77c9-479c-bb78-969724d28057"
+    },
+    {
+      "round": 2,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 53.07916666722667,
+      "pauseMs": 567.6791666668541,
+      "lastSpeechToNewSampleMs": 1438.183333333891,
+      "uploadToNewSampleMs": 925.6000000005588,
+      "hangoverAndUploadMs": 512.5833333333321,
+      "asrMs": 216.9,
+      "asrQueueMs": 13.4,
+      "bargeListenId": "2ba0d58e-dc5c-4b4c-ba80-d2181d415754"
+    },
+    {
+      "round": 3,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 60.97916666666788,
+      "pauseMs": 575.2791666664816,
+      "lastSpeechToNewSampleMs": 1417.6833333329632,
+      "uploadToNewSampleMs": 897.2999999998137,
+      "hangoverAndUploadMs": 520.3833333331495,
+      "asrMs": 187.9,
+      "asrQueueMs": 26.7,
+      "bargeListenId": "e567fece-bcf1-49c3-a1ba-c24d0399bad8"
+    },
+    {
+      "round": 4,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 75.6791666668505,
+      "pauseMs": 592.079166667223,
+      "lastSpeechToNewSampleMs": 1381.9833333337083,
+      "uploadToNewSampleMs": 878.7000000001863,
+      "hangoverAndUploadMs": 503.283333333522,
+      "asrMs": 194.2,
+      "asrQueueMs": 3.1,
+      "bargeListenId": "64115f8c-c6a5-470b-a87a-2e98f02b1311"
+    },
+    {
+      "round": 5,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 50.67916666591918,
+      "pauseMs": 562.279166666478,
+      "lastSpeechToNewSampleMs": 1414.8833333331495,
+      "uploadToNewSampleMs": 900.2000000001863,
+      "hangoverAndUploadMs": 514.6833333329632,
+      "asrMs": 195.2,
+      "asrQueueMs": 9.9,
+      "bargeListenId": "ea179060-6ac5-40b2-be48-a589864dd487"
+    },
+    {
+      "round": 6,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 59.47916666666424,
+      "pauseMs": 573.8791666670368,
+      "lastSpeechToNewSampleMs": 1478.983333333701,
+      "uploadToNewSampleMs": 959.7999999998137,
+      "hangoverAndUploadMs": 519.1833333338873,
+      "asrMs": 221.7,
+      "asrQueueMs": 47.8,
+      "bargeListenId": "6dbad5a3-5452-48c4-bfc2-81e217bed288"
+    },
+    {
+      "round": 7,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 60.879166667044046,
+      "pauseMs": 574.379166667044,
+      "lastSpeechToNewSampleMs": 1444.1833333338873,
+      "uploadToNewSampleMs": 923.2000000001863,
+      "hangoverAndUploadMs": 520.983333333701,
+      "asrMs": 193.2,
+      "asrQueueMs": 25.5,
+      "bargeListenId": "0f74ba30-5b16-4a7a-84c1-d52c935554b2"
+    },
+    {
+      "round": 8,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 52.57916666723031,
+      "pauseMs": 565.4791666666715,
+      "lastSpeechToNewSampleMs": 1408.1833333338873,
+      "uploadToNewSampleMs": 895.4000000003725,
+      "hangoverAndUploadMs": 512.7833333335147,
+      "asrMs": 204.6,
+      "asrQueueMs": 1.9,
+      "bargeListenId": "852e8022-a28b-4270-af24-6c4f100ebe68"
+    },
+    {
+      "round": 9,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 82.37916666611272,
+      "pauseMs": 590.6791666659265,
+      "lastSpeechToNewSampleMs": 1388.683333332956,
+      "uploadToNewSampleMs": 881.7999999998137,
+      "hangoverAndUploadMs": 506.8833333331422,
+      "asrMs": 198,
+      "asrQueueMs": 7.2,
+      "bargeListenId": "69e7538f-a44d-4170-b509-9f39a0a48c19"
+    },
+    {
+      "round": 10,
+      "accepted": true,
+      "oldTurnCancelled": true,
+      "duckMs": 63.47916666667152,
+      "pauseMs": 577.7791666664853,
+      "lastSpeechToNewSampleMs": 1731.3833333331422,
+      "uploadToNewSampleMs": 1208.4000000003725,
+      "hangoverAndUploadMs": 522.9833333327697,
+      "asrMs": 321,
+      "asrQueueMs": 8.3,
+      "bargeListenId": "5998c453-1a85-4943-a762-b6fcf6ce8857"
+    }
+  ]
+}

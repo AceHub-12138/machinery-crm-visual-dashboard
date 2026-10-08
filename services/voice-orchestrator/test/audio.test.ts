@@ -107,11 +107,11 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     const screen = { id: 'screen', role: 'screen' as const, send: () => {}, close: () => {} };
     setScreens(1); orch.detach(screen); expect(orch.state.name).toBe('answering');
     setScreens(0); orch.detach({ ...screen, role: 'console' }); expect(orch.state.name).toBe('answering');
-    orch.detach(screen); expect(orch.state.name).toBe('answering'); expect(store.lookup(id)?.controller.signal.aborted).toBe(false);
+    orch.detach(screen); expect(orch.state.name).toBe('followup'); expect(store.lookup(id)?.controller.signal.aborted).toBe(false);
     expect(append).not.toHaveBeenCalled(); orch.detach(screen);
     release(); await store.lookup(id)!.completed;
     expect(append).toHaveBeenCalledOnce(); expect(append.mock.calls[0][0].playbackOutcome).toBe('drained');
-    await vi.advanceTimersByTimeAsync(8000 + 2999); expect(orch.state.name).toBe('followup');
+    await vi.advanceTimersByTimeAsync(8000 + 4999); expect(orch.state.name).toBe('followup');
     await vi.advanceTimersByTimeAsync(1); expect(orch.state.name).toBe('closing'); expect(store.lookup(id)?.cancelled).toBe(false); orch.forceClose('force');
   });
   it.each(['answering', 'followup'])('current screen dismissal closes %s and rejects other roles and stale turns', async (phase) => {
@@ -192,8 +192,8 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     report('playback.started'); const first = events.filter(e => e.type === 'trace.turn').at(-1) as Extract<VoiceWireEvent, { type: 'trace.turn' }>;
     expect(first.trace.playbackStartMs).toBeGreaterThan(0);
     const count = events.filter(e => e.type === 'trace.turn').length; report('playback.started'); expect(events.filter(e => e.type === 'trace.turn')).toHaveLength(count);
-    report('playback.drained'); expect(orch.state.name).toBe('answering'); report('playback.drained');
-    await vi.advanceTimersByTimeAsync(8000 + 2999); expect(orch.state.name).toBe('followup');
+    report('playback.drained'); expect(orch.state.name).toBe('followup'); report('playback.drained');
+    await vi.advanceTimersByTimeAsync(8000 + 4999); expect(orch.state.name).toBe('followup');
     await vi.advanceTimersByTimeAsync(1); expect(orch.state.name).toBe('closing'); expect(store.lookup(id)?.cancelled).toBe(false);
     orch.forceClose('force');
   });
