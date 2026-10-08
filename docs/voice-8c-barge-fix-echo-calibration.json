@@ -1,0 +1,502 @@
+{
+  "startedAt": "2026-10-08T07:55:09.156Z",
+  "commit": "f1e05596539f2c0562ec090be257bbf7a12a7a12",
+  "scope": "local true-model synthesized benchmark; no physical capture; synthetic CRM test values",
+  "models": {
+    "tts": "qwen3-tts-1.7b-base",
+    "asr": "qwen3-asr-0.6b"
+  },
+  "refHash": "d6e0137839e69c5da2abc11fc2968ea55b7f2b3a90e5560b498015cd85899d18",
+  "styleHashes": {
+    "default": "d6e0137839e69c5da2abc11fc2968ea55b7f2b3a90e5560b498015cd85899d18",
+    "advise": "6ffee3b2dc362415aaae984d84be88fb21984b3dc78cde6d3a404a97d70285a3",
+    "apologetic": "91cce154adbab4926cf76d572ada967b5bdc2b3d61e4488f883f64234ec94e2b",
+    "cheerful": "7e1b7febb13f0241055a296ee254ebcaf5d9e98a57fbc4fec12ddff982554b14",
+    "serious": "4034213baef97267f6808bd450e8130601061402948520379dfe48d32b0350bf",
+    "serious_long": "bcd464c24ae2e20fc7cd7a6c6d5625cd085e6395669dde6c52e4148df00ae9db",
+    "warm": "7d7a4d3e559a499fd6ce9780266c99aa7317be4238cdbf3bcf04107177e907d6"
+  },
+  "echo": [
+    {
+      "answerIndex": 0,
+      "reference": "先生，本月累计销售额一千二百万元，完成年度目标的百分之六十二。销售进度已经整理，具体金额请看屏幕上的卡片。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.867208333333333,
+      "sha256": "6e6bca65bfa1d29155ce83b0d30b416fed80883502ab400ff3f4b566d0ee2b48",
+      "text": "本月累计销售额一千二百万元。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 0,
+      "reference": "先生，本月累计销售额一千二百万元，完成年度目标的百分之六十二。销售进度已经整理，具体金额请看屏幕上的卡片。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.867166666666667,
+      "sha256": "ebf515a71ff281ff7852c7750cdba3e10b09d0b5ddca36ae30e2dc7c0d2e0bca",
+      "text": "完成年度目标的百分之六十二。销",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 0,
+      "reference": "先生，本月累计销售额一千二百万元，完成年度目标的百分之六十二。销售进度已经整理，具体金额请看屏幕上的卡片。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.867208333333333,
+      "sha256": "e84f80487d9d924dd5801fe6049a8cec8ef6234786a2b4310e93176ee68c9e23",
+      "text": "销售进度已经整理，具体金额请看。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 1,
+      "reference": "本月销售额环比增长百分之五，年度目标完成百分之六十二。目标金额和当前完成金额，已经显示在进度卡片上。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.620791666666667,
+      "sha256": "4d1adfb550c4b91fa2ed1e370bfdd0ab9b5f0150bf86e19fcf62f04fe9769116",
+      "text": "月销售额环比增长百分之五，年度。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 1,
+      "reference": "本月销售额环比增长百分之五，年度目标完成百分之六十二。目标金额和当前完成金额，已经显示在进度卡片上。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.620791666666667,
+      "sha256": "4b3f3dd160a9056d9287d0063927db8ca1406e03498feef837ea83c7ec5ede4e",
+      "text": "度目标完成百分之六十二，目标经。",
+      "score": 0.9285714285714286,
+      "echo": true
+    },
+    {
+      "answerIndex": 1,
+      "reference": "本月销售额环比增长百分之五，年度目标完成百分之六十二。目标金额和当前完成金额，已经显示在进度卡片上。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.620833333333333,
+      "sha256": "1912ab4489856aacdeafbf14045fce085be1e3102612ca3a3443b95cb130cf3c",
+      "text": "金额和当前完成金额已经显示在。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 2,
+      "reference": "本月新增客户六家，待办事项十二项。客户汇总和待办数量均已整理，可以继续询问销售和回款情况。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.5312083333333333,
+      "sha256": "87d2a24882f9be6cd89d48e15eb253a141620aa48c47a9806f6e42d5dc84a912",
+      "text": "新增客户六家，待办事项十二项。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 2,
+      "reference": "本月新增客户六家，待办事项十二项。客户汇总和待办数量均已整理，可以继续询问销售和回款情况。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.5311666666666666,
+      "sha256": "f161c5c98c645a6233aa721f36a057ee3c8afc5b5cb474445258d97705929de4",
+      "text": "像，客户汇总和代办数量均。",
+      "score": 0.8181818181818181,
+      "echo": true
+    },
+    {
+      "answerIndex": 2,
+      "reference": "本月新增客户六家，待办事项十二项。客户汇总和待办数量均已整理，可以继续询问销售和回款情况。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.5312083333333333,
+      "sha256": "fbbc1d23fba36247b58a3301d1f26850dfa726104d1a72677a3036b43ce56413",
+      "text": "均已整理，可以继续询问销售和。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 3,
+      "reference": "本月发运总计三十八台，主要区域的车次和设备台数分别显示。统计时间以卡片标注为准，区域之间不重复相加。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.6432083333333334,
+      "sha256": "196ec5f96d00b30181db58dd526f32338529cd3af9aa730de845e5992eb19d75",
+      "text": "发运总计三十八台，主要区域的。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 3,
+      "reference": "本月发运总计三十八台，主要区域的车次和设备台数分别显示。统计时间以卡片标注为准，区域之间不重复相加。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.6431666666666667,
+      "sha256": "26add4fe25de38bdee3a95baeea67fca9ffe4f3db5a5a52d4bc568b305c2fd25",
+      "text": "车次和设备台数分别显示统计。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 3,
+      "reference": "本月发运总计三十八台，主要区域的车次和设备台数分别显示。统计时间以卡片标注为准，区域之间不重复相加。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.6432083333333334,
+      "sha256": "65e1303b81d2644bf593d5e4dcfc95f4ba7cf805b488567093bd108868135ec8",
+      "text": "统计时间以卡片标注为准。区域之间。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 4,
+      "reference": "未来七天计划发运十二台设备，涉及四个区域。具体发运日期和各区域的台数，已经显示在发运安排卡片上。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.4864166666666665,
+      "sha256": "1a9cb435481f468b70416e999b639fe0458d56103e7e03752453b3b2286923fc",
+      "text": "七天计划发运十二台设备，涉及。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 4,
+      "reference": "未来七天计划发运十二台设备，涉及四个区域。具体发运日期和各区域的台数，已经显示在发运安排卡片上。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.486375,
+      "sha256": "a043ae9416f4ad5bc6f78c64a10a7bfc091ff5b03f90294506a7d52e5420440e",
+      "text": "四个区域，具体发运日期和。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 4,
+      "reference": "未来七天计划发运十二台设备，涉及四个区域。具体发运日期和各区域的台数，已经显示在发运安排卡片上。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.4864166666666665,
+      "sha256": "567177601391787a4c5a5d233a00f7dfe4f6550b4447cd98066409afa5892a5e",
+      "text": "和各区域的台数已经显示在发运案。",
+      "score": 0.9333333333333333,
+      "echo": true
+    },
+    {
+      "answerIndex": 5,
+      "reference": "本月回款金额为六百万元，尚有三百万元待回款。已回款和待回款分别展示，具体统计口径请看屏幕上的标注。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.5984166666666666,
+      "sha256": "0e8e808dc57db61c49ec2df748a1ac9a825b3d4baf52a7be095077b4183ce6ee",
+      "text": "回款金额为六百万元，尚有三百。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 5,
+      "reference": "本月回款金额为六百万元，尚有三百万元待回款。已回款和待回款分别展示，具体统计口径请看屏幕上的标注。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.598375,
+      "sha256": "0b51b8fc228688619544c64582c8b595f3a790cdd51df474dff77e38ad6afd82",
+      "text": "百万元带回款，以回款和带回款。",
+      "score": 0.7692307692307692,
+      "echo": true
+    },
+    {
+      "answerIndex": 5,
+      "reference": "本月回款金额为六百万元，尚有三百万元待回款。已回款和待回款分别展示，具体统计口径请看屏幕上的标注。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.5984166666666666,
+      "sha256": "65491bec2edd51c34cd81b83a69dfcab24d064fbf5cfd7a63c9e446a9e88dbd6",
+      "text": "分别展示具体统计口径，请看。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 6,
+      "reference": "今天待办事项共十二项，其中逾期事项三项。系统已经汇总当前待办，可以查看卡片上的分类数量。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.2847916666666666,
+      "sha256": "2c463dde9ad4a9c574e54c47091f2a35c9c0aaabf34059ff69c333824393adf5",
+      "text": "代办事项共十二项，其中与。",
+      "score": 0.8181818181818181,
+      "echo": true
+    },
+    {
+      "answerIndex": 6,
+      "reference": "今天待办事项共十二项，其中逾期事项三项。系统已经汇总当前待办，可以查看卡片上的分类数量。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.2847916666666666,
+      "sha256": "d2e84f9f6b1bf2ed2c8431ce9e7b7df42aff1e5df05f2af1119bb196c49ebd86",
+      "text": "逾期事项三项，系统已经汇总。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 6,
+      "reference": "今天待办事项共十二项，其中逾期事项三项。系统已经汇总当前待办，可以查看卡片上的分类数量。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.2848333333333333,
+      "sha256": "2668a5d6a915e1b871ead600679796881e27254313afa697490b64d249bc5814",
+      "text": "总当前待办，可以查看卡片上的。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 7,
+      "reference": "年度销售目标为两千万元，当前完成率为百分之六十二。剩余目标金额已经显示，所有数值均为演示测试数据。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.5984166666666666,
+      "sha256": "36c20ea0a8807cd1b5c002393f24698658b9558e6cadb4c2cadae8d20ad8b5d1",
+      "text": "销售目标为两千万元，当前完成。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 7,
+      "reference": "年度销售目标为两千万元，当前完成率为百分之六十二。剩余目标金额已经显示，所有数值均为演示测试数据。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.598375,
+      "sha256": "223d8337d77df351d7d821f5bd63dd6781fcb4937bdeb93e3aa45a2640d1e664",
+      "text": "成率为百分之六十二，剩余目标金额。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 7,
+      "reference": "年度销售目标为两千万元，当前完成率为百分之六十二。剩余目标金额已经显示，所有数值均为演示测试数据。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.5984166666666666,
+      "sha256": "35c6efaf4df541c9c035dc06b4e684681c6d0a31a9d79a7946608b21eeb98e74",
+      "text": "金额已经显示，所有数值均为演示。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 8,
+      "reference": "本月拜访记录共四十七条，新增商机共二十三个。相关数量已经按当前月份整理，统计范围以卡片说明为准。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.620791666666667,
+      "sha256": "7186947c40126e4b32c053e7774f299ce1ac0c916990eb746ed636a427f90c6d",
+      "text": "拜访记录共四十七条，新增商。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 8,
+      "reference": "本月拜访记录共四十七条，新增商机共二十三个。相关数量已经按当前月份整理，统计范围以卡片说明为准。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.620791666666667,
+      "sha256": "7a8595e54f31e8debe0e11a382986a5f934261542f3c850619408ebd0ff27768",
+      "text": "机共二十三个，相关数量已经按。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 8,
+      "reference": "本月拜访记录共四十七条，新增商机共二十三个。相关数量已经按当前月份整理，统计范围以卡片说明为准。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.620833333333333,
+      "sha256": "f87961ce24113b6ffa9408c788974ffbd065e9ff9003506cd0167a309519a00d",
+      "text": "按当前月份整理统计范围，以卡。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 9,
+      "reference": "先生，本轮经营数据已经整理完毕。销售进度、客户数量和回款情况均已显示，可以继续询问支持的汇总信息。",
+      "crop": [
+        0.08,
+        0.36
+      ],
+      "seconds": 2.8,
+      "sha256": "67ee2518a4fd2363e6cf1dc3f7433aadeca82a3c427c8757dc332909bf32eb52",
+      "text": "本轮经营数据已经整理完毕。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 9,
+      "reference": "先生，本轮经营数据已经整理完毕。销售进度、客户数量和回款情况均已显示，可以继续询问支持的汇总信息。",
+      "crop": [
+        0.35,
+        0.63
+      ],
+      "seconds": 2.8,
+      "sha256": "b38b7566377ae46cb4c3dd9b9b2d5a16e325d18f0dd9ffd0a0496356e89566dd",
+      "text": "销售进度、客户数量和回款情。",
+      "score": 1,
+      "echo": true
+    },
+    {
+      "answerIndex": 9,
+      "reference": "先生，本轮经营数据已经整理完毕。销售进度、客户数量和回款情况均已显示，可以继续询问支持的汇总信息。",
+      "crop": [
+        0.62,
+        0.9
+      ],
+      "seconds": 2.8,
+      "sha256": "8b2a4294237128c9bf21a31c2acbe4d3c7bfd5c8bdc7e1fd1eb7714e324ad38c",
+      "text": "情况均已显示，可以继续询问支持。",
+      "score": 1,
+      "echo": true
+    }
+  ],
+  "questions": [
+    {
+      "question": "本月销售额环比呢",
+      "reference": "本月销售额环比增长百分之五",
+      "text": "本月销售额环比呢？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "今年目标完成多少了",
+      "reference": "今年目标完成百分之六十二",
+      "text": "今年目标完成多少了？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "本月新增客户有几家",
+      "reference": "本月新增客户六家",
+      "text": "本月新增客户有几家。",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "销售目标是怎么计算的",
+      "reference": "销售目标金额为两千万元",
+      "text": "销售目标是怎么计算的？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "本月回款金额是多少",
+      "reference": "本月回款金额为六百万元",
+      "text": "本月回款金额是多少？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "今天还有什么待办",
+      "reference": "今天待办事项共十二项",
+      "text": "今天还有什么待办？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "哪个区域发货最多",
+      "reference": "主要区域的设备台数已经显示",
+      "text": "哪个区域发货最多？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "今年是不是已经完成目标了",
+      "reference": "今年目标完成百分之六十二",
+      "text": "今年是不是已经完成目标了？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "本月销售额达到目标了吗",
+      "reference": "本月销售额为一千二百万元",
+      "text": "本月销售额达到目标了吗？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    },
+    {
+      "question": "下周发货安排呢",
+      "reference": "未来七天计划发运十二台设备",
+      "text": "下周发货安排呢？",
+      "hasInterrogative": true,
+      "score": 0,
+      "echo": false
+    }
+  ],
+  "passed": true,
+  "summary": {
+    "echoRecognized": 30,
+    "echoTotal": 30,
+    "questionFalseEcho": 0,
+    "validQuestions": 10
+  },
+  "finishedAt": "2026-10-08T07:56:07.499Z",
+  "echoSourceSha256": "243da4504468562dab519a95ee9250320e53e7f8910b38d2eaf903a28ab264e5"
+}
