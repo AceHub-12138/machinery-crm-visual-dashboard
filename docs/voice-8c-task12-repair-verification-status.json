@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-08",
+  "branch": "codex/voice-8c-task12",
+  "m1Commit": "39cbefe",
+  "playbackACommit": "a6836f6",
+  "vitest": {
+    "passed": 470,
+    "failed": 0
+  },
+  "python": {
+    "passed": 28,
+    "failed": 0
+  },
+  "playwright": {
+    "startTime": "2026-10-09T00:37:00.914Z",
+    "duration": 560508.8740000001,
+    "expected": 70,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "build": "passed",
+  "decoderSameCodeGate": "passed",
+  "fixedCache": "ready",
+  "styleTrials": 105,
+  "styleSynthesisFailures": 3,
+  "styleF0MedianFailures": [
+    "cheerful"
+  ],
+  "completeAudioAcceptance": "not passed",
+  "screenshotHumanAcceptance": "pending",
+  "humanListening": "pending",
+  "physicalEcho10": "pending environment confirmation",
+  "merged": false,
+  "pushed": false,
+  "deployed": false,
+  "task11": "not started"
+}

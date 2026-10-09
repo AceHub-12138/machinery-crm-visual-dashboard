@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "ready": true,
+  "reason": "ready",
+  "scope": "new decoder/reference hashes; fresh isolated fixed speech cache"
+}

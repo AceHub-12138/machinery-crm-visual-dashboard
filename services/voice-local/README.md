@@ -48,3 +48,11 @@ services/voice-local/.venv/bin/python services/voice-local/calibrate.py --out se
 仍只有一个GPU线程。`gpu_queue.py`在TTS采样和PCM输出检查点处理有界ASR优先队列，识别结束后续生成；空闲时直接处理ASR。TTS/ASR取消对象独立，排队取消、异常和关闭均完成future。`/asr`追加 `asrQueueMs`（入队到执行，不含识别）及 `interleavedTts`（开始识别时有TTS正在合成）。原有 `ms`仍是识别执行耗时。
 
 GPU预填充及kernel不可强抢占，指标由真实测量确认。10次合成中ASR排队P95为24.165ms，原始记录在视觉仓 `docs/voice-8c-asr-priority-calibration.json`。不代替麦克风/展厅验收。
+
+## 流式解码预热（2026-10-08）
+
+`VOICE_TTS_DECODER_PRIME_FRAMES` 默认 50，设为 0 关闭。启动自检按风格只编码一次参考，预热解码器并保存卷积缓存、overflow 和 transformer KV 状态。每句流式开始的首次 reset 后恢复该风格快照；结束/取消时清零，不在清理阶段预热。钩子只安装在当前模型的解码器实例，不修改已安装 mlx-audio。KV 数组在恢复时复制以避免下句污染快照。
+
+解码版本与帧数进入参考哈希，编排 AudioStore 因哈希变化重建固定话术缓存。情绪参考文件（包括热情降调）不变。evaluate_styles.py 使用生产 HTTP /tts 流式输出评测，追加 F0 起伏、PCM 格式校验和按风格试听样本；禁止复用不同参考/解码哈希的评测记录。
+
+真模型同码验证可运行 verify_decoder_prime.py，参数 --env-file、--out、--samples；其结果验证快照/现场预热逐样本相等、重复恢复不污染状态、SNR 和音高跨度。此自动验证不代表真人听感或展厅验收。

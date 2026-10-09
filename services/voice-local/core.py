@@ -11,6 +11,7 @@ import threading
 import unicodedata
 from dataclasses import dataclass, replace
 from pathlib import Path
+from decoder_prime import DecoderPrimer
 
 import numpy as np
 
@@ -40,6 +41,7 @@ class Settings:
     hotwords: tuple[str, ...] = ()
     styles_dir: str = ""
     ref_bytes: bytes | None = None
+    decoder_prime_frames: int = 50
 
     @classmethod
     def from_env(cls):
@@ -57,12 +59,15 @@ class Settings:
             silence_peak=float(os.environ.get("VOICE_TTS_SILENCE_PEAK", "0.001")),
             seconds_per_char=float(os.environ.get("VOICE_TTS_SECONDS_PER_CHAR", "0.4")),
             styles_dir=os.environ.get("VOICE_TTS_STYLES_DIR", ""),
+            decoder_prime_frames=int(os.environ.get("VOICE_TTS_DECODER_PRIME_FRAMES", "50")),
             hotwords=tuple(word.strip() for word in os.environ.get("VOICE_ASR_HOTWORDS", "回款,跟进待办,成品仓,原材料仓,半成品仓,物料,库存预警,发货,完成率,合同额").split(",") if word.strip()),
         )
         if not 0 <= settings.temperature <= 2 or not 0 < settings.silence_peak < 1 or not 0.1 <= settings.seconds_per_char <= 1:
             raise ValueError("Invalid TTS generation settings")
         if not settings.style or len(settings.style) > 64:
             raise ValueError("Invalid style name")
+        if not 0 <= settings.decoder_prime_frames <= 1000:
+            raise ValueError("Invalid decoder prime frames")
         return settings
 
     def ref_hash(self):
@@ -70,7 +75,8 @@ class Settings:
         digest.update(json.dumps({"model": self.tts_model, "refText": self.ref_text,
                                   "temperature": self.temperature, "style": self.style,
                                   "silencePeak": self.silence_peak, "secondsPerChar": self.seconds_per_char,
-                                  "format": "s16le/24000/mono", "version": 1}, ensure_ascii=False, sort_keys=True).encode())
+                                  "decoderPrimeFrames": self.decoder_prime_frames,
+                                  "format": "s16le/24000/mono", "version": 2}, ensure_ascii=False, sort_keys=True).encode())
         digest.update(self.ref_bytes if self.ref_bytes is not None else Path(self.ref_audio).read_bytes())
         return digest.hexdigest()
 
@@ -165,6 +171,8 @@ class MlxBackend:
             kwargs["logits_processors"] = [*(kwargs.get("logits_processors") or []), processor]
             return single_chunk(*args, **kwargs)
         object.__setattr__(self.asr, "_generate_single_chunk", checked_asr)
+        self.primer = DecoderPrimer(self.tts.speech_tokenizer, mx) if self.settings.decoder_prime_frames else None
+        self.reference_codes = {}
 
     def set_reference(self, settings):
         import wave
@@ -186,10 +194,19 @@ class MlxBackend:
             self.references[settings.style] = self.mx.array(audio)
         self.reference = self.references[settings.style]
         self.reference_text = settings.ref_text
+        self.reference_style = settings.style
+        if self.primer and settings.style not in self.reference_codes:
+            # Uses the model's own ICL cache: exactly one reference encode per style.
+            *_, codes = self.tts._prepare_icl_generation_inputs(SELF_CHECK_TEXT, self.reference, self.reference_text, "Chinese")
+            self.mx.eval(codes)
+            self.reference_codes[settings.style] = codes
+            self.primer.prepare(settings.style, codes, self.settings.decoder_prime_frames)
 
     def generate(self, text: str, cancel: threading.Event, max_tokens: int):
         self.tts_cancel = cancel
         check_cancel(cancel)
+        if self.primer:
+            self.primer.begin(self.reference_style)
         generator = self.tts.generate(
             text=text, ref_audio=self.reference, ref_text=self.reference_text,
             lang_code="Chinese", temperature=self.settings.temperature, max_tokens=max_tokens,
@@ -206,7 +223,10 @@ class MlxBackend:
                 yield (np.clip(audio, -1, 1) * 32767).astype("<i2").tobytes(), part.token_count
         finally:
             generator.close()
-            self.tts.speech_tokenizer.decoder.reset_streaming_state()
+            if self.primer:
+                self.primer.end()
+            else:
+                self.tts.speech_tokenizer.decoder.reset_streaming_state()
             self.mx.synchronize()
 
     def recognize(self, audio: np.ndarray, cancel: threading.Event):

@@ -11,7 +11,7 @@ from gpu_queue import CooperativeGpuExecutor
 
 class CancellationTests(unittest.TestCase):
     def backend(self):
-        backend = MlxBackend(Settings("tts", "asr", "unused", "reference"))
+        backend = MlxBackend(Settings("tts", "asr", "unused", "reference", decoder_prime_frames=0))
         decoder = types.SimpleNamespace(reset_streaming_state=lambda: None)
         class Tts:
             sample_rate = 24000

@@ -1,0 +1,62 @@
+{
+  "frames": 50,
+  "rows": [
+    {
+      "index": 1,
+      "snapshotSampleIdentical": true,
+      "repeatSampleIdentical": true,
+      "restoreMs": 0.1413749996572733,
+      "livePrimeMs": 677.7812079999421,
+      "snrDb": 16.975324630737305,
+      "offlineSpan": 10.488687523885773,
+      "streamSpan": 10.389474454407459,
+      "spanDelta": 0.09921306947831354
+    },
+    {
+      "index": 2,
+      "snapshotSampleIdentical": true,
+      "repeatSampleIdentical": true,
+      "restoreMs": 0.07499999992433004,
+      "livePrimeMs": 138.36024999909569,
+      "snrDb": 16.346723556518555,
+      "offlineSpan": 10.087836882099065,
+      "streamSpan": 10.1025618283192,
+      "spanDelta": 0.014724946220134427
+    },
+    {
+      "index": 3,
+      "snapshotSampleIdentical": true,
+      "repeatSampleIdentical": true,
+      "restoreMs": 0.05783300002804026,
+      "livePrimeMs": 117.46612499700859,
+      "snrDb": 17.74367904663086,
+      "offlineSpan": 9.396188410766465,
+      "streamSpan": 9.45528063332207,
+      "spanDelta": 0.059092222555605645
+    },
+    {
+      "index": 4,
+      "snapshotSampleIdentical": true,
+      "repeatSampleIdentical": true,
+      "restoreMs": 0.06912500248290598,
+      "livePrimeMs": 120.12287499965169,
+      "snrDb": 16.61138153076172,
+      "offlineSpan": 9.981147512623954,
+      "streamSpan": 10.166142711492464,
+      "spanDelta": 0.1849951988685099
+    },
+    {
+      "index": 5,
+      "snapshotSampleIdentical": true,
+      "repeatSampleIdentical": true,
+      "restoreMs": 0.06491699969046749,
+      "livePrimeMs": 125.37516699740081,
+      "snrDb": 17.609769821166992,
+      "offlineSpan": 11.166963182472129,
+      "streamSpan": 11.08405660789357,
+      "spanDelta": 0.08290657457855843
+    }
+  ],
+  "scope": "same-code true model, no physical listening",
+  "passed": true
+}

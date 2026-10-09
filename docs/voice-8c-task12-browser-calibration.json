@@ -1327,10 +1327,10 @@
       },
       "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
       "baselineFrames": 31,
-      "overlayFrames": 155,
-      "baselineP95": 0.10000000149011612,
+      "overlayFrames": 154,
+      "baselineP95": 0.09999999776482582,
       "overlayP95": 1.5,
-      "incrementP95": 1.3999999985098839
+      "incrementP95": 1.4000000022351742
     }
   },
   {

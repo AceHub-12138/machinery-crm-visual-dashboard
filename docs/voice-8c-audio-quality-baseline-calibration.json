@@ -1,0 +1,469 @@
+{
+  "scope": "old unprimed service, same 5 texts x3 for failing styles; F0/HTTP only, no Whisper CER",
+  "styles": {
+    "advise": {
+      "failed": 3,
+      "rounds": 15,
+      "f0Median": 90.58735186321098
+    },
+    "cheerful": {
+      "failed": 0,
+      "rounds": 15,
+      "f0Median": 124.0318359062016
+    },
+    "warm": {
+      "failed": 0,
+      "rounds": 15,
+      "f0Median": 116.54879773691655
+    }
+  },
+  "rows": [
+    {
+      "style": "advise",
+      "text": "我在,先生。请讲。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 80.53691275167785,
+      "f0Span": 5.805789327171077
+    },
+    {
+      "style": "advise",
+      "text": "我在,先生。请讲。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 82.76255707762556,
+      "f0Span": 7.600406968947857
+    },
+    {
+      "style": "advise",
+      "text": "我在,先生。请讲。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 87.5912408759124,
+      "f0Span": 11.19716242861708
+    },
+    {
+      "style": "advise",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 1,
+      "httpStatus": 503,
+      "failed": true
+    },
+    {
+      "style": "advise",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 97.5609756097561,
+      "f0Span": 9.944742874202053
+    },
+    {
+      "style": "advise",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 99.17355371900827,
+      "f0Span": 10.309813341055694
+    },
+    {
+      "style": "advise",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 85.40925266903915,
+      "f0Span": 11.819552204413112
+    },
+    {
+      "style": "advise",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 87.27388130752142,
+      "f0Span": 10.085165564831062
+    },
+    {
+      "style": "advise",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 91.9553728714034,
+      "f0Span": 12.35184040961838
+    },
+    {
+      "style": "advise",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 1,
+      "httpStatus": 503,
+      "failed": true
+    },
+    {
+      "style": "advise",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 89.21933085501858,
+      "f0Span": 12.926698413322764
+    },
+    {
+      "style": "advise",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 94.48818897637796,
+      "f0Span": 11.349462609395681
+    },
+    {
+      "style": "advise",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 1,
+      "httpStatus": 503,
+      "failed": true
+    },
+    {
+      "style": "advise",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 95.23809523809524,
+      "f0Span": 19.367546247161112
+    },
+    {
+      "style": "advise",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 95.61752988047809,
+      "f0Span": 16.849673028384764
+    },
+    {
+      "style": "cheerful",
+      "text": "我在,先生。请讲。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 95.23809523809524,
+      "f0Span": 14.440346701192457
+    },
+    {
+      "style": "cheerful",
+      "text": "我在,先生。请讲。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 150.9433962264151,
+      "f0Span": 14.31174093530875
+    },
+    {
+      "style": "cheerful",
+      "text": "我在,先生。请讲。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 92.8714709140445,
+      "f0Span": 15.24640638301263
+    },
+    {
+      "style": "cheerful",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 123.07692307692308,
+      "f0Span": 14.727040111527433
+    },
+    {
+      "style": "cheerful",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 149.06832298136646,
+      "f0Span": 15.435519662534997
+    },
+    {
+      "style": "cheerful",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 124.0318359062016,
+      "f0Span": 17.20541262869517
+    },
+    {
+      "style": "cheerful",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 113.74407582938389,
+      "f0Span": 14.075013320734216
+    },
+    {
+      "style": "cheerful",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 120.0,
+      "f0Span": 15.892209085850617
+    },
+    {
+      "style": "cheerful",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 117.36011477761836,
+      "f0Span": 13.197091021013659
+    },
+    {
+      "style": "cheerful",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 129.03225806451613,
+      "f0Span": 17.151895969715596
+    },
+    {
+      "style": "cheerful",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 113.74407582938389,
+      "f0Span": 16.572467089772083
+    },
+    {
+      "style": "cheerful",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 132.23240847550238,
+      "f0Span": 13.71917635363295
+    },
+    {
+      "style": "cheerful",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 133.33744868668788,
+      "f0Span": 15.334007617517667
+    },
+    {
+      "style": "cheerful",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 162.16216216216216,
+      "f0Span": 15.658254978341052
+    },
+    {
+      "style": "cheerful",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 164.3835616438356,
+      "f0Span": 16.97698321452809
+    },
+    {
+      "style": "warm",
+      "text": "我在,先生。请讲。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 98.09155211530762,
+      "f0Span": 11.378087098011756
+    },
+    {
+      "style": "warm",
+      "text": "我在,先生。请讲。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 105.26315789473684,
+      "f0Span": 14.56056694999726
+    },
+    {
+      "style": "warm",
+      "text": "我在,先生。请讲。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 106.66666666666667,
+      "f0Span": 12.219146476712739
+    },
+    {
+      "style": "warm",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 122.44897959183673,
+      "f0Span": 15.26895529643549
+    },
+    {
+      "style": "warm",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 120.0,
+      "f0Span": 14.07385193728367
+    },
+    {
+      "style": "warm",
+      "text": "先生,本月合同额一千二百八十六万元,已完成月度目标的百分之一百一十点二。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 131.14754098360655,
+      "f0Span": 14.546007621858413
+    },
+    {
+      "style": "warm",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 128.3422459893048,
+      "f0Span": 15.167338929371445
+    },
+    {
+      "style": "warm",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 108.84409707939119,
+      "f0Span": 22.297851312732778
+    },
+    {
+      "style": "warm",
+      "text": "抱歉先生,我暂时无法调取这项数据。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 107.39598766668001,
+      "f0Span": 17.219062400085974
+    },
+    {
+      "style": "warm",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 113.21006608370604,
+      "f0Span": 15.243713543674382
+    },
+    {
+      "style": "warm",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 115.94202898550725,
+      "f0Span": 14.514003432653006
+    },
+    {
+      "style": "warm",
+      "text": "先生,目前有七项物料低于安全库存,请尽快安排补货。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 117.07317073170732,
+      "f0Span": 13.84886955279017
+    },
+    {
+      "style": "warm",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 1,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 121.21212121212122,
+      "f0Span": 14.576638389462744
+    },
+    {
+      "style": "warm",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 2,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 116.54879773691655,
+      "f0Span": 15.515046886914579
+    },
+    {
+      "style": "warm",
+      "text": "为您服务是我的荣幸,先生。",
+      "rep": 3,
+      "httpStatus": 200,
+      "failed": false,
+      "f0": 117.36011477761836,
+      "f0Span": 13.42664679489408
+    }
+  ],
+  "health": {
+    "warm": true,
+    "selfCheck": "passed",
+    "selfCheckCer": 0.0,
+    "models": {
+      "tts": "qwen3-tts-1.7b-base",
+      "asr": "qwen3-asr-0.6b"
+    },
+    "refHash": "d6e0137839e69c5da2abc11fc2968ea55b7f2b3a90e5560b498015cd85899d18",
+    "styles": [
+      "default",
+      "advise",
+      "apologetic",
+      "cheerful",
+      "serious",
+      "serious_long",
+      "warm"
+    ],
+    "styleHashes": {
+      "default": "d6e0137839e69c5da2abc11fc2968ea55b7f2b3a90e5560b498015cd85899d18",
+      "advise": "6ffee3b2dc362415aaae984d84be88fb21984b3dc78cde6d3a404a97d70285a3",
+      "apologetic": "91cce154adbab4926cf76d572ada967b5bdc2b3d61e4488f883f64234ec94e2b",
+      "cheerful": "7e1b7febb13f0241055a296ee254ebcaf5d9e98a57fbc4fec12ddff982554b14",
+      "serious": "4034213baef97267f6808bd450e8130601061402948520379dfe48d32b0350bf",
+      "serious_long": "bcd464c24ae2e20fc7cd7a6c6d5625cd085e6395669dde6c52e4148df00ae9db",
+      "warm": "7d7a4d3e559a499fd6ce9780266c99aa7317be4238cdbf3bcf04107177e907d6"
+    },
+    "failedStyles": [],
+    "styleFailures": {},
+    "styleChecks": {
+      "default": 0.0,
+      "advise": 0.0,
+      "apologetic": 0.0,
+      "cheerful": 0.0,
+      "serious": 0.0,
+      "serious_long": 0.0,
+      "warm": 0.0
+    },
+    "metrics": {
+      "ttsRequests": 31,
+      "asrRequests": 44,
+      "ttsRegenerated": 0,
+      "ttsTruncated": 0,
+      "ttsFail": 0,
+      "cancelled": 0
+    },
+    "activeJobs": 0
+  }
+}
