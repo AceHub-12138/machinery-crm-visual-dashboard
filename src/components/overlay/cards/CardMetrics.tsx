@@ -1,4 +1,5 @@
 "use client";
+import { displayRate } from "@/lib/voice/card-presentation";
 
 import type { AnswerCardData } from "@/lib/voice/session-machine";
 import { clamp01 } from "@/lib/voice/params";
@@ -13,7 +14,7 @@ export function MetricRing({ rate, label }: { rate: number; label: string }) {
       <circle className="overlay-ring-fill" cx="80" cy="80" r="64" transform="rotate(-90 80 80)"
         style={{ strokeDasharray: length, strokeDashoffset: length * (1 - clamp01(rate / 100)) }} />
     </svg>
-    <div className="overlay-ring-value"><strong>{rate.toFixed(1)}%</strong><span>{label}</span></div>
+    <div className="overlay-ring-value"><strong>{displayRate(rate)}</strong><span>{label}</span></div>
   </div>;
 }
 

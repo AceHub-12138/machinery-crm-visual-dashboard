@@ -147,7 +147,7 @@ export function buildCustomersShipmentsCard(
     }));
 
   // reminders 是样本列表，不能用列表长度冒充完整汇总数量。
-  const summaryText = `今日到期 ${todayDue} · 七日内 ${sevenDayDue} · 逾期 ${overdueDue}`;
+  const summaryText = `台账共 ${delivery.summary.unitCount} 台`;
 
   return {
     kind: "customers-shipments",

@@ -440,7 +440,8 @@ function stateVisual(input: CoreVisualInput): CoreVisual {
       // 核心振幅驱动半径呼吸(±12%),外圈细环常亮;氛围场缓慢漂移(§6)
       return {
         ...base,
-        coreRadius: 1 + 0.12 * amplitude,
+        // A retained launch identifies the raised answer card during barge pause.
+        coreRadius: (input.launchElapsedMs === null ? 1 : 0.75) * (1 + 0.12 * amplitude),
         ringAlpha: 0.85,
         brightness: 0.85 + 0.15 * amplitude,
         ambientDrift: 1,

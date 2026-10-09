@@ -366,3 +366,11 @@ it('live countdown uses the received listen clock for full/pause/resume/hide',()
   expect(coreVisual({...input,listenClock:null}).countdown).toBeNull();
   expect(coreVisual({...input,name:'listening',listenClock:{...clock,timeoutMs:5000,remainingMs:5000}}).countdown).toBe(1);
 });
+
+ it("打断暂停保留上移卡片时聆听核心仍为0.75倍，普通聆听保持全尺寸", () => {
+  for (const amplitude of [0, .5, 1]) {
+    const input = { name: "listening" as const, since: 0, now: 100, amplitude, launchElapsedMs: null };
+    expect(coreVisual(input).coreRadius).toBeCloseTo(1 + .12 * amplitude);
+    expect(coreVisual({ ...input, launchElapsedMs: 100 }).coreRadius).toBeCloseTo(.75 * (1 + .12 * amplitude));
+  }
+ });

@@ -46,3 +46,10 @@ export function shipmentPageAt(elapsedMs: number, pageCount: number, sentenceInd
   }
   return Math.floor(Math.max(0, elapsedMs) / 4000) % pageCount;
 }
+
+/** Keep numeric grouping commas and UTF-16 sentence offsets unchanged. */
+export function displaySpoken(text: string): string {
+  return text.replace(/(?<=[\u3400-\u9fff。！？]),|,(?=[\u3400-\u9fff])/gu, "，");
+}
+/** Builders interpolate the numeric rate directly into spoken text. */
+export function displayRate(rate: number): string { return `${rate}%`; }

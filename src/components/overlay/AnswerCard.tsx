@@ -1,7 +1,7 @@
 "use client";
 
 import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
-import { cardExcerpt, cardFollowups, shipmentPages, shipmentPageAt } from "@/lib/voice/card-presentation";
+import { cardExcerpt, cardFollowups, shipmentPages, shipmentPageAt, displaySpoken } from "@/lib/voice/card-presentation";
 import { buildSpokenSentences } from "@/lib/voice/spoken-normalize";
 import {
   clamp01,
@@ -92,7 +92,7 @@ export const AnswerCard = memo(function AnswerCard({
     svg.setAttribute("preserveAspectRatio", "none");
     const c = 22;
     rect.setAttribute("d", `M ${c} 1 L ${w-c} 1 L ${w-1} ${c} L ${w-1} ${h-c} L ${w-c} ${h-1} L ${c} ${h-1} L 1 ${h-c} L 1 ${c} Z`);
-  }, [card.kind]);
+  }, [card.kind, geometry.cardAnchor.width, geometry.scale]);
 
   /* 编排主循环:rAF 写 DOM,打字完毕即停。
      bar(进度条)只存在于 target-progress 模板——其余模板无进度条,
@@ -170,7 +170,7 @@ export const AnswerCard = memo(function AnswerCard({
         const highlight = active ? `${active.start}:${active.end}` : "";
         if (typed !== lastTyped || highlight !== lastHighlight) {
           lastTyped = typed; lastHighlight = highlight;
-          const text = card.spoken.slice(0, typed);
+          const text = displaySpoken(card.spoken).slice(0, typed);
           if (active) {
             const mark = document.createElement("span");
             mark.className = "overlay-sentence-active";

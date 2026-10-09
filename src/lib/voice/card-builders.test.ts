@@ -109,9 +109,7 @@ describe("card-builders — 卡片数字 == payload 字段", () => {
   it("客户/发货卡:摘要计数 == summary，行 == milestones 最近 15 条", () => {
     const card = buildCustomersShipmentsCard(payload.delivery, payload.period.label);
     expect(card.summaryText).toBe(
-      `今日到期 ${payload.delivery.summary.todayDue}` +
-        ` · 七日内 ${payload.delivery.summary.sevenDayDue}` +
-        ` · 逾期 ${payload.delivery.summary.overdueDue}`,
+      `台账共 ${payload.delivery.summary.unitCount} 台`,
     );
 
     const latest = [...payload.delivery.milestones]
@@ -143,7 +141,7 @@ describe("card-builders — 卡片数字 == payload 字段", () => {
   it("发货完整计数不受提醒样本数量影响", () => {
     const delivery = { ...payload.delivery, summary: { ...payload.delivery.summary, todayDue: 17, sevenDayDue: 25, overdueDue: 9 } };
     const card = buildCustomersShipmentsCard(delivery, payload.period.label);
-    expect(card.summaryText).toBe("今日到期 17 · 七日内 25 · 逾期 9");
+    expect(card.counts).toEqual({ today: 17, sevenDays: 25, overdue: 9 });
     expect(card.spoken).toContain("今日到期 17 台、逾期未发 9 台");
   });
 });

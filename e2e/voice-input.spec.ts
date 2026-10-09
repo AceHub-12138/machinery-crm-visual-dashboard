@@ -53,6 +53,7 @@ test('real worklet/VAD interrupts an answer, then a long question survives the 8
     await s.open();await s.play('sales-question.wav');await expect.poll(()=>s.questions.length,{timeout:10000}).toBe(1);
     await expect.poll(()=>s.orch.state.name).toBe('answering');expect(s.questions[0]).toBe('本月销售怎么样');
     await s.play('rate-question.wav');await expect(page.locator('.overlay-root')).toHaveAttribute('data-barge-paused','true',{timeout:1500});
+    await page.screenshot({path:'docs/design/answer-card-mockups/修复_M1_打断暂停.png'});
     await expect.poll(()=>s.questions.length,{timeout:10000}).toBe(2);
     const before=s.ready();await expect.poll(()=>s.orch.state.name,{timeout:15000}).toBe('followup');await expect.poll(()=>s.ready(),{timeout:5000}).toBeGreaterThan(before);
     await page.waitForTimeout(3500);await s.play('followup-long.wav');await page.waitForTimeout(4000);

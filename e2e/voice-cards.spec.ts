@@ -4,6 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { startVoiceHub, type VoiceHubServer } from "../services/voice-orchestrator/src/ws/ws-server";
 import { isValidAnswerCard } from "../src/lib/voice/protocol";
 import type { AnswerCardData } from "../src/lib/voice/session-machine";
+import { displaySpoken } from "../src/lib/voice/card-presentation";
 import { CARD_INTENTS, task12Card } from "./task12-fixtures";
 let hub: VoiceHubServer;
 const evidence: unknown[]=[];
@@ -26,7 +27,7 @@ async function show(page:Page, card:AnswerCardData) {
   hub.broadcast({type:"answer.delta",at:Date.now(),seq:0,text:card.spoken,full:true,card});
   hub.broadcast({type:"state.change",at:Date.now(),from:"thinking",to:"answering",turn:0});
   await expect(page.locator(`[data-card-kind="${card.kind}"] .overlay-card-body`)).toBeVisible();
-  await expect.poll(()=>page.locator(".overlay-card-spoken").innerText(),{timeout:12000}).toBe(card.spoken);
+  await expect.poll(()=>page.locator(".overlay-card-spoken").innerText(),{timeout:12000}).toBe(displaySpoken(card.spoken));
   await page.evaluate(()=>document.fonts.ready);
 }
 async function bounds(page:Page) {
@@ -74,12 +75,12 @@ test("zero values, 180% and no duplicate brief body",async({page})=>{
   }
   for(const intent of ["sales_progress","target_rate"] as const){
     const card=task12Card(intent,"exceeded"); await show(page,card);
-    await expect(page.locator(".overlay-card-data")).toContainText("180.0%");
+    await expect(page.locator(".overlay-card-data")).toContainText("180%");
     expect(await page.locator(".overlay-card-data").innerText()).not.toContain("距目标还差");
   }
   const brief=task12Card("unanswerable","normal"); await show(page,brief);
-  await expect(page.locator(".overlay-card-spoken")).toHaveText(brief.spoken);
-  expect((await page.locator(".overlay-card-body").innerText()).split(brief.spoken).length-1).toBe(1);
+  await expect(page.locator(".overlay-card-spoken")).toHaveText(displaySpoken(brief.spoken));
+  expect((await page.locator(".overlay-card-body").innerText()).split(displaySpoken(brief.spoken)).length-1).toBe(1);
 });
 test("15 shipments slide at 4s with five slots and three dots",async({page})=>{
   await open(page); await show(page,task12Card("upcoming_shipments","long"));
