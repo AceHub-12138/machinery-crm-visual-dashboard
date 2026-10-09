@@ -71,28 +71,30 @@ export function approach(current: number, target: number, dtMs: number, tauMs: n
 
 /** 核心落位 (960, 470) @1920×1080(plan §5),按视口比例换算。 */
 export const CORE_RATIO = { x: 0.5, y: 470 / 1080 };
-/** 答案卡锚点在核心正下方(plan §5 的 y 700–880 带下限附近):取 0.635
- * (1080p = 686),实测卡体 ~360px 向下展开后底缘 ~1046,全卡可见;
- * 8a 视觉打磨时只动这里。 */
-export const CARD_ANCHOR_Y_RATIO = 0.635;
-export const CARD_WIDTH = 720;
+/** Task 12: card top at y=400, height at most 620, standard/wide widths 880/1040. */
+export const CARD_ANCHOR_Y_RATIO = 400 / 1080;
+export const CARD_WIDTH = 880;
 
 export type OverlayGeometry = {
   width: number;
   height: number;
+  scale: number;
   core: { x: number; y: number };
   cardAnchor: { x: number; y: number; width: number };
 };
 
 /** 纯函数:视口尺寸 → 覆盖层几何(核心/卡片锚点)。 */
-export function overlayGeometry(width: number, height: number): OverlayGeometry {
+export function overlayGeometry(width: number, height: number, phase: VoiceStateName = "ambient", wide = false): OverlayGeometry {
   const w = Math.max(1, width);
   const h = Math.max(1, height);
+  const scale = Math.min(w / 1920, h / 1080);
+  const hasCard = phase === "answering" || phase === "followup";
   return {
     width: w,
     height: h,
-    core: { x: w * CORE_RATIO.x, y: h * CORE_RATIO.y },
-    cardAnchor: { x: w * CORE_RATIO.x, y: h * CARD_ANCHOR_Y_RATIO, width: Math.min(CARD_WIDTH, w * 0.9) },
+    scale,
+    core: { x: w * CORE_RATIO.x, y: h * (hasCard ? 225 / 1080 : CORE_RATIO.y) },
+    cardAnchor: { x: w * CORE_RATIO.x, y: h * CARD_ANCHOR_Y_RATIO, width: (wide ? 1040 : CARD_WIDTH) * scale },
   };
 }
 
@@ -177,7 +179,8 @@ export function beamArcPoint(
   to: { x: number; y: number },
   bow: number,
 ): { x: number; y: number } {
-  const mx = (from.x + to.x) / 2 + bow;
+  const narrowBow = from.x === to.x ? Math.max(-12, Math.min(12, bow)) : bow;
+  const mx = (from.x + to.x) / 2 + narrowBow;
   const my = (from.y + to.y) / 2;
   const u = 1 - t;
   return {
@@ -459,7 +462,7 @@ function stateVisual(input: CoreVisualInput): CoreVisual {
       const ph = input.launchElapsedMs == null ? null : launchPhase(input.launchElapsedMs);
       return {
         ...base,
-        coreRadius: 1 + 0.04 * amplitude,
+        coreRadius: 0.75 * (1 + 0.04 * amplitude),
         brightness: 1,
         pulse: ph ? ph.pulse : 0,
         stream: ph ? ph.stream : 0,
@@ -475,7 +478,7 @@ function stateVisual(input: CoreVisualInput): CoreVisual {
       const slow = 0.5 + 0.5 * Math.sin((now - since) / 1000 * 1.6);
       return {
         ...base,
-        coreRadius: 1 + 0.05 * slow * (0.4 + 0.6 * amplitude),
+        coreRadius: 0.75 * (1 + 0.05 * slow * (0.4 + 0.6 * amplitude)),
         brightness: 0.85,
         ringAlpha: 0.4,
         countdown,

@@ -5,15 +5,19 @@
  * 数据句不复用 id=2 的固定数字,而是从 mock 口径(target.ts)现场推导——
  * 与答案卡、基线大屏永远同源(plan §7 数据一致性红线)。
  *
- * 演示剧本按 cycles 轮换:偶数轮走正常链路,奇数轮走 thinking 超时降级,
- * 一块屏同时展示两条路径。thinkTimeoutMs 压缩到 3.2s 只为演示节奏,
- * 真实规格仍是 VOICE_TIMING.thinkingMaxMs = 8s(状态机常量不动)。
+ * Task 12: seven data templates rotate by cycle. Error recovery stays covered
+ * by live integration tests, while unattended demos display supported data.
  */
 
 import { formatMoney } from "../format.ts";
 import { calculateSalesTargetProgress } from "../target.ts";
 import { synthAmplitude, synthSpeechAmplitude } from "./params.ts";
 import type { AnswerCardData } from "./session-machine.ts";
+import type { PublicScreenPayload } from "../public-screen-payload.ts";
+import type { PublicSalesScreenPayload } from "./public-payload.ts";
+import { buildIntentAnswer } from "./intent-answers.ts";
+import { classifyScriptedQuestion } from "./intents.ts";
+import { DEMO_QUESTIONS } from "./demo-questions.ts";
 
 export const DEMO_LINES = {
   wake: "我在,先生。请讲。", // lines.json #1
@@ -46,10 +50,33 @@ export const DEMO_TIMING = {
   exitFadeMs: 520,
 } as const;
 
-export type DemoScenarioId = "normal" | "timeout-error";
-
-export function scenarioForCycle(cycle: number): DemoScenarioId {
-  return cycle % 2 === 0 ? "normal" : "timeout-error";
+/** Demo answers derive from the displayed public screen, rather than a second fixture. */
+export function demoAnswerForCycle(screen: PublicScreenPayload, cycle: number) {
+  const stats = screen.dashboard.stats;
+  const target = screen.salesTargets.targets.find(t => t.salesUserId === null);
+  const progress = calculateSalesTargetProgress(target?.actualAmount ?? 0, target?.amount ?? 0);
+  const routes = screen.map.routes;
+  const paths = screen.dashboard.shipmentPaths;
+  const payload: PublicSalesScreenPayload = {
+    version: 1, generatedAt: screen.generatedAt, displayNotice: false, modules: {},
+    period: { label: screen.salesTargets.period.label, startDate: screen.dashboard.range.startDate, endDate: screen.dashboard.range.endDate },
+    kpis: { ...stats, periodContractAmount: String(stats.periodContractAmount), periodPaidAmount: String(stats.periodPaidAmount), periodUnpaidAmount: String(stats.periodUnpaidAmount) },
+    collection: { totalContractAmount: String(stats.totalContractAmount), totalPaidAmount: String(stats.totalPaidAmount), totalUnpaidAmount: String(stats.totalUnpaidAmount),
+      collectionRate: stats.totalContractAmount > 0 ? Number((stats.totalPaidAmount / stats.totalContractAmount * 100).toFixed(1)) : 0,
+      targetAmount: progress.targetAmount, actualAmount: progress.actualAmount, targetRate: progress.completionRate, targetVisualRate: progress.visualRate,
+      remainingAmount: progress.remainingAmount, exceededAmount: progress.exceededAmount, exceeded: progress.exceeded },
+    delivery: {
+      summary: { shipmentCount: screen.map.shipmentCount, unitCount: paths.reduce((sum, p) => sum + p.quantity, 0), regionCount: screen.map.coverageProvinces.length,
+        todayDue: stats.todayShipmentDue, sevenDayDue: stats.sevenDayShipmentDue, overdueDue: stats.overdueShipmentDue },
+      routes: routes.filter(r => r.destination.lng !== undefined && r.destination.lat !== undefined).map(r => ({ key: r.id, province: r.region, city: r.city,
+        centerLng: r.destination.lng!, centerLat: r.destination.lat!, equipmentName: r.equipmentName, equipmentModel: "", shipmentDate: paths.find(p => p.id === r.id)?.shipmentDate ?? "", unitCount: paths.find(p => p.id === r.id)?.quantity ?? 0 })),
+      reminders: { today: [], sevenDays: [], overdue: [] },
+      milestones: paths.map(p => ({ key: p.id, contractNumber: routes.find(r => r.id === p.id)?.contractNo ?? null, equipmentName: p.equipmentName,
+        equipmentModel: p.contract.equipmentModel, shipmentDate: p.shipmentDate, shipmentStatus: p.shipmentStatus, unitCount: p.quantity })),
+    },
+  };
+  const question = DEMO_QUESTIONS[((cycle % 7) + 7) % 7].question;
+  return { question, ...buildIntentAnswer(classifyScriptedQuestion(question), payload) };
 }
 
 /** 目标进度卡(首个精做模板):数据只从 payload 的公司目标行推导。 */

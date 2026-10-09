@@ -1,44 +1,26 @@
 "use client";
-
-import type { RefObject } from "react";
 import type { AnswerCardData } from "@/lib/voice/session-machine";
-
-/**
- * 区域对比卡(plan §7「区域对比卡」)。
- *
- * 数据红线:rows 由 card-builders.buildRegionCard 从 delivery.routes
- * 按省聚合,组件零计算。两列数值 + 迷你横向条(铜色,按占比宽)。
- */
-export function RegionCard({
-  card,
-  spokenRef,
-}: {
-  card: AnswerCardData & { kind: "region" };
-  spokenRef: RefObject<HTMLSpanElement | null>;
-}) {
-  return (
-    <div className="overlay-card-body">
-      <p className="overlay-card-title">{card.title}</p>
-      <p className="overlay-card-subtitle">{card.summaryText}</p>
-
-      <div className="overlay-card-rows" role="table" aria-label={card.title}>
-        {card.rows.map((row) => (
-          <div className="overlay-card-row" role="row" key={row.region}>
-            <span className="overlay-card-row-region">{row.region}</span>
-            <span className="overlay-card-row-mini" aria-hidden="true">
-              <i style={{ width: `${Math.min(100, row.sharePercent)}%` }} />
-            </span>
-            <span className="overlay-card-row-value">
-              <strong>{row.units}</strong> 台 / {row.shipments} 单
-              <em className="overlay-card-row-share">{row.sharePercent.toFixed(1)}%</em>
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <p className="overlay-card-spoken">
-        <span ref={spokenRef} />
-      </p>
+import { chinaMap, createScreenArc, mapBBox, projectLonLat } from "@/lib/geo";
+import { cardExcerpt } from "@/lib/voice/card-presentation";
+/** Same map and projection as ShipmentMap; no separate map dependency. */
+export function RegionCard({card}: {card: Extract<AnswerCardData, {kind: "region"}>}) {
+  const points = card.mapPoints?.map(p => ({...projectLonLat(p.lng, p.lat), region: p.region})) ?? [];
+  const viewBox = `${mapBBox.minX - 20} ${mapBBox.minY - 20} ${mapBBox.width + 40} ${mapBBox.height + 40}`;
+  return <div className="overlay-region-block">
+    <div className="overlay-region-ranking" role="table" aria-label="区域发运排行">
+      <div className="overlay-region-head"><span>排名 / 省市</span><span>发运量 · 占比</span></div>
+      {card.rows.slice(0, 5).map((row, i) => <div className="overlay-region-row" role="row" key={row.region}>
+        <i className="overlay-rank">{i + 1}</i><span className="overlay-region-name" title={row.region}>{cardExcerpt(row.region, 6)}</span>
+        <span className="overlay-card-row-mini" aria-hidden="true"><i style={{width: `${Math.min(100, row.sharePercent)}%`}} /></span>
+        <span className="overlay-region-value"><strong>{row.units}</strong> 台 / {row.shipments} 单</span><em>{row.sharePercent.toFixed(1)}%</em>
+      </div>)}
+      {card.other && card.other.regions > 0 ? <p className="overlay-region-other">其他 {card.other.regions} 省 · {card.other.units} 台</p> : null}
+      {card.rows.length === 0 ? <p className="overlay-empty">暂无发运记录</p> : null}
     </div>
-  );
+    <svg className="overlay-region-map" viewBox={viewBox} role="img" aria-label={`发运地图，共 ${points.length} 个落点`}>
+      {chinaMap.provinces.map(p => <path key={p.adcode} d={p.d} className="overlay-map-province" />)}
+      {points.map((point, i) => <g key={`${point.region}-${i}`}><path d={createScreenArc(chinaMap.factory, point).d} className="overlay-map-route" /><circle cx={point.x} cy={point.y} r="8" className="overlay-map-point"><title>{point.region}</title></circle></g>)}
+      <circle cx={chinaMap.factory.x} cy={chinaMap.factory.y} r="12" className="overlay-map-factory"><title>工厂</title></circle>
+    </svg>
+  </div>;
 }

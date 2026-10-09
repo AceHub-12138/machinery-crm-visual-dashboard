@@ -261,6 +261,7 @@ const isNum = (v: unknown): v is number => typeof v === "number" && Number.isFin
 export const ANSWER_TEXT_MAX = 300;
 export const ANSWER_SPOKEN_MAX = 600;
 export const ANSWER_ROWS_MAX = 20;
+export const ANSWER_MAP_POINTS_MAX = 200;
 const isText = (v: unknown, max = ANSWER_TEXT_MAX): v is string => isStr(v) && v.length <= max;
 /** 百分比:0–1000(允许超额完成) */
 const isPercent = (v: unknown): v is number => isNum(v) && v >= 0 && v <= 1000;
@@ -280,6 +281,12 @@ export function isValidAnswerCard(card: unknown): card is AnswerCardData {
       return isPercent(c.ratePercent) && isText(c.collectedText) && isText(c.targetText) && isText(c.remainingText);
     case "region":
       return (
+        (c.other === undefined || (typeof c.other === "object" && c.other !== null && isCount((c.other as Record<string, unknown>).regions) && isCount((c.other as Record<string, unknown>).units))) &&
+        (c.mapPoints === undefined || (Array.isArray(c.mapPoints) && c.mapPoints.length <= ANSWER_MAP_POINTS_MAX && c.mapPoints.every(p => {
+          if (typeof p !== "object" || p === null) return false;
+          const point = p as Record<string, unknown>;
+          return isText(point.region) && isNum(point.lng) && point.lng >= -180 && point.lng <= 180 && isNum(point.lat) && point.lat >= -90 && point.lat <= 90;
+        }))) &&
         isText(c.summaryText) &&
         Array.isArray(c.rows) &&
         c.rows.length <= ANSWER_ROWS_MAX &&
@@ -291,6 +298,8 @@ export function isValidAnswerCard(card: unknown): card is AnswerCardData {
       );
     case "customers-shipments":
       return (
+        (c.omittedCount === undefined || isCount(c.omittedCount)) &&
+        (c.counts === undefined || (typeof c.counts === "object" && c.counts !== null && ["today", "sevenDays", "overdue"].every(key => isCount((c.counts as Record<string, unknown>)[key])))) &&
         isText(c.summaryText) &&
         Array.isArray(c.rows) &&
         c.rows.length <= ANSWER_ROWS_MAX &&
@@ -300,6 +309,9 @@ export function isValidAnswerCard(card: unknown): card is AnswerCardData {
           return isText(r.equipmentText) && isText(r.detailText) && isText(r.statusText) && isText(r.dateLabel);
         })
       );
+    case "customer-kpi": return isCount(c.newCustomers) && isCount(c.totalCustomers);
+    case "followup-buckets": return isCount(c.today) && isCount(c.sevenDays) && isCount(c.overdue);
+    case "collection-split": return isPercent(c.ratePercent) && isText(c.paidText) && isText(c.unpaidText);
     case "brief":
       return Array.isArray(c.lines) && c.lines.length <= ANSWER_ROWS_MAX && c.lines.every((line) => isText(line));
     default:

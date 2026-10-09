@@ -1,0 +1,130 @@
+{
+  "branch": "codex/voice-8c-task12",
+  "baseCommit": "561ae0ef51493635e85f3834a773fa6885cd8de5",
+  "task12CommitCreated": true,
+  "unitTests": {
+    "passed": 468,
+    "total": 468
+  },
+  "task12BrowserChecks": {
+    "passed": 36,
+    "total": 36
+  },
+  "classifierQuestions": {
+    "passed": 11,
+    "total": 11
+  },
+  "fullBrowserRegression": {
+    "mode": "PLAYWRIGHT_SILENT_AUDIO=0; default native AudioContext output; caffeinate only during test process",
+    "stats": {
+      "startTime": "2026-10-08T23:57:37.020Z",
+      "duration": 560167.097,
+      "expected": 69,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "failures": []
+  },
+  "status": "All automated checks passed; screenshots and physical-device acceptance remain for the user; no merge or push.",
+  "previousIncompleteRun": {
+    "mode": "PLAYWRIGHT_SILENT_AUDIO=1; native AudioContext silent sink in test fixtures only",
+    "stats": {
+      "startTime": "2026-10-08T14:30:17.505Z",
+      "duration": 2418441.04,
+      "expected": 50,
+      "skipped": 0,
+      "unexpected": 19,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "title": "full silence after an answer traverses long window, prompt, short window and warm exit",
+        "status": "unexpected"
+      },
+      {
+        "title": "speech spanning the final sample and tail guard is preserved as one barge utterance",
+        "status": "unexpected"
+      },
+      {
+        "title": "goodbye and fallback close without accepting speech during their playback",
+        "status": "unexpected"
+      },
+      {
+        "title": "paused playback releases both ends on Escape",
+        "status": "unexpected"
+      },
+      {
+        "title": "paused playback releases both ends on disconnect",
+        "status": "unexpected"
+      },
+      {
+        "title": "200ms prerecorded speech cannot confirm a barge or submit a business question",
+        "status": "unexpected"
+      },
+      {
+        "title": "configured 2s ordinary window reaches the browser and expires from actual ready",
+        "status": "unexpected"
+      },
+      {
+        "title": "ordinary rate limit plays an apology and reopens instead of leaving the session",
+        "status": "unexpected"
+      },
+      {
+        "title": "only the owner plays; a second screen failure cannot cut off audio; followup begins at actual drain",
+        "status": "unexpected"
+      },
+      {
+        "title": "a suspended real AudioContext keeps the answer without followup; a click enables the next turn",
+        "status": "unexpected"
+      },
+      {
+        "title": "real PCM drives analyser and sentence highlight; followup waits for EOF and final sample",
+        "status": "unexpected"
+      },
+      {
+        "title": "cached goodbye plays before closing and starts no new GPU request",
+        "status": "unexpected"
+      },
+      {
+        "title": "superseding a live answer stops its sources and downloads; only the new turn drains",
+        "status": "unexpected"
+      },
+      {
+        "title": "audio failure leaves the card readable and does not report successful playback",
+        "status": "unexpected"
+      },
+      {
+        "title": "Escape and hub disconnect stop audio immediately and restore the baseline",
+        "status": "unexpected"
+      },
+      {
+        "title": "Escape during followup closes the hub and a fresh question wakes the screen",
+        "status": "unexpected"
+      },
+      {
+        "title": "one failed sentence preserves earlier audio and records skipped sentences with drained",
+        "status": "unexpected"
+      },
+      {
+        "title": "a skipped first sentence still reports the actual first sound exactly once",
+        "status": "unexpected"
+      },
+      {
+        "title": "a suspended context reports failure and a pointer gesture enables the next answer",
+        "status": "unexpected"
+      }
+    ]
+  },
+  "failedSubsetRerun": {
+    "mode": "native silent sink",
+    "stats": {
+      "startTime": "2026-10-08T23:53:27.815Z",
+      "duration": 216848.38499999998,
+      "expected": 19,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
+}

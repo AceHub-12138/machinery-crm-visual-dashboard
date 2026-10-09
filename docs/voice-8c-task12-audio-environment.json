@@ -1,0 +1,42 @@
+{
+  "physicalOutputProbe": {
+    "wallMs": 1200,
+    "initialAudioTimeSeconds": 0,
+    "finalAudioTimeSeconds": 0.005333333333333333,
+    "state": "running",
+    "sampleRate": 48000
+  },
+  "nativeSilentSinkProbe": {
+    "wallMs": 1200,
+    "initialAudioTimeSeconds": 0.005333333333333333,
+    "finalAudioTimeSeconds": 1.2053333333333334,
+    "state": "running",
+    "sampleRate": 48000
+  },
+  "scope": "Headless Chromium on this Mac; no production audio code or system audio settings changed.",
+  "recheck": {
+    "physicalOutputProbe": {
+      "wallMs": 1200,
+      "audioElapsedMs": 1189,
+      "state": "running"
+    },
+    "nativeSilentSinkProbe": {
+      "wallMs": 1202,
+      "audioElapsedMs": 1205,
+      "state": "running"
+    },
+    "failedSubset": {
+      "mode": "native silent sink",
+      "passed": 19,
+      "total": 19,
+      "skipped": 0
+    },
+    "note": "The stalled default clock was not reproduced in the fresh probe. The 19-case subset passed, then all 69 browser checks passed using default native output with the silent option disabled. System audio settings and production audio code were not changed. Audibility and venue hardware still require human acceptance.",
+    "defaultOutputFullRegression": {
+      "passed": 69,
+      "total": 69,
+      "skipped": 0,
+      "flaky": 0
+    }
+  }
+}

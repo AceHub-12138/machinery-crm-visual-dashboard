@@ -106,7 +106,7 @@ describe("card-builders — 卡片数字 == payload 字段", () => {
     );
   });
 
-  it("客户/发货卡:摘要计数 == summary，行 == milestones 最近 5 条", () => {
+  it("客户/发货卡:摘要计数 == summary，行 == milestones 最近 15 条", () => {
     const card = buildCustomersShipmentsCard(payload.delivery, payload.period.label);
     expect(card.summaryText).toBe(
       `今日到期 ${payload.delivery.summary.todayDue}` +
@@ -116,12 +116,12 @@ describe("card-builders — 卡片数字 == payload 字段", () => {
 
     const latest = [...payload.delivery.milestones]
       .sort((a, b) => b.shipmentDate.localeCompare(a.shipmentDate))
-      .slice(0, 5);
+      .slice(0, 15);
     expect(card.rows).toHaveLength(latest.length);
     card.rows.forEach((row, i) => {
       const milestone = latest[i];
       expect(row.equipmentText).toBe(`${milestone.equipmentName} ${milestone.equipmentModel}`);
-      expect(row.detailText).toBe(`合同 ${milestone.contractNumber}`);
+      expect(row.detailText).toBe(`合同尾号 ${milestone.contractNumber!.slice(-4)}`);
       expect(row.dateLabel).toBe(formatShortDate(milestone.shipmentDate));
     });
   });

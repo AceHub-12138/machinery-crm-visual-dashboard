@@ -6,13 +6,12 @@ import { AnswerCard } from "@/components/overlay/AnswerCard";
 import "./overlay.css";
 import {
   DEMO_LINES,
-  DEMO_QUESTION,
   DEMO_TIMING,
   buildTargetProgressCard,
+  demoAnswerForCycle,
   demoAmplitude,
-  scenarioForCycle,
 } from "@/lib/voice/demo-script.ts";
-import { LAUNCH, overlayGeometry, type OverlayGeometry, type VoiceFrame } from "@/lib/voice/params";
+import { LAUNCH, overlayGeometry, easeInOutCubic, lerp, type OverlayGeometry, type VoiceFrame } from "@/lib/voice/params";
 import {
   initSessionState,
   sessionReducer,
@@ -44,7 +43,7 @@ import type { PublicScreenPayload } from "@/lib/public-screen-payload";
  * 基线轮播与轮询全程继续跑,退场淡出后观众无缝接回原相位。
  *
  * driver="demo"(默认,?voiceDemo=1):8a 脚本回放器,自动循环演示全流程,
- * 剧本按 cycles 轮换(偶数轮正常 / 奇数轮 thinking 超时降级)。
+ * 剧本按 cycles 轮播全部七张数据卡。
  * driver="live"(?voiceLive=1):订阅编排服务 WS hub——session.start 唤醒、
  * asr.partial 转写、answer.delta 携卡发射、error 降级、断链 FORCE_CLOSE。
  * 状态机/粒子/卡片两个驱动共用;wire→状态机映射在 live-source.ts(纯函数)。
@@ -138,15 +137,24 @@ export function OverlayStage({
 
   /* ---- 几何:核心/锚点随视口换算(1080p 全屏即方案落位) ---- */
   useEffect(() => {
+    let raf = 0;
     const apply = () => {
-      const g = overlayGeometry(window.innerWidth, window.innerHeight);
-      frameRef.current.geometry = g;
+      cancelAnimationFrame(raf);
+      const g = overlayGeometry(window.innerWidth, window.innerHeight, session.name, session.card?.kind === "region");
+      const from = frameRef.current.geometry.core;
+      const start = performance.now();
+      const paint = (now: number) => {
+        const p = Math.min(1, (now - start) / 600);
+        frameRef.current.geometry = { ...g, core: { x: lerp(from.x, g.core.x, easeInOutCubic(p)), y: lerp(from.y, g.core.y, easeInOutCubic(p)) } };
+        if (p < 1) raf = requestAnimationFrame(paint);
+      };
+      raf = requestAnimationFrame(paint);
       setGeometry(g);
     };
     apply();
     window.addEventListener("resize", apply);
-    return () => window.removeEventListener("resize", apply);
-  }, []);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", apply); };
+  }, [session.name, session.card?.kind]);
 
   /* ---- 状态机 → 画布快照(名字/相位/振幅源/折叠起点) ---- */
   useEffect(() => {
@@ -187,7 +195,7 @@ export function OverlayStage({
     (card?: AnswerCardData) => {
       const resolved =
         card ??
-        buildTargetProgressCard(payloadRef.current.salesTargets.targets, payloadRef.current.salesTargets.period.label);
+        (live ? buildTargetProgressCard(payloadRef.current.salesTargets.targets, payloadRef.current.salesTargets.period.label) : demoAnswerForCycle(payloadRef.current, mirrorRef.current.cycles).card);
       const now = performance.now();
       frameRef.current.launchAt = now;
       setLaunchAt(now);
@@ -257,11 +265,12 @@ export function OverlayStage({
       case "listening": {
         if (live) break; // 转写与提交由编排服务 asr.partial / state.change 驱动
         // ASR 逐字中间结果 → 静音判定提交
-        for (let i = 1; i <= DEMO_QUESTION.length; i++) {
-          const text = DEMO_QUESTION.slice(0, i);
+        const question = demoAnswerForCycle(payloadRef.current, session.cycles).question;
+        for (let i = 1; i <= question.length; i++) {
+          const text = question.slice(0, i);
           at(i * DEMO_TIMING.partialStepMs, () => dispatchTracked({ type: "PARTIAL", text, at: now() }));
         }
-        at(DEMO_TIMING.listenMs, () => dispatchTracked({ type: "SUBMIT", question: DEMO_QUESTION, at: now() }));
+        at(DEMO_TIMING.listenMs, () => dispatchTracked({ type: "SUBMIT", question, at: now() }));
         break;
       }
       case "thinking": {
@@ -270,11 +279,7 @@ export function OverlayStage({
           at(VOICE_TIMING.thinkingMaxMs + 1500, () => dispatchTracked({ type: "THINK_TIMEOUT", at: now() }));
           break;
         }
-        if (scenarioForCycle(session.cycles) === "normal") {
-          at(DEMO_TIMING.thinkOkMs, () => fireAnswer());
-        } else {
-          at(DEMO_TIMING.thinkTimeoutMs, () => dispatchTracked({ type: "THINK_TIMEOUT", at: now() }));
-        }
+        at(DEMO_TIMING.thinkOkMs, () => fireAnswer());
         break;
       }
       case "answering": {
@@ -519,7 +524,7 @@ export function OverlayStage({
   if (phase === "off") return null;
 
   return (
-    <div className="overlay-root" data-phase={phase} data-barge-paused={bargePaused}>
+    <div className="overlay-root" data-phase={phase} data-has-card={session.card !== null} data-barge-paused={bargePaused}>
       <JarvisCore frameRef={frameRef} quality={lite ? "lite" : "high"} />
 
       <div key={session.name} className="overlay-caption-block overlay-caption-appear">

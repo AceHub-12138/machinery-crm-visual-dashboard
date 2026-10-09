@@ -1,45 +1,19 @@
 "use client";
-
-import type { RefObject } from "react";
 import type { AnswerCardData } from "@/lib/voice/session-machine";
-
-/**
- * 客户/发货卡(plan §7「客户/发货卡」,ReminderRail / DeliveryMilestones 数据面)。
- *
- * 数据红线:rows/summaryText 由 card-builders.buildCustomersShipmentsCard
- * 从 delivery.milestones + reminders 构造,组件零计算。
- * 迷你紧凑列表:设备型号 + 合同号 + 状态徽标 + 日期。
- */
-export function CustomersShipmentsCard({
-  card,
-  spokenRef,
-}: {
-  card: AnswerCardData & { kind: "customers-shipments" };
-  spokenRef: RefObject<HTMLSpanElement | null>;
-}) {
-  return (
-    <div className="overlay-card-body">
-      <p className="overlay-card-title">{card.title}</p>
-      <p className="overlay-card-subtitle">{card.summaryText}</p>
-
-      <div className="overlay-card-rows" role="table" aria-label={card.title}>
-        {card.rows.map((row, index) => (
-          <div className="overlay-card-row" role="row" key={`${row.equipmentText}-${index}`}>
-            <span className="overlay-card-row-main">
-              <strong>{row.equipmentText}</strong>
-              <small>{row.detailText}</small>
-            </span>
-            <span className="overlay-card-row-tail">
-              <i className="overlay-card-chip">{row.statusText}</i>
-              <em>{row.dateLabel}</em>
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <p className="overlay-card-spoken">
-        <span ref={spokenRef} />
-      </p>
-    </div>
-  );
+import { cardExcerpt, shipmentPages } from "@/lib/voice/card-presentation";
+export function CustomersShipmentsCard({card, pageIndex}: {card: Extract<AnswerCardData, {kind: "customers-shipments"}>; pageIndex: number}) {
+  const pages = shipmentPages(card.rows, card.omittedCount);
+  const activePage = Math.min(pages.length - 1, pageIndex);
+  return <div className="overlay-shipments-block" data-page={activePage + 1}>
+    {card.counts ? <div className="overlay-shipment-badges"><span>今日到期 <strong>{card.counts.today}</strong></span><span>七日内 <strong>{card.counts.sevenDays}</strong></span><span className={card.counts.overdue > 0 ? "is-accent" : ""}>逾期未发 <strong>{card.counts.overdue}</strong></span></div> : null}
+    <div className="overlay-pages-window"><div className="overlay-pages-track" style={{transform: `translateX(-${activePage * 100}%)`}}>
+      {pages.map((rows, p) => <div className="overlay-shipment-page" role="table" aria-label={`发运明细第 ${p + 1} 页`} aria-hidden={p !== activePage} key={p}>
+        {rows.map((row, i) => "otherCount" in row ? <div className="overlay-shipment-row overlay-empty" role="row" key="other">其他 {row.otherCount} 项</div> : <div className="overlay-shipment-row" role="row" key={i}>
+          <strong title={row.equipmentText}>{cardExcerpt(row.equipmentText, 24)}</strong><small title={row.detailText}>{cardExcerpt(row.detailText, 10)}</small><span className="overlay-card-chip" title={row.statusText}>{cardExcerpt(row.statusText, 6)}</span><time>{row.dateLabel}</time>
+        </div>)}
+        {rows.length === 0 ? <p className="overlay-empty">暂无发运明细</p> : null}
+      </div>)}
+    </div></div>
+    <div className="overlay-page-dots" aria-label={`第 ${activePage + 1} 页，共 ${pages.length} 页`}>{pages.map((_, i) => <i key={i} className={i === activePage ? "is-active" : ""} />)}</div>
+  </div>;
 }

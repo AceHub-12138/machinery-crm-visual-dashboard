@@ -1,0 +1,85 @@
+{
+  "testedAt": "2026-10-08T09:01:59.799Z",
+  "endpoint": "local",
+  "results": [
+    {
+      "question": "目标完成率是多少？",
+      "expected": "target_rate",
+      "actual": "target_rate",
+      "ms": 478,
+      "ok": true
+    },
+    {
+      "question": "回款情况怎么样？",
+      "expected": "collection",
+      "actual": "collection",
+      "ms": 385,
+      "ok": true
+    },
+    {
+      "question": "本月销售情况怎么样？",
+      "expected": "sales_progress",
+      "actual": "sales_progress",
+      "ms": 401,
+      "ok": true
+    },
+    {
+      "question": "近期有哪些发货安排？",
+      "expected": "upcoming_shipments",
+      "actual": "upcoming_shipments",
+      "ms": 429,
+      "ok": true
+    },
+    {
+      "question": "各区域发货分布怎么样？",
+      "expected": "region_shipments",
+      "actual": "region_shipments",
+      "ms": 414,
+      "ok": true
+    },
+    {
+      "question": "今天有多少跟进待办？",
+      "expected": "followup_todo",
+      "actual": "followup_todo",
+      "ms": 415,
+      "ok": true
+    },
+    {
+      "question": "本月新增了多少客户？",
+      "expected": "new_customers",
+      "actual": "new_customers",
+      "ms": 412,
+      "ok": true
+    },
+    {
+      "question": "本月目标完成率是多少？",
+      "expected": "target_rate",
+      "actual": "target_rate",
+      "ms": 408,
+      "ok": true
+    },
+    {
+      "question": "本月销售情况",
+      "expected": "sales_progress",
+      "actual": "sales_progress",
+      "ms": 396,
+      "ok": true
+    },
+    {
+      "question": "回款情况",
+      "expected": "collection",
+      "actual": "collection",
+      "ms": 384,
+      "ok": true
+    },
+    {
+      "question": "发货安排",
+      "expected": "upcoming_shipments",
+      "actual": "upcoming_shipments",
+      "ms": 430,
+      "ok": true
+    }
+  ],
+  "passed": 11,
+  "total": 11
+}

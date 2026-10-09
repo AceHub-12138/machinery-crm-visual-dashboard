@@ -73,20 +73,20 @@ describe("缓动基础", () => {
 });
 
 describe("overlayGeometry(§5 落位)", () => {
-  it("1080p 下核心落在 (960,470),卡片锚点在核心正下方、宽 720", () => {
+  it("1080p 下核心落在 (960,470),卡片锚点在核心正下方、宽 880", () => {
     const g = overlayGeometry(1920, 1080);
     expect(g.core).toEqual({ x: 960, y: 470 });
     expect(g.cardAnchor.x).toBe(960);
-    expect(g.cardAnchor.y).toBeCloseTo(685.8, 1); // 0.635 × 1080,卡体 ~360px 全卡可见
-    expect(g.cardAnchor.width).toBe(720);
+    expect(g.cardAnchor.y).toBe(400);
+    expect(g.cardAnchor.width).toBe(880);
     expect(coreRadiusFor(1920, 1080)).toBeCloseTo(150.12, 1);
   });
 
   it("小视口收窄卡片宽度并保持比例落位", () => {
     const g = overlayGeometry(800, 600);
-    expect(g.cardAnchor.width).toBe(720); // 800×0.9=720,恰好等于上限
+    expect(g.cardAnchor.width).toBeCloseTo(880 * 800 / 1920);
     const g2 = overlayGeometry(600, 500);
-    expect(g2.cardAnchor.width).toBe(540); // 600×0.9
+    expect(g2.cardAnchor.width).toBeCloseTo(880 * 600 / 1920);
     expect(g2.core).toEqual({ x: 300, y: 500 * (470 / 1080) });
   });
 });
@@ -161,8 +161,8 @@ describe("发射编排时序(§7,验收:各步参数可调)", () => {
     const from = { x: 960, y: 470 };
     const to = { x: 960, y: 777 };
     const mid = beamArcPoint(0.5, from, to, 120);
-    // 二次贝塞尔中点弓高为 bow/2:960 + 60 = 1020
-    expect(mid.x).toBeCloseTo(1020, 5);
+    // 竖向收束，水平弓高封顶 12，束宽不超过 12px。
+    expect(mid.x).toBeCloseTo(966, 5);
     expect(mid.y).toBeCloseTo(623.5, 5);
     expect(beamArcPoint(0, from, to, 120)).toEqual(from);
     expect(beamArcPoint(1, from, to, 120)).toEqual(to);
@@ -227,7 +227,7 @@ describe("coreVisual — §6 六状态行为映射", () => {
     expect(done.stream).toBe(1);
     expect(done.pulseRing).toBe(1);
     // 振幅只动 ±4%(微幅律动)
-    expect(at("answering", 0, 100, 1, 0).coreRadius).toBeCloseTo(1.04, 5);
+    expect(at("answering", 0, 100, 1, 0).coreRadius).toBeCloseTo(0.78, 5);
   });
 
   it("followup:能量环 8s 线性递减,8s 整归零", () => {

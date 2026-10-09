@@ -15,7 +15,7 @@ export type DemoQuestion = {
   id: number;
   question: string;
   /** 预期答案卡模板;覆盖缺口问题为 "unanswerable"(必降级) */
-  expectCard: "target-progress" | "completion-ring" | "region" | "customers-shipments" | "brief" | "unanswerable";
+  expectCard: "target-progress" | "completion-ring" | "region" | "customers-shipments" | "customer-kpi" | "followup-buckets" | "collection-split" | "brief" | "unanswerable";
   note: string;
 };
 
@@ -47,19 +47,19 @@ export const DEMO_QUESTIONS: DemoQuestion[] = [
   {
     id: 5,
     question: "本月新增了多少客户?",
-    expectCard: "brief",
+    expectCard: "customer-kpi",
     note: "结论卡:kpis.periodNewCustomers / totalCustomers",
   },
   {
     id: 6,
     question: "今天有多少跟进待办?",
-    expectCard: "brief",
+    expectCard: "followup-buckets",
     note: "结论卡:kpis.todayFollowUp / overdueFollowUp / sevenDayFollowUp",
   },
   {
     id: 7,
     question: "本月回款情况怎么样?",
-    expectCard: "brief",
+    expectCard: "collection-split",
     note: "结论卡:collection.totalPaidAmount / collectionRate",
   },
   {

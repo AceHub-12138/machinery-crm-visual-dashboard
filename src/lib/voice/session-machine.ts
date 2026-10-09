@@ -72,6 +72,8 @@ export type AnswerCardData =
         /** 占总台数百分比(0..100,一位小数) */
         sharePercent: number;
       }>;
+      mapPoints?: Array<{ region: string; lng: number; lat: number }>;
+      other?: { regions: number; units: number };
       spoken: string;
     }
   | {
@@ -84,8 +86,13 @@ export type AnswerCardData =
         statusText: string;
         dateLabel: string;
       }>;
+      counts?: { today: number; sevenDays: number; overdue: number };
+      omittedCount?: number;
       spoken: string;
     }
+  | { kind: "customer-kpi"; title: string; newCustomers: number; totalCustomers: number; spoken: string }
+  | { kind: "followup-buckets"; title: string; today: number; sevenDays: number; overdue: number; spoken: string }
+  | { kind: "collection-split"; title: string; ratePercent: number; paidText: string; unpaidText: string; spoken: string }
   | {
       kind: "brief";
       title: string;

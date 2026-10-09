@@ -1,6 +1,8 @@
 "use client";
 
-import { memo, useEffect, useLayoutEffect, useRef, type RefObject } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { cardExcerpt, cardFollowups, shipmentPages, shipmentPageAt } from "@/lib/voice/card-presentation";
+import { buildSpokenSentences } from "@/lib/voice/spoken-normalize";
 import {
   clamp01,
   easeInOutCubic,
@@ -48,10 +50,29 @@ export const AnswerCard = memo(function AnswerCard({
 }) {
   const lineRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<HTMLDivElement | null>(null);
-  const frameRef = useRef<SVGRectElement | null>(null);
+  const frameRef = useRef<SVGPathElement | null>(null);
   const cornerRef = useRef<HTMLDivElement | null>(null);
   const spokenRef = useRef<HTMLSpanElement | null>(null);
   const barFillRef = useRef<HTMLSpanElement | null>(null);
+  const [pageIndex, setPageIndex] = useState(0);
+  const pages = card.kind === "customers-shipments" ? shipmentPages(card.rows, card.omittedCount).length : 1;
+  const followups = cardFollowups(card);
+  useEffect(() => {
+    if (pages <= 1 || foldAt !== null) return;
+    const sentences = buildSpokenSentences(card.spoken);
+    let lastSentence = -1;
+    let boundaryAt = launchAt + config.unfoldStartMs + config.unfoldMs;
+    const update = () => {
+      const active = sentenceRef?.current;
+      const index = active ? sentences.findIndex(s => active.start >= s.displayStart && active.start < s.displayEnd) : -1;
+      const now = performance.now();
+      if (index !== lastSentence) { lastSentence = index; boundaryAt = now; }
+      setPageIndex(shipmentPageAt(now - boundaryAt, pages, index < 0 ? null : index, sentences.length));
+    };
+    update();
+    const timer = window.setInterval(update, 100);
+    return () => window.clearInterval(timer);
+  }, [card, pages, launchAt, config, foldAt, sentenceRef]);
 
   /* 进度条填充只写一次;宽度目标从卡片数据算出 */
   const barWidth = `${clamp01(card.kind === "target-progress" ? card.completionRate / 100 : 0) * 100}%`;
@@ -69,9 +90,9 @@ export const AnswerCard = memo(function AnswerCard({
     metrics.current = { w, h, perimeter: 2 * (w + h) };
     svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
     svg.setAttribute("preserveAspectRatio", "none");
-    rect.setAttribute("width", String(w - 1.5));
-    rect.setAttribute("height", String(h - 1.5));
-  }, []);
+    const c = 22;
+    rect.setAttribute("d", `M ${c} 1 L ${w-c} 1 L ${w-1} ${c} L ${w-1} ${h-c} L ${w-c} ${h-1} L ${c} ${h-1} L 1 ${h-c} L 1 ${c} Z`);
+  }, [card.kind]);
 
   /* 编排主循环:rAF 写 DOM,打字完毕即停。
      bar(进度条)只存在于 target-progress 模板——其余模板无进度条,
@@ -176,15 +197,16 @@ export const AnswerCard = memo(function AnswerCard({
 
   return (
     <div
-      className="overlay-card"
-      style={{ top: anchor.y, width: anchor.width }}
+      className={`overlay-card${card.kind === "brief" ? " is-brief" : ""}`}
+      data-card-kind={card.kind}
+      style={{ top: anchor.y, width: anchor.width / geometry.scale, transform: `translateX(-50%) scale(${geometry.scale})` }}
       role="status"
       aria-label={card.title}
     >
       <div className="overlay-card-line" ref={lineRef} style={{ transform: "scaleX(0)" }} />
       <div className="overlay-card-body" ref={bodyRef} style={{ opacity: 0, transform: "scaleY(0.012)" }}>
         <svg ref={svgRef} className="overlay-card-frame" aria-hidden="true">
-          <rect ref={frameRef} className="overlay-card-frame-rect" x="0.75" y="0.75" width="10" height="10" />
+          <path ref={frameRef} className="overlay-card-frame-rect" />
         </svg>
         <div className="overlay-card-corners" ref={cornerRef}>
           <i className="overlay-card-corner overlay-card-corner-tl" />
@@ -192,7 +214,12 @@ export const AnswerCard = memo(function AnswerCard({
           <i className="overlay-card-corner overlay-card-corner-bl" />
           <i className="overlay-card-corner overlay-card-corner-br" />
         </div>
-        {renderCardTemplate(card, { spokenRef, barFillRef })}
+        <header className="overlay-card-header"><h2 className="overlay-card-title" title={card.title}>{cardExcerpt(card.title, 24)}</h2>
+          <p className="overlay-card-subtitle" title={"summaryText" in card ? card.summaryText : undefined}>{"summaryText" in card ? cardExcerpt(card.summaryText, 40) : card.kind === "brief" ? "小川 · 为您服务" : "经营数据总览"}</p>
+        </header>
+        {card.kind !== "brief" ? <div className="overlay-card-data">{renderCardTemplate(card, { barFillRef, launchAt, pageIndex })}</div> : null}
+        <section className="overlay-spoken-section" aria-label="小川播报"><h3><span aria-hidden="true">✦</span> 小川播报</h3><p className="overlay-card-spoken"><span ref={spokenRef} /></p></section>
+        <div className="overlay-followups">{followups.length ? <><span className="overlay-followups-label">{card.kind === "brief" ? "您可以问我：" : "可继续追问："}</span>{followups.map(q => <span key={q}>{q}</span>)}</> : null}</div>
       </div>
     </div>
   );
