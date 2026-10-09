@@ -8,6 +8,7 @@ import type { SkippedPlaybackSentence, VoiceWireEvent } from "./protocol.ts";
 export type Speech = NonNullable<Extract<VoiceWireEvent, { type: "answer.delta" }>["speech"]>;
 export type PlaybackFailure = "audio_unavailable" | "invalid_audio" | "audio_interrupted" | "autoplay_blocked" | "timeout";
 export type PcmEvents = {
+  onMetrics?: (metrics: { playbackContextRate: number; playbackUnderruns: number }) => void;
   onSentenceStart?: (index: number, contextTime: number) => void;
   onDrained?: () => void;
   onError?: (reason: PlaybackFailure) => void;
@@ -44,6 +45,8 @@ export class PcmPlayer {
   private receivedBytes = 0;
   private active = false;
   private first = true;
+  private underruns = 0;
+  get playbackMetrics() { return { playbackContextRate: this.context?.sampleRate ?? 0, playbackUnderruns: this.underruns }; }
   constructor(private readonly options: {
     createContext?: () => AudioContext;
     fetch?: typeof fetch;
@@ -55,7 +58,11 @@ export class PcmPlayer {
 
   private ensureContext(): AudioContext {
     if (!this.context) {
-      this.context = (this.options.createContext ?? (() => new AudioContext()))();
+      if (this.options.createContext) this.context = this.options.createContext();
+      else {
+        try { this.context = new AudioContext({ sampleRate: 24000, latencyHint: "interactive" }); }
+        catch { this.context = new AudioContext(); }
+      }
       this.analyser = this.context.createAnalyser();
       this.analyser.fftSize = 512;
       this.gain = this.context.createGain();
@@ -88,7 +95,7 @@ export class PcmPlayer {
     this.controller = controller;
     this.events = events; this.active = true; this.first = true; this.sentenceIndex = 0;
     this.options.onActive?.();
-    this.receivedBytes = 0; this.tail = 0; this.streamsEnded = false;
+    this.receivedBytes = 0; this.tail = 0; this.streamsEnded = false; this.underruns = 0;
     this.completionError = null;
     this.deadline = new PausableDeadline(timeoutMs, () => this.fail("timeout", controller));
     const resumeDeadline = setTimeout(() => {
@@ -102,6 +109,7 @@ export class PcmPlayer {
 
   private async run(speech: Speech, baseUrl: string, token: string | null, controller: AbortController): Promise<void> {
     const ctx = this.ensureContext();
+    this.events.onMetrics?.(this.playbackMetrics);
     await ctx.resume();
     controller.signal.throwIfAborted();
     if (ctx.state !== "running") throw new PlaybackError("autoplay_blocked");
@@ -207,6 +215,13 @@ export class PcmPlayer {
     const floats = buffer.getChannelData(0);
     const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.length);
     for (let i = 0; i < floats.length; i++) floats[i] = view.getInt16(i * 2, true) / 32768;
+    const underrun = !this.first && this.tail < ctx.currentTime;
+    if (underrun) {
+      const fadeSamples = Math.min(floats.length, 120); // 5ms at 24kHz
+      for (let i = 0; i < fadeSamples; i++) floats[i] *= i / Math.max(1, fadeSamples - 1);
+      this.underruns++;
+      this.events.onMetrics?.(this.playbackMetrics);
+    }
     const source = ctx.createBufferSource();
     source.buffer = buffer; source.connect(this.analyser!);
     const when = this.first

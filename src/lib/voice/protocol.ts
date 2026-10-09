@@ -121,6 +121,8 @@ export type SkippedPlaybackSentence = {
 
 /** 一轮问答的全程打点(plan §16.2 B④;毫秒,相对 question 起点)。 */
 export type TurnTracePayload = {
+  playbackContextRate?: number;
+  playbackUnderruns?: number;
   style?: string;
   styleFallback?: string;
   speculative?: "hit" | "miss" | "none";
@@ -164,6 +166,7 @@ export type TurnTracePayload = {
  * 客户端 → 服务端：对话台控制会话；大屏仅鉴权/声明角色和回报当前轮播放状态。
  */
 export type ConsoleWireEvent =
+  | { type: "playback.metrics"; at: number; turnId: string; playbackContextRate: number; playbackUnderruns: number }
   | { type: "console.hello"; at: number; role: "console" | "screen" }
   | { type: "hub.auth"; at: number; token: string } // 首帧鉴权(审核 H1;仅鉴权模式生效)
   | { type: "session.wake"; at: number } // 开始一轮接管(等价 8c 唤醒词)

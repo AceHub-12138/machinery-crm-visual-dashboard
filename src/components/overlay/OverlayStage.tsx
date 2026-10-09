@@ -213,6 +213,11 @@ export function OverlayStage({
         let reportedStart = false;
         const isCurrent = () => playingIdRef.current === speech.turnId && mirrorRef.current.name === "answering";
         getPlayer().play(speech, audioBaseUrl(hubUrl ?? `ws://${window.location.hostname}:3210`), tokenRef.current, {
+          onMetrics: metrics => {
+            if (isCurrent() && socketRef.current?.readyState === WebSocket.OPEN) {
+              socketRef.current.send(JSON.stringify({ type: "playback.metrics", at: Date.now(), turnId: speech.turnId, ...metrics }));
+            }
+          },
           onSentenceStart: (index) => {
             if (!isCurrent()) return;
             const sentence = speech.sentences[index];

@@ -192,6 +192,12 @@ describe('audio cache, stream, cancellation and lifecycle',()=>{
     report('playback.started'); const first = events.filter(e => e.type === 'trace.turn').at(-1) as Extract<VoiceWireEvent, { type: 'trace.turn' }>;
     expect(first.trace.playbackStartMs).toBeGreaterThan(0);
     const count = events.filter(e => e.type === 'trace.turn').length; report('playback.started'); expect(events.filter(e => e.type === 'trace.turn')).toHaveLength(count);
+    const metrics = (role: 'screen' | 'console', turnId = id, playbackUnderruns = 2) => orch.handleClientMessage({id:'screen',role,send:()=>{},close:()=>{}},JSON.stringify({type:'playback.metrics',at:Date.now(),turnId,playbackContextRate:24000,playbackUnderruns}));
+    metrics('console'); metrics('screen', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'); metrics('screen', id, -1);
+    expect(first.trace.playbackContextRate).toBeUndefined();
+    metrics('screen');
+    const measured = events.filter(e => e.type === 'trace.turn').at(-1) as Extract<VoiceWireEvent, {type:'trace.turn'}>;
+    expect(measured.trace).toMatchObject({playbackContextRate:24000,playbackUnderruns:2});
     report('playback.drained'); expect(orch.state.name).toBe('followup'); report('playback.drained');
     await vi.advanceTimersByTimeAsync(8000 + 4999); expect(orch.state.name).toBe('followup');
     await vi.advanceTimersByTimeAsync(1); expect(orch.state.name).toBe('closing'); expect(store.lookup(id)?.cancelled).toBe(false);

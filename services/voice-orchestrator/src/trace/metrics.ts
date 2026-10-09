@@ -14,6 +14,8 @@ import type { SkippedPlaybackSentence } from "../../../../src/lib/voice/protocol
 export type TurnStage = "question" | "prefetch" | "llmFirstToken" | "toolExec" | "answerFull";
 
 export type TurnTraceRecord = {
+  playbackContextRate?: number;
+  playbackUnderruns?: number;
   style?: string;
   styleFallback?: string;
   speculative?: "hit" | "miss" | "none";

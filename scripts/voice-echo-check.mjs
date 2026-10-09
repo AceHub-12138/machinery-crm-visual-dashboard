@@ -13,7 +13,7 @@ const root = new URL("../", import.meta.url).pathname;
 const output = process.env.VOICE_ECHO_OUTPUT ?? join(root, `services/voice-orchestrator/logs/interaction-echo-step0-${Date.now()}.json`);
 const priorPath = process.env.VOICE_ECHO_PRIOR_REPORT;
 const prior = priorPath ? JSON.parse(await readFile(priorPath, "utf8")) : undefined;
-const config = { placement: process.env.VOICE_ECHO_PLACEMENT ?? "耳机麦克风在本人面前、Mac旁边；距离未测量，非展厅摆位", displayPlacement: false, consentedQuiet: process.argv.includes("--run"), ...(prior ? { prior, priorPath, priorSha256: createHash("sha256").update(await readFile(priorPath)).digest("hex") } : {}) };
+const config = { quietOnly: process.argv.includes("--quiet-only"), placement: process.env.VOICE_ECHO_PLACEMENT ?? "耳机麦克风在本人面前、Mac旁边；距离未测量，非展厅摆位", displayPlacement: false, consentedQuiet: process.argv.includes("--run"), ...(prior ? { prior, priorPath, priorSha256: createHash("sha256").update(await readFile(priorPath)).digest("hex") } : {}) };
 const cache = await mkdtemp(join(tmpdir(), "voice-echo-"));
 const vitestRequire = createRequire(import.meta.resolve("vitest"));
 const viteRequire = createRequire(vitestRequire.resolve("vite"));
@@ -33,7 +33,7 @@ try {
     "销售目标与实际完成金额已经对照，卡片提供完成率和差额，建议按区域继续查看进展。",
     "先生，本轮数据汇总已完成，您可以继续询问客户、拜访或回款情况，我会为您展示对应信息。",
   ];
-  const client = new VoiceLocalClient("http://127.0.0.1:8810");
+  const client = new VoiceLocalClient(process.env.VOICE_ECHO_LOCAL_URL ?? "http://127.0.0.1:8810");
   const health = await client.health(); if (!health.warm || health.selfCheck !== "passed") throw new Error("voice-local not ready");
   const clips = [], audio = new Map();
   for (let index = 0; index < (prior ? 5 : texts.length); index++) {
@@ -80,11 +80,11 @@ try {
       try {
         result = JSON.parse(await readFile(output, "utf8"));
         if (result.state !== state) { state = result.state; console.log(`state=${state} report=${output}`); if (state === "awaiting-human") await page.bringToFront(); }
-        if (["blocked-controls", "completed-passed", "completed-failed", "failed"].includes(result.state)) break;
+        if (["blocked-controls", "completed-passed", "completed-failed", "quiet-completed-passed", "quiet-completed-failed", "failed"].includes(result.state)) break;
       } catch (error) { if (error.code !== "ENOENT") throw error; }
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
-    if (!result || !["blocked-controls", "completed-passed", "completed-failed", "failed"].includes(result.state)) throw new Error("echo experiment did not complete");
+    if (!result || !["blocked-controls", "completed-passed", "completed-failed", "quiet-completed-passed", "quiet-completed-failed", "failed"].includes(result.state)) throw new Error("echo experiment did not complete");
     console.log(JSON.stringify({ output, state: result.state, passed: result.passed, pickup: result.pickup, human: result.human }));
   }
 } finally { await browser?.close(); if (server) await new Promise(resolve => server.close(resolve)); await rm(cache, { recursive: true, force: true }); }

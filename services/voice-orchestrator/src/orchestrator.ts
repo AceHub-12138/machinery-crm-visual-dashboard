@@ -118,6 +118,9 @@ export function parseConsoleEvent(raw: string): ConsoleWireEvent | null {
     case "playback.skipped":
       if (ev.type === "playback.skipped" && (!Number.isInteger(ev.sentenceIndex) || ev.sentenceIndex < 0 || ev.sentenceIndex >= 100 || !["audio_unavailable", "invalid_audio", "audio_interrupted"].includes(ev.reason))) return null;
       // fall through
+    case "playback.metrics":
+      if (ev.type === "playback.metrics" && (!Number.isInteger(ev.playbackContextRate) || ev.playbackContextRate < 8000 || ev.playbackContextRate > 192000 || !Number.isInteger(ev.playbackUnderruns) || ev.playbackUnderruns < 0 || ev.playbackUnderruns > 100000)) return null;
+      // fall through
     case "playback.started":
     case "playback.drained":
       return typeof ev.turnId === "string" && /^[a-f0-9-]{36}$/.test(ev.turnId) ? ev : null;
@@ -417,6 +420,8 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           ...(record.playbackScreenId ? { playbackScreenId: record.playbackScreenId } : {}),
           ...(record.playbackEndMs !== undefined ? { playbackEndMs: record.playbackEndMs } : {}),
           ...(record.playbackScreenCount !== undefined ? { playbackScreenCount: record.playbackScreenCount } : {}),
+          ...(record.playbackContextRate !== undefined ? { playbackContextRate: record.playbackContextRate } : {}),
+          ...(record.playbackUnderruns !== undefined ? { playbackUnderruns: record.playbackUnderruns } : {}),
           ...(record.playbackSkipped ? { playbackSkipped: record.playbackSkipped.map(s => ({ ...s })) } : {}),
           ...(record.ttsFirstByteMs !== undefined ? { ttsFirstByteMs: record.ttsFirstByteMs } : {}),
           ...(record.ttsRegenerated !== undefined ? { ttsRegenerated: record.ttsRegenerated, ttsTruncated: record.ttsTruncated, ttsFail: record.ttsFail } : {}),
@@ -593,6 +598,7 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
       return;
     }
     switch (event.type) {
+      case "playback.metrics":
       case "playback.started":
       case "playback.failed":
       case "playback.drained":
@@ -604,6 +610,12 @@ export function createVoiceOrchestrator(options: OrchestratorOptions) {
           return;
         }
         if (playback.finished || state.name !== "answering") return;
+        if (event.type === "playback.metrics") {
+          playback.record.playbackContextRate = event.playbackContextRate;
+          playback.record.playbackUnderruns = Math.max(playback.record.playbackUnderruns ?? 0, event.playbackUnderruns);
+          emitTrace(playback.record);
+          return;
+        }
         if (event.type === "playback.skipped") {
           if (event.sentenceIndex >= (answer?.sentences.length ?? 0)) return;
           const skipped = playback.record.playbackSkipped ??= [];

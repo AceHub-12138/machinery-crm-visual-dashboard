@@ -261,6 +261,8 @@ export default function VoiceConsolePage() {
               {trace.degraded ? "降级应答" : trace.source === "mcp" ? "MCP 长尾" : "预取主路径"}
             </span>
             <span>卡片:{trace.card ?? "—"}</span>
+            {trace.playbackContextRate != null ? <span>播放采样率：{trace.playbackContextRate}Hz{trace.playbackContextRate !== 24000 ? "（回落，可能有块边界噪声）" : ""}</span> : null}
+            {trace.playbackUnderruns != null ? <span>播放欠载：{trace.playbackUnderruns} 次</span> : null}
             {trace.speculative ? <span>预测：{trace.speculative}</span> : null}
             {trace.style ? <span>风格：{trace.style}{trace.styleFallback ? `（${trace.styleFallback}不可用，回落默认）` : ""}</span> : null}
             {trace.asrMs != null ? <span>识别 {trace.asrMs.toFixed(1)}ms</span> : null}

@@ -15,7 +15,7 @@ function pcm(samples = 2400, value = 8192) {
 }
 function response(bytes = pcm()) { return new Response(bytes, { headers }); }
 class ClockContext {
-  currentTime = 0; state = "running"; destination = {}; fftSize = 512;
+  sampleRate = 24000; currentTime = 0; state = "running"; destination = {}; fftSize = 512;
   nodes: Array<{ buffer: { duration: number; data: Float32Array } | null; start: ReturnType<typeof vi.fn>; stop: ReturnType<typeof vi.fn>; connect: ReturnType<typeof vi.fn>; disconnect: ReturnType<typeof vi.fn>; onended: (() => void) | null }> = [];
   resume = vi.fn(async () => {}); suspend = vi.fn(async () => { this.state = "suspended"; });
   gain = { setTargetAtTime: vi.fn(), setValueAtTime: vi.fn() };
@@ -59,6 +59,9 @@ describe("PCM streaming timeline", () => {
     s.ctx.currentTime = 0.4; await vi.advanceTimersByTimeAsync(10);
     expect(s.drained).not.toHaveBeenCalled(); input.enqueue(pcm()); input.close(); await flush();
     expect(s.ctx.nodes[2].start).toHaveBeenCalledWith(0.55);
+    expect(s.ctx.nodes[2].buffer!.data[0]).toBe(0);
+    expect(s.ctx.nodes[2].buffer!.data[119]).toBe(.25);
+    expect(s.player.playbackMetrics).toEqual({playbackContextRate:24000,playbackUnderruns:1});
     s.ctx.currentTime = 0.66; await vi.advanceTimersByTimeAsync(10);
     expect(s.drained).toHaveBeenCalledOnce(); expect(s.started).toHaveBeenCalledOnce();
   });
@@ -165,4 +168,21 @@ it("duck and native pause keep sources, sentence boundaries, downloads and the r
   await s.player.continuePlayback(); expect(s.ctx.gain.setTargetAtTime).toHaveBeenLastCalledWith(1, .2, .015);
   await vi.advanceTimersByTimeAsync(1599); expect(s.error).not.toHaveBeenCalled();
   await vi.advanceTimersByTimeAsync(1); expect(s.error).toHaveBeenCalledExactlyOnceWith("timeout");
+});
+
+it("requests a 24kHz interactive context and falls back when unsupported", async () => {
+  const contexts: ClockContext[] = [];
+  const factory = vi.fn(function(options?: AudioContextOptions) {
+    if (options && contexts.length) throw new Error("unsupported rate");
+    const ctx = new ClockContext(); ctx.sampleRate = options ? 24000 : 48000; contexts.push(ctx); return ctx;
+  });
+  vi.stubGlobal("AudioContext", factory);
+  try {
+    const first = new PcmPlayer(); players.push(first); await first.resume();
+    expect(factory).toHaveBeenNthCalledWith(1, {sampleRate:24000,latencyHint:"interactive"});
+    expect(first.playbackMetrics.playbackContextRate).toBe(24000);
+    const fallback = new PcmPlayer(); players.push(fallback); await fallback.resume();
+    expect(factory).toHaveBeenNthCalledWith(3);
+    expect(fallback.playbackMetrics.playbackContextRate).toBe(48000);
+  } finally { vi.unstubAllGlobals(); }
 });

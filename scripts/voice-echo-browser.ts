@@ -23,7 +23,7 @@ async function run() {
   const report: Record<string, unknown> = { schema: 2, state: "initializing", passed: false, scope: "physical Mac speaker/KZ microphone; not exhibit acceptance", rounds };
   const save = async () => { const r = await fetch("/result", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(report) }); if (!r.ok) throw new Error(`report HTTP ${r.status}`); };
   try {
-    const config = await (await fetch("/config.json")).json() as { placement: string; displayPlacement: boolean; consentedQuiet: boolean; prior?: { rounds: typeof rounds }; priorPath?: string; priorSha256?: string };
+    const config = await (await fetch("/config.json")).json() as { placement: string; displayPlacement: boolean; consentedQuiet: boolean; quietOnly?: boolean; prior?: { rounds: typeof rounds }; priorPath?: string; priorSha256?: string };
     report.placement = { description: config.placement, exhibitPlacementVerified: config.displayPlacement, distanceMeasured: false };
     report.userConfirmedQuiet = config.consentedQuiet;
     report.thresholds = { positive: .8, negative: .35, minimumMs: 300, confirmationMs: 500, baselineMs: 5000 };
@@ -49,7 +49,9 @@ async function run() {
       report.input = track.label; source = input!.createMediaStreamSource(stream); source.connect(worklet);
       if (!output) {
         const sink = (await navigator.mediaDevices.enumerateDevices()).find(device => device.kind === "audiooutput" && device.label.includes("Mac Studio")); if (!sink) throw new Error("未找到Mac Studio扬声器");
-        output = new AudioContext() as SinkContext; if (!output.setSinkId) throw new Error("不支持选择实验输出设备");
+        try { output = new AudioContext({ sampleRate: 24000, latencyHint: "interactive" }) as SinkContext; }
+        catch { output = new AudioContext() as SinkContext; }
+        report.playbackContextRate = output.sampleRate; if (!output.setSinkId) throw new Error("不支持选择实验输出设备");
         await output.setSinkId(sink.deviceId); report.output = sink.label;
         gain = output.createGain(); gain.connect(output.destination);
         const makeAnalyser = output.createAnalyser.bind(output);
@@ -97,6 +99,7 @@ async function run() {
     const quiet = config.prior?.rounds.find(round => round.mode === "aec-on-quiet") ?? { mode: "aec-on-quiet", trials: [] as Trial[], passed: false }; rounds.push(quiet); allowDuck = true;
     if (!config.prior) for (let index = 0; index < 10; index++) await oneTrial(quiet, index);
     quiet.passed = quiet.trials.length === 10 && quiet.trials.every(t => t.playback.quality && t.baseline.quality) && quiet.trials.reduce((sum, t) => sum + t.playback.confirms, 0) === 0 && quiet.trials.reduce((sum, t) => sum + t.playback.starts, 0) <= 2;
+    if (config.quietOnly) { report.passed = quiet.passed; report.state = quiet.passed ? "quiet-completed-passed" : "quiet-completed-failed"; await save(); status(`AEC开无人声10次：${quiet.passed ? "通过" : "未通过"}`); return report; }
     const off = config.prior?.rounds.find(round => round.mode === "aec-off-quiet") ?? { mode: "aec-off-quiet", trials: [] as Trial[], passed: false }; rounds.push(off);
     if (!config.prior) { await openMic(false); allowDuck = false; for (let index = 0; index < 3; index++) await oneTrial(off, index); }
     if (config.prior) {
