@@ -37,6 +37,10 @@
 5. `task12.test.ts` 的追问断言改为断言具体意图，不要只断言「不是 unanswerable」。
 6. **启动自检的静音重试**：`server.py` 的 `initialize()` 里每个风格只自检一次，首块静音就永久 `failedStyles`，该风格一直回落到 `default`，直到人工重启。2026-10-08 起服务实测 warm 因此掉线一次（`rejectedFirstPeak=0.00067`，门槛 0.001）。要求：自检同样按第 4 条改成最多 3 次重试，仍失败才记 `failedStyles`；并在 `/health` 增加 `styleAttempts` 便于诊断。
 
+### v8-3b 构建与离网
+1. **`next/font/google` 会在 `next build` 时联网拉字体，本机访问不到 fonts.googleapis.com**（2026-10-08 实测 curl 返回 000），当前只能复用别处的构建产物，Task 9 无人值守部署会直接卡住。改为 `next/font/local`（自托管这两套字体到 `public/fonts/`），或退回系统字体栈（`globals.css:138/152` 已有 PingFang SC / 微软雅黑 兜底）。改完必须在**断网**状态下验证 `pnpm build` 通过。
+2. 顺带确认 `pnpm build` 与 `pnpm install` 在离网机器上的可行性，写进 Task 9 部署文档。
+
 ### v8-4 稳定性批次（Task 11 之后、Task 9 之前）
 1. voice-local P3 五项：`server.py:246` 提交失败释放名额、已生成 PCM 块先发再跑检查点、`gpu_queue.py` 捕获范围改为 `Exception`、补测准备阶段（参考编码 / 解码 / synchronize）的 ASR 排队、补 HTTP 层并发与断连测试。
 2. 打断判定补强：1–2 个字的 ASR 文本容易误判为回声，增加固定打断词表（如「停」「等一下」「打住」）直接判为接受；浏览器端 `pendingAttempt` 目前只靠 `barge.result` 清除，补一条兜底。
