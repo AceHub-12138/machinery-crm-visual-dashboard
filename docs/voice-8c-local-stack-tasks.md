@@ -35,6 +35,7 @@
 3. 完成率上限：协议 1000% 的上限与平台不封顶的口径冲突，超限时卡片会被丢弃、界面停在思考中直到 8 秒超时。改为显示「>999%」，不丢卡。
 4. `services/voice-local/core.py` 的 `guarded_audio`：首块静音重试从 `range(2)` 改为 `range(3)`，确认首包延迟门槛不受影响，并补「连续两次静音、第三次成功」的单测。
 5. `task12.test.ts` 的追问断言改为断言具体意图，不要只断言「不是 unanswerable」。
+6. **启动自检的静音重试**：`server.py` 的 `initialize()` 里每个风格只自检一次，首块静音就永久 `failedStyles`，该风格一直回落到 `default`，直到人工重启。2026-10-08 起服务实测 warm 因此掉线一次（`rejectedFirstPeak=0.00067`，门槛 0.001）。要求：自检同样按第 4 条改成最多 3 次重试，仍失败才记 `failedStyles`；并在 `/health` 增加 `styleAttempts` 便于诊断。
 
 ### v8-4 稳定性批次（Task 11 之后、Task 9 之前）
 1. voice-local P3 五项：`server.py:246` 提交失败释放名额、已生成 PCM 块先发再跑检查点、`gpu_queue.py` 捕获范围改为 `Exception`、补测准备阶段（参考编码 / 解码 / synchronize）的 ASR 排队、补 HTTP 层并发与断连测试。
