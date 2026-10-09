@@ -51,6 +51,7 @@ function ReminderGroup({
         </span>
       </header>
 
+      <p className="text-micro text-[var(--ink-3)]">样本 {Math.min(2, items.length)} / 展示总量 {count}</p>
       {/* 每条一行：日期 · 合同编号 · 设备。
           每条只有 272px（586 ÷ 2 列 − 列间距），20px 的合同号 + 18px 的设备名
           合计约 315px，**必然放不下**，所以两个字段都显式 truncate：

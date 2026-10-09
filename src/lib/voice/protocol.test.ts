@@ -138,10 +138,10 @@ describe("isValidAnswerCard — 数值与长度上限(审核 L5)", () => {
   it("基础卡片本身合法(防止样例写错导致假通过)", () => {
     for (const c of [baseTargetProgress, baseRing, baseRegion, baseBrief]) expect(isValidAnswerCard(c)).toBe(true);
   });
-  it("非法数值被拒:负数 / 超大 / 百分比越界", () => {
+  it("负数及超大数值被拒，合法超额比例保留", () => {
     expect(isValidAnswerCard({ ...baseTargetProgress, completionRate: -1 })).toBe(false);
     expect(isValidAnswerCard({ ...baseTargetProgress, completionRate: 1e308 })).toBe(false);
-    expect(isValidAnswerCard({ ...baseRing, ratePercent: 1001 })).toBe(false);
+    expect(isValidAnswerCard({ ...baseRing, ratePercent: 1001 })).toBe(true);
   });
   it("行数与字符串长度超限被拒", () => {
     const row = baseRegion.rows[0];

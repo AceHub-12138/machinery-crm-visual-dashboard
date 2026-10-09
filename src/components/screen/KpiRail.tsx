@@ -3,6 +3,7 @@
 import { AnimatedNumber } from "@/components/screen/AnimatedNumber";
 import { Panel, PanelHead } from "@/components/screen/Panel";
 import { formatCount, formatMoney } from "@/lib/format";
+import type { PublicSalesScreenPayload } from "@/lib/voice/public-payload";
 import type { CrmDashboardStats } from "@/lib/types";
 
 /** 等宽刻度条 —— 比连续渐变条更像仪表，也更符合工业语境。 */
@@ -68,14 +69,14 @@ function MiniStat({
 export function KpiRail({
   stats,
   targetAmount,
+  collection,
 }: {
   stats: CrmDashboardStats;
   targetAmount: number;
+  collection?: PublicSalesScreenPayload["collection"];
 }) {
-  const periodTotal = stats.periodPaidAmount + stats.periodUnpaidAmount;
-  const collectionRate = periodTotal > 0 ? stats.periodPaidAmount / periodTotal : 0;
-  const unpaidShare = stats.totalContractAmount > 0 ? stats.totalUnpaidAmount / stats.totalContractAmount : 0;
-  const targetRatio = targetAmount > 0 ? stats.periodContractAmount / targetAmount : 0;
+  const targetConfigured = collection?.targetConfigured ?? targetAmount > 0;
+  const targetRatio = (collection?.targetVisualRate ?? 0) / 100;
 
   return (
     <Panel className="flex h-full flex-col">
@@ -84,8 +85,8 @@ export function KpiRail({
         title="经营指标"
         extra={
           <p className="num text-label leading-none text-[var(--c-collect)]">
-            {Math.round(collectionRate * 100)}%
-            <span className="ml-1.5 text-micro font-normal text-[var(--ink-3)]">回款率</span>
+            {collection?.collectionRate.toFixed(1) ?? "—"}%
+            <span className="ml-1.5 text-micro font-normal text-[var(--ink-3)]">累计回款率</span>
           </p>
         }
       />
@@ -105,42 +106,30 @@ export function KpiRail({
           <p className="num kpi-hero money mt-2.5 text-hero-lg leading-none">
             <AnimatedNumber value={stats.periodContractAmount} format={formatMoney} />
           </p>
-          <div className="mt-4">
+          {targetConfigured && targetAmount > 0 ? <div className="mt-4">
             <Gauge ratio={targetRatio} slots={22} />
             <div className="mt-2 flex items-baseline justify-between">
               <span className="text-micro text-[var(--ink-3)]">
                 月度目标 {formatMoney(targetAmount)}
               </span>
               <span className="num text-label leading-none text-[var(--brand-orange-hot)]">
-                达成 {(targetRatio * 100).toFixed(1)}%
+                达成 {(collection?.targetRate ?? 0) > 999 ? ">999" : (collection?.targetRate ?? 0).toFixed(1)}%
               </span>
             </div>
-          </div>
+          </div> : <p className="mt-4 text-micro text-[var(--ink-3)]">{targetConfigured ? "目标为 0" : "目标未设置"}</p>}
         </article>
 
-        {/* 回款结构 */}
+        {/* 本期实收与新合同欠款分别展示 */}
         <article className="kpi-settlement shrink-0 px-4 py-2.5">
           <div className="flex items-baseline justify-between">
-            <p className="text-micro text-[var(--ink-3)]">回款结构</p>
+            <p className="text-micro text-[var(--ink-3)]">本期实际回款</p>
             <p className="num text-label leading-none text-[var(--c-collect)]">
               {formatMoney(stats.periodPaidAmount)}
             </p>
           </div>
-          <div className="seg-bar mt-2.5">
-            <div
-              className="bg-[linear-gradient(90deg,#2fb8d4,var(--c-collect))]"
-              style={{ width: `${collectionRate * 100}%` }}
-            />
-            <div
-              className="bg-[linear-gradient(90deg,var(--brand-orange),var(--c-overdue))]"
-              style={{ width: `${(1 - collectionRate) * 100}%` }}
-            />
-          </div>
           <div className="mt-2.5 flex justify-between text-micro">
-            <span className="text-[var(--c-collect)]">已回 {Math.round(collectionRate * 100)}%</span>
-            <span className="text-[var(--brand-orange-hot)]">
-              待回 {formatMoney(stats.periodUnpaidAmount)}
-            </span>
+            <span className="text-[var(--ink-3)]">本期新合同欠款</span>
+            <span className="text-[var(--brand-orange-hot)]">{formatMoney(stats.periodUnpaidAmount)}{stats.periodUnpaidAmount < 0 ? " · 金额异常" : ""}</span>
           </div>
         </article>
 
@@ -149,7 +138,7 @@ export function KpiRail({
           <MiniStat label="客户总数" value={stats.totalCustomers} format={formatCount} hint={`新增 ${stats.periodNewCustomers}`} />
           <MiniStat label="本期发货" value={stats.periodShipments} format={formatCount} hint={`待发 ${stats.sevenDayShipmentDue}`} tone="collect" />
           <MiniStat label="未回款" value={stats.totalUnpaidAmount} format={formatMoney} hint={`${stats.unpaidContracts} 份未付`} tone="brand" money />
-          <MiniStat label="部分回款" value={stats.partialPaidContracts} format={formatCount} hint={`${Math.round(unpaidShare * 100)}% 敞口`} tone="partial" />
+          <MiniStat label="部分回款" value={stats.partialPaidContracts} format={formatCount} hint="累计有效合同" tone="partial" />
         </div>
 
         {/* 待处理预警：一格一数 */}

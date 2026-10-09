@@ -129,7 +129,7 @@ export type ScreenMapRoute = {
 
 export type ScreenCrmPayload = {
   generatedAt: string;
-  source: "mock";
+  source: "mock" | "public";
   dashboard: CrmDashboardResponse;
   salesTargets: SalesTargetResponse;
   map: {

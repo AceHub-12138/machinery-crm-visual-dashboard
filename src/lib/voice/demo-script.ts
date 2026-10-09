@@ -52,6 +52,10 @@ export const DEMO_TIMING = {
 
 /** Demo answers derive from the displayed public screen, rather than a second fixture. */
 export function demoAnswerForCycle(screen: PublicScreenPayload, cycle: number) {
+  if (screen.business) {
+    const question = DEMO_QUESTIONS[((cycle % 7) + 7) % 7].question;
+    return { question, ...buildIntentAnswer(classifyScriptedQuestion(question), screen.business) };
+  }
   const stats = screen.dashboard.stats;
   const target = screen.salesTargets.targets.find(t => t.salesUserId === null);
   const progress = calculateSalesTargetProgress(target?.actualAmount ?? 0, target?.amount ?? 0);
@@ -100,6 +104,8 @@ export function buildTargetProgressCard(
     targetText,
     remainingText,
     completionRate: progress.completionRate,
+    targetConfigured: company !== undefined,
+    targetAvailable: company !== undefined && Number(company.amount) > 0,
     spoken: `先生,${periodLabel}合同额 ${actualText},完成月度目标的 ${progress.completionRate}%,${progress.exceeded ? remainingText : `距离目标还差 ${remainingText}`}。`,
   };
 }

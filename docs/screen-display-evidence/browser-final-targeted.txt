@@ -1,0 +1,19 @@
+[WebServer] (node:48492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:48493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:48510) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/screen-data-reconcile.spec.ts:30:1 › missing targets and rates above 999 remain valid visible cards (562ms)
+  ✓  2 e2e/screen-data-reconcile.spec.ts:47:1 › unresolved regions and full totals fit both viewports while points stay samples (771ms)
+  ✓  3 e2e/screen-data-reconcile.spec.ts:67:1 › shipment page freezes at playback end instead of resetting or cycling (5.5s)
+  ✓  4 e2e/screen.spec.ts:16:1 › 1920×1080 面板尺寸、间距和首屏内容回归 (492ms)
+  ✓  5 e2e/screen.spec.ts:25:1 › 公开 API 与首屏 HTML 不携带客户、跟进、业务员及详细地址 (56ms)
+  ✓  6 e2e/screen.spec.ts:33:1 › 列宽改变 5px 会被几何验收发现 (203ms)
+  ✓  7 e2e/screen.spec.ts:40:1 › 1280×720 自适应保持完整画布 (171ms)
+  ✓  8 e2e/voice-cards.spec.ts:93:1 › demo automatically completes launch, answer and withdrawal for seven cards (1.1s)
+
+  8 passed (10.4s)

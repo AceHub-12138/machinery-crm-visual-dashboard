@@ -1,5 +1,4 @@
 import { chinaOutline, projectLonLat } from "@/lib/geo";
-import { formatLocalDate } from "@/lib/format";
 import { calculateSalesTargetProgress, currentMonthPeriod } from "@/lib/target";
 import type {
   CrmDashboardResponse,
@@ -231,15 +230,20 @@ function reminder(
 }
 
 export function buildMockScreenPayload(now = new Date()): ScreenCrmPayload {
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const periodStart = new Date(year, month, 1);
-  const periodEnd = new Date(year, month + 1, 1);
-  const today = formatLocalDate(now);
-  const tomorrow = formatLocalDate(new Date(year, month, now.getDate() + 1));
-  const inThree = formatLocalDate(new Date(year, month, now.getDate() + 3));
-  const overdueA = formatLocalDate(new Date(year, month, now.getDate() - 4));
-  const overdueB = formatLocalDate(new Date(year, month, now.getDate() - 9));
+  const shifted = new Date(now.getTime() + 8 * 3600000);
+  const year = shifted.getUTCFullYear();
+  const month = shifted.getUTCMonth();
+  const date = shifted.getUTCDate();
+  const day = 86400000;
+  const todayDate = Date.UTC(year, month, date);
+  const dateLabel = (offset: number) => new Date(todayDate + offset * day).toISOString().slice(0, 10);
+  const periodStart = new Date(Date.UTC(year, month, 1) - 8 * 3600000);
+  const periodEnd = new Date(todayDate + day - 8 * 3600000);
+  const today = dateLabel(0);
+  const tomorrow = dateLabel(1);
+  const inThree = dateLabel(3);
+  const overdueA = dateLabel(-4);
+  const overdueB = dateLabel(-9);
 
   const origin = projectLonLat(FACTORY.lon, FACTORY.lat);
   const shipmentPaths: ShipmentPathItem[] = destinations.map((item) => ({
@@ -277,8 +281,8 @@ export function buildMockScreenPayload(now = new Date()): ScreenCrmPayload {
       preset: "month",
       start: periodStart.toISOString(),
       end: periodEnd.toISOString(),
-      startDate: formatLocalDate(periodStart),
-      endDate: formatLocalDate(new Date(periodEnd.getTime() - 86400000)),
+      startDate: new Date(Date.UTC(year, month, 1)).toISOString().slice(0, 10),
+      endDate: today,
     },
     filters: {
       province: "",

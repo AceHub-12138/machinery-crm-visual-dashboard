@@ -39,6 +39,7 @@ export function ScreenStage({
   const lastGood = useRef(initialPayload);
   useEffect(() => {
     let active = true;
+    if (initialPayload.source !== "mock") return;
     const load = async () => {
       try {
         const response = await fetch("/api/screen/crm", { cache: "no-store" });
@@ -56,7 +57,7 @@ export function ScreenStage({
       active = false;
       window.clearInterval(timer);
     };
-  }, []);
+  }, [initialPayload.source]);
 
   useEffect(() => {
     if (!scaleToFit) return;
@@ -89,7 +90,7 @@ export function ScreenStage({
     return `${startDate} ~ ${endDate}`;
   }, [payload]);
 
-  const targetAmount = Number(
+  const targetAmount = payload.business ? Number(payload.business.collection.targetAmount) : Number(
     payload.salesTargets.targets.find((item) => item.salesUserId === null)?.amount || 0,
   );
 
@@ -115,7 +116,7 @@ export function ScreenStage({
               任何面板内容变化后都要重新实测，见 docs/screen-design-spec.md。 */}
           <div className="grid min-h-0 flex-1 grid-cols-[360px_880px_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_112px] gap-[var(--gutter)] p-[var(--gutter)]">
             <div data-screen-panel="kpi" className="col-start-1 row-start-1 min-h-0">
-              <KpiRail stats={payload.dashboard.stats} targetAmount={targetAmount} />
+              <KpiRail stats={payload.dashboard.stats} targetAmount={targetAmount} collection={payload.business?.collection} />
             </div>
 
             <div data-screen-panel="map" className="map-panel col-start-2 row-start-1 min-h-0 overflow-hidden rounded-[var(--radius)]">
@@ -128,6 +129,7 @@ export function ScreenStage({
             <div className="col-start-3 row-start-1 grid min-h-0 grid-rows-[441px_minmax(0,1fr)] gap-[var(--gutter)]">
               <div data-screen-panel="collection" className="min-h-0">
                 <TargetRing
+                  collection={payload.business?.collection}
                   targets={payload.salesTargets}
                   periodLabel={payload.salesTargets.period.label}
                   stats={payload.dashboard.stats}
@@ -142,7 +144,7 @@ export function ScreenStage({
             </div>
 
             <div data-screen-panel="delivery" className="col-span-3 col-start-1 row-start-2 min-h-0">
-              <DeliveryMilestones paths={payload.dashboard.shipmentPaths} />
+              <DeliveryMilestones paths={payload.dashboard.shipmentPaths} delivery={payload.business?.delivery} />
             </div>
           </div>
         </main>

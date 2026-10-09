@@ -554,6 +554,8 @@ export function OverlayStage({
           foldAt={session.name === "closing" ? session.since : null}
           sentenceRef={live ? sentenceRef : undefined}
           sentenceVersion={sentenceVersion}
+          playbackPaused={bargePaused}
+          playbackFinished={session.name !== "answering"}
         />
       ) : null}
 

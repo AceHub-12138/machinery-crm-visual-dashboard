@@ -71,7 +71,7 @@ describe("Task 12 data contracts and boundaries", () => {
   });
   it("20 provinces keep all map points while only top five ranked rows render", () => {
     const routes = Array.from({length:20}, (_,i) => ({...payload.delivery.routes[0], province: `省${i}`, unitCount:i+1}));
-    const card = buildRegionCard({...payload.delivery, routes}, "本期");
+    const card = buildRegionCard({...payload.delivery, routes, regionUnits: routes.map(r => ({ province: r.province, shipmentCount: 1, unitCount: r.unitCount })), summary: { ...payload.delivery.summary, regionCount: 20, unitCount: 210, shipmentCount: 20 } }, "本期");
     expect(card.mapPoints).toHaveLength(20); expect(card.rows).toHaveLength(5);
     expect(card.other).toEqual({regions:15, units:120});
     expect(isValidAnswerCard(card)).toBe(true);
@@ -81,7 +81,7 @@ describe("Task 12 data contracts and boundaries", () => {
     const kinds = Array.from({length:7}, (_,i) => demoAnswerForCycle(screen,i).card.kind);
     expect(new Set(kinds).size).toBe(7);
     expect(demoAnswerForCycle(screen,7).card).toEqual(demoAnswerForCycle(screen,0).card);
-    const altered = structuredClone(screen); altered.dashboard.stats.periodNewCustomers = 77;
+    const altered = structuredClone(screen); altered.dashboard.stats.periodNewCustomers = 77; altered.business!.kpis.periodNewCustomers = 77;
     expect(demoAnswerForCycle(altered,4).card).toMatchObject({kind:"customer-kpi", newCustomers:77});
   });
   it("answer geometry scales both widths and upper core position at 720p", () => {

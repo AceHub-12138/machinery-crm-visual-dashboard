@@ -29,6 +29,8 @@ export function buildTargetProgressCardFromPublic(
   collection: PublicSalesScreenPayload["collection"],
   periodLabel: string,
 ): AnswerCardData & { kind: "target-progress" } {
+  const configured = collection.targetConfigured ?? Number(collection.targetAmount) > 0;
+  const available = configured && Number(collection.targetAmount) > 0;
   const actualText = formatMoney(Number(collection.actualAmount));
   const targetText = formatMoney(Number(collection.targetAmount));
   const remainingText = collection.exceeded
@@ -42,7 +44,8 @@ export function buildTargetProgressCardFromPublic(
     targetText,
     remainingText,
     completionRate: collection.targetRate,
-    spoken: `先生,${periodLabel}合同额 ${actualText},完成月度目标的 ${collection.targetRate}%,${collection.exceeded ? remainingText : `距离目标还差 ${remainingText}`}。`,
+    targetConfigured: configured, targetAvailable: available,
+    spoken: available ? `先生,${periodLabel}合同额 ${actualText},完成月度目标的 ${collection.targetRate}%,${collection.exceeded ? remainingText : `距离目标还差 ${remainingText}`}。` : `先生,${periodLabel}合同额 ${actualText},${configured ? "本月目标为零，无法计算完成率" : "本月目标尚未设置"}。`,
   };
 }
 
@@ -52,6 +55,8 @@ export function buildCompletionRingCard(
   collection: PublicSalesScreenPayload["collection"],
   periodLabel: string,
 ): AnswerCardData & { kind: "completion-ring" } {
+  const configured = collection.targetConfigured ?? Number(collection.targetAmount) > 0;
+  const available = configured && Number(collection.targetAmount) > 0;
   // 环形图在渲染时限幅，数值与播报保留真实完成率（可超过 100%）。
   const ratePercent = collection.targetRate;
   const collectedText = formatMoney(Number(collection.actualAmount));
@@ -67,7 +72,8 @@ export function buildCompletionRingCard(
     collectedText,
     targetText,
     remainingText,
-    spoken: `先生,${periodLabel}合同额目标完成 ${ratePercent}%,已完成 ${collectedText},${collection.exceeded ? remainingText : `距离目标还差 ${remainingText}`}。`,
+    targetConfigured: configured, targetAvailable: available,
+    spoken: available ? `先生,${periodLabel}合同额目标完成 ${ratePercent}%,已完成 ${collectedText},${collection.exceeded ? remainingText : `距离目标还差 ${remainingText}`}。` : `先生,${configured ? "本月目标为零，无法计算完成率" : "本月目标尚未设置"},本期合同额 ${collectedText}。`,
   };
 }
 
@@ -99,13 +105,22 @@ export function aggregateRegions(routes: PublicRouteSample[]): RegionRow[] {
     .sort((a, b) => b.units - a.units || a.region.localeCompare(b.region, "zh-CN"));
 }
 
+/** 全量区域榜；旧接口缺字段时不再用地图样本冒充完整分布。 */
+export function fullRegionRows(delivery: PublicSalesScreenPayload["delivery"]): RegionRow[] {
+  return (delivery.regionUnits ?? []).map(row => ({ region: row.province, shipments: row.shipmentCount, units: row.unitCount,
+    sharePercent: delivery.summary.unitCount > 0 ? Number((row.unitCount / delivery.summary.unitCount * 100).toFixed(1)) : 0,
+  })).sort((a, b) => b.units - a.units || a.region.localeCompare(b.region, "zh-CN"));
+}
+
 /** 区域对比卡(plan §7「区域对比卡」)。
- * 数据 = delivery.routes 按省聚合,取台数前 5;总数与覆盖数取自 delivery.summary。 */
+ * 数据 = delivery.regionUnits 全量聚合,取台数前 5;总数与覆盖数取自 delivery.summary。 */
 export function buildRegionCard(
   delivery: PublicSalesScreenPayload["delivery"],
-  periodLabel: string,
+  _periodLabel: string,
 ): AnswerCardData & { kind: "region" } {
-  const aggregates = aggregateRegions(delivery.routes);
+  // 保留调用签名；此卡固定累计口径，不套用本月标签。
+  void _periodLabel;
+  const aggregates = fullRegionRows(delivery);
   const rows = aggregates.slice(0, 5).map((row) => ({ ...row }));
   const { regionCount, unitCount, shipmentCount } = delivery.summary;
   const topText = rows
@@ -115,12 +130,13 @@ export function buildRegionCard(
 
   return {
     kind: "region",
-    title: `${periodLabel} · 区域发运分布`,
-    summaryText: `覆盖 ${regionCount} 个省市 · ${shipmentCount} 车次 / ${unitCount} 台`,
+    title: `累计 · 区域发运分布`,
+    summaryText: `覆盖 ${regionCount} 个省份 · ${shipmentCount} 车次 / ${unitCount} 台${delivery.regionUnits === undefined ? " · 区域明细待更新" : ""}`,
     rows,
     other: { regions: Math.max(0, aggregates.length - 5), units: aggregates.slice(5).reduce((sum, r) => sum + r.units, 0) },
     mapPoints: delivery.routes.map(r => ({ region: r.province, lng: r.centerLng, lat: r.centerLat })),
-    spoken: `先生,本期发运覆盖 ${regionCount} 个省市、共 ${unitCount} 台${topText ? `,台数最多的是${topText}` : ""}。`,
+    ...(delivery.unresolvedRegionTotals ? { unresolved: { shipments: delivery.unresolvedRegionTotals.shipmentCount, units: delivery.unresolvedRegionTotals.unitCount } } : {}),
+    spoken: `先生,累计发运覆盖 ${regionCount} 个省份、共 ${unitCount} 台${topText ? `,台数最多的是${topText}` : ""}${delivery.unresolvedRegionTotals?.unitCount ? `,另有地区待确认 ${delivery.unresolvedRegionTotals.unitCount} 台` : ""}。`,
   };
 }
 
@@ -147,7 +163,7 @@ export function buildCustomersShipmentsCard(
     }));
 
   // reminders 是样本列表，不能用列表长度冒充完整汇总数量。
-  const summaryText = `台账共 ${delivery.summary.unitCount} 台`;
+  const summaryText = `累计台账共 ${delivery.summary.unitCount} 台${delivery.milestonesTotal === undefined ? " · 明细为样本" : ` · 样本 ${rows.length} / 展示总量 ${delivery.milestonesTotal}`}`;
 
   return {
     kind: "customers-shipments",
@@ -155,8 +171,9 @@ export function buildCustomersShipmentsCard(
     summaryText,
     rows,
     counts: { today: todayDue, sevenDays: sevenDayDue, overdue: overdueDue },
+    ...(delivery.milestonesTotal === undefined ? {} : { sampleTotal: delivery.milestonesTotal }),
     omittedCount: Math.max(0, delivery.milestones.length - rows.length),
-    spoken: `先生,近期发运台账共 ${delivery.summary.unitCount} 台,今日到期 ${todayDue} 台、逾期未发 ${overdueDue} 台,已为您列出发运明细。`,
+    spoken: `先生,近期发运台账共 ${delivery.summary.unitCount} 台,今日到期 ${todayDue} 份、逾期未发 ${overdueDue} 份,已为您列出发运明细。`,
   };
 }
 

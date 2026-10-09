@@ -102,14 +102,14 @@ describe("card-builders — 卡片数字 == payload 字段", () => {
     expect(card.rows).toEqual(expected.slice(0, 5));
     expect(aggregateRegions(payload.delivery.routes)).toEqual(expected);
     expect(card.summaryText).toBe(
-      `覆盖 ${payload.delivery.summary.regionCount} 个省市 · ${payload.delivery.summary.shipmentCount} 车次 / ${payload.delivery.summary.unitCount} 台`,
+      `覆盖 ${payload.delivery.summary.regionCount} 个省份 · ${payload.delivery.summary.shipmentCount} 车次 / ${payload.delivery.summary.unitCount} 台`,
     );
   });
 
   it("客户/发货卡:摘要计数 == summary，行 == milestones 最近 15 条", () => {
     const card = buildCustomersShipmentsCard(payload.delivery, payload.period.label);
     expect(card.summaryText).toBe(
-      `台账共 ${payload.delivery.summary.unitCount} 台`,
+      `累计台账共 ${payload.delivery.summary.unitCount} 台 · 样本 ${payload.delivery.milestones.length} / 展示总量 ${payload.delivery.milestonesTotal}`,
     );
 
     const latest = [...payload.delivery.milestones]
@@ -142,7 +142,7 @@ describe("card-builders — 卡片数字 == payload 字段", () => {
     const delivery = { ...payload.delivery, summary: { ...payload.delivery.summary, todayDue: 17, sevenDayDue: 25, overdueDue: 9 } };
     const card = buildCustomersShipmentsCard(delivery, payload.period.label);
     expect(card.counts).toEqual({ today: 17, sevenDays: 25, overdue: 9 });
-    expect(card.spoken).toContain("今日到期 17 台、逾期未发 9 台");
+    expect(card.spoken).toContain("今日到期 17 份、逾期未发 9 份");
   });
 });
 

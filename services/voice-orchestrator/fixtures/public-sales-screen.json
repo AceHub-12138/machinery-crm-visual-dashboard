@@ -33,7 +33,8 @@
     "targetVisualRate": 85.7,
     "remainingAmount": "2140000.00",
     "exceededAmount": "0.00",
-    "exceeded": false
+    "exceeded": false,
+    "targetConfigured": true
   },
   "delivery": {
     "summary": {
@@ -256,7 +257,10 @@
           "province": "江苏省",
           "city": "徐州"
         }
-      ]
+      ],
+      "todayTotal": 2,
+      "sevenDaysTotal": 5,
+      "overdueTotal": 3
     },
     "milestones": [
       {
@@ -367,6 +371,74 @@
         "shipmentStatus": "SHIPPED",
         "unitCount": 1
       }
-    ]
+    ],
+    "regionUnits": [
+      {
+        "province": "广东省",
+        "shipmentCount": 1,
+        "unitCount": 3
+      },
+      {
+        "province": "上海市",
+        "shipmentCount": 1,
+        "unitCount": 2
+      },
+      {
+        "province": "浙江省",
+        "shipmentCount": 1,
+        "unitCount": 2
+      },
+      {
+        "province": "辽宁省",
+        "shipmentCount": 1,
+        "unitCount": 2
+      },
+      {
+        "province": "湖南省",
+        "shipmentCount": 1,
+        "unitCount": 2
+      },
+      {
+        "province": "江苏省",
+        "shipmentCount": 1,
+        "unitCount": 1
+      },
+      {
+        "province": "山东省",
+        "shipmentCount": 1,
+        "unitCount": 1
+      },
+      {
+        "province": "湖北省",
+        "shipmentCount": 1,
+        "unitCount": 1
+      },
+      {
+        "province": "四川省",
+        "shipmentCount": 1,
+        "unitCount": 1
+      },
+      {
+        "province": "陕西省",
+        "shipmentCount": 1,
+        "unitCount": 1
+      },
+      {
+        "province": "河南省",
+        "shipmentCount": 1,
+        "unitCount": 1
+      },
+      {
+        "province": "黑龙江省",
+        "shipmentCount": 1,
+        "unitCount": 1
+      }
+    ],
+    "unresolvedRegionTotals": {
+      "shipmentCount": 0,
+      "unitCount": 0
+    },
+    "routesTotal": 12,
+    "milestonesTotal": 12
   }
 }

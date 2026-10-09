@@ -1,0 +1,60 @@
+[WebServer] (node:45466) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45467) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:45475) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/screen-data-reconcile.spec.ts:30:1 › missing targets and rates above 999 remain valid visible cards (712ms)
+  ✓  2 e2e/screen-data-reconcile.spec.ts:47:1 › unresolved regions and full totals fit both viewports while points stay samples (697ms)
+  ✘  3 e2e/screen-data-reconcile.spec.ts:67:1 › shipment page freezes at playback end instead of resetting or cycling (10.5s)
+(node:45504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 e2e/voice-cards.spec.ts:51:40 › 1920 normal region_shipments (3.9s)
+  ✓  5 e2e/voice-cards.spec.ts:51:40 › 1920 long region_shipments (3.6s)
+  ✓  6 e2e/voice-cards.spec.ts:51:40 › 1280 normal region_shipments (3.3s)
+  ✓  7 e2e/voice-cards.spec.ts:51:40 › 1280 long region_shipments (3.3s)
+
+
+  1) e2e/screen-data-reconcile.spec.ts:67:1 › shipment page freezes at playback end instead of resetting or cycling
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.overlay-en')
+    Expected: "Awaiting"
+    Received: "Answering"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.overlay-en') with timeout 5000ms
+      - waiting for locator('.overlay-en')
+        14 × locator resolved to <span class="overlay-en">Answering</span>
+           - unexpected value "Answering"
+
+
+      69 |   await expect(page.locator(".overlay-shipments-block")).toHaveAttribute("data-page", "2", { timeout: 6000 });
+      70 |   hub.broadcast({ type: "state.change", at: Date.now(), from: "answering", to: "awaiting", turn: 0 });
+    > 71 |   await expect(page.locator(".overlay-en")).toHaveText("Awaiting");
+         |                                             ^
+      72 |   const pageAtEnd = await page.locator(".overlay-shipments-block").getAttribute("data-page");
+      73 |   await page.clock.install(); await page.clock.fastForward(12000);
+      74 |   await expect(page.locator(".overlay-shipments-block")).toHaveAttribute("data-page", pageAtEnd!);
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-screen-data/e2e/screen-data-reconcile.spec.ts:71:45
+
+    Error Context: test-results/screen-data-reconcile-ship-e58ae-ead-of-resetting-or-cycling/error-context.md
+
+    Error Context: test-results/screen-data-reconcile-ship-e58ae-ead-of-resetting-or-cycling/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/screen-data-reconcile-ship-e58ae-ead-of-resetting-or-cycling/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/screen-data-reconcile-ship-e58ae-ead-of-resetting-or-cycling/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/screen-data-reconcile.spec.ts:67:1 › shipment page freezes at playback end instead of resetting or cycling
+  6 passed (28.2s)

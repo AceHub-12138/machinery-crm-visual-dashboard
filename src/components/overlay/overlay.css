@@ -191,7 +191,7 @@
 .overlay-region-block { height: 100%; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
 .overlay-region-ranking { min-width: 0; }
 .overlay-region-head { display: flex; justify-content: space-between; font-size: 13px; color: #ffe8c777; border-bottom: 1px solid #ffb65c22; padding-bottom: 8px; }
-.overlay-region-row { display: flex; align-items: center; gap: 9px; height: 33px; font-size: 15px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.overlay-region-row { display: flex; align-items: center; gap: 9px; height: 31px; font-size: 15px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .overlay-rank { font-style: normal; display: grid; place-items: center; width: 23px; height: 26px; flex: none; color: var(--ov-core); border: 1px solid var(--ov-copper); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: #c97f3d33; }
 .overlay-region-row:first-of-type .overlay-rank { background: var(--ov-copper); }
 .overlay-region-name { width: 105px; flex: none; overflow: hidden; text-overflow: ellipsis; }
@@ -200,7 +200,7 @@
 .overlay-region-value { flex: none; color: #ffe8c799; font-size: 14px; }
 .overlay-region-value strong { font-size: 19px; color: var(--ov-ink); }
 .overlay-region-row > em { width: 54px; flex: none; text-align: right; font-style: normal; color: var(--ov-core); }
-.overlay-region-other { margin: 8px 0 0; font-size: 14px; color: #ffe8c788; }
+.overlay-region-other { margin: 6px 0 0; font-size: 12px; line-height: 18px; color: #ffe8c788; }
 .overlay-region-map { width: 100%; height: 100%; }
 .overlay-map-province { fill: #c97f3d0a; stroke: #c97f3d99; stroke-width: 1.2; }
 .overlay-map-route { fill: none; stroke: #ffb65c88; stroke-width: 1.8; }

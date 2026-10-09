@@ -47,9 +47,31 @@ export function shipmentPageAt(elapsedMs: number, pageCount: number, sentenceInd
   return Math.floor(Math.max(0, elapsedMs) / 4000) % pageCount;
 }
 
+/** 播放时钟独立于墙钟；暂停不积累时间，播完保留当前页，句间空隙不复位。 */
+export class ShipmentPageClock {
+  page = 0;
+  private lastAt: number;
+  private elapsed = 0;
+  private sentence: number | null = null;
+  private readonly pageCount: number;
+  private readonly sentenceCount: number;
+  constructor(pageCount: number, sentenceCount: number, at: number) {
+    this.pageCount = pageCount; this.sentenceCount = sentenceCount; this.lastAt = at;
+  }
+  update(at: number, sentence: number | null, paused: boolean, finished: boolean): number {
+    const delta = Math.max(0, at - this.lastAt);
+    this.lastAt = Math.max(this.lastAt, at);
+    if (paused || finished || at < this.lastAt) return this.page;
+    this.elapsed += delta;
+    if (sentence !== null && sentence !== this.sentence) { this.sentence = sentence; this.elapsed = 0; }
+    this.page = Math.max(this.page, shipmentPageAt(this.elapsed, this.pageCount, this.sentence, this.sentenceCount));
+    return this.page;
+  }
+}
+
 /** Keep numeric grouping commas and UTF-16 sentence offsets unchanged. */
 export function displaySpoken(text: string): string {
   return text.replace(/(?<=[\u3400-\u9fff。！？]),|,(?=[\u3400-\u9fff])/gu, "，");
 }
 /** Builders interpolate the numeric rate directly into spoken text. */
-export function displayRate(rate: number): string { return `${rate}%`; }
+export function displayRate(rate: number): string { return rate > 999 ? ">999%" : `${rate}%`; }

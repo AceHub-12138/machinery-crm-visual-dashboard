@@ -1,7 +1,7 @@
 "use client";
 
 import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
-import { cardExcerpt, cardFollowups, shipmentPages, shipmentPageAt, displaySpoken } from "@/lib/voice/card-presentation";
+import { cardExcerpt, cardFollowups, shipmentPages, ShipmentPageClock, displaySpoken } from "@/lib/voice/card-presentation";
 import { buildSpokenSentences } from "@/lib/voice/spoken-normalize";
 import {
   clamp01,
@@ -37,6 +37,8 @@ export const AnswerCard = memo(function AnswerCard({
   foldAt = null,
   sentenceRef,
   sentenceVersion = 0,
+  playbackPaused = false,
+  playbackFinished = false,
 }: {
   card: AnswerCardData;
   /** 发射起点(performance.now 域,由 OverlayStage 在派发 ANSWER 时写下) */
@@ -47,6 +49,8 @@ export const AnswerCard = memo(function AnswerCard({
   foldAt?: number | null;
   sentenceVersion?: number;
   sentenceRef?: RefObject<{ start: number; end: number } | null>;
+  playbackPaused?: boolean;
+  playbackFinished?: boolean;
 }) {
   const lineRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<HTMLDivElement | null>(null);
@@ -57,17 +61,16 @@ export const AnswerCard = memo(function AnswerCard({
   const [pageIndex, setPageIndex] = useState(0);
   const pages = card.kind === "customers-shipments" ? shipmentPages(card.rows, card.omittedCount).length : 1;
   const followups = cardFollowups(card);
+  const pagingFlags = useRef({ paused: false, finished: false });
+  useEffect(() => { pagingFlags.current = { paused: playbackPaused, finished: playbackFinished }; }, [playbackPaused, playbackFinished]);
   useEffect(() => {
     if (pages <= 1 || foldAt !== null) return;
     const sentences = buildSpokenSentences(card.spoken);
-    let lastSentence = -1;
-    let boundaryAt = launchAt + config.unfoldStartMs + config.unfoldMs;
+    const clock = new ShipmentPageClock(pages, sentences.length, launchAt + config.unfoldStartMs + config.unfoldMs);
     const update = () => {
       const active = sentenceRef?.current;
       const index = active ? sentences.findIndex(s => active.start >= s.displayStart && active.start < s.displayEnd) : -1;
-      const now = performance.now();
-      if (index !== lastSentence) { lastSentence = index; boundaryAt = now; }
-      setPageIndex(shipmentPageAt(now - boundaryAt, pages, index < 0 ? null : index, sentences.length));
+      setPageIndex(clock.update(performance.now(), index < 0 ? null : index, pagingFlags.current.paused, pagingFlags.current.finished));
     };
     update();
     const timer = window.setInterval(update, 100);

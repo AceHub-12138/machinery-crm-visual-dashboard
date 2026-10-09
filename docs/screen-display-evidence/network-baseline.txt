@@ -1,0 +1,10 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/2 301
+date: Fri, 09 Oct 2026 09:49:25 GMT
+location: https://one.one.one.one/
+server: cloudflare
+cf-ray: a47c79a808655654-LAX

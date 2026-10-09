@@ -11,6 +11,8 @@ export function task12Payload(variant: "normal" | "long" | "zero" | "exceeded"):
     p.period.label = "2026年9月" + "统计周期名称很长".repeat(12);
     p.delivery.routes = locations.map(([province, lng, lat], i) => ({...p.delivery.routes[0], key:String(i), province, centerLng:lng, centerLat:lat, unitCount:i+1}));
     p.delivery.summary = {...p.delivery.summary, regionCount:20, shipmentCount:20, unitCount:210};
+    p.delivery.regionUnits = p.delivery.routes.map(r => ({ province: r.province, shipmentCount: 1, unitCount: r.unitCount }));
+    p.delivery.milestonesTotal = 15;
     p.delivery.milestones = Array.from({length:15}, (_,i) => ({...p.delivery.milestones[0], key:String(i), equipmentName:"数控插齿机长型号名称".repeat(6), equipmentModel:`Y${i}型号` + "EXTRA".repeat(12), contractNumber:"CT-LONG-0000" + i}));
     p.kpis.totalCustomers = 999999999; p.kpis.periodNewCustomers = 999999999;
     p.kpis.todayFollowUp = 999999999; p.kpis.sevenDayFollowUp = 999999999; p.kpis.overdueFollowUp = 999999999;
@@ -18,8 +20,11 @@ export function task12Payload(variant: "normal" | "long" | "zero" | "exceeded"):
   if (variant === "zero") {
     for (const key of Object.keys(p.kpis)) (p.kpis as unknown as Record<string,unknown>)[key] = typeof (p.kpis as unknown as Record<string,unknown>)[key] === "number" ? 0 : "0.00";
     for (const key of Object.keys(p.collection)) (p.collection as unknown as Record<string,unknown>)[key] = typeof (p.collection as unknown as Record<string,unknown>)[key] === "number" ? 0 : typeof (p.collection as unknown as Record<string,unknown>)[key] === "boolean" ? false : "0.00";
+    p.delivery.regionUnits=[]; p.delivery.milestonesTotal=0; p.delivery.routesTotal=0;
+    p.delivery.unresolvedRegionTotals={shipmentCount:0,unitCount:0};
     p.delivery.routes=[]; p.delivery.milestones=[]; p.delivery.summary={shipmentCount:0,unitCount:0,regionCount:0,todayDue:0,sevenDayDue:0,overdueDue:0};
   }
+  if (variant === "exceeded") p.kpis.periodContractAmount="27000000.00";
   if (variant === "exceeded") Object.assign(p.collection, {targetRate:180,targetVisualRate:100,actualAmount:"27000000.00",exceeded:true,exceededAmount:"12000000.00",remainingAmount:"0.00"});
   return p;
 }

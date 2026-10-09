@@ -1,6 +1,8 @@
 "use client";
 
 import { matchProvinceKey } from "@/lib/geo";
+import { formatShortDate } from "@/lib/format";
+import type { PublicSalesScreenPayload } from "@/lib/voice/public-payload";
 import type { PublicShipment } from "@/lib/public-screen-payload";
 
 /**
@@ -49,22 +51,15 @@ const REGION_GROUP: Record<string, string> = {
   澳门: "港澳台",
 };
 
-function formatDay(value: string) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "—";
-  return `${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-}
+const formatDay = formatShortDate;
 
-export function DeliveryMilestones({ paths }: { paths: PublicShipment[] }) {
+export function DeliveryMilestones({ paths, delivery }: { paths: PublicShipment[]; delivery?: PublicSalesScreenPayload["delivery"] }) {
   // 最近交付在前
   const milestones = [...paths]
+    .filter(path => path.shipmentStatus === "SHIPPED")
     .sort((a, b) => new Date(b.shipmentDate).getTime() - new Date(a.shipmentDate).getTime())
     .slice(0, 5);
 
-  const totalUnits = paths.reduce((sum, item) => sum + (item.quantity || 0), 0);
-  const regionCount = new Set(
-    paths.map((item) => REGION_GROUP[matchProvinceKey(item.contract.customer.region)] ?? "其他"),
-  ).size;
 
   return (
     <div className="panel grid h-full grid-cols-[210px_1fr] items-stretch">
@@ -76,10 +71,11 @@ export function DeliveryMilestones({ paths }: { paths: PublicShipment[] }) {
             前面，不如显式分行：第一行数量、第二行覆盖大区，读起来也更顺。 */}
         <p className="num flex flex-wrap items-baseline gap-x-2 text-micro leading-none text-[var(--ink-3)]">
           <span>
-            {paths.length} 单 · {totalUnits} 台
+            {delivery?.summary.shipmentCount ?? "—"} 单 · {delivery?.summary.unitCount ?? "—"} 台
           </span>
-          <span className="text-[var(--ink-4)]">{regionCount} 大区</span>
+          <span className="text-[var(--ink-4)]">{delivery?.summary.regionCount ?? "—"} 省份</span>
         </p>
+        <p className="text-micro text-[var(--ink-3)]">样本 {milestones.length}{delivery?.milestonesTotal === undefined ? "" : ` / 展示总量 ${delivery.milestonesTotal}`}</p>
       </div>
 
       {/* 三列自适应：`auto-fit + minmax(300px, 1fr)` 让 5 张卡按可用宽度

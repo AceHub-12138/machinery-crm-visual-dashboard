@@ -266,8 +266,8 @@ export const ANSWER_SPOKEN_MAX = 600;
 export const ANSWER_ROWS_MAX = 20;
 export const ANSWER_MAP_POINTS_MAX = 200;
 const isText = (v: unknown, max = ANSWER_TEXT_MAX): v is string => isStr(v) && v.length <= max;
-/** 百分比:0–1000(允许超额完成) */
-const isPercent = (v: unknown): v is number => isNum(v) && v >= 0 && v <= 1000;
+/** 完成率可超过 999%，只对图形限幅，不丢弃合法卡片。 */
+const isPercent = (v: unknown): v is number => isNum(v) && v >= 0 && v <= Number.MAX_SAFE_INTEGER;
 /** 计数:0–1e9 */
 const isCount = (v: unknown): v is number => isNum(v) && v >= 0 && v <= 1e9;
 
@@ -279,11 +279,12 @@ export function isValidAnswerCard(card: unknown): card is AnswerCardData {
   if (!isText(c.spoken, ANSWER_SPOKEN_MAX) || !isText(c.title)) return false;
   switch (c.kind) {
     case "target-progress":
-      return isText(c.actualText) && isText(c.targetText) && isText(c.remainingText) && isPercent(c.completionRate);
+      return (c.targetConfigured === undefined || typeof c.targetConfigured === "boolean") && (c.targetAvailable === undefined || typeof c.targetAvailable === "boolean") && (c.paidText === undefined || isText(c.paidText)) && (c.newContractUnpaidText === undefined || isText(c.newContractUnpaidText)) && isText(c.actualText) && isText(c.targetText) && isText(c.remainingText) && isPercent(c.completionRate);
     case "completion-ring":
-      return isPercent(c.ratePercent) && isText(c.collectedText) && isText(c.targetText) && isText(c.remainingText);
+      return (c.targetConfigured === undefined || typeof c.targetConfigured === "boolean") && (c.targetAvailable === undefined || typeof c.targetAvailable === "boolean") && isPercent(c.ratePercent) && isText(c.collectedText) && isText(c.targetText) && isText(c.remainingText);
     case "region":
       return (
+        (c.unresolved === undefined || (typeof c.unresolved === "object" && c.unresolved !== null && isCount((c.unresolved as Record<string, unknown>).shipments) && isCount((c.unresolved as Record<string, unknown>).units))) &&
         (c.other === undefined || (typeof c.other === "object" && c.other !== null && isCount((c.other as Record<string, unknown>).regions) && isCount((c.other as Record<string, unknown>).units))) &&
         (c.mapPoints === undefined || (Array.isArray(c.mapPoints) && c.mapPoints.length <= ANSWER_MAP_POINTS_MAX && c.mapPoints.every(p => {
           if (typeof p !== "object" || p === null) return false;
@@ -301,6 +302,7 @@ export function isValidAnswerCard(card: unknown): card is AnswerCardData {
       );
     case "customers-shipments":
       return (
+        (c.sampleTotal === undefined || isCount(c.sampleTotal)) &&
         (c.omittedCount === undefined || isCount(c.omittedCount)) &&
         (c.counts === undefined || (typeof c.counts === "object" && c.counts !== null && ["today", "sevenDays", "overdue"].every(key => isCount((c.counts as Record<string, unknown>)[key])))) &&
         isText(c.summaryText) &&

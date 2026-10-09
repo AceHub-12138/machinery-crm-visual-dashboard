@@ -19,8 +19,9 @@ export function calculateSalesTargetProgress(actualValue: unknown, targetValue: 
 }
 
 export function currentMonthPeriod(now = new Date()) {
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
+  const beijing = new Date(now.getTime() + 8 * 3600000);
+  const year = beijing.getUTCFullYear();
+  const month = beijing.getUTCMonth() + 1;
   return {
     type: "MONTH" as const,
     year,

@@ -49,13 +49,19 @@ export type AnswerCardData =
       targetText: string;
       remainingText: string;
       completionRate: number;
+      targetConfigured?: boolean;
+      targetAvailable?: boolean;
+      paidText?: string;
+      newContractUnpaidText?: string;
       spoken: string;
     }
   | {
       kind: "completion-ring";
       title: string;
-      /** 环读数(0..100,已在构造处钳制) */
+      /** 目标完成率保留真实值，环图形另做限幅 */
       ratePercent: number;
+      targetConfigured?: boolean;
+      targetAvailable?: boolean;
       collectedText: string;
       targetText: string;
       remainingText: string;
@@ -74,6 +80,7 @@ export type AnswerCardData =
       }>;
       mapPoints?: Array<{ region: string; lng: number; lat: number }>;
       other?: { regions: number; units: number };
+      unresolved?: { shipments: number; units: number };
       spoken: string;
     }
   | {
@@ -88,6 +95,7 @@ export type AnswerCardData =
       }>;
       counts?: { today: number; sevenDays: number; overdue: number };
       omittedCount?: number;
+      sampleTotal?: number;
       spoken: string;
     }
   | { kind: "customer-kpi"; title: string; newCustomers: number; totalCustomers: number; spoken: string }

@@ -40,6 +40,7 @@ export type PublicSalesScreenPayload = {
     totalPaidAmount: string;
     totalUnpaidAmount: string;
     collectionRate: number;
+    targetConfigured?: boolean;
     targetAmount: string;
     actualAmount: string;
     targetRate: number;
@@ -57,8 +58,15 @@ export type PublicSalesScreenPayload = {
       sevenDayDue: number;
       overdueDue: number;
     };
+    regionUnits?: Array<{ province: string; shipmentCount: number; unitCount: number }>;
+    unresolvedRegionTotals?: { shipmentCount: number; unitCount: number };
+    routesTotal?: number;
+    milestonesTotal?: number;
     routes: PublicRouteSample[];
     reminders: {
+      todayTotal?: number;
+      sevenDaysTotal?: number;
+      overdueTotal?: number;
       today: PublicReminderSample[];
       sevenDays: PublicReminderSample[];
       overdue: PublicReminderSample[];
@@ -101,7 +109,7 @@ export type PublicMilestoneSample = {
 
 /**
  * fail-closed 结构校验(plan §10 风格:不可信输入一律显式拒绝)。
- * 只校验语音链路消费到的骨架与字段类型;金额字符串留 Number() 兜底。
+ * 只校验语音链路消费到的骨架与字段类型;金额字符串必须是有限的十进制数。
  * 校验失败抛 DataSourceError 由调用方归一为降级路径。
  */
 export function validatePublicPayload(raw: unknown): PublicSalesScreenPayload {
@@ -119,14 +127,17 @@ export function validatePublicPayload(raw: unknown): PublicSalesScreenPayload {
   }
   const kpis = p.kpis as Record<string, unknown>;
   for (const key of Object.keys(KPIS_NUMBER_FIELDS)) {
-    if (typeof kpis[key] !== "number") fail(`kpis.${key} 必须为 number`);
+    if (typeof kpis[key] !== "number" || !Number.isFinite(kpis[key])) fail(`kpis.${key} 必须为 number`);
+  }
+  for (const key of ["periodContractAmount", "periodPaidAmount", "periodUnpaidAmount"]) {
+    if (typeof kpis[key] !== "string" || !/^-?\d+(\.\d+)?$/.test(kpis[key] as string) || !Number.isFinite(Number(kpis[key]))) fail(`kpis.${key} 金额不合法`);
   }
   const collection = p.collection as Record<string, unknown>;
   for (const key of Object.keys(COLLECTION_TEXT_FIELDS)) {
-    if (typeof collection[key] !== "string") fail(`collection.${key} 必须为 string`);
+    if (typeof collection[key] !== "string" || !/^-?\d+(\.\d+)?$/.test(collection[key] as string) || !Number.isFinite(Number(collection[key]))) fail(`collection.${key} 必须为 string`);
   }
   for (const key of ["collectionRate", "targetRate", "targetVisualRate"] as const) {
-    if (typeof collection[key] !== "number") fail(`collection.${key} 必须为 number`);
+    if (typeof collection[key] !== "number" || !Number.isFinite(collection[key])) fail(`collection.${key} 必须为 number`);
   }
   const delivery = p.delivery as Record<string, unknown>;
   if (typeof delivery.summary !== "object" || delivery.summary === null) fail("delivery.summary 缺失");
@@ -138,6 +149,23 @@ export function validatePublicPayload(raw: unknown): PublicSalesScreenPayload {
     if (!Array.isArray((delivery.reminders as Record<string, unknown>)[list])) {
       fail(`delivery.reminders.${list} 必须为数组`);
     }
+  }
+  if (collection.targetConfigured !== undefined && typeof collection.targetConfigured !== "boolean") fail("targetConfigured 必须为 boolean");
+  const integer = (value: unknown) => typeof value === "number" && Number.isSafeInteger(value);
+  for (const key of ["routesTotal", "milestonesTotal"]) if (delivery[key] !== undefined && !integer(delivery[key])) fail(`delivery.${key} 必须为整数`);
+  const reminders = delivery.reminders as Record<string, unknown>;
+  for (const key of ["todayTotal", "sevenDaysTotal", "overdueTotal"]) if (reminders[key] !== undefined && !integer(reminders[key])) fail(`reminders.${key} 必须为整数`);
+  if (delivery.regionUnits !== undefined && (!Array.isArray(delivery.regionUnits) || !delivery.regionUnits.every(row => row && typeof row.province === "string" && integer(row.shipmentCount) && integer(row.unitCount)))) fail("regionUnits 不合法");
+  const unresolved = delivery.unresolvedRegionTotals as Record<string, unknown> | undefined;
+  if (unresolved !== undefined && (!unresolved || !integer(unresolved.shipmentCount) || !integer(unresolved.unitCount))) fail("unresolvedRegionTotals 不合法");
+  const summaryFields = ["shipmentCount", "unitCount", "regionCount", "todayDue", "sevenDayDue", "overdueDue"];
+  if (summaryFields.some(key => !integer((delivery.summary as Record<string, unknown>)[key]))) fail("summary 计数不合法");
+  if (Array.isArray(delivery.regionUnits) && unresolved) {
+    const summary = delivery.summary as Record<string, unknown>;
+    const regions = delivery.regionUnits as Array<{province: string; shipmentCount: number; unitCount: number}>;
+    if (new Set(regions.map(r => r.province)).size !== regions.length || regions.length !== summary.regionCount ||
+      regions.reduce((n, r) => n + r.unitCount, 0) + Number(unresolved.unitCount) !== summary.unitCount ||
+      regions.reduce((n, r) => n + r.shipmentCount, 0) + Number(unresolved.shipmentCount) !== summary.shipmentCount) fail("区域总量不一致");
   }
   return raw as PublicSalesScreenPayload;
 }

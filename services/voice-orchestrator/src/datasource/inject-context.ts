@@ -7,7 +7,7 @@
 import { formatMoney, formatShortDate } from "../../../../src/lib/format.ts";
 import { VOICE_COVERAGE_FALLBACK } from "../../../../src/lib/voice/card-builders.ts";
 import type { PublicSalesScreenPayload } from "../../../../src/lib/voice/public-payload.ts";
-import { aggregateRegions } from "../../../../src/lib/voice/card-builders.ts";
+import { fullRegionRows } from "../../../../src/lib/voice/card-builders.ts";
 
 /** system prompt 硬约束(plan §10.2,原句拼接,勿改口径)。 */
 export const INJECTION_CONSTRAINT = [
@@ -40,7 +40,7 @@ export function buildInjectedContext(payload: PublicSalesScreenPayload): string 
 
   lines.push("[目标完成]");
   lines.push(
-    `合同额目标 ${formatMoney(Number(c.targetAmount))};已完成 ${formatMoney(Number(c.actualAmount))};` +
+    `合同额目标 ${formatMoney(Number(c.targetAmount))};已完成 ${formatMoney(Number(k.periodContractAmount))};` +
       `完成率 ${c.targetRate}%;距目标还差 ${formatMoney(Number(c.remainingAmount))}` +
       (c.exceeded ? `;已超额 ${formatMoney(Number(c.exceededAmount))}` : ""),
   );
@@ -53,16 +53,18 @@ export function buildInjectedContext(payload: PublicSalesScreenPayload): string 
 
   lines.push("[发货概览]");
   lines.push(
-    `本期发运 ${d.summary.shipmentCount} 车次 / ${d.summary.unitCount} 台,覆盖 ${d.summary.regionCount} 个省市;` +
-      `今日到期 ${d.summary.todayDue} 台;七日内到期 ${d.summary.sevenDayDue} 台;逾期未发 ${d.summary.overdueDue} 台`,
+    `累计发运 ${d.summary.shipmentCount} 车次 / ${d.summary.unitCount} 台,覆盖 ${d.summary.regionCount} 个省份;` +
+      `今日到期 ${d.summary.todayDue} 份;七日内到期 ${d.summary.sevenDayDue} 份;逾期未发 ${d.summary.overdueDue} 份`,
   );
 
-  const regions = aggregateRegions(d.routes);
+  const regions = fullRegionRows(d);
   if (regions.length > 0) {
     lines.push("[区域分布]");
     lines.push(regions.map((row) => `${row.region} ${row.units}台/${row.shipments}单`).join(";"));
   }
 
+  if (d.unresolvedRegionTotals) lines.push(`地区待确认 ${d.unresolvedRegionTotals.unitCount}台/${d.unresolvedRegionTotals.shipmentCount}单`);
+  if (d.milestonesTotal !== undefined) lines.push(`里程碑展示总量 ${d.milestonesTotal}`);
   const milestones = [...d.milestones]
     .sort((a, b) => b.shipmentDate.localeCompare(a.shipmentDate))
     .slice(0, 8);

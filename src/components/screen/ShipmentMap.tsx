@@ -139,12 +139,11 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
 
   const heat = useMemo(() => {
     const counts = new Map<string, number>();
-    for (const route of routes) {
-      const key = matchProvinceKey(route.region);
-      counts.set(key, (counts.get(key) || 0) + 1);
+    for (const row of (payload.business?.delivery.regionUnits ?? [])) {
+      counts.set(matchProvinceKey(row.province), row.unitCount);
     }
     return { counts, max: Math.max(1, ...counts.values()) };
-  }, [routes]);
+  }, [payload.business]);
 
   const arcs = useMemo(
     () =>
@@ -214,16 +213,7 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
   const coveredProvinces = payload.map.coverageProvinces.length;
 
   /** 省级排行：按 region 归并。用来填满地图两侧的空白，同时给出量级对比。 */
-  const provinceRanking = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const route of routes) {
-      const name = matchProvinceKey(route.region) || route.region;
-      counts.set(name, (counts.get(name) || 0) + 1);
-    }
-    return [...counts.entries()]
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, "zh-CN"));
-  }, [routes]);
+  const provinceRanking = useMemo(() => (payload.business?.delivery.regionUnits ?? []).map(row => ({ name: matchProvinceKey(row.province) || row.province, count: row.unitCount })).sort((a, b) => b.count - a.count), [payload.business]);
 
   const shippedCount = routes.filter((route) => route.status === "SHIPPED").length;
   const pendingCount = routes.length - shippedCount;
@@ -233,23 +223,23 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
     <div className="relative h-full overflow-hidden">
       <div className="map-titlebar pointer-events-none absolute top-0 right-0 left-0 z-10 flex items-center justify-between px-5 py-4">
         <div>
-          <p className="panel-eyebrow">NATIONAL DELIVERY NETWORK</p>
+          <p className="panel-eyebrow">NATIONAL DELIVERY NETWORK · 点位为样本</p>
           <h2 className="mt-1.5 text-label leading-none font-bold tracking-[0.08em] text-[var(--ink)]">
             全国交付态势
           </h2>
         </div>
         <div className="flex items-center gap-7 text-right">
           <div>
-            <p className="text-micro leading-none text-[var(--ink-3)]">交付路线</p>
-            <p className="num mt-1.5 text-label leading-none text-[var(--ink)]">{routes.length}</p>
+            <p className="text-micro leading-none text-[var(--ink-3)]">累计发运</p>
+            <p className="num mt-1.5 text-label leading-none text-[var(--ink)]">{payload.business?.delivery.summary.shipmentCount ?? "—"}</p>
           </div>
           <div>
             <p className="text-micro leading-none text-[var(--ink-3)]">覆盖省份</p>
-            <p className="num mt-1.5 text-label leading-none text-[var(--c-collect)]">{coveredProvinces}</p>
+            <p className="num mt-1.5 text-label leading-none text-[var(--c-collect)]">{payload.business?.delivery.summary.regionCount ?? "—"}</p>
           </div>
           <div>
-            <p className="text-micro leading-none text-[var(--ink-3)]">完成交付</p>
-            <p className="num mt-1.5 text-label leading-none text-[var(--c-received)]">{shippedCount}</p>
+            <p className="text-micro leading-none text-[var(--ink-3)]">累计台数</p>
+            <p className="num mt-1.5 text-label leading-none text-[var(--c-received)]">{payload.business?.delivery.summary.unitCount ?? "—"}</p>
           </div>
         </div>
       </div>
@@ -574,12 +564,13 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
               </li>
             ))}
           </ul>
+          {payload.business?.delivery.unresolvedRegionTotals?.shipmentCount ? <p className="text-micro">地区待确认 {payload.business.delivery.unresolvedRegionTotals.unitCount} 台</p> : null}
         </div>
       </div>
 
       <div className="pointer-events-none absolute top-[92px] right-3 z-10 flex w-[150px] flex-col gap-2">
         <div className="map-hud px-2.5 py-2">
-          <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">发货状态</p>
+          <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">样本状态</p>
           <ul className="mt-1.5 space-y-1.5">
             <li>
               <div className="flex items-center gap-1.5">
@@ -624,7 +615,7 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
           </div>
           <div className="mt-1.5 flex justify-between text-micro leading-none text-[var(--ink-3)]">
             <span>0</span>
-            <span className="num text-[var(--brand-orange-hot)]">{heat.max} 单</span>
+            <span className="num text-[var(--brand-orange-hot)]">{heat.max} 台</span>
           </div>
         </div>
       </div>

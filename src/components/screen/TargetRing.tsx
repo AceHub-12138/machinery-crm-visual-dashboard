@@ -2,13 +2,14 @@
 
 import { Panel, PanelHead } from "@/components/screen/Panel";
 import { formatMoney } from "@/lib/format";
+import type { PublicSalesScreenPayload } from "@/lib/voice/public-payload";
 import type { CrmDashboardStats } from "@/lib/types";
 import type { PublicScreenPayload } from "@/lib/public-screen-payload";
 
 /**
  * 累计回款率环。
  *
- * 简化后的回款环只承担一个任务：让管理者在远处看清总体回款率。
+ * 简化后的回款环只承担一个任务：让管理者在远处看清累计回款率。
  * 金额与目标移到环外，避免同一块图形里同时塞进三组口径。
  */
 function RateDial({ rate }: { rate: number }) {
@@ -81,21 +82,21 @@ export function TargetRing({
   targets,
   periodLabel,
   stats,
+  collection,
 }: {
   targets: PublicScreenPayload["salesTargets"];
   periodLabel: string;
   stats: CrmDashboardStats;
+  collection?: PublicSalesScreenPayload["collection"];
 }) {
   const company = targets.targets.find((item) => item.salesUserId === null);
 
-  // 回款率口径与平台一致：已回 / (已回 + 未回)。
-  // 优先用销售目标里的金额，没有目标时退回到 dashboard 的累计口径。
-  const receivedFromTarget = Number(company?.actualAmount ?? 0);
-  const targetAmount = Number(company?.amount ?? 0);
-  const received = receivedFromTarget > 0 ? receivedFromTarget : stats.totalPaidAmount;
-  const outstanding = stats.totalUnpaidAmount;
-  const contracted = stats.totalContractAmount || received + outstanding;
-  const collectRate = contracted > 0 ? received / contracted : 0;
+  const targetAmount = Number(collection?.targetAmount ?? company?.amount ?? 0);
+  const targetConfigured = collection?.targetConfigured ?? company !== undefined;
+  const received = Number(collection?.totalPaidAmount ?? stats.totalPaidAmount);
+  const outstanding = Number(collection?.totalUnpaidAmount ?? stats.totalUnpaidAmount);
+  const contracted = Number(collection?.totalContractAmount ?? stats.totalContractAmount);
+  const collectRate = (collection?.collectionRate ?? 0) / 100;
 
   return (
     <Panel className="flex h-full min-h-0 flex-col">
@@ -111,7 +112,7 @@ export function TargetRing({
             <RateDial rate={collectRate * 100} />
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <p className="text-micro leading-none tracking-[0.08em] text-[var(--ink-3)]">
-                总体回款率
+                累计回款率
               </p>
               <p className="num mt-2.5 flex items-baseline text-hero leading-none tracking-[-0.02em] text-[var(--ink)]">
                 {(collectRate * 100).toFixed(1)}
@@ -144,15 +145,15 @@ export function TargetRing({
                 {formatMoney(contracted)}
               </p>
             </div>
-            {targetAmount > 0 ? (
+            {targetConfigured && targetAmount > 0 ? (
               <p className="num text-right text-micro leading-tight text-[var(--ink-3)]">
                 本月目标 {formatMoney(targetAmount)}
                 <br />
                 <span className="text-[var(--brand-orange-hot)]">
-                  已完成 {formatMoney(Number(company?.actualAmount ?? 0))}
+                  已完成 {formatMoney(stats.periodContractAmount)}
                 </span>
               </p>
-            ) : null}
+            ) : <p className="text-micro text-[var(--ink-3)]">{targetConfigured ? "目标为 0" : "目标未设置"}</p>}
           </div>
           <div className="collection-track mt-3 flex overflow-hidden">
             <span className="bg-[var(--c-received)]" style={{ width: `${collectRate * 100}%` }} />

@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
-import { Noto_Sans_SC, Rajdhani } from "next/font/google";
+import type { CSSProperties } from "react";
 import "./globals.css";
 
-const notoSansSC = Noto_Sans_SC({
-  subsets: ["latin"],
-  weight: ["500", "700", "900"],
-  variable: "--font-heiti",
-});
-
-const rajdhani = Rajdhani({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-hud",
-});
+// 沿用系统字体兜底；构建与运行均不向 Google 请求字体。
+const systemFonts = { "--font-heiti": '"PingFang SC", "Microsoft YaHei"', "--font-hud": '"Arial Narrow", "Segoe UI", sans-serif' } as CSSProperties;
 
 export const metadata: Metadata = {
   title: "大川经营指挥舱",
@@ -22,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN">
-      <body className={`${notoSansSC.variable} ${rajdhani.variable}`}>{children}</body>
+      <body style={systemFonts}>{children}</body>
     </html>
   );
 }
