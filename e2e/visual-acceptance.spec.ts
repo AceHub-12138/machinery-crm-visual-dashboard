@@ -49,12 +49,18 @@ for(const viewport of [{width:1280,height:720},{width:1920,height:1080},{width:3
   await show(page,{kind:"brief",title,spoken,lines:[]});
   expect(await page.locator(".overlay-card-title").evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(20);
   expect(await page.locator(".overlay-card-title").evaluate(el=>el.scrollHeight)).toBeLessThanOrEqual(45);
+  expect(await page.locator(".overlay-card-title").evaluate(el=>el.scrollHeight)).toBeGreaterThanOrEqual(42);
+  const lineCount=await page.locator(".overlay-card-title").evaluate(el=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const rows:number[]=[];for(let n=walker.nextNode();n;n=walker.nextNode()){const range=document.createRange();range.selectNodeContents(n);for(const rect of range.getClientRects())if(rect.width>0 && !rows.some(y=>Math.abs(y-rect.top)<1))rows.push(rect.top);}return rows.length;});expect(lineCount).toBe(2);
+  const wordBreaks=await page.locator(".overlay-card-title, .overlay-card-spoken").evaluateAll(nodes=>nodes.map(el=>getComputedStyle(el).wordBreak));expect(wordBreaks).toEqual(["normal","normal"]);
   await collectPages(page,true,title);await collectPages(page,false,displaySpoken(spoken));expect(await auditPanels(page)).toEqual([]);
   await page.screenshot({path:`test-results/visual-acceptance/long-title-${viewport.width}.png`});
 });
 test("word audit detects an unwrapped renderer splitting 区域 and 距离",async({page})=>{
   await page.goto("/screen/sales");await page.evaluate(()=>{const probe=document.createElement("p");probe.id="word-probe";probe.dataset.wordAudit="";probe.textContent="区域距离";probe.style.cssText="position:fixed;top:20px;left:20px;width:25px;font-size:24px;line-height:1.5;word-break:break-all;overflow-wrap:anywhere;text-wrap:wrap";document.body.append(probe);});
-  const findings=await auditText(page,"#word-probe");for(const word of ["区域","距离"])expect(findings.some(f=>f.kind==="word-split" && f.text===word)).toBe(true);
+  for(const lineHeight of [1,1.5]) {
+    await page.locator("#word-probe").evaluate((el,height)=>{(el as HTMLElement).style.lineHeight=String(height);},lineHeight);
+    const findings=await auditText(page,"#word-probe");for(const word of ["区域","距离"])expect(findings.some(f=>f.kind==="word-split" && f.text===word)).toBe(true);
+  }
 });
 for(const empty of [false,true])test(`public contract tail ${empty ? "empty" : "masked"}`,async({page})=>{
   const p=validatePublicPayload(structuredClone(fixture));for(const row of p.delivery.reminders.overdue)row.contractNumber=empty ? null : "****0123";for(const row of p.delivery.milestones)row.contractNumber=empty ? null : "****0123";
@@ -76,7 +82,7 @@ for(const empty of [false,true])test(`public contract tail ${empty ? "empty" : "
 for(const width of [1280,1920,3840])test(`map labels remain clear of HUD ${width}`,async({page})=>{
   await page.setViewportSize({width,height:width*1080/1920});await page.goto("/screen/sales");await page.evaluate(()=>document.fonts.ready);
   const huds=await page.locator('[data-map-hud]').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().toJSON()));
-  for(const name of ["上海","宁波","日本"]){const labels=page.locator(`[data-map-label="${name}"]`);expect(await labels.count()).toBeGreaterThan(0);for(const node of await labels.all()){const box=(await node.boundingBox())!;for(const hud of huds){const area=Math.max(0,Math.min(box.x+box.width,hud.right)-Math.max(box.x,hud.left))*Math.max(0,Math.min(box.y+box.height,hud.bottom)-Math.max(box.y,hud.top));expect(area).toBeLessThanOrEqual(.5);}}}
+  for(const name of ["上海","宁波","日本","哈尔滨","黑龙江"]){const labels=page.locator(`[data-map-label="${name}"]`);expect(await labels.count()).toBeGreaterThan(0);for(const node of await labels.all()){const box=(await node.boundingBox())!;for(const hud of huds){const area=Math.max(0,Math.min(box.x+box.width,hud.right)-Math.max(box.x,hud.left))*Math.max(0,Math.min(box.y+box.height,hud.bottom)-Math.max(box.y,hud.top));expect(area).toBeLessThanOrEqual(.5);}}}
   expect(await auditText(page)).toEqual([]);await page.screenshot({path:`test-results/visual-acceptance/map-${width}.png`});
 });
 test("negative primary money has one large pending readout",async({page})=>{
@@ -89,4 +95,13 @@ test("SVG note has an effective 20px design font and a tiny SVG font fails audit
   const note=page.locator("[data-readable-svg]");await expect(note).toHaveAttribute("data-svg-measured","true");await expect(note).toHaveText("仅标注部分地点");expect(await auditText(page,".overlay-card")).toEqual([]);
   await page.addStyleTag({content:"[data-readable-svg] {font-size:1px!important}"});
   expect((await auditText(page,".overlay-card")).some(f=>f.kind==="font" && f.text==="仅标注部分地点")).toBe(true);
+});
+
+
+test("default demo reminders expose masked tails with no raw contract identifier",async({page,request})=>{
+  const response=await request.get("/api/screen/crm");expect(response.ok()).toBe(true);
+  const p=await response.json();const values=Object.values(p.dashboard.shipmentReminders as Record<string,Array<{contractNo:string}>>).flat().map(row=>row.contractNo);
+  expect(values.length).toBeGreaterThan(0);for(const value of values)expect(value).toMatch(/^\*{4}\d{4}$/u);
+  await page.goto("/screen/sales");await expect(page.locator("[data-reminder] [data-contract-tail]")).toHaveCount(6);
+  await expect(page.locator("[data-screen-panel=reminders]")).not.toContainText("DC-2026-");expect(await auditText(page)).toEqual([]);
 });

@@ -321,18 +321,18 @@ export function buildMockScreenPayload(now = new Date()): ScreenCrmPayload {
     },
     shipmentReminders: {
       today: [
-        reminder("due-1", "无锡精密传动有限公司", "DC-2026-0342", "数控插床", "BK5030", today),
-        reminder("due-2", "合肥液压件厂", "DC-2026-0338", "数控键槽铣床", "X5032", today),
+        reminder("due-1", "无锡精密传动有限公司", "****0342", "数控插床", "BK5030", today),
+        reminder("due-2", "合肥液压件厂", "****0338", "数控键槽铣床", "X5032", today),
       ],
       sevenDays: [
-        reminder("due-3", "大连船舶齿轮厂", "DC-2026-0348", "数控插齿机", "YK5120", tomorrow),
-        reminder("due-4", "太原重工配套中心", "DC-2026-0351", "数控插床", "BK5040", inThree),
-        reminder("due-5", "南昌轨道交通装备", "DC-2026-0355", "普通插床", "B5032", inThree),
+        reminder("due-3", "大连船舶齿轮厂", "****0348", "数控插齿机", "YK5120", tomorrow),
+        reminder("due-4", "太原重工配套中心", "****0351", "数控插床", "BK5040", inThree),
+        reminder("due-5", "南昌轨道交通装备", "****0355", "普通插床", "B5032", inThree),
       ],
       overdue: [
-        reminder("ov-1", "兰州石油机械厂", "DC-2026-0294", "数控插床", "BK5032", overdueA),
-        reminder("ov-2", "包头矿用减速机厂", "DC-2026-0271", "数控插齿机", "YK5132", overdueB),
-        reminder("ov-3", "徐州工程机械配套", "DC-2026-0288", "数控键槽铣床", "X5040", overdueB),
+        reminder("ov-1", "兰州石油机械厂", "****0294", "数控插床", "BK5032", overdueA),
+        reminder("ov-2", "包头矿用减速机厂", "****0271", "数控插齿机", "YK5132", overdueB),
+        reminder("ov-3", "徐州工程机械配套", "****0288", "数控键槽铣床", "X5040", overdueB),
       ],
     },
     recentFollows: [
