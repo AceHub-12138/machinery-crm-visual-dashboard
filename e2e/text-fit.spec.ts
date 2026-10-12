@@ -26,13 +26,14 @@ test("audit detects visible, inline and fixed overflow; accepts only compensated
   await page.goto("/screen/sales");
   await page.evaluate(()=>{
     const root=document.createElement("div");root.id="audit-probe";root.style.cssText="position:fixed;left:20px;top:20px;width:100px;font-size:20px";
-    root.innerHTML='<div style="width:30px;overflow:visible;white-space:nowrap"><span>这是故意撑破的文字</span></div><div style="position:fixed;width:30px;overflow:hidden;white-space:nowrap">固定位置溢出</div><div hidden>隐藏文字不能误报</div><span class="sr-only">读屏专用文字</span><div class="clip-1" title="合法补偿的长文字" style="width:30px">合法补偿的长文字</div><div class="clip-1" style="width:30px">没有补偿的长文字</div>';
+    root.innerHTML='<div style="width:30px;overflow:visible;white-space:nowrap"><span>这是故意撑破的文字</span></div><div style="position:fixed;width:30px;overflow:hidden;white-space:nowrap">固定位置溢出</div><div hidden>隐藏文字不能误报</div><span class="sr-only">读屏专用文字</span><div class="clip-1" title="合法补偿的长文字" style="width:30px">合法补偿的长文字</div><div class="clip-1" style="width:30px">没有补偿的长文字</div><div style="width:30px"><span title="行内伪裁剪" aria-label="行内伪裁剪" style="display:inline;width:30px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">行内伪裁剪</span></div>';
     document.body.append(root);
   });
   const findings=await auditText(page,"#audit-probe");
   expect(findings.some(f=>f.text.includes("故意撑破"))).toBe(true);
   expect(findings.some(f=>f.text.includes("固定位置"))).toBe(true);
   expect(findings.some(f=>f.text.includes("没有补偿"))).toBe(true);
+  expect(findings.some(f=>f.text.includes("行内伪裁剪"))).toBe(true);
   expect(findings.some(f=>f.text.includes("隐藏") || f.text.includes("读屏") || f.text.includes("合法补偿"))).toBe(false);
 });
 test("audit detects a panel overlap without changing its size assertion", async({page})=>{

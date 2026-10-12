@@ -149,7 +149,7 @@ h1, h2, h3, .panel-title, .overlay-card-title { text-wrap: balance; }
 .fit-text { display: block; width: 100%; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .num-unit, .money, .nowrap-num { white-space: nowrap; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
 .num-unit > .u { margin-left: .12em; font-size: inherit; font-weight: 600; }
-.clip-1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.clip-1 { display: block; min-width: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .clip-2 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 
 body {

@@ -22,7 +22,8 @@ export async function auditText(page: Page, root = "#screen-stage, .overlay-root
       const css = getComputedStyle(el);
       const hasTruncation = css.textOverflow === "ellipsis" || Number(css.webkitLineClamp) > 0 || el.hasAttribute("data-fit-ellipsis");
       const accessible = el.getAttribute("aria-label") === full || el.querySelector(".sr-only")?.textContent === full || el.textContent?.trim() === full;
-      return hasTruncation && accessible;
+      const clips = css.display !== "inline" && css.display !== "contents" && /hidden|clip/.test(css.overflowX);
+      return hasTruncation && accessible && clips;
     };
     const add = (el: Element, kind: string, text: string, detail?: string) => {
       if (!failures.some(f => f.kind === kind && f.cls === el.getAttribute("class") && f.text === text.slice(0,80))) failures.push({ kind, cls: el.getAttribute("class") ?? el.tagName, text: text.slice(0,80), detail });
