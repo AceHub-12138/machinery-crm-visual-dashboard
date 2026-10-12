@@ -1,5 +1,6 @@
 "use client";
 
+import { FitText } from "@/components/screen/FitText";
 import { AnimatedNumber } from "@/components/screen/AnimatedNumber";
 import { Panel, PanelHead } from "@/components/screen/Panel";
 import { formatCount, formatMoney } from "@/lib/format";
@@ -58,7 +59,7 @@ function MiniStat({
       {/* money：金额不许折行，字号比小整数降一档 —— 28px 的
           「¥2,072.0万」在 158px 的卡片里放不下，硬撑只会断成两行。 */}
       <p className={`num mt-2.5 leading-none ${toneClass} ${money ? "money text-label" : "text-metric"}`}>
-        <AnimatedNumber value={value} format={format} />
+        <FitText text={format(value)} min={money ? 18 : 20} max={money ? "var(--fs-label)" : "var(--fs-metric)"}><AnimatedNumber value={value} format={format} /></FitText>
       </p>
       <p className="mt-2 text-micro leading-none text-[var(--ink-3)]">{hint}</p>
     </article>
@@ -103,7 +104,7 @@ export function KpiRail({
             </p>
           </div>
           <p className="num kpi-hero money mt-2.5 text-hero-lg leading-none">
-            <AnimatedNumber value={stats.periodContractAmount} format={formatMoney} />
+            <FitText text={formatMoney(stats.periodContractAmount)} min={44} max="var(--fs-hero-lg)"><AnimatedNumber value={stats.periodContractAmount} format={formatMoney} /></FitText>
           </p>
           <div className="mt-4">
             <Gauge ratio={targetRatio} slots={22} />

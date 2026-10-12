@@ -1,7 +1,8 @@
 "use client";
 
+import { FitText } from "@/components/screen/FitText";
+import { Money } from "@/components/screen/Money";
 import { Panel, PanelHead } from "@/components/screen/Panel";
-import { formatMoney } from "@/lib/format";
 import type { CrmDashboardStats } from "@/lib/types";
 import type { PublicScreenPayload } from "@/lib/public-screen-payload";
 
@@ -113,9 +114,8 @@ export function TargetRing({
               <p className="text-micro leading-none tracking-[0.08em] text-[var(--ink-3)]">
                 总体回款率
               </p>
-              <p className="num mt-2.5 flex items-baseline text-hero leading-none tracking-[-0.02em] text-[var(--ink)]">
-                {(collectRate * 100).toFixed(1)}
-                <span className="ml-1 text-label leading-none text-[var(--ink-3)]">%</span>
+              <p className="num num-unit mt-2.5 w-full px-5 text-center text-ring leading-none tracking-[-0.02em] text-[var(--ink)]">
+                <FitText text={`${(collectRate * 100).toFixed(1)}%`} min={40} max="var(--fs-ring)">{(collectRate * 100).toFixed(1)}<span className="text-label text-[var(--ink-3)]">%</span></FitText>
               </p>
             </div>
           </div>
@@ -124,13 +124,13 @@ export function TargetRing({
             <div className="collection-number collection-number-received">
               <p className="text-micro leading-none text-[var(--ink-3)]">已收款</p>
               <p className="num money mt-2 text-metric leading-none text-[var(--c-received)]">
-                {formatMoney(received)}
+                <Money value={received} />
               </p>
             </div>
             <div className="collection-number collection-number-pending">
               <p className="text-micro leading-none text-[var(--ink-3)]">未收款</p>
               <p className="num money mt-2 text-metric leading-none text-[var(--c-pending)]">
-                {formatMoney(outstanding)}
+                <Money value={outstanding} />
               </p>
             </div>
           </div>
@@ -141,15 +141,15 @@ export function TargetRing({
             <div>
               <p className="text-micro leading-none text-[var(--ink-3)]">累计合同</p>
               <p className="num money mt-2 text-label leading-none text-[var(--ink)]">
-                {formatMoney(contracted)}
+                <Money value={contracted} />
               </p>
             </div>
             {targetAmount > 0 ? (
               <p className="num text-right text-micro leading-tight text-[var(--ink-3)]">
-                本月目标 {formatMoney(targetAmount)}
+                本月目标 <Money value={targetAmount} />
                 <br />
                 <span className="text-[var(--brand-orange-hot)]">
-                  已完成 {formatMoney(Number(company?.actualAmount ?? 0))}
+                  已完成 <Money value={Number(company?.actualAmount ?? 0)} />
                 </span>
               </p>
             ) : null}
