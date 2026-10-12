@@ -138,3 +138,11 @@ export const sphereRings: Array<{
   { scale: 1.78, opacity: 0.12, width: 1, dash: "7 20" },
   { scale: 2.1, opacity: 0.07, width: 1 },
 ];
+
+/** Presentation aliases only; aggregation keys and source data remain untouched. */
+export const PROVINCE_SHORT_NAMES: Record<string,string> = {
+  ...Object.fromEntries(chinaMap.provinces.map(p => [p.name,p.short])),
+  "内蒙古自治区":"内蒙古", "广西壮族自治区":"广西", "新疆维吾尔自治区":"新疆",
+  "宁夏回族自治区":"宁夏", "西藏自治区":"西藏",
+};
+export function provinceShortName(region: string) { return PROVINCE_SHORT_NAMES[region] ?? matchProvinceKey(region); }

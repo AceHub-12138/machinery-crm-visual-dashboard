@@ -39,6 +39,7 @@ const TOKENS = [
   { css: "--fs-brand", utility: "text-brand", min: 18 },
   { css: "--fs-brand-sm", utility: "text-brand-sm", min: 18 },
   { css: "--fs-hero-lg", utility: "text-hero-lg", min: 18 },
+  { css: "--fs-ring", utility: "text-ring", min: 18 },
   // 头部英文装饰字，跟踪 0.34em 的 kicker，是全屏唯一低于 18px 的文字
   { css: "--fs-kicker", utility: "text-kicker", min: 14 },
 ] as const;
@@ -56,7 +57,7 @@ function walk(dir: string): string[] {
 describe("font scale", () => {
   it("declares the six size tokens in :root", () => {
     for (const token of TOKENS) {
-      expect(CSS).toMatch(new RegExp(`${token.css}:\\s*\\d+px`));
+      expect(CSS).toMatch(new RegExp(`${token.css}:\\s*(?:calc\\()?\\d+px`));
     }
   });
 
@@ -91,7 +92,7 @@ describe("font scale", () => {
 
   it("keeps every size on the declared scale — no bare text-[Npx] in components", () => {
     const sizes = new Map(
-      [...CSS.matchAll(/(--fs-[a-z-]+):\s*(\d+)px/g)].map((m) => [m[1], Number(m[2])]),
+      [...CSS.matchAll(/(--fs-[a-z-]+):\s*(?:calc\()?([\d.]+)px/g)].map((m) => [m[1], Number(m[2])]),
     );
     expect(sizes.size).toBeGreaterThanOrEqual(TOKENS.length);
     for (const token of TOKENS) {
@@ -111,4 +112,5 @@ describe("font scale", () => {
     }
     expect(bare).toEqual([]);
   });
+
 });

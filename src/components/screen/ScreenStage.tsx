@@ -59,12 +59,12 @@ export function ScreenStage({
   }, []);
 
   useEffect(() => {
-    if (!scaleToFit) return;
     const stage = document.getElementById("screen-stage");
     if (!stage) return;
 
     const apply = () => {
-      const scale = Math.min(window.innerWidth / STAGE_WIDTH, window.innerHeight / STAGE_HEIGHT);
+      const scale = scaleToFit ? Math.min(window.innerWidth / STAGE_WIDTH, window.innerHeight / STAGE_HEIGHT) : 1;
+      stage.style.setProperty("--stage-scale", String(scale));
       stage.style.transform = `scale(${scale})`;
       stage.style.transformOrigin = "top left";
       const frame = stage.parentElement;

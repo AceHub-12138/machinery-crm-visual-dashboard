@@ -42,7 +42,7 @@ function ReminderGroup({
       <header className="flex shrink-0 items-center justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2">
           <span className="h-4 w-[3px] shrink-0 rounded-full" style={{ background: TONES[tone].bar }} />
-          <h3 className="truncate text-caption leading-none font-medium text-[var(--ink)]">
+          <h3 title={title} className="truncate text-caption leading-none font-medium text-[var(--ink)]">
             {title}
           </h3>
         </div>
@@ -69,10 +69,10 @@ function ReminderGroup({
             <span className="num shrink-0 text-micro leading-none text-[var(--ink-3)]">
               {formatShortDate(item.estimatedShipmentDate)}
             </span>
-            <span className="min-w-0 shrink basis-28 truncate text-caption leading-none text-[var(--ink)]">
+            <span title={item.contractNo} className="min-w-0 shrink basis-28 truncate text-caption leading-none text-[var(--ink)]">
               {item.contractNo}
             </span>
-            <span className="min-w-0 flex-1 truncate text-micro leading-none text-[var(--ink-3)]">
+            <span title={`${item.equipmentName}${item.equipmentModel ? ` ${item.equipmentModel}` : ""}`} className="min-w-0 flex-1 truncate text-micro leading-none text-[var(--ink-3)]">
               {item.equipmentName}
               {item.equipmentModel ? ` ${item.equipmentModel}` : ""}
             </span>

@@ -37,7 +37,7 @@ const NEIGHBOR_LABEL_FILL = [
  * 要除以 0.72 才是屏幕像素。省名 19 → 屏幕 13.7px，城市 22 → 15.8px。
  * 大屏视距 4m 以上，再小就读不清了，所以宁可少放几个标签。
  */
-const LABEL_SIZES = { province: 19, city: 22, neighbor: 17 } as const;
+const LABEL_SIZES = { province: 28, city: 30, neighbor: 26 } as const;
 
 type Placed = {
   id: string;
@@ -559,7 +559,7 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
             {provinceRanking.slice(0, 4).map((row) => (
               <li key={row.name}>
                 <div className="flex items-baseline justify-between gap-1.5">
-                  <span className="truncate text-micro leading-none text-[var(--ink-2)]">
+                  <span title={row.name} className="truncate text-micro leading-none text-[var(--ink-2)]">
                     {row.name}
                   </span>
                   <span className="num text-micro leading-none text-[var(--ink)]">{row.count}</span>
