@@ -278,3 +278,6 @@
 .overlay-collection-meta .overlay-metric { padding-top: 6px; padding-bottom: 6px; }
 .overlay-collection-meta .overlay-metric-label { line-height: 1.2; }
 .overlay-collection-meta .overlay-metric-number { line-height: 1.1; }
+
+/* The reconciled progress card adds actual collections and new-contract arrears. */
+.overlay-progress-block:has(> .overlay-progress-meta + .overlay-progress-meta) { gap: 10px; }
