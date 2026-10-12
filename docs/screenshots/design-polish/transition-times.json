@@ -1,0 +1,23 @@
+[
+  {
+    "clockMs": 0,
+    "performanceMs": 61865,
+    "phase": "enter",
+    "copper": "#ee7d2c",
+    "core": "#ffb65c"
+  },
+  {
+    "clockMs": 250,
+    "performanceMs": 62115,
+    "phase": "on",
+    "copper": "#ee7d2c",
+    "core": "#ffb65c"
+  },
+  {
+    "clockMs": 500,
+    "performanceMs": 62365,
+    "phase": "on",
+    "copper": "#ee7d2c",
+    "core": "#ffb65c"
+  }
+]
