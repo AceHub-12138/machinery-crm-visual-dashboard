@@ -79,11 +79,11 @@ export async function auditText(page: Page, root = "#screen-stage, .overlay-root
         const check=(start:number,end:number,word:string)=>{
           const boxes:DOMRect[]=[];let offset=0;
           for(const node of nodes){const length=node.textContent?.length??0;for(let i=Math.max(0,start-offset);i<Math.min(length,end-offset);i++){const range=document.createRange();range.setStart(node,i);range.setEnd(node,i+1);boxes.push(range.getBoundingClientRect());}offset+=length;}
-          if(boxes.length && Math.max(...boxes.map(r=>r.top))>=Math.min(...boxes.map(r=>r.bottom)))add(element,"word-split",word);
+          if(boxes.length && Math.max(...boxes.map(r=>r.top))-Math.min(...boxes.map(r=>r.top))>1)add(element,"word-split",word);
         };
         // Independent lexical search also catches a renderer that forgets word wrappers.
         for(const word of words){let at=full.indexOf(word);while(at>=0){check(at,at+word.length,word);at=full.indexOf(word,at+word.length);}}
-        for(const word of element.querySelectorAll<HTMLElement>("[data-word]")){if(!visible(word))continue;const range=document.createRange();range.selectNodeContents(word);const rects=[...range.getClientRects()].filter(r=>r.width>0);if(rects.length && Math.max(...rects.map(r=>r.top))>=Math.min(...rects.map(r=>r.bottom)))add(word,"word-split",word.textContent??"");}
+        for(const word of element.querySelectorAll<HTMLElement>("[data-word]")){if(!visible(word))continue;const range=document.createRange();range.selectNodeContents(word);const rects=[...range.getClientRects()].filter(r=>r.width>0);if(rects.length && Math.max(...rects.map(r=>r.top))-Math.min(...rects.map(r=>r.top))>1)add(word,"word-split",word.textContent??"");}
       }
       for (const unit of stage.querySelectorAll<HTMLElement>(".num-unit")) {
         if (!visible(unit)) continue;

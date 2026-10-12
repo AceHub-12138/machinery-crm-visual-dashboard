@@ -284,7 +284,9 @@
 
 .overlay-next-step { margin: 18px auto 0; max-width: 900px; font-size: 30px; line-height: 1.4; color: var(--ov-ink); text-wrap: balance; }
 .overlay-title-wrap { position: relative; }
-.overlay-card-title { line-height: 1.1; white-space: normal; overflow: hidden; max-height: 44px; text-overflow: clip; text-wrap: pretty; }
+.overlay-card-title { line-height: 1; word-break: normal; overflow-wrap: anywhere; white-space: normal; overflow: hidden; max-height: 44px; text-overflow: clip; text-wrap: pretty; }
 .overlay-title-wrap:has(.overlay-title-next) { padding-right: 74px; }
 .overlay-title-next { position: absolute; right: 0; top: 8px; border: 0; padding: 4px; color: var(--ov-core); background: none; font-size: var(--ov-fs-meta); }
 .overlay-shipment-row[data-has-contract="false"] { grid-template-columns: minmax(0, 1fr) 136px 70px; }
+
+.overlay-title-wrap:has(.overlay-title-next) .overlay-card-title { height: 44px; }

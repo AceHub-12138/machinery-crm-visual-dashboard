@@ -20,3 +20,11 @@ describe("screen mock contract", () => {
     expect(payload.map.routes.some((route) => route.city === "上海")).toBe(true);
   });
 });
+
+
+it("all demo contract values, including reminder call sites, use the public mask",()=>{
+  const payload=buildMockScreenPayload();
+  const values=[...payload.map.routes.map(row=>row.contractNo),...Object.values(payload.dashboard.shipmentReminders).flat().map(row=>row.contractNo)];
+  expect(values.length).toBeGreaterThan(0);
+  for(const value of values)expect(value).toMatch(/^\*{4}\d{4}$/u);
+});

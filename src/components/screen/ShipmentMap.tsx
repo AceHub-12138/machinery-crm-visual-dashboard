@@ -586,7 +586,7 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
           {provinceRanking.length > 4 ? <p className="mt-2 text-micro text-[var(--ink-3)]">其他 {provinceRanking.length - 4} 省</p> : null}
         </div>
       </div>
-      <div data-map-hud="details" className="pointer-events-none absolute top-[96px] right-3 z-10 flex w-[22%] flex-col gap-2">
+      <div data-map-hud="details" className="pointer-events-none absolute top-[96px] left-3 z-10 flex w-[22%] flex-col gap-2">
         <div className="map-hud px-2.5 py-2">
           <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">图中发运状态</p>
           <ul className="mt-1.5 space-y-1.5">
@@ -619,6 +619,8 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
           </ul>
         </div>
 
+      </div>
+      <div data-map-hud="legend" className="pointer-events-none absolute top-[96px] right-3 z-10 flex w-[22%] flex-col gap-2">
         {/* 高度色阶图例：带刻度 */}
         <div className="map-hud px-2.5 py-2">
           <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">省级发货量</p>
