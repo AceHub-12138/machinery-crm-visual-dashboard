@@ -1,0 +1,92 @@
+[
+  {
+    "original": "4138681cfb6ff1390d3747049125fc2d8c4c56a5",
+    "rebased": "b5885c3c9fe01586b99b4691a1d3e14790ec477c",
+    "subject": "feat(screen): 建立缩字与全文补偿工具，避免长值撑破布局"
+  },
+  {
+    "original": "5fd0db3b060c1f2f11a2338ef65cd943bd497713",
+    "rebased": "39265a8364767c784e02121827f34ece7ef2c1a5",
+    "subject": "feat(voice-ui): 独立表达异常原因并把声音提示放入卡片"
+  },
+  {
+    "original": "f3eba0296528943329a84cf6a2604f57d01b86dd",
+    "rebased": "af2f995605893d84da209b321fa0bc15973803bf",
+    "subject": "feat(voice-ui): 提升语音字号并保留新尺寸几何断言"
+  },
+  {
+    "original": "006ffe836638604319d55a4a1ba18a42084ef2b6",
+    "rebased": "110fddc63be8593fed31cdc2594d754ac34c99dc",
+    "subject": "feat(screen): 放大主读数和回款环并限制缩字下限"
+  },
+  {
+    "original": "40e8257f8bf691caef2f6add0c658cad373d5249",
+    "rebased": "282f433db853b3828622cb67f9b33940bfbeb184",
+    "subject": "feat(screen): 默认隐藏英文眉标与语音调试提示"
+  },
+  {
+    "original": "14033cf1e1ecd14dba11cc308796c54ca2cc5033",
+    "rebased": "7575c8ece866c5070c50b99b3e69ed526bd538b2",
+    "subject": "feat(voice-ui): 将覆盖层主线框统一为品牌橙"
+  },
+  {
+    "original": "d414d97eead54b15237b4c04f8a686ae849b4e75",
+    "rebased": "4203dcb81e5d504cba2313ac9769b554a64f27b2",
+    "subject": "feat(voice-ui): 读屏只播完整句并避免逐字重复通知"
+  },
+  {
+    "original": "e8c353d9e19f40703cf664336124c5dc16d7f480",
+    "rebased": "18798f6dee1574d8ab81c1b9550d391b5b441183",
+    "subject": "feat(voice-ui): 减少动效时静态绘制并保留真实音量采样"
+  },
+  {
+    "original": "fdd8b112b35d0a142cb77af21dc49443e6041aa2",
+    "rebased": "09fc098e98290ace37e044072e4b8689e1c373bd",
+    "subject": "test(e2e): 重写溢出检测并扩充长字符串和异常状态回归"
+  },
+  {
+    "original": "bd6effd00781858e5e894c0a79a64b5f036fa916",
+    "rebased": "dac5cd7758ba7f74e014f9c571b55d9fed94f32a",
+    "subject": "feat(screen): 扩大地图并外移浮层，同步更新几何验收"
+  },
+  {
+    "original": "31bb322000a3e8dfd62f0087aa43d07a3fd98495",
+    "rebased": "ee54b33fe4c5ab29fbb44e8530fb0365cf280b9b",
+    "subject": "feat(screen): 提醒以数字为主，按紧急程度单列翻页"
+  },
+  {
+    "original": "4f4981bf77bc93846828f25f372533bc7d1b4889",
+    "rebased": "3df6a8aec599fbd5943f72fb9e2b39d44ed3acfc",
+    "subject": "feat(screen): 交付里程碑改为横向时间轴并保留全部分页记录"
+  },
+  {
+    "original": "805c5d7170042b149016091a54ff1ae92fe72f40",
+    "rebased": "3bba2308afd33bb48d2ba900f2fdb59b91c7dec5",
+    "subject": "feat(voice-ui): 聆听时展示真实音量，并保留原有收音判定"
+  },
+  {
+    "original": "312c2ec240eeff2db0abc64a7ecf1b66099997f4",
+    "rebased": "9b118bf70caf76fc1401dee1822282f5386832cd",
+    "subject": "feat(voice-ui): 卡片按内容分档，长播报按三行测量翻页"
+  },
+  {
+    "original": "db8503cc39e19fd338b5cf2dcd9b56dff6ed902e",
+    "rebased": "d38814fa6af046299a88c698a2385779fa60f537",
+    "subject": "feat(screen): 补齐大金额与长标签边界，保持数字单位同一行"
+  },
+  {
+    "original": "0e2b180eacce9916f0bc7d0f56765c0512aa9e3a",
+    "rebased": "8164654ef25804490e4e2f3b88e76c1b3f5581dd",
+    "subject": "feat(screen): 提交 P2 超宽与过渡设计稿，待确认后实施"
+  },
+  {
+    "original": "de5d1a5cd9edc541080abe9ad5e0f83883617ebf",
+    "rebased": "0f04be9768d951a4d2c6acbdb057bf722cff3024",
+    "subject": "feat(screen): 让长标签裁剪真正生效，防止时间轴相邻文字重叠"
+  },
+  {
+    "original": "b86b5fbc7db789fb0aed71fef0c9f149dbb33ad2",
+    "rebased": "2ca602f760962dfd6732128a2a1803f617cf4cf4",
+    "subject": "feat(screen): 交付前后对比、阶段截图和本地验收报告"
+  }
+]

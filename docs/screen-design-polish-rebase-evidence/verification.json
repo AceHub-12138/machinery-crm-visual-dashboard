@@ -1,0 +1,49 @@
+{
+  "branch": "feat/screen-design-polish-rebased",
+  "base": "70be18a",
+  "originalBranch": "feat/screen-design-polish",
+  "originalCommit": "b86b5fb",
+  "lastCodeCommit": "767dcfd",
+  "migratedCommits": 18,
+  "unitTests": 533,
+  "unitFiles": 38,
+  "browser": {
+    "startTime": "2026-10-12T06:47:11.067Z",
+    "duration": 469592.881,
+    "expected": 125,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "performance": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 32,
+      "overlayFrames": 121,
+      "baselineP95": 0.10000000149011612,
+      "overlayP95": 1.699999999254942,
+      "incrementP95": 1.5999999977648258
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 31,
+      "overlayFrames": 151,
+      "baselineP95": 0.09999999776482582,
+      "overlayP95": 1.7999999970197678,
+      "incrementP95": 1.699999999254942
+    }
+  ],
+  "silentAudioMode": "unset",
+  "platformDocumentCommit": "f2ce4dd",
+  "merged": false,
+  "pushed": false,
+  "deployed": false
+}

@@ -1,0 +1,9 @@
+4138681: format.ts, DeliveryMilestones.tsx, ShipmentMap.tsx — 保留负值核对、北京日期、完整统计与未知地区；合入金额拆分和全文提示。
+f3eba02: AnswerCard.tsx, ProgressCard.tsx, overlay.css — 保留发运时钟、目标设置与实际回款/新合同欠款语义；采用前端字号、金额适配与卡片尺寸。
+006ffe8: KpiRail.tsx, TargetRing.tsx — 保留目标有效性、累计回款率和本期合同口径；负值核对文案用 min18/max22 FitText，正常数字保留主读数44与环心40下限。
+e8c353d: AnswerCard.tsx — 保留数据批句级发运翻页时钟与暂停行为，合入减少动效。
+bd6effd: ShipmentMap.tsx — 右下角布局合入，同时保留地区待确认与其他省份提示。
+31bb322: ReminderRail.tsx — 前端单列分页和44px计数合入；保留全量计数、样本/展示总量标识和负计数核对提示。
+4f4981b: DeliveryMilestones.tsx — 时间轴和全部分页合入；仅SHIPPED、北京日期、全量summary与样本/展示总量标签仍以数据批为准。
+db8503c: KpiRail.tsx, DeliveryMilestones.tsx — 保留实际回款/新合同欠款、真实目标率、负值格式；合入单位绑定、定宽缩字与读屏全文。
+集成复验: ProgressCard 202px 数据区保留两项新增口径，双指标行时 gap22→10；所有高度和字号断言不变。
