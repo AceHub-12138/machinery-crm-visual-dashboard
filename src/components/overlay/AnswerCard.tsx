@@ -31,6 +31,7 @@ import { renderCardTemplate } from "./cards/registry";
 /* memo:编排推进全走 ref 直写 DOM,重渲染只会浪费(几何/配置不变时不进) */
 export const AnswerCard = memo(function AnswerCard({
   card,
+  audioNotice = null,
   launchAt,
   geometry,
   config = LAUNCH,
@@ -39,6 +40,7 @@ export const AnswerCard = memo(function AnswerCard({
   sentenceVersion = 0,
 }: {
   card: AnswerCardData;
+  audioNotice?: string | null;
   /** 发射起点(performance.now 域,由 OverlayStage 在派发 ANSWER 时写下) */
   launchAt: number;
   geometry: OverlayGeometry;
@@ -214,7 +216,7 @@ export const AnswerCard = memo(function AnswerCard({
           <i className="overlay-card-corner overlay-card-corner-bl" />
           <i className="overlay-card-corner overlay-card-corner-br" />
         </div>
-        <header className="overlay-card-header"><h2 className="overlay-card-title" title={card.title}>{cardExcerpt(card.title, 24)}</h2>
+        <header className="overlay-card-header">{audioNotice ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}<h2 className="overlay-card-title" title={card.title}>{cardExcerpt(card.title, 24)}</h2>
           <p className="overlay-card-subtitle" title={"summaryText" in card ? card.summaryText : undefined}>{"summaryText" in card ? cardExcerpt(card.summaryText, 40) : card.kind === "brief" ? "小川 · 为您服务" : "经营数据总览"}</p>
         </header>
         {card.kind !== "brief" ? <div className="overlay-card-data">{renderCardTemplate(card, { barFillRef, launchAt, pageIndex })}</div> : null}
