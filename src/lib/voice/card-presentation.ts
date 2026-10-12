@@ -78,3 +78,9 @@ export function displaySpoken(text: string): string {
 }
 /** Builders interpolate the numeric rate directly into spoken text. */
 export function displayRate(rate: number): string { return rate > 999 ? ">999%" : `${rate}%`; }
+
+
+/** A coverage fallback is a presentation warning, not a lifecycle transition. */
+export function isUnsupportedCard(card:AnswerCardData|null) {
+  return card?.kind === "brief" && card.spoken === VOICE_COVERAGE_FALLBACK;
+}

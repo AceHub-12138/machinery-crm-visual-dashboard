@@ -107,10 +107,10 @@ export function KpiRail({
               {formatCount(stats.periodNewContracts)} 份新签
             </p>
           </div>
-          <p className={`num num-unit kpi-hero money mt-2.5 ${stats.periodContractAmount < 0 ? "text-label" : "text-hero-lg"} leading-none`}>
-            <FitText text={formatMoney(stats.periodContractAmount)} min={stats.periodContractAmount < 0 ? 18 : 44} max={stats.periodContractAmount < 0 ? "var(--fs-label)" : "var(--fs-hero-lg)"}><AnimatedNumber value={stats.periodContractAmount} format={formatMoney} /></FitText>
+          <p className={`num num-unit kpi-hero money mt-2.5 text-hero-lg leading-none`}>
+            <FitText text={formatMoney(stats.periodContractAmount)} min={44} max="var(--fs-hero-lg)"><AnimatedNumber value={stats.periodContractAmount} format={formatMoney} /></FitText>
           </p>
-          {targetInvalid ? <p className="mt-4 text-micro">{DATA_PENDING}</p> : targetConfigured && targetAmount > 0 ? <div className="mt-4">
+          {targetInvalid ? (stats.periodContractAmount < 0 ? null : <p className="mt-4 text-micro">{DATA_PENDING}</p>) : targetConfigured && targetAmount > 0 ? <div className="mt-4">
             <Gauge ratio={targetRatio} slots={22} />
             <div className="mt-2 flex items-baseline justify-between">
               <span className="text-micro text-[var(--ink-3)]">

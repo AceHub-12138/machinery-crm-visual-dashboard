@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ClipText } from "@/components/screen/ClipText";
+import {listingCopy} from "@/lib/display-copy";
 import { matchProvinceKey } from "@/lib/geo";
 import { DATA_PENDING, hasNegativeMetric, formatCount, formatShortDate } from "@/lib/format";
 import type { PublicSalesScreenPayload } from "@/lib/voice/public-payload";
@@ -66,7 +67,7 @@ export function DeliveryMilestones({ paths, delivery }: { paths: PublicShipment[
     <div className="flex min-w-0 flex-col justify-center gap-1 border-r border-[var(--hairline)] px-4">
       <p className="text-label leading-tight font-bold text-[var(--ink)]">交付里程碑</p>
       <ClipText full={summary} className="clip-1 num num-unit text-micro leading-tight text-[var(--ink-3)]" />
-      <ClipText full={`样本 ${ordered.length}${delivery?.milestonesTotal === undefined ? "" : ` / 展示总量 ${formatCount(delivery.milestonesTotal)}`}`} className="clip-1 text-micro leading-tight text-[var(--ink-3)]" />
+      <ClipText full={listingCopy(ordered.length,delivery?.milestonesTotal)} className="clip-1 text-micro leading-tight text-[var(--ink-3)]" />
       {pages>1 ? <div className="flex items-center gap-2 text-micro leading-tight text-[var(--ink-3)]"><span>第 {page+1}/{pages} 页</span><button type="button" aria-label="下一页交付里程碑" className="text-micro text-[var(--brand-orange-hot)]" onClick={()=>setPaging(prev=>({paths,page:((prev.paths===paths?prev.page:0)+1)%pages}))}>下一页 ›</button></div> : null}
     </div>
     <div className="milestone-timeline grid min-w-0 grid-cols-5 items-center px-3 py-1" data-page={page+1}>

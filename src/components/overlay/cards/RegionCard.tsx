@@ -1,4 +1,5 @@
 "use client";
+import {ReadableSvgNote} from "../ReadableSvgNote";
 import { ClipText } from "@/components/screen/ClipText";
 import type { AnswerCardData } from "@/lib/voice/session-machine";
 import { chinaMap, provinceShortName, createScreenArc, mapBBox, projectLonLat } from "@/lib/geo";
@@ -22,7 +23,7 @@ export function RegionCard({card}: {card: Extract<AnswerCardData, {kind: "region
       {card.rows.length === 0 ? <p className="overlay-empty">暂无发运记录</p> : null}
     </div>
     <svg className="overlay-region-map" viewBox={viewBox} role="img" aria-label={`发运地图，共 ${points.length} 个落点`}>
-      <text x={mapBBox.minX} y={mapBBox.minY} fontSize="20" fill="#ffe8c788">点位为样本</text>
+      <ReadableSvgNote>仅标注部分地点</ReadableSvgNote>
       {chinaMap.provinces.map(p => <path key={p.adcode} d={p.d} className="overlay-map-province" />)}
       {points.map((point, i) => <g key={`${point.region}-${i}`}><path d={createScreenArc(chinaMap.factory, point).d} className="overlay-map-route" /><circle cx={point.x} cy={point.y} r="8" className="overlay-map-point"><title>{point.region}</title></circle></g>)}
       <circle cx={chinaMap.factory.x} cy={chinaMap.factory.y} r="12" className="overlay-map-factory"><title>工厂</title></circle>

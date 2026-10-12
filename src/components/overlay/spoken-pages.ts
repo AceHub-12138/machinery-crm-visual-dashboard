@@ -3,25 +3,10 @@ import { useMemo, useSyncExternalStore, type RefObject } from "react";
 import { buildSpokenSentences } from "@/lib/voice/spoken-normalize";
 
 export type SpokenPage = { start: number; end: number };
-const numericUnits = /[¥￥]?-?\d+(?:,\d{3})*(?:\.\d+)?\s*(?:亿|万|台|单|家|项|[%％])/gu;
+import {textRuns,textNodes} from "@/lib/text-layout";
+export const spokenNodes = textNodes;
 
-/** Binding applies equally to measurement and visible text, preserving UTF-16 offsets. */
-export function spokenNodes(text: string): DocumentFragment {
-  const fragment = document.createDocumentFragment();
-  let start = 0;
-  for (const match of text.matchAll(numericUnits)) {
-    fragment.append(document.createTextNode(text.slice(start,match.index)));
-    const unit = document.createElement("span");
-    unit.className = "overlay-num-unit num-unit";
-    unit.textContent = match[0];
-    fragment.append(unit);
-    start = match.index + match[0].length;
-  }
-  fragment.append(document.createTextNode(text.slice(start)));
-  return fragment;
-}
-
-function createSpokenStore(text: string, paragraph: RefObject<HTMLParagraphElement | null>) {
+function createSpokenStore(text: string, paragraph: RefObject<HTMLElement | null>, title = false) {
     const initial: SpokenPage[] = [{start:0,end:text.length}];
     let snapshot = initial;
     let signature = "";
@@ -35,22 +20,35 @@ function createSpokenStore(text: string, paragraph: RefObject<HTMLParagraphEleme
         const measure = (force = false) => {
           if (disposed || !node.clientWidth) return;
           const css = getComputedStyle(node);
-          const key = [node.clientWidth,css.fontSize,css.fontFamily,css.fontWeight,css.lineHeight].join(":");
+          const key = [node.clientWidth,css.fontFamily,css.fontWeight, title ? "title" : css.fontSize, title ? "title" : css.lineHeight].join(":");
           if (!force && key === signature) return;
           signature = key;
-          const probe = node.cloneNode(false) as HTMLParagraphElement;
+          const probe = node.cloneNode(false) as HTMLElement;
           probe.removeAttribute("id");
           Object.assign(probe.style,{position:"absolute",visibility:"hidden",pointerEvents:"none",width:`${node.clientWidth}px`,height:"auto",maxHeight:"none",overflow:"visible",margin:"0"});
           node.parentElement!.append(probe);
-          const lineHeight = parseFloat(css.lineHeight);
+          if(title) {
+            probe.style.display="block";
+            probe.style.webkitLineClamp="unset";
+            probe.replaceChildren(spokenNodes(text));
+            let size=34;probe.style.fontSize=`${size}px`;
+            while(size>20 && probe.scrollHeight>44+1){size-=2;probe.style.fontSize=`${size}px`;}
+            node.style.fontSize=`${size}px`;
+          }
+          const lineHeight = parseFloat(getComputedStyle(probe).lineHeight);
+          const limit = title ? 44 : lineHeight*3;
           const fits = (start: number, end: number) => {
             probe.replaceChildren(spokenNodes(text.slice(start,end)));
-            return probe.scrollHeight <= lineHeight * 3 + 1;
+            return probe.scrollHeight <= limit + 1 && probe.scrollWidth <= node.clientWidth + 1;
           };
+          const runs=textRuns(text);
           const offsets = [0];
-          for (const char of text) offsets.push(offsets[offsets.length-1]+char.length);
+          for(const run of runs) {
+            if(run.atomic)offsets.push(run.end);
+            else for(const char of run.text)offsets.push(offsets[offsets.length-1]+char.length);
+          }
           const endings = buildSpokenSentences(text).map(s=>s.displayEnd);
-          const units = [...text.matchAll(numericUnits)].map(m=>({start:m.index,end:m.index+m[0].length}));
+          const units = runs.filter(run=>run.atomic);
           const pages: SpokenPage[] = [];
           let cursor = 0;
           while (cursor < offsets.length-1) {
@@ -87,7 +85,7 @@ function createSpokenStore(text: string, paragraph: RefObject<HTMLParagraphEleme
     };
 }
 
-export function useSpokenPages(text: string, paragraph: RefObject<HTMLParagraphElement | null>) {
-  const store = useMemo(()=>createSpokenStore(text,paragraph),[text,paragraph]);
+export function useSpokenPages(text: string, paragraph: RefObject<HTMLElement | null>, title = false) {
+  const store = useMemo(()=>createSpokenStore(text,paragraph,title),[text,paragraph,title]);
   return useSyncExternalStore(store.subscribe,store.getSnapshot,store.getServerSnapshot);
 }

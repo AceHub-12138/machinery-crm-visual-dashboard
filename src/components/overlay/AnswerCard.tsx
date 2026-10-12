@@ -1,6 +1,8 @@
 "use client";
 
 import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { CardTitle } from "./CardTitle";
+import { audienceSummary } from "@/lib/display-copy";
 import { ClipText } from "@/components/screen/ClipText";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { cardExcerpt, cardFollowups, shipmentPages, ShipmentPageClock, displaySpoken } from "@/lib/voice/card-presentation";
@@ -269,8 +271,8 @@ export const AnswerCard = memo(function AnswerCard({
           <i className="overlay-card-corner overlay-card-corner-bl" />
           <i className="overlay-card-corner overlay-card-corner-br" />
         </div>
-        <header className="overlay-card-header">{audioNotice ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}<h2 className="overlay-card-title" title={card.title}><ClipText full={card.title}>{cardExcerpt(card.title, 24)}</ClipText></h2>
-          <p className="overlay-card-subtitle" title={"summaryText" in card ? card.summaryText : undefined}>{"summaryText" in card ? <ClipText full={card.summaryText}>{cardExcerpt(card.summaryText, 40)}</ClipText> : card.kind === "brief" ? "小川 · 为您服务" : "经营数据总览"}</p>
+        <header className="overlay-card-header">{audioNotice ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}<CardTitle text={card.title} />
+          {card.kind !== "brief" ? <p className="overlay-card-subtitle">{"summaryText" in card ? <ClipText full={audienceSummary(card.summaryText)}>{cardExcerpt(audienceSummary(card.summaryText), 40)}</ClipText> : "经营数据总览"}</p> : null}
         </header>
         {card.kind !== "brief" ? <div className="overlay-card-data">{renderCardTemplate(card, { barFillRef, launchAt, pageIndex })}</div> : null}
         <section className="overlay-spoken-section" aria-label="小川播报" data-page={spokenPage+1} data-pages={spokenPages.length}>
@@ -282,7 +284,7 @@ export const AnswerCard = memo(function AnswerCard({
               <button type="button" aria-label="下一页播报" onClick={()=>selectSpokenPage((spokenPage+1)%spokenPages.length)}>›</button>
             </div> : null}
           </div>
-          <p ref={paragraphRef} className="overlay-card-spoken" title={displaySpoken(card.spoken)} aria-hidden="true"><span ref={spokenRef} /></p>
+          <p ref={paragraphRef} className="overlay-card-spoken" title={displaySpoken(card.spoken)} aria-hidden="true" data-word-audit><span ref={spokenRef} /></p>
         </section>
         <div className="overlay-followups">{followups.length ? <><span className="overlay-followups-label">{card.kind === "brief" ? "您可以问我：" : "可继续追问："}</span>{followups.map(q => <span key={q}>{q}</span>)}</> : null}</div>
       </div>

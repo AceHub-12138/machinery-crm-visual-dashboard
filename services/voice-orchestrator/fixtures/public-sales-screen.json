@@ -183,7 +183,7 @@
       "today": [
         {
           "key": "due-1",
-          "contractNumber": "DC-2026-0342",
+          "contractNumber": "****0342",
           "equipmentName": "数控插床",
           "equipmentModel": "BK5030",
           "estimatedShipmentDate": "2026-09-28",
@@ -192,7 +192,7 @@
         },
         {
           "key": "due-2",
-          "contractNumber": "DC-2026-0338",
+          "contractNumber": "****0338",
           "equipmentName": "数控键槽铣床",
           "equipmentModel": "X5032",
           "estimatedShipmentDate": "2026-09-28",
@@ -203,7 +203,7 @@
       "sevenDays": [
         {
           "key": "due-3",
-          "contractNumber": "DC-2026-0348",
+          "contractNumber": "****0348",
           "equipmentName": "数控插齿机",
           "equipmentModel": "YK5120",
           "estimatedShipmentDate": "2026-09-29",
@@ -212,7 +212,7 @@
         },
         {
           "key": "due-4",
-          "contractNumber": "DC-2026-0351",
+          "contractNumber": "****0351",
           "equipmentName": "数控插床",
           "equipmentModel": "BK5040",
           "estimatedShipmentDate": "2026-10-01",
@@ -221,7 +221,7 @@
         },
         {
           "key": "due-5",
-          "contractNumber": "DC-2026-0355",
+          "contractNumber": "****0355",
           "equipmentName": "普通插床",
           "equipmentModel": "B5032",
           "estimatedShipmentDate": "2026-10-01",
@@ -232,7 +232,7 @@
       "overdue": [
         {
           "key": "ov-1",
-          "contractNumber": "DC-2026-0294",
+          "contractNumber": "****0294",
           "equipmentName": "数控插床",
           "equipmentModel": "BK5032",
           "estimatedShipmentDate": "2026-09-24",
@@ -241,7 +241,7 @@
         },
         {
           "key": "ov-2",
-          "contractNumber": "DC-2026-0271",
+          "contractNumber": "****0271",
           "equipmentName": "数控插齿机",
           "equipmentModel": "YK5132",
           "estimatedShipmentDate": "2026-09-19",
@@ -250,7 +250,7 @@
         },
         {
           "key": "ov-3",
-          "contractNumber": "DC-2026-0288",
+          "contractNumber": "****0288",
           "equipmentName": "数控键槽铣床",
           "equipmentModel": "X5040",
           "estimatedShipmentDate": "2026-09-19",
@@ -265,7 +265,7 @@
     "milestones": [
       {
         "key": "ms-sh",
-        "contractNumber": "DC-2026-0318",
+        "contractNumber": "****0318",
         "equipmentName": "数控插床",
         "equipmentModel": "BK5030",
         "shipmentDate": "2026-09-08",
@@ -274,7 +274,7 @@
       },
       {
         "key": "ms-sz",
-        "contractNumber": "DC-2026-0281",
+        "contractNumber": "****0281",
         "equipmentName": "数控插齿机",
         "equipmentModel": "YK5120",
         "shipmentDate": "2026-09-04",
@@ -283,7 +283,7 @@
       },
       {
         "key": "ms-nb",
-        "contractNumber": "DC-2026-0302",
+        "contractNumber": "****0302",
         "equipmentName": "插齿插键复合机床",
         "equipmentModel": "B5032",
         "shipmentDate": "2026-09-11",
@@ -292,7 +292,7 @@
       },
       {
         "key": "ms-qd",
-        "contractNumber": "DC-2026-0276",
+        "contractNumber": "****0276",
         "equipmentName": "数控键槽铣床",
         "equipmentModel": "X5032",
         "shipmentDate": "2026-08-29",
@@ -301,7 +301,7 @@
       },
       {
         "key": "ms-wh",
-        "contractNumber": "DC-2026-0255",
+        "contractNumber": "****0255",
         "equipmentName": "数控插床",
         "equipmentModel": "BK5040",
         "shipmentDate": "2026-08-21",
@@ -310,7 +310,7 @@
       },
       {
         "key": "ms-cd",
-        "contractNumber": "DC-2026-0219",
+        "contractNumber": "****0219",
         "equipmentName": "五轴加工中心",
         "equipmentModel": "DC-VMC650",
         "shipmentDate": "2026-08-12",
@@ -319,7 +319,7 @@
       },
       {
         "key": "ms-sy",
-        "contractNumber": "DC-2026-0331",
+        "contractNumber": "****0331",
         "equipmentName": "数控插床",
         "equipmentModel": "BK5032",
         "shipmentDate": "2026-09-13",
@@ -328,7 +328,7 @@
       },
       {
         "key": "ms-gz",
-        "contractNumber": "DC-2026-0198",
+        "contractNumber": "****0198",
         "equipmentName": "普通插床",
         "equipmentModel": "B5032",
         "shipmentDate": "2026-07-30",
@@ -337,7 +337,7 @@
       },
       {
         "key": "ms-xa",
-        "contractNumber": "DC-2026-0244",
+        "contractNumber": "****0244",
         "equipmentName": "数控插齿机",
         "equipmentModel": "YK5132",
         "shipmentDate": "2026-08-18",
@@ -346,7 +346,7 @@
       },
       {
         "key": "ms-zz",
-        "contractNumber": "DC-2026-0268",
+        "contractNumber": "****0268",
         "equipmentName": "数控键槽铣床",
         "equipmentModel": "X5040",
         "shipmentDate": "2026-08-26",
@@ -355,7 +355,7 @@
       },
       {
         "key": "ms-cs",
-        "contractNumber": "DC-2026-0326",
+        "contractNumber": "****0326",
         "equipmentName": "数控插床",
         "equipmentModel": "BK5030",
         "shipmentDate": "2026-09-10",
@@ -364,7 +364,7 @@
       },
       {
         "key": "ms-hrb",
-        "contractNumber": "DC-2026-0186",
+        "contractNumber": "****0186",
         "equipmentName": "普通刨床",
         "equipmentModel": "B2016A",
         "shipmentDate": "2026-07-18",

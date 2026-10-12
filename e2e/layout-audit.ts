@@ -1,10 +1,11 @@
+import {PROTECTED_WORDS} from "../src/lib/text-layout";
 import type { Page } from "@playwright/test";
 
 /** Evaluate actual text ranges in viewport coordinates, including inline/fixed nodes.
  * Visibility, compensation and containment are separate decisions; no offsetParent heuristic.
  */
 export async function auditText(page: Page, root = "#screen-stage, .overlay-root") {
-  return page.evaluate((selector) => {
+  return page.evaluate(({selector,words}) => {
     const canvas = document.createElement("canvas");
     const inkContext = canvas.getContext("2d")!;
     const failures: { kind: string; cls: string; text: string; detail?: string }[] = [];
@@ -36,7 +37,15 @@ export async function auditText(page: Page, root = "#screen-stage, .overlay-root
         if (!host || !text.trim() || !visible(host) || host.closest("script, style, title, desc")) continue;
         const css = getComputedStyle(host);
         const minimum = host.closest(".overlay-root") ? 20 : 18;
-        if (!host.closest(".text-kicker") && parseFloat(css.fontSize) < minimum - .01) add(host, "font", text, css.fontSize);
+        const holder=host.closest<HTMLElement>(".overlay-card, #screen-stage");
+        const stageScale=holder ? holder.getBoundingClientRect().width/holder.offsetWidth : 1;
+        const matrix=host instanceof SVGGraphicsElement ? host.getScreenCTM() : null;
+        const size=host instanceof SVGElement && matrix ? parseFloat(css.fontSize)*Math.hypot(matrix.a,matrix.b)/stageScale : parseFloat(css.fontSize);
+        if (!host.closest(".text-kicker") && size < minimum - .01) add(host, "font", text, String(size));
+        if(host instanceof SVGElement) {
+          const owner=host.ownerSVGElement;if(owner){const box=owner.getBoundingClientRect();const glyph=host.getBoundingClientRect();if(glyph.left<box.left-1 || glyph.right>box.right+1 || glyph.top<box.top-1 || glyph.bottom>box.bottom+1)add(host,"overflow",text,"SVG viewport");}
+          continue;
+        }
         const range = document.createRange(); range.selectNodeContents(node);
         const rects = [...range.getClientRects()];
         inkContext.font = `${css.fontStyle} ${css.fontWeight} ${css.fontSize} ${css.fontFamily}`;
@@ -47,8 +56,6 @@ export async function auditText(page: Page, root = "#screen-stage, .overlay-root
           const baseline = r.top + ink.fontBoundingBoxAscent * scale;
           return { left:r.left, right:r.right, width:r.width, top:baseline - ink.actualBoundingBoxAscent * scale, bottom:baseline + ink.actualBoundingBoxDescent * scale };
         });
-        // SVG text uses its geometric bounding box; HTML uses rendered line fragments.
-        if (host instanceof SVGElement) continue;
         for (let container: HTMLElement | null = host as HTMLElement; container; container = container.parentElement) {
           const style = getComputedStyle(container);
           if (compensated(container)) break;
@@ -64,6 +71,20 @@ export async function auditText(page: Page, root = "#screen-stage, .overlay-root
           if (container === stage) break;
         }
       }
+      for(const element of [...(stage.matches("[data-word-audit]") ? [stage] : []),...stage.querySelectorAll<HTMLElement>("[data-word-audit]")]) {
+        if(!visible(element))continue;
+        const nodes:Text[]=[];const walker=document.createTreeWalker(element,NodeFilter.SHOW_TEXT);
+        for(let n=walker.nextNode();n;n=walker.nextNode())if(n.parentElement && visible(n.parentElement))nodes.push(n as Text);
+        const full=nodes.map(n=>n.textContent).join("");
+        const check=(start:number,end:number,word:string)=>{
+          const boxes:DOMRect[]=[];let offset=0;
+          for(const node of nodes){const length=node.textContent?.length??0;for(let i=Math.max(0,start-offset);i<Math.min(length,end-offset);i++){const range=document.createRange();range.setStart(node,i);range.setEnd(node,i+1);boxes.push(range.getBoundingClientRect());}offset+=length;}
+          if(boxes.length && Math.max(...boxes.map(r=>r.top))>=Math.min(...boxes.map(r=>r.bottom)))add(element,"word-split",word);
+        };
+        // Independent lexical search also catches a renderer that forgets word wrappers.
+        for(const word of words){let at=full.indexOf(word);while(at>=0){check(at,at+word.length,word);at=full.indexOf(word,at+word.length);}}
+        for(const word of element.querySelectorAll<HTMLElement>("[data-word]")){if(!visible(word))continue;const range=document.createRange();range.selectNodeContents(word);const rects=[...range.getClientRects()].filter(r=>r.width>0);if(rects.length && Math.max(...rects.map(r=>r.top))>=Math.min(...rects.map(r=>r.bottom)))add(word,"word-split",word.textContent??"");}
+      }
       for (const unit of stage.querySelectorAll<HTMLElement>(".num-unit")) {
         if (!visible(unit)) continue;
         const lines: DOMRect[] = [];
@@ -78,7 +99,7 @@ export async function auditText(page: Page, root = "#screen-stage, .overlay-root
       }
     }
     return failures;
-  }, root);
+  }, {selector:root,words:[...PROTECTED_WORDS]});
 }
 
 export async function auditPanels(page: Page) {

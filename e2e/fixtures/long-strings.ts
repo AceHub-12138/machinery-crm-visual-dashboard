@@ -12,7 +12,7 @@ export function longScreenPayload(amount: number, rows: number) {
   p.dashboard.shipmentPaths = Array.from({length: rows}, (_,i) => ({ ...source, id:`long-${i}`, contract:{ ...source.contract, equipmentName:LONG_MODEL, equipmentModel:LONG_MODEL, customer:{region:["内蒙古自治区","广西壮族自治区","新疆维吾尔自治区"][i%3]} } }));
   for (const key of ["today","sevenDays","overdue"] as const) {
     const row = p.dashboard.shipmentReminders[key][0] ?? p.dashboard.shipmentReminders.sevenDays[0];
-    p.dashboard.shipmentReminders[key] = Array.from({length:rows},(_,i)=>({...row,id:`${key}-${i}`,contractNo:`LONG-${i}-2026`,equipmentName:LONG_MODEL,equipmentModel:LONG_MODEL}));
+    p.dashboard.shipmentReminders[key] = Array.from({length:rows},(_,i)=>({...row,id:`${key}-${i}`,contractNo:`****${String(i).padStart(4,"0")}`,equipmentName:LONG_MODEL,equipmentModel:LONG_MODEL}));
   }
   return p;
 }

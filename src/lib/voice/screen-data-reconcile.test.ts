@@ -113,7 +113,7 @@ describe("屏幕与语音同源口径", () => {
     partial.shipmentStatus = "PARTIAL_SHIPPED"; partial.contract.equipmentName = "仅部分发出的设备";
     partial.shipmentDate = "2099-01-01";
     const html = renderToStaticMarkup(createElement(DeliveryMilestones, { paths: [partial, ...screen.dashboard.shipmentPaths], delivery: screen.business!.delivery }));
-    expect(html).not.toContain("仅部分发出的设备"); expect(html).toContain("展示总量");
+    expect(html).not.toContain("仅部分发出的设备"); expect(html).toContain("当前列出");
   });
   it("北京时间月初、跨午夜和DATE显示不依赖运行时区", () => {
     expect(formatClock(new Date("2026-09-30T18:00:00Z"))).toBe("2026-10-01 02:00:00");

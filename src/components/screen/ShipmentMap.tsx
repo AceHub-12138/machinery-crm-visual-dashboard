@@ -8,6 +8,7 @@ import {
   chinaSilhouette,
   createScreenArc,
   screenMapViewBox,
+  screenMapBounds,
   matchProvinceKey,
   sphereCenter,
   sphereRings,
@@ -209,7 +210,17 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
         fill: NEIGHBOR_LABEL_FILL[Math.min(2, item.order)],
       }));
 
-    return placeLabels([{ items: cities }, { items: provinceItems }, { items: neighborItems }]);
+    return placeLabels([{ items: cities }, { items: provinceItems }, { items: neighborItems }]).map(label=>{
+      if(!["上海","宁波","日本"].includes(label.text))return label;
+      const width=label.text.length*label.size;
+      const left=label.x+(label.anchor === "end" ? -width : label.anchor === "middle" ? -width/2 : 0);
+      const delta=Math.max(screenMapBounds.x+8-left,Math.min(0,screenMapBounds.x+screenMapBounds.width-8-left-width));
+      return {...label,x:label.x+delta};
+    }).filter(label=>{
+      const width=label.text.length*label.size;
+      const left=label.x+(label.anchor === "end" ? -width : label.anchor === "middle" ? -width/2 : 0);
+      return left>=screenMapBounds.x+8 && left+width<=screenMapBounds.x+screenMapBounds.width-8 && label.y-label.size>=screenMapBounds.y && label.y+label.size*.35<=screenMapBounds.y+screenMapBounds.height;
+    });
   }, [heat, neighbors, provinces, routes]);
 
   const coveredProvinces = payload.map.coverageProvinces.length;
@@ -225,7 +236,7 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
     <div className="relative h-full overflow-hidden">
       <div className="map-titlebar pointer-events-none absolute top-0 right-0 left-0 z-10 flex items-center justify-between px-5 py-4">
         <div>
-          <p className="panel-eyebrow">NATIONAL DELIVERY NETWORK · 点位为样本</p>
+          <p className="panel-eyebrow">NATIONAL DELIVERY NETWORK · 部分发运地点</p>
           <h2 className="mt-1.5 text-label leading-none font-bold tracking-[0.08em] text-[var(--ink)]">
             全国交付态势
           </h2>
@@ -409,6 +420,7 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
             <text
               key={label.id}
               className={label.cls}
+              data-map-label={label.text}
               x={label.x}
               y={label.y}
               fontSize={label.size}
@@ -549,7 +561,7 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
       </div>
 
       <div className="pointer-events-none absolute bottom-3 right-3 z-10 flex w-[22%] flex-col gap-2">
-        <div className="map-hud px-2.5 py-2">
+        <div data-map-hud="ranking" className="map-hud px-2.5 py-2">
           <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">省级排行</p>
           <ul className="mt-1.5 space-y-1.5">
             {provinceRanking.slice(0, 4).map((row) => (
@@ -573,8 +585,10 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
           {payload.business?.delivery.unresolvedRegionTotals?.shipmentCount ? <p className="text-micro">地区待确认 {formatCount(payload.business.delivery.unresolvedRegionTotals.unitCount)} 台</p> : null}
           {provinceRanking.length > 4 ? <p className="mt-2 text-micro text-[var(--ink-3)]">其他 {provinceRanking.length - 4} 省</p> : null}
         </div>
+      </div>
+      <div data-map-hud="details" className="pointer-events-none absolute top-[96px] right-3 z-10 flex w-[22%] flex-col gap-2">
         <div className="map-hud px-2.5 py-2">
-          <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">样本状态</p>
+          <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">图中发运状态</p>
           <ul className="mt-1.5 space-y-1.5">
             <li>
               <div className="flex items-center gap-1.5">
