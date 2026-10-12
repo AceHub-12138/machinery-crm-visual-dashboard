@@ -105,7 +105,7 @@ describe("屏幕与语音同源口径", () => {
     expect(screen.dashboard.stats.periodUnpaidAmount).toBe(-120000);
     expect(screen.business!.kpis.periodContractAmount).toBe(p.kpis.periodContractAmount);
     for (const text of ["secret name", "secret contact", "secret phone", "multipliers"]) expect(json).not.toContain(text);
-    expect(buildIntentAnswer("sales_progress", p).spoken).toContain("数据异常，需核对");
+    expect(buildIntentAnswer("sales_progress", p).spoken).toContain("先生，数据待核对。");
   });
   it("里程碑样本与完整总数同为整单已发集合，不混入部分发运", () => {
     const screen = toPublicScreenPayload(buildMockScreenPayload());
@@ -161,7 +161,7 @@ describe("公开负数核对提示", () => {
     const answer = buildIntentAnswer(intent as Parameters<typeof buildIntentAnswer>[0], p);
     expect(isValidAnswerCard(answer.card)).toBe(true); expect(answer.unanswerable).toBe(false);
     expect(answer.card).toMatchObject({ kind: "brief", title: "数据待核对", lines: ["数据待核对"] });
-    expect(answer.spoken).toContain("数据异常，需核对"); expect(JSON.stringify(answer)).not.toContain("98765");
+    expect(answer.spoken).toContain("先生，数据待核对。"); expect(JSON.stringify(answer)).not.toContain("98765");
   });
   it("主屏所有计数入口与金额使用同一提示，保留原始 payload", () => {
     const p = payload();

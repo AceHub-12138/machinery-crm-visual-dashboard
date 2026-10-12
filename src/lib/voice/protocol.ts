@@ -224,7 +224,7 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
     case "session.start":
       return typeof ev.sessionId === "string" && ev.sessionId.length > 0 && (ev.screenId === undefined || (typeof ev.screenId === "string" && /^[a-f0-9-]{36}$/.test(ev.screenId))) ? ev : null;
     case "state.change":
-      if (ev.reason !== undefined && !["no-data", "offline", "asr-miss", "interrupted"].includes(ev.reason)) return null;
+      if (ev.reason !== undefined && !["no-data", "offline", "asr-miss", "interrupted"].includes(ev.reason)) delete ev.reason;
       return typeof ev.from === "string" && typeof ev.to === "string" && typeof ev.turn === "number"
         ? ev
         : null;

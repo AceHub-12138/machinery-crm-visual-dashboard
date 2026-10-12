@@ -16,7 +16,7 @@ for (const viewport of [{width:1280,height:720},{width:1920,height:1080},{width:
     await page.route("**/api/screen/crm", route=>route.fulfill({json:longScreenPayload(amount,60)}));
     await page.goto("/screen/sales?fit=1");
     await page.clock.fastForward(60001);
-    await expect(page.locator(".kpi-hero")).toContainText(amount===987654321 ? "9.88" : amount===123456789.5 ? "1.23" : amount===0 ? "¥0" : "-123.5");
+    await expect(page.locator(".kpi-hero")).toContainText(amount===987654321 ? "9.88" : amount===123456789.5 ? "1.23" : amount===0 ? "¥0" : "数据待核对");
     await page.evaluate(()=>document.fonts.ready);
     expect(await auditText(page)).toEqual([]);
     expect(await auditPanels(page)).toEqual([]);

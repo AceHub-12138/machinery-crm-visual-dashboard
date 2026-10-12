@@ -6,7 +6,8 @@ import {
   type TurnTracePayload,
   type VoiceWireEvent,
 } from "./protocol";
-import type { AnswerCardData } from "./session-machine";
+import { initSessionState, sessionReducer, type AnswerCardData } from "./session-machine";
+import { initLiveSourceContext, wireToMachineEvents } from "./live-source";
 
 describe("protocol — fail-closed 解析(plan §10 风格)", () => {
   it("非字符串 / 非法 JSON / 未知类型 / 缺 at 一律 null", () => {
@@ -207,4 +208,25 @@ it('accepts configured ordinary listen budgets, rejects absent or invalid countd
     expect(parseWireEvent(JSON.stringify({...base,type:'input.open',timeoutMs,remainingMs:timeoutMs,paused:false}))).not.toBeNull();
   }
   for(const timeoutMs of [0,-1,60001,Infinity])expect(parseWireEvent(JSON.stringify({...base,type:'input.open',timeoutMs,remainingMs:0,paused:false}))).toBeNull();
+});
+
+
+describe("optional state presentation reason",()=>{
+  it.each(["future-server-reason",null,123,{label:"offline"}])("ignores unknown reason %s while still processing state transition",reason=>{
+    const event={type:"state.change",at:42,from:"listening",to:"thinking",turn:3,question:"检查状态兼容",reason};
+    const parsed=parseWireEvent(JSON.stringify(event));
+    expect(parsed).toEqual({type:"state.change",at:42,from:"listening",to:"thinking",turn:3,question:"检查状态兼容"});
+    expect(parsed).not.toHaveProperty("reason");
+    const mapping=wireToMachineEvents("listening",parsed!,initLiveSourceContext());
+    expect(mapping.events).toEqual([{type:"SUBMIT",question:"检查状态兼容"}]);
+    const listening={...initSessionState(0),name:"listening" as const};
+    expect(sessionReducer(listening,{...mapping.events[0],at:42})).toMatchObject({name:"thinking",question:"检查状态兼容"});
+  });
+  it.each(["no-data","offline","asr-miss","interrupted"])("preserves known reason %s",reason=>{
+    const event={type:"state.change",at:42,from:"listening",to:"thinking",turn:0,reason};
+    expect(parseWireEvent(JSON.stringify(event))).toEqual(event);
+  });
+  it("does not let an unknown optional reason excuse an invalid state event",()=>{
+    expect(parseWireEvent(JSON.stringify({type:"state.change",at:42,from:"listening",to:"thinking",turn:"invalid",reason:"future"}))).toBeNull();
+  });
 });
