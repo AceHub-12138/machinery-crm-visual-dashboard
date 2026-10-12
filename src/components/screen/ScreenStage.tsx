@@ -62,6 +62,7 @@ export function ScreenStage({
     const stage = document.getElementById("screen-stage");
     if (!stage) return;
 
+    document.documentElement.dataset.debug = new URLSearchParams(window.location.search).get("debug") === "1" ? "1" : "0";
     const apply = () => {
       const scale = scaleToFit ? Math.min(window.innerWidth / STAGE_WIDTH, window.innerHeight / STAGE_HEIGHT) : 1;
       stage.style.setProperty("--stage-scale", String(scale));
