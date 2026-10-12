@@ -419,3 +419,5 @@ P0-3：主读数 64px、最低 44px；回款环 56px、最低 40px；金额卡�
 P0-4：默认不显示面板英文眉标与操作调试字；debug=1 恢复，data-eyebrow=on 可显式启用眉标。
 
 P0-5：--ov-copper 使用 #ee7d2c；核心琥珀 --ov-core 保持 #ffb65c，回款语义青色不改。
+
+P0-6：可见打字层 aria-hidden；独立 polite live region 在完整句结束后更新，按卡片记录已播句子，避免句级高亮更新导致重复读屏。
