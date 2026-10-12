@@ -88,6 +88,7 @@ export function OverlayStage({
   const [geometry, setGeometry] = useState<OverlayGeometry>(() => overlayGeometry(1920, 1080));
   const [launchAt, setLaunchAt] = useState(0);
   const [promptCaption, setPromptCaption] = useState<string | null>(null);
+  const [debug] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).get("debug") === "1");
   const [audioNotice, setAudioNotice] = useState<string | null>(null);
   const [bargePaused, setBargePaused] = useState(false);
   const playbackGuardRef = useRef<PausableDeadline | null>(null);
@@ -568,9 +569,9 @@ export function OverlayStage({
         />
       ) : null}
 
-      <p className="overlay-hint">
+      {debug ? <p className="overlay-hint">
         {live ? "HUB LIVE · ESC EXIT — XIAOCHUAN 8C" : "F9 WAKE · ESC EXIT — XIAOCHUAN 8A"}
-      </p>
+      </p> : null}
     </div>
   );
 }
