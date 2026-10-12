@@ -24,16 +24,27 @@ export function formatClock(date: Date) {
   return `${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}:${p.second}`;
 }
 
-export function formatMoney(value: number) {
-  if (value < 0) return DATA_PENDING;
+export function formatMoneyParts(value: number | string): { currency: string; number: string; unit: string } {
+  if (typeof value === "string") {
+    const match = /^(¥)?\s*(-?[\d,.]+)\s*(万|亿)?$/u.exec(value.trim());
+    if (!match) return { currency: "", number: value, unit: "" };
+    if (Number(match[2].replaceAll(",", "")) < 0) return { currency: "", number: DATA_PENDING, unit: "" };
+    return { currency: match[1] ?? "", number: match[2], unit: match[3] ?? "" };
+  }
+  if (value < 0) return { currency: "", number: DATA_PENDING, unit: "" };
   const abs = Math.abs(value);
   if (abs >= 100000000) {
-    return `¥${(value / 100000000).toLocaleString("zh-CN", { maximumFractionDigits: 2, minimumFractionDigits: 2 })}亿`;
+    return { currency: "¥", number: (value / 100000000).toLocaleString("zh-CN", { maximumFractionDigits: 2, minimumFractionDigits: 2 }), unit: "亿" };
   }
   if (abs >= 10000) {
-    return `¥${(value / 10000).toLocaleString("zh-CN", { maximumFractionDigits: 1, minimumFractionDigits: 1 })}万`;
+    return { currency: "¥", number: (value / 10000).toLocaleString("zh-CN", { maximumFractionDigits: 1, minimumFractionDigits: 1 }), unit: "万" };
   }
-  return `¥${value.toLocaleString("zh-CN", { maximumFractionDigits: 0 })}`;
+  return { currency: "¥", number: value.toLocaleString("zh-CN", { maximumFractionDigits: 0 }), unit: "" };
+}
+
+export function formatMoney(value: number) {
+  const { currency, number, unit } = formatMoneyParts(value);
+  return `${currency}${number}${unit}`;
 }
 
 export function formatMoneyFull(value: number | string | null | undefined) {

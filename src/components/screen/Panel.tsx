@@ -33,7 +33,7 @@ export function PanelHead({
         />
         <div className="min-w-0">
           <p className="panel-eyebrow">{eyebrow}</p>
-          <h2 className="panel-title mt-1 truncate">{title}</h2>
+          <h2 title={title} className="panel-title mt-1 truncate">{title}</h2>
         </div>
       </div>
       {extra ? <div className="shrink-0 text-right">{extra}</div> : null}

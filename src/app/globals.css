@@ -67,8 +67,9 @@
   --fs-hero: 44px;
   --fs-metric: 28px;
   --fs-label: 22px;
-  --fs-caption: 20px;
-  --fs-micro: 18px;
+  --fs-boost: clamp(1, calc(0.9 / var(--stage-scale, 1)), 1.12);
+  --fs-caption: calc(20px * var(--fs-boost));
+  --fs-micro: calc(18px * var(--fs-boost));
 
   /* ---- 标尺外的两个特例（都要在这里登记，不能再写裸 px） ----
      --fs-brand   头部「经营指挥舱」字标：品牌资产，比 panel-title 大一档
@@ -81,6 +82,7 @@
   --fs-brand-sm: 24px;
   --fs-kicker: 14px;
   --fs-hero-lg: 50px;
+  --fs-ring: 44px;
 
   /* ---- 栅格 ---- */
   --gutter: 14px;
@@ -123,6 +125,7 @@
   --text-brand-sm: var(--fs-brand-sm);
   --text-kicker: var(--fs-kicker);
   --text-hero-lg: var(--fs-hero-lg);
+  --text-ring: var(--fs-ring);
 }
 
 * {
@@ -139,13 +142,23 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+html { line-break: strict; word-break: keep-all; overflow-wrap: anywhere; hanging-punctuation: allow-end; }
+:lang(zh) p, .t-body { text-wrap: pretty; }
+h1, h2, h3, .panel-title, .overlay-card-title { text-wrap: balance; }
+
+.fit-text { display: block; width: 100%; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.num-unit, .money, .nowrap-num { white-space: nowrap; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+.num-unit > .u { margin-left: .12em; font-size: inherit; font-weight: 600; }
+.clip-1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.clip-2 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+
 body {
   overflow: auto;
 }
 
 button,
 a {
-  font: inherit;
+  font-family: inherit;
 }
 
 .hud-en {
@@ -180,6 +193,9 @@ a {
 }
 
 .screen-stage {
+  --fs-boost: clamp(1, calc(0.9 / var(--stage-scale, 1)), 1.12);
+  --fs-caption: calc(20px * var(--fs-boost));
+  --fs-micro: calc(18px * var(--fs-boost));
   position: relative;
   width: 1920px;
   height: 1080px;
@@ -321,7 +337,7 @@ a {
 
 .panel-eyebrow {
   font-family: var(--font-hud), Rajdhani, sans-serif;
-  font-size: 14px;
+  font-size: var(--fs-caption);
   font-weight: 700;
   letter-spacing: 0.3em;
   color: var(--brand-orange);
@@ -718,3 +734,5 @@ a {
     animation: none !important;
   }
 }
+
+#screen-stage :where(div, article, section, p, span, li, header) { min-width: 0; min-height: 0; }

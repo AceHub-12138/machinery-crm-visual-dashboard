@@ -4,8 +4,11 @@ import { VOICE_COVERAGE_FALLBACK } from "./card-builders.ts";
 
 /** Visible excerpt only; callers retain the original in title/accessible labels. */
 export function cardExcerpt(text: string, maxChars: number): string {
-  const chars = Array.from(text);
-  return chars.length > maxChars ? chars.slice(0, maxChars - 1).join("") + "…" : text;
+  const cleaned = text.replace(/(?:股份有限公司|有限责任公司|有限公司|集团)$/u, "") || text;
+  const chars = Array.from(cleaned);
+  if (chars.length <= maxChars) return cleaned;
+  if (maxChars < 4) return chars.slice(0, Math.max(0,maxChars-1)).join("") + "…";
+  return chars.slice(0, Math.min(6,maxChars-3)).join("") + "…" + chars.slice(-2).join("");
 }
 
 export const CARD_FOLLOWUPS = {

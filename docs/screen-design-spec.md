@@ -407,3 +407,5 @@ pnpm test:e2e
 Playwright 验证 1920×1080 面板位置/尺寸、1280×720 完整缩放、公开 API 与首屏 HTML 字段边界，并导出截图与失败 trace。负向用例证明列宽改变 5px 能被发现。CI 在 Linux 跑同一组几何断言，结果截图作为 artifact 留存。
 当前采用方案 B 的跨平台 DOM 几何断言和截图审核，不把 macOS 字体渲染生成的图片当 Linux 像素基线。几何测试不能覆盖每个内容裁切和颜色变化；新增视觉设计改动时需审核截图并逐步扩充断言。
 参考：https://playwright.dev/docs/test-snapshots 、https://playwright.dev/docs/test-webserver 。
+
+P0 共用基础：正文 20/18px 令牌按舞台缩放补偿，金额拆分不改数值，缩字有下限，省略同时保留读屏全文。

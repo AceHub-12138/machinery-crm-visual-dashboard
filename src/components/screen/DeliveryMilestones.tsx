@@ -100,10 +100,10 @@ export function DeliveryMilestones({ paths, delivery }: { paths: PublicShipment[
                 </span>
               </div>
 
-              <p className="mt-1 truncate text-label leading-none font-medium text-[var(--ink)]">
+              <p title={item.contract.equipmentName} className="mt-1 truncate text-label leading-none font-medium text-[var(--ink)]">
                 {item.contract.equipmentName}
               </p>
-              <p className="num mt-1 truncate text-caption leading-none text-[var(--ink-2)]">
+              <p title={`${item.contract.equipmentModel || "—"} · ${formatCount(item.quantity)} 台 · ${region}`} className="num mt-1 truncate text-caption leading-none text-[var(--ink-2)]">
                 {item.contract.equipmentModel || "—"} · {formatCount(item.quantity)} 台 · {region}
               </p>
             </article>
