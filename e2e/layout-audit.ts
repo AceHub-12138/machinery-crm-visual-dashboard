@@ -65,8 +65,13 @@ export async function auditText(page: Page, root = "#screen-stage, .overlay-root
       }
       for (const unit of stage.querySelectorAll<HTMLElement>(".num-unit")) {
         if (!visible(unit)) continue;
-        const range = document.createRange(); range.selectNodeContents(unit);
-        const lines = [...range.getClientRects()].filter(r => r.width > 0 && r.height > 0);
+        const lines: DOMRect[] = [];
+        const walker = document.createTreeWalker(unit,NodeFilter.SHOW_TEXT);
+        for(let n=walker.nextNode();n;n=walker.nextNode()) {
+          if(!n.parentElement || !visible(n.parentElement)) continue;
+          const range=document.createRange();range.selectNodeContents(n);
+          lines.push(...[...range.getClientRects()].filter(r=>r.width>0 && r.height>0));
+        }
         // Nested currency/number/unit spans produce several rects on the same line.
         if (lines.length && Math.max(...lines.map(r => r.top)) > Math.min(...lines.map(r => r.bottom)) + 1) add(unit, "unit-wrap", unit.textContent ?? "");
       }

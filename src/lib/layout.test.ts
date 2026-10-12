@@ -148,9 +148,8 @@ describe("screen grid geometry", () => {
     const fixedY = rows
       .filter((r) => !r.startsWith("minmax("))
       .reduce((sum, r) => sum + trackPx(r, 0), 0);
-    // 地图格的实际高度 = 弹性轨道(838) + 行区上下 padding(28) = 866。
-    // ⚠️ 别直接用弹性轨道值 838 —— 那会把「面板中心」算到 419 去，
-    // 于是这个测试会误报 13px 偏差（自己踩过一次）。
+    // 实际地图内框 = 838px 轨道减去上下 1px 边框；栅格 padding 不属于面板。
+    // 浏览器实测为 836px，中心定位必须采用这一坐标系。
     const mapHeight = STAGE_H - HEADER_H - PAD * 2 - gapsY - fixedY - 2;
 
     // 视口宽高比必须**不宽于**画布，否则会变成由高度定标 ——
