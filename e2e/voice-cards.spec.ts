@@ -5,15 +5,16 @@ import { startVoiceHub, type VoiceHubServer } from "../services/voice-orchestrat
 import { isValidAnswerCard } from "../src/lib/voice/protocol";
 import type { AnswerCardData } from "../src/lib/voice/session-machine";
 import { displaySpoken } from "../src/lib/voice/card-presentation";
+import { auditText, auditPanels } from "./layout-audit";
 import { CARD_INTENTS, task12Card } from "./task12-fixtures";
 let hub: VoiceHubServer;
 const evidence: unknown[]=[];
-const output = join(process.cwd(),"docs/design/answer-card-mockups");
+const output = join(process.cwd(),"test-results/design-polish");
 test.beforeAll(async () => {
   hub = await startVoiceHub({host:"127.0.0.1",port:0,onMessage:(conn,raw)=>{const ev=JSON.parse(raw); if(ev.type==="console.hello")conn.role="screen";}});
   await mkdir(output,{recursive:true});
 });
-test.afterAll(async()=>{await hub?.close(); await writeFile(join(process.cwd(),"docs/voice-8c-task12-browser-calibration.json"),JSON.stringify(evidence,null,2)+"\n");});
+test.afterAll(async()=>{await hub?.close(); await writeFile(join(output,"voice-cards-calibration.json"),JSON.stringify(evidence,null,2)+"\n");});
 async function open(page: Page) {
   await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
   await expect.poll(()=>hub.counts().screens).toBe(1);
@@ -56,6 +57,8 @@ for (const viewport of [{width:1920,height:1080},{width:1280,height:720}]) {
       expect(measured.x).toBeGreaterThanOrEqual(0); expect(measured.x+measured.width).toBeLessThanOrEqual(viewport.width+1);
       expect(measured.spills).toEqual([]);
       expect(measured.dataSpills).toEqual([]);
+      expect(await auditText(page, ".overlay-root")).toEqual([]);
+      expect(await auditPanels(page)).toEqual([]);
       for(const section of measured.sections) expect(section.bottom).toBeLessThanOrEqual(measured.bottom+1);
       expect(measured.bottom - measured.sections.find(s=>s.class==="overlay-followups")!.bottom).toBeGreaterThanOrEqual((card.kind === "brief" ? 35 : 71)*viewport.height/1080);
       expect(measured.sections.find(s=>s.class==="overlay-spoken-section")!.height).toBeCloseTo(170*viewport.height/1080,0);
@@ -108,6 +111,7 @@ test("demo automatically completes launch, answer and withdrawal for seven cards
 });
 
 test("overlay RAF callback CPU increment stays within 8ms at both resolutions",async({page})=>{
+  await page.emulateMedia({reducedMotion:"no-preference"});
   test.setTimeout(60000);
   for(const viewport of [{width:1920,height:1080},{width:1280,height:720}]) {
     await page.setViewportSize(viewport);
@@ -134,4 +138,47 @@ test("overlay RAF callback CPU increment stays within 8ms at both resolutions",a
     const record={viewport,metric:"summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",baselineFrames:baseline.length,overlayFrames:active.length,baselineP95:p95(baseline),overlayP95:p95(active),incrementP95:Math.max(0,p95(active)-p95(baseline))};
     evidence.push({performance:record}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);
   }
+});
+
+for(const [reason,en,zh] of [["no-data","No Data","暂无数据"],["offline","Offline","网络中断"],["asr-miss","Pardon","没听清"],["interrupted","Interrupted","已打断"]] as const) test(`presentation reason ${reason} preserves lifecycle`,async({page})=>{
+  await open(page);
+  hub.broadcast({type:"state.change",at:Date.now(),from:"listening",to:"thinking",turn:0,question:"异常标签验收",reason});
+  await expect(page.locator(".overlay-en")).toHaveText(en);
+  await expect(page.locator(".overlay-status")).toContainText(zh);
+  await expect(page.locator(".overlay-status")).toHaveAttribute("data-tone","warn");
+  await page.screenshot({path:join(output,`status-${reason}.png`)});
+});
+test("reduced motion renders whole answer and announces complete sentences",async({page})=>{
+  await page.emulateMedia({reducedMotion:"reduce"});
+  await open(page);
+  const card=task12Card("unanswerable","normal");
+  await show(page,card);
+  await expect(page.locator(".overlay-card [aria-live]")).toHaveText(displaySpoken(card.spoken));
+  await expect(page.locator(".overlay-card")).not.toHaveAttribute("role","status");
+  expect(await page.evaluate(()=>document.getAnimations().filter(a=>a.playState==="running").length)).toBe(0);
+  await page.screenshot({path:join(output,"reduced-motion.png")});
+});
+test("debug hints appear only with debug query",async({page})=>{
+  await open(page);
+  await expect(page.locator(".overlay-hint")).toHaveCount(0);
+  await page.goto(`/screen/sales?voiceDemo=1&debug=1&lite=1`);
+  await expect(page.locator(".overlay-hint")).toBeVisible();
+});
+
+test("service degradation has its own status",async({page})=>{
+  await open(page);
+  hub.broadcast({type:"error",at:Date.now(),code:"llm_unavailable",message:"服务暂不可用"});
+  hub.broadcast({type:"state.change",at:Date.now(),from:"listening",to:"error-fallback",turn:0});
+  await expect(page.locator(".overlay-en")).toHaveText("Degraded");
+  await expect(page.locator(".overlay-status")).toContainText("服务降级");
+  await page.screenshot({path:join(output,"status-degraded.png")});
+});
+test("normal motion live region never announces a partial sentence",async({page})=>{
+  await page.emulateMedia({reducedMotion:"no-preference"}); await open(page);
+  const card={kind:"brief" as const,title:"读屏验收",lines:[],spoken:"第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。"};
+  hub.broadcast({type:"state.change",at:Date.now(),from:"listening",to:"thinking",turn:0,question:"读屏验收"});
+  hub.broadcast({type:"answer.delta",at:Date.now(),seq:0,text:card.spoken,full:true,card});
+  hub.broadcast({type:"state.change",at:Date.now(),from:"thinking",to:"answering",turn:0});
+  await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第一句完整。");
+  await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。");
 });
