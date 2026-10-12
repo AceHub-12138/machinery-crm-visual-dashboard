@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { isUnsupportedCard } from "@/lib/voice/card-presentation";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { LevelMeter } from "@/components/overlay/LevelMeter";
 import { JarvisCore } from "@/components/overlay/JarvisCore";
@@ -546,7 +547,9 @@ export function OverlayStage({
             ? DEMO_LINES.fallback
             : null;
   const captionDim = session.name === "listening" && !session.partial;
-  const statusNow = STATUS[session.reason ?? session.name];
+  const unsupported = isUnsupportedCard(session.card) && ["answering","followup"].includes(session.name);
+  const statusNow = session.reason ? STATUS[session.reason] : unsupported ? {en:"Unsupported",zh:"暂不支持"} : STATUS[session.name];
+  const nextStep = session.reason === "no-data" ? "当前暂无可展示的数据，请稍后重试" : session.reason === "offline" ? "网络连接中断，请检查网络后重试" : null;
 
   if (phase === "off") return null;
 
@@ -556,11 +559,12 @@ export function OverlayStage({
 
       <div key={session.name} className="overlay-caption-block overlay-caption-appear">
         {statusNow ? (
-          <p className="overlay-status" data-tone={session.reason || session.name === "error-fallback" ? "warn" : "normal"}>
+          <p className="overlay-status" data-tone={session.reason || unsupported || session.name === "error-fallback" ? "warn" : "normal"}>
             <span className="overlay-en">{bargePaused ? "Listening" : statusNow.en}</span>
             <span aria-hidden="true">{bargePaused ? "聆听中" : statusNow.zh}</span>
           </p>
         ) : null}
+        {nextStep ? <p className="overlay-next-step" role="status">{nextStep}</p> : null}
         {bargePaused || ["listening", "followup"].includes(session.name) ? <LevelMeter sample={sampleInput} /> : null}
         {audioNotice && !session.card ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}
         {captionText ? (

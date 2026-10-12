@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { ClipText } from "@/components/screen/ClipText";
+import {ContractTail} from "./ContractTail";
+import {listingCopy,maskedContractTail} from "@/lib/display-copy";
 import { Panel, PanelHead } from "@/components/screen/Panel";
 import { DATA_PENDING, hasNegativeMetric, formatCount, formatShortDate } from "@/lib/format";
 import type { CrmDashboardStats } from "@/lib/types";
@@ -33,7 +35,7 @@ function ReminderGroup({ title, count, items, tone }: {
   const visible = sorted.slice(page*2,page*2+2);
   return <section data-reminder={tone} data-page={page+1} className={`reminder-group reminder-${tone} flex min-h-0 flex-1 flex-col overflow-hidden px-3 py-1`}>
     <header className="grid shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-      <div className="min-w-0"><h3 className="text-caption leading-none font-medium text-[var(--ink)]">{title}</h3><ClipText full={`样本 ${visible.length} / 展示总量 ${formatCount(count)}`} className="clip-1 mt-1 text-micro leading-none text-[var(--ink-3)]" /></div>
+      <div className="min-w-0"><h3 className="text-caption leading-none font-medium text-[var(--ink)]">{title}</h3><ClipText full={listingCopy(visible.length,count)} className="clip-1 mt-1 text-micro leading-none text-[var(--ink-3)]" /></div>
       <div className="flex items-center gap-2">
         {items.length>visible.length ? <span className="text-micro text-[var(--ink-3)]">+{items.length-visible.length}</span> : null}
         {!reduced && pages>1 ? <button type="button" onClick={advance} aria-label={`下一页：${title}`} className="text-caption text-[var(--ink-3)]">›</button> : null}
@@ -41,11 +43,14 @@ function ReminderGroup({ title, count, items, tone }: {
       </div>
     </header>
     <ul className="mt-1 grid min-h-0 grid-cols-1 gap-0">
-      {visible.map(item=><li key={item.id} className="grid min-w-0 grid-cols-[70px_120px_minmax(0,1fr)] items-center gap-2 text-micro leading-[22px]">
-        <span className="num num-unit text-[var(--ink-3)]">{formatShortDate(item.estimatedShipmentDate)}</span>
-        <ClipText full={item.contractNo} className="clip-1 text-caption text-[var(--ink)]" />
-        <ClipText full={`${item.equipmentName}${item.equipmentModel ? ` ${item.equipmentModel}` : ""}`} className="clip-1 text-micro text-[var(--ink-3)]" />
-      </li>)}
+      {visible.map(item=>{
+        const tail=maskedContractTail(item.contractNo);
+        return <li key={item.id} className={`grid min-w-0 ${tail ? "grid-cols-[70px_120px_minmax(0,1fr)]" : "grid-cols-[70px_minmax(0,1fr)]"} items-center gap-2 text-micro leading-[22px]`}>
+          <span className="num num-unit text-[var(--ink-3)]">{formatShortDate(item.estimatedShipmentDate)}</span>
+          <ContractTail tail={tail} />
+          <ClipText full={`${item.equipmentName}${item.equipmentModel ? ` ${item.equipmentModel}` : ""}`} className="clip-1 text-micro text-[var(--ink-3)]" />
+        </li>;
+      })}
       {!visible.length ? <li className="text-micro leading-[22px] text-[var(--ink-3)]">暂无数据</li> : null}
     </ul>
   </section>;

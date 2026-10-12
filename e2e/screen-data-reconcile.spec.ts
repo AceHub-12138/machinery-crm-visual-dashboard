@@ -55,7 +55,7 @@ test("unresolved regions and full totals fit both viewports while points stay sa
   for (const viewport of [{ width: 1920, height: 1080 }, { width: 1280, height: 720 }]) {
     await page.setViewportSize(viewport); await open(page); await show(page, card);
     await expect(page.locator(".overlay-card-data")).toContainText("地区待确认 · 7 台 / 2 单");
-    await expect(page.locator(".overlay-card-data")).toContainText("点位为样本");
+    await expect(page.locator(".overlay-card-data")).toContainText("仅标注部分地点");
     await expect(page.locator(".overlay-map-point")).toHaveCount(1);
     const spills = await page.locator(".overlay-card-data").evaluate(el => {
       const box = el.getBoundingClientRect();

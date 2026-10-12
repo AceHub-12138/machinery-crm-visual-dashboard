@@ -742,3 +742,10 @@ a {
 
 .milestone-track { position: relative; height: 12px; margin: 4px -12px 4px 0; border-top: 1px solid var(--panel-border-strong); }
 .milestone-track i { position: absolute; left: 0; top: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--brand-orange); box-shadow: 0 0 8px rgba(238,125,44,.3); }
+
+.text-word { white-space: nowrap; }
+@font-face { font-family: "Rajdhani"; src: url("/fonts/rajdhani/Rajdhani-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+.contract-tail { white-space: nowrap; font-size: inherit; }
+.contract-tail-digits { font-family: "Rajdhani", var(--font-hud); font-size: inherit; font-weight: 600; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+/* Equal advances remain guaranteed even when a font omits OpenType tnum. */
+.contract-tail-digits { display: inline-grid; grid-auto-flow: column; grid-auto-columns: .62em; text-align: center; letter-spacing: 0; font-kerning: none; }
