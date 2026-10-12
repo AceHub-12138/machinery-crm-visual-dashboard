@@ -1,7 +1,7 @@
 "use client";
 
 import { Panel, PanelHead } from "@/components/screen/Panel";
-import { formatMoney } from "@/lib/format";
+import { DATA_PENDING, hasNegativeMetric, formatMoney } from "@/lib/format";
 import type { PublicSalesScreenPayload } from "@/lib/voice/public-payload";
 import type { CrmDashboardStats } from "@/lib/types";
 import type { PublicScreenPayload } from "@/lib/public-screen-payload";
@@ -97,6 +97,8 @@ export function TargetRing({
   const outstanding = Number(collection?.totalUnpaidAmount ?? stats.totalUnpaidAmount);
   const contracted = Number(collection?.totalContractAmount ?? stats.totalContractAmount);
   const collectRate = (collection?.collectionRate ?? 0) / 100;
+  const collectionInvalid = hasNegativeMetric(collectRate, received, outstanding, contracted);
+  const targetInvalid = hasNegativeMetric(targetAmount, stats.periodContractAmount, collection?.targetRate ?? 0);
 
   return (
     <Panel className="flex h-full min-h-0 flex-col">
@@ -109,14 +111,14 @@ export function TargetRing({
       <div className="collection-layout min-h-0 flex-1 overflow-hidden p-[var(--panel-pad)]">
         <div className="collection-overview grid grid-cols-[198px_1fr] items-center gap-6">
           <div className="ring-box relative">
-            <RateDial rate={collectRate * 100} />
+            {collectionInvalid ? null : <RateDial rate={collectRate * 100} />}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <p className="text-micro leading-none tracking-[0.08em] text-[var(--ink-3)]">
                 累计回款率
               </p>
-              <p className="num mt-2.5 flex items-baseline text-hero leading-none tracking-[-0.02em] text-[var(--ink)]">
-                {(collectRate * 100).toFixed(1)}
-                <span className="ml-1 text-label leading-none text-[var(--ink-3)]">%</span>
+              <p className={`num mt-2.5 flex items-baseline ${collectionInvalid ? "text-label" : "text-hero"} leading-none tracking-[-0.02em] text-[var(--ink)]`}>
+                {collectionInvalid ? DATA_PENDING : (collectRate * 100).toFixed(1)}
+                {collectionInvalid ? null : <span className="ml-1 text-label leading-none text-[var(--ink-3)]">%</span>}
               </p>
             </div>
           </div>
@@ -145,7 +147,7 @@ export function TargetRing({
                 {formatMoney(contracted)}
               </p>
             </div>
-            {targetConfigured && targetAmount > 0 ? (
+            {targetInvalid ? <p className="text-micro">{DATA_PENDING}</p> : targetConfigured && targetAmount > 0 ? (
               <p className="num text-right text-micro leading-tight text-[var(--ink-3)]">
                 本月目标 {formatMoney(targetAmount)}
                 <br />
@@ -155,6 +157,7 @@ export function TargetRing({
               </p>
             ) : <p className="text-micro text-[var(--ink-3)]">{targetConfigured ? "目标为 0" : "目标未设置"}</p>}
           </div>
+          {collectionInvalid ? null : <>
           <div className="collection-track mt-3 flex overflow-hidden">
             <span className="bg-[var(--c-received)]" style={{ width: `${collectRate * 100}%` }} />
             <span className="bg-[var(--c-pending)]" style={{ width: `${(1 - collectRate) * 100}%` }} />
@@ -163,6 +166,7 @@ export function TargetRing({
             <span>已回 {Math.round(collectRate * 100)}%</span>
             <span>待回 {Math.round((1 - collectRate) * 100)}%</span>
           </div>
+          </>}
         </div>
       </div>
     </Panel>

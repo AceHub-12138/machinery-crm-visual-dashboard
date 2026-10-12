@@ -1,0 +1,50 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 test /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-screen-data
+> vitest run
+
+
+ RUN  v3.2.7 /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-screen-data
+
+ ✓ scripts/voice-echo-metrics.test.ts (4 tests) 3ms
+ ✓ src/lib/font-scale.test.ts (4 tests) 12ms
+ ✓ services/voice-orchestrator/test/datasource.test.ts (7 tests) 35ms
+ ✓ src/lib/voice/params.test.ts (28 tests) 23ms
+ ✓ src/lib/geo.test.ts (13 tests) 15ms
+ ✓ services/voice-orchestrator/test/inject-context.test.ts (10 tests) 32ms
+ ✓ services/voice-orchestrator/test/http-input.test.ts (6 tests) 97ms
+ ✓ src/lib/voice/input.test.ts (13 tests) 53ms
+ ✓ src/lib/voice/task12.test.ts (15 tests) 42ms
+ ✓ services/voice-orchestrator/test/scripted.test.ts (12 tests) 40ms
+ ✓ src/lib/voice/card-builders.test.ts (13 tests) 34ms
+ ✓ services/voice-orchestrator/test/llm.test.ts (11 tests) 12ms
+ ✓ services/voice-orchestrator/test/trace.test.ts (23 tests) 29ms
+ ✓ services/voice-orchestrator/test/utterance.test.ts (3 tests) 43ms
+ ✓ src/lib/voice/microphone-barge.test.ts (9 tests) 10ms
+ ✓ src/lib/voice/echo-similarity.test.ts (12 tests) 4ms
+ ✓ src/lib/voice/protocol.test.ts (15 tests) 7ms
+ ✓ src/lib/voice/spoken-normalize.test.ts (35 tests) 11ms
+ ✓ services/voice-orchestrator/test/platform-mcp.test.ts (6 tests) 5ms
+ ✓ src/lib/voice/pcm-player.test.ts (26 tests) 529ms
+   ✓ duck and native pause keep sources, sentence boundaries, downloads and the remaining deadline  370ms
+ ✓ src/lib/mock.test.ts (2 tests) 5ms
+ ✓ src/lib/voice/live-source.test.ts (9 tests) 4ms
+ ✓ src/lib/voice/session-machine.test.ts (11 tests) 16ms
+ ✓ src/lib/public-screen-payload.test.ts (3 tests) 67ms
+ ✓ src/lib/voice/screen-data-reconcile.test.ts (40 tests) 106ms
+ ✓ src/lib/voice/intents.test.ts (39 tests) 3ms
+ ✓ services/voice-orchestrator/test/config.test.ts (9 tests) 3ms
+ ✓ src/lib/layout.test.ts (8 tests) 2ms
+ ✓ services/voice-orchestrator/test/orchestrator.test.ts (33 tests) 591ms
+ ✓ src/lib/voice/microphone-mode.test.ts (1 test) 3ms
+ ✓ services/voice-orchestrator/test/secrets.test.ts (1 test) 2ms
+ ✓ src/lib/target.test.ts (2 tests) 2ms
+ ✓ services/voice-orchestrator/test/ws-server.test.ts (19 tests) 1147ms
+   ✓ ws hub — 2026-09-30 审核修复 > 已声明角色的连接不受 hello 截止影响  406ms
+   ✓ ws hub — 2026-09-30 审核修复 > 心跳:idleTimeoutMs 内无任何入站数据 → 断开(审核 M5)  304ms
+ ✓ services/voice-orchestrator/test/audio.test.ts (29 tests) 1201ms
+ ✓ services/voice-orchestrator/test/listen-repair.test.ts (40 tests) 1203ms
+
+ Test Files  35 passed (35)
+      Tests  511 passed (511)
+   Start at  19:39:34
+   Duration  2.47s (transform 4.34s, setup 0ms, collect 12.53s, tests 5.39s, environment 62ms, prepare 4.55s)

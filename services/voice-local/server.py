@@ -68,13 +68,13 @@ class Runtime:
         self.failed_styles = []
         self.style_failures = {}
         self.style_checks = {}
+        self.style_attempts = {}
         self.counts = {"ttsRequests": 0, "asrRequests": 0, "ttsRegenerated": 0, "ttsTruncated": 0, "ttsFail": 0, "cancelled": 0}
 
     def initialize(self):
         self.backend.load()
         configured = load_style_settings(self.settings)
         for style, settings in configured.items():
-            cancel, stats = threading.Event(), {}
             # Preserve the original default startup probe; emotional styles use their own first clause.
             clauses = __import__("re").split(r"[，,。！？!?]", settings.ref_text)
             probe = clauses[0]
@@ -84,22 +84,27 @@ class Runtime:
                 if clause:
                     probe += "," + clause
             text = SELF_CHECK_TEXT if style == "default" else probe + "。"
-            try:
-                pcm = b"".join(guarded_audio(self.backend, settings, text, cancel, stats))
-                if stats.get("ttsFail") or stats.get("ttsTruncated") or len(pcm) < SAMPLE_RATE * 2 * .3 or pcm_peak(pcm) < settings.silence_peak:
-                    raise ValueError("Silent self check")
-                audio = np.frombuffer(pcm, dtype="<i2").astype(np.float32) / 32768
-                resampled = np.interp(np.arange(round(len(audio) * 16000 / SAMPLE_RATE)) * SAMPLE_RATE / 16000, np.arange(len(audio)), audio).astype(np.float32)
-                value = cer(text, self.backend.recognize(resampled, cancel))
-                self.style_checks[style] = value
-                if value > .2:
-                    raise ValueError("Self check CER exceeds 20%")
-                self.styles[style] = settings
-                self.style_hashes[style] = settings.ref_hash()
-            except Exception as error:
-                self.failed_styles.append(style)
-                self.style_failures[style] = {"reason": str(error), "stats": dict(stats)}
-                LOG.error("TTS style self-check failed: %s (%s, stats=%s)", style, error, stats)
+            for attempt in range(1, 4):
+                self.style_attempts[style] = attempt
+                cancel, stats = threading.Event(), {}
+                try:
+                    pcm = b"".join(guarded_audio(self.backend, settings, text, cancel, stats))
+                    if stats.get("ttsFail") or stats.get("ttsTruncated") or len(pcm) < SAMPLE_RATE * 2 * .3 or pcm_peak(pcm) < settings.silence_peak:
+                        raise ValueError("Silent self check")
+                    audio = np.frombuffer(pcm, dtype="<i2").astype(np.float32) / 32768
+                    resampled = np.interp(np.arange(round(len(audio) * 16000 / SAMPLE_RATE)) * SAMPLE_RATE / 16000, np.arange(len(audio)), audio).astype(np.float32)
+                    value = cer(text, self.backend.recognize(resampled, cancel))
+                    self.style_checks[style] = value
+                    if value > .2:
+                        raise ValueError("Self check CER exceeds 20%")
+                    self.styles[style] = settings
+                    self.style_hashes[style] = settings.ref_hash()
+                    break
+                except Exception as error:
+                    if attempt == 3:
+                        self.failed_styles.append(style)
+                        self.style_failures[style] = {"reason": str(error), "stats": dict(stats)}
+                        LOG.error("TTS style self-check failed after 3 attempts: %s (%s, stats=%s)", style, error, stats)
         self.ref_hash = configured["default"].ref_hash()
         self.self_check_cer = self.style_checks.get("default")
         self.self_check = "passed" if "default" in self.styles else "failed"
@@ -148,7 +153,7 @@ class Runtime:
                 "models": {"tts": self.settings.tts_model.rsplit("/", 1)[-1], "asr": self.settings.asr_model.rsplit("/", 1)[-1]},
                 "refHash": self.ref_hash, "styles": list(self.styles), "styleHashes": self.style_hashes, "failedStyles": self.failed_styles,
                 "styleFailures": self.style_failures,
-                "styleChecks": self.style_checks, "metrics": self.counts,
+                "styleChecks": self.style_checks, "styleAttempts": self.style_attempts, "metrics": self.counts,
                 "activeJobs": sum(not job.finished for job in self.jobs.values())}
 
 

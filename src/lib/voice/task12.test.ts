@@ -41,12 +41,22 @@ describe("Task 12 data contracts and boundaries", () => {
     expect(isValidAnswerCard({...buildIntentAnswer("followup_todo", payload).card, today: -1})).toBe(false);
   });
   it("only supported followups are exposed; greeting, goodbye and unheard have no strip", () => {
-    for (const questions of Object.values(CARD_FOLLOWUPS)) {
+    const expected: Record<keyof typeof CARD_FOLLOWUPS, readonly Intent[]> = {
+      "target-progress": ["target_rate", "collection"],
+      "completion-ring": ["sales_progress", "collection"],
+      region: ["upcoming_shipments", "sales_progress"],
+      "customers-shipments": ["region_shipments", "followup_todo"],
+      "customer-kpi": ["followup_todo", "sales_progress"],
+      "followup-buckets": ["new_customers", "upcoming_shipments"],
+      "collection-split": ["target_rate", "sales_progress"],
+    };
+    for (const kind of Object.keys(CARD_FOLLOWUPS) as Array<keyof typeof CARD_FOLLOWUPS>) {
+      const questions = CARD_FOLLOWUPS[kind];
       expect(questions.length).toBe(2);
-      for (const q of questions) expect(classifyScriptedQuestion(q)).not.toBe("unanswerable");
+      expect(questions.map(q => classifyScriptedQuestion(q))).toEqual(expected[kind]);
     }
     for (const intent of ["greeting", "chitchat_or_end"] as Intent[]) expect(cardFollowups(buildIntentAnswer(intent, payload).card)).toEqual([]);
-    for (const q of cardFollowups(buildIntentAnswer("unanswerable", payload).card)) expect(classifyScriptedQuestion(q)).not.toBe("unanswerable");
+    expect(cardFollowups(buildIntentAnswer("unanswerable", payload).card).map(q => classifyScriptedQuestion(q))).toEqual(["sales_progress", "collection", "upcoming_shipments"]);
     expect(cardFollowups(buildBriefCard("小川", ["抱歉先生,刚才没有听清,请再说一次。"]))).toEqual([]);
   });
   it("15 shipments form 3×5, 20 shipments preserve all overflow as a summary slot", () => {

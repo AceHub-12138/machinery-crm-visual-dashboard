@@ -2,7 +2,7 @@
 
 import { AnimatedNumber } from "@/components/screen/AnimatedNumber";
 import { Panel, PanelHead } from "@/components/screen/Panel";
-import { formatCount, formatMoney } from "@/lib/format";
+import { DATA_PENDING, formatPercent, hasNegativeMetric, formatCount, formatMoney } from "@/lib/format";
 import type { PublicSalesScreenPayload } from "@/lib/voice/public-payload";
 import type { CrmDashboardStats } from "@/lib/types";
 
@@ -58,7 +58,7 @@ function MiniStat({
       <p className="text-micro leading-none text-[var(--ink-3)]">{label}</p>
       {/* money：金额不许折行，字号比小整数降一档 —— 28px 的
           「¥2,072.0万」在 158px 的卡片里放不下，硬撑只会断成两行。 */}
-      <p className={`num mt-2.5 leading-none ${toneClass} ${money ? "money text-label" : "text-metric"}`}>
+      <p className={`num mt-2.5 leading-none ${toneClass} ${value < 0 || money ? "money text-label" : "text-metric"}`}>
         <AnimatedNumber value={value} format={format} />
       </p>
       <p className="mt-2 text-micro leading-none text-[var(--ink-3)]">{hint}</p>
@@ -78,15 +78,17 @@ export function KpiRail({
   const targetConfigured = collection?.targetConfigured ?? targetAmount > 0;
   const targetRatio = (collection?.targetVisualRate ?? 0) / 100;
 
+  const collectionInvalid = hasNegativeMetric(collection?.collectionRate ?? 0, collection?.totalContractAmount ?? stats.totalContractAmount, collection?.totalPaidAmount ?? stats.totalPaidAmount, collection?.totalUnpaidAmount ?? stats.totalUnpaidAmount);
+  const targetInvalid = hasNegativeMetric(targetAmount, stats.periodContractAmount, collection?.targetRate ?? 0);
   return (
     <Panel className="flex h-full flex-col">
       <PanelHead
         eyebrow="Sales KPI"
         title="经营指标"
         extra={
-          <p className="num text-label leading-none text-[var(--c-collect)]">
-            {collection?.collectionRate.toFixed(1) ?? "—"}%
-            <span className="ml-1.5 text-micro font-normal text-[var(--ink-3)]">累计回款率</span>
+          <p className={`num leading-none text-[var(--c-collect)] ${collectionInvalid ? "text-micro flex flex-col gap-1" : "text-label"}`}>
+            {collectionInvalid ? DATA_PENDING : collection ? formatPercent(collection.collectionRate) : "—"}
+            <span className={`text-micro font-normal text-[var(--ink-3)] ${collectionInvalid ? "" : "ml-1.5"}`}>累计回款率</span>
           </p>
         }
       />
@@ -100,20 +102,20 @@ export function KpiRail({
           <div className="flex items-baseline justify-between gap-3">
             <p className="text-label font-bold text-[var(--ink)]">本期合同额</p>
             <p className="num text-micro text-[var(--ink-2)]">
-              {stats.periodNewContracts} 份新签
+              {formatCount(stats.periodNewContracts)} 份新签
             </p>
           </div>
-          <p className="num kpi-hero money mt-2.5 text-hero-lg leading-none">
+          <p className={`num kpi-hero money mt-2.5 ${stats.periodContractAmount < 0 ? "text-label" : "text-hero-lg"} leading-none`}>
             <AnimatedNumber value={stats.periodContractAmount} format={formatMoney} />
           </p>
-          {targetConfigured && targetAmount > 0 ? <div className="mt-4">
+          {targetInvalid ? <p className="mt-4 text-micro">{DATA_PENDING}</p> : targetConfigured && targetAmount > 0 ? <div className="mt-4">
             <Gauge ratio={targetRatio} slots={22} />
             <div className="mt-2 flex items-baseline justify-between">
               <span className="text-micro text-[var(--ink-3)]">
                 月度目标 {formatMoney(targetAmount)}
               </span>
               <span className="num text-label leading-none text-[var(--brand-orange-hot)]">
-                达成 {(collection?.targetRate ?? 0) > 999 ? ">999" : (collection?.targetRate ?? 0).toFixed(1)}%
+                达成 {formatPercent(collection?.targetRate ?? 0, 1, true)}
               </span>
             </div>
           </div> : <p className="mt-4 text-micro text-[var(--ink-3)]">{targetConfigured ? "目标为 0" : "目标未设置"}</p>}
@@ -129,15 +131,15 @@ export function KpiRail({
           </div>
           <div className="mt-2.5 flex justify-between text-micro">
             <span className="text-[var(--ink-3)]">本期新合同欠款</span>
-            <span className="text-[var(--brand-orange-hot)]">{formatMoney(stats.periodUnpaidAmount)}{stats.periodUnpaidAmount < 0 ? " · 金额异常" : ""}</span>
+            <span className="text-[var(--brand-orange-hot)]">{formatMoney(stats.periodUnpaidAmount)}</span>
           </div>
         </article>
 
         {/* 4 宫格 */}
         <div className="grid min-h-0 flex-1 grid-cols-2 gap-2.5">
-          <MiniStat label="客户总数" value={stats.totalCustomers} format={formatCount} hint={`新增 ${stats.periodNewCustomers}`} />
-          <MiniStat label="本期发货" value={stats.periodShipments} format={formatCount} hint={`待发 ${stats.sevenDayShipmentDue}`} tone="collect" />
-          <MiniStat label="未回款" value={stats.totalUnpaidAmount} format={formatMoney} hint={`${stats.unpaidContracts} 份未付`} tone="brand" money />
+          <MiniStat label="客户总数" value={stats.totalCustomers} format={formatCount} hint={`新增 ${formatCount(stats.periodNewCustomers)}`} />
+          <MiniStat label="本期发货" value={stats.periodShipments} format={formatCount} hint={`待发 ${formatCount(stats.sevenDayShipmentDue)}`} tone="collect" />
+          <MiniStat label="未回款" value={stats.totalUnpaidAmount} format={formatMoney} hint={`${formatCount(stats.unpaidContracts)} 份未付`} tone="brand" money />
           <MiniStat label="部分回款" value={stats.partialPaidContracts} format={formatCount} hint="累计有效合同" tone="partial" />
         </div>
 
@@ -146,19 +148,19 @@ export function KpiRail({
           <div className="attention-cell px-2 py-3 text-center">
             <p className="text-micro leading-none text-[rgba(232,163,61,0.85)]">今日跟进</p>
             <p className="num mt-2.5 text-metric leading-none text-[var(--c-pending)]">
-              {stats.todayFollowUp}
+              {formatCount(stats.todayFollowUp)}
             </p>
           </div>
           <div className="attention-cell attention-cell-risk px-2 py-3 text-center">
             <p className="text-micro leading-none text-[rgba(242,85,90,0.85)]">逾期跟进</p>
             <p className="num mt-2.5 text-metric leading-none text-[var(--c-overdue)]">
-              {stats.overdueFollowUp}
+              {formatCount(stats.overdueFollowUp)}
             </p>
           </div>
           <div className="attention-cell attention-cell-risk px-2 py-3 text-center">
             <p className="text-micro leading-none text-[rgba(242,85,90,0.85)]">逾期发货</p>
             <p className="num mt-2.5 text-metric leading-none text-[var(--c-overdue)]">
-              {stats.overdueShipmentDue}
+              {formatCount(stats.overdueShipmentDue)}
             </p>
           </div>
         </div>

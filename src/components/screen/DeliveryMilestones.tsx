@@ -1,7 +1,7 @@
 "use client";
 
 import { matchProvinceKey } from "@/lib/geo";
-import { formatShortDate } from "@/lib/format";
+import { DATA_PENDING, hasNegativeMetric, formatCount, formatShortDate } from "@/lib/format";
 import type { PublicSalesScreenPayload } from "@/lib/voice/public-payload";
 import type { PublicShipment } from "@/lib/public-screen-payload";
 
@@ -71,11 +71,11 @@ export function DeliveryMilestones({ paths, delivery }: { paths: PublicShipment[
             前面，不如显式分行：第一行数量、第二行覆盖大区，读起来也更顺。 */}
         <p className="num flex flex-wrap items-baseline gap-x-2 text-micro leading-none text-[var(--ink-3)]">
           <span>
-            {delivery?.summary.shipmentCount ?? "—"} 单 · {delivery?.summary.unitCount ?? "—"} 台
+            {delivery && hasNegativeMetric(delivery.summary.shipmentCount, delivery.summary.unitCount) ? DATA_PENDING : `${delivery ? formatCount(delivery.summary.shipmentCount) : "—"} 单 · ${delivery ? formatCount(delivery.summary.unitCount) : "—"} 台`}
           </span>
-          <span className="text-[var(--ink-4)]">{delivery?.summary.regionCount ?? "—"} 省份</span>
+          <span className="text-[var(--ink-4)]">{delivery ? formatCount(delivery.summary.regionCount) : "—"} 省份</span>
         </p>
-        <p className="text-micro text-[var(--ink-3)]">样本 {milestones.length}{delivery?.milestonesTotal === undefined ? "" : ` / 展示总量 ${delivery.milestonesTotal}`}</p>
+        <p className="text-micro text-[var(--ink-3)]">样本 {milestones.length}{delivery?.milestonesTotal === undefined ? "" : ` / 展示总量 ${formatCount(delivery.milestonesTotal)}`}</p>
       </div>
 
       {/* 三列自适应：`auto-fit + minmax(300px, 1fr)` 让 5 张卡按可用宽度
@@ -104,7 +104,7 @@ export function DeliveryMilestones({ paths, delivery }: { paths: PublicShipment[
                 {item.contract.equipmentName}
               </p>
               <p className="num mt-1 truncate text-caption leading-none text-[var(--ink-2)]">
-                {item.contract.equipmentModel || "—"} · {item.quantity} 台 · {region}
+                {item.contract.equipmentModel || "—"} · {formatCount(item.quantity)} 台 · {region}
               </p>
             </article>
           );

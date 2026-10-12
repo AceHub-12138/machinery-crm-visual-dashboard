@@ -1,5 +1,7 @@
 "use client";
 
+import { formatCount } from "@/lib/format";
+
 import { useMemo, useState } from "react";
 import {
   chinaMap,
@@ -231,15 +233,15 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
         <div className="flex items-center gap-7 text-right">
           <div>
             <p className="text-micro leading-none text-[var(--ink-3)]">累计发运</p>
-            <p className="num mt-1.5 text-label leading-none text-[var(--ink)]">{payload.business?.delivery.summary.shipmentCount ?? "—"}</p>
+            <p className="num mt-1.5 text-label leading-none text-[var(--ink)]">{payload.business ? formatCount(payload.business.delivery.summary.shipmentCount) : "—"}</p>
           </div>
           <div>
             <p className="text-micro leading-none text-[var(--ink-3)]">覆盖省份</p>
-            <p className="num mt-1.5 text-label leading-none text-[var(--c-collect)]">{payload.business?.delivery.summary.regionCount ?? "—"}</p>
+            <p className="num mt-1.5 text-label leading-none text-[var(--c-collect)]">{payload.business ? formatCount(payload.business.delivery.summary.regionCount) : "—"}</p>
           </div>
           <div>
             <p className="text-micro leading-none text-[var(--ink-3)]">累计台数</p>
-            <p className="num mt-1.5 text-label leading-none text-[var(--c-received)]">{payload.business?.delivery.summary.unitCount ?? "—"}</p>
+            <p className="num mt-1.5 text-label leading-none text-[var(--c-received)]">{payload.business ? formatCount(payload.business.delivery.summary.unitCount) : "—"}</p>
           </div>
         </div>
       </div>
@@ -548,23 +550,23 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
           <ul className="mt-1.5 space-y-1.5">
             {provinceRanking.slice(0, 4).map((row) => (
               <li key={row.name}>
-                <div className="flex items-baseline justify-between gap-1.5">
+                <div className={row.count < 0 ? "flex flex-col gap-1" : "flex items-baseline justify-between gap-1.5"}>
                   <span className="truncate text-micro leading-none text-[var(--ink-2)]">
                     {row.name}
                   </span>
-                  <span className="num text-micro leading-none text-[var(--ink)]">{row.count}</span>
+                  <span className="num text-micro leading-none text-[var(--ink)]">{formatCount(row.count)}</span>
                 </div>
                 <span
                   className="mt-1 block h-1 rounded-full"
                   style={{
-                    width: `${Math.max(14, (row.count / maxRank) * 100)}%`,
-                    background: HEAT_SCALE[Math.min(HEAT_SCALE.length - 1, 2 + row.count)],
+                    width: `${row.count < 0 ? 0 : Math.max(14, (row.count / Math.max(1, maxRank)) * 100)}%`,
+                    background: HEAT_SCALE[Math.min(HEAT_SCALE.length - 1, 2 + Math.max(0, row.count))],
                   }}
                 />
               </li>
             ))}
           </ul>
-          {payload.business?.delivery.unresolvedRegionTotals?.shipmentCount ? <p className="text-micro">地区待确认 {payload.business.delivery.unresolvedRegionTotals.unitCount} 台</p> : null}
+          {payload.business?.delivery.unresolvedRegionTotals?.shipmentCount ? <p className="text-micro">地区待确认 {formatCount(payload.business.delivery.unresolvedRegionTotals.unitCount)} 台</p> : null}
         </div>
       </div>
 

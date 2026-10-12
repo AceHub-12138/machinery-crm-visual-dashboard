@@ -1,0 +1,56 @@
+[WebServer] (node:13903) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:13905) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:13926) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/screen-data-reconcile.spec.ts:31:1 › missing targets and rates above 999 remain valid visible cards (562ms)
+  ✓  2 e2e/screen-data-reconcile.spec.ts:48:1 › unresolved regions and full totals fit both viewports while points stay samples (785ms)
+  ✓  3 e2e/screen-data-reconcile.spec.ts:68:1 › shipment page freezes at playback end instead of resetting or cycling (5.5s)
+  ✓  4 e2e/screen-data-reconcile.spec.ts:79:1 › negative amount, count and units retain a visible pending card and safe speech (499ms)
+  ✘  5 e2e/screen-data-reconcile.spec.ts:99:1 › negative metrics stay pending after a screen refresh at both sizes (5.2s)
+
+
+  1) e2e/screen-data-reconcile.spec.ts:99:1 › negative metrics stay pending after a screen refresh at both sizes
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('[data-screen-panel=kpi]')
+    Expected substring: "数据待核对"
+    Received string:    "Sales KPI经营指标57.4%累计回款率本期合同额11 份新签¥1,286.0万月度目标 ¥1,500.0万达成 85.7%本期实际回款¥742.0万本期新合同欠款¥544.0万客户总数286新增 18本期发货7待发 5未回款¥2,072.0万8 份未付部分回款14累计有效合同今日跟进9逾期跟进6逾期发货3"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('[data-screen-panel=kpi]') with timeout 5000ms
+      - waiting for locator('[data-screen-panel=kpi]')
+        14 × locator resolved to <div data-screen-panel="kpi" class="col-start-1 row-start-1 min-h-0">…</div>
+           - unexpected value "Sales KPI经营指标57.4%累计回款率本期合同额11 份新签¥1,286.0万月度目标 ¥1,500.0万达成 85.7%本期实际回款¥742.0万本期新合同欠款¥544.0万客户总数286新增 18本期发货7待发 5未回款¥2,072.0万8 份未付部分回款14累计有效合同今日跟进9逾期跟进6逾期发货3"
+
+
+      111 |     await expect(page.getByRole("heading", { name: "经营指挥舱" })).toBeVisible();
+      112 |     await page.clock.install(); await page.clock.fastForward(60_000);
+    > 113 |     await expect(page.locator("[data-screen-panel=kpi]")).toContainText("数据待核对");
+          |                                                           ^
+      114 |     for (const panel of ["kpi", "map", "collection", "reminders", "delivery"]) {
+      115 |       await expect(page.locator(`[data-screen-panel=${panel}]`)).toContainText("数据待核对");
+      116 |       await expect(page.locator(`[data-screen-panel=${panel}]`)).not.toContainText("98765");
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-screen-data/e2e/screen-data-reconcile.spec.ts:113:59
+
+    Error Context: test-results/screen-data-reconcile-nega-acc1d-creen-refresh-at-both-sizes/error-context.md
+
+    Error Context: test-results/screen-data-reconcile-nega-acc1d-creen-refresh-at-both-sizes/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/screen-data-reconcile-nega-acc1d-creen-refresh-at-both-sizes/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/screen-data-reconcile-nega-acc1d-creen-refresh-at-both-sizes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/screen-data-reconcile.spec.ts:99:1 › negative metrics stay pending after a screen refresh at both sizes
+  4 passed (14.3s)

@@ -245,7 +245,7 @@ def guarded_audio(backend, settings: Settings, text: str, cancel: threading.Even
     limit = max_tokens_for(text, settings.seconds_per_char)
     max_bytes = math.ceil((len(text) * settings.seconds_per_char + 1.5) * SAMPLE_RATE) * 2
     stats.update(ttsRegenerated=0, ttsTruncated=0, ttsFail=0, tokens=0, bytes=0)
-    for attempt in range(2):
+    for attempt in range(3):
         sent = False
         generator = backend.generate(text, cancel, limit)
         try:
@@ -282,6 +282,6 @@ def guarded_audio(backend, settings: Settings, text: str, cancel: threading.Even
                 return
         finally:
             generator.close()
-        if attempt == 0:
+        if attempt < 2:
             stats["ttsRegenerated"] = 1
     stats["ttsFail"] = 1

@@ -27,12 +27,15 @@ export type PublicSalesScreenPayload = {
     todayFollowUp: number;
     overdueFollowUp: number;
     sevenDayFollowUp: number;
+    /** 本期有效 CNY 合同数，与本期合同额同一集合。 */
     periodNewContracts: number;
     periodContractAmount: string;
     periodPaidAmount: string;
     periodUnpaidAmount: string;
     periodShipments: number;
+    /** 累计有效 CNY 未回款合同数。 */
     unpaidContracts: number;
+    /** 累计有效 CNY 部分回款合同数。 */
     partialPaidContracts: number;
   };
   collection: {
@@ -40,6 +43,7 @@ export type PublicSalesScreenPayload = {
     totalPaidAmount: string;
     totalUnpaidAmount: string;
     collectionRate: number;
+    /** 同月公司目标取最后修改的一条（updatedAt desc，id asc）。 */
     targetConfigured?: boolean;
     targetAmount: string;
     actualAmount: string;
@@ -58,6 +62,7 @@ export type PublicSalesScreenPayload = {
       sevenDayDue: number;
       overdueDue: number;
     };
+    /** 全量区域放在 delivery.regionUnits，区别于地图样本 routes。 */
     regionUnits?: Array<{ province: string; shipmentCount: number; unitCount: number }>;
     unresolvedRegionTotals?: { shipmentCount: number; unitCount: number };
     routesTotal?: number;

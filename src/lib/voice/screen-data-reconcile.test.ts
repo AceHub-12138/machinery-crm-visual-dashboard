@@ -9,9 +9,11 @@ import { ShipmentPageClock, displayRate } from "./card-presentation";
 import { isValidAnswerCard } from "./protocol";
 import { fromPublicSalesScreenPayload, toPublicScreenPayload } from "../public-screen-payload";
 import { buildMockScreenPayload } from "../mock";
-import { formatClock, formatShortDate } from "../format";
+import { formatClock, formatShortDate, formatCount, formatMoney, formatPercent } from "../format";
 import { KpiRail } from "../../components/screen/KpiRail";
 import { TargetRing } from "../../components/screen/TargetRing";
+import { ReminderRail } from "../../components/screen/ReminderRail";
+import { ShipmentMap } from "../../components/screen/ShipmentMap";
 import { DeliveryMilestones } from "../../components/screen/DeliveryMilestones";
 import { ProgressCard } from "../../components/overlay/cards/ProgressCard";
 import { CompletionRingCard } from "../../components/overlay/cards/CompletionRingCard";
@@ -50,7 +52,7 @@ describe("屏幕与语音同源口径", () => {
     const mock = buildMockScreenPayload(); mock.salesTargets.targets = [];
     expect(toPublicScreenPayload(mock).business!.collection.targetConfigured).toBe(false);
   });
-  it("已有历史零元目标与未设置不同，负计数明确提示并保留数值", () => {
+  it("已有历史零元目标与未设置不同，负计数明确提示并保留卡片", () => {
     const p = payload(); p.collection.targetConfigured = true; p.collection.targetAmount = "0";
     for (const intent of ["sales_progress", "target_rate"] as const) {
       const answer = buildIntentAnswer(intent, p);
@@ -60,7 +62,7 @@ describe("屏幕与语音同源口径", () => {
     }
     p.kpis.periodNewCustomers = -3;
     const answer = buildIntentAnswer("new_customers", p);
-    expect(answer.card.kind).toBe("brief"); expect(answer.spoken).toContain("-3");
+    expect(answer.card.kind).toBe("brief"); expect(answer.spoken).not.toContain("-3"); expect(answer.card).toMatchObject({ title: "数据待核对", lines: ["数据待核对"] });
     expect(answer.spoken).toContain("核对"); expect(isValidAnswerCard(answer.card)).toBe(true);
   });
   it("全量区域与地图样本独立，地区待确认不增加省份数", () => {
@@ -103,7 +105,7 @@ describe("屏幕与语音同源口径", () => {
     expect(screen.dashboard.stats.periodUnpaidAmount).toBe(-120000);
     expect(screen.business!.kpis.periodContractAmount).toBe(p.kpis.periodContractAmount);
     for (const text of ["secret name", "secret contact", "secret phone", "multipliers"]) expect(json).not.toContain(text);
-    expect(buildIntentAnswer("sales_progress", p).spoken).toContain("¥-12.0万");
+    expect(buildIntentAnswer("sales_progress", p).spoken).toContain("数据异常，需核对");
   });
   it("里程碑样本与完整总数同为整单已发集合，不混入部分发运", () => {
     const screen = toPublicScreenPayload(buildMockScreenPayload());
@@ -135,5 +137,55 @@ describe("发运分页播放生命周期", () => {
     expect(clock.update(200, 1, false, false)).toBe(1);
     expect(clock.update(300, null, false, false)).toBe(1);
     expect(clock.update(400, null, false, true)).toBe(1);
+  });
+});
+
+
+describe("公开负数核对提示", () => {
+  it.each([
+    ["sales_progress", "kpis.periodContractAmount"], ["sales_progress", "kpis.periodPaidAmount"], ["sales_progress", "kpis.periodUnpaidAmount"],
+    ["target_rate", "collection.targetAmount"], ["target_rate", "collection.remainingAmount"], ["target_rate", "collection.targetRate"],
+    ["collection", "collection.totalContractAmount"], ["collection", "collection.totalPaidAmount"], ["collection", "collection.totalUnpaidAmount"], ["collection", "collection.collectionRate"],
+    ["new_customers", "kpis.totalCustomers"], ["new_customers", "kpis.periodNewCustomers"],
+    ["followup_todo", "kpis.todayFollowUp"], ["followup_todo", "kpis.sevenDayFollowUp"], ["followup_todo", "kpis.overdueFollowUp"],
+    ["region_shipments", "delivery.summary.unitCount"], ["region_shipments", "delivery.summary.shipmentCount"], ["region_shipments", "delivery.summary.regionCount"],
+    ["region_shipments", "delivery.regionUnits.0.unitCount"], ["region_shipments", "delivery.regionUnits.0.shipmentCount"], ["region_shipments", "delivery.routes.0.unitCount"],
+    ["upcoming_shipments", "delivery.summary.unitCount"], ["upcoming_shipments", "delivery.summary.todayDue"], ["upcoming_shipments", "delivery.summary.sevenDayDue"], ["upcoming_shipments", "delivery.summary.overdueDue"],
+    ["upcoming_shipments", "delivery.milestones.0.unitCount"], ["upcoming_shipments", "delivery.milestonesTotal"],
+  ])("%s 的 %s 为负值时卡片与播报不泄露负数", (intent, path) => {
+    const p = payload();
+    const keys = path.split(".");
+    let row = p as unknown as Record<string, unknown>;
+    for (const key of keys.slice(0, -1)) row = row[key] as Record<string, unknown>;
+    const key = keys.at(-1)!; row[key] = typeof row[key] === "string" ? "-98765" : -98765;
+    const answer = buildIntentAnswer(intent as Parameters<typeof buildIntentAnswer>[0], p);
+    expect(isValidAnswerCard(answer.card)).toBe(true); expect(answer.unanswerable).toBe(false);
+    expect(answer.card).toMatchObject({ kind: "brief", title: "数据待核对", lines: ["数据待核对"] });
+    expect(answer.spoken).toContain("数据异常，需核对"); expect(JSON.stringify(answer)).not.toContain("98765");
+  });
+  it("主屏所有计数入口与金额使用同一提示，保留原始 payload", () => {
+    const p = payload();
+    for (const key of Object.keys(p.kpis)) { const row = p.kpis as Record<string, number | string>; row[key] = typeof row[key] === "string" ? "-98765" : -98765; }
+    p.delivery.summary = { shipmentCount: -98765, unitCount: -98765, regionCount: 1, todayDue: -98765, sevenDayDue: -98765, overdueDue: -98765 };
+    p.delivery.regionUnits = [{ province: "山东省", shipmentCount: -98765, unitCount: -98765 }];
+    p.delivery.unresolvedRegionTotals = { shipmentCount: 0, unitCount: 0 };
+    p.delivery.milestones[0].unitCount = -98765; p.delivery.milestonesTotal = -98765;
+    const screen = fromPublicSalesScreenPayload(p);
+    const html = renderToStaticMarkup(createElement("div", {},
+      createElement(KpiRail, { stats: screen.dashboard.stats, targetAmount: Number(p.collection.targetAmount), collection: p.collection }),
+      createElement(ReminderRail, { stats: screen.dashboard.stats, reminders: screen.dashboard.shipmentReminders }),
+      createElement(DeliveryMilestones, { paths: screen.dashboard.shipmentPaths, delivery: p.delivery }),
+      createElement(ShipmentMap, { payload: screen }),
+    ));
+    expect(html).toContain("数据待核对"); expect(html).not.toContain("-98,765"); expect(html).not.toContain("-98765");
+    expect(screen.dashboard.stats.periodNewContracts).toBe(-98765);
+    expect(formatCount(-3)).toBe("数据待核对"); expect(formatMoney(-3)).toBe("数据待核对"); expect(formatPercent(-3)).toBe("数据待核对");
+  });
+  it("负金额不渲染累计回款率环与占比条，正数金额仍显示", () => {
+    const p = payload(); p.collection.totalUnpaidAmount = "-98765";
+    const screen = fromPublicSalesScreenPayload(p);
+    const html = renderToStaticMarkup(createElement(TargetRing, { stats: screen.dashboard.stats, targets: screen.salesTargets, periodLabel: p.period.label, collection: p.collection }));
+    expect(html).toContain("数据待核对"); expect(html).not.toContain("collection-track"); expect(html).not.toContain("累计回款率 57.4%"); expect(html).not.toContain("¥-");
+    expect(html).toContain("¥2,790.0万");
   });
 });

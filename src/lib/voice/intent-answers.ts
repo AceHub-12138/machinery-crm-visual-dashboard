@@ -14,21 +14,35 @@ export const VOICE_GOODBYE = "为您服务是我的荣幸,先生。";
 
 export function buildIntentAnswer(intent: Intent, payload: PublicSalesScreenPayload, periodLabel = payload.period.label) {
   let card: AnswerCardData;
-  const counts: Array<[string, number]> = intent === "new_customers"
+  // 检查本意图会使用的汇总、金额和样本；负值不送进数值卡协议，也不静默丢卡。
+  const targetMetrics: Array<[string, number | string]> = [
+    ["本期合同额", payload.kpis.periodContractAmount], ["月度目标", payload.collection.targetAmount],
+    ["目标完成率", payload.collection.targetRate], ["剩余金额", payload.collection.remainingAmount], ["超额金额", payload.collection.exceededAmount],
+  ];
+  const metrics: Array<[string, number | string]> = intent === "new_customers"
     ? [["本期新增客户", payload.kpis.periodNewCustomers], ["累计客户", payload.kpis.totalCustomers]]
     : intent === "followup_todo"
       ? [["今日跟进", payload.kpis.todayFollowUp], ["七日内跟进", payload.kpis.sevenDayFollowUp], ["逾期跟进", payload.kpis.overdueFollowUp]]
       : intent === "region_shipments"
-        ? [["累计发运台数", payload.delivery.summary.unitCount], ...(payload.delivery.regionUnits ?? []).map(row => [`${row.province}发运台数`, row.unitCount] as [string, number]), ["地区待确认台数", payload.delivery.unresolvedRegionTotals?.unitCount ?? 0]]
+        ? [
+          ...Object.entries(payload.delivery.summary).map(([key, value]) => [key, value] as [string, number]),
+          ...(payload.delivery.regionUnits ?? []).flatMap(row => [[`${row.province}发运台数`, row.unitCount], [`${row.province}发运次数`, row.shipmentCount]] as Array<[string, number]>),
+          ["地区待确认台数", payload.delivery.unresolvedRegionTotals?.unitCount ?? 0], ["地区待确认次数", payload.delivery.unresolvedRegionTotals?.shipmentCount ?? 0],
+          ...payload.delivery.routes.map(row => ["地图样本台数", row.unitCount] as [string, number]),
+        ]
         : intent === "upcoming_shipments"
-          ? [["今日待发", payload.delivery.summary.todayDue], ["七日内待发", payload.delivery.summary.sevenDayDue], ["逾期待发", payload.delivery.summary.overdueDue]]
-          : intent === "sales_progress" || intent === "target_rate"
-            ? [["目标完成率", payload.collection.targetRate]]
-            : intent === "collection" ? [["累计回款率", payload.collection.collectionRate]] : [];
-  const anomalies = counts.filter(([, value]) => value < 0);
-  if (anomalies.length > 0) {
-    const lines = anomalies.map(([label, value]) => `${label}为 ${value}，需要核对历史数据`);
-    card = buildBriefCard("数据异常", lines);
+          ? [
+            ...Object.entries(payload.delivery.summary).map(([key, value]) => [key, value] as [string, number]),
+            ["明细总数", payload.delivery.milestonesTotal ?? 0],
+            ...payload.delivery.milestones.map(row => ["发运明细台数", row.unitCount] as [string, number]),
+            ["今日待发总数", payload.delivery.reminders.todayTotal ?? 0], ["七日内待发总数", payload.delivery.reminders.sevenDaysTotal ?? 0], ["逾期待发总数", payload.delivery.reminders.overdueTotal ?? 0],
+          ]
+          : intent === "sales_progress"
+            ? [...targetMetrics, ["本期实际回款", payload.kpis.periodPaidAmount], ["本期新合同欠款", payload.kpis.periodUnpaidAmount]]
+            : intent === "target_rate" ? targetMetrics
+              : intent === "collection" ? [["累计合同额", payload.collection.totalContractAmount], ["累计已回款", payload.collection.totalPaidAmount], ["累计未回款", payload.collection.totalUnpaidAmount], ["累计回款率", payload.collection.collectionRate]] : [];
+  if (metrics.some(([, value]) => Number(value) < 0)) {
+    card = { ...buildBriefCard("数据待核对", ["数据待核对"]), spoken: "先生,数据异常，需核对。" };
     return { cardId: card.kind, card, spoken: card.spoken, sentences: buildSpokenSentences(card.spoken), unanswerable: false };
   }
   switch (intent) {

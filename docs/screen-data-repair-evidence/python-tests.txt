@@ -1,0 +1,39 @@
+/Users/apple/voxlab/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+test_different_instances_do_not_share_reset_hooks (test_decoder_prime.PrimerTests.test_different_instances_do_not_share_reset_hooks) ... ok
+test_hash_changes_when_priming_is_disabled (test_decoder_prime.PrimerTests.test_hash_changes_when_priming_is_disabled) ... ok
+test_reset_primes_only_first_stream_reset_and_cleanup_clears_state (test_decoder_prime.PrimerTests.test_reset_primes_only_first_stream_reset_and_cleanup_clears_state) ... ok
+test_snapshots_are_style_specific_and_kv_mutation_cannot_change_saved_state (test_decoder_prime.PrimerTests.test_snapshots_are_style_specific_and_kv_mutation_cannot_change_saved_state) ... ok
+test_cancelled_queued_asr_is_skipped (test_gpu_queue.QueueTests.test_cancelled_queued_asr_is_skipped) ... ok
+test_idle_priority_and_exception_do_not_poison_worker (test_gpu_queue.QueueTests.test_idle_priority_and_exception_do_not_poison_worker) ... ok
+test_in_place_priority_before_tts_finishes_and_same_thread (test_gpu_queue.QueueTests.test_in_place_priority_before_tts_finishes_and_same_thread) ... ok
+test_shutdown_cancels_pending_priority_and_rejects_new_tasks (test_gpu_queue.QueueTests.test_shutdown_cancels_pending_priority_and_rejects_new_tasks) ... ok
+test_wrong_thread_checkpoint_is_rejected (test_gpu_queue.QueueTests.test_wrong_thread_checkpoint_is_rejected) ... ok
+test_cancelled_asr_does_not_cancel_suspended_tts (test_mlx_cancel.CancellationTests.test_cancelled_asr_does_not_cancel_suspended_tts) ... ok
+test_tts_cancel_during_asr_is_still_observed_on_return (test_mlx_cancel.CancellationTests.test_tts_cancel_during_asr_is_still_observed_on_return) ... ok
+test_after_bytes_error_never_retries (test_voice_local.PolicyTests.test_after_bytes_error_never_retries) ... ok
+test_cancel (test_voice_local.PolicyTests.test_cancel) ... ok
+test_ceiling (test_voice_local.PolicyTests.test_ceiling) ... ok
+test_cer_and_negative_peak (test_voice_local.PolicyTests.test_cer_and_negative_peak) ... ok
+test_disconnect_releases_blocked_worker_and_audio_queue (test_voice_local.PolicyTests.test_disconnect_releases_blocked_worker_and_audio_queue) ... ok
+test_failed_self_check_mutes_tts_keeps_asr (test_voice_local.PolicyTests.test_failed_self_check_mutes_tts_keeps_asr) ... TTS style self-check failed after 3 attempts: default (Self check CER exceeds 20%, stats={'ttsRegenerated': 0, 'ttsTruncated': 0, 'ttsFail': 0, 'tokens': 12, 'bytes': 48000, 'firstPeak': 0.06103515625})
+ok
+test_hash_tracks_pair_and_parameters (test_voice_local.PolicyTests.test_hash_tracks_pair_and_parameters) ... ok
+test_pcm_wav_and_limits (test_voice_local.PolicyTests.test_pcm_wav_and_limits) ... ok
+test_response_header_failure_and_cancellation_release_stream_slots (test_voice_local.PolicyTests.test_response_header_failure_and_cancellation_release_stream_slots) ... ok
+test_service_contract_and_faults (test_voice_local.PolicyTests.test_service_contract_and_faults) ... ok
+test_silent_retry_before_bytes (test_voice_local.PolicyTests.test_silent_retry_before_bytes) ... ok
+test_stalled_connected_stream_releases_gpu_and_bounds_retained_jobs (test_voice_local.PolicyTests.test_stalled_connected_stream_releases_gpu_and_bounds_retained_jobs) ... ok
+test_three_silent_attempts_fail (test_voice_local.PolicyTests.test_three_silent_attempts_fail) ... ok
+test_ttl_reclaims_finished_abandoned_streams_but_not_running_jobs (test_voice_local.PolicyTests.test_ttl_reclaims_finished_abandoned_streams_but_not_running_jobs) ... ok
+test_two_silent_attempts_then_third_succeeds (test_voice_local.PolicyTests.test_two_silent_attempts_then_third_succeeds) ... ok
+test_byte_snapshot_pair_validation_and_style_health (test_voice_local.StyleTests.test_byte_snapshot_pair_validation_and_style_health) ... ok
+test_missing_style_directory_configuration_retains_default (test_voice_local.StyleTests.test_missing_style_directory_configuration_retains_default) ... ok
+test_single_style_failure_keeps_default_and_rejects_failed_style (test_voice_local.StyleTests.test_single_style_failure_keeps_default_and_rejects_failed_style) ... TTS style self-check failed after 3 attempts: warm (Self check CER exceeds 20%, stats={'ttsRegenerated': 0, 'ttsTruncated': 0, 'ttsFail': 0, 'tokens': 12, 'bytes': 48000, 'firstPeak': 0.06103515625})
+ok
+test_style_self_check_recovers_on_third_attempt (test_voice_local.StyleTests.test_style_self_check_recovers_on_third_attempt) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.399s
+
+OK

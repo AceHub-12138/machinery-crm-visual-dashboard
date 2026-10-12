@@ -3,6 +3,7 @@ import { startVoiceHub, type VoiceHubServer } from "../services/voice-orchestrat
 import { readFileSync } from "node:fs";
 const fixture = JSON.parse(readFileSync(new URL("../services/voice-orchestrator/fixtures/public-sales-screen.json", import.meta.url), "utf8"));
 import { validatePublicPayload } from "../src/lib/voice/public-payload";
+import { fromPublicSalesScreenPayload } from "../src/lib/public-screen-payload";
 import { buildIntentAnswer } from "../src/lib/voice/intent-answers";
 import { task12Card } from "./task12-fixtures";
 import type { AnswerCardData } from "../src/lib/voice/session-machine";
@@ -25,7 +26,7 @@ async function show(page: Page, card: AnswerCardData) {
   hub.broadcast({ type: "state.change", at: Date.now(), from: "listening", to: "thinking", turn: 0 });
   hub.broadcast({ type: "answer.delta", at: Date.now(), seq: 0, text: card.spoken, full: true, card });
   hub.broadcast({ type: "state.change", at: Date.now(), from: "thinking", to: "answering", turn: 0 });
-  await expect(page.locator(`[data-card-kind="${card.kind}"] .overlay-card-data`)).toBeVisible();
+  await expect(page.locator(`[data-card-kind="${card.kind}"] .overlay-card-body`)).toBeVisible();
 }
 test("missing targets and rates above 999 remain valid visible cards", async ({ page }) => {
   await open(page);
@@ -72,4 +73,53 @@ test("shipment page freezes at playback end instead of resetting or cycling", as
   const pageAtEnd = await page.locator(".overlay-shipments-block").getAttribute("data-page");
   await page.clock.install(); await page.clock.fastForward(12000);
   await expect(page.locator(".overlay-shipments-block")).toHaveAttribute("data-page", pageAtEnd!);
+});
+
+
+test("negative amount, count and units retain a visible pending card and safe speech", async ({ page }) => {
+  await open(page);
+  for (const viewport of [{ width: 1920, height: 1080 }, { width: 1280, height: 720 }]) {
+    await page.setViewportSize(viewport);
+    for (const intent of ["sales_progress", "new_customers", "region_shipments"] as const) {
+      const p = validatePublicPayload(structuredClone(fixture));
+      p.kpis.periodUnpaidAmount = "-98765"; p.kpis.periodNewCustomers = -98765;
+      p.delivery.summary.unitCount = -98765;
+      const answer = buildIntentAnswer(intent, p);
+      expect(answer.spoken).toContain("数据异常，需核对");
+      await show(page, answer.card);
+      await expect(page.locator(".overlay-card-body")).toContainText("数据待核对");
+      await expect(page.locator(".overlay-card-body")).not.toContainText("98765");
+      const spills = await page.locator(".overlay-card-body").evaluate(el => [...el.querySelectorAll<HTMLElement>("*")].filter(node => node.childElementCount === 0 && node.textContent?.trim() && node.scrollWidth > node.clientWidth + 1).map(node => node.textContent));
+      expect(spills).toEqual([]);
+    }
+  }
+});
+
+
+test("negative metrics stay pending after a screen refresh at both sizes", async ({ page }) => {
+  const p = validatePublicPayload(structuredClone(fixture));
+  p.kpis.periodContractAmount = "-98765"; p.kpis.periodNewContracts = -98765; p.kpis.totalCustomers = -98765;
+  p.collection.totalPaidAmount = "-98765"; p.collection.totalUnpaidAmount = "-98765";
+  p.delivery.summary.unitCount = -98765; p.delivery.summary.shipmentCount = -98765; p.delivery.summary.regionCount = 1;
+  p.delivery.regionUnits = [{ province: "山东省", unitCount: -98765, shipmentCount: -98765 }];
+  p.delivery.unresolvedRegionTotals = { unitCount: 0, shipmentCount: 0 };
+  p.delivery.summary.todayDue = -98765; p.delivery.milestones[0].unitCount = -98765;
+  const screen = fromPublicSalesScreenPayload(p);
+  await page.route("**/api/screen/crm", route => route.fulfill({ json: screen }));
+  await page.clock.install();
+  for (const viewport of [{ width: 1920, height: 1080 }, { width: 1280, height: 720 }]) {
+    await page.setViewportSize(viewport); await page.goto("/screen/sales");
+    await expect(page.getByRole("heading", { name: "经营指挥舱" })).toBeVisible();
+    await expect(page.locator("#screen-stage")).toHaveAttribute("style", /scale/);
+    await page.clock.fastForward(61_000);
+    await expect(page.locator("[data-screen-panel=kpi]")).toContainText("数据待核对");
+    for (const panel of ["kpi", "map", "collection", "reminders", "delivery"]) {
+      await expect(page.locator(`[data-screen-panel=${panel}]`)).toContainText("数据待核对");
+      await expect(page.locator(`[data-screen-panel=${panel}]`)).not.toContainText("98765");
+    }
+    await expect(page.locator(".collection-track")).toHaveCount(0);
+    const spills = await page.locator("#screen-stage").evaluate(el => [...el.querySelectorAll<HTMLElement>("p, span")].filter(node => node.childElementCount === 0 && node.textContent?.includes("数据待核对") && node.scrollWidth > node.clientWidth + 1).map(node => ({text: node.textContent, className: node.className})));
+    expect(spills).toEqual([]);
+    await page.screenshot({ path: `docs/screen-data-repair-evidence/screen-negative-${viewport.width}.png`, animations: "disabled" });
+  }
 });

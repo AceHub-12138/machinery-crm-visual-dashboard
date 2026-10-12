@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-11",
+  "branch": "codex/screen-data-display",
+  "baseline": "9f0d0d6",
+  "vitest": 511,
+  "pythonTests": 30,
+  "typecheck": "passed",
+  "fullLint": "passed",
+  "changedFileLint": "passed, zero warnings",
+  "offlineBuild": "passed",
+  "browserRegression": 45,
+  "finalBrowserRegression": 9,
+  "tts": {
+    "rounds": 30,
+    "p50Ms": 304.25,
+    "p95Ms": 450.255,
+    "maxMs": 570.3,
+    "regeneratedRequests": 2,
+    "failures": 0,
+    "truncated": 0,
+    "thresholdsMs": {
+      "p50": 350,
+      "p95": 600
+    },
+    "scope": "default style, warm direct HTTP; includes actual silence retries; not complete voice L1 or venue acceptance"
+  }
+}

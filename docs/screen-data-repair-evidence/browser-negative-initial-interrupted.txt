@@ -1,0 +1,15 @@
+[WebServer] (node:13679) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:13680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:13686) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/screen-data-reconcile.spec.ts:31:1 › missing targets and rates above 999 remain valid visible cards (596ms)
+  ✓  2 e2e/screen-data-reconcile.spec.ts:48:1 › unresolved regions and full totals fit both viewports while points stay samples (702ms)
+  ✓  3 e2e/screen-data-reconcile.spec.ts:68:1 › shipment page freezes at playback end instead of resetting or cycling (5.6s)
+  ✘  4 e2e/screen-data-reconcile.spec.ts:79:1 › negative amount, count and units retain a visible pending card and safe speech (5.4s)
+(node:13702) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

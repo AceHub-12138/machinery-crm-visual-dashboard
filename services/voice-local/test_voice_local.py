@@ -30,7 +30,7 @@ class Backend:
         return self.recognition
     def generate(self, text, cancel, max_tokens):
         self.calls += 1
-        if self.mode == 'silent' or (self.mode == 'retry' and self.calls == 1):
+        if self.mode == 'silent' or (self.mode == 'retry' and self.calls == 1) or (self.mode == 'retry_twice' and self.calls <= 2):
             yield bytes(len(PCM)), 6
             return
         for _ in range(100 if self.mode == 'runaway' else 2):
@@ -56,12 +56,20 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(stats['ttsRegenerated'], 1)
         self.assertEqual(self.backend.calls, 2)
         self.assertTrue(all(pcm_peak(p) > .001 for p in parts))
-    def test_two_silent_attempts_fail(self):
+    def test_two_silent_attempts_then_third_succeeds(self):
+        self.backend.mode = 'retry_twice'
+        parts, stats = self.audio()
+        self.assertEqual(self.backend.calls, 3)
+        self.assertEqual(stats['ttsRegenerated'], 1)
+        self.assertEqual(stats['ttsFail'], 0)
+        self.assertEqual(b''.join(parts), PCM * 2)
+        self.assertTrue(all(pcm_peak(part) > .001 for part in parts))
+    def test_three_silent_attempts_fail(self):
         self.backend.mode='silent'
         parts, stats=self.audio()
         self.assertEqual(parts, [])
         self.assertEqual(stats['ttsFail'], 1)
-        self.assertEqual(self.backend.calls, 2)
+        self.assertEqual(self.backend.calls, 3)
     def test_after_bytes_error_never_retries(self):
         self.backend.mode='error'
         parts, stats=self.audio()
@@ -330,9 +338,26 @@ class StyleTests(unittest.TestCase):
                 health=client.get('/health').json()
                 self.assertEqual(health['styles'],['default'])
                 self.assertEqual(health['failedStyles'],['warm'])
+                self.assertEqual(health['styleAttempts'], {'default': 1, 'warm': 3})
                 self.assertEqual(health['styleFailures']['warm']['reason'], 'Self check CER exceeds 20%')
                 self.assertEqual(health['selfCheck'],'passed')
                 self.assertEqual(client.post('/tts',json={'text':'你好','style':'warm'}).status_code,400)
+    def test_style_self_check_recovers_on_third_attempt(self):
+        class RecoveringBackend(Backend):
+            def recognize(self, audio, cancel):
+                self.checks += 1
+                return '识别失败' if self.checks <= 2 else SELF_CHECK_TEXT
+        with tempfile.TemporaryDirectory() as directory:
+            ref = Path(directory) / 'ref.wav'; ref.write_bytes(b'ref')
+            backend = RecoveringBackend(); backend.checks = 0
+            with TestClient(create_app(Settings('tts', 'asr', str(ref), 'reference'), backend)) as client:
+                health = client.get('/health').json()
+                self.assertEqual(health['styleAttempts'], {'default': 3})
+                self.assertEqual(health['failedStyles'], [])
+                self.assertEqual(health['styleFailures'], {})
+                self.assertEqual(health['selfCheck'], 'passed')
+                self.assertEqual(backend.checks, 3)
+                self.assertEqual(client.post('/tts', json={'text': '你好'}).status_code, 200)
     def test_missing_style_directory_configuration_retains_default(self):
         from core import load_style_settings
         with tempfile.TemporaryDirectory() as directory:

@@ -1,0 +1,34 @@
+{"round": 1, "firstByteMs": 311.0, "secondsPerCharacter": 0.2578, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 2, "firstByteMs": 305.0, "secondsPerCharacter": 0.1986, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 3, "firstByteMs": 303.4, "secondsPerCharacter": 0.185, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 4, "firstByteMs": 302.5, "secondsPerCharacter": 0.2, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 5, "firstByteMs": 302.8, "secondsPerCharacter": 0.1858, "cer": 0.03571428571428571, "regenerated": 0, "truncated": 0}
+{"round": 6, "firstByteMs": 305.0, "secondsPerCharacter": 0.1867, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 7, "firstByteMs": 299.2, "secondsPerCharacter": 0.1969, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 8, "firstByteMs": 303.7, "secondsPerCharacter": 0.208, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 9, "firstByteMs": 298.4, "secondsPerCharacter": 0.2109, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 10, "firstByteMs": 308.0, "secondsPerCharacter": 0.2097, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 11, "firstByteMs": 562.8, "secondsPerCharacter": 0.2667, "cer": 0.0, "regenerated": 1, "truncated": 0}
+{"round": 12, "firstByteMs": 312.7, "secondsPerCharacter": 0.2069, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 13, "firstByteMs": 301.7, "secondsPerCharacter": 0.185, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 14, "firstByteMs": 304.8, "secondsPerCharacter": 0.2029, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 15, "firstByteMs": 308.5, "secondsPerCharacter": 0.1935, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 16, "firstByteMs": 303.1, "secondsPerCharacter": 0.2, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 17, "firstByteMs": 302.0, "secondsPerCharacter": 0.2031, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 18, "firstByteMs": 307.4, "secondsPerCharacter": 0.224, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 19, "firstByteMs": 570.3, "secondsPerCharacter": 0.2109, "cer": 0.0, "regenerated": 1, "truncated": 0}
+{"round": 20, "firstByteMs": 308.3, "secondsPerCharacter": 0.2011, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 21, "firstByteMs": 300.5, "secondsPerCharacter": 0.2756, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 22, "firstByteMs": 303.4, "secondsPerCharacter": 0.1959, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 23, "firstByteMs": 305.5, "secondsPerCharacter": 0.195, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 24, "firstByteMs": 304.9, "secondsPerCharacter": 0.2029, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 25, "firstByteMs": 305.2, "secondsPerCharacter": 0.1935, "cer": 0.03571428571428571, "regenerated": 0, "truncated": 0}
+{"round": 26, "firstByteMs": 302.6, "secondsPerCharacter": 0.1956, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 27, "firstByteMs": 301.8, "secondsPerCharacter": 0.1908, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 28, "firstByteMs": 302.2, "secondsPerCharacter": 0.216, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 29, "firstByteMs": 300.3, "secondsPerCharacter": 0.1964, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"round": 30, "firstByteMs": 312.0, "secondsPerCharacter": 0.1968, "cer": 0.0, "regenerated": 0, "truncated": 0}
+{"phase": "stream", "stopMs": 27.9}
+{"phase": "prefill", "stopMs": 36.1}
+{"phase": "stream", "stopMs": 29.6}
+{"phase": "prefill", "stopMs": 40.7}
