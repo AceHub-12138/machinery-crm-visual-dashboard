@@ -254,3 +254,6 @@
 .overlay-card-body { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) { .overlay-root, .overlay-root * { animation: none !important; transition-duration: 0ms !important; } }
+
+.overlay-level { height: 36px; margin: 8px auto 0; display: flex; justify-content: center; align-items: end; gap: 6px; }
+.overlay-level span { width: 8px; height: 36px; border-radius: 3px; transform: scaleY(.18); transform-origin: bottom; background: var(--ov-core); }

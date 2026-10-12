@@ -13,6 +13,12 @@ export function toPcm16(audio: Float32Array): Uint8Array<ArrayBuffer> {
   return bytes;
 }
 export class VoiceMicrophone {
+  private inputLevel = 0;
+  private inputLevelAt = 0;
+  /** Presentation reads the already captured worklet frames, never opens another stream. */
+  getAmplitude(): number {
+    return this.mode === "off" || this.context?.state !== "running" || !this.sessionOwner || performance.now()-this.inputLevelAt > 150 ? 0 : this.inputLevel;
+  }
   private context: AudioContext | null = null;
   private stream: MediaStream | null = null;
   private worklet: AudioWorkletNode | null = null;
@@ -145,6 +151,9 @@ export class VoiceMicrophone {
       const silent = this.context.createGain(); silent.gain.value = 0;
       source.connect(this.worklet).connect(silent).connect(this.context.destination);
       this.worklet.port.onmessage = ({ data }: MessageEvent<Float32Array>) => {
+        let energy = 0; for (const sample of data) energy += sample * sample;
+        this.inputLevel = Math.min(1,Math.sqrt(energy / Math.max(1,data.length)) * 4);
+        this.inputLevelAt = performance.now();
         this.update();
         const epoch = this.epoch;
         if (this.mode === "kws") { this.worker?.postMessage({ type: "audio", samples: data, epoch }, [data.buffer]); return; }

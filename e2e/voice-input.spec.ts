@@ -178,3 +178,16 @@ test('ordinary rate limit plays an apology and reopens instead of leaving the se
     expect(s.orch.answer?.spoken).toBe(FIXED_LINES.unheard);
   }finally{await s.close();}
 });
+
+test('listening level follows real captured worklet audio at 20Hz',async({page})=>{
+  test.setTimeout(30000);await page.emulateMedia({reducedMotion:'no-preference'});
+  const s=await setup(page);try{
+    await s.open();const meter=page.locator('.overlay-level');await expect(meter).toBeVisible();
+    await expect(meter.locator('span')).toHaveCount(7);
+    await expect.poll(()=>meter.getAttribute('data-level')).toBe('0.000');
+    await s.play('followup-long.wav');
+    await expect.poll(async()=>Number(await meter.getAttribute('data-level')),{timeout:5000}).toBeGreaterThan(.05);
+    const scales=await meter.locator('span').evaluateAll(nodes=>nodes.map(n=>getComputedStyle(n).transform));
+    expect(new Set(scales).size).toBeGreaterThan(1);
+  }finally{await s.close();}
+});
