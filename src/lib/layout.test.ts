@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import { screenMapBounds } from "./geo";
 import { describe, expect, it } from "vitest";
 
 /**
@@ -129,12 +130,13 @@ describe("screen grid geometry", () => {
     expect(mapHeight).toBe(838);
 
     // 地图 SVG 的视口比面板高（见 globals.css 的 .map-svg），仍由宽度定标。
-    const scale = (mapWidth - MAP_SVG.insetX * 2) / MAP.width;
+    const scale = MAP_SVG.width / screenMapBounds.width;
 
     // 中国在屏幕上至少要占到 560px 宽。
     // Rev 3 实测只有 472px —— 画布宽高比和面板差了 26%，被缩掉一整圈。
     const chinaScreenW = (MAP.china.maxX - MAP.china.minX) * scale;
     expect(chinaScreenW).toBeGreaterThan(560);
+    expect(chinaScreenW / mapWidth).toBeGreaterThanOrEqual(.75);
   });
 
   it("centers China inside the map panel instead of trusting the canvas centre", () => {
@@ -149,17 +151,17 @@ describe("screen grid geometry", () => {
     // 地图格的实际高度 = 弹性轨道(838) + 行区上下 padding(28) = 866。
     // ⚠️ 别直接用弹性轨道值 838 —— 那会把「面板中心」算到 419 去，
     // 于是这个测试会误报 13px 偏差（自己踩过一次）。
-    const mapHeight = STAGE_H - HEADER_H - gapsY - fixedY;
+    const mapHeight = STAGE_H - HEADER_H - PAD * 2 - gapsY - fixedY - 2;
 
     // 视口宽高比必须**不宽于**画布，否则会变成由高度定标 ——
     // 那样中国会被缩小，且投影窗口的推导前提（按宽度定标）全部失效。
-    expect(MAP_SVG.width / MAP_SVG.height).toBeLessThanOrEqual(MAP.width / MAP.height);
+    expect(MAP_SVG.width / MAP_SVG.height).toBeLessThanOrEqual(screenMapBounds.width / screenMapBounds.height);
     // 视口左右内缩对称 ⇒ 水平方向不会偏。
     // 参照系是**面板内框**（880px 的格子减去左右各 1px 边框 = 878），
     // 所以内缩量应当是 (878-866)/2 = 6，而不是 (880-866)/2 = 7。
     expect(MAP_SVG.insetX).toBeCloseTo((mapWidth - 2 - MAP_SVG.width) / 2, 1);
 
-    const scale = MAP_SVG.width / MAP.width;
+    const scale = MAP_SVG.width / screenMapBounds.width;
     // 画布在视口里按 meet 垂直居中，所以画布中心的屏幕 y（面板坐标）=
     const canvasCentreInPanel =
       MAP_SVG.top + (MAP_SVG.height - MAP.height * scale) / 2 + (MAP.height / 2) * scale;

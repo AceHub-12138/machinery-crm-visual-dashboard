@@ -5,7 +5,7 @@ import {
   chinaMap,
   chinaSilhouette,
   createScreenArc,
-  mapViewBox,
+  screenMapViewBox,
   matchProvinceKey,
   sphereCenter,
   sphereRings,
@@ -263,7 +263,7 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
       <div className="absolute inset-0 flex">
         <svg
           className="map-svg"
-          viewBox={mapViewBox}
+          viewBox={screenMapViewBox}
           preserveAspectRatio="xMidYMid meet"
           role="img"
           aria-label={`全国发货网络图：滕州工厂发往 ${routes.length} 个收货点，覆盖 ${coveredProvinces} 个省级区域`}
@@ -546,13 +546,17 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
           · 右侧：发货状态 + 色阶图例（x ≥ 1046，只压到日本海与菲律宾海）
           卡片做成半透明，压在邻国上也不会显得「糊住」。 */}
 
-      <div className="pointer-events-none absolute top-[92px] left-3 z-10 flex w-[150px] flex-col gap-2">
+      <div className="pointer-events-none absolute bottom-3 left-3 z-10 flex w-[150px] flex-col gap-2">
         <div className="map-hud px-2.5 py-2">
           <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">发货来源</p>
           <p className="mt-1.5 text-caption leading-tight font-bold text-[var(--ink)]">滕州工厂</p>
           <p className="mt-1 text-micro leading-none text-[var(--ink-3)]">山东 · 滕州</p>
         </div>
 
+
+      </div>
+
+      <div className="pointer-events-none absolute bottom-3 right-3 z-10 flex w-[22%] flex-col gap-2">
         <div className="map-hud px-2.5 py-2">
           <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">省级排行</p>
           <ul className="mt-1.5 space-y-1.5">
@@ -574,10 +578,8 @@ export function ShipmentMap({ payload }: { payload: PublicScreenPayload }) {
               </li>
             ))}
           </ul>
+          {provinceRanking.length > 4 ? <p className="mt-2 text-micro text-[var(--ink-3)]">其他 {provinceRanking.length - 4} 省</p> : null}
         </div>
-      </div>
-
-      <div className="pointer-events-none absolute top-[92px] right-3 z-10 flex w-[150px] flex-col gap-2">
         <div className="map-hud px-2.5 py-2">
           <p className="text-micro leading-none tracking-[0.14em] text-[var(--ink-3)]">发货状态</p>
           <ul className="mt-1.5 space-y-1.5">
