@@ -6,6 +6,7 @@ import { validatePublicPayload } from "../src/lib/voice/public-payload";
 import { fromPublicSalesScreenPayload } from "../src/lib/public-screen-payload";
 import { buildIntentAnswer } from "../src/lib/voice/intent-answers";
 import { task12Card } from "./task12-fixtures";
+import { auditText } from "./layout-audit";
 import type { AnswerCardData } from "../src/lib/voice/session-machine";
 
 let hub: VoiceHubServer;
@@ -58,9 +59,10 @@ test("unresolved regions and full totals fit both viewports while points stay sa
     await expect(page.locator(".overlay-map-point")).toHaveCount(1);
     const spills = await page.locator(".overlay-card-data").evaluate(el => {
       const box = el.getBoundingClientRect();
-      return [...el.querySelectorAll<HTMLElement>("*")].filter(node => !(node instanceof SVGElement) && node.childElementCount === 0 && node.textContent?.trim()).filter(node => node.scrollWidth > node.clientWidth + 1 || node.getBoundingClientRect().bottom > box.bottom + 1).map(node => node.textContent);
+      return [...el.querySelectorAll<HTMLElement>("*")].filter(node => !node.closest(".sr-only") && !(node instanceof SVGElement) && node.childElementCount === 0 && node.textContent?.trim()).filter(node => node.scrollWidth > node.clientWidth + 1 || node.getBoundingClientRect().bottom > box.bottom + 1).map(node => node.textContent);
     });
     expect(spills).toEqual([]);
+    expect(await auditText(page,".overlay-card-data")).toEqual([]);
     const width = await page.locator(".overlay-card-row-mini > i").first().evaluate(el => el.style.width);
     expect(width).toBe("100%");
   }
@@ -85,12 +87,13 @@ test("negative amount, count and units retain a visible pending card and safe sp
       p.kpis.periodUnpaidAmount = "-98765"; p.kpis.periodNewCustomers = -98765;
       p.delivery.summary.unitCount = -98765;
       const answer = buildIntentAnswer(intent, p);
-      expect(answer.spoken).toContain("数据异常，需核对");
+      expect(answer.spoken).toContain("先生，数据待核对。");
       await show(page, answer.card);
       await expect(page.locator(".overlay-card-body")).toContainText("数据待核对");
       await expect(page.locator(".overlay-card-body")).not.toContainText("98765");
-      const spills = await page.locator(".overlay-card-body").evaluate(el => [...el.querySelectorAll<HTMLElement>("*")].filter(node => node.childElementCount === 0 && node.textContent?.trim() && node.scrollWidth > node.clientWidth + 1).map(node => node.textContent));
+      const spills = await page.locator(".overlay-card-body").evaluate(el => [...el.querySelectorAll<HTMLElement>("*")].filter(node => !node.closest(".sr-only") && node.childElementCount === 0 && node.textContent?.trim() && node.scrollWidth > node.clientWidth + 1).map(node => node.textContent));
       expect(spills).toEqual([]);
+      expect(await auditText(page,".overlay-card-body")).toEqual([]);
     }
   }
 });
@@ -107,7 +110,7 @@ test("negative metrics stay pending after a screen refresh at both sizes", async
   const screen = fromPublicSalesScreenPayload(p);
   await page.route("**/api/screen/crm", route => route.fulfill({ json: screen }));
   await page.clock.install();
-  for (const viewport of [{ width: 1920, height: 1080 }, { width: 1280, height: 720 }]) {
+  for (const viewport of [{ width: 1920, height: 1080 }, { width: 1280, height: 720 }, { width: 3840, height: 2160 }]) {
     await page.setViewportSize(viewport); await page.goto("/screen/sales");
     await expect(page.getByRole("heading", { name: "经营指挥舱" })).toBeVisible();
     await expect(page.locator("#screen-stage")).toHaveAttribute("style", /scale/);
@@ -118,8 +121,18 @@ test("negative metrics stay pending after a screen refresh at both sizes", async
       await expect(page.locator(`[data-screen-panel=${panel}]`)).not.toContainText("98765");
     }
     await expect(page.locator(".collection-track")).toHaveCount(0);
-    const spills = await page.locator("#screen-stage").evaluate(el => [...el.querySelectorAll<HTMLElement>("p, span")].filter(node => node.childElementCount === 0 && node.textContent?.includes("数据待核对") && node.scrollWidth > node.clientWidth + 1).map(node => ({text: node.textContent, className: node.className})));
+    for(const selector of [".kpi-hero .fit-text", ".ring-box .fit-text"]) {
+      const pending=page.locator(selector);await expect(pending).toHaveText("数据待核对");
+      const measure=await pending.evaluate(el=>{
+        const css=getComputedStyle(el);const range=document.createRange();range.selectNodeContents(el);
+        const rects=[...range.getClientRects()].filter(r=>r.width>0);const box=el.getBoundingClientRect();
+        return {font:parseFloat(css.fontSize),nowrap:css.whiteSpace,singleLine:Math.max(...rects.map(r=>r.top))<Math.min(...rects.map(r=>r.bottom)),contained:rects.every(r=>r.left>=box.left-1 && r.right<=box.right+1)};
+      });
+      expect(measure.font).toBeGreaterThanOrEqual(18);expect(measure.nowrap).toBe("nowrap");expect(measure.singleLine).toBe(true);expect(measure.contained).toBe(true);
+    }
+    const spills = await page.locator("#screen-stage").evaluate(el => [...el.querySelectorAll<HTMLElement>("p, span")].filter(node => !node.closest(".sr-only") && node.childElementCount === 0 && node.textContent?.includes("数据待核对") && node.scrollWidth > node.clientWidth + 1).map(node => ({text: node.textContent, className: node.className})));
     expect(spills).toEqual([]);
+    expect(await auditText(page,"#screen-stage")).toEqual([]);
     await page.screenshot({ path: `docs/screen-data-repair-evidence/screen-negative-${viewport.width}.png`, animations: "disabled" });
   }
 });

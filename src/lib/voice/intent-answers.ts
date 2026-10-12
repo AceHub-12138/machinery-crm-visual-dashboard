@@ -42,7 +42,7 @@ export function buildIntentAnswer(intent: Intent, payload: PublicSalesScreenPayl
             : intent === "target_rate" ? targetMetrics
               : intent === "collection" ? [["累计合同额", payload.collection.totalContractAmount], ["累计已回款", payload.collection.totalPaidAmount], ["累计未回款", payload.collection.totalUnpaidAmount], ["累计回款率", payload.collection.collectionRate]] : [];
   if (metrics.some(([, value]) => Number(value) < 0)) {
-    card = { ...buildBriefCard("数据待核对", ["数据待核对"]), spoken: "先生,数据异常，需核对。" };
+    card = { ...buildBriefCard("数据待核对", ["数据待核对"]), spoken: "先生，数据待核对。" };
     return { cardId: card.kind, card, spoken: card.spoken, sentences: buildSpokenSentences(card.spoken), unanswerable: false };
   }
   switch (intent) {
