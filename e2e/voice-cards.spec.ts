@@ -6,6 +6,7 @@ import { isValidAnswerCard } from "../src/lib/voice/protocol";
 import type { AnswerCardData } from "../src/lib/voice/session-machine";
 import { displaySpoken } from "../src/lib/voice/card-presentation";
 import { auditText, auditPanels } from "./layout-audit";
+import { LONG_ANSWER } from "./fixtures/long-strings";
 import { CARD_INTENTS, task12Card } from "./task12-fixtures";
 let hub: VoiceHubServer;
 const evidence: unknown[]=[];
@@ -21,6 +22,7 @@ async function open(page: Page) {
   await page.mouse.click(40,40);
   hub.broadcast({type:"session.start",at:Date.now(),sessionId:"task12-layout",screenId:"00000000-0000-0000-0000-000000000001"});
   hub.broadcast({type:"state.change",at:Date.now(),from:"waking",to:"listening",turn:0});
+  await expect(page.locator(".overlay-root")).toHaveAttribute("data-phase","on");
 }
 async function show(page:Page, card:AnswerCardData) {
   expect(isValidAnswerCard(card)).toBe(true);
@@ -28,7 +30,19 @@ async function show(page:Page, card:AnswerCardData) {
   hub.broadcast({type:"answer.delta",at:Date.now(),seq:0,text:card.spoken,full:true,card});
   hub.broadcast({type:"state.change",at:Date.now(),from:"thinking",to:"answering",turn:0});
   await expect(page.locator(`[data-card-kind="${card.kind}"] .overlay-card-body`)).toBeVisible();
-  await expect.poll(()=>page.locator(".overlay-card-spoken").innerText(),{timeout:12000}).toBe(displaySpoken(card.spoken));
+  await expect(page.locator(".overlay-card-body")).toHaveAttribute("data-spoken-complete","true",{timeout:12000});
+  await expect(page.locator(".overlay-card-spoken")).toHaveAttribute("data-measured","true");
+  const pages=Number(await page.locator(".overlay-spoken-section").getAttribute("data-pages"));
+  if(pages===1) await expect(page.locator(".overlay-card-spoken")).toHaveText(displaySpoken(card.spoken));
+  else {
+    const fragments=new Map<number,string>();
+    for(let i=0;i<pages;i++) {
+      const index=Number(await page.locator(".overlay-spoken-section").getAttribute("data-page"));
+      fragments.set(index,await page.locator(".overlay-card-spoken").innerText());
+      await page.getByRole("button",{name:"下一页播报"}).click();
+    }
+    expect([...fragments].sort((a,b)=>a[0]-b[0]).map(([,text])=>text).join("")).toBe(displaySpoken(card.spoken));
+  }
   await page.evaluate(()=>document.fonts.ready);
 }
 async function bounds(page:Page) {
@@ -47,7 +61,7 @@ async function bounds(page:Page) {
     return {x:rect.x,y:rect.y,width:rect.width,height:rect.height,bottom:rect.bottom,spills,dataSpills,sections};
   });
 }
-for (const viewport of [{width:1920,height:1080},{width:1280,height:720}]) {
+for (const viewport of [{width:1920,height:1080},{width:1280,height:720},{width:3840,height:2160}]) {
   for (const variant of ["normal","long"] as const) {
     for (const intent of CARD_INTENTS) test(`${viewport.width} ${variant} ${intent}`,async({page})=>{
       await page.setViewportSize(viewport); await open(page);
@@ -60,9 +74,13 @@ for (const viewport of [{width:1920,height:1080},{width:1280,height:720}]) {
       expect(await auditText(page, ".overlay-root")).toEqual([]);
       expect(await auditPanels(page)).toEqual([]);
       for(const section of measured.sections) expect(section.bottom).toBeLessThanOrEqual(measured.bottom+1);
-      expect(measured.bottom - measured.sections.find(s=>s.class==="overlay-followups")!.bottom).toBeGreaterThanOrEqual((card.kind === "brief" ? 35 : 71)*viewport.height/1080);
+      expect(measured.bottom - measured.sections.find(s=>s.class==="overlay-followups")!.bottom).toBeGreaterThanOrEqual((card.kind === "brief" ? 29 : 59)*viewport.height/1080);
       expect(measured.sections.find(s=>s.class==="overlay-spoken-section")!.height).toBeCloseTo(170*viewport.height/1080,0);
-      if(card.kind!=="brief")expect(measured.sections.find(s=>s.class==="overlay-card-data")!.height).toBeCloseTo(270*viewport.height/1080,0);
+      const tier=card.kind==="brief" ? "s" : ["region","customers-shipments"].includes(card.kind) ? "l" : "m";
+      await expect(page.locator(".overlay-card")).toHaveAttribute("data-tier",tier);
+      const expectedSize={s:{height:360,data:0},m:{height:620,data:202},l:{height:720,data:302}}[tier];
+      expect(measured.height).toBeCloseTo(expectedSize.height*viewport.height/1080,0);
+      if(card.kind!=="brief")expect(measured.sections.find(s=>s.class==="overlay-card-data")!.height).toBeCloseTo(expectedSize.data*viewport.height/1080,0);
       expect(await page.locator(".overlay-card-body").count()).toBe(1);
       expect(await page.locator(".overlay-card-spoken").count()).toBe(1);
       if(card.kind==="region")expect(await page.locator(".overlay-map-point").count()).toBe(card.mapPoints?.length);
@@ -182,4 +200,36 @@ test("normal motion live region never announces a partial sentence",async({page}
   hub.broadcast({type:"state.change",at:Date.now(),from:"thinking",to:"answering",turn:0});
   await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第一句完整。");
   await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。");
+});
+
+for(const viewport of [{width:1920,height:1080},{width:1280,height:720},{width:3840,height:2160}]) test(`300 character answer pages without hidden text ${viewport.width}`,async({page})=>{
+  await page.setViewportSize(viewport);await page.emulateMedia({reducedMotion:"reduce"});await open(page);
+  const text=LONG_ANSWER.slice(0,300);
+  const card={kind:"brief" as const,title:"长回答分页验收",spoken:text,lines:[text]};await show(page,card);
+  const section=page.locator('.overlay-spoken-section');
+  const count=Number(await section.getAttribute('data-pages'));expect(count).toBeGreaterThan(1);
+  for(let i=0;i<count;i++) {
+    expect(await auditText(page,'.overlay-root')).toEqual([]);
+    const starts=await page.locator('.overlay-card-spoken').evaluate(el=>{
+      const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const starts=new Map<number,{x:number,char:string}>();
+      const origin=el.getBoundingClientRect();const scale=origin.width/(el as HTMLElement).clientWidth;const line=parseFloat(getComputedStyle(el).lineHeight)*scale;
+      for(let n=walker.nextNode();n;n=walker.nextNode())for(let j=0;j<(n.textContent?.length??0);j++){
+        const char=n.textContent![j];if(!char.trim())continue;const r=document.createRange();r.setStart(n,j);r.setEnd(n,j+1);const box=r.getBoundingClientRect();const row=Math.round((box.top-origin.top)/line);
+        if(!starts.has(row)||box.left<starts.get(row)!.x)starts.set(row,{x:box.left,char});
+      }
+      return [...starts.values()].map(s=>s.char);
+    });
+    expect(starts.length).toBeLessThanOrEqual(3);expect(starts.every(c=>!/[，。、％！？；：）】》」』]/u.test(c))).toBe(true);
+    await page.getByRole('button',{name:'下一页播报'}).click();
+  }
+});
+
+test("single province 100% and large row counts remain contained",async({page})=>{
+  await open(page);
+  const base=task12Card("region_shipments","normal");if(base.kind!=="region")throw new Error("region fixture required");
+  const card={...base,title:"单省边界验收",summaryText:"单省发运",spoken:"单省发运布局验收。",rows:[{region:"内蒙古自治区",units:999999999,shipments:999999999,sharePercent:100}],other:{regions:0,units:0}};
+  await show(page,card);expect((await bounds(page)).spills).toEqual([]);expect(await auditText(page,".overlay-root")).toEqual([]);
+  await page.addStyleTag({content:'.overlay-region-row > em { width:50px !important; }'});
+  await expect(page.locator(".overlay-region-row > em")).toHaveCSS("width","50px");
+  expect((await auditText(page,".overlay-root")).some(f=>f.kind==="overflow" && f.cls==="EM")).toBe(true);
 });

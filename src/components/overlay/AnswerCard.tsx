@@ -17,7 +17,8 @@ import {
   type OverlayGeometry,
 } from "@/lib/voice/params";
 import type { AnswerCardData } from "@/lib/voice/session-machine";
-import { renderCardTemplate } from "./cards/registry";
+import { spokenNodes, useSpokenPages } from "./spoken-pages";
+import { CARD_TIERS, renderCardTemplate } from "./cards/registry";
 
 /**
  * 答案卡发射编排(plan §7,总时长约 700ms,时序参数在 LaunchConfig)。
@@ -60,6 +61,36 @@ export const AnswerCard = memo(function AnswerCard({
   const frameRef = useRef<SVGPathElement | null>(null);
   const cornerRef = useRef<HTMLDivElement | null>(null);
   const spokenRef = useRef<HTMLSpanElement | null>(null);
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const spokenPages = useSpokenPages(displaySpoken(card.spoken),paragraphRef);
+  const [spokenPageIndex,setSpokenPageIndex] = useState(0);
+  const spokenPage = Math.min(spokenPageIndex,spokenPages.length-1);
+  const activeSpokenPage = spokenPages[spokenPage];
+  const progressRef = useRef(0);
+  const manualUntil = useRef(0);
+  const visiblePageRef = useRef(0);
+  const selectSpokenPage = (page: number) => { manualUntil.current=performance.now()+10000;setSpokenPageIndex(page); };
+  useEffect(()=>{ visiblePageRef.current=spokenPage; },[spokenPage]);
+  useEffect(()=>{
+    if(reduced || spokenPages.length===1 || foldAt!==null) return;
+    let lastKey="",boundary=performance.now(),base=0;
+    const update=()=>{
+      const now=performance.now();if(now<manualUntil.current) return;
+      const active=sentenceRef?.current;
+      const complete=progressRef.current>=card.spoken.length;
+      const key=active ? `${active.start}:${active.end}` : complete ? "complete" : "typing";
+      if(key!==lastKey) {lastKey=key;boundary=now;base=visiblePageRef.current;}
+      let page=0;
+      if(active) {
+        const first=Math.max(0,spokenPages.findIndex(p=>active.start>=p.start && active.start<p.end));
+        const last=Math.max(first,spokenPages.findIndex(p=>active.end-1>=p.start && active.end-1<p.end));
+        page=first+Math.floor((now-boundary)/4000)%(last-first+1);
+      } else if(complete) page=(base+Math.floor((now-boundary)/4000))%spokenPages.length;
+      else page=Math.max(0,spokenPages.findIndex(p=>Math.max(0,progressRef.current-1)>=p.start && progressRef.current-1<p.end));
+      setSpokenPageIndex(page);
+    };
+    update();const timer=window.setInterval(update,100);return()=>window.clearInterval(timer);
+  },[card,spokenPages,reduced,foldAt,sentenceRef]);
   const barFillRef = useRef<HTMLSpanElement | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const pages = card.kind === "customers-shipments" ? shipmentPages(card.rows, card.omittedCount).length : 1;
@@ -99,7 +130,7 @@ export const AnswerCard = memo(function AnswerCard({
     svg.setAttribute("preserveAspectRatio", "none");
     const c = 22;
     rect.setAttribute("d", `M ${c} 1 L ${w-c} 1 L ${w-1} ${c} L ${w-1} ${h-c} L ${w-c} ${h-1} L ${c} ${h-1} L 1 ${h-c} L 1 ${c} Z`);
-  }, [card.kind, geometry.cardAnchor.width, geometry.scale]);
+  }, [card.kind, geometry.cardAnchor.width, geometry.scale, audioNotice]);
 
   /* 编排主循环:rAF 写 DOM,打字完毕即停。
      bar(进度条)只存在于 target-progress 模板——其余模板无进度条,
@@ -176,18 +207,22 @@ export const AnswerCard = memo(function AnswerCard({
       {
         const active = sentenceRef?.current;
         const typed = reduced ? card.spoken.length : Math.max(typedChars(card.spoken, ph.typingMs, config.typeCps), active?.end ?? 0);
+        progressRef.current = typed;
+        body.dataset.spokenComplete = String(typed >= card.spoken.length);
         const highlight = active ? `${active.start}:${active.end}` : "";
         if (typed !== lastTyped || highlight !== lastHighlight) {
           lastTyped = typed; lastHighlight = highlight;
-          const text = displaySpoken(card.spoken).slice(0, typed);
-          if (active) {
+          const text = displaySpoken(card.spoken).slice(activeSpokenPage.start, Math.max(activeSpokenPage.start, Math.min(typed,activeSpokenPage.end)));
+          if (active && active.end>activeSpokenPage.start && active.start<activeSpokenPage.end) {
             const mark = document.createElement("span");
             mark.className = "overlay-sentence-active";
             mark.dataset.sentenceStart = String(active.start);
             mark.dataset.sentenceEnd = String(active.end);
-            mark.textContent = text.slice(active.start, active.end);
-            spoken.replaceChildren(document.createTextNode(text.slice(0, active.start)), mark, document.createTextNode(text.slice(active.end)));
-          } else spoken.textContent = text;
+            const start=Math.max(0,active.start-activeSpokenPage.start);
+            const end=Math.min(text.length,active.end-activeSpokenPage.start);
+            mark.append(spokenNodes(text.slice(start,end)));
+            spoken.replaceChildren(spokenNodes(text.slice(0,start)),mark,spokenNodes(text.slice(end)));
+          } else spoken.replaceChildren(spokenNodes(text));
         }
         const completed = sentences.findLastIndex(s => s.displayEnd <= typed);
         if (completed > announcedRef.current.index && liveRef.current) {
@@ -206,7 +241,7 @@ export const AnswerCard = memo(function AnswerCard({
       disposed = true;
       cancelAnimationFrame(raf);
     };
-  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion, reduced]);
+  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion, reduced, activeSpokenPage]);
 
   const anchor = geometry.cardAnchor;
 
@@ -214,6 +249,7 @@ export const AnswerCard = memo(function AnswerCard({
     <div
       className={`overlay-card${card.kind === "brief" ? " is-brief" : ""}`}
       data-card-kind={card.kind}
+      data-tier={CARD_TIERS[card.kind]}
       style={{ top: anchor.y, width: anchor.width / geometry.scale, transform: `translateX(-50%) scale(${geometry.scale})` }}
       role="region"
       aria-label={card.title}
@@ -234,7 +270,17 @@ export const AnswerCard = memo(function AnswerCard({
           <p className="overlay-card-subtitle" title={"summaryText" in card ? card.summaryText : undefined}>{"summaryText" in card ? <ClipText full={card.summaryText}>{cardExcerpt(card.summaryText, 40)}</ClipText> : card.kind === "brief" ? "小川 · 为您服务" : "经营数据总览"}</p>
         </header>
         {card.kind !== "brief" ? <div className="overlay-card-data">{renderCardTemplate(card, { barFillRef, launchAt, pageIndex })}</div> : null}
-        <section className="overlay-spoken-section" aria-label="小川播报"><h3><span aria-hidden="true">✦</span> 小川播报</h3><p className="overlay-card-spoken" title={displaySpoken(card.spoken)} aria-hidden="true"><span ref={spokenRef} /></p></section>
+        <section className="overlay-spoken-section" aria-label="小川播报" data-page={spokenPage+1} data-pages={spokenPages.length}>
+          <div className="overlay-spoken-heading"><h3><span aria-hidden="true">✦</span> 小川播报</h3>
+            {spokenPages.length>1 ? <div className="overlay-spoken-pagination">
+              <button type="button" aria-label="上一页播报" onClick={()=>selectSpokenPage((spokenPage+spokenPages.length-1)%spokenPages.length)}>‹</button>
+              <span>{spokenPage+1}/{spokenPages.length}</span>
+              <div className="overlay-page-dots" aria-hidden="true">{spokenPages.slice(Math.max(0,spokenPage-3),Math.max(7,spokenPage+4)).map((p)=><i key={p.start} className={p.start===activeSpokenPage.start ? "is-active" : ""} />)}</div>
+              <button type="button" aria-label="下一页播报" onClick={()=>selectSpokenPage((spokenPage+1)%spokenPages.length)}>›</button>
+            </div> : null}
+          </div>
+          <p ref={paragraphRef} className="overlay-card-spoken" title={displaySpoken(card.spoken)} aria-hidden="true"><span ref={spokenRef} /></p>
+        </section>
         <div className="overlay-followups">{followups.length ? <><span className="overlay-followups-label">{card.kind === "brief" ? "您可以问我：" : "可继续追问："}</span>{followups.map(q => <span key={q}>{q}</span>)}</> : null}</div>
       </div>
     </div>
