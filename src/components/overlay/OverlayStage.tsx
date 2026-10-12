@@ -561,7 +561,7 @@ export function OverlayStage({
             <span aria-hidden="true">{bargePaused ? "聆听中" : statusNow.zh}</span>
           </p>
         ) : null}
-        {["listening", "followup"].includes(session.name) ? <LevelMeter sample={sampleInput} /> : null}
+        {bargePaused || ["listening", "followup"].includes(session.name) ? <LevelMeter sample={sampleInput} /> : null}
         {audioNotice && !session.card ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}
         {captionText ? (
           <p className={`overlay-partial${captionDim ? " overlay-partial-idle" : ""}`}>{captionText}</p>
@@ -570,6 +570,7 @@ export function OverlayStage({
 
       {session.card ? (
         <AnswerCard
+          key={launchAt}
           card={session.card}
           audioNotice={audioNotice}
           launchAt={launchAt}

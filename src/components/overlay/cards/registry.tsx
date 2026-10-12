@@ -24,3 +24,9 @@ export function renderCardTemplate(card: AnswerCardData, refs: CardTemplateRefs)
   if (!Object.hasOwn(CARD_TEMPLATES, card.kind)) return null;
   return CARD_TEMPLATES[card.kind]({card, ...refs} as never);
 }
+
+/** Default tier is a presentation concern; wire card shapes remain unchanged. */
+export const CARD_TIERS: Record<AnswerCardData["kind"], "s" | "m" | "l"> = {
+  brief: "s", "target-progress": "m", "completion-ring": "m", region: "l",
+  "customers-shipments": "l", "customer-kpi": "m", "followup-buckets": "m", "collection-split": "m",
+};
