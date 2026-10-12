@@ -1,4 +1,5 @@
 "use client";
+import { FitText } from "@/components/screen/FitText";
 import { displayRate } from "@/lib/voice/card-presentation";
 
 import type { AnswerCardData } from "@/lib/voice/session-machine";
@@ -21,7 +22,7 @@ export function MetricRing({ rate, label }: { rate: number; label: string }) {
 export function Metric({ label, value, unit, accent = false }: { label: string; value: string | number; unit?: string; accent?: boolean }) {
   return <div className={`overlay-metric${accent ? " is-accent" : ""}`}>
     <span className="overlay-metric-label">{label}</span>
-    <p className="overlay-metric-number"><strong style={typeof value === "number" && String(value).length >= 8 ? { fontSize: 28 } : undefined}>{value}</strong>{unit ? <em>{unit}</em> : null}</p>
+    <p className="overlay-metric-number num-unit"><strong><FitText text={String(value)} min={28} max={typeof value === "number" ? "var(--ov-fs-metric)" : "var(--ov-fs-money)"}>{value}</FitText></strong>{unit ? <em>{unit}</em> : null}</p>
   </div>;
 }
 

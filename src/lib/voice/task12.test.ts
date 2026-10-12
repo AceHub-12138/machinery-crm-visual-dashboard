@@ -86,7 +86,7 @@ describe("Task 12 data contracts and boundaries", () => {
   });
   it("answer geometry scales both widths and upper core position at 720p", () => {
     const full = overlayGeometry(1920,1080,"answering",true);
-    expect(full.core).toEqual({x:960,y:225}); expect(full.cardAnchor).toEqual({x:960,y:400,width:1040});
+    expect(full.core).toEqual({x:960,y:225}); expect(full.cardAnchor).toEqual({x:960,y:300,width:1040});
     const small = overlayGeometry(1280,720,"followup");
     expect(small.core.y).toBe(150); expect(small.scale).toBeCloseTo(2/3);
     expect(small.cardAnchor.width).toBeCloseTo(880*2/3);

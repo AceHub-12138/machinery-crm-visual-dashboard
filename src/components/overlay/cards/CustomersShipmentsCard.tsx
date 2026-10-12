@@ -1,4 +1,5 @@
 "use client";
+import { ClipText } from "@/components/screen/ClipText";
 import type { AnswerCardData } from "@/lib/voice/session-machine";
 import { cardExcerpt, shipmentPages } from "@/lib/voice/card-presentation";
 export function CustomersShipmentsCard({card, pageIndex}: {card: Extract<AnswerCardData, {kind: "customers-shipments"}>; pageIndex: number}) {
@@ -9,7 +10,7 @@ export function CustomersShipmentsCard({card, pageIndex}: {card: Extract<AnswerC
     <div className="overlay-pages-window"><div className="overlay-pages-track" style={{transform: `translateX(-${activePage * 100}%)`}}>
       {pages.map((rows, p) => <div className="overlay-shipment-page" role="table" aria-label={`发运明细第 ${p + 1} 页`} aria-hidden={p !== activePage} key={p}>
         {rows.map((row, i) => "otherCount" in row ? <div className="overlay-shipment-row overlay-empty" role="row" key="other">其他 {row.otherCount} 项</div> : <div className="overlay-shipment-row" role="row" key={i}>
-          <strong title={row.equipmentText}>{cardExcerpt(row.equipmentText, 24)}</strong><small title={row.detailText}>{cardExcerpt(row.detailText, 10)}</small><span className="overlay-card-chip" title={row.statusText}>{cardExcerpt(row.statusText, 6)}</span><time>{row.dateLabel}</time>
+          <strong title={row.equipmentText}><ClipText full={row.equipmentText}>{cardExcerpt(row.equipmentText, 24)}</ClipText></strong><small title={row.detailText}><ClipText full={row.detailText}>{cardExcerpt(row.detailText, 10)}</ClipText></small><span className="overlay-card-chip" title={row.statusText}><ClipText full={row.statusText}>{cardExcerpt(row.statusText, 6)}</ClipText></span><time>{row.dateLabel}</time>
         </div>)}
         {rows.length === 0 ? <p className="overlay-empty">暂无发运明细</p> : null}
       </div>)}

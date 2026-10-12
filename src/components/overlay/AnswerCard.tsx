@@ -1,6 +1,7 @@
 "use client";
 
 import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { ClipText } from "@/components/screen/ClipText";
 import { cardExcerpt, cardFollowups, shipmentPages, shipmentPageAt, displaySpoken } from "@/lib/voice/card-presentation";
 import { buildSpokenSentences } from "@/lib/voice/spoken-normalize";
 import {
@@ -216,11 +217,11 @@ export const AnswerCard = memo(function AnswerCard({
           <i className="overlay-card-corner overlay-card-corner-bl" />
           <i className="overlay-card-corner overlay-card-corner-br" />
         </div>
-        <header className="overlay-card-header">{audioNotice ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}<h2 className="overlay-card-title" title={card.title}>{cardExcerpt(card.title, 24)}</h2>
-          <p className="overlay-card-subtitle" title={"summaryText" in card ? card.summaryText : undefined}>{"summaryText" in card ? cardExcerpt(card.summaryText, 40) : card.kind === "brief" ? "小川 · 为您服务" : "经营数据总览"}</p>
+        <header className="overlay-card-header">{audioNotice ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}<h2 className="overlay-card-title" title={card.title}><ClipText full={card.title}>{cardExcerpt(card.title, 24)}</ClipText></h2>
+          <p className="overlay-card-subtitle" title={"summaryText" in card ? card.summaryText : undefined}>{"summaryText" in card ? <ClipText full={card.summaryText}>{cardExcerpt(card.summaryText, 40)}</ClipText> : card.kind === "brief" ? "小川 · 为您服务" : "经营数据总览"}</p>
         </header>
         {card.kind !== "brief" ? <div className="overlay-card-data">{renderCardTemplate(card, { barFillRef, launchAt, pageIndex })}</div> : null}
-        <section className="overlay-spoken-section" aria-label="小川播报"><h3><span aria-hidden="true">✦</span> 小川播报</h3><p className="overlay-card-spoken"><span ref={spokenRef} /></p></section>
+        <section className="overlay-spoken-section" aria-label="小川播报"><h3><span aria-hidden="true">✦</span> 小川播报</h3><p className="overlay-card-spoken" title={displaySpoken(card.spoken)}><span ref={spokenRef} /></p></section>
         <div className="overlay-followups">{followups.length ? <><span className="overlay-followups-label">{card.kind === "brief" ? "您可以问我：" : "可继续追问："}</span>{followups.map(q => <span key={q}>{q}</span>)}</> : null}</div>
       </div>
     </div>
