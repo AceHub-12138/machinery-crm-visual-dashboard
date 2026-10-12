@@ -19,6 +19,7 @@ import {
   type AnswerCardData,
   type VoiceEvent,
   type VoiceStateName,
+  type VoicePresentationReason,
   type VoiceSessionState,
 } from "@/lib/voice/session-machine";
 import { PausableDeadline } from "@/lib/voice/deadline";
@@ -52,7 +53,11 @@ import type { PublicScreenPayload } from "@/lib/public-screen-payload";
 
 type Phase = "off" | "enter" | "on" | "exit";
 
-const STATUS: Partial<Record<VoiceStateName, { en: string; zh: string }>> = {
+const STATUS: Partial<Record<VoiceStateName | VoicePresentationReason, { en: string; zh: string }>> = {
+  "no-data": { en: "No Data", zh: "暂无数据" },
+  offline: { en: "Offline", zh: "网络中断" },
+  "asr-miss": { en: "Pardon", zh: "没听清" },
+  interrupted: { en: "Interrupted", zh: "已打断" },
   waking: { en: "Waking", zh: "唤醒中" },
   listening: { en: "Listening", zh: "聆听中" },
   thinking: { en: "Thinking", zh: "思考中" },
@@ -374,6 +379,7 @@ export function OverlayStage({
       if (event.type === "state.change" && ["thinking", "closing", "error-fallback"].includes(event.to)) { micRef.current?.setListen(null); frameRef.current.listenClock = null; }
       if (event.type === "answer.delta" && event.full) speechRef.current = event.speech ?? null;
       if (event.type === "speech.fixed") {
+        if (event.speech.fixed === "unheard") dispatchTracked({ type: "PRESENTATION_REASON", reason: "asr-miss", at: performance.now() });
         if (!ownsSessionRef.current) return;
         frameRef.current.listenClock = null; setPromptCaption(event.text);
         const id = event.speech.turnId; fixedIdRef.current = id;
@@ -396,6 +402,8 @@ export function OverlayStage({
           dispatchTracked({ ...machineEvent, at: performance.now() } as VoiceEvent);
         }
       }
+      if (event.type === "state.change" && event.reason) dispatchTracked({ type: "PRESENTATION_REASON", reason: event.reason, at: performance.now() });
+      if (event.type === "state.change" && event.to === "answering" && speechRef.current?.fixed === "unheard") dispatchTracked({ type: "PRESENTATION_REASON", reason: "asr-miss", at: performance.now() });
     };
 
     // 令牌:#hubToken= 优先(读后写入 sessionStorage 并从地址栏抹掉),否则取 sessionStorage
@@ -449,6 +457,7 @@ export function OverlayStage({
         for (const machineEvent of connectionLostEvents(mirrorRef.current.name)) {
           dispatchTracked({ ...machineEvent, at: performance.now() } as VoiceEvent);
         }
+        if (mirrorRef.current.name !== "ambient") dispatchTracked({ type: "PRESENTATION_REASON", reason: "offline", at: performance.now() });
         if (e.code === 4401) {
           console.warn("[overlay] hub 令牌无效");
           return;
@@ -524,7 +533,7 @@ export function OverlayStage({
             ? DEMO_LINES.fallback
             : null;
   const captionDim = session.name === "listening" && !session.partial;
-  const statusNow = STATUS[session.name];
+  const statusNow = STATUS[session.reason ?? session.name];
 
   if (phase === "off") return null;
 
@@ -534,21 +543,21 @@ export function OverlayStage({
 
       <div key={session.name} className="overlay-caption-block overlay-caption-appear">
         {statusNow ? (
-          <p className="overlay-status">
+          <p className="overlay-status" data-tone={session.reason || session.name === "error-fallback" ? "warn" : "normal"}>
             <span className="overlay-en">{bargePaused ? "Listening" : statusNow.en}</span>
             <span aria-hidden="true">{bargePaused ? "聆听中" : statusNow.zh}</span>
           </p>
         ) : null}
+        {audioNotice && !session.card ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}
         {captionText ? (
           <p className={`overlay-partial${captionDim ? " overlay-partial-idle" : ""}`}>{captionText}</p>
         ) : null}
       </div>
 
-      {audioNotice ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}
-
       {session.card ? (
         <AnswerCard
           card={session.card}
+          audioNotice={audioNotice}
           launchAt={launchAt}
           geometry={geometry}
           foldAt={session.name === "closing" ? session.since : null}

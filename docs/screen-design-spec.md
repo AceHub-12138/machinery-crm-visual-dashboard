@@ -409,3 +409,5 @@ Playwright 验证 1920×1080 面板位置/尺寸、1280×720 完整缩放、公�
 参考：https://playwright.dev/docs/test-snapshots 、https://playwright.dev/docs/test-webserver 。
 
 P0 共用基础：正文 20/18px 令牌按舞台缩放补偿，金额拆分不改数值，缩字有下限，省略同时保留读屏全文。
+
+P0-1：新增展示原因，不新增会话状态或修改原有流转；断网/没听清/打断分别表达，无数据不得由零金额推断。

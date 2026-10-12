@@ -53,6 +53,7 @@ export type VoiceWireEvent =
       turn: number;
       /** to === "thinking" 时携带最终问题(大屏不依赖,对话台展示用) */
       question?: string;
+      reason?: import("./session-machine").VoicePresentationReason;
     }
   | { type: "asr.partial"; at: number; text: string; final: boolean }
   | {
@@ -223,6 +224,7 @@ export function parseWireEvent(raw: unknown): VoiceWireEvent | null {
     case "session.start":
       return typeof ev.sessionId === "string" && ev.sessionId.length > 0 && (ev.screenId === undefined || (typeof ev.screenId === "string" && /^[a-f0-9-]{36}$/.test(ev.screenId))) ? ev : null;
     case "state.change":
+      if (ev.reason !== undefined && !["no-data", "offline", "asr-miss", "interrupted"].includes(ev.reason)) return null;
       return typeof ev.from === "string" && typeof ev.to === "string" && typeof ev.turn === "number"
         ? ev
         : null;

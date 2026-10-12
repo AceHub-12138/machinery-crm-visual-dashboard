@@ -109,7 +109,10 @@ export type AnswerCardData =
       spoken: string;
     };
 
+export type VoicePresentationReason = "no-data" | "offline" | "asr-miss" | "interrupted";
+
 export type VoiceSessionState = {
+  reason?: VoicePresentationReason;
   name: VoiceStateName;
   /** 进入当前状态的时刻(ms)。自环事件(PARTIAL)不刷新。 */
   since: number;
@@ -129,6 +132,7 @@ export type VoiceSessionState = {
 };
 
 export type VoiceEvent =
+  | { type: "PRESENTATION_REASON"; at: number; reason?: VoicePresentationReason }
   | { type: "WAKE"; at: number } // 唤醒词命中(或 F9 运维后备)
   | { type: "WOKEN"; at: number } // waking 成型动画结束(~900ms)
   | { type: "PARTIAL"; at: number; text: string } // ASR 中间结果(自环)
@@ -174,6 +178,8 @@ export function initSessionState(now = 0): VoiceSessionState {
 export function sessionReducer(state: VoiceSessionState, event: VoiceEvent): VoiceSessionState {
   const at = event.at;
   switch (event.type) {
+    case "PRESENTATION_REASON":
+      return { ...state, reason: event.reason };
     case "WAKE":
       if (state.name !== "ambient") return state;
       return { ...initSessionState(at), cycles: state.cycles, name: "waking", since: at };
@@ -184,11 +190,11 @@ export function sessionReducer(state: VoiceSessionState, event: VoiceEvent): Voi
 
     case "PARTIAL":
       if (state.name !== "listening") return state;
-      return { ...state, partial: event.text }; // 自环:since 不变,呼吸相位连续
+      return { ...state, reason: undefined, partial: event.text }; // 自环:since 不变,呼吸相位连续
 
     case "SUBMIT":
       if (state.name !== "listening") return state;
-      return { ...state, name: "thinking", since: at, question: event.question, partial: null };
+      return { ...state, name: "thinking", reason: undefined, since: at, question: event.question, partial: null };
 
     case "THINKING_VOICE":
       if (state.name !== "thinking") return state;
@@ -202,6 +208,7 @@ export function sessionReducer(state: VoiceSessionState, event: VoiceEvent): Voi
         since: at,
         card: event.card,
         spoken: event.card.spoken,
+        reason: undefined,
         turns: state.turns + 1,
       };
 
@@ -211,11 +218,11 @@ export function sessionReducer(state: VoiceSessionState, event: VoiceEvent): Voi
 
     case "BARGE_IN":
       if (state.name !== "answering") return state;
-      return { ...state, name: "listening", since: at, card: null, spoken: null, partial: null };
+      return { ...state, name: "listening", reason: "interrupted", since: at, card: null, spoken: null, partial: null };
 
     case "SPEAK":
       if (state.name !== "followup") return state;
-      return { ...state, name: "listening", since: at, card: null, spoken: null, partial: null };
+      return { ...state, name: "listening", reason: undefined, since: at, card: null, spoken: null, partial: null };
 
     case "DECLINE":
     case "FOLLOWUP_TIMEOUT":
