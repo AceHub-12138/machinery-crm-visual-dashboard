@@ -77,7 +77,7 @@ describe("overlayGeometry(§5 落位)", () => {
     const g = overlayGeometry(1920, 1080);
     expect(g.core).toEqual({ x: 960, y: 470 });
     expect(g.cardAnchor.x).toBe(960);
-    expect(g.cardAnchor.y).toBe(400);
+    expect(g.cardAnchor.y).toBe(300);
     expect(g.cardAnchor.width).toBe(880);
     expect(coreRadiusFor(1920, 1080)).toBeCloseTo(150.12, 1);
   });

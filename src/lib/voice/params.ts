@@ -71,8 +71,8 @@ export function approach(current: number, target: number, dtMs: number, tauMs: n
 
 /** 核心落位 (960, 470) @1920×1080(plan §5),按视口比例换算。 */
 export const CORE_RATIO = { x: 0.5, y: 470 / 1080 };
-/** Task 12: card top at y=400, height at most 620, standard/wide widths 880/1040. */
-export const CARD_ANCHOR_Y_RATIO = 400 / 1080;
+/** Design polish: card top at y=300, height at most 720, standard/wide widths 880/1040. */
+export const CARD_ANCHOR_Y_RATIO = 300 / 1080;
 export const CARD_WIDTH = 880;
 
 export type OverlayGeometry = {

@@ -1,6 +1,7 @@
 "use client";
+import { ClipText } from "@/components/screen/ClipText";
 import type { AnswerCardData } from "@/lib/voice/session-machine";
-import { chinaMap, createScreenArc, mapBBox, projectLonLat } from "@/lib/geo";
+import { chinaMap, provinceShortName, createScreenArc, mapBBox, projectLonLat } from "@/lib/geo";
 import { cardExcerpt } from "@/lib/voice/card-presentation";
 /** Same map and projection as ShipmentMap; no separate map dependency. */
 export function RegionCard({card}: {card: Extract<AnswerCardData, {kind: "region"}>}) {
@@ -10,7 +11,7 @@ export function RegionCard({card}: {card: Extract<AnswerCardData, {kind: "region
     <div className="overlay-region-ranking" role="table" aria-label="区域发运排行">
       <div className="overlay-region-head"><span>排名 / 省份</span><span>发运量 · 占比</span></div>
       {card.rows.slice(0, 5).map((row, i) => <div className="overlay-region-row" role="row" key={row.region}>
-        <i className="overlay-rank">{i + 1}</i><span className="overlay-region-name" title={row.region}>{cardExcerpt(row.region, 6)}</span>
+        <i className="overlay-rank">{i + 1}</i><span className="overlay-region-name" title={row.region}><ClipText full={row.region}>{cardExcerpt(provinceShortName(row.region), 6)}</ClipText></span>
         <span className="overlay-card-row-mini" aria-hidden="true"><i style={{width: `${(card.rows[0]?.units ? Math.min(100, row.units / card.rows[0].units * 100) : 0)}%`}} /></span>
         <span className="overlay-region-value"><strong>{row.units}</strong> 台 / {row.shipments} 单</span><em>{row.sharePercent.toFixed(1)}%</em>
       </div>)}

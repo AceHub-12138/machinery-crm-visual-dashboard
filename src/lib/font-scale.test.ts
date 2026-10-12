@@ -112,5 +112,19 @@ describe("font scale", () => {
     }
     expect(bare).toEqual([]);
   });
+  it("rejects subminimum font declarations in every CSS and TSX file", () => {
+    const offenders: string[] = [];
+    for (const file of walk(SRC).filter(f => /\.(css|tsx)$/.test(f))) {
+      const text = readFileSync(file, "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+      const floor = file.includes("/overlay/") ? 20 : 18;
+      for (const m of text.matchAll(/(?:font-size:\s*|fontSize:\s*|fontSize=\{)(\d+(?:\.\d+)?)/g)) {
+        if (Number(m[1]) < floor) offenders.push(`${path.relative(SRC,file)}: ${m[0]}`);
+      }
+      for (const m of text.matchAll(/(--(?:ov-)?fs-[a-z-]+):\s*(?:calc\()?([\d.]+)px/g)) {
+        if (m[1] !== "--fs-kicker" && Number(m[2]) < floor) offenders.push(`${path.relative(SRC,file)}: ${m[0]}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
 
 });

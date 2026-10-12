@@ -34,13 +34,13 @@ async function bounds(page:Page) {
   return page.locator(".overlay-card").evaluate(el => {
     const rect=el.getBoundingClientRect();
     const spills=Array.from(el.querySelectorAll<HTMLElement>("*"))
-      .filter(node=>!(node instanceof SVGElement) && node.textContent?.trim() && node.childElementCount===0)
+      .filter(node=>!node.closest(".sr-only") && !(node instanceof SVGElement) && node.textContent?.trim() && node.childElementCount===0)
       .filter(node=>node.scrollWidth>node.clientWidth+1)
       .map(node=>({class:node.className,text:node.textContent?.slice(0,40),scroll:node.scrollWidth,client:node.clientWidth}));
     const sections=Array.from(el.querySelectorAll<HTMLElement>(".overlay-card-header,.overlay-card-data,.overlay-spoken-section,.overlay-followups")).map(node=>({class:node.className,y:node.getBoundingClientRect().y,bottom:node.getBoundingClientRect().bottom,height:node.getBoundingClientRect().height}));
     const data=el.querySelector(".overlay-card-data")?.getBoundingClientRect();
     const dataSpills=data ? Array.from(el.querySelectorAll<HTMLElement>(".overlay-card-data *"))
-      .filter(node=>!(node instanceof SVGElement) && node.textContent?.trim() && node.childElementCount===0)
+      .filter(node=>!node.closest(".sr-only") && !(node instanceof SVGElement) && node.textContent?.trim() && node.childElementCount===0)
       .filter(node=>{const r=node.getBoundingClientRect();return r.y<data.y-1 || r.bottom>data.bottom+1;})
       .map(node=>({class:node.className,text:node.textContent?.slice(0,40)})) : [];
     return {x:rect.x,y:rect.y,width:rect.width,height:rect.height,bottom:rect.bottom,spills,dataSpills,sections};
@@ -57,9 +57,9 @@ for (const viewport of [{width:1920,height:1080},{width:1280,height:720}]) {
       expect(measured.spills).toEqual([]);
       expect(measured.dataSpills).toEqual([]);
       for(const section of measured.sections) expect(section.bottom).toBeLessThanOrEqual(measured.bottom+1);
-      expect(measured.bottom - measured.sections.find(s=>s.class==="overlay-followups")!.bottom).toBeGreaterThanOrEqual((card.kind === "brief" ? 35 : 59)*viewport.height/1080);
-      expect(measured.sections.find(s=>s.class==="overlay-spoken-section")!.height).toBeCloseTo(150*viewport.height/1080,0);
-      if(card.kind!=="brief")expect(measured.sections.find(s=>s.class==="overlay-card-data")!.height).toBeCloseTo(230*viewport.height/1080,0);
+      expect(measured.bottom - measured.sections.find(s=>s.class==="overlay-followups")!.bottom).toBeGreaterThanOrEqual((card.kind === "brief" ? 35 : 71)*viewport.height/1080);
+      expect(measured.sections.find(s=>s.class==="overlay-spoken-section")!.height).toBeCloseTo(170*viewport.height/1080,0);
+      if(card.kind!=="brief")expect(measured.sections.find(s=>s.class==="overlay-card-data")!.height).toBeCloseTo(270*viewport.height/1080,0);
       expect(await page.locator(".overlay-card-body").count()).toBe(1);
       expect(await page.locator(".overlay-card-spoken").count()).toBe(1);
       if(card.kind==="region")expect(await page.locator(".overlay-map-point").count()).toBe(card.mapPoints?.length);
