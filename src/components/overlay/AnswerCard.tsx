@@ -2,6 +2,7 @@
 
 import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { ClipText } from "@/components/screen/ClipText";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { cardExcerpt, cardFollowups, shipmentPages, shipmentPageAt, displaySpoken } from "@/lib/voice/card-presentation";
 import { buildSpokenSentences } from "@/lib/voice/spoken-normalize";
 import {
@@ -51,6 +52,7 @@ export const AnswerCard = memo(function AnswerCard({
   sentenceVersion?: number;
   sentenceRef?: RefObject<{ start: number; end: number } | null>;
 }) {
+  const reduced = useReducedMotion();
   const announcedRef = useRef<{ card: AnswerCardData | null; index: number }>({card:null,index:-1});
   const liveRef = useRef<HTMLParagraphElement>(null);
   const lineRef = useRef<HTMLDivElement | null>(null);
@@ -124,7 +126,7 @@ export const AnswerCard = memo(function AnswerCard({
 
       /* §5 退场第一步:折叠吸回核心(200ms)——发射编排的逆过程;
          完成后停帧,覆盖层淡出接管余下的退场 */
-      if (foldAt != null) {
+      if (foldAt != null && !reduced) {
         const fp = foldProgress(now - foldAt);
         const inv = 1 - easeInOutCubic(fp);
         line.style.transform = `scaleX(${inv})`;
@@ -138,7 +140,7 @@ export const AnswerCard = memo(function AnswerCard({
         return;
       }
 
-      const elapsed = now - launchAt;
+      const elapsed = reduced ? config.unfoldStartMs + config.unfoldMs + card.spoken.length / config.typeCps * 1000 : now - launchAt;
       const ph = launchPhase(elapsed, config);
       const u = ph.unfold;
 
@@ -173,7 +175,7 @@ export const AnswerCard = memo(function AnswerCard({
       /* ④⑤ 打字机 + 高亮(8a 近似:金额/文案一体逐字;8b 起全模板通用) */
       {
         const active = sentenceRef?.current;
-        const typed = Math.max(typedChars(card.spoken, ph.typingMs, config.typeCps), active?.end ?? 0);
+        const typed = reduced ? card.spoken.length : Math.max(typedChars(card.spoken, ph.typingMs, config.typeCps), active?.end ?? 0);
         const highlight = active ? `${active.start}:${active.end}` : "";
         if (typed !== lastTyped || highlight !== lastHighlight) {
           lastTyped = typed; lastHighlight = highlight;
@@ -198,12 +200,13 @@ export const AnswerCard = memo(function AnswerCard({
       raf = requestAnimationFrame(paint);
     };
 
-    raf = requestAnimationFrame(paint);
+    if (reduced) paint(performance.now());
+    else raf = requestAnimationFrame(paint);
     return () => {
       disposed = true;
       cancelAnimationFrame(raf);
     };
-  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion]);
+  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion, reduced]);
 
   const anchor = geometry.cardAnchor;
 

@@ -252,3 +252,5 @@
 
 .overlay-root :where(div, p, span, strong, small, em, section, header) { min-width: 0; min-height: 0; }
 .overlay-card-body { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) { .overlay-root, .overlay-root * { animation: none !important; transition-duration: 0ms !important; } }
