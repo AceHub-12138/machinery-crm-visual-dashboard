@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { JarvisCore } from "@/components/overlay/JarvisCore";
 import { AnswerCard } from "@/components/overlay/AnswerCard";
 import "./overlay.css";
@@ -81,6 +82,7 @@ export function OverlayStage({
   /** live 模式 hub 地址(缺省同主机 3210) */
   hubUrl?: string;
 }) {
+  const reduced = useReducedMotion();
   const payloadRef = useRef(payload);
   useEffect(() => { payloadRef.current = payload; }, [payload]);
   const [session, dispatch] = useReducer(sessionReducer, undefined, () => initSessionState());
@@ -154,13 +156,14 @@ export function OverlayStage({
         frameRef.current.geometry = { ...g, core: { x: lerp(from.x, g.core.x, easeInOutCubic(p)), y: lerp(from.y, g.core.y, easeInOutCubic(p)) } };
         if (p < 1) raf = requestAnimationFrame(paint);
       };
-      raf = requestAnimationFrame(paint);
+      if (reduced) frameRef.current.geometry = g;
+      else raf = requestAnimationFrame(paint);
       setGeometry(g);
     };
     apply();
     window.addEventListener("resize", apply);
     return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", apply); };
-  }, [session.name, session.card?.kind]);
+  }, [session.name, session.card?.kind, reduced]);
 
   /* ---- 状态机 → 画布快照(名字/相位/振幅源/折叠起点) ---- */
   useEffect(() => {
@@ -172,6 +175,13 @@ export function OverlayStage({
     frameRef.current.foldAt = session.name === "closing" ? session.since : null;
     if (session.name !== "answering") frameRef.current.launchAt = null;
   }, [session.name, session.since, driver, bargePaused]);
+
+  // Audio diagnostics must remain live when the particle renderer is static.
+  useEffect(() => {
+    if (!reduced || driver !== "live" || session.name === "ambient") return;
+    const timer = window.setInterval(() => { frameRef.current.amplitude(performance.now()); }, 50);
+    return () => window.clearInterval(timer);
+  }, [reduced, driver, session.name]);
 
   /* ---- 驱动器:每个状态排一个动作序列,转移即换排 ----
      demo:全流程脚本化;live:播完和追问倒计时由hub统一驱动,
@@ -540,7 +550,7 @@ export function OverlayStage({
 
   return (
     <div className="overlay-root" data-phase={phase} data-has-card={session.card !== null} data-barge-paused={bargePaused}>
-      <JarvisCore frameRef={frameRef} quality={lite ? "lite" : "high"} />
+      <JarvisCore reduced={reduced} stateKey={session.name} frameRef={frameRef} quality={lite ? "lite" : "high"} />
 
       <div key={session.name} className="overlay-caption-block overlay-caption-appear">
         {statusNow ? (

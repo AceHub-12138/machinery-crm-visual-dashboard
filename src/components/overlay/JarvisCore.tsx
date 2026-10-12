@@ -79,21 +79,26 @@ type Spark = {
 /* memo:回放器每 130ms 的 PARTIAL 自环不应触发画布组件重渲染 */
 export const JarvisCore = memo(function JarvisCore({
   frameRef,
+  reduced = false,
+  stateKey,
   quality = "high",
 }: {
   frameRef: React.RefObject<VoiceFrame>;
+  reduced?: boolean;
+  stateKey?: string;
   /** lite=强制降级档(&lite=1,软件渲染环境预览演示用) */
   quality?: "high" | "lite";
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  const staticState = reduced ? stateKey : undefined;
   useEffect(() => {
+    void staticState;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     /* ---- 背景缓存:渐隐拖尾用的近黑,预解析成 rgba 字符串 ---- */
     const bgFade = (() => {
@@ -244,6 +249,7 @@ export const JarvisCore = memo(function JarvisCore({
       });
     };
 
+    let repaintStatic = () => {};
     const resize = () => {
       dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP) * RESOLUTION_SCALE * qualityScale;
       canvas.width = Math.round(window.innerWidth * dpr);
@@ -253,6 +259,7 @@ export const JarvisCore = memo(function JarvisCore({
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
       buildGlow(coreRadiusFor(window.innerWidth, window.innerHeight));
       buildAmbientTiles();
+      if (reduced) repaintStatic();
     };
     resize();
     window.addEventListener("resize", resize);
@@ -285,10 +292,10 @@ export const JarvisCore = memo(function JarvisCore({
 
     const loop = (now: number) => {
       if (disposed) return;
-      raf = requestAnimationFrame(loop);
+      if (!reduced) raf = requestAnimationFrame(loop);
 
       const frame = frameRef.current;
-      const dt = Math.min(0.064, (now - last) / 1000);
+      const dt = reduced ? 1 : Math.min(0.064, (now - last) / 1000);
       last = now;
 
       const g = frame.geometry;
@@ -306,6 +313,7 @@ export const JarvisCore = memo(function JarvisCore({
 
       /* A1:标量滑行(τ 按感知调);发射时序与倒计时数值保持精确不平滑 */
       const dtMs = dt * 1000;
+      if (reduced) Object.assign(smooth, target, { formation: 1, brightness: 1 });
       smooth.coreRadius = approach(smooth.coreRadius, target.coreRadius, dtMs, 220);
       smooth.brightness = approach(smooth.brightness, target.brightness, dtMs, 260);
       smooth.ringAlpha = approach(smooth.ringAlpha, target.ringAlpha, dtMs, 320);
@@ -693,13 +701,14 @@ export const JarvisCore = memo(function JarvisCore({
       coreHalf = quality === "lite" || costEma > FRAME_BUDGET_MS * 1.5;
     };
 
+    repaintStatic = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); };
     raf = requestAnimationFrame(loop);
     return () => {
       disposed = true;
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
-  }, [frameRef, quality]);
+  }, [frameRef, quality, reduced, staticState]);
 
   return <canvas ref={canvasRef} className="overlay-canvas" aria-hidden="true" />;
 });
