@@ -1,0 +1,1829 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/node_modules/@playwright/test/cli.js",
+      "test",
+      "e2e/visual-acceptance.spec.ts",
+      "e2e/text-fit.spec.ts",
+      "e2e/screen-data-reconcile.spec.ts",
+      "e2e/screen.spec.ts",
+      "e2e/reminders.spec.ts",
+      "e2e/milestones.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/playwright.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm exec next start --hostname 127.0.0.1 --port 3017",
+      "url": "http://127.0.0.1:3017/screen/sales",
+      "reuseExistingServer": false,
+      "env": {
+        "TZ": "Asia/Shanghai"
+      },
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "milestones.spec.ts",
+      "file": "milestones.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "12 deliveries paginate evenly across a 112px timeline without losing rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 471,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:37.448Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ab2f9f75384c88771f76-9475b0f38bd7fba33690",
+          "file": "milestones.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "reminders.spec.ts",
+      "file": "reminders.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "reminder pages reduce",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 266,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:38.071Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "aa75b1db4695422e71e4-f947e10184b7a26ddef3",
+          "file": "reminders.spec.ts",
+          "line": 4,
+          "column": 59
+        },
+        {
+          "title": "reminder pages no-preference",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 335,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:38.343Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "aa75b1db4695422e71e4-80fa0288d7d2904e2d42",
+          "file": "reminders.spec.ts",
+          "line": 4,
+          "column": 59
+        }
+      ]
+    },
+    {
+      "title": "screen-data-reconcile.spec.ts",
+      "file": "screen-data-reconcile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "missing targets and rates above 999 remain valid visible cards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:38.694Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "639d4a450ce42638395d-d2c0597beefe51a52739",
+          "file": "screen-data-reconcile.spec.ts",
+          "line": 32,
+          "column": 1
+        },
+        {
+          "title": "unresolved regions and full totals fit both viewports while points stay samples",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 718,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:39.392Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "639d4a450ce42638395d-c7e3ebd5da3ede3559c5",
+          "file": "screen-data-reconcile.spec.ts",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "shipment page freezes at playback end instead of resetting or cycling",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5282,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:40.115Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "639d4a450ce42638395d-549bc5af43f1923f4166",
+          "file": "screen-data-reconcile.spec.ts",
+          "line": 70,
+          "column": 1
+        },
+        {
+          "title": "negative amount, count and units retain a visible pending card and safe speech",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 702,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:45.403Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "639d4a450ce42638395d-2dfb42a9d2c327c68bf9",
+          "file": "screen-data-reconcile.spec.ts",
+          "line": 81,
+          "column": 1
+        },
+        {
+          "title": "negative metrics stay pending after a screen refresh at both sizes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:46.109Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "639d4a450ce42638395d-c3a0584a9e39ac41c66c",
+          "file": "screen-data-reconcile.spec.ts",
+          "line": 102,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "screen.spec.ts",
+      "file": "screen.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "1920×1080 面板尺寸、间距和首屏内容回归",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 455,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:48.757Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6bf18f613c0dfb1d8e04-5ef4160e90142dde92a3",
+          "file": "screen.spec.ts",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "公开 API 与首屏 HTML 不携带客户、跟进、业务员及详细地址",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 57,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:49.218Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6bf18f613c0dfb1d8e04-77a154f2f6f0e690903b",
+          "file": "screen.spec.ts",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "列宽改变 5px 会被几何验收发现",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 214,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:49.281Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6bf18f613c0dfb1d8e04-3b767105ddadaae8e55a",
+          "file": "screen.spec.ts",
+          "line": 33,
+          "column": 1
+        },
+        {
+          "title": "1280×720 自适应保持完整画布",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 186,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:49.499Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6bf18f613c0dfb1d8e04-c83d0c55c7427e285945",
+          "file": "screen.spec.ts",
+          "line": 40,
+          "column": 1
+        },
+        {
+          "title": "China occupies at least 75% of map width and lower-right HUD stays within 22%",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 171,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:49.689Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6bf18f613c0dfb1d8e04-11b350d74e24258d50cd",
+          "file": "screen.spec.ts",
+          "line": 50,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "text-fit.spec.ts",
+      "file": "text-fit.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "1280 base content has no clipping or overlapping panels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 177,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:49.868Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-a09d9d92885c1a1939ad",
+          "file": "text-fit.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "1280 long strings amount 987654321",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 215,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:50.049Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-4f42ac5ee29d85657cd0",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "1280 long strings amount 123456789.5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 213,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:50.268Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-b6fbaef9dbd2005f970f",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "1280 long strings amount 0",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 210,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:50.488Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-0a2b2d15780223f3d0ba",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "1280 long strings amount -1234567",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 213,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:50.703Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-a4d91b8d8109acb14314",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "1920 base content has no clipping or overlapping panels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 452,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:50.920Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-cc438cbcfb423e246270",
+          "file": "text-fit.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "1920 long strings amount 987654321",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 232,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:51.377Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-77433d9deed8dbe233c6",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "1920 long strings amount 123456789.5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 238,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:51.615Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-a47ed1aec46b23d11c3e",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "1920 long strings amount 0",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 237,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:51.858Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-35246fdc267b1bdb2b3d",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "1920 long strings amount -1234567",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 244,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:52.099Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-8a8dc485693d269e69d8",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "3840 base content has no clipping or overlapping panels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 186,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:52.347Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-fdb46384d18f1f1de80f",
+          "file": "text-fit.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "3840 long strings amount 987654321",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 439,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:52.539Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-cb0c979f7ec5685cb8cc",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "3840 long strings amount 123456789.5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 444,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:52.982Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-665715ceb600dc322b65",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "3840 long strings amount 0",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 443,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:53.432Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-d26d51dc5cf4b8107a52",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "3840 long strings amount -1234567",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 432,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:53.881Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-806d9f1f4f214e988467",
+          "file": "text-fit.spec.ts",
+          "line": 13,
+          "column": 59
+        },
+        {
+          "title": "audit detects visible, inline and fixed overflow; accepts only compensated clipping",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:54.318Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-351f414616b4509ef721",
+          "file": "text-fit.spec.ts",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "audit detects a panel overlap without changing its size assertion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 187,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:54.487Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24f37a88f91b3191fa39-84af8f9c511aa6b98730",
+          "file": "text-fit.spec.ts",
+          "line": 39,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "visual-acceptance.spec.ts",
+      "file": "visual-acceptance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unsupported answer uses a warning and one service title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 619,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:54.687Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-b3101e7513d2e28508ca",
+          "file": "visual-acceptance.spec.ts",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "title": "large next-step guide no-data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 444,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:55.320Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-5bc0894b7163fc3d8727",
+          "file": "visual-acceptance.spec.ts",
+          "line": 26,
+          "column": 52
+        },
+        {
+          "title": "large next-step guide offline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 439,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:55.770Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-013f64c295ebb1870650",
+          "file": "visual-acceptance.spec.ts",
+          "line": 26,
+          "column": 52
+        },
+        {
+          "title": "intact words and full two-line titles 1280",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5381,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n\n    at show (/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:17:368)\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:49:9",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                      "column": 368,
+                      "line": 17
+                    },
+                    "snippet": "  15 | test.afterAll(async()=>{await hub.close();});\n  16 | async function open(page:Page){await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);await expect.poll(()=>hub.counts().screens).toBe(1);await page.mouse.click(40,40);hub.broadcast({type:\"session.start\",at:Date.now(),sessionId:\"visual-check\"});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"waking\",to:\"listening\",turn:0});await expect(page.locator(\".overlay-root\")).toHaveAttribute(\"data-phase\",\"on\");}\n> 17 | async function show(page:Page,card:AnswerCardData){hub.broadcast({type:\"state.change\",at:Date.now(),from:\"listening\",to:\"thinking\",turn:0});hub.broadcast({type:\"answer.delta\",at:Date.now(),seq:0,text:card.spoken,full:true,card});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"thinking\",to:\"answering\",turn:0});await expect(page.locator(\".overlay-card-body\")).toHaveAttribute(\"data-spoken-complete\",\"true\");await expect(page.locator(\".overlay-card-title\")).toHaveAttribute(\"data-measured\",\"true\");await expect(page.locator(\".overlay-card-spoken\")).toHaveAttribute(\"data-measured\",\"true\");await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));}\n     |                                                                                                                                                                                                                                                                                                                                                                                ^\n  18 | test(\"unsupported answer uses a warning and one service title\",async({page})=>{\n  19 |   await open(page);const card=buildIntentAnswer(\"unanswerable\",validatePublicPayload(fixture)).card;await show(page,card);\n  20 |   await expect(page.locator(\".overlay-status\")).toHaveAttribute(\"data-tone\",\"warn\");await expect(page.locator(\".overlay-en\")).toHaveText(\"Unsupported\");await expect(page.locator(\".overlay-status\")).not.toContainText(\"播报中\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                        "column": 368,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n\n\n  15 | test.afterAll(async()=>{await hub.close();});\n  16 | async function open(page:Page){await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);await expect.poll(()=>hub.counts().screens).toBe(1);await page.mouse.click(40,40);hub.broadcast({type:\"session.start\",at:Date.now(),sessionId:\"visual-check\"});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"waking\",to:\"listening\",turn:0});await expect(page.locator(\".overlay-root\")).toHaveAttribute(\"data-phase\",\"on\");}\n> 17 | async function show(page:Page,card:AnswerCardData){hub.broadcast({type:\"state.change\",at:Date.now(),from:\"listening\",to:\"thinking\",turn:0});hub.broadcast({type:\"answer.delta\",at:Date.now(),seq:0,text:card.spoken,full:true,card});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"thinking\",to:\"answering\",turn:0});await expect(page.locator(\".overlay-card-body\")).toHaveAttribute(\"data-spoken-complete\",\"true\");await expect(page.locator(\".overlay-card-title\")).toHaveAttribute(\"data-measured\",\"true\");await expect(page.locator(\".overlay-card-spoken\")).toHaveAttribute(\"data-measured\",\"true\");await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));}\n     |                                                                                                                                                                                                                                                                                                                                                                                ^\n  18 | test(\"unsupported answer uses a warning and one service title\",async({page})=>{\n  19 |   await open(page);const card=buildIntentAnswer(\"unanswerable\",validatePublicPayload(fixture)).card;await show(page,card);\n  20 |   await expect(page.locator(\".overlay-status\")).toHaveAttribute(\"data-tone\",\"warn\");await expect(page.locator(\".overlay-en\")).toHaveText(\"Unsupported\");await expect(page.locator(\".overlay-status\")).not.toContainText(\"播报中\");\n    at show (/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:17:368)\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:49:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:41:56.214Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1280/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1280/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1280/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                    "column": 368,
+                    "line": 17
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-7c939e0d205a6f27e187",
+          "file": "visual-acceptance.spec.ts",
+          "line": 46,
+          "column": 99
+        },
+        {
+          "title": "intact words and full two-line titles 1920",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5546,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n\n    at show (/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:17:368)\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:49:9",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                      "column": 368,
+                      "line": 17
+                    },
+                    "snippet": "  15 | test.afterAll(async()=>{await hub.close();});\n  16 | async function open(page:Page){await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);await expect.poll(()=>hub.counts().screens).toBe(1);await page.mouse.click(40,40);hub.broadcast({type:\"session.start\",at:Date.now(),sessionId:\"visual-check\"});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"waking\",to:\"listening\",turn:0});await expect(page.locator(\".overlay-root\")).toHaveAttribute(\"data-phase\",\"on\");}\n> 17 | async function show(page:Page,card:AnswerCardData){hub.broadcast({type:\"state.change\",at:Date.now(),from:\"listening\",to:\"thinking\",turn:0});hub.broadcast({type:\"answer.delta\",at:Date.now(),seq:0,text:card.spoken,full:true,card});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"thinking\",to:\"answering\",turn:0});await expect(page.locator(\".overlay-card-body\")).toHaveAttribute(\"data-spoken-complete\",\"true\");await expect(page.locator(\".overlay-card-title\")).toHaveAttribute(\"data-measured\",\"true\");await expect(page.locator(\".overlay-card-spoken\")).toHaveAttribute(\"data-measured\",\"true\");await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));}\n     |                                                                                                                                                                                                                                                                                                                                                                                ^\n  18 | test(\"unsupported answer uses a warning and one service title\",async({page})=>{\n  19 |   await open(page);const card=buildIntentAnswer(\"unanswerable\",validatePublicPayload(fixture)).card;await show(page,card);\n  20 |   await expect(page.locator(\".overlay-status\")).toHaveAttribute(\"data-tone\",\"warn\");await expect(page.locator(\".overlay-en\")).toHaveText(\"Unsupported\");await expect(page.locator(\".overlay-status\")).not.toContainText(\"播报中\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                        "column": 368,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n\n\n  15 | test.afterAll(async()=>{await hub.close();});\n  16 | async function open(page:Page){await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);await expect.poll(()=>hub.counts().screens).toBe(1);await page.mouse.click(40,40);hub.broadcast({type:\"session.start\",at:Date.now(),sessionId:\"visual-check\"});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"waking\",to:\"listening\",turn:0});await expect(page.locator(\".overlay-root\")).toHaveAttribute(\"data-phase\",\"on\");}\n> 17 | async function show(page:Page,card:AnswerCardData){hub.broadcast({type:\"state.change\",at:Date.now(),from:\"listening\",to:\"thinking\",turn:0});hub.broadcast({type:\"answer.delta\",at:Date.now(),seq:0,text:card.spoken,full:true,card});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"thinking\",to:\"answering\",turn:0});await expect(page.locator(\".overlay-card-body\")).toHaveAttribute(\"data-spoken-complete\",\"true\");await expect(page.locator(\".overlay-card-title\")).toHaveAttribute(\"data-measured\",\"true\");await expect(page.locator(\".overlay-card-spoken\")).toHaveAttribute(\"data-measured\",\"true\");await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));}\n     |                                                                                                                                                                                                                                                                                                                                                                                ^\n  18 | test(\"unsupported answer uses a warning and one service title\",async({page})=>{\n  19 |   await open(page);const card=buildIntentAnswer(\"unanswerable\",validatePublicPayload(fixture)).card;await show(page,card);\n  20 |   await expect(page.locator(\".overlay-status\")).toHaveAttribute(\"data-tone\",\"warn\");await expect(page.locator(\".overlay-en\")).toHaveText(\"Unsupported\");await expect(page.locator(\".overlay-status\")).not.toContainText(\"播报中\");\n    at show (/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:17:368)\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:49:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:01.982Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1920/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1920/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1920/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                    "column": 368,
+                    "line": 17
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-0942a85f2ba22cbb681b",
+          "file": "visual-acceptance.spec.ts",
+          "line": 46,
+          "column": 99
+        },
+        {
+          "title": "intact words and full two-line titles 3840",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5654,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n\n    at show (/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:17:368)\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:49:9",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                      "column": 368,
+                      "line": 17
+                    },
+                    "snippet": "  15 | test.afterAll(async()=>{await hub.close();});\n  16 | async function open(page:Page){await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);await expect.poll(()=>hub.counts().screens).toBe(1);await page.mouse.click(40,40);hub.broadcast({type:\"session.start\",at:Date.now(),sessionId:\"visual-check\"});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"waking\",to:\"listening\",turn:0});await expect(page.locator(\".overlay-root\")).toHaveAttribute(\"data-phase\",\"on\");}\n> 17 | async function show(page:Page,card:AnswerCardData){hub.broadcast({type:\"state.change\",at:Date.now(),from:\"listening\",to:\"thinking\",turn:0});hub.broadcast({type:\"answer.delta\",at:Date.now(),seq:0,text:card.spoken,full:true,card});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"thinking\",to:\"answering\",turn:0});await expect(page.locator(\".overlay-card-body\")).toHaveAttribute(\"data-spoken-complete\",\"true\");await expect(page.locator(\".overlay-card-title\")).toHaveAttribute(\"data-measured\",\"true\");await expect(page.locator(\".overlay-card-spoken\")).toHaveAttribute(\"data-measured\",\"true\");await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));}\n     |                                                                                                                                                                                                                                                                                                                                                                                ^\n  18 | test(\"unsupported answer uses a warning and one service title\",async({page})=>{\n  19 |   await open(page);const card=buildIntentAnswer(\"unanswerable\",validatePublicPayload(fixture)).card;await show(page,card);\n  20 |   await expect(page.locator(\".overlay-status\")).toHaveAttribute(\"data-tone\",\"warn\");await expect(page.locator(\".overlay-en\")).toHaveText(\"Unsupported\");await expect(page.locator(\".overlay-status\")).not.toContainText(\"播报中\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                        "column": 368,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-body')\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-card-body') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-body')\u001b[22m\n\n\n  15 | test.afterAll(async()=>{await hub.close();});\n  16 | async function open(page:Page){await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);await expect.poll(()=>hub.counts().screens).toBe(1);await page.mouse.click(40,40);hub.broadcast({type:\"session.start\",at:Date.now(),sessionId:\"visual-check\"});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"waking\",to:\"listening\",turn:0});await expect(page.locator(\".overlay-root\")).toHaveAttribute(\"data-phase\",\"on\");}\n> 17 | async function show(page:Page,card:AnswerCardData){hub.broadcast({type:\"state.change\",at:Date.now(),from:\"listening\",to:\"thinking\",turn:0});hub.broadcast({type:\"answer.delta\",at:Date.now(),seq:0,text:card.spoken,full:true,card});hub.broadcast({type:\"state.change\",at:Date.now(),from:\"thinking\",to:\"answering\",turn:0});await expect(page.locator(\".overlay-card-body\")).toHaveAttribute(\"data-spoken-complete\",\"true\");await expect(page.locator(\".overlay-card-title\")).toHaveAttribute(\"data-measured\",\"true\");await expect(page.locator(\".overlay-card-spoken\")).toHaveAttribute(\"data-measured\",\"true\");await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));}\n     |                                                                                                                                                                                                                                                                                                                                                                                ^\n  18 | test(\"unsupported answer uses a warning and one service title\",async({page})=>{\n  19 |   await open(page);const card=buildIntentAnswer(\"unanswerable\",validatePublicPayload(fixture)).card;await show(page,card);\n  20 |   await expect(page.locator(\".overlay-status\")).toHaveAttribute(\"data-tone\",\"warn\");await expect(page.locator(\".overlay-en\")).toHaveText(\"Unsupported\");await expect(page.locator(\".overlay-status\")).not.toContainText(\"播报中\");\n    at show (/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:17:368)\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:49:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:08.000Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-3840/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-3840/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-3840/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                    "column": 368,
+                    "line": 17
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-4d4eab20371611d782d8",
+          "file": "visual-acceptance.spec.ts",
+          "line": 46,
+          "column": 99
+        },
+        {
+          "title": "word audit detects an unwrapped renderer splitting 区域 and 距离",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 244,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:57:149",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                      "column": 149,
+                      "line": 57
+                    },
+                    "snippet": "  55 | test(\"word audit detects an unwrapped renderer splitting 区域 and 距离\",async({page})=>{\n  56 |   await page.goto(\"/screen/sales\");await page.evaluate(()=>{const probe=document.createElement(\"p\");probe.id=\"word-probe\";probe.dataset.wordAudit=\"\";probe.textContent=\"区域距离\";probe.style.cssText=\"position:fixed;top:20px;left:20px;width:25px;font-size:24px;line-height:1.5;word-break:break-all;overflow-wrap:anywhere;text-wrap:wrap\";document.body.append(probe);});\n> 57 |   const findings=await auditText(page,\"#word-probe\");for(const word of [\"区域\",\"距离\"])expect(findings.some(f=>f.kind===\"word-split\" && f.text===word)).toBe(true);\n     |                                                                                                                                                     ^\n  58 | });\n  59 | for(const empty of [false,true])test(`public contract tail ${empty ? \"empty\" : \"masked\"}`,async({page})=>{\n  60 |   const p=validatePublicPayload(structuredClone(fixture));for(const row of p.delivery.reminders.overdue)row.contractNumber=empty ? null : \"****0123\";"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                        "column": 149,
+                        "line": 57
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  55 | test(\"word audit detects an unwrapped renderer splitting 区域 and 距离\",async({page})=>{\n  56 |   await page.goto(\"/screen/sales\");await page.evaluate(()=>{const probe=document.createElement(\"p\");probe.id=\"word-probe\";probe.dataset.wordAudit=\"\";probe.textContent=\"区域距离\";probe.style.cssText=\"position:fixed;top:20px;left:20px;width:25px;font-size:24px;line-height:1.5;word-break:break-all;overflow-wrap:anywhere;text-wrap:wrap\";document.body.append(probe);});\n> 57 |   const findings=await auditText(page,\"#word-probe\");for(const word of [\"区域\",\"距离\"])expect(findings.some(f=>f.kind===\"word-split\" && f.text===word)).toBe(true);\n     |                                                                                                                                                     ^\n  58 | });\n  59 | for(const empty of [false,true])test(`public contract tail ${empty ? \"empty\" : \"masked\"}`,async({page})=>{\n  60 |   const p=validatePublicPayload(structuredClone(fixture));for(const row of p.delivery.reminders.overdue)row.contractNumber=empty ? null : \"****0123\";\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:57:149"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:14.126Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-word-aud-7a57f-enderer-splitting-区域-and-距离/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-word-aud-7a57f-enderer-splitting-区域-and-距离/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-word-aud-7a57f-enderer-splitting-区域-and-距离/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                    "column": 149,
+                    "line": 57
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-e72ab411f3cd0a1408bd",
+          "file": "visual-acceptance.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "public contract tail masked",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 326,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.1\u001b[39m\nReceived:   \u001b[31m3.625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.1\u001b[39m\nReceived:   \u001b[31m3.625\u001b[39m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:68:253",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                      "column": 253,
+                      "line": 68
+                    },
+                    "snippet": "  66 |     await page.evaluate(()=>document.fonts.load('600 18px \"Rajdhani\"'));\n  67 |     const metrics=await group.locator(\".contract-tail-digits\").first().evaluate(el=>{const css=getComputedStyle(el);const row=el.closest(\"li\")!;const widths=[];const node=el.firstChild!;for(let i=0;i<4;i++){const range=document.createRange();range.setStart(node,i);range.setEnd(node,i+1);widths.push(range.getBoundingClientRect().width);}return {family:css.fontFamily,size:parseFloat(css.fontSize),rowSize:parseFloat(getComputedStyle(row).fontSize),tabular:css.fontVariantNumeric,widths,ellipsis:css.textOverflow};});\n> 68 |     expect(metrics.family).toContain(\"Rajdhani\");expect(metrics.size).toBe(metrics.rowSize);expect(metrics.tabular).toContain(\"tabular-nums\");expect(metrics.ellipsis).not.toBe(\"ellipsis\");expect(Math.max(...metrics.widths)-Math.min(...metrics.widths)).toBeLessThan(.1);\n     |                                                                                                                                                                                                                                                             ^\n  69 |   }\n  70 |   expect(await auditText(page)).toEqual([]);\n  71 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                        "column": 253,
+                        "line": 68
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.1\u001b[39m\nReceived:   \u001b[31m3.625\u001b[39m\n\n  66 |     await page.evaluate(()=>document.fonts.load('600 18px \"Rajdhani\"'));\n  67 |     const metrics=await group.locator(\".contract-tail-digits\").first().evaluate(el=>{const css=getComputedStyle(el);const row=el.closest(\"li\")!;const widths=[];const node=el.firstChild!;for(let i=0;i<4;i++){const range=document.createRange();range.setStart(node,i);range.setEnd(node,i+1);widths.push(range.getBoundingClientRect().width);}return {family:css.fontFamily,size:parseFloat(css.fontSize),rowSize:parseFloat(getComputedStyle(row).fontSize),tabular:css.fontVariantNumeric,widths,ellipsis:css.textOverflow};});\n> 68 |     expect(metrics.family).toContain(\"Rajdhani\");expect(metrics.size).toBe(metrics.rowSize);expect(metrics.tabular).toContain(\"tabular-nums\");expect(metrics.ellipsis).not.toBe(\"ellipsis\");expect(Math.max(...metrics.widths)-Math.min(...metrics.widths)).toBeLessThan(.1);\n     |                                                                                                                                                                                                                                                             ^\n  69 |   }\n  70 |   expect(await auditText(page)).toEqual([]);\n  71 | });\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:68:253"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:14.827Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-public-contract-tail-masked/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-public-contract-tail-masked/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-public-contract-tail-masked/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                    "column": 253,
+                    "line": 68
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-47fb43c029b0d4f44ba6",
+          "file": "visual-acceptance.spec.ts",
+          "line": 59,
+          "column": 33
+        },
+        {
+          "title": "public contract tail empty",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 260,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:15.632Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-06850883301e2e68c75f",
+          "file": "visual-acceptance.spec.ts",
+          "line": 59,
+          "column": 33
+        },
+        {
+          "title": "map labels remain clear of HUD 1280",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 379,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:16.010Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-4c09ad84c7cbbb32ab90",
+          "file": "visual-acceptance.spec.ts",
+          "line": 72,
+          "column": 37
+        },
+        {
+          "title": "map labels remain clear of HUD 1920",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 507,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:16.395Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-094b514d75bb9bfb72b0",
+          "file": "visual-acceptance.spec.ts",
+          "line": 72,
+          "column": 37
+        },
+        {
+          "title": "map labels remain clear of HUD 3840",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1209,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:16.907Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-ec31bc91b190f611fb8a",
+          "file": "visual-acceptance.spec.ts",
+          "line": 72,
+          "column": 37
+        },
+        {
+          "title": "negative primary money has one large pending readout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 262,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:18.121Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-5bb030761ade9b190027",
+          "file": "visual-acceptance.spec.ts",
+          "line": 78,
+          "column": 1
+        },
+        {
+          "title": "SVG note has an effective 20px design font and a tiny SVG font fails audit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 627,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:42:18.389Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-8c44a48954c71873d7e7",
+          "file": "visual-acceptance.spec.ts",
+          "line": 83,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T07:41:35.995Z",
+    "duration": 43069.34,
+    "expected": 39,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}

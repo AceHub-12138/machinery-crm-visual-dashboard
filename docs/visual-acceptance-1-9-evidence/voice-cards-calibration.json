@@ -1,0 +1,2010 @@
+[
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "normal",
+    "intent": "sales_progress",
+    "kind": "target-progress",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "normal",
+    "intent": "target_rate",
+    "kind": "completion-ring",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "normal",
+    "intent": "region_shipments",
+    "kind": "region",
+    "x": 440,
+    "y": 300,
+    "width": 1040,
+    "height": 720,
+    "bottom": 1020,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 706,
+        "height": 302
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 722,
+        "bottom": 892,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 908,
+        "bottom": 960,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "normal",
+    "intent": "upcoming_shipments",
+    "kind": "customers-shipments",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 720,
+    "bottom": 1020,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 706,
+        "height": 302
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 722,
+        "bottom": 892,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 908,
+        "bottom": 960,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "normal",
+    "intent": "new_customers",
+    "kind": "customer-kpi",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "normal",
+    "intent": "followup_todo",
+    "kind": "followup-buckets",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "normal",
+    "intent": "collection",
+    "kind": "collection-split",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "normal",
+    "intent": "unanswerable",
+    "kind": "brief",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 360,
+    "bottom": 660,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 398,
+        "bottom": 568,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 578,
+        "bottom": 630,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "long",
+    "intent": "sales_progress",
+    "kind": "target-progress",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "long",
+    "intent": "target_rate",
+    "kind": "completion-ring",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "long",
+    "intent": "region_shipments",
+    "kind": "region",
+    "x": 440,
+    "y": 300,
+    "width": 1040,
+    "height": 720,
+    "bottom": 1020,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 706,
+        "height": 302
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 722,
+        "bottom": 892,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 908,
+        "bottom": 960,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "long",
+    "intent": "upcoming_shipments",
+    "kind": "customers-shipments",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 720,
+    "bottom": 1020,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 706,
+        "height": 302
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 722,
+        "bottom": 892,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 908,
+        "bottom": 960,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "long",
+    "intent": "new_customers",
+    "kind": "customer-kpi",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "long",
+    "intent": "followup_todo",
+    "kind": "followup-buckets",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "long",
+    "intent": "collection",
+    "kind": "collection-split",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 620,
+    "bottom": 920,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 404,
+        "bottom": 606,
+        "height": 202
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 622,
+        "bottom": 792,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 808,
+        "bottom": 860,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "variant": "long",
+    "intent": "unanswerable",
+    "kind": "brief",
+    "x": 520,
+    "y": 300,
+    "width": 880,
+    "height": 360,
+    "bottom": 660,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 324,
+        "bottom": 388,
+        "height": 64
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 398,
+        "bottom": 568,
+        "height": 170
+      },
+      {
+        "class": "overlay-followups",
+        "y": 578,
+        "bottom": 630,
+        "height": 52
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "normal",
+    "intent": "sales_progress",
+    "kind": "target-progress",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "normal",
+    "intent": "target_rate",
+    "kind": "completion-ring",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "normal",
+    "intent": "region_shipments",
+    "kind": "region",
+    "x": 293.33331298828125,
+    "y": 200,
+    "width": 693.3333740234375,
+    "height": 480,
+    "bottom": 680,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 470.66668701171875,
+        "height": 201.33334350585938
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 481.3333435058594,
+        "bottom": 594.6666870117188,
+        "height": 113.33334350585938
+      },
+      {
+        "class": "overlay-followups",
+        "y": 605.3333740234375,
+        "bottom": 640,
+        "height": 34.6666259765625
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "normal",
+    "intent": "upcoming_shipments",
+    "kind": "customers-shipments",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 480,
+    "bottom": 680,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 470.66668701171875,
+        "height": 201.33334350585938
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 481.3333435058594,
+        "bottom": 594.6666870117188,
+        "height": 113.33334350585938
+      },
+      {
+        "class": "overlay-followups",
+        "y": 605.3333740234375,
+        "bottom": 640,
+        "height": 34.6666259765625
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "normal",
+    "intent": "new_customers",
+    "kind": "customer-kpi",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "normal",
+    "intent": "followup_todo",
+    "kind": "followup-buckets",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "normal",
+    "intent": "collection",
+    "kind": "collection-split",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "normal",
+    "intent": "unanswerable",
+    "kind": "brief",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 240,
+    "bottom": 440,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 265.3333435058594,
+        "bottom": 378.66668701171875,
+        "height": 113.33334350585938
+      },
+      {
+        "class": "overlay-followups",
+        "y": 385.3333435058594,
+        "bottom": 420,
+        "height": 34.666656494140625
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "long",
+    "intent": "sales_progress",
+    "kind": "target-progress",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "long",
+    "intent": "target_rate",
+    "kind": "completion-ring",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "long",
+    "intent": "region_shipments",
+    "kind": "region",
+    "x": 293.33331298828125,
+    "y": 200,
+    "width": 693.3333740234375,
+    "height": 480,
+    "bottom": 680,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 470.66668701171875,
+        "height": 201.33334350585938
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 481.3333435058594,
+        "bottom": 594.6666870117188,
+        "height": 113.33334350585938
+      },
+      {
+        "class": "overlay-followups",
+        "y": 605.3333740234375,
+        "bottom": 640,
+        "height": 34.6666259765625
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "long",
+    "intent": "upcoming_shipments",
+    "kind": "customers-shipments",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 480,
+    "bottom": 680,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 470.66668701171875,
+        "height": 201.33334350585938
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 481.3333435058594,
+        "bottom": 594.6666870117188,
+        "height": 113.33334350585938
+      },
+      {
+        "class": "overlay-followups",
+        "y": 605.3333740234375,
+        "bottom": 640,
+        "height": 34.6666259765625
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "long",
+    "intent": "new_customers",
+    "kind": "customer-kpi",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "long",
+    "intent": "followup_todo",
+    "kind": "followup-buckets",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "long",
+    "intent": "collection",
+    "kind": "collection-split",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 413.3333740234375,
+    "bottom": 613.3333740234375,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 269.3333435058594,
+        "bottom": 404,
+        "height": 134.66665649414062
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 414.66668701171875,
+        "bottom": 528,
+        "height": 113.33331298828125
+      },
+      {
+        "class": "overlay-followups",
+        "y": 538.6666870117188,
+        "bottom": 573.3333740234375,
+        "height": 34.66668701171875
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "variant": "long",
+    "intent": "unanswerable",
+    "kind": "brief",
+    "x": 346.6666564941406,
+    "y": 200,
+    "width": 586.666748046875,
+    "height": 240,
+    "bottom": 440,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 216,
+        "bottom": 258.6666564941406,
+        "height": 42.666656494140625
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 265.3333435058594,
+        "bottom": 378.66668701171875,
+        "height": 113.33334350585938
+      },
+      {
+        "class": "overlay-followups",
+        "y": 385.3333435058594,
+        "bottom": 420,
+        "height": 34.666656494140625
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "normal",
+    "intent": "sales_progress",
+    "kind": "target-progress",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "normal",
+    "intent": "target_rate",
+    "kind": "completion-ring",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "normal",
+    "intent": "region_shipments",
+    "kind": "region",
+    "x": 880,
+    "y": 600,
+    "width": 2080,
+    "height": 1440,
+    "bottom": 2040,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1412,
+        "height": 604
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1444,
+        "bottom": 1784,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1816,
+        "bottom": 1920,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "normal",
+    "intent": "upcoming_shipments",
+    "kind": "customers-shipments",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1440,
+    "bottom": 2040,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1412,
+        "height": 604
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1444,
+        "bottom": 1784,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1816,
+        "bottom": 1920,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "normal",
+    "intent": "new_customers",
+    "kind": "customer-kpi",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "normal",
+    "intent": "followup_todo",
+    "kind": "followup-buckets",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "normal",
+    "intent": "collection",
+    "kind": "collection-split",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "normal",
+    "intent": "unanswerable",
+    "kind": "brief",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 720,
+    "bottom": 1320,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 796,
+        "bottom": 1136,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1156,
+        "bottom": 1260,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "long",
+    "intent": "sales_progress",
+    "kind": "target-progress",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "long",
+    "intent": "target_rate",
+    "kind": "completion-ring",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "long",
+    "intent": "region_shipments",
+    "kind": "region",
+    "x": 880,
+    "y": 600,
+    "width": 2080,
+    "height": 1440,
+    "bottom": 2040,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1412,
+        "height": 604
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1444,
+        "bottom": 1784,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1816,
+        "bottom": 1920,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "long",
+    "intent": "upcoming_shipments",
+    "kind": "customers-shipments",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1440,
+    "bottom": 2040,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1412,
+        "height": 604
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1444,
+        "bottom": 1784,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1816,
+        "bottom": 1920,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "long",
+    "intent": "new_customers",
+    "kind": "customer-kpi",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "long",
+    "intent": "followup_todo",
+    "kind": "followup-buckets",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "long",
+    "intent": "collection",
+    "kind": "collection-split",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 1240,
+    "bottom": 1840,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-card-data",
+        "y": 808,
+        "bottom": 1212,
+        "height": 404
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 1244,
+        "bottom": 1584,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1616,
+        "bottom": 1720,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "variant": "long",
+    "intent": "unanswerable",
+    "kind": "brief",
+    "x": 1040,
+    "y": 600,
+    "width": 1760,
+    "height": 720,
+    "bottom": 1320,
+    "spills": [],
+    "dataSpills": [],
+    "sections": [
+      {
+        "class": "overlay-card-header",
+        "y": 648,
+        "bottom": 776,
+        "height": 128
+      },
+      {
+        "class": "overlay-spoken-section",
+        "y": 796,
+        "bottom": 1136,
+        "height": 340
+      },
+      {
+        "class": "overlay-followups",
+        "y": 1156,
+        "bottom": 1260,
+        "height": 104
+      }
+    ]
+  },
+  {
+    "performance": {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 33,
+      "overlayFrames": 119,
+      "baselineP95": 0.10000000149011612,
+      "overlayP95": 1.7000000029802322,
+      "incrementP95": 1.6000000014901161
+    }
+  },
+  {
+    "performance": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 31,
+      "overlayFrames": 151,
+      "baselineP95": 0.10000000149011612,
+      "overlayP95": 1.7000000029802322,
+      "incrementP95": 1.6000000014901161
+    }
+  }
+]

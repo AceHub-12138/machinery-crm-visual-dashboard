@@ -1,0 +1,718 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/node_modules/@playwright/test/cli.js",
+      "test",
+      "e2e/visual-acceptance.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/playwright.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm exec next start --hostname 127.0.0.1 --port 3017",
+      "url": "http://127.0.0.1:3017/screen/sales",
+      "reuseExistingServer": false,
+      "env": {
+        "TZ": "Asia/Shanghai"
+      },
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "visual-acceptance.spec.ts",
+      "file": "visual-acceptance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unsupported answer uses a warning and one service title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 769,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:30.619Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-b3101e7513d2e28508ca",
+          "file": "visual-acceptance.spec.ts",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "title": "large next-step guide no-data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 449,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:31.528Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-5bc0894b7163fc3d8727",
+          "file": "visual-acceptance.spec.ts",
+          "line": 26,
+          "column": 52
+        },
+        {
+          "title": "large next-step guide offline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 448,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:31.982Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-013f64c295ebb1870650",
+          "file": "visual-acceptance.spec.ts",
+          "line": 26,
+          "column": 52
+        },
+        {
+          "title": "intact words and full two-line titles 1280",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 545,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:52:83",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                      "column": 83,
+                      "line": 52
+                    },
+                    "snippet": "  50 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(20);\n  51 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeLessThanOrEqual(45);\n> 52 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeGreaterThanOrEqual(42);\n     |                                                                                   ^\n  53 |   const wordBreaks=await page.locator(\".overlay-card-title, .overlay-card-spoken\").evaluateAll(nodes=>nodes.map(el=>getComputedStyle(el).wordBreak));expect(wordBreaks).toEqual([\"normal\",\"normal\"]);\n  54 |   await collectPages(page,true,title);await collectPages(page,false,displaySpoken(spoken));expect(await auditPanels(page)).toEqual([]);\n  55 |   await page.screenshot({path:`test-results/visual-acceptance/long-title-${viewport.width}.png`});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                        "column": 83,
+                        "line": 52
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m\n\n  50 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(20);\n  51 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeLessThanOrEqual(45);\n> 52 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeGreaterThanOrEqual(42);\n     |                                                                                   ^\n  53 |   const wordBreaks=await page.locator(\".overlay-card-title, .overlay-card-spoken\").evaluateAll(nodes=>nodes.map(el=>getComputedStyle(el).wordBreak));expect(wordBreaks).toEqual([\"normal\",\"normal\"]);\n  54 |   await collectPages(page,true,title);await collectPages(page,false,displaySpoken(spoken));expect(await auditPanels(page)).toEqual([]);\n  55 |   await page.screenshot({path:`test-results/visual-acceptance/long-title-${viewport.width}.png`});\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:52:83"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:32.436Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1280/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1280/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1280/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                    "column": 83,
+                    "line": 52
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-7c939e0d205a6f27e187",
+          "file": "visual-acceptance.spec.ts",
+          "line": 46,
+          "column": 99
+        },
+        {
+          "title": "intact words and full two-line titles 1920",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 718,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:52:83",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                      "column": 83,
+                      "line": 52
+                    },
+                    "snippet": "  50 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(20);\n  51 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeLessThanOrEqual(45);\n> 52 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeGreaterThanOrEqual(42);\n     |                                                                                   ^\n  53 |   const wordBreaks=await page.locator(\".overlay-card-title, .overlay-card-spoken\").evaluateAll(nodes=>nodes.map(el=>getComputedStyle(el).wordBreak));expect(wordBreaks).toEqual([\"normal\",\"normal\"]);\n  54 |   await collectPages(page,true,title);await collectPages(page,false,displaySpoken(spoken));expect(await auditPanels(page)).toEqual([]);\n  55 |   await page.screenshot({path:`test-results/visual-acceptance/long-title-${viewport.width}.png`});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                        "column": 83,
+                        "line": 52
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m\n\n  50 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(20);\n  51 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeLessThanOrEqual(45);\n> 52 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeGreaterThanOrEqual(42);\n     |                                                                                   ^\n  53 |   const wordBreaks=await page.locator(\".overlay-card-title, .overlay-card-spoken\").evaluateAll(nodes=>nodes.map(el=>getComputedStyle(el).wordBreak));expect(wordBreaks).toEqual([\"normal\",\"normal\"]);\n  54 |   await collectPages(page,true,title);await collectPages(page,false,displaySpoken(spoken));expect(await auditPanels(page)).toEqual([]);\n  55 |   await page.screenshot({path:`test-results/visual-acceptance/long-title-${viewport.width}.png`});\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:52:83"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:33.357Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1920/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1920/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-1920/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                    "column": 83,
+                    "line": 52
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-0942a85f2ba22cbb681b",
+          "file": "visual-acceptance.spec.ts",
+          "line": 46,
+          "column": 99
+        },
+        {
+          "title": "intact words and full two-line titles 3840",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 978,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:52:83",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                      "column": 83,
+                      "line": 52
+                    },
+                    "snippet": "  50 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(20);\n  51 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeLessThanOrEqual(45);\n> 52 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeGreaterThanOrEqual(42);\n     |                                                                                   ^\n  53 |   const wordBreaks=await page.locator(\".overlay-card-title, .overlay-card-spoken\").evaluateAll(nodes=>nodes.map(el=>getComputedStyle(el).wordBreak));expect(wordBreaks).toEqual([\"normal\",\"normal\"]);\n  54 |   await collectPages(page,true,title);await collectPages(page,false,displaySpoken(spoken));expect(await auditPanels(page)).toEqual([]);\n  55 |   await page.screenshot({path:`test-results/visual-acceptance/long-title-${viewport.width}.png`});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                        "column": 83,
+                        "line": 52
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m42\u001b[39m\nReceived:    \u001b[31m25\u001b[39m\n\n  50 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(20);\n  51 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeLessThanOrEqual(45);\n> 52 |   expect(await page.locator(\".overlay-card-title\").evaluate(el=>el.scrollHeight)).toBeGreaterThanOrEqual(42);\n     |                                                                                   ^\n  53 |   const wordBreaks=await page.locator(\".overlay-card-title, .overlay-card-spoken\").evaluateAll(nodes=>nodes.map(el=>getComputedStyle(el).wordBreak));expect(wordBreaks).toEqual([\"normal\",\"normal\"]);\n  54 |   await collectPages(page,true,title);await collectPages(page,false,displaySpoken(spoken));expect(await auditPanels(page)).toEqual([]);\n  55 |   await page.screenshot({path:`test-results/visual-acceptance/long-title-${viewport.width}.png`});\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts:52:83"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:34.557Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-3840/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-3840/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/test-results/visual-acceptance-intact-words-and-full-two-line-titles-3840/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased/e2e/visual-acceptance.spec.ts",
+                    "column": 83,
+                    "line": 52
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-4d4eab20371611d782d8",
+          "file": "visual-acceptance.spec.ts",
+          "line": 46,
+          "column": 99
+        },
+        {
+          "title": "word audit detects an unwrapped renderer splitting 区域 and 距离",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 215,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:36.008Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-e72ab411f3cd0a1408bd",
+          "file": "visual-acceptance.spec.ts",
+          "line": 57,
+          "column": 1
+        },
+        {
+          "title": "public contract tail masked",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 896,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:36.343Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-47fb43c029b0d4f44ba6",
+          "file": "visual-acceptance.spec.ts",
+          "line": 61,
+          "column": 33
+        },
+        {
+          "title": "public contract tail empty",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 668,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:37.245Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-06850883301e2e68c75f",
+          "file": "visual-acceptance.spec.ts",
+          "line": 61,
+          "column": 33
+        },
+        {
+          "title": "map labels remain clear of HUD 1280",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 416,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:37.919Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-4c09ad84c7cbbb32ab90",
+          "file": "visual-acceptance.spec.ts",
+          "line": 78,
+          "column": 37
+        },
+        {
+          "title": "map labels remain clear of HUD 1920",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 534,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:38.341Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-094b514d75bb9bfb72b0",
+          "file": "visual-acceptance.spec.ts",
+          "line": 78,
+          "column": 37
+        },
+        {
+          "title": "map labels remain clear of HUD 3840",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1219,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:38.880Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-ec31bc91b190f611fb8a",
+          "file": "visual-acceptance.spec.ts",
+          "line": 78,
+          "column": 37
+        },
+        {
+          "title": "negative primary money has one large pending readout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 260,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:40.105Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-5bb030761ade9b190027",
+          "file": "visual-acceptance.spec.ts",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "title": "SVG note has an effective 20px design font and a tiny SVG font fails audit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 512,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:40.374Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-8c44a48954c71873d7e7",
+          "file": "visual-acceptance.spec.ts",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "default demo reminders expose masked tails with no raw contract identifier",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 228,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:24:40.891Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d90acd6925399cf4d98-476f60b98e3763427c0e",
+          "file": "visual-acceptance.spec.ts",
+          "line": 97,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T08:24:29.267Z",
+    "duration": 11903.405999999999,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

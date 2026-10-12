@@ -1,0 +1,3 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 lint /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased
+> eslint

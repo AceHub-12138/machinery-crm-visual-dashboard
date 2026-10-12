@@ -1,0 +1,53 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 test /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased
+> vitest run
+
+
+ RUN  v3.2.7 /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-design-polish-rebased
+
+ ✓ src/lib/format.test.ts (6 tests) 14ms
+ ✓ src/lib/font-scale.test.ts (5 tests) 18ms
+ ✓ src/lib/geo.test.ts (13 tests) 15ms
+ ✓ src/lib/voice/params.test.ts (28 tests) 23ms
+ ✓ services/voice-orchestrator/test/inject-context.test.ts (10 tests) 26ms
+ ✓ services/voice-orchestrator/test/http-input.test.ts (6 tests) 62ms
+ ✓ src/lib/voice/input.test.ts (13 tests) 39ms
+ ✓ src/lib/voice/card-builders.test.ts (13 tests) 29ms
+ ✓ src/lib/voice/task12.test.ts (15 tests) 39ms
+ ✓ services/voice-orchestrator/test/scripted.test.ts (12 tests) 74ms
+ ✓ services/voice-orchestrator/test/utterance.test.ts (3 tests) 46ms
+ ✓ src/components/overlay/JarvisCore.test.tsx (2 tests) 129ms
+ ✓ services/voice-orchestrator/test/datasource.test.ts (7 tests) 32ms
+ ✓ services/voice-orchestrator/test/llm.test.ts (11 tests) 11ms
+ ✓ services/voice-orchestrator/test/trace.test.ts (23 tests) 11ms
+ ✓ services/voice-orchestrator/test/platform-mcp.test.ts (6 tests) 6ms
+ ✓ src/lib/voice/protocol.test.ts (24 tests) 8ms
+ ✓ src/lib/voice/microphone-barge.test.ts (9 tests) 10ms
+ ✓ src/lib/voice/live-source.test.ts (9 tests) 4ms
+ ✓ src/lib/voice/pcm-player.test.ts (26 tests) 379ms
+ ✓ src/lib/voice/spoken-normalize.test.ts (35 tests) 6ms
+ ✓ src/lib/public-screen-payload.test.ts (3 tests) 69ms
+ ✓ src/lib/voice/screen-data-reconcile.test.ts (40 tests) 89ms
+ ✓ src/lib/text-layout.test.ts (5 tests) 8ms
+ ✓ src/lib/voice/echo-similarity.test.ts (12 tests) 4ms
+ ✓ services/voice-orchestrator/test/orchestrator.test.ts (33 tests) 448ms
+ ✓ src/lib/mock.test.ts (3 tests) 4ms
+ ✓ src/lib/voice/intents.test.ts (39 tests) 5ms
+ ✓ src/lib/voice/session-machine.test.ts (11 tests) 3ms
+ ✓ services/voice-orchestrator/test/config.test.ts (9 tests) 4ms
+ ✓ src/lib/voice/card-presentation.test.ts (4 tests) 2ms
+ ✓ src/lib/layout.test.ts (8 tests) 3ms
+ ✓ src/lib/voice/microphone-mode.test.ts (1 test) 2ms
+ ✓ src/lib/target.test.ts (2 tests) 2ms
+ ✓ services/voice-orchestrator/test/secrets.test.ts (1 test) 2ms
+ ✓ scripts/voice-echo-metrics.test.ts (4 tests) 3ms
+ ✓ services/voice-orchestrator/test/listen-repair.test.ts (40 tests) 898ms
+ ✓ services/voice-orchestrator/test/audio.test.ts (29 tests) 913ms
+ ✓ services/voice-orchestrator/test/ws-server.test.ts (19 tests) 1051ms
+   ✓ ws hub — 2026-09-30 审核修复 > 已声明角色的连接不受 hello 截止影响  404ms
+   ✓ ws hub — 2026-09-30 审核修复 > 心跳:idleTimeoutMs 内无任何入站数据 → 断开(审核 M5)  304ms
+
+ Test Files  39 passed (39)
+      Tests  539 passed (539)
+   Start at  01:36:18
+   Duration  1.63s (transform 2.36s, setup 0ms, collect 6.98s, tests 4.49s, environment 5ms, prepare 3.04s)
