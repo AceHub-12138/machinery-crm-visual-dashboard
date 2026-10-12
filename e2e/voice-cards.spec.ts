@@ -146,6 +146,7 @@ for(const [reason,en,zh] of [["no-data","No Data","暂无数据"],["offline","Of
   await expect(page.locator(".overlay-en")).toHaveText(en);
   await expect(page.locator(".overlay-status")).toContainText(zh);
   await expect(page.locator(".overlay-status")).toHaveAttribute("data-tone","warn");
+  if(reason==="asr-miss") await expect(page.locator(".overlay-partial")).toHaveText("没听清，请再说一次");
   await page.screenshot({path:join(output,`status-${reason}.png`)});
 });
 test("reduced motion renders whole answer and announces complete sentences",async({page})=>{

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
+import { LevelMeter } from "@/components/overlay/LevelMeter";
 import { JarvisCore } from "@/components/overlay/JarvisCore";
 import { AnswerCard } from "@/components/overlay/AnswerCard";
 import "./overlay.css";
@@ -196,6 +197,7 @@ export function OverlayStage({
   }, []);
 
   const live = driver === "live";
+  const sampleInput = useCallback(() => driver === "live" ? micRef.current?.getAmplitude() ?? 0 : demoAmplitude("listening", mirrorRef.current.since, performance.now()),[driver]);
 
   const wake = useCallback(() => {
     // 守卫:手动 F9 与回放器排定的唤醒撞车时,第二次直接忽略。
@@ -533,7 +535,7 @@ export function OverlayStage({
 
   /* ---- A3 文案过渡:状态词/转写按状态名 key 重挂载,CSS 淡入(240ms);
      同状态内的 ASR 打字就地刷新,不经任何 effect/setState ---- */
-  const captionText =
+  const captionText = session.reason === "asr-miss" ? "没听清，请再说一次" :
     session.name === "waking"
       ? DEMO_LINES.wake
       : session.name === "listening"
@@ -559,6 +561,7 @@ export function OverlayStage({
             <span aria-hidden="true">{bargePaused ? "聆听中" : statusNow.zh}</span>
           </p>
         ) : null}
+        {["listening", "followup"].includes(session.name) ? <LevelMeter sample={sampleInput} /> : null}
         {audioNotice && !session.card ? <p className="overlay-audio-notice" role="status">{audioNotice}</p> : null}
         {captionText ? (
           <p className={`overlay-partial${captionDim ? " overlay-partial-idle" : ""}`}>{captionText}</p>
