@@ -1,5 +1,6 @@
 "use client";
 
+import { Money } from "@/components/screen/Money";
 import { FitText } from "@/components/screen/FitText";
 import { AnimatedNumber } from "@/components/screen/AnimatedNumber";
 import { Panel, PanelHead } from "@/components/screen/Panel";
@@ -58,7 +59,7 @@ function MiniStat({
       <p className="text-micro leading-none text-[var(--ink-3)]">{label}</p>
       {/* money：金额不许折行，字号比小整数降一档 —— 28px 的
           「¥2,072.0万」在 158px 的卡片里放不下，硬撑只会断成两行。 */}
-      <p className={`num mt-2.5 leading-none ${toneClass} ${money ? "money text-label" : "text-metric"}`}>
+      <p className={`num num-unit mt-2.5 leading-none ${toneClass} ${money ? "money text-label" : "text-metric"}`}>
         <FitText text={format(value)} min={money ? 18 : 20} max={money ? "var(--fs-label)" : "var(--fs-metric)"}><AnimatedNumber value={value} format={format} /></FitText>
       </p>
       <p className="mt-2 text-micro leading-none text-[var(--ink-3)]">{hint}</p>
@@ -84,7 +85,7 @@ export function KpiRail({
         eyebrow="Sales KPI"
         title="经营指标"
         extra={
-          <p className="num text-label leading-none text-[var(--c-collect)]">
+          <p className="num num-unit text-label leading-none text-[var(--c-collect)]">
             {Math.round(collectionRate * 100)}%
             <span className="ml-1.5 text-micro font-normal text-[var(--ink-3)]">回款率</span>
           </p>
@@ -99,21 +100,21 @@ export function KpiRail({
           <div className="pointer-events-none absolute -top-10 -right-8 size-32 rounded-full bg-[rgba(238,125,44,0.11)] blur-2xl" />
           <div className="flex items-baseline justify-between gap-3">
             <p className="text-label font-bold text-[var(--ink)]">本期合同额</p>
-            <p className="num text-micro text-[var(--ink-2)]">
+            <p className="num num-unit text-micro text-[var(--ink-2)]">
               {stats.periodNewContracts} 份新签
             </p>
           </div>
-          <p className="num kpi-hero money mt-2.5 text-hero-lg leading-none">
+          <p className="num num-unit kpi-hero money mt-2.5 text-hero-lg leading-none">
             <FitText text={formatMoney(stats.periodContractAmount)} min={44} max="var(--fs-hero-lg)"><AnimatedNumber value={stats.periodContractAmount} format={formatMoney} /></FitText>
           </p>
           <div className="mt-4">
             <Gauge ratio={targetRatio} slots={22} />
             <div className="mt-2 flex items-baseline justify-between">
               <span className="text-micro text-[var(--ink-3)]">
-                月度目标 {formatMoney(targetAmount)}
+                月度目标 <Money value={targetAmount} />
               </span>
-              <span className="num text-label leading-none text-[var(--brand-orange-hot)]">
-                达成 {(targetRatio * 100).toFixed(1)}%
+              <span className="num num-unit w-[120px] shrink-0 text-right text-label leading-none text-[var(--brand-orange-hot)]">
+                <FitText text={`达成 ${(targetRatio * 100).toFixed(1)}%`} min={18} max="var(--fs-label)">达成 {(targetRatio * 100).toFixed(1)}%</FitText>
               </span>
             </div>
           </div>
@@ -123,8 +124,8 @@ export function KpiRail({
         <article className="kpi-settlement shrink-0 px-4 py-2.5">
           <div className="flex items-baseline justify-between">
             <p className="text-micro text-[var(--ink-3)]">回款结构</p>
-            <p className="num text-label leading-none text-[var(--c-collect)]">
-              {formatMoney(stats.periodPaidAmount)}
+            <p className="num num-unit text-label leading-none text-[var(--c-collect)]">
+              <Money value={stats.periodPaidAmount} />
             </p>
           </div>
           <div className="seg-bar mt-2.5">
@@ -140,7 +141,7 @@ export function KpiRail({
           <div className="mt-2.5 flex justify-between text-micro">
             <span className="text-[var(--c-collect)]">已回 {Math.round(collectionRate * 100)}%</span>
             <span className="text-[var(--brand-orange-hot)]">
-              待回 {formatMoney(stats.periodUnpaidAmount)}
+              待回 <Money value={stats.periodUnpaidAmount} />
             </span>
           </div>
         </article>

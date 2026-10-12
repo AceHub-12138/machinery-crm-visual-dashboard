@@ -80,7 +80,7 @@ export function DeliveryMilestones({ paths }: { paths: PublicShipment[] }) {
           <time className="num num-unit text-micro leading-tight text-[var(--ink-3)]" dateTime={item.shipmentDate}>{formatDay(item.shipmentDate)}</time>
           <div className="milestone-track" aria-hidden="true"><i /></div>
           <ClipText full={`${group} · ${item.contract.equipmentName} ${item.contract.equipmentModel}`} className="clip-1 text-label leading-tight font-medium text-[var(--ink)]">{label}</ClipText>
-          <p className="num num-unit mt-1 text-micro leading-tight text-[var(--ink-2)]">{item.quantity} 台 · {region}</p>
+          <ClipText full={`${item.quantity} 台 · ${item.contract.customer.region}`} className="clip-1 num num-unit mt-1 text-micro leading-tight text-[var(--ink-2)]">{item.quantity} 台 · {region}</ClipText>
         </article>;
       })}
       {!milestones.length ? <p className="col-span-full text-center text-caption text-[var(--ink-3)]">暂无交付记录</p> : null}

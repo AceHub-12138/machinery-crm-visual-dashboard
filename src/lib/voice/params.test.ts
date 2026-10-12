@@ -73,7 +73,7 @@ describe("缓动基础", () => {
 });
 
 describe("overlayGeometry(§5 落位)", () => {
-  it("1080p 下核心落在 (960,470),卡片锚点在核心正下方、宽 880", () => {
+  it("1080p 下核心落在 (960,470),卡片预留锚点 y=300、宽 880", () => {
     const g = overlayGeometry(1920, 1080);
     expect(g.core).toEqual({ x: 960, y: 470 });
     expect(g.cardAnchor.x).toBe(960);
