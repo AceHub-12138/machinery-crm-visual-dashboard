@@ -51,6 +51,8 @@ export const AnswerCard = memo(function AnswerCard({
   sentenceVersion?: number;
   sentenceRef?: RefObject<{ start: number; end: number } | null>;
 }) {
+  const announcedRef = useRef<{ card: AnswerCardData | null; index: number }>({card:null,index:-1});
+  const liveRef = useRef<HTMLParagraphElement>(null);
   const lineRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef<SVGPathElement | null>(null);
@@ -114,6 +116,8 @@ export const AnswerCard = memo(function AnswerCard({
     let lastTyped = -1;
     let lastHighlight = "";
     let barSet = false;
+    const sentences = buildSpokenSentences(displaySpoken(card.spoken));
+    if (announcedRef.current.card !== card) announcedRef.current = { card, index: -1 };
 
     const paint = (now: number) => {
       if (disposed) return;
@@ -183,6 +187,11 @@ export const AnswerCard = memo(function AnswerCard({
             spoken.replaceChildren(document.createTextNode(text.slice(0, active.start)), mark, document.createTextNode(text.slice(active.end)));
           } else spoken.textContent = text;
         }
+        const completed = sentences.findLastIndex(s => s.displayEnd <= typed);
+        if (completed > announcedRef.current.index && liveRef.current) {
+          liveRef.current.textContent = sentences.slice(announcedRef.current.index + 1, completed + 1).map(s => s.text).join("");
+          announcedRef.current.index = completed;
+        }
         if (typed >= card.spoken.length && u >= 1) return; // 编排完成,停帧
       }
 
@@ -203,9 +212,10 @@ export const AnswerCard = memo(function AnswerCard({
       className={`overlay-card${card.kind === "brief" ? " is-brief" : ""}`}
       data-card-kind={card.kind}
       style={{ top: anchor.y, width: anchor.width / geometry.scale, transform: `translateX(-50%) scale(${geometry.scale})` }}
-      role="status"
+      role="region"
       aria-label={card.title}
     >
+      <p className="sr-only" aria-live="polite" aria-atomic="true" ref={liveRef} />
       <div className="overlay-card-line" ref={lineRef} style={{ transform: "scaleX(0)" }} />
       <div className="overlay-card-body" ref={bodyRef} style={{ opacity: 0, transform: "scaleY(0.012)" }}>
         <svg ref={svgRef} className="overlay-card-frame" aria-hidden="true">
@@ -221,7 +231,7 @@ export const AnswerCard = memo(function AnswerCard({
           <p className="overlay-card-subtitle" title={"summaryText" in card ? card.summaryText : undefined}>{"summaryText" in card ? <ClipText full={card.summaryText}>{cardExcerpt(card.summaryText, 40)}</ClipText> : card.kind === "brief" ? "小川 · 为您服务" : "经营数据总览"}</p>
         </header>
         {card.kind !== "brief" ? <div className="overlay-card-data">{renderCardTemplate(card, { barFillRef, launchAt, pageIndex })}</div> : null}
-        <section className="overlay-spoken-section" aria-label="小川播报"><h3><span aria-hidden="true">✦</span> 小川播报</h3><p className="overlay-card-spoken" title={displaySpoken(card.spoken)}><span ref={spokenRef} /></p></section>
+        <section className="overlay-spoken-section" aria-label="小川播报"><h3><span aria-hidden="true">✦</span> 小川播报</h3><p className="overlay-card-spoken" title={displaySpoken(card.spoken)} aria-hidden="true"><span ref={spokenRef} /></p></section>
         <div className="overlay-followups">{followups.length ? <><span className="overlay-followups-label">{card.kind === "brief" ? "您可以问我：" : "可继续追问："}</span>{followups.map(q => <span key={q}>{q}</span>)}</> : null}</div>
       </div>
     </div>
