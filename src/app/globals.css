@@ -739,3 +739,6 @@ a {
 
 .panel-eyebrow { display: none; }
 :root[data-debug="1"] .panel-eyebrow, [data-eyebrow="on"] .panel-eyebrow { display: block; }
+
+.milestone-track { position: relative; height: 12px; margin: 4px -12px 4px 0; border-top: 1px solid var(--panel-border-strong); }
+.milestone-track i { position: absolute; left: 0; top: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--brand-orange); box-shadow: 0 0 8px rgba(238,125,44,.3); }
