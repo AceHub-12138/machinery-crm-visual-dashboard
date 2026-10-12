@@ -1,8 +1,8 @@
 import { test, expect, type Page } from "@playwright/test";
 
 const layout = {
-  kpi: [14, 102, 360, 838], map: [388, 102, 880, 838],
-  collection: [1282, 102, 624, 441], reminders: [1282, 557, 624, 383],
+  kpi: [14, 102, 360, 838], map: [388, 102, 940, 838],
+  collection: [1342, 102, 564, 441], reminders: [1342, 557, 564, 383],
   delivery: [14, 954, 1892, 112],
 };
 async function assertLayout(page: Page) {
@@ -33,7 +33,7 @@ test("公开 API 与首屏 HTML 不携带客户、跟进、业务员及详细地
 test("列宽改变 5px 会被几何验收发现", async ({ page }) => {
   await page.goto("/screen/sales?fit=0");
   await assertLayout(page);
-  await page.addStyleTag({ content: "#screen-stage > .grid { grid-template-columns: 365px 880px minmax(0,1fr) !important; }" });
+  await page.addStyleTag({ content: "#screen-stage > .grid { grid-template-columns: 365px 940px minmax(0,1fr) !important; }" });
   await expect(assertLayout(page)).rejects.toThrow();
 });
 
@@ -45,4 +45,17 @@ test("1280×720 自适应保持完整画布", async ({ page }) => {
   expect(bounds?.height).toBe(720);
   expect(bounds?.x).toBe(0);
   expect(bounds?.y).toBe(0);
+});
+
+test("China occupies at least 75% of map width and lower-right HUD stays within 22%",async({page})=>{
+  await page.goto("/screen/sales?fit=0");
+  const measured=await page.locator('.map-panel').evaluate(el=>{
+    const panel=el.getBoundingClientRect();const boxes=[...el.querySelectorAll('.map-china-edge-core')].map(n=>n.getBoundingClientRect());
+    const left=Math.min(...boxes.map(r=>r.left)),right=Math.max(...boxes.map(r=>r.right));
+    const hud=el.querySelector('[class*="w-[22%]"]')!.getBoundingClientRect();
+    return {landRatio:(right-left)/panel.width,hudRatio:hud.width/panel.width,left,right,panelLeft:panel.left,panelRight:panel.right};
+  });
+  expect(measured.landRatio).toBeGreaterThanOrEqual(.75);
+  expect(measured.hudRatio).toBeLessThanOrEqual(.22);
+  expect(measured.left).toBeGreaterThanOrEqual(measured.panelLeft);expect(measured.right).toBeLessThanOrEqual(measured.panelRight);
 });

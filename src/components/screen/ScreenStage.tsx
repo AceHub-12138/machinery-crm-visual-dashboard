@@ -115,7 +115,7 @@ export function ScreenStage({
               row-span 的格子会把自动指针推到不存在的行，后面的面板直接掉出画面
               （这个坑踩过一次）。
               任何面板内容变化后都要重新实测，见 docs/screen-design-spec.md。 */}
-          <div className="grid min-h-0 flex-1 grid-cols-[360px_880px_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_112px] gap-[var(--gutter)] p-[var(--gutter)]">
+          <div className="grid min-h-0 flex-1 grid-cols-[360px_940px_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_112px] gap-[var(--gutter)] p-[var(--gutter)]">
             <div data-screen-panel="kpi" className="col-start-1 row-start-1 min-h-0">
               <KpiRail stats={payload.dashboard.stats} targetAmount={targetAmount} collection={payload.business?.collection} />
             </div>

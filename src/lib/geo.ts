@@ -146,3 +146,10 @@ export const PROVINCE_SHORT_NAMES: Record<string,string> = {
   "宁夏回族自治区":"宁夏", "西藏自治区":"西藏",
 };
 export function provinceShortName(region: string) { return PROVINCE_SHORT_NAMES[region] ?? matchProvinceKey(region); }
+
+/** Crop the display window around China, retaining projection coordinates for every route. */
+export const screenMapBounds = {
+  x: (mapBBox.minX + mapBBox.maxX) / 2 - mapBBox.width / .8 / 2,
+  y: 0, width: mapBBox.width / .8, height: chinaMap.height,
+};
+export const screenMapViewBox = `${screenMapBounds.x} ${screenMapBounds.y} ${screenMapBounds.width} ${screenMapBounds.height}`;
