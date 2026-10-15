@@ -3,8 +3,8 @@
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 
 /** Measure the final value at the declared size, never the animated intermediate value. */
-export function FitText({ children, text, min = 20, max, className = "" }: {
-  children: ReactNode; text: string; min?: number; max: number | string; className?: string;
+export function FitText({ children, text, min = 20, max, className = "", measureContent = false }: {
+  children: ReactNode; text: string; min?: number; max: number | string; className?: string; measureContent?: boolean;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   useLayoutEffect(() => {
@@ -13,8 +13,9 @@ export function FitText({ children, text, min = 20, max, className = "" }: {
     let disposed = false;
     const measure = () => {
       if (disposed || !node.clientWidth) return;
-      const probe = node.cloneNode(false) as HTMLSpanElement;
-      probe.textContent = text;
+      const probe = node.cloneNode(measureContent) as HTMLSpanElement;
+      if (!measureContent) probe.textContent = text;
+      else probe.querySelectorAll<HTMLElement>('[data-final-number]').forEach(el => { el.textContent = el.dataset.finalNumber ?? el.textContent; });
       probe.removeAttribute("id");
       Object.assign(probe.style, { position: "absolute", visibility: "hidden", width: "max-content", maxWidth: "none", fontSize: typeof max === "number" ? `${max}px` : max });
       node.append(probe);
@@ -36,6 +37,6 @@ export function FitText({ children, text, min = 20, max, className = "" }: {
     measure();
     void document.fonts.ready.then(measure);
     return () => { disposed = true; observer.disconnect(); };
-  }, [text, min, max]);
-  return <span ref={ref} className={`fit-text ${className}`} title={text} aria-label={text}>{children}</span>;
+  }, [text, min, max, measureContent]);
+  return <span ref={ref} className={`fit-text ${className}`} style={{ fontSize: typeof max === "number" ? `${max}px` : max }} title={text} aria-label={text}>{children}</span>;
 }

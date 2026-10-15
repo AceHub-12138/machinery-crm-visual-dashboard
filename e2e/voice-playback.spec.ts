@@ -130,7 +130,7 @@ test("real PCM drives analyser and sentence highlight; followup waits for EOF an
   const m = await metrics(page); expect(m.scheduled[0].when - m.scheduled[0].at).toBeCloseTo(0.15, 2);
   for (let i = 1; i < m.scheduled.length; i++) expect(m.scheduled[i].when).toBeCloseTo(m.scheduled[i - 1].when + m.scheduled[i - 1].duration, 5);
   await expect(page.locator(".overlay-root")).toHaveCount(0, { timeout: 16000 });
-  expect(await page.locator("#screen-stage").boundingBox()).toEqual({ x: 0, y: 0, width: 1920, height: 1080 });
+  expect(await page.locator("#screen-stage").boundingBox()).toEqual({ x: 64, y: 124, width: 1792, height: 832 });
 });
 
 test("cached goodbye plays before closing and starts no new GPU request", async ({ page }) => {
@@ -176,7 +176,7 @@ test("Escape and hub disconnect stop audio immediately and restore the baseline"
   await expect.poll(async () => (await traces(dismissedSession)).map(r => r.playbackOutcome)).toEqual(["cancelled"]);
   await expect.poll(async () => (await metrics(page)).stopped).toBeGreaterThan(0);
   await expect(page.locator(".overlay-root")).toHaveCount(0);
-  expect(await page.locator("#screen-stage").boundingBox()).toEqual({ x: 0, y: 0, width: 1920, height: 1080 });
+  expect(await page.locator("#screen-stage").boundingBox()).toEqual({ x: 64, y: 124, width: 1792, height: 832 });
   reports.length = 0; ask("本期新增客户有多少家"); await expect.poll(() => reports.some(r => r.type === "playback.started")).toBe(true);
   const before = (await metrics(page)).stopped; for (const conn of hub.connections) if (conn.role === "screen") conn.close(1011);
   await expect.poll(() => orch.state.name).toBe("ambient");

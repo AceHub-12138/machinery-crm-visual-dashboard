@@ -10,7 +10,7 @@ import { formatClock } from "@/lib/format";
  * 同步触发一次渲染，React 19 会判为级联渲染；而且服务端首帧未订阅时钟，
  * getServerSnapshot 返回 0 让首帧渲染成占位符，hydration 也不会不匹配。
  */
-function useClock() {
+export function useClock() {
   const listeners = useRef(new Set<() => void>());
   const snapshot = useRef(0);
   const timer = useRef<number | null>(null);
@@ -40,82 +40,25 @@ function useClock() {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
-export function HeaderBar({
-  periodLabel,
-  isSample,
-}: {
-  periodLabel: string;
-  isSample: boolean;
+export function HeaderBar({ periodLabel, isSample, displayNotice = false, freshnessLabel = "" }: {
+  periodLabel: string; isSample: boolean; displayNotice?: boolean; freshnessLabel?: string;
 }) {
   const epoch = useClock();
-  const now = epoch > 0 ? new Date(epoch) : null;
-
-  return (
-    <header className="relative z-10 flex h-[88px] shrink-0 items-center justify-between border-b border-[var(--hairline)] px-7">
-      {/* 品牌区 */}
-      <div className="flex items-center gap-4">
-        <div className="flex size-14 items-center justify-center rounded-[var(--radius)] border border-[var(--panel-border-strong)] bg-[rgba(238,125,44,0.1)]">
-          <span className="hud-en text-brand-sm leading-none font-bold tracking-[0.06em] text-[var(--brand-orange)]">
-            DC
-          </span>
-        </div>
-        <div>
-          <p className="hud-en text-kicker leading-none tracking-[0.34em] text-[var(--ink-3)]">
-            DACHUAN · CRM COMMAND
-          </p>
-          <h1 className="mt-2 text-brand leading-none font-bold tracking-[0.1em] text-[var(--ink)]">
-            经营指挥舱
-          </h1>
-        </div>
+  return <header className="nexus-header">
+    <div className="nexus-brand">
+      {/* Static local brand asset; original pixels remain available for LED output. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/brand/logo-light.png" alt="大川机床 DACHUAN MACHINE" />
+      <div className="nexus-brand-heading"><h1>销售经营中心</h1><p className="nexus-period">统计周期：{periodLabel.replace(/(\d{4})年(\d{1,2})月/, "$1 年 $2 月")}</p></div>
+    </div>
+    <div className="nexus-header-right">
+      <p className="nexus-slogan">数据驱动 · 精密运营 · 客户成长 · 大川智造</p>
+      <div className="nexus-clock-row">
+        <span className="nexus-standby">◉ 小川 · STANDBY</span>
+        {freshnessLabel ? <span className="nexus-freshness" role="status">{freshnessLabel}</span> : null}
+        {displayNotice ? <span className="nexus-notice">展厅演示数据</span> : isSample ? <span className="nexus-notice">演示数据</span> : null}
+        <time>{epoch ? formatClock(new Date(epoch)) : "--:--:--"}</time>
       </div>
-
-      {/* 右侧信息区 */}
-      <div className="flex items-center gap-7">
-        <div className="text-right">
-          <p className="text-micro leading-none tracking-[0.2em] text-[var(--ink-3)]">统计周期</p>
-          <p className="mt-2 text-label leading-none font-medium text-[var(--ink)]">
-            {periodLabel}
-          </p>
-        </div>
-
-        <span className="h-11 w-px bg-[var(--hairline)]" />
-
-        <div className="text-right">
-          <p className="text-micro leading-none tracking-[0.2em] text-[var(--ink-3)]">北京时间</p>
-          <p className="hud-en mt-2 text-label leading-none font-semibold text-[var(--ink)]">
-            {now ? formatClock(now) : "--:--:--"}
-          </p>
-        </div>
-
-        <span className="h-11 w-px bg-[var(--hairline)]" />
-
-        {isSample ? (
-          <div className="status-pill status-pill-sample flex items-center gap-2.5 px-3.5 py-2">
-            <span className="text-micro leading-none tracking-[0.12em] text-[var(--c-pending)]">
-              演示数据
-            </span>
-          </div>
-        ) : (
-          <div className="status-pill status-pill-live flex items-center gap-2.5 px-3.5 py-2">
-            <span className="live-dot" />
-            <span className="hud-en text-micro leading-none tracking-[0.16em] text-[var(--c-live)]">
-              LIVE
-            </span>
-          </div>
-        )}
-
-        <button
-          type="button"
-          onClick={() => {
-            const el = document.documentElement;
-            if (document.fullscreenElement) void document.exitFullscreen();
-            else void el.requestFullscreen?.();
-          }}
-          className="rounded-[var(--radius)] border border-[var(--hairline)] px-3.5 py-2 text-micro text-[var(--ink-2)] transition-colors duration-[var(--t-fast)] hover:border-[var(--panel-border-strong)] hover:text-[var(--brand-orange)]"
-        >
-          全屏
-        </button>
-      </div>
-    </header>
-  );
+    </div>
+  </header>;
 }

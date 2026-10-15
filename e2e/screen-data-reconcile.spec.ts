@@ -99,40 +99,31 @@ test("negative amount, count and units retain a visible pending card and safe sp
 });
 
 
-test("negative metrics stay pending after a screen refresh at both sizes", async ({ page }) => {
-  const p = validatePublicPayload(structuredClone(fixture));
-  p.kpis.periodContractAmount = "-98765"; p.kpis.periodNewContracts = -98765; p.kpis.totalCustomers = -98765;
-  p.collection.totalPaidAmount = "-98765"; p.collection.totalUnpaidAmount = "-98765";
-  p.delivery.summary.unitCount = -98765; p.delivery.summary.shipmentCount = -98765; p.delivery.summary.regionCount = 1;
-  p.delivery.regionUnits = [{ province: "山东省", unitCount: -98765, shipmentCount: -98765 }];
-  p.delivery.unresolvedRegionTotals = { unitCount: 0, shipmentCount: 0 };
-  p.delivery.summary.todayDue = -98765; p.delivery.milestones[0].unitCount = -98765;
-  const screen = fromPublicSalesScreenPayload(p);
-  await page.route("**/api/screen/crm", route => route.fulfill({ json: screen }));
+test("negative metrics stay pending after a screen refresh at both sizes", async ({ page, request }) => {
+  const { nexusPayload, setNexusPayload, SCREEN_VIEWPORTS, screenUrl } = await import('./nexus-test-data');
+  const { auditText: auditNexusText } = await import('./nexus-layout-audit');
   await page.clock.install();
-  for (const viewport of [{ width: 1920, height: 1080 }, { width: 1280, height: 720 }, { width: 3840, height: 2160 }]) {
-    await page.setViewportSize(viewport); await page.goto("/screen/sales");
-    await expect(page.getByRole("heading", { name: "经营指挥舱" })).toBeVisible();
-    await expect(page.locator("#screen-stage")).toHaveAttribute("style", /scale/);
-    await page.clock.fastForward(61_000);
-    await expect(page.locator("[data-screen-panel=kpi]")).toContainText("数据待核对");
-    for (const panel of ["kpi", "map", "collection", "reminders", "delivery"]) {
-      await expect(page.locator(`[data-screen-panel=${panel}]`)).toContainText("数据待核对");
-      await expect(page.locator(`[data-screen-panel=${panel}]`)).not.toContainText("98765");
+  for (const viewport of SCREEN_VIEWPORTS) {
+    const normal = nexusPayload(); await setNexusPayload(request, normal);
+    await page.setViewportSize(viewport); await page.goto(screenUrl(viewport.width));
+    await expect(page.locator('.nexus-money-hero')).toHaveAttribute('data-fit-ellipsis', 'false');
+    const negative = nexusPayload();
+    negative.kpis.periodContractAmount = '-987654.32'; negative.kpis.periodPaidAmount = '-987654.32';
+    negative.kpis.periodNewContracts = -7; negative.kpis.totalCustomers = -7;
+    negative.collection.totalPaidAmount = '-987654.32'; negative.collection.totalUnpaidAmount = '-987654.32';
+    negative.delivery.summary.todayDue = -7; negative.delivery.summary.unitCount = -7;
+    negative.delivery.summary.shipmentCount = -7; negative.delivery.summary.regionCount = 1;
+    negative.delivery.regionUnits = [{ province: '山东省', unitCount: -7, shipmentCount: -7 }];
+    negative.delivery.unresolvedRegionTotals = { unitCount: 0, shipmentCount: 0 };
+    await setNexusPayload(request, negative);
+    const response = page.waitForResponse(r => r.request().method() === 'POST');
+    await page.clock.runFor(60_100); await response;
+    for (const selector of ['.nexus-contract','.nexus-operations','.nexus-collection','.nexus-alerts']) {
+      await expect(page.locator(selector)).toContainText('数据待核对'); await expect(page.locator(selector)).not.toContainText('-987654.32');
     }
-    await expect(page.locator(".collection-track")).toHaveCount(0);
-    for(const selector of [".kpi-hero .fit-text", ".ring-box .fit-text"]) {
-      const pending=page.locator(selector);await expect(pending).toHaveText("数据待核对");
-      const measure=await pending.evaluate(el=>{
-        const css=getComputedStyle(el);const range=document.createRange();range.selectNodeContents(el);
-        const rects=[...range.getClientRects()].filter(r=>r.width>0);const box=el.getBoundingClientRect();
-        return {font:parseFloat(css.fontSize),nowrap:css.whiteSpace,singleLine:Math.max(...rects.map(r=>r.top))<Math.min(...rects.map(r=>r.bottom)),contained:rects.every(r=>r.left>=box.left-1 && r.right<=box.right+1)};
-      });
-      expect(measure.font).toBeGreaterThanOrEqual(18);expect(measure.nowrap).toBe("nowrap");expect(measure.singleLine).toBe(true);expect(measure.contained).toBe(true);
-    }
-    const spills = await page.locator("#screen-stage").evaluate(el => [...el.querySelectorAll<HTMLElement>("p, span")].filter(node => !node.closest(".sr-only") && node.childElementCount === 0 && node.textContent?.includes("数据待核对") && node.scrollWidth > node.clientWidth + 1).map(node => ({text: node.textContent, className: node.className})));
-    expect(spills).toEqual([]);
-    expect(await auditText(page,"#screen-stage")).toEqual([]);
-    await page.screenshot({ path: `docs/screen-data-repair-evidence/screen-negative-${viewport.width}.png`, animations: "disabled" });
+    const primary = page.locator('.nexus-money-hero'); await expect(primary).toHaveText('数据待核对');
+    const measured = await primary.evaluate(el => { const css=getComputedStyle(el), range=document.createRange(); range.selectNodeContents(el); const rects=[...range.getClientRects()].filter(r=>r.width), box=el.getBoundingClientRect();return {font:parseFloat(css.fontSize),nowrap:css.whiteSpace,singleLine:Math.max(...rects.map(r=>r.top))<Math.min(...rects.map(r=>r.bottom)),contained:rects.every(r=>r.left>=box.left-1 && r.right<=box.right+1)}; });
+    expect(measured.font).toBeGreaterThanOrEqual(24); expect(measured.nowrap).toBe('nowrap'); expect(measured.singleLine).toBe(true); expect(measured.contained).toBe(true);
+    expect(await auditNexusText(page)).toEqual([]);
   }
 });

@@ -1,0 +1,24 @@
+import { chromium } from '@playwright/test';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+const output = path.resolve('.review/nexus-p2-motion'); mkdirSync(output, { recursive: true });
+const browser = await chromium.launch();
+const context = await browser.newContext({ viewport: { width: 1792, height: 832 }, deviceScaleFactor: 1, recordVideo: { dir: path.join(output, 'video'), size: { width: 1792, height: 832 } } });
+const started = Date.now(), page = await context.newPage();
+await page.goto('http://127.0.0.1:3036/screen/sales?debug=1');
+await page.locator('.nexus-motion-debug').waitFor(); await page.evaluate(() => document.fonts.ready);
+await page.addStyleTag({ content: '.nexus-motion-debug { display:none !important; }' });
+await page.waitForTimeout(9000);
+await page.screenshot({ path: path.join(output, 'ambient-real-1792.png') });
+await page.getByRole('button', { name: '触发共振', includeHidden: true }).evaluate(el => el.click());
+await page.waitForTimeout(5000);
+const audit = await page.evaluate(() => {
+  const root = document.querySelector('#screen-stage'), panel = document.querySelector('.nexus-motion-debug');
+  return { viewport: { width: innerWidth, height: innerHeight }, routes: root.querySelectorAll('[data-route-baseline]').length, pulse: panel.textContent, brightRoutes: root.querySelectorAll('[data-route-bright="true"]').length, notice: root.querySelector('.nexus-notice')?.textContent, baselineStyle: [...root.querySelectorAll('[data-route-baseline]')].every(el => el.getAttribute('stroke-width') === '1.5' && el.getAttribute('stroke-opacity') === '0.4' && el.getAttribute('stroke') === '#EE7D2C') };
+});
+writeFileSync(path.join(output, 'real-evidence-audit.json'), JSON.stringify(audit, null, 2));
+await page.screenshot({ path: path.join(output, 'pulse-5s-real-1792.png') });
+await page.waitForTimeout(Math.max(0, 62_000 - (Date.now() - started)));
+const video = page.video(); await context.close();
+console.log(JSON.stringify({ video: await video.path(), elapsedMs: Date.now() - started, routes: audit.routes }));
+await browser.close();

@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-CN">
-      <body style={systemFonts}>{children}</body>
+    <html lang="zh-CN" style={{ background: "#07080a", colorScheme: "dark" }}>
+      <body style={{ ...systemFonts, background: "#07080a" }}>{children}</body>
     </html>
   );
 }
