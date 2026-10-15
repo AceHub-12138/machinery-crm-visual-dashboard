@@ -21,7 +21,19 @@ jobs:
       - run: pnpm lint
       - run: pnpm build
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e
+      - name: Install and lock Chinese fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra
+          mkdir -p "$HOME/.config/fontconfig/conf.d"
+          cp .github/workflows/noto-cjk.conf "$HOME/.config/fontconfig/conf.d/99-nexus-cjk.conf"
+          fc-cache -f
+          for family in 'PingFang SC' 'Microsoft YaHei' 'Noto Sans SC' 'sans-serif'; do
+            fc-match -f '%{family} | %{style} | weight=%{weight} | %{file}\n' "$family:lang=zh-cn:weight=180"
+          done
+      - name: Verify browser Chinese font and weight
+        run: node .github/workflows/font-probe.cjs
+      - run: pnpm exec playwright test --config=.github/workflows/browser.config.ts
       - uses: actions/upload-artifact@v4
         if: always()
         with:
