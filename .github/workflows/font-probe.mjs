@@ -44,6 +44,8 @@ async function main() {
       probe.style.cssText = 'position:fixed;left:0;top:0;font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;font-size:34px;font-weight:600';
       document.body.append(probe);
     });
+    await page.locator('#font-weight-probe').evaluate(el => el.getBoundingClientRect().width);
+    await page.evaluate(() => document.fonts.ready);
     const fonts = await record('#font-weight-probe', 'semibold-600');
     if (!fonts.some(font => /SemiBold/i.test(font.postScriptName))) throw new Error('A real SemiBold face is required');
     await page.locator('#font-weight-probe').evaluate(el => el.remove());
