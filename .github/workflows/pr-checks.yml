@@ -24,9 +24,11 @@ jobs:
       - name: Install and lock Chinese fonts
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra python3-fonttools
           mkdir -p "$HOME/.config/fontconfig/conf.d"
           cp .github/workflows/noto-cjk.conf "$HOME/.config/fontconfig/conf.d/99-nexus-cjk.conf"
+          # The distro packages provide 500 and 700 but no real 600 face.
+          python3 .github/workflows/prepare-semibold.py "$HOME/.local/share/fonts/NotoSansCJKsc-SemiBold.ttf"
           fc-cache -f
           for family in 'PingFang SC' 'Microsoft YaHei' 'Noto Sans SC' 'sans-serif'; do
             fc-match -f '%{family} | %{style} | weight=%{weight} | %{file}\n' "$family:lang=zh-cn:weight=180"
