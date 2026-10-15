@@ -32,7 +32,7 @@ jobs:
             fc-match -f '%{family} | %{style} | weight=%{weight} | %{file}\n' "$family:lang=zh-cn:weight=180"
           done
       - name: Verify browser Chinese font and weight
-        run: node .github/workflows/font-probe.cjs
+        run: node .github/workflows/font-probe.mjs
       - run: pnpm exec playwright test --config=.github/workflows/browser.config.ts
       - uses: actions/upload-artifact@v4
         if: always()

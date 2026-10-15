@@ -1,6 +1,6 @@
-const { chromium } = require('@playwright/test');
-const { spawn } = require('node:child_process');
-const { mkdir } = require('node:fs/promises');
+import { chromium } from '@playwright/test';
+import { spawn } from 'node:child_process';
+import { mkdir } from 'node:fs/promises';
 
 // Only fixture data is served. Never inherit public-screen credentials in this probe.
 async function main() {
