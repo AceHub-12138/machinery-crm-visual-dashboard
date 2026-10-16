@@ -57,7 +57,7 @@ test("native mock and fixture, route linkage, and stale/unavailable transitions"
   await audit(page, "1792-mock");
   await verifyVoiceEntry(page);
   await page.goto(`/screen/sales?voiceLive=1&lite=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
-  await expect(page.getByText("展厅演示数据")).toBeVisible();
+  await expect(page.locator('.nexus-notice')).toHaveCount(0);
   await audit(page, "1792-fixture");
   const row = page.locator('.nexus-feed-item').nth(2), key = await row.getAttribute('data-route-key');
   await row.click();

@@ -752,7 +752,7 @@ a {
 .nexus-panel { position: relative; border: 1px solid rgba(238,125,44,.16); border-radius: 6px; background: linear-gradient(180deg,rgba(22,25,29,.56),rgba(14,16,20,.22)); padding: 0 16px 24px; }
 .nexus-title { position: relative; display: flex; align-items: center; gap: 12px; margin: 0; height: 42px; font-size: 20px; font-weight: 700; color: #e8ecf2; background: linear-gradient(90deg,rgba(238,125,44,.12),transparent 55%); }
 .nexus-title > span { color: #ee7d2c; font-size: 24px; }
-.nexus-currency { position: absolute; bottom: 4px; right: 16px; font-size: 18px; color: #8a93a0; }
+.nexus-currency { margin-left: auto; flex: none; font-size: 18px; font-weight: 400; color: #8a93a0; letter-spacing: 0; line-height: 1.5; }
 .nexus-money { color: #ee7d2c; line-height: 1.2; font-family: inherit; font-variant-numeric: tabular-nums; font-weight: 700; overflow: visible; text-overflow: clip; }
 .nexus-money-hero { margin-top: 6px; margin-bottom: 6px; line-height: 1.12; }
 .nexus-ruler { position: relative; height: 34px; margin: 8px 4px 0; padding: 7px; border-radius: 20px; border: 2px solid #56606b; background: repeating-linear-gradient(90deg,transparent 0 12px,#76808955 12px 13px),#080b10; box-shadow: inset 0 0 0 3px #121820; }
@@ -827,12 +827,18 @@ a {
 .nexus-unresolved { position: absolute; bottom: 0; left: 0; font-size: 18px; color: #f2b84b; }
 .nexus-feed { height: 100%; }
 .nexus-feed > .nexus-title { background-size: var(--rail-width) 100%; background-repeat: no-repeat; }
-.nexus-feed-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 20px; border-top: 2px solid #b05e24; padding-top: 15px; }
-.nexus-feed-item { position: relative; height: 116px; padding: 4px 14px; color: #ecf0f4; border: 0; border-left: 1px solid #4e535a; background: linear-gradient(180deg,#0b0e1299,#090c10); text-align: left; cursor: pointer; }
+.nexus-feed-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 20px; height: calc(100% - 42px); padding-top: 36px; }
+.nexus-feed-item { position: relative; min-width: 0; height: 102px; padding: 0 14px; display: grid; grid-template-columns: 92px minmax(0,1fr); grid-template-rows: 58px 34px; gap: 6px 12px; align-content: start; color: #ecf0f4; border: 0; border-left: 1px solid #4e535a; background: linear-gradient(180deg,#0b0e1299,#090c10); text-align: left; cursor: pointer; }
 .nexus-feed-item[aria-pressed="true"] { box-shadow: inset 0 -2px #ee7d2c; }
-.nexus-feed-index { position: absolute; top: -29px; left: 15px; border: 1px solid #e8ecf2; border-radius: 50%; background: #5b3520; width: 28px; height: 28px; text-align: center; font-size: 18px; line-height: 26px; }
-.nexus-model { display: block; padding: 12px 0; color: #fff; font-size: 28px; font-weight: 700; line-height: 1.5; white-space: nowrap; }
-.nexus-feed-bottom { display: flex; align-items: baseline; gap: 8px; margin-top: 10px; font-size: 18px; line-height: 1.5; border-top: 1px solid #ee7d2c77; padding-top: 6px; white-space: nowrap; }
+.nexus-feed-index { position: absolute; top: -30px; left: 15px; border: 1px solid #e8ecf2; border-radius: 50%; background: #5b3520; width: 28px; height: 28px; text-align: center; font-size: 18px; line-height: 26px; }
+.nexus-machine-thumb { width: 92px; height: 58px; align-self: center; filter: drop-shadow(0 3px 8px #ee7d2c22); }
+.nexus-machine-halo { fill: #ee7d2c12; stroke: #ee7d2c66; stroke-width: .8; }
+.nexus-machine-front { fill: #252a31; stroke: #a5adb6; }
+.nexus-machine-side { fill: #151b22; stroke: #707c8b; }
+.nexus-machine-window { fill: #090f15; stroke: #ee7d2c; }
+.nexus-machine-detail { fill: none; stroke: #ee7d2c; }
+.nexus-model { display: block; align-self: center; padding: 0; color: #fff; font-size: 28px; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+.nexus-feed-bottom { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 8px; margin-top: 0; font-size: 18px; line-height: 1.5; border-top: 1px solid #ee7d2c77; padding-top: 6px; white-space: nowrap; }
 .nexus-feed-region { margin-left: auto; text-align: right; }
 .nexus-feed-bottom > * { flex-shrink: 0; }
 .nexus-stage[data-layout="4x3"] .nexus-feed-item { padding-inline: 4px; }
@@ -868,9 +874,9 @@ a {
 .nexus-map-labels .nexus-local-units { white-space: nowrap; font-size: 13px; line-height: 18px; color: #EE7D2C; opacity: .85; -webkit-text-stroke: 2px #11151B; paint-order: stroke; }
 .nexus-map-reflection { width: 80%; height: 46px; left: 10%; right: auto; bottom: calc(var(--map-base-bottom) - 23px); transform: none; background: radial-gradient(ellipse at center,#ee7d2c33,transparent 70%); border-color: #ee7d2c33; box-shadow: 0 0 14px #ee7d2c0a; }
 .nexus-feed-grid { position: relative; border-top: 0; }
-.nexus-feed-grid::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: linear-gradient(90deg,transparent,#ee7d2c 4%,#ffb36b 50%,#ee7d2c 96%,transparent); box-shadow: 0 0 8px #ee7d2c88; }
+.nexus-feed-grid::before { content: ""; position: absolute; left: 0; right: 0; top: 19px; height: 2px; background: linear-gradient(90deg,transparent,#ee7d2c 4%,#ffb36b 50%,#ee7d2c 96%,transparent); box-shadow: 0 0 8px #ee7d2c88; }
 .nexus-feed-item { border-left-color: #4e535a55; background: linear-gradient(180deg,#0b0e1233,transparent); }
-.nexus-feed-item:not(:last-child)::after { content: ""; position: absolute; top: -21px; left: calc(50% + 39px); width: 36px; height: 12px; transform: translateX(-50%); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 12' fill='none' stroke='%23ee7d2c' stroke-width='2'%3E%3Cpath d='M3 1l5 5-5 5M15 1l5 5-5 5' stroke-opacity='.45'/%3E%3Cpath d='M27 1l5 5-5 5'/%3E%3C/svg%3E") center / contain no-repeat; }
+.nexus-feed-item:not(:last-child)::after { content: ""; position: absolute; top: -22px; left: calc(50% + 39px); width: 36px; height: 12px; transform: translateX(-50%); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 12' fill='none' stroke='%23ee7d2c' stroke-width='2'%3E%3Cpath d='M3 1l5 5-5 5M15 1l5 5-5 5' stroke-opacity='.45'/%3E%3Cpath d='M27 1l5 5-5 5'/%3E%3C/svg%3E") center / contain no-repeat; }
 .nexus-feed-index { border-color: #ee7d2c; background: #1b1009; color: #ffb36b; box-shadow: 0 0 10px #ee7d2c88,inset 0 0 6px #ee7d2c55; }
 .nexus-feed-item[aria-pressed="true"] { background: linear-gradient(180deg,#ee7d2c1f,transparent 75%); }
 .nexus-feed-item[aria-pressed="true"] .nexus-feed-index { background: #ee7d2c; color: #fff; }

@@ -222,12 +222,13 @@
 .overlay-map-route { fill: none; stroke: #ffb65c88; stroke-width: 1.8; }
 .overlay-map-point { fill: var(--ov-core); stroke: var(--ov-ink); stroke-width: 2; filter: drop-shadow(0 0 5px #ffb65c99); }
 .overlay-map-factory { fill: var(--ov-ink); stroke: var(--ov-core); stroke-width: 3; filter: drop-shadow(0 0 7px #ffb65c99); }
-.overlay-shipments-block { height: 100%; display: grid; grid-template-rows: 34px 220px 14px; gap: 8px; }
+.overlay-shipments-block { height: 100%; display: grid; grid-template-rows: 34px 222px 24px 8px; gap: 4px; align-content: start; }
+.overlay-shipment-caption { margin: 0; font-size: var(--ov-fs-meta); line-height: 24px; color: #ffe8c799; }
 .overlay-shipment-badges { display: flex; justify-content: center; gap: 20px; font-size: var(--ov-fs-meta); color: #ffe8c799; }
 .overlay-shipment-badges > span { padding: 3px 16px; border: 1px solid #ffb65c33; border-radius: 16px; }
 .overlay-shipment-badges strong { margin-left: 8px; color: var(--ov-ink); }
 .overlay-shipment-badges .is-accent { color: var(--ov-core); border-color: #ffb65c77; }
-.overlay-pages-window { overflow: hidden; min-width: 0; }
+.overlay-pages-window { overflow: hidden; min-width: 0; padding-block: 1px; }
 .overlay-pages-track { display: flex; height: 100%; transition: transform 400ms ease-in-out; }
 .overlay-shipment-page { flex: 0 0 100%; min-width: 0; }
 .overlay-shipment-row { display: grid; grid-template-columns: minmax(0, 1fr) 160px 136px 70px; gap: 12px; align-items: center; height: 44px; border-bottom: 1px solid #ffb65c16; font-size: var(--ov-fs-meta); }
@@ -290,3 +291,11 @@
 .overlay-shipment-row[data-has-contract="false"] { grid-template-columns: minmax(0, 1fr) 136px 70px; }
 
 .overlay-title-wrap:has(.overlay-title-next) .overlay-card-title { height: 44px; }
+
+/* Keep all five shipment rows plus caption/paging in their own data area.
+   A two-line title and the audio notice need 120px; spacing is explicit. */
+.overlay-card[data-card-kind="customers-shipments"] .overlay-card-body:has(.overlay-audio-notice) {
+  padding-bottom: 24px;
+  gap: 12px;
+  grid-template-rows: 120px 302px 170px 44px;
+}

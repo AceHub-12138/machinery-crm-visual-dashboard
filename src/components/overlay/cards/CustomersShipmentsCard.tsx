@@ -17,7 +17,7 @@ export function CustomersShipmentsCard({card, pageIndex}: {card: Extract<AnswerC
         {rows.length === 0 ? <p className="overlay-empty">暂无发运明细</p> : null}
       </div>)}
     </div></div>
-    <p>{listingCopy(card.rows.length,card.sampleTotal)}</p>
+    <p className="overlay-shipment-caption">{listingCopy(card.rows.length,card.sampleTotal)}</p>
     <div className="overlay-page-dots" aria-label={`第 ${activePage + 1} 页，共 ${pages.length} 页`}>{pages.map((_, i) => <i key={i} className={i === activePage ? "is-active" : ""} />)}</div>
   </div>;
 }

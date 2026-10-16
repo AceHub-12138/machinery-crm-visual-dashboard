@@ -2,11 +2,12 @@
 import { useId } from "react";
 import { AnimatedNumber } from "./AnimatedNumber";
 import { FitText } from "./FitText";
+import { MachineThumbnail } from "./MachineThumbnail";
 import { formatCount, formatMoney, formatMoneyParts, formatPercent, formatShortDate, hasNegativeMetric } from "@/lib/format";
 import { feedCity, latestRoutes } from "@/lib/feed-mask";
 import type { PublicSalesScreenPayload } from "@/lib/voice/public-payload";
 
-export function NexusTitle({ children }: { children: React.ReactNode }) { return <h2 className="nexus-title"><span className="nexus-title-square" aria-hidden="true"/>{children}<span aria-hidden="true">›</span></h2>; }
+export function NexusTitle({ children, currency = false }: { children: React.ReactNode; currency?: boolean }) { return <h2 className="nexus-title"><span className="nexus-title-square" aria-hidden="true"/>{children}<span aria-hidden="true">›</span>{currency ? <small className="nexus-currency">人民币口径</small> : null}</h2>; }
 export function NexusMoney({ value, hero = false, max }: { value: string; hero?: boolean; max?: number }) {
   const parts = formatMoneyParts(Number(value));
   const text = formatMoney(Number(value));
@@ -18,7 +19,7 @@ export function ContractGauge({ business }: { business: PublicSalesScreenPayload
   const invalid = hasNegativeMetric(k.periodContractAmount, c.targetAmount, c.targetRate, c.targetVisualRate, c.exceededAmount);
   const fill = Math.min(100, Math.max(0, c.targetVisualRate));
   return <section className="nexus-panel nexus-contract" data-screen-panel="contract">
-    <NexusTitle>本月合同额</NexusTitle><NexusMoney value={k.periodContractAmount} hero max={c.exceeded ? 56 : 72} />
+    <NexusTitle currency>本月合同额</NexusTitle><NexusMoney value={k.periodContractAmount} hero max={c.exceeded ? 56 : 72} />
     {target && !invalid ? <div className="nexus-ruler-group"><div className={`nexus-ruler ${c.exceeded ? "is-exceeded" : ""}`} role="meter" aria-label="月度目标达成" aria-valuemin={0} aria-valuemax={100} aria-valuenow={fill}>
       <div className="nexus-ruler-fill" style={{ width: `${fill}%` }}>{!c.exceeded && fill > 0 ? <i className="nexus-ruler-knob" /> : null}<span className="nexus-ruler-sweep-track"><i className="nexus-ruler-sweep"/></span></div>{c.exceeded ? <i className="nexus-overrun-triangle" /> : null}
     </div><div className="nexus-ruler-ticks" aria-label="合同目标刻度"><span>0</span><span>{formatMoney(Number(c.targetAmount) / 2)}</span><span>{formatMoney(Number(c.targetAmount))}</span></div></div> : !target ? <div className="nexus-ruler-group" data-target-configured="false"><div className="nexus-ruler nexus-ruler-empty" aria-label="月度目标未设定"/><div className="nexus-ruler-ticks" aria-hidden="true">&nbsp;</div></div> : <p className="nexus-target-message">数据待核对</p>}
@@ -28,7 +29,6 @@ export function ContractGauge({ business }: { business: PublicSalesScreenPayload
       <div><p>达成</p><FitText min={18} max={30} text={target ? formatPercent(c.targetRate) : "—"} className={target ? "nexus-orange" : "nexus-unset"}>{target ? <AnimatedNumber value={c.targetRate} format={formatPercent}/> : "—"}</FitText></div>
       <div><p>新签</p><strong className="nexus-orange"><AnimatedNumber value={k.periodNewContracts} format={formatCount}/><small> 份</small></strong></div>
     </div>
-    <span className="nexus-currency">人民币口径</span>
   </section>;
 }
 function AlertIcon({ index }: { index: number }) {
@@ -62,7 +62,7 @@ export function CollectionDial({ business }: { business: PublicSalesScreenPayloa
   const circumference = 2 * Math.PI * 84, orbit = 2 * Math.PI * 114;
   const paid = circumference * rate / 100, gap = rate > 0 && rate < 100 ? 3 : 0;
   const id = useId(), progressId = `${id}-progress`;
-  return <section className="nexus-panel nexus-collection" data-screen-panel="collection"><NexusTitle>合同与回款</NexusTitle>
+  return <section className="nexus-panel nexus-collection" data-screen-panel="collection"><NexusTitle currency>合同与回款</NexusTitle>
     <div className="nexus-collection-body"><div className="nexus-dial" data-invalid={invalid}>
       <svg className="nexus-dial-scale" viewBox="0 0 240 240" aria-hidden="true">
         <defs><linearGradient id={progressId} x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#FFB36B"/><stop offset="100%" stopColor="#C9561C"/></linearGradient></defs>
@@ -77,7 +77,6 @@ export function CollectionDial({ business }: { business: PublicSalesScreenPayloa
         <circle cx="120" cy="120" r="73" stroke="#EE7D2C" strokeOpacity=".3"/>
       </svg><div className="nexus-dial-center"><p>累计回款率</p><strong>{invalid ? "数据待核对" : <AnimatedNumber value={c.collectionRate} format={formatPercent}/>}</strong></div>
     </div><div className="nexus-paid"><div className="nexus-paid-received"><p>已收</p><NexusMoney value={c.totalPaidAmount}/></div><div className="nexus-paid-unpaid"><p>未收</p><NexusMoney value={c.totalUnpaidAmount}/></div></div></div>
-    <span className="nexus-currency">人民币口径</span>
   </section>;
 }
 export function DeliveryAlerts({ business }: { business: PublicSalesScreenPayload }) {
@@ -92,6 +91,7 @@ export function ShipmentFeed({ business, activeKey, onSelect }: { business: Publ
   return <section className="nexus-feed" data-screen-panel="delivery" aria-label="交付里程碑"><NexusTitle>最新发货动态</NexusTitle>
     <div className="nexus-feed-grid">{rows.map((r, index) => <button type="button" className="nexus-feed-item" key={r.key} data-route-key={r.key} aria-pressed={activeKey === r.key} onClick={() => onSelect(r.key)} onFocus={() => onSelect(r.key)}>
       <span className="nexus-feed-index">{String(index + 1).padStart(2, "0")}</span>
+      <MachineThumbnail model={r.equipmentModel}/>
       <FitText text={r.equipmentModel || "型号待确认"} min={18} max={28} className="nexus-model">{r.equipmentModel || "型号待确认"}</FitText>
       <div className="nexus-feed-bottom"><time>{formatShortDate(r.shipmentDate)}</time><span className="nexus-feed-units">{formatCount(r.unitCount)} 台</span><span className="nexus-feed-region">{feedCity(r, routes)}</span></div>
     </button>)}</div>{!rows.length ? <p className="nexus-empty">本期暂无发货动态</p> : null}

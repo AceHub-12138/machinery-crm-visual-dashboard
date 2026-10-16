@@ -40,8 +40,8 @@ export function useClock() {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
-export function HeaderBar({ periodLabel, isSample, displayNotice = false, freshnessLabel = "" }: {
-  periodLabel: string; isSample: boolean; displayNotice?: boolean; freshnessLabel?: string;
+export function HeaderBar({ periodLabel, demoMode = false, displayNotice = false, freshnessLabel = "" }: {
+  periodLabel: string; demoMode?: boolean; displayNotice?: boolean; freshnessLabel?: string;
 }) {
   const epoch = useClock();
   return <header className="nexus-header">
@@ -56,7 +56,7 @@ export function HeaderBar({ periodLabel, isSample, displayNotice = false, freshn
       <div className="nexus-clock-row">
         <span className="nexus-standby">◉ 小川 · STANDBY</span>
         {freshnessLabel ? <span className="nexus-freshness" role="status">{freshnessLabel}</span> : null}
-        {displayNotice ? <span className="nexus-notice">展厅演示数据</span> : isSample ? <span className="nexus-notice">演示数据</span> : null}
+        {demoMode ? <span className="nexus-notice">{displayNotice ? "展厅演示数据" : "演示数据"}</span> : null}
         <time>{epoch ? formatClock(new Date(epoch)) : "--:--:--"}</time>
       </div>
     </div>

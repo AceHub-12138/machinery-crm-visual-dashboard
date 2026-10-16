@@ -68,7 +68,9 @@ export async function auditText(page: Page, root = "#screen-stage, .overlay-root
           const style = getComputedStyle(container);
           if (compensated(container)) break;
           const box = container.getBoundingClientRect();
-          const block = style.display !== "inline" && style.display !== "contents";
+          // The translated strip deliberately overflows horizontally; its window
+          // is the clipping boundary. Audit every active page against that window.
+          const block = style.display !== "inline" && style.display !== "contents" && !container.classList.contains('overlay-pages-track');
           const clippedY = /hidden|clip|auto|scroll/.test(style.overflowY);
           const clippedX = /hidden|clip|auto|scroll/.test(style.overflowX);
           // overflow:visible may let a line exceed its own line-height; only real clipping
