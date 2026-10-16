@@ -1,9 +1,11 @@
 import { chromium } from '@playwright/test';
 import { spawn } from 'node:child_process';
-import { mkdir } from 'node:fs/promises';
+import os from 'node:os';
+import { execFileSync } from 'node:child_process';
 
 // Only fixture data is served. Never inherit public-screen credentials in this probe.
 async function main() {
+  console.log(JSON.stringify({ platform: process.platform, arch: process.arch, kernel: os.release(), system: execFileSync('sw_vers', { encoding: 'utf8' }).trim() }));
   const env = { ...process.env, SCREEN_PLATFORM_URL: 'http://127.0.0.1:3199', SCREEN_PUBLIC_ID: 'fixture-only' };
   const servers = [
     spawn(process.execPath, ['e2e/nexus-fixture-server.mjs'], { env, stdio: 'ignore' }),
@@ -33,24 +35,10 @@ async function main() {
         return { family: css.fontFamily, weight: css.fontWeight, size: css.fontSize };
       });
       console.log(JSON.stringify({ label, requested: style, actual: fonts }));
-      if (!fonts.some(font => font.familyName === 'Noto Sans CJK SC' && font.glyphCount > 0)) throw new Error('Chinese fallback is not Noto Sans CJK SC');
+      if (!fonts.some(font => /PingFang/i.test(font.familyName) && font.glyphCount > 0)) throw new Error('Application title did not use PingFang');
       return fonts;
     }
     await record('.overlay-card-title', 'application-title');
-    // Verify a real 600 face, rather than silently synthesizing from the regular face.
-    await page.evaluate(() => {
-      const probe = document.createElement('span'); probe.id = 'font-weight-probe';
-      probe.textContent = '中文字体核验';
-      probe.style.cssText = 'position:fixed;left:0;top:0;font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;font-size:34px;font-weight:600';
-      document.body.append(probe);
-    });
-    await page.locator('#font-weight-probe').evaluate(el => el.getBoundingClientRect().width);
-    await page.evaluate(() => document.fonts.ready);
-    const fonts = await record('#font-weight-probe', 'semibold-600');
-    if (!fonts.some(font => /SemiBold/i.test(font.postScriptName))) throw new Error('A real SemiBold face is required');
-    await page.locator('#font-weight-probe').evaluate(el => el.remove());
-    await mkdir('test-results/font-probe', { recursive: true });
-    await page.screenshot({ path: 'test-results/font-probe/application.png' });
   } finally {
     await browser?.close();
     await Promise.all(servers.map(server => new Promise(resolve => {

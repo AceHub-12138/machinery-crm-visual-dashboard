@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -20,25 +20,29 @@ jobs:
       - run: pnpm test
       - run: pnpm lint
       - run: pnpm build
-      - run: pnpm exec playwright install --with-deps chromium
-      - name: Install and lock Chinese fonts
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra python3-fonttools
-          mkdir -p "$HOME/.config/fontconfig/conf.d"
-          cp .github/workflows/noto-cjk.conf "$HOME/.config/fontconfig/conf.d/99-nexus-cjk.conf"
-          # The distro packages provide 500 and 700 but no real 600 face.
-          python3 .github/workflows/prepare-semibold.py "$HOME/.local/share/fonts/NotoSansCJKsc-SemiBold.ttf"
-          fc-cache -f
-          for family in 'PingFang SC' 'Microsoft YaHei' 'Noto Sans SC' 'sans-serif'; do
-            fc-match -f '%{family} | %{style} | weight=%{weight} | %{file}\n' "$family:lang=zh-cn:weight=180"
-          done
-      - name: Verify browser Chinese font and weight
-        run: node .github/workflows/font-probe.mjs
+  browser:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm exec playwright install chromium
+      - name: Record macOS system and application fonts
+        run: node .github/workflows/macos-runtime.mjs
       - run: pnpm exec playwright test --config=.github/workflows/browser.config.ts
+      - name: Verify JSON report is in the artifact directory
+        if: always()
+        run: |
+          node -e 'const fs = require("node:fs"); const path = require("node:path"); const file = path.join(process.env.GITHUB_WORKSPACE, "test-results/ci-results.json"); const report = JSON.parse(fs.readFileSync(file, "utf8")); console.log(JSON.stringify({ report: path.relative(process.env.GITHUB_WORKSPACE, file), stats: report.stats }));'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screen-browser-results
-          path: test-results/
+          path: ${{ github.workspace }}/test-results/
+          if-no-files-found: error
           retention-days: 7

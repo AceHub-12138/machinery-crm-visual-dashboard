@@ -11,5 +11,5 @@ export default defineConfig({
   })),
   outputDir: path.resolve(__dirname, "../../test-results/browser"),
   use: { ...base.use, screenshot: "only-on-failure" },
-  reporter: [["line"], ["json", { outputFile: "test-results/ci-results.json" }]],
+  reporter: [["line"], ["json", { outputFile: path.resolve(__dirname, "../../test-results/ci-results.json") }]],
 });
