@@ -1,3 +1,4 @@
+import { useExperimentalEngine } from "./gsap-engine";
 import { test, expect, type Page } from "@playwright/test";
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -232,3 +233,5 @@ test("P2 A native fixture screenshot and side-by-side design comparison", async 
   await comparison.screenshot({ path: path.join(evidence, 'nexus-synthetic-comparison.png') });
   await comparison.close();
 });
+
+test.beforeEach(async ({ page }) => { await useExperimentalEngine(page); });

@@ -17,6 +17,9 @@ export class MotionDirector {
   private started = false;
   private callbacks = new Map<string, { draw: (frame: MotionFrame) => void; significant: boolean }>();
   private listeners = new Set<() => void>();
+  private introStart = 0;
+  get introTime() { return this.frame.time - this.introStart; }
+  restartIntro() { if (!this.enabled()) return false; this.stable(); this.introStart = this.frame.time; this.introEnd = this.frame.time + motionConfig.intro; this.frame.state = "INTRO"; this.draw(); this.notify(); return true; }
   private introEnd = motionConfig.intro as number;
   private nextPulse = motionConfig.pulseInterval as number;
   private pulseStart = 0;

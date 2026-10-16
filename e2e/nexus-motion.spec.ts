@@ -1,3 +1,4 @@
+import { useExperimentalEngine } from "./gsap-engine";
 import { test, expect } from '@playwright/test';
 import { startVoiceHub, type VoiceHubServer } from '../services/voice-orchestrator/src/ws/ws-server';
 let hub: VoiceHubServer;
@@ -6,7 +7,7 @@ test.afterAll(async () => { await hub.close(); });
 test.beforeEach(async ({ request }) => { await request.get('http://127.0.0.1:3199/control?reset=1'); });
 test('SSR first paint declares normal money size before measurement', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1792, height: 832 } });
-  const page = await context.newPage(); await page.goto(`${baseURL}/screen/sales`);
+  const page = await context.newPage(); await page.goto(`${baseURL}/screen/sales${process.env.NEXUS_MOTION_ENGINE === "gsap" ? "?motion=gsap" : ""}`);
   expect(await page.locator('.nexus-money-hero').evaluate(el => getComputedStyle(el).fontSize)).toBe('72px');
   expect(await page.locator('.nexus-money-number').first().evaluate(el => getComputedStyle(el).fontSize)).toBe('72px');
   await context.close();
@@ -134,3 +135,5 @@ test('actual numeric snapshot change has one bounded tween and correct final mea
   const text = await page.locator('.nexus-money-hero').textContent(); await page.clock.runFor(5000);
   await expect(page.locator('.nexus-money-hero')).toHaveText(text!);
 });
+
+test.beforeEach(async ({ page }) => { await useExperimentalEngine(page); });

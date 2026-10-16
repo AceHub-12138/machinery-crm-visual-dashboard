@@ -1,3 +1,4 @@
+import { useExperimentalEngine } from "./gsap-engine";
 import { test, expect, type Page } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -7,7 +8,7 @@ import { nexusPayload, longNexusPayload, SCREEN_VIEWPORTS, screenUrl, setNexusPa
 import { auditText } from './nexus-layout-audit';
 
 const baseline = process.env.P13_BASELINE === '1';
-const output = path.resolve('.review/p1-3', baseline ? 'before' : 'after');
+const output = path.resolve(process.env.P13_EVIDENCE_DIR ?? '.review/p1-3', baseline ? 'before' : 'after');
 mkdirSync(output, { recursive: true });
 let hub: VoiceHubServer;
 test.beforeAll(async () => { hub = await startVoiceHub({ host: '127.0.0.1', port: 0, onMessage: (conn, raw) => { if (JSON.parse(raw).type === 'console.hello') conn.role = 'screen'; } }); });
@@ -137,3 +138,5 @@ test('demo badge requires explicit demo mode even when payload requests a notice
     if (!baseline) await expect(page.locator('.nexus-notice')).toHaveCount(visible ? 1 : 0);
   }
 });
+
+test.beforeEach(async ({ page }) => { await useExperimentalEngine(page); });

@@ -26,6 +26,15 @@ describe('MotionDirector', () => {
     r.run(149_000); expect(r.director.frame.state).toBe('AMBIENT');
     r.run(1100); expect(r.director.frame.state).toBe('PULSE');
   });
+  it('restarts intro from the current clock and rejects restart while interrupted', () => {
+    const r = rig(); r.director.start(); r.run(8000);
+    expect(r.director.restartIntro()).toBe(true); expect(r.director.introTime).toBe(0);
+    r.run(1000); expect(r.director.frame.state).toBe('INTRO');
+    r.run(1300); expect(r.director.frame.state).toBe('AMBIENT');
+    r.director.setEnvironment({ voiceActive: true }); expect(r.director.restartIntro()).toBe(false);
+    r.director.setEnvironment({ voiceActive: false, reduced: true }); expect(r.director.restartIntro()).toBe(false);
+    r.director.dispose(); expect(r.pending.size).toBe(0);
+  });
   it('hidden page pauses the clock, clears pulse, and resumes stable without catch-up', () => {
     const r = rig(); r.director.start(); r.run(2500); r.director.triggerPulse(); r.run(5000);
     r.director.setEnvironment({ pageVisible: false }); const time = r.director.frame.time;
