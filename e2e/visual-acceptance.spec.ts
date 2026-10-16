@@ -3,7 +3,6 @@ import {readFileSync} from "node:fs";
 import {mkdir} from "node:fs/promises";
 import {startVoiceHub,type VoiceHubServer} from "../services/voice-orchestrator/src/ws/ws-server";
 import {buildIntentAnswer} from "../src/lib/voice/intent-answers";
-import {fromPublicSalesScreenPayload} from "../src/lib/public-screen-payload";
 import {validatePublicPayload} from "../src/lib/voice/public-payload";
 import {displaySpoken} from "../src/lib/voice/card-presentation";
 import {PROTECTED_WORDS} from "../src/lib/text-layout";
@@ -62,22 +61,42 @@ test("word audit detects an unwrapped renderer splitting 区域 and 距离",asyn
     const findings=await auditText(page,"#word-probe");for(const word of ["区域","距离"])expect(findings.some(f=>f.kind==="word-split" && f.text===word)).toBe(true);
   }
 });
-for(const empty of [false,true])test(`public contract tail ${empty ? "empty" : "masked"}`,async({page})=>{
-  const p=validatePublicPayload(structuredClone(fixture));for(const row of p.delivery.reminders.overdue)row.contractNumber=empty ? null : "****0123";for(const row of p.delivery.milestones)row.contractNumber=empty ? null : "****0123";
-  await page.route("**/api/screen/crm",route=>route.fulfill({json:fromPublicSalesScreenPayload(p)}));await page.clock.install();await page.goto("/screen/sales");await page.clock.fastForward(61000);
-  const group=page.locator('[data-reminder="overdue"]');await expect(group.locator("li")).toHaveCount(2);
-  if(empty){await expect(group.locator("[data-contract-tail]")).toHaveCount(0);await expect(group).not.toContainText("尾号");}
-  else{
-    for(const tail of await group.locator("[data-contract-tail]").all())await expect(tail).toHaveText("尾号 0123");
-    await page.evaluate(()=>document.fonts.load('600 18px "Rajdhani"'));
-    const metrics=await group.locator(".contract-tail-digits").first().evaluate(el=>{const css=getComputedStyle(el);const row=el.closest("li")!;const widths=[...el.querySelectorAll("span")].map(digit=>digit.getBoundingClientRect().width);return {family:css.fontFamily,size:parseFloat(css.fontSize),rowSize:parseFloat(getComputedStyle(row).fontSize),tabular:css.fontVariantNumeric,widths,ellipsis:css.textOverflow};});
-    expect(metrics.widths).toHaveLength(4);expect(metrics.family).toContain("Rajdhani");expect(metrics.size).toBe(metrics.rowSize);expect(metrics.tabular).toContain("tabular-nums");expect(metrics.ellipsis).not.toBe("ellipsis");expect(Math.max(...metrics.widths)-Math.min(...metrics.widths)).toBeLessThan(.1);
-  }
-  expect(await auditText(page)).toEqual([]);
-  await open(page);await show(page,buildIntentAnswer("upcoming_shipments",p).card);
-  if(empty){await expect(page.locator(".overlay-shipment-row small")).toHaveCount(0);await expect(page.locator(".overlay-shipment-row [data-contract-tail]")).toHaveCount(0);}
-  else for(const tail of await page.locator(".overlay-shipment-row [data-contract-tail]").all())await expect(tail).toHaveText("尾号 0123");
-  expect(await auditText(page,".overlay-card")).toEqual([]);
+for(const empty of [false,true])test(`public contract tail ${empty ? "empty" : "masked"}`,async({page,request},testInfo)=>{
+  const {setNexusPayload,settle}=await import("./nexus-test-data");
+  const {auditText:auditNexusText}=await import("./nexus-layout-audit");
+  const p=validatePublicPayload(structuredClone(fixture));
+  for(const rows of [p.delivery.reminders.today,p.delivery.reminders.sevenDays,p.delivery.reminders.overdue,p.delivery.milestones])for(const row of rows)row.contractNumber=empty ? null : "****0123";
+  try {
+    // NEXUS renders summary alerts, not the retired ReminderRail list. Inject at
+    // the local public fixture server used by SSR and the refresh Server Action.
+    await setNexusPayload(request,p);await page.goto("/screen/sales");await settle(page);
+    const screen=page.locator("#screen-stage"),alerts=screen.locator(".nexus-alert-grid > div");
+    await expect(alerts).toHaveCount(3);
+    for(const [i,count] of [p.delivery.summary.overdueDue,p.delivery.summary.todayDue,p.delivery.summary.sevenDayDue].entries())await expect(alerts.nth(i).locator("strong")).toHaveText(`${count} 单`);
+    await expect(screen.locator("[data-contract-tail]")).toHaveCount(0);
+    for(const text of ["尾号","0123","****0123"])await expect(screen).not.toContainText(text);
+    expect(await auditNexusText(page)).toEqual([]);
+    await page.screenshot({path:testInfo.outputPath("nexus-contract-privacy.png")});
+
+    await open(page);const card=buildIntentAnswer("upcoming_shipments",p).card;await show(page,card);
+    const rows=page.locator(".overlay-shipment-row"),tails=rows.locator("[data-contract-tail]");
+    expect(card.kind).toBe("customers-shipments");
+    if(card.kind!=="customers-shipments")throw new Error("Expected shipment card");
+    expect(card.rows.length).toBeGreaterThan(0);
+    await expect(rows).toHaveCount(card.rows.length);
+    await expect(page.locator(".overlay-card")).not.toContainText("****0123");
+    if(empty){await expect(rows.locator("small")).toHaveCount(0);await expect(tails).toHaveCount(0);await expect(page.locator(".overlay-card")).not.toContainText("尾号");}
+    else{
+      // Explicit count prevents an empty locator from vacuously passing privacy checks.
+      await expect(tails).toHaveCount(card.rows.length);
+      for(const tail of await tails.all())await expect(tail).toHaveText("尾号 0123");
+      await page.evaluate(()=>document.fonts.load('600 20px "Rajdhani"'));
+      const metrics=await rows.locator(".contract-tail-digits").first().evaluate(el=>{const css=getComputedStyle(el);const row=el.closest(".overlay-shipment-row")!;const widths=[...el.querySelectorAll("span")].map(digit=>digit.getBoundingClientRect().width);return {family:css.fontFamily,size:parseFloat(css.fontSize),rowSize:parseFloat(getComputedStyle(row).fontSize),tabular:css.fontVariantNumeric,widths,ellipsis:css.textOverflow};});
+      expect(metrics.widths).toHaveLength(4);expect(metrics.family).toContain("Rajdhani");expect(metrics.size).toBe(metrics.rowSize);expect(metrics.tabular).toContain("tabular-nums");expect(metrics.ellipsis).not.toBe("ellipsis");expect(Math.max(...metrics.widths)-Math.min(...metrics.widths)).toBeLessThan(.1);
+    }
+    expect(await auditText(page,".overlay-card")).toEqual([]);
+    await page.screenshot({path:testInfo.outputPath("voice-contract-privacy.png")});
+  } finally {await request.get("http://127.0.0.1:3199/control?reset=1");}
 });
 for (const viewport of [{width:1280,height:720},{width:1792,height:832},{width:1920,height:1080},{width:3840,height:2160}]) test(`map labels remain clear of HUD ${viewport.width}`, async ({ page, request }) => {
   const { nexusPayload, setNexusPayload, screenUrl, settle } = await import('./nexus-test-data');

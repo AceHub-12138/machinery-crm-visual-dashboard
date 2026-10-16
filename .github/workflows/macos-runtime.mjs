@@ -2,10 +2,27 @@ import { chromium } from '@playwright/test';
 import { spawn } from 'node:child_process';
 import os from 'node:os';
 import { execFileSync } from 'node:child_process';
+import assert from 'node:assert/strict';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
+
+export function assertApplicationTitleFont(requested, fonts) {
+  assert.equal(requested.weight, '700', 'Application title must request CSS weight 700');
+  assert(fonts.some(font => {
+    if (!(font.glyphCount > 0) || font.isCustomFont) return false;
+    // CoreText resolves PingFang SC 700 to Semibold. Family names vary by OS locale;
+    // PostScript names identify both the face and weight independently of that locale.
+    if (font.postScriptName) return /^PingFangSC-(Semibold|Bold)$/i.test(font.postScriptName);
+    // Older CDP implementations can omit PostScript names. Only accept a family
+    // naming the weight explicitly; a bare localized family cannot prove the face.
+    return /^(?:PingFang SC|蘋方-簡|苹方-简)[ -](?:Semibold|Bold|中粗體|中粗体|粗體|粗体)$/i.test(font.familyName);
+  }), 'Application title must render real glyphs in PingFang SC Semibold/Bold');
+}
 
 // Only fixture data is served. Never inherit public-screen credentials in this probe.
 async function main() {
-  console.log(JSON.stringify({ platform: process.platform, arch: process.arch, kernel: os.release(), system: execFileSync('sw_vers', { encoding: 'utf8' }).trim() }));
+  const diagnostic = { commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), platform: process.platform, arch: process.arch, kernel: os.release(), system: execFileSync('sw_vers', { encoding: 'utf8' }).trim(), records: [] };
+  console.log(JSON.stringify(diagnostic));
   const env = { ...process.env, SCREEN_PLATFORM_URL: 'http://127.0.0.1:3199', SCREEN_PUBLIC_ID: 'fixture-only' };
   const servers = [
     spawn(process.execPath, ['e2e/nexus-fixture-server.mjs'], { env, stdio: 'ignore' }),
@@ -35,11 +52,19 @@ async function main() {
         return { family: css.fontFamily, weight: css.fontWeight, size: css.fontSize };
       });
       console.log(JSON.stringify({ label, requested: style, actual: fonts }));
-      if (!fonts.some(font => /PingFang/i.test(font.familyName) && font.glyphCount > 0)) throw new Error('Application title did not use PingFang');
+      diagnostic.records.push({ label, requested: style, actual: fonts });
+      assertApplicationTitleFont(style, fonts);
       return fonts;
     }
     await record('.overlay-card-title', 'application-title');
+    diagnostic.passed = true;
+  } catch (error) {
+    diagnostic.passed = false;
+    diagnostic.error = error.message;
+    throw error;
   } finally {
+    await mkdir('test-results', { recursive: true });
+    await writeFile('test-results/macos-runtime.json', JSON.stringify(diagnostic, null, 2));
     await browser?.close();
     await Promise.all(servers.map(server => new Promise(resolve => {
       if (server.exitCode !== null) return resolve();
@@ -47,4 +72,6 @@ async function main() {
     })));
   }
 }
-main().catch(error => { console.error(error.message); process.exitCode = 1; });
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(error => { console.error(error.message); process.exitCode = 1; });
+}
