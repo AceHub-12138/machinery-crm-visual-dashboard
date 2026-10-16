@@ -1,18 +1,19 @@
-import { test, expect } from "@playwright/test";
-import { longScreenPayload } from "./fixtures/long-strings";
-import { auditText, auditPanels } from "./layout-audit";
-test("12 deliveries paginate evenly across a 112px timeline without losing rows",async({page})=>{
-  await page.clock.install();await page.route("**/api/screen/crm",route=>route.fulfill({json:longScreenPayload(987654321,12)}));
-  await page.goto("/screen/sales?fit=1");await page.clock.fastForward(60001);
-  const strip=page.locator('[data-screen-panel="delivery"]');
-  await expect(strip).toContainText("12 单");expect((await strip.boundingBox())?.height).toBe(112);
-  const seen:number[]=[];
-  for(const count of [5,5,2]) {
-    await expect(strip.locator('.milestone-node')).toHaveCount(count);seen.push(await strip.locator('.milestone-node').count());
-    const boxes=await strip.locator('.milestone-node').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().toJSON()));
-    for(let i=1;i<boxes.length;i++) { expect(boxes[i].x).toBeGreaterThanOrEqual(boxes[i-1].right); expect(boxes[i].width).toBeCloseTo(boxes[0].width,0); }
-    expect(await auditText(page)).toEqual([]);expect(await auditPanels(page)).toEqual([]);
-    await page.getByRole('button',{name:'下一页交付里程碑'}).click();
+import { test, expect } from '@playwright/test';
+import { auditText, auditPanels } from './nexus-layout-audit';
+import { longNexusPayload, setNexusPayload, settle } from './nexus-test-data';
+test('12 deliveries retain exactly the latest five records in the NEXUS feed', async ({ page, request }) => {
+  const p = longNexusPayload(683927.41, 12);
+  await setNexusPayload(request, p); await page.goto('/screen/sales'); await settle(page);
+  const rows = page.locator('.nexus-feed-item'); await expect(rows).toHaveCount(5);
+  expect(await rows.evaluateAll(nodes => nodes.map(n => n.getAttribute('data-route-key')))).toEqual(['long-11','long-10','long-09','long-08','long-07']);
+  const expected = p.delivery.routes.slice(-5).reverse();
+  for (let i = 0; i < 5; i++) {
+    await expect(rows.nth(i)).toContainText(expected[i].equipmentModel);
+    await expect(rows.nth(i)).toContainText(`${expected[i].unitCount} 台`);
+    await rows.nth(i).click(); await expect(rows.nth(i)).toHaveAttribute('aria-pressed', 'true');
   }
-  expect(seen.reduce((sum,n)=>sum+n,0)).toBe(12);
+  const boxes = await rows.evaluateAll(nodes => nodes.map(n => n.getBoundingClientRect().toJSON()));
+  for (let i = 1; i < boxes.length; i++) { expect(boxes[i].x).toBeGreaterThanOrEqual(boxes[i - 1].right); }
+  expect(boxes.map(b => b.width)).toEqual([331.1875,331.203125,331.203125,331.203125,331.203125]);
+  expect(await auditText(page)).toEqual([]); expect(await auditPanels(page)).toEqual([]);
 });

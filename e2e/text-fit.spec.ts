@@ -1,25 +1,32 @@
-import { test, expect } from "@playwright/test";
-import { auditText, auditPanels } from "./layout-audit";
-import { longScreenPayload } from "./fixtures/long-strings";
-for (const viewport of [{width:1280,height:720},{width:1920,height:1080},{width:3840,height:2160}]) {
-  test(`${viewport.width} base content has no clipping or overlapping panels`, async ({page}, info) => {
-    await page.setViewportSize(viewport);
-    await page.goto("/screen/sales?fit=1");
-    await page.evaluate(()=>document.fonts.ready);
-    expect(await auditText(page)).toEqual([]);
-    expect(await auditPanels(page)).toEqual([]);
-    if(viewport.width===1920) await page.screenshot({path:info.outputPath("default-screen.png")});
+import { test, expect } from '@playwright/test';
+import { LONG_MODEL } from './fixtures/long-strings';
+import { auditText, auditPanels } from './nexus-layout-audit';
+import { longNexusPayload, nexusPayload, setNexusPayload, SCREEN_VIEWPORTS, screenUrl, settle } from './nexus-test-data';
+for (const viewport of SCREEN_VIEWPORTS) {
+  test(`${viewport.width} base content has no clipping or overlapping panels`, async ({ page, request }) => {
+    await page.setViewportSize(viewport); await setNexusPayload(request, nexusPayload());
+    await page.goto(screenUrl(viewport.width)); await settle(page);
+    expect(await auditText(page)).toEqual([]); expect(await auditPanels(page)).toEqual([]);
   });
-  for(const amount of [987654321,123456789.5,0,-1234567]) test(`${viewport.width} long strings amount ${amount}`, async ({page}) => {
-    await page.setViewportSize(viewport);
-    await page.clock.install();
-    await page.route("**/api/screen/crm", route=>route.fulfill({json:longScreenPayload(amount,60)}));
-    await page.goto("/screen/sales?fit=1");
-    await page.clock.fastForward(60001);
-    await expect(page.locator(".kpi-hero")).toContainText(amount===987654321 ? "9.88" : amount===123456789.5 ? "1.23" : amount===0 ? "¥0" : "数据待核对");
-    await page.evaluate(()=>document.fonts.ready);
-    expect(await auditText(page)).toEqual([]);
-    expect(await auditPanels(page)).toEqual([]);
+  for (const [amount, expected] of [[987654321, '¥9.88亿'], [123456789.5, '¥1.23亿'], [0, '¥0'], [-1234567, '数据待核对']] as const) test(`${viewport.width} long strings amount ${amount}`, async ({ page, request }) => {
+    await page.setViewportSize(viewport); await setNexusPayload(request, longNexusPayload(amount));
+    await page.goto(screenUrl(viewport.width)); await page.evaluate(() => document.fonts.ready);
+    const hero = page.locator('.nexus-money-hero');
+    if (amount < 0) await expect(hero).toHaveText(expected);
+    else { await expect(hero).toHaveText(expected); await expect(hero).toHaveAttribute('data-fit-ellipsis', 'false'); }
+    await expect(page.locator('.nexus-model')).toHaveText(Array(5).fill(LONG_MODEL));
+    expect(await auditText(page)).toEqual([]); expect(await auditPanels(page)).toEqual([]);
+  });
+  test(`${viewport.width} maximum digit count with thousands separators stays on one line`, async ({ page, request }) => {
+    const p = nexusPayload(); p.kpis.totalCustomers = 9999999999; p.kpis.periodContractAmount = '99999999.99';
+    await page.setViewportSize(viewport); await setNexusPayload(request, p); await page.goto(screenUrl(viewport.width)); await settle(page);
+    const number = page.locator('.nexus-metrics > div').nth(1).locator('.nexus-customer-count');
+    await expect(number).toHaveText('9,999,999,999'); await expect(number).toHaveAttribute('data-fit-ellipsis','false');
+    await expect(page.locator('.nexus-money-hero')).toHaveText('¥10,000.0万');
+    await expect(page.locator('.nexus-money-hero')).toHaveAttribute('data-fit-ellipsis', 'false');
+    const lines = await number.evaluate(el => { const range = document.createRange(); range.selectNodeContents(el); const rects = [...range.getClientRects()].filter(r => r.width); return { one: Math.max(...rects.map(r => r.top)) < Math.min(...rects.map(r => r.bottom)), contained: el.scrollWidth <= el.clientWidth + 1 }; });
+    expect(lines).toEqual({ one: true, contained: true });
+    expect(await auditText(page)).toEqual([]); expect(await auditPanels(page)).toEqual([]);
   });
 }
 test("audit detects visible, inline and fixed overflow; accepts only compensated clipping", async ({page}) => {
@@ -38,6 +45,6 @@ test("audit detects visible, inline and fixed overflow; accepts only compensated
 });
 test("audit detects a panel overlap without changing its size assertion", async({page})=>{
   await page.goto("/screen/sales");
-  await page.addStyleTag({content:'[data-screen-panel="map"] { transform:translateX(-20px); }'});
+  await page.addStyleTag({content:'[data-screen-panel="map"] { transform:translateX(-80px); }'});
   expect(await auditPanels(page)).toContain("kpi overlaps map");
 });

@@ -1,27 +1,17 @@
-import { test, expect, type Page } from "@playwright/test";
-
-const layout = {
-  kpi: [14, 102, 360, 838], map: [388, 102, 940, 838],
-  collection: [1342, 102, 564, 441], reminders: [1342, 557, 564, 383],
-  delivery: [14, 954, 1892, 112],
-};
+import { test, expect, type Page } from '@playwright/test';
+import { nexusPayload, setNexusPayload, settle } from './nexus-test-data';
 async function assertLayout(page: Page) {
-  const stage = await page.locator("#screen-stage").boundingBox();
-  expect(stage).toEqual({ x: 0, y: 0, width: 1920, height: 1080 });
-  for (const [panel, [x, y, width, height]] of Object.entries(layout)) {
-    expect(await page.locator(`[data-screen-panel="${panel}"]`).boundingBox(), panel).toEqual({ x, y, width, height });
-  }
+  expect(await page.locator('#screen-stage').boundingBox()).toEqual({ x: 0, y: 0, width: 1920, height: 1080 });
+  const grid = await page.locator('.nexus-grid').evaluate(el => { const s = getComputedStyle(el); return { columns: s.gridTemplateColumns, columnGap: s.columnGap, rowGap: s.rowGap }; });
+  expect(grid).toEqual({ columns: '470px 808px 470px', columnGap: '58px', rowGap: '16px' });
+  for (const [selector, x, y, width, height] of [['.nexus-left',28,80,470,788],['.nexus-map-cell',556,80,808,788],['.nexus-right',1422,80,470,788],['.nexus-feed-cell',28,884,1864,180]] as const) expect(await page.locator(selector).boundingBox(), selector).toEqual({ x,y,width,height });
 }
-
-test("1920×1080 面板尺寸、间距和首屏内容回归", async ({ page }, testInfo) => {
-  await page.goto("/screen/sales?fit=0");
-  await expect(page.getByRole("heading", { name: "经营指挥舱" })).toBeVisible();
-  await page.evaluate(() => document.fonts.ready);
-  await assertLayout(page);
-  await page.evaluate(() => document.querySelectorAll("svg").forEach((svg) => svg.pauseAnimations()));
-  await page.screenshot({ path: testInfo.outputPath("screen-sales.png"), animations: "disabled" });
+test.beforeEach(async ({ request }) => { await setNexusPayload(request, nexusPayload()); });
+test('1920×1080 面板尺寸、间距和首屏内容回归', async ({ page }, info) => {
+  await page.goto('/screen/sales?layout=16x9&fit=0'); await settle(page); await assertLayout(page);
+  await expect(page.getByRole('heading', { name: '最新发货动态' })).toBeVisible();
+  await page.screenshot({ path: info.outputPath('screen-sales.png'), animations: 'disabled' });
 });
-
 test("公开 API 与首屏 HTML 不携带客户、跟进、业务员及详细地址", async ({ request }) => {
   for (const url of ["/api/screen/crm", "/screen/sales?voiceDemo=1"]) {
     const response = await request.get(url);
@@ -30,32 +20,20 @@ test("公开 API 与首屏 HTML 不携带客户、跟进、业务员及详细地
   }
 });
 
-test("列宽改变 5px 会被几何验收发现", async ({ page }) => {
-  await page.goto("/screen/sales?fit=0");
-  await assertLayout(page);
-  await page.addStyleTag({ content: "#screen-stage > .grid { grid-template-columns: 365px 940px minmax(0,1fr) !important; }" });
+test('列宽改变 5px 会被几何验收发现', async ({ page }) => {
+  await page.goto('/screen/sales?layout=16x9&fit=0'); await settle(page); await assertLayout(page);
+  await page.addStyleTag({ content: '#screen-stage .nexus-grid { grid-template-columns: 475px 808px 470px !important; }' });
   await expect(assertLayout(page)).rejects.toThrow();
 });
-
-test("1280×720 自适应保持完整画布", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 720 });
-  await page.goto("/screen/sales");
-  await expect.poll(async () => (await page.locator("#screen-stage").boundingBox())?.width).toBe(1280);
-  const bounds = await page.locator("#screen-stage").boundingBox();
-  expect(bounds?.height).toBe(720);
-  expect(bounds?.x).toBe(0);
-  expect(bounds?.y).toBe(0);
+test('1280×720 自适应保持完整画布', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 }); await page.goto('/screen/sales?layout=16x9'); await settle(page);
+  expect(await page.locator('#screen-stage').boundingBox()).toEqual({ x:0,y:0,width:1280,height:720 });
 });
-
-test("China occupies at least 75% of map width and lower-right HUD stays within 22%",async({page})=>{
-  await page.goto("/screen/sales?fit=0");
-  const measured=await page.locator('.map-panel').evaluate(el=>{
-    const panel=el.getBoundingClientRect();const boxes=[...el.querySelectorAll('.map-china-edge-core')].map(n=>n.getBoundingClientRect());
-    const left=Math.min(...boxes.map(r=>r.left)),right=Math.max(...boxes.map(r=>r.right));
-    const hud=el.querySelector('[class*="w-[22%]"]')!.getBoundingClientRect();
-    return {landRatio:(right-left)/panel.width,hudRatio:hud.width/panel.width,left,right,panelLeft:panel.left,panelRight:panel.right};
+test('China occupies at least 75% of map width and lower-right HUD stays within 22%', async ({ page }) => {
+  await page.goto('/screen/sales'); await settle(page);
+  const m = await page.locator('.nexus-map').evaluate(el => {
+    const panel=el.getBoundingClientRect(), frame=el.querySelector('.nexus-map-frame')!.getBoundingClientRect(), hud=el.querySelector('.nexus-islands')!.getBoundingClientRect();
+    return { ratio: frame.width/panel.width, hudRatio:hud.width/panel.width, inside:frame.left>=panel.left && frame.right<=panel.right && hud.left>=panel.left && hud.right<=panel.right };
   });
-  expect(measured.landRatio).toBeGreaterThanOrEqual(.75);
-  expect(measured.hudRatio).toBeLessThanOrEqual(.22);
-  expect(measured.left).toBeGreaterThanOrEqual(measured.panelLeft);expect(measured.right).toBeLessThanOrEqual(measured.panelRight);
+  expect(m.ratio).toBeGreaterThanOrEqual(.75); expect(m.hudRatio).toBeLessThanOrEqual(.22); expect(m.inside).toBe(true);
 });

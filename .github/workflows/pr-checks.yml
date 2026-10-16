@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -20,11 +20,34 @@ jobs:
       - run: pnpm test
       - run: pnpm lint
       - run: pnpm build
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e
+  browser:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm exec playwright install chromium
+      - name: Check font identification policy
+        run: node --test .github/workflows/font-policy.check.mjs
+      - name: Record macOS system and application fonts
+        id: fonts
+        run: node .github/workflows/macos-runtime.mjs
+      - name: Run browser regressions even if the font probe failed
+        if: ${{ !cancelled() && (steps.fonts.outcome == 'success' || steps.fonts.outcome == 'failure') }}
+        run: pnpm exec playwright test --config=.github/workflows/browser.config.ts
+      - name: Verify JSON report is in the artifact directory
+        if: always()
+        run: |
+          node -e 'const fs = require("node:fs"); const path = require("node:path"); const file = path.join(process.env.GITHUB_WORKSPACE, "test-results/ci-results.json"); if (!fs.existsSync(file)) throw new Error("Browser JSON missing: browser suite did not produce a report"); const report = JSON.parse(fs.readFileSync(file, "utf8")); console.log(JSON.stringify({ report: path.relative(process.env.GITHUB_WORKSPACE, file), stats: report.stats })); if (report.stats.expected + report.stats.unexpected + report.stats.flaky === 0) throw new Error("Browser suite did not execute any tests (all skipped or empty)"); if (report.stats.unexpected || report.stats.flaky || report.stats.skipped) throw new Error("Browser suite contains failures, flaky tests or skipped tests");'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screen-browser-results
-          path: test-results/
+          path: ${{ github.workspace }}/test-results/
+          if-no-files-found: error
           retention-days: 7

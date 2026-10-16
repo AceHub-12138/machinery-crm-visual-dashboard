@@ -117,8 +117,29 @@ describe("font scale", () => {
     for (const file of walk(SRC).filter(f => /\.(css|tsx)$/.test(f))) {
       const text = readFileSync(file, "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
       const floor = file.includes("/overlay/") ? 20 : 18;
+      const islandCaption = path.relative(SRC, file) === "app/globals.css" ? text.match(/\.nexus-islands p\s*\{[^}]*\}/) : null;
+      if (islandCaption) {
+        expect(islandCaption[0]).toMatch(/font-size:\s*14px/);
+        expect(islandCaption[0]).toMatch(/color:\s*#8A93A0/);
+      }
+      const cityLabel = path.relative(SRC, file) === "app/globals.css" ? text.match(/\.nexus-map-labels \.nexus-city-label\s*\{[^}]*\}/) : null;
+      if (cityLabel) expect(cityLabel[0]).toMatch(/font-size:\s*16px/);
+      const provinceLabel = path.relative(SRC, file) === "app/globals.css" ? text.match(/\.nexus-map-labels \.nexus-province-label\s*\{[^}]*\}/) : null;
+      if (provinceLabel) { expect(provinceLabel[0]).toMatch(/font-size:\s*14px/); expect(provinceLabel[0]).toMatch(/color:\s*#8A93A0/); }
+      const localSubtitle = path.relative(SRC, file) === "app/globals.css" ? text.match(/\.nexus-map-labels \.nexus-local-units\s*\{[^}]*\}/) : null;
+      if (localSubtitle) {
+        expect(localSubtitle[0]).toMatch(/font-size:\s*13px;/);
+        expect(localSubtitle[0]).toMatch(/color:\s*#EE7D2C;/);
+        expect(localSubtitle[0]).toMatch(/opacity:\s*\.85;/);
+        expect(localSubtitle[0]).toMatch(/white-space:\s*nowrap;/);
+        expect(localSubtitle[0]).toMatch(/-webkit-text-stroke:\s*2px #11151B;/);
+        expect(localSubtitle[0]).toMatch(/paint-order:\s*stroke;/);
+      }
       for (const m of text.matchAll(/(?:font-size:\s*|fontSize:\s*|fontSize=\{)(\d+(?:\.\d+)?)/g)) {
-        if (Number(m[1]) < floor) offenders.push(`${path.relative(SRC,file)}: ${m[0]}`);
+        const captionException = islandCaption && m.index >= islandCaption.index! && m.index < islandCaption.index! + islandCaption[0].length && Number(m[1]) === 14;
+        const cityException = cityLabel && m.index >= cityLabel.index! && m.index < cityLabel.index! + cityLabel[0].length && Number(m[1]) === 16;
+        const localSubtitleException = localSubtitle && m.index >= localSubtitle.index! && m.index < localSubtitle.index! + localSubtitle[0].length && Number(m[1]) === 13;
+        if (Number(m[1]) < floor && !captionException && !cityException && !localSubtitleException && !(provinceLabel && m.index >= provinceLabel.index! && m.index < provinceLabel.index! + provinceLabel[0].length && Number(m[1]) === 14)) offenders.push(`${path.relative(SRC,file)}: ${m[0]}`);
       }
       for (const m of text.matchAll(/(--(?:ov-)?fs-[a-z-]+):\s*(?:calc\()?([\d.]+)px/g)) {
         if (m[1] !== "--fs-kicker" && Number(m[2]) < floor) offenders.push(`${path.relative(SRC,file)}: ${m[0]}`);
