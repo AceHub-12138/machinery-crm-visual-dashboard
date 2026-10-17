@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-10-17T07:23:29.016Z",
+  "baseline": "df69d71f5b0cafcdab70a18f8e11be9f92cd163d",
+  "currentWorktree": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-a",
+  "currentBranch": "codex/nexus-p1-5-a-performance-calibration",
+  "currentHead": "df69d71f5b0cafcdab70a18f8e11be9f92cd163d",
+  "productPaths": [
+    "src",
+    "public"
+  ],
+  "productDiff": "",
+  "productStatus": "",
+  "baselineTrackedListingSha256": "92ff4d0ca7fbe8ecfbb0e203a78786ddd88baad47d3aa9dc2d77e775fc81f191",
+  "currentTrackedListingSha256": "92ff4d0ca7fbe8ecfbb0e203a78786ddd88baad47d3aa9dc2d77e775fc81f191",
+  "listingsMatch": true,
+  "productFilesMatchBaseline": true,
+  "protectedWorktrees": [
+    {
+      "directory": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-3",
+      "expectedHead": "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1",
+      "actualHead": "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1",
+      "branch": "codex/nexus-p1-3-visual",
+      "status": ""
+    },
+    {
+      "directory": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-gsap-poc",
+      "expectedHead": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "actualHead": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "branch": "codex/nexus-gsap-poc",
+      "status": ""
+    },
+    {
+      "directory": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-4-motion-audit",
+      "expectedHead": "df69d71f5b0cafcdab70a18f8e11be9f92cd163d",
+      "actualHead": "df69d71f5b0cafcdab70a18f8e11be9f92cd163d",
+      "branch": "codex/nexus-p1-4-motion-audit",
+      "status": ""
+    }
+  ],
+  "p14EvidenceStillTracked": 15
+}

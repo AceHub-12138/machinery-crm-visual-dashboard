@@ -1,0 +1,5831 @@
+[
+  {
+    "backend": "headless",
+    "file": ".review/p1-5-a/headless/gsap-1920.trace.json.gz",
+    "traceEventCount": 576039,
+    "processNames": {
+      "7007": "Browser",
+      "7008": "GPU Process",
+      "7297": "Renderer"
+    },
+    "threadNames": {
+      "0:0": "swapper",
+      "7007:275779": "CrBrowserMain",
+      "7297:276514": "Compositor",
+      "7297:276502": "CrRendererMain",
+      "7008:275826": "PerfettoTrace",
+      "7297:276507": "PerfettoTrace",
+      "7007:275789": "PerfettoTrace",
+      "7007:275814": "DevToolsPipeHandlerWriteThread",
+      "7007:275794": "Chrome_IOThread",
+      "7297:276511": "Chrome_ChildIOThread",
+      "7008:275861": "VizCompositorThread",
+      "7297:276509": "ThreadPoolForegroundWorker",
+      "7297:276512": "ThreadPoolForegroundWorker",
+      "7297:276564": "ThreadPoolForegroundWorker",
+      "7297:276565": "ThreadPoolForegroundWorker",
+      "7008:275860": "Chrome_ChildIOThread",
+      "7008:275801": "CrGpuMain",
+      "7297:276566": "ThreadPoolForegroundWorker",
+      "7297:276567": "ThreadPoolForegroundWorker",
+      "7297:276581": "ThreadPoolForegroundWorker",
+      "7297:276582": "ThreadPoolForegroundWorker",
+      "7297:276594": "ThreadPoolForegroundWorker",
+      "7297:276583": "ThreadPoolForegroundWorker",
+      "7297:276595": "ThreadPoolForegroundWorker",
+      "7297:276596": "ThreadPoolForegroundWorker",
+      "7297:276597": "ThreadPoolForegroundWorker",
+      "7297:276598": "ThreadPoolForegroundWorker",
+      "7297:276599": "ThreadPoolForegroundWorker",
+      "7297:276508": "ThreadPoolServiceThread",
+      "7297:276601": "ThreadPoolForegroundWorker",
+      "7297:276603": "ThreadPoolForegroundWorker",
+      "7297:276602": "ThreadPoolForegroundWorker",
+      "7297:276600": "ThreadPoolForegroundWorker",
+      "7007:275791": "ThreadPoolForegroundWorker"
+    },
+    "userTimingMarks": [
+      {
+        "name": "P15A:trace-start",
+        "timestampUs": 9043364574
+      },
+      {
+        "name": "P15A:trace-end",
+        "timestampUs": 9053368026
+      }
+    ],
+    "costs": {
+      "rendererMainThread": {
+        "count": 49671,
+        "inclusiveTotalMs": 10238.293000004129,
+        "p95Ms": 0.878,
+        "p99Ms": 4.436,
+        "maxMs": 13.163
+      },
+      "scriptAndAnimationCalculation": {
+        "count": 1420,
+        "inclusiveTotalMs": 367.4679999999998,
+        "p95Ms": 0.646,
+        "p99Ms": 2.8,
+        "maxMs": 3.818
+      },
+      "layoutAndStyle": {
+        "count": 1200,
+        "inclusiveTotalMs": 569.8599999999993,
+        "p95Ms": 2.598,
+        "p99Ms": 2.721,
+        "maxMs": 3.009
+      },
+      "paint": {
+        "count": 4081,
+        "inclusiveTotalMs": 1068.8219999999992,
+        "p95Ms": 0.613,
+        "p99Ms": 2.638,
+        "maxMs": 3.009
+      },
+      "compositeAndRaster": {
+        "count": 28536,
+        "inclusiveTotalMs": 10388.332000001608,
+        "p95Ms": 2.16,
+        "p99Ms": 6.045,
+        "maxMs": 8.528
+      },
+      "gpuProcess": {
+        "count": 70323,
+        "inclusiveTotalMs": 31778.915000004028,
+        "p95Ms": 5.639,
+        "p99Ms": 6.02,
+        "maxMs": 6.469
+      }
+    },
+    "topEvents": {
+      "rendererMainThread": [
+        {
+          "name": "RunTask",
+          "count": 9954,
+          "inclusiveTotalMs": 2067.263999999814,
+          "p95Ms": 2.274,
+          "p99Ms": 4.954,
+          "maxMs": 13.163
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 7877,
+          "inclusiveTotalMs": 2043.9189999999394,
+          "p95Ms": 2.382,
+          "p99Ms": 5.091,
+          "maxMs": 13.154
+        },
+        {
+          "name": "ProxyMain::BeginMainFrame",
+          "count": 600,
+          "inclusiveTotalMs": 1884.047000000001,
+          "p95Ms": 5.357,
+          "p99Ms": 5.571,
+          "maxMs": 5.782
+        },
+        {
+          "name": "LocalFrameView::RunStyleAndLayoutLifecyclePhases",
+          "count": 605,
+          "inclusiveTotalMs": 580.2839999999998,
+          "p95Ms": 2.736,
+          "p99Ms": 2.848,
+          "maxMs": 3.095
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 600,
+          "inclusiveTotalMs": 537.098,
+          "p95Ms": 2.661,
+          "p99Ms": 2.766,
+          "maxMs": 3.009
+        },
+        {
+          "name": "LocalFrameView::RunPaintLifecyclePhase",
+          "count": 604,
+          "inclusiveTotalMs": 504.8089999999999,
+          "p95Ms": 0.975,
+          "p99Ms": 1.018,
+          "maxMs": 2.586
+        },
+        {
+          "name": "Paint",
+          "count": 2309,
+          "inclusiveTotalMs": 470.8699999999997,
+          "p95Ms": 0.542,
+          "p99Ms": 0.614,
+          "maxMs": 2.114
+        },
+        {
+          "name": "Commit",
+          "count": 600,
+          "inclusiveTotalMs": 412.77700000000004,
+          "p95Ms": 0.747,
+          "p99Ms": 0.797,
+          "maxMs": 0.885
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "count": 600,
+          "inclusiveTotalMs": 388.6130000000002,
+          "p95Ms": 0.697,
+          "p99Ms": 0.746,
+          "maxMs": 0.764
+        },
+        {
+          "name": "FunctionCall",
+          "count": 1400,
+          "inclusiveTotalMs": 326.8899999999997,
+          "p95Ms": 0.609,
+          "p99Ms": 0.85,
+          "maxMs": 3.762
+        },
+        {
+          "name": "FireAnimationFrame",
+          "count": 1200,
+          "inclusiveTotalMs": 298.0620000000002,
+          "p95Ms": 0.664,
+          "p99Ms": 0.842,
+          "maxMs": 1.594
+        },
+        {
+          "name": "Layerize",
+          "count": 600,
+          "inclusiveTotalMs": 168.94600000000003,
+          "p95Ms": 0.325,
+          "p99Ms": 0.351,
+          "maxMs": 0.417
+        },
+        {
+          "name": "UpdateLayer",
+          "count": 1448,
+          "inclusiveTotalMs": 67.45199999999949,
+          "p95Ms": 0.131,
+          "p99Ms": 0.144,
+          "maxMs": 0.167
+        },
+        {
+          "name": "PrePaint",
+          "count": 605,
+          "inclusiveTotalMs": 54.38300000000004,
+          "p95Ms": 0.125,
+          "p99Ms": 0.138,
+          "maxMs": 0.305
+        },
+        {
+          "name": "LocalFrameView::RunPrePaintLifecyclePhase",
+          "count": 603,
+          "inclusiveTotalMs": 41.645999999999965,
+          "p95Ms": 0.103,
+          "p99Ms": 0.113,
+          "maxMs": 0.283
+        },
+        {
+          "name": "TimerFire",
+          "count": 20,
+          "inclusiveTotalMs": 40.578,
+          "p95Ms": 3.779,
+          "p99Ms": 3.818,
+          "maxMs": 3.818
+        },
+        {
+          "name": "MajorGC",
+          "count": 8,
+          "inclusiveTotalMs": 34.03,
+          "p95Ms": 13.07,
+          "p99Ms": 13.07,
+          "maxMs": 13.07
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "count": 8,
+          "inclusiveTotalMs": 33.838,
+          "p95Ms": 13.049,
+          "p99Ms": 13.049,
+          "maxMs": 13.049
+        },
+        {
+          "name": "LocalFrameView::layout",
+          "count": 600,
+          "inclusiveTotalMs": 33.721000000000004,
+          "p95Ms": 0.085,
+          "p99Ms": 0.127,
+          "maxMs": 0.189
+        },
+        {
+          "name": "Layout",
+          "count": 600,
+          "inclusiveTotalMs": 32.76199999999998,
+          "p95Ms": 0.083,
+          "p99Ms": 0.125,
+          "maxMs": 0.187
+        },
+        {
+          "name": "LocalFrameView::performLayout",
+          "count": 600,
+          "inclusiveTotalMs": 29.259000000000015,
+          "p95Ms": 0.077,
+          "p99Ms": 0.11,
+          "maxMs": 0.169
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL",
+          "count": 106,
+          "inclusiveTotalMs": 18.893,
+          "p95Ms": 1.024,
+          "p99Ms": 1.057,
+          "maxMs": 1.08
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL_EMBEDDER_TRACING",
+          "count": 97,
+          "inclusiveTotalMs": 15.356999999999992,
+          "p95Ms": 1.025,
+          "p99Ms": 1.072,
+          "maxMs": 1.072
+        },
+        {
+          "name": "V8.GC_MC_MARK",
+          "count": 8,
+          "inclusiveTotalMs": 13.198,
+          "p95Ms": 9.771,
+          "p99Ms": 9.771,
+          "maxMs": 9.771
+        },
+        {
+          "name": "V8.GC_MC_MARK_FULL_CLOSURE_PARALLEL",
+          "count": 8,
+          "inclusiveTotalMs": 12.844,
+          "p95Ms": 9.725,
+          "p99Ms": 9.725,
+          "maxMs": 9.725
+        }
+      ],
+      "paint": [
+        {
+          "name": "UpdateLayoutTree",
+          "count": 600,
+          "inclusiveTotalMs": 537.098,
+          "p95Ms": 2.661,
+          "p99Ms": 2.766,
+          "maxMs": 3.009
+        },
+        {
+          "name": "Paint",
+          "count": 2309,
+          "inclusiveTotalMs": 470.8699999999997,
+          "p95Ms": 0.542,
+          "p99Ms": 0.614,
+          "maxMs": 2.114
+        },
+        {
+          "name": "PrePaint",
+          "count": 605,
+          "inclusiveTotalMs": 54.38300000000004,
+          "p95Ms": 0.125,
+          "p99Ms": 0.138,
+          "maxMs": 0.305
+        },
+        {
+          "name": "PaintImage",
+          "count": 567,
+          "inclusiveTotalMs": 6.47099999999997,
+          "p95Ms": 0.017,
+          "p99Ms": 0.021,
+          "maxMs": 0.043
+        }
+      ],
+      "compositeAndRaster": [
+        {
+          "name": "RasterTask",
+          "count": 7699,
+          "inclusiveTotalMs": 9344.164000000006,
+          "p95Ms": 5.815,
+          "p99Ms": 8.131,
+          "maxMs": 8.528
+        },
+        {
+          "name": "Commit",
+          "count": 601,
+          "inclusiveTotalMs": 412.7920000000001,
+          "p95Ms": 0.747,
+          "p99Ms": 0.797,
+          "maxMs": 0.885
+        },
+        {
+          "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+          "count": 1211,
+          "inclusiveTotalMs": 110.31000000000016,
+          "p95Ms": 0.262,
+          "p99Ms": 0.299,
+          "maxMs": 0.795
+        },
+        {
+          "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+          "count": 1507,
+          "inclusiveTotalMs": 92.2890000000003,
+          "p95Ms": 0.208,
+          "p99Ms": 0.241,
+          "maxMs": 0.765
+        },
+        {
+          "name": "LayerTreeHostImpl::ActivateSyncTree",
+          "count": 600,
+          "inclusiveTotalMs": 84.519,
+          "p95Ms": 0.215,
+          "p99Ms": 0.254,
+          "maxMs": 0.492
+        },
+        {
+          "name": "LayerTreeHostImpl::CommitComplete",
+          "count": 601,
+          "inclusiveTotalMs": 80.05200000000002,
+          "p95Ms": 0.184,
+          "p99Ms": 0.212,
+          "maxMs": 0.432
+        },
+        {
+          "name": "LayerTreeHostImpl::FinishCommit",
+          "count": 601,
+          "inclusiveTotalMs": 77.46599999999984,
+          "p95Ms": 0.181,
+          "p99Ms": 0.196,
+          "maxMs": 0.268
+        },
+        {
+          "name": "TileManager::PrepareTiles",
+          "count": 601,
+          "inclusiveTotalMs": 64.44899999999998,
+          "p95Ms": 0.157,
+          "p99Ms": 0.183,
+          "maxMs": 0.403
+        },
+        {
+          "name": "TileManager::AssignGpuMemoryToTiles",
+          "count": 603,
+          "inclusiveTotalMs": 43.44299999999989,
+          "p95Ms": 0.113,
+          "p99Ms": 0.13,
+          "maxMs": 0.356
+        },
+        {
+          "name": "LayerTreeHostImpl::PrepareToDraw",
+          "count": 601,
+          "inclusiveTotalMs": 21.24000000000002,
+          "p95Ms": 0.044,
+          "p99Ms": 0.053,
+          "maxMs": 0.1
+        },
+        {
+          "name": "TileManager::ScheduleTasks",
+          "count": 603,
+          "inclusiveTotalMs": 18.09699999999998,
+          "p95Ms": 0.041,
+          "p99Ms": 0.047,
+          "maxMs": 0.117
+        },
+        {
+          "name": "LayerTreeHostImpl::CalculateRenderPasses",
+          "count": 601,
+          "inclusiveTotalMs": 13.604999999999974,
+          "p95Ms": 0.028,
+          "p99Ms": 0.034,
+          "maxMs": 0.047
+        },
+        {
+          "name": "LayerTreeHostImpl::NotifyTileStateChanged",
+          "count": 8092,
+          "inclusiveTotalMs": 8.459000000000689,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.018
+        },
+        {
+          "name": "TileManager::PrepareToDraw",
+          "count": 601,
+          "inclusiveTotalMs": 4.467999999999978,
+          "p95Ms": 0.011,
+          "p99Ms": 0.016,
+          "maxMs": 0.025
+        },
+        {
+          "name": "LayerTreeHostImpl::BeginCommit",
+          "count": 601,
+          "inclusiveTotalMs": 3.1739999999999684,
+          "p95Ms": 0.008,
+          "p99Ms": 0.009,
+          "maxMs": 0.021
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForActivation",
+          "count": 602,
+          "inclusiveTotalMs": 2.9109999999999885,
+          "p95Ms": 0.009,
+          "p99Ms": 0.012,
+          "maxMs": 0.026
+        },
+        {
+          "name": "TileManager::IsReadyToActivate",
+          "count": 603,
+          "inclusiveTotalMs": 2.235999999999989,
+          "p95Ms": 0.007,
+          "p99Ms": 0.008,
+          "maxMs": 0.016
+        },
+        {
+          "name": "TileManager::IsReadyToDraw",
+          "count": 601,
+          "inclusiveTotalMs": 1.7579999999999876,
+          "p95Ms": 0.005,
+          "p99Ms": 0.006,
+          "maxMs": 0.009
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForDraw",
+          "count": 603,
+          "inclusiveTotalMs": 1.5489999999999902,
+          "p95Ms": 0.005,
+          "p99Ms": 0.009,
+          "maxMs": 0.016
+        },
+        {
+          "name": "LayerTreeHostImpl::BuildHitTestData",
+          "count": 596,
+          "inclusiveTotalMs": 0.8620000000000007,
+          "p95Ms": 0.004,
+          "p99Ms": 0.005,
+          "maxMs": 0.006
+        },
+        {
+          "name": "TileManager::DidFinishRunningAllTileTasks",
+          "count": 407,
+          "inclusiveTotalMs": 0.47900000000000037,
+          "p95Ms": 0.003,
+          "p99Ms": 0.004,
+          "maxMs": 0.005
+        },
+        {
+          "name": "LayerTreeHostImpl::DidNotProduceFrame",
+          "count": 1,
+          "inclusiveTotalMs": 0.01,
+          "p95Ms": 0.01,
+          "p99Ms": 0.01,
+          "maxMs": 0.01
+        }
+      ],
+      "gpuProcess": [
+        {
+          "name": "Graphics.Pipeline",
+          "count": 6612,
+          "inclusiveTotalMs": 3826.4400000000137,
+          "p95Ms": 5.755,
+          "p99Ms": 6.078,
+          "maxMs": 6.464
+        },
+        {
+          "name": "RunTask",
+          "count": 2589,
+          "inclusiveTotalMs": 3568.9060000000054,
+          "p95Ms": 5.988,
+          "p99Ms": 6.196,
+          "maxMs": 6.469
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 2587,
+          "inclusiveTotalMs": 3564.411000000015,
+          "p95Ms": 5.987,
+          "p99Ms": 6.196,
+          "maxMs": 6.469
+        },
+        {
+          "name": "DisplayScheduler::OnBeginFrameDeadline",
+          "count": 600,
+          "inclusiveTotalMs": 3481.0350000000026,
+          "p95Ms": 6.183,
+          "p99Ms": 6.28,
+          "maxMs": 6.467
+        },
+        {
+          "name": "DisplayScheduler::DrawAndSwap",
+          "count": 600,
+          "inclusiveTotalMs": 3480.3200000000006,
+          "p95Ms": 6.182,
+          "p99Ms": 6.278,
+          "maxMs": 6.465
+        },
+        {
+          "name": "Display::DrawAndSwap",
+          "count": 600,
+          "inclusiveTotalMs": 3479.7980000000002,
+          "p95Ms": 6.181,
+          "p99Ms": 6.278,
+          "maxMs": 6.465
+        },
+        {
+          "name": "DirectRenderer::DrawFrame",
+          "count": 600,
+          "inclusiveTotalMs": 3422.3209999999995,
+          "p95Ms": 6.092,
+          "p99Ms": 6.186,
+          "maxMs": 6.349
+        },
+        {
+          "name": "DirectRenderer::DrawRenderPass",
+          "count": 600,
+          "inclusiveTotalMs": 3415.7759999999976,
+          "p95Ms": 6.08,
+          "p99Ms": 6.171,
+          "maxMs": 6.339
+        },
+        {
+          "name": "SoftwareRenderer::DoDrawQuad",
+          "count": 46200,
+          "inclusiveTotalMs": 3394.8729999997568,
+          "p95Ms": 0.1,
+          "p99Ms": 0.665,
+          "maxMs": 1.027
+        },
+        {
+          "name": "SimpleWatcher::OnHandleReady",
+          "count": 689,
+          "inclusiveTotalMs": 50.44900000000014,
+          "p95Ms": 0.11,
+          "p99Ms": 0.121,
+          "maxMs": 0.216
+        },
+        {
+          "name": "Receive mojo message",
+          "count": 674,
+          "inclusiveTotalMs": 34.55399999999993,
+          "p95Ms": 0.068,
+          "p99Ms": 0.077,
+          "maxMs": 0.15
+        },
+        {
+          "name": "ExternalBeginFrameSource::OnBeginFrame",
+          "count": 600,
+          "inclusiveTotalMs": 18.43799999999997,
+          "p95Ms": 0.039,
+          "p99Ms": 0.043,
+          "maxMs": 0.064
+        },
+        {
+          "name": "Surface::CommitFrame",
+          "count": 601,
+          "inclusiveTotalMs": 11.451999999999984,
+          "p95Ms": 0.023,
+          "p99Ms": 0.028,
+          "maxMs": 0.053
+        },
+        {
+          "name": "Surface::ActivateFrame",
+          "count": 601,
+          "inclusiveTotalMs": 10.304000000000013,
+          "p95Ms": 0.021,
+          "p99Ms": 0.025,
+          "maxMs": 0.047
+        },
+        {
+          "name": "DisplayScheduler::BeginFrame",
+          "count": 600,
+          "inclusiveTotalMs": 5.281999999999974,
+          "p95Ms": 0.012,
+          "p99Ms": 0.021,
+          "maxMs": 0.037
+        },
+        {
+          "name": "DisplayScheduler::ScheduleBeginFrameDeadline",
+          "count": 1564,
+          "inclusiveTotalMs": 3.1829999999998777,
+          "p95Ms": 0.003,
+          "p99Ms": 0.005,
+          "maxMs": 0.03
+        },
+        {
+          "name": "SoftwareRenderer::SwapBuffers",
+          "count": 600,
+          "inclusiveTotalMs": 3.0449999999999733,
+          "p95Ms": 0.007,
+          "p99Ms": 0.014,
+          "maxMs": 0.022
+        },
+        {
+          "name": "Scheduler::RunTask",
+          "count": 111,
+          "inclusiveTotalMs": 1.3419999999999985,
+          "p95Ms": 0.041,
+          "p99Ms": 0.047,
+          "maxMs": 0.054
+        },
+        {
+          "name": "GpuChannel::ExecuteDeferredRequest",
+          "count": 109,
+          "inclusiveTotalMs": 1.1519999999999995,
+          "p95Ms": 0.032,
+          "p99Ms": 0.044,
+          "maxMs": 0.051
+        },
+        {
+          "name": "DirectRenderer::DrawFrame ProcessForOverlays",
+          "count": 600,
+          "inclusiveTotalMs": 1.099999999999999,
+          "p95Ms": 0.003,
+          "p99Ms": 0.004,
+          "maxMs": 0.008
+        },
+        {
+          "name": "SendBeginFrameDecision",
+          "count": 575,
+          "inclusiveTotalMs": 0.8490000000000006,
+          "p95Ms": 0.003,
+          "p99Ms": 0.005,
+          "maxMs": 0.014
+        },
+        {
+          "name": "Using new deadline",
+          "count": 793,
+          "inclusiveTotalMs": 0.8410000000000006,
+          "p95Ms": 0.001,
+          "p99Ms": 0.003,
+          "maxMs": 0.014
+        },
+        {
+          "name": "SharedImageStub::OnDestroySharedImage",
+          "count": 69,
+          "inclusiveTotalMs": 0.7320000000000005,
+          "p95Ms": 0.031,
+          "p99Ms": 0.049,
+          "maxMs": 0.049
+        },
+        {
+          "name": "SoftwareRenderer::FinishDrawingFrame",
+          "count": 415,
+          "inclusiveTotalMs": 0.43500000000000033,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.004
+        },
+        {
+          "name": "SurfaceManager::GarbageCollectSurfaces",
+          "count": 322,
+          "inclusiveTotalMs": 0.32600000000000023,
+          "p95Ms": 0.001,
+          "p99Ms": 0.001,
+          "maxMs": 0.003
+        }
+      ]
+    },
+    "interpretation": {
+      "unit": "milliseconds",
+      "durationType": "inclusive trace event duration",
+      "additive": false,
+      "warning": "Trace categories overlap and must not be summed into a total. GPU process event time is not GPU utilization, power, or presented-frame telemetry."
+    }
+  },
+  {
+    "backend": "headless",
+    "file": ".review/p1-5-a/headless/gsap-3840.trace.json.gz",
+    "traceEventCount": 355756,
+    "processNames": {
+      "7007": "Browser",
+      "7008": "GPU Process",
+      "7865": "Renderer"
+    },
+    "threadNames": {
+      "0:0": "swapper",
+      "7007:275779": "CrBrowserMain",
+      "7865:277818": "Compositor",
+      "7865:277805": "CrRendererMain",
+      "7008:275826": "PerfettoTrace",
+      "7007:275789": "PerfettoTrace",
+      "7008:275861": "VizCompositorThread",
+      "7865:277809": "PerfettoTrace",
+      "7007:275814": "DevToolsPipeHandlerWriteThread",
+      "7007:275794": "Chrome_IOThread",
+      "7865:277814": "Chrome_ChildIOThread",
+      "7865:277859": "ThreadPoolForegroundWorker",
+      "7865:277812": "ThreadPoolForegroundWorker",
+      "7865:277860": "ThreadPoolForegroundWorker",
+      "7865:277815": "ThreadPoolForegroundWorker",
+      "7865:277872": "ThreadPoolForegroundWorker",
+      "7865:277862": "ThreadPoolForegroundWorker",
+      "7865:277873": "ThreadPoolForegroundWorker",
+      "7865:277874": "ThreadPoolForegroundWorker",
+      "7865:277895": "ThreadPoolForegroundWorker",
+      "7865:277875": "ThreadPoolForegroundWorker",
+      "7865:277894": "ThreadPoolForegroundWorker",
+      "7865:277896": "ThreadPoolForegroundWorker",
+      "7865:277897": "ThreadPoolForegroundWorker",
+      "7865:277898": "ThreadPoolForegroundWorker",
+      "7865:277899": "ThreadPoolForegroundWorker",
+      "7865:277900": "ThreadPoolForegroundWorker",
+      "7865:277903": "ThreadPoolForegroundWorker",
+      "7865:277902": "ThreadPoolForegroundWorker",
+      "7008:275860": "Chrome_ChildIOThread",
+      "7865:277811": "ThreadPoolServiceThread",
+      "7008:275801": "CrGpuMain",
+      "7865:277813": "ThreadPoolBackgroundWorker",
+      "7865:277901": "ThreadPoolForegroundWorker",
+      "7007:275791": "ThreadPoolForegroundWorker"
+    },
+    "userTimingMarks": [
+      {
+        "name": "P15A:trace-start",
+        "timestampUs": 9093808948
+      },
+      {
+        "name": "P15A:trace-end",
+        "timestampUs": 9103810867
+      }
+    ],
+    "costs": {
+      "rendererMainThread": {
+        "count": 33946,
+        "inclusiveTotalMs": 4913.91300000098,
+        "p95Ms": 0.809,
+        "p99Ms": 1.755,
+        "maxMs": 64.829
+      },
+      "scriptAndAnimationCalculation": {
+        "count": 1239,
+        "inclusiveTotalMs": 223.1189999999999,
+        "p95Ms": 0.351,
+        "p99Ms": 3.419,
+        "maxMs": 3.804
+      },
+      "layoutAndStyle": {
+        "count": 996,
+        "inclusiveTotalMs": 116.06400000000026,
+        "p95Ms": 0.199,
+        "p99Ms": 0.25,
+        "maxMs": 2.652
+      },
+      "paint": {
+        "count": 3413,
+        "inclusiveTotalMs": 477.24699999999876,
+        "p95Ms": 0.461,
+        "p99Ms": 0.514,
+        "maxMs": 2.652
+      },
+      "compositeAndRaster": {
+        "count": 24852,
+        "inclusiveTotalMs": 4670.9950000010085,
+        "p95Ms": 0.752,
+        "p99Ms": 1.566,
+        "maxMs": 5.834
+      },
+      "gpuProcess": {
+        "count": 53656,
+        "inclusiveTotalMs": 32192.612000007426,
+        "p95Ms": 2.428,
+        "p99Ms": 2.906,
+        "maxMs": 48.816
+      }
+    },
+    "topEvents": {
+      "rendererMainThread": [
+        {
+          "name": "RunTask",
+          "count": 5438,
+          "inclusiveTotalMs": 999.4699999999805,
+          "p95Ms": 1.552,
+          "p99Ms": 2.275,
+          "maxMs": 64.829
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 4447,
+          "inclusiveTotalMs": 986.3449999999566,
+          "p95Ms": 1.574,
+          "p99Ms": 2.323,
+          "maxMs": 64.805
+        },
+        {
+          "name": "ProxyMain::BeginMainFrame",
+          "count": 499,
+          "inclusiveTotalMs": 890.4719999999996,
+          "p95Ms": 2.343,
+          "p99Ms": 5.089,
+          "maxMs": 64.803
+        },
+        {
+          "name": "LocalFrameView::RunPaintLifecyclePhase",
+          "count": 503,
+          "inclusiveTotalMs": 383.6529999999999,
+          "p95Ms": 0.875,
+          "p99Ms": 0.982,
+          "maxMs": 2.371
+        },
+        {
+          "name": "Paint",
+          "count": 1924,
+          "inclusiveTotalMs": 344.00699999999955,
+          "p95Ms": 0.479,
+          "p99Ms": 0.523,
+          "maxMs": 1.926
+        },
+        {
+          "name": "FunctionCall",
+          "count": 1219,
+          "inclusiveTotalMs": 181.01399999999998,
+          "p95Ms": 0.3,
+          "p99Ms": 0.824,
+          "maxMs": 3.745
+        },
+        {
+          "name": "FireAnimationFrame",
+          "count": 998,
+          "inclusiveTotalMs": 146.67399999999998,
+          "p95Ms": 0.364,
+          "p99Ms": 0.582,
+          "maxMs": 1.551
+        },
+        {
+          "name": "Layerize",
+          "count": 499,
+          "inclusiveTotalMs": 131.1880000000001,
+          "p95Ms": 0.305,
+          "p99Ms": 0.403,
+          "maxMs": 0.559
+        },
+        {
+          "name": "LocalFrameView::RunStyleAndLayoutLifecyclePhases",
+          "count": 504,
+          "inclusiveTotalMs": 124.37399999999987,
+          "p95Ms": 0.303,
+          "p99Ms": 0.414,
+          "maxMs": 2.723
+        },
+        {
+          "name": "Commit",
+          "count": 499,
+          "inclusiveTotalMs": 103.75100000000015,
+          "p95Ms": 0.707,
+          "p99Ms": 0.728,
+          "maxMs": 0.783
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 498,
+          "inclusiveTotalMs": 91.83100000000013,
+          "p95Ms": 0.21,
+          "p99Ms": 0.448,
+          "maxMs": 2.652
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "count": 498,
+          "inclusiveTotalMs": 87.37200000000004,
+          "p95Ms": 0.668,
+          "p99Ms": 0.687,
+          "maxMs": 0.704
+        },
+        {
+          "name": "LayerTreeHost::WaitForCommitCompletion",
+          "count": 499,
+          "inclusiveTotalMs": 70.45100000000018,
+          "p95Ms": 0.008,
+          "p99Ms": 0.014,
+          "maxMs": 63.06
+        },
+        {
+          "name": "UpdateLayer",
+          "count": 619,
+          "inclusiveTotalMs": 62.73799999999999,
+          "p95Ms": 0.145,
+          "p99Ms": 0.164,
+          "maxMs": 0.224
+        },
+        {
+          "name": "TimerFire",
+          "count": 20,
+          "inclusiveTotalMs": 42.10500000000001,
+          "p95Ms": 3.781,
+          "p99Ms": 3.804,
+          "maxMs": 3.804
+        },
+        {
+          "name": "PrePaint",
+          "count": 504,
+          "inclusiveTotalMs": 36.51800000000004,
+          "p95Ms": 0.091,
+          "p99Ms": 0.118,
+          "maxMs": 0.276
+        },
+        {
+          "name": "LocalFrameView::RunPrePaintLifecyclePhase",
+          "count": 502,
+          "inclusiveTotalMs": 26.32200000000002,
+          "p95Ms": 0.066,
+          "p99Ms": 0.093,
+          "maxMs": 0.253
+        },
+        {
+          "name": "LocalFrameView::layout",
+          "count": 498,
+          "inclusiveTotalMs": 25.148000000000014,
+          "p95Ms": 0.076,
+          "p99Ms": 0.13,
+          "maxMs": 0.165
+        },
+        {
+          "name": "Layout",
+          "count": 498,
+          "inclusiveTotalMs": 24.23299999999999,
+          "p95Ms": 0.075,
+          "p99Ms": 0.127,
+          "maxMs": 0.162
+        },
+        {
+          "name": "LocalFrameView::performLayout",
+          "count": 498,
+          "inclusiveTotalMs": 21.413999999999977,
+          "p95Ms": 0.068,
+          "p99Ms": 0.109,
+          "maxMs": 0.142
+        },
+        {
+          "name": "MajorGC",
+          "count": 6,
+          "inclusiveTotalMs": 14.595,
+          "p95Ms": 5.328,
+          "p99Ms": 5.328,
+          "maxMs": 5.328
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "count": 6,
+          "inclusiveTotalMs": 14.451999999999998,
+          "p95Ms": 5.305,
+          "p99Ms": 5.305,
+          "maxMs": 5.305
+        },
+        {
+          "name": "LocalFrameView::RunCompositingInputsLifecyclePhase",
+          "count": 503,
+          "inclusiveTotalMs": 9.32299999999998,
+          "p95Ms": 0.023,
+          "p99Ms": 0.028,
+          "maxMs": 0.061
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL",
+          "count": 106,
+          "inclusiveTotalMs": 8.177999999999997,
+          "p95Ms": 0.262,
+          "p99Ms": 0.345,
+          "maxMs": 0.397
+        },
+        {
+          "name": "V8.GC_MC_MARK",
+          "count": 6,
+          "inclusiveTotalMs": 5.044999999999999,
+          "p95Ms": 3.413,
+          "p99Ms": 3.413,
+          "maxMs": 3.413
+        }
+      ],
+      "paint": [
+        {
+          "name": "Paint",
+          "count": 1924,
+          "inclusiveTotalMs": 344.00699999999955,
+          "p95Ms": 0.479,
+          "p99Ms": 0.523,
+          "maxMs": 1.926
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 498,
+          "inclusiveTotalMs": 91.83100000000013,
+          "p95Ms": 0.21,
+          "p99Ms": 0.448,
+          "maxMs": 2.652
+        },
+        {
+          "name": "PrePaint",
+          "count": 504,
+          "inclusiveTotalMs": 36.51800000000004,
+          "p95Ms": 0.091,
+          "p99Ms": 0.118,
+          "maxMs": 0.276
+        },
+        {
+          "name": "PaintImage",
+          "count": 487,
+          "inclusiveTotalMs": 4.890999999999983,
+          "p95Ms": 0.015,
+          "p99Ms": 0.02,
+          "maxMs": 0.045
+        }
+      ],
+      "compositeAndRaster": [
+        {
+          "name": "RasterTask",
+          "count": 6852,
+          "inclusiveTotalMs": 3783.2969999999827,
+          "p95Ms": 1.39,
+          "p99Ms": 2.553,
+          "maxMs": 5.834
+        },
+        {
+          "name": "LayerTreeHostImpl::FinishCommit",
+          "count": 499,
+          "inclusiveTotalMs": 293.0700000000001,
+          "p95Ms": 0.702,
+          "p99Ms": 0.733,
+          "maxMs": 0.888
+        },
+        {
+          "name": "Commit",
+          "count": 500,
+          "inclusiveTotalMs": 103.76800000000014,
+          "p95Ms": 0.705,
+          "p99Ms": 0.728,
+          "maxMs": 0.783
+        },
+        {
+          "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+          "count": 1048,
+          "inclusiveTotalMs": 81.63500000000006,
+          "p95Ms": 0.19,
+          "p99Ms": 0.251,
+          "maxMs": 1.641
+        },
+        {
+          "name": "LayerTreeHostImpl::CommitComplete",
+          "count": 499,
+          "inclusiveTotalMs": 79.89400000000006,
+          "p95Ms": 0.203,
+          "p99Ms": 0.254,
+          "maxMs": 0.389
+        },
+        {
+          "name": "TileManager::PrepareTiles",
+          "count": 500,
+          "inclusiveTotalMs": 68.55599999999998,
+          "p95Ms": 0.173,
+          "p99Ms": 0.197,
+          "maxMs": 0.298
+        },
+        {
+          "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+          "count": 1265,
+          "inclusiveTotalMs": 64.59999999999938,
+          "p95Ms": 0.148,
+          "p99Ms": 0.184,
+          "maxMs": 1.62
+        },
+        {
+          "name": "LayerTreeHostImpl::ActivateSyncTree",
+          "count": 500,
+          "inclusiveTotalMs": 62.256999999999984,
+          "p95Ms": 0.163,
+          "p99Ms": 0.348,
+          "maxMs": 0.854
+        },
+        {
+          "name": "TileManager::AssignGpuMemoryToTiles",
+          "count": 521,
+          "inclusiveTotalMs": 55.17600000000005,
+          "p95Ms": 0.145,
+          "p99Ms": 0.221,
+          "maxMs": 0.25
+        },
+        {
+          "name": "LayerTreeHostImpl::PrepareToDraw",
+          "count": 500,
+          "inclusiveTotalMs": 24.019000000000073,
+          "p95Ms": 0.086,
+          "p99Ms": 0.141,
+          "maxMs": 0.174
+        },
+        {
+          "name": "LayerTreeHostImpl::CalculateRenderPasses",
+          "count": 500,
+          "inclusiveTotalMs": 16.089999999999954,
+          "p95Ms": 0.07,
+          "p99Ms": 0.097,
+          "maxMs": 0.122
+        },
+        {
+          "name": "TileManager::ScheduleTasks",
+          "count": 521,
+          "inclusiveTotalMs": 14.720999999999966,
+          "p95Ms": 0.037,
+          "p99Ms": 0.046,
+          "maxMs": 0.072
+        },
+        {
+          "name": "LayerTreeHostImpl::NotifyTileStateChanged",
+          "count": 7293,
+          "inclusiveTotalMs": 7.581000000000797,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.018
+        },
+        {
+          "name": "TileManager::PrepareToDraw",
+          "count": 500,
+          "inclusiveTotalMs": 5.10399999999999,
+          "p95Ms": 0.014,
+          "p99Ms": 0.02,
+          "maxMs": 0.055
+        },
+        {
+          "name": "TileManager::IsReadyToDraw",
+          "count": 497,
+          "inclusiveTotalMs": 2.8669999999999782,
+          "p95Ms": 0.009,
+          "p99Ms": 0.01,
+          "maxMs": 0.012
+        },
+        {
+          "name": "TileManager::IsReadyToActivate",
+          "count": 542,
+          "inclusiveTotalMs": 2.223999999999989,
+          "p95Ms": 0.008,
+          "p99Ms": 0.01,
+          "maxMs": 0.017
+        },
+        {
+          "name": "LayerTreeHostImpl::BeginCommit",
+          "count": 498,
+          "inclusiveTotalMs": 2.0419999999999896,
+          "p95Ms": 0.006,
+          "p99Ms": 0.009,
+          "maxMs": 0.01
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForActivation",
+          "count": 520,
+          "inclusiveTotalMs": 1.9939999999999833,
+          "p95Ms": 0.008,
+          "p99Ms": 0.01,
+          "maxMs": 0.013
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForDraw",
+          "count": 521,
+          "inclusiveTotalMs": 1.1529999999999954,
+          "p95Ms": 0.005,
+          "p99Ms": 0.008,
+          "maxMs": 0.015
+        },
+        {
+          "name": "LayerTreeHostImpl::BuildHitTestData",
+          "count": 391,
+          "inclusiveTotalMs": 0.45500000000000035,
+          "p95Ms": 0.002,
+          "p99Ms": 0.004,
+          "maxMs": 0.007
+        },
+        {
+          "name": "TileManager::DidFinishRunningAllTileTasks",
+          "count": 381,
+          "inclusiveTotalMs": 0.4170000000000003,
+          "p95Ms": 0.001,
+          "p99Ms": 0.004,
+          "maxMs": 0.005
+        },
+        {
+          "name": "LayerTreeHostImpl::DidNotProduceFrame",
+          "count": 4,
+          "inclusiveTotalMs": 0.075,
+          "p95Ms": 0.037,
+          "p99Ms": 0.037,
+          "maxMs": 0.037
+        }
+      ],
+      "gpuProcess": [
+        {
+          "name": "Graphics.Pipeline",
+          "count": 5517,
+          "inclusiveTotalMs": 3901.436000000008,
+          "p95Ms": 2.475,
+          "p99Ms": 11.181,
+          "maxMs": 48.809
+        },
+        {
+          "name": "RunTask",
+          "count": 2733,
+          "inclusiveTotalMs": 3609.1200000000385,
+          "p95Ms": 2.556,
+          "p99Ms": 47.592,
+          "maxMs": 48.816
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 2732,
+          "inclusiveTotalMs": 3605.396000000011,
+          "p95Ms": 2.555,
+          "p99Ms": 47.59,
+          "maxMs": 48.814
+        },
+        {
+          "name": "DisplayScheduler::OnBeginFrameDeadline",
+          "count": 501,
+          "inclusiveTotalMs": 3513.1390000000065,
+          "p95Ms": 47.639,
+          "p99Ms": 48.548,
+          "maxMs": 48.812
+        },
+        {
+          "name": "DisplayScheduler::DrawAndSwap",
+          "count": 499,
+          "inclusiveTotalMs": 3512.555999999998,
+          "p95Ms": 47.651,
+          "p99Ms": 48.583,
+          "maxMs": 48.81
+        },
+        {
+          "name": "Display::DrawAndSwap",
+          "count": 499,
+          "inclusiveTotalMs": 3512.1449999999986,
+          "p95Ms": 47.65,
+          "p99Ms": 48.582,
+          "maxMs": 48.81
+        },
+        {
+          "name": "DirectRenderer::DrawFrame",
+          "count": 499,
+          "inclusiveTotalMs": 3462.932999999996,
+          "p95Ms": 47.516,
+          "p99Ms": 48.45,
+          "maxMs": 48.675
+        },
+        {
+          "name": "DirectRenderer::DrawRenderPass",
+          "count": 509,
+          "inclusiveTotalMs": 3457.220999999998,
+          "p95Ms": 47.484,
+          "p99Ms": 48.386,
+          "maxMs": 48.657
+        },
+        {
+          "name": "SoftwareRenderer::DoDrawQuad",
+          "count": 30606,
+          "inclusiveTotalMs": 3440.7189999996785,
+          "p95Ms": 0.101,
+          "p99Ms": 0.252,
+          "maxMs": 25.93
+        },
+        {
+          "name": "SimpleWatcher::OnHandleReady",
+          "count": 572,
+          "inclusiveTotalMs": 59.83800000000001,
+          "p95Ms": 0.192,
+          "p99Ms": 0.257,
+          "maxMs": 0.407
+        },
+        {
+          "name": "Receive mojo message",
+          "count": 558,
+          "inclusiveTotalMs": 43.90500000000012,
+          "p95Ms": 0.146,
+          "p99Ms": 0.205,
+          "maxMs": 0.382
+        },
+        {
+          "name": "ExternalBeginFrameSource::OnBeginFrame",
+          "count": 502,
+          "inclusiveTotalMs": 14.336999999999978,
+          "p95Ms": 0.038,
+          "p99Ms": 0.044,
+          "maxMs": 0.059
+        },
+        {
+          "name": "Surface::CommitFrame",
+          "count": 500,
+          "inclusiveTotalMs": 14.154999999999953,
+          "p95Ms": 0.051,
+          "p99Ms": 0.064,
+          "maxMs": 0.082
+        },
+        {
+          "name": "Surface::ActivateFrame",
+          "count": 500,
+          "inclusiveTotalMs": 13.182999999999996,
+          "p95Ms": 0.048,
+          "p99Ms": 0.062,
+          "maxMs": 0.079
+        },
+        {
+          "name": "Scheduler::RunTask",
+          "count": 646,
+          "inclusiveTotalMs": 7.120999999999981,
+          "p95Ms": 0.019,
+          "p99Ms": 0.042,
+          "maxMs": 0.142
+        },
+        {
+          "name": "GpuChannel::ExecuteDeferredRequest",
+          "count": 645,
+          "inclusiveTotalMs": 6.265999999999987,
+          "p95Ms": 0.017,
+          "p99Ms": 0.039,
+          "maxMs": 0.14
+        },
+        {
+          "name": "SharedImageStub::OnDestroySharedImage",
+          "count": 636,
+          "inclusiveTotalMs": 5.689999999999988,
+          "p95Ms": 0.015,
+          "p99Ms": 0.034,
+          "maxMs": 0.14
+        },
+        {
+          "name": "DisplayScheduler::BeginFrame",
+          "count": 502,
+          "inclusiveTotalMs": 4.145999999999987,
+          "p95Ms": 0.012,
+          "p99Ms": 0.015,
+          "maxMs": 0.02
+        },
+        {
+          "name": "DisplayScheduler::ScheduleBeginFrameDeadline",
+          "count": 1312,
+          "inclusiveTotalMs": 2.6169999999999276,
+          "p95Ms": 0.003,
+          "p99Ms": 0.004,
+          "maxMs": 0.01
+        },
+        {
+          "name": "SoftwareRenderer::SwapBuffers",
+          "count": 500,
+          "inclusiveTotalMs": 1.952999999999989,
+          "p95Ms": 0.006,
+          "p99Ms": 0.008,
+          "maxMs": 0.009
+        },
+        {
+          "name": "DirectRenderer::DrawFrame ProcessForOverlays",
+          "count": 499,
+          "inclusiveTotalMs": 0.8930000000000007,
+          "p95Ms": 0.003,
+          "p99Ms": 0.005,
+          "maxMs": 0.015
+        },
+        {
+          "name": "GpuChannelMessageFilter::FlushDeferredRequests",
+          "count": 18,
+          "inclusiveTotalMs": 0.7110000000000001,
+          "p95Ms": 0.311,
+          "p99Ms": 0.311,
+          "maxMs": 0.311
+        },
+        {
+          "name": "SendBeginFrameDecision",
+          "count": 471,
+          "inclusiveTotalMs": 0.6330000000000005,
+          "p95Ms": 0.003,
+          "p99Ms": 0.004,
+          "maxMs": 0.006
+        },
+        {
+          "name": "Using new deadline",
+          "count": 595,
+          "inclusiveTotalMs": 0.6170000000000004,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.004
+        },
+        {
+          "name": "SoftwareRenderer::FinishDrawingFrame",
+          "count": 300,
+          "inclusiveTotalMs": 0.32100000000000023,
+          "p95Ms": 0.001,
+          "p99Ms": 0.003,
+          "maxMs": 0.004
+        }
+      ]
+    },
+    "interpretation": {
+      "unit": "milliseconds",
+      "durationType": "inclusive trace event duration",
+      "additive": false,
+      "warning": "Trace categories overlap and must not be summed into a total. GPU process event time is not GPU utilization, power, or presented-frame telemetry."
+    }
+  },
+  {
+    "backend": "headless",
+    "file": ".review/p1-5-a/headless/legacy-1920.trace.json.gz",
+    "traceEventCount": 569894,
+    "processNames": {
+      "7007": "Browser",
+      "7008": "GPU Process",
+      "7018": "Renderer"
+    },
+    "threadNames": {
+      "0:0": "swapper",
+      "7007:275779": "CrBrowserMain",
+      "7018:275898": "Compositor",
+      "7018:275885": "CrRendererMain",
+      "7008:275826": "PerfettoTrace",
+      "7007:275789": "PerfettoTrace",
+      "7018:275891": "PerfettoTrace",
+      "7007:275814": "DevToolsPipeHandlerWriteThread",
+      "7007:275794": "Chrome_IOThread",
+      "7018:275895": "Chrome_ChildIOThread",
+      "7008:275861": "VizCompositorThread",
+      "7018:275896": "ThreadPoolForegroundWorker",
+      "7018:275893": "ThreadPoolForegroundWorker",
+      "7018:275957": "ThreadPoolForegroundWorker",
+      "7018:275956": "ThreadPoolForegroundWorker",
+      "7018:275958": "ThreadPoolForegroundWorker",
+      "7018:275959": "ThreadPoolForegroundWorker",
+      "7018:275960": "ThreadPoolForegroundWorker",
+      "7018:275966": "ThreadPoolForegroundWorker",
+      "7018:275967": "ThreadPoolForegroundWorker",
+      "7018:275983": "ThreadPoolForegroundWorker",
+      "7018:275981": "ThreadPoolForegroundWorker",
+      "7018:275982": "ThreadPoolForegroundWorker",
+      "7018:275984": "ThreadPoolForegroundWorker",
+      "7018:275985": "ThreadPoolForegroundWorker",
+      "7018:275988": "ThreadPoolForegroundWorker",
+      "7018:275987": "ThreadPoolForegroundWorker",
+      "7018:275986": "ThreadPoolForegroundWorker",
+      "7018:275990": "ThreadPoolForegroundWorker",
+      "7018:275989": "ThreadPoolForegroundWorker",
+      "7008:275860": "Chrome_ChildIOThread",
+      "7018:275892": "ThreadPoolServiceThread",
+      "7008:275801": "CrGpuMain",
+      "7007:275791": "ThreadPoolForegroundWorker",
+      "7007:275790": "ThreadPoolServiceThread"
+    },
+    "userTimingMarks": [
+      {
+        "name": "P15A:trace-start",
+        "timestampUs": 9017538413
+      },
+      {
+        "name": "P15A:trace-end",
+        "timestampUs": 9027545255
+      }
+    ],
+    "costs": {
+      "rendererMainThread": {
+        "count": 46153,
+        "inclusiveTotalMs": 10137.13100000394,
+        "p95Ms": 0.98,
+        "p99Ms": 4.762,
+        "maxMs": 9.36
+      },
+      "scriptAndAnimationCalculation": {
+        "count": 1422,
+        "inclusiveTotalMs": 346.3120000000001,
+        "p95Ms": 0.666,
+        "p99Ms": 2.867,
+        "maxMs": 4.234
+      },
+      "layoutAndStyle": {
+        "count": 1202,
+        "inclusiveTotalMs": 588.2100000000008,
+        "p95Ms": 2.662,
+        "p99Ms": 2.839,
+        "maxMs": 3.527
+      },
+      "paint": {
+        "count": 4087,
+        "inclusiveTotalMs": 1088.1229999999932,
+        "p95Ms": 0.61,
+        "p99Ms": 2.725,
+        "maxMs": 3.527
+      },
+      "compositeAndRaster": {
+        "count": 28923,
+        "inclusiveTotalMs": 10338.333000001689,
+        "p95Ms": 2.154,
+        "p99Ms": 6.047,
+        "maxMs": 8.961
+      },
+      "gpuProcess": {
+        "count": 70480,
+        "inclusiveTotalMs": 32390.595000004836,
+        "p95Ms": 5.719,
+        "p99Ms": 6.109,
+        "maxMs": 6.575
+      }
+    },
+    "topEvents": {
+      "rendererMainThread": [
+        {
+          "name": "RunTask",
+          "count": 8287,
+          "inclusiveTotalMs": 2041.1009999998378,
+          "p95Ms": 2.302,
+          "p99Ms": 5.066,
+          "maxMs": 9.36
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 6725,
+          "inclusiveTotalMs": 2018.2999999999406,
+          "p95Ms": 2.383,
+          "p99Ms": 5.094,
+          "maxMs": 9.352
+        },
+        {
+          "name": "ProxyMain::BeginMainFrame",
+          "count": 601,
+          "inclusiveTotalMs": 1875.771000000001,
+          "p95Ms": 5.271,
+          "p99Ms": 5.609,
+          "maxMs": 5.895
+        },
+        {
+          "name": "LocalFrameView::RunStyleAndLayoutLifecyclePhases",
+          "count": 605,
+          "inclusiveTotalMs": 599.1209999999998,
+          "p95Ms": 2.843,
+          "p99Ms": 3.01,
+          "maxMs": 3.595
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 601,
+          "inclusiveTotalMs": 555.4160000000005,
+          "p95Ms": 2.751,
+          "p99Ms": 2.954,
+          "maxMs": 3.527
+        },
+        {
+          "name": "LocalFrameView::RunPaintLifecyclePhase",
+          "count": 605,
+          "inclusiveTotalMs": 499.8109999999998,
+          "p95Ms": 0.957,
+          "p99Ms": 1.001,
+          "maxMs": 2.59
+        },
+        {
+          "name": "Paint",
+          "count": 2313,
+          "inclusiveTotalMs": 471.24099999999873,
+          "p95Ms": 0.548,
+          "p99Ms": 0.61,
+          "maxMs": 2.133
+        },
+        {
+          "name": "Commit",
+          "count": 601,
+          "inclusiveTotalMs": 410.87900000000025,
+          "p95Ms": 0.759,
+          "p99Ms": 0.807,
+          "maxMs": 0.843
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "count": 601,
+          "inclusiveTotalMs": 386.2539999999999,
+          "p95Ms": 0.708,
+          "p99Ms": 0.75,
+          "maxMs": 0.795
+        },
+        {
+          "name": "FunctionCall",
+          "count": 1402,
+          "inclusiveTotalMs": 305.3419999999999,
+          "p95Ms": 0.661,
+          "p99Ms": 0.782,
+          "maxMs": 4.168
+        },
+        {
+          "name": "FireAnimationFrame",
+          "count": 1202,
+          "inclusiveTotalMs": 276.49099999999993,
+          "p95Ms": 0.668,
+          "p99Ms": 0.755,
+          "maxMs": 1.477
+        },
+        {
+          "name": "Layerize",
+          "count": 601,
+          "inclusiveTotalMs": 161.21900000000022,
+          "p95Ms": 0.303,
+          "p99Ms": 0.336,
+          "maxMs": 0.391
+        },
+        {
+          "name": "UpdateLayer",
+          "count": 1430,
+          "inclusiveTotalMs": 68.29499999999943,
+          "p95Ms": 0.136,
+          "p99Ms": 0.152,
+          "maxMs": 0.181
+        },
+        {
+          "name": "PrePaint",
+          "count": 606,
+          "inclusiveTotalMs": 54.93200000000003,
+          "p95Ms": 0.124,
+          "p99Ms": 0.135,
+          "maxMs": 0.292
+        },
+        {
+          "name": "LocalFrameView::RunPrePaintLifecyclePhase",
+          "count": 605,
+          "inclusiveTotalMs": 41.88600000000003,
+          "p95Ms": 0.102,
+          "p99Ms": 0.11,
+          "maxMs": 0.271
+        },
+        {
+          "name": "TimerFire",
+          "count": 20,
+          "inclusiveTotalMs": 40.970000000000006,
+          "p95Ms": 4.137,
+          "p99Ms": 4.234,
+          "maxMs": 4.234
+        },
+        {
+          "name": "LocalFrameView::layout",
+          "count": 601,
+          "inclusiveTotalMs": 33.83499999999998,
+          "p95Ms": 0.087,
+          "p99Ms": 0.147,
+          "maxMs": 0.174
+        },
+        {
+          "name": "Layout",
+          "count": 601,
+          "inclusiveTotalMs": 32.793999999999976,
+          "p95Ms": 0.085,
+          "p99Ms": 0.146,
+          "maxMs": 0.172
+        },
+        {
+          "name": "LocalFrameView::performLayout",
+          "count": 601,
+          "inclusiveTotalMs": 28.933000000000007,
+          "p95Ms": 0.078,
+          "p99Ms": 0.128,
+          "maxMs": 0.154
+        },
+        {
+          "name": "MajorGC",
+          "count": 5,
+          "inclusiveTotalMs": 28.719,
+          "p95Ms": 9.328,
+          "p99Ms": 9.328,
+          "maxMs": 9.328
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "count": 5,
+          "inclusiveTotalMs": 28.594,
+          "p95Ms": 9.302,
+          "p99Ms": 9.302,
+          "maxMs": 9.302
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL",
+          "count": 85,
+          "inclusiveTotalMs": 14.815999999999997,
+          "p95Ms": 1.047,
+          "p99Ms": 1.079,
+          "maxMs": 1.079
+        },
+        {
+          "name": "V8.GC_MC_MARK",
+          "count": 5,
+          "inclusiveTotalMs": 12.405999999999999,
+          "p95Ms": 6.168,
+          "p99Ms": 6.168,
+          "maxMs": 6.168
+        },
+        {
+          "name": "V8.GC_MC_MARK_FULL_CLOSURE_PARALLEL",
+          "count": 5,
+          "inclusiveTotalMs": 12.182999999999998,
+          "p95Ms": 6.125,
+          "p99Ms": 6.125,
+          "maxMs": 6.125
+        },
+        {
+          "name": "V8.GC_MC_MARK_WEAK_CLOSURE_EPHEMERON_MARKING",
+          "count": 15,
+          "inclusiveTotalMs": 12.034999999999997,
+          "p95Ms": 6.103,
+          "p99Ms": 6.103,
+          "maxMs": 6.103
+        }
+      ],
+      "paint": [
+        {
+          "name": "UpdateLayoutTree",
+          "count": 601,
+          "inclusiveTotalMs": 555.4160000000005,
+          "p95Ms": 2.751,
+          "p99Ms": 2.954,
+          "maxMs": 3.527
+        },
+        {
+          "name": "Paint",
+          "count": 2313,
+          "inclusiveTotalMs": 471.24099999999873,
+          "p95Ms": 0.548,
+          "p99Ms": 0.61,
+          "maxMs": 2.133
+        },
+        {
+          "name": "PrePaint",
+          "count": 606,
+          "inclusiveTotalMs": 54.93200000000003,
+          "p95Ms": 0.124,
+          "p99Ms": 0.135,
+          "maxMs": 0.292
+        },
+        {
+          "name": "PaintImage",
+          "count": 567,
+          "inclusiveTotalMs": 6.533999999999982,
+          "p95Ms": 0.017,
+          "p99Ms": 0.025,
+          "maxMs": 0.05
+        }
+      ],
+      "compositeAndRaster": [
+        {
+          "name": "RasterTask",
+          "count": 7702,
+          "inclusiveTotalMs": 9432.267999999984,
+          "p95Ms": 5.855,
+          "p99Ms": 8.173,
+          "maxMs": 8.961
+        },
+        {
+          "name": "Commit",
+          "count": 602,
+          "inclusiveTotalMs": 410.89500000000027,
+          "p95Ms": 0.759,
+          "p99Ms": 0.807,
+          "maxMs": 0.843
+        },
+        {
+          "name": "LayerTreeHostImpl::ActivateSyncTree",
+          "count": 602,
+          "inclusiveTotalMs": 95.178,
+          "p95Ms": 0.224,
+          "p99Ms": 0.319,
+          "maxMs": 0.464
+        },
+        {
+          "name": "LayerTreeHostImpl::CommitComplete",
+          "count": 602,
+          "inclusiveTotalMs": 84.20200000000014,
+          "p95Ms": 0.2,
+          "p99Ms": 0.247,
+          "maxMs": 0.404
+        },
+        {
+          "name": "LayerTreeHostImpl::FinishCommit",
+          "count": 602,
+          "inclusiveTotalMs": 77.47799999999978,
+          "p95Ms": 0.179,
+          "p99Ms": 0.19,
+          "maxMs": 0.199
+        },
+        {
+          "name": "TileManager::PrepareTiles",
+          "count": 601,
+          "inclusiveTotalMs": 67.86399999999998,
+          "p95Ms": 0.171,
+          "p99Ms": 0.221,
+          "maxMs": 0.378
+        },
+        {
+          "name": "TileManager::AssignGpuMemoryToTiles",
+          "count": 603,
+          "inclusiveTotalMs": 46.511999999999894,
+          "p95Ms": 0.123,
+          "p99Ms": 0.17,
+          "maxMs": 0.337
+        },
+        {
+          "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+          "count": 1209,
+          "inclusiveTotalMs": 28.946999999999985,
+          "p95Ms": 0.066,
+          "p99Ms": 0.223,
+          "maxMs": 0.718
+        },
+        {
+          "name": "LayerTreeHostImpl::PrepareToDraw",
+          "count": 602,
+          "inclusiveTotalMs": 23.909000000000052,
+          "p95Ms": 0.056,
+          "p99Ms": 0.084,
+          "maxMs": 0.105
+        },
+        {
+          "name": "TileManager::ScheduleTasks",
+          "count": 603,
+          "inclusiveTotalMs": 18.061999999999983,
+          "p95Ms": 0.041,
+          "p99Ms": 0.052,
+          "maxMs": 0.061
+        },
+        {
+          "name": "LayerTreeHostImpl::CalculateRenderPasses",
+          "count": 602,
+          "inclusiveTotalMs": 15.240999999999975,
+          "p95Ms": 0.032,
+          "p99Ms": 0.04,
+          "maxMs": 0.054
+        },
+        {
+          "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+          "count": 1546,
+          "inclusiveTotalMs": 10.932000000000016,
+          "p95Ms": 0.011,
+          "p99Ms": 0.202,
+          "maxMs": 0.695
+        },
+        {
+          "name": "LayerTreeHostImpl::NotifyTileStateChanged",
+          "count": 8422,
+          "inclusiveTotalMs": 8.915000000000381,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.035
+        },
+        {
+          "name": "TileManager::PrepareToDraw",
+          "count": 602,
+          "inclusiveTotalMs": 5.114999999999962,
+          "p95Ms": 0.018,
+          "p99Ms": 0.052,
+          "maxMs": 0.069
+        },
+        {
+          "name": "LayerTreeHostImpl::BeginCommit",
+          "count": 602,
+          "inclusiveTotalMs": 3.3889999999999705,
+          "p95Ms": 0.008,
+          "p99Ms": 0.012,
+          "maxMs": 0.022
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForActivation",
+          "count": 602,
+          "inclusiveTotalMs": 2.8639999999999812,
+          "p95Ms": 0.009,
+          "p99Ms": 0.012,
+          "maxMs": 0.023
+        },
+        {
+          "name": "TileManager::IsReadyToActivate",
+          "count": 604,
+          "inclusiveTotalMs": 2.31499999999999,
+          "p95Ms": 0.007,
+          "p99Ms": 0.008,
+          "maxMs": 0.023
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForDraw",
+          "count": 603,
+          "inclusiveTotalMs": 1.600999999999987,
+          "p95Ms": 0.005,
+          "p99Ms": 0.01,
+          "maxMs": 0.027
+        },
+        {
+          "name": "TileManager::IsReadyToDraw",
+          "count": 561,
+          "inclusiveTotalMs": 1.1559999999999928,
+          "p95Ms": 0.003,
+          "p99Ms": 0.005,
+          "maxMs": 0.012
+        },
+        {
+          "name": "LayerTreeHostImpl::BuildHitTestData",
+          "count": 598,
+          "inclusiveTotalMs": 0.9190000000000007,
+          "p95Ms": 0.004,
+          "p99Ms": 0.005,
+          "maxMs": 0.006
+        },
+        {
+          "name": "TileManager::DidFinishRunningAllTileTasks",
+          "count": 451,
+          "inclusiveTotalMs": 0.5220000000000004,
+          "p95Ms": 0.002,
+          "p99Ms": 0.005,
+          "maxMs": 0.009
+        },
+        {
+          "name": "LayerTreeHostImpl::DidNotProduceFrame",
+          "count": 2,
+          "inclusiveTotalMs": 0.049,
+          "p95Ms": 0.039,
+          "p99Ms": 0.039,
+          "maxMs": 0.039
+        }
+      ],
+      "gpuProcess": [
+        {
+          "name": "Graphics.Pipeline",
+          "count": 6620,
+          "inclusiveTotalMs": 3941.7399999999852,
+          "p95Ms": 5.847,
+          "p99Ms": 6.197,
+          "maxMs": 6.569
+        },
+        {
+          "name": "RunTask",
+          "count": 2605,
+          "inclusiveTotalMs": 3632.0170000000103,
+          "p95Ms": 6.065,
+          "p99Ms": 6.32,
+          "maxMs": 6.575
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 2604,
+          "inclusiveTotalMs": 3627.4340000000057,
+          "p95Ms": 6.061,
+          "p99Ms": 6.318,
+          "maxMs": 6.574
+        },
+        {
+          "name": "DisplayScheduler::OnBeginFrameDeadline",
+          "count": 600,
+          "inclusiveTotalMs": 3539.7879999999996,
+          "p95Ms": 6.294,
+          "p99Ms": 6.406,
+          "maxMs": 6.572
+        },
+        {
+          "name": "DisplayScheduler::DrawAndSwap",
+          "count": 600,
+          "inclusiveTotalMs": 3539.1009999999987,
+          "p95Ms": 6.294,
+          "p99Ms": 6.404,
+          "maxMs": 6.57
+        },
+        {
+          "name": "Display::DrawAndSwap",
+          "count": 600,
+          "inclusiveTotalMs": 3538.512999999998,
+          "p95Ms": 6.292,
+          "p99Ms": 6.404,
+          "maxMs": 6.57
+        },
+        {
+          "name": "DirectRenderer::DrawFrame",
+          "count": 600,
+          "inclusiveTotalMs": 3479.596000000002,
+          "p95Ms": 6.183,
+          "p99Ms": 6.297,
+          "maxMs": 6.454
+        },
+        {
+          "name": "DirectRenderer::DrawRenderPass",
+          "count": 600,
+          "inclusiveTotalMs": 3472.4959999999996,
+          "p95Ms": 6.17,
+          "p99Ms": 6.287,
+          "maxMs": 6.443
+        },
+        {
+          "name": "SoftwareRenderer::DoDrawQuad",
+          "count": 46275,
+          "inclusiveTotalMs": 3456.260999999928,
+          "p95Ms": 0.101,
+          "p99Ms": 0.669,
+          "maxMs": 1.164
+        },
+        {
+          "name": "SimpleWatcher::OnHandleReady",
+          "count": 691,
+          "inclusiveTotalMs": 50.79800000000023,
+          "p95Ms": 0.098,
+          "p99Ms": 0.122,
+          "maxMs": 0.146
+        },
+        {
+          "name": "Receive mojo message",
+          "count": 679,
+          "inclusiveTotalMs": 35.89699999999998,
+          "p95Ms": 0.069,
+          "p99Ms": 0.093,
+          "maxMs": 0.107
+        },
+        {
+          "name": "ExternalBeginFrameSource::OnBeginFrame",
+          "count": 601,
+          "inclusiveTotalMs": 19.893000000000015,
+          "p95Ms": 0.045,
+          "p99Ms": 0.061,
+          "maxMs": 0.112
+        },
+        {
+          "name": "Surface::CommitFrame",
+          "count": 602,
+          "inclusiveTotalMs": 12.008000000000008,
+          "p95Ms": 0.025,
+          "p99Ms": 0.034,
+          "maxMs": 0.057
+        },
+        {
+          "name": "Surface::ActivateFrame",
+          "count": 602,
+          "inclusiveTotalMs": 10.783,
+          "p95Ms": 0.023,
+          "p99Ms": 0.031,
+          "maxMs": 0.054
+        },
+        {
+          "name": "DisplayScheduler::BeginFrame",
+          "count": 601,
+          "inclusiveTotalMs": 5.862999999999984,
+          "p95Ms": 0.015,
+          "p99Ms": 0.025,
+          "maxMs": 0.07
+        },
+        {
+          "name": "Scheduler::RunTask",
+          "count": 134,
+          "inclusiveTotalMs": 3.7499999999999925,
+          "p95Ms": 0.042,
+          "p99Ms": 0.055,
+          "maxMs": 1.669
+        },
+        {
+          "name": "GpuChannel::ExecuteDeferredRequest",
+          "count": 132,
+          "inclusiveTotalMs": 3.537999999999996,
+          "p95Ms": 0.038,
+          "p99Ms": 0.052,
+          "maxMs": 1.666
+        },
+        {
+          "name": "DisplayScheduler::ScheduleBeginFrameDeadline",
+          "count": 1548,
+          "inclusiveTotalMs": 3.1999999999999047,
+          "p95Ms": 0.003,
+          "p99Ms": 0.009,
+          "maxMs": 0.015
+        },
+        {
+          "name": "SoftwareRenderer::SwapBuffers",
+          "count": 600,
+          "inclusiveTotalMs": 3.0379999999999696,
+          "p95Ms": 0.007,
+          "p99Ms": 0.009,
+          "maxMs": 0.024
+        },
+        {
+          "name": "GPUTask",
+          "count": 5,
+          "inclusiveTotalMs": 1.6989999999999998,
+          "p95Ms": 1.625,
+          "p99Ms": 1.625,
+          "maxMs": 1.625
+        },
+        {
+          "name": "WebGL",
+          "count": 4,
+          "inclusiveTotalMs": 1.659,
+          "p95Ms": 1.604,
+          "p99Ms": 1.604,
+          "maxMs": 1.604
+        },
+        {
+          "name": "CommandBuffer::Flush",
+          "count": 3,
+          "inclusiveTotalMs": 1.6460000000000001,
+          "p95Ms": 1.604,
+          "p99Ms": 1.604,
+          "maxMs": 1.604
+        },
+        {
+          "name": "CommandBufferStub::OnAsyncFlush",
+          "count": 3,
+          "inclusiveTotalMs": 1.642,
+          "p95Ms": 1.601,
+          "p99Ms": 1.601,
+          "maxMs": 1.601
+        },
+        {
+          "name": "CommandBufferService:PutChanged",
+          "count": 3,
+          "inclusiveTotalMs": 1.6320000000000001,
+          "p95Ms": 1.594,
+          "p99Ms": 1.594,
+          "maxMs": 1.594
+        },
+        {
+          "name": "SharedImageStub::OnDestroySharedImage",
+          "count": 99,
+          "inclusiveTotalMs": 1.4619999999999993,
+          "p95Ms": 0.037,
+          "p99Ms": 0.05,
+          "maxMs": 0.05
+        }
+      ]
+    },
+    "interpretation": {
+      "unit": "milliseconds",
+      "durationType": "inclusive trace event duration",
+      "additive": false,
+      "warning": "Trace categories overlap and must not be summed into a total. GPU process event time is not GPU utilization, power, or presented-frame telemetry."
+    }
+  },
+  {
+    "backend": "headless",
+    "file": ".review/p1-5-a/headless/legacy-3840.trace.json.gz",
+    "traceEventCount": 353263,
+    "processNames": {
+      "7007": "Browser",
+      "7008": "GPU Process",
+      "7573": "Renderer"
+    },
+    "threadNames": {
+      "0:0": "swapper",
+      "7007:275779": "CrBrowserMain",
+      "7573:277115": "Compositor",
+      "7573:277100": "CrRendererMain",
+      "7008:275826": "PerfettoTrace",
+      "7007:275789": "PerfettoTrace",
+      "7008:275861": "VizCompositorThread",
+      "7573:277105": "PerfettoTrace",
+      "7007:275814": "DevToolsPipeHandlerWriteThread",
+      "7007:275794": "Chrome_IOThread",
+      "7573:277109": "Chrome_ChildIOThread",
+      "7573:277107": "ThreadPoolForegroundWorker",
+      "7573:277110": "ThreadPoolForegroundWorker",
+      "7573:277172": "ThreadPoolForegroundWorker",
+      "7573:277173": "ThreadPoolForegroundWorker",
+      "7573:277174": "ThreadPoolForegroundWorker",
+      "7573:277175": "ThreadPoolForegroundWorker",
+      "7573:277188": "ThreadPoolForegroundWorker",
+      "7573:277187": "ThreadPoolForegroundWorker",
+      "7573:277186": "ThreadPoolForegroundWorker",
+      "7573:277201": "ThreadPoolForegroundWorker",
+      "7573:277205": "ThreadPoolForegroundWorker",
+      "7573:277202": "ThreadPoolForegroundWorker",
+      "7573:277204": "ThreadPoolForegroundWorker",
+      "7573:277207": "ThreadPoolForegroundWorker",
+      "7573:277206": "ThreadPoolForegroundWorker",
+      "7573:277209": "ThreadPoolForegroundWorker",
+      "7573:277203": "ThreadPoolForegroundWorker",
+      "7573:277210": "ThreadPoolForegroundWorker",
+      "7573:277208": "ThreadPoolForegroundWorker",
+      "7008:275860": "Chrome_ChildIOThread",
+      "7573:277106": "ThreadPoolServiceThread",
+      "7008:275801": "CrGpuMain",
+      "7573:277108": "ThreadPoolBackgroundWorker",
+      "7007:275791": "ThreadPoolForegroundWorker"
+    },
+    "userTimingMarks": [
+      {
+        "name": "P15A:trace-start",
+        "timestampUs": 9067741099
+      },
+      {
+        "name": "P15A:trace-end",
+        "timestampUs": 9077744213
+      }
+    ],
+    "costs": {
+      "rendererMainThread": {
+        "count": 33118,
+        "inclusiveTotalMs": 5014.901000001102,
+        "p95Ms": 0.858,
+        "p99Ms": 1.768,
+        "maxMs": 73.029
+      },
+      "scriptAndAnimationCalculation": {
+        "count": 1235,
+        "inclusiveTotalMs": 217.50199999999984,
+        "p95Ms": 0.262,
+        "p99Ms": 3.605,
+        "maxMs": 6.65
+      },
+      "layoutAndStyle": {
+        "count": 994,
+        "inclusiveTotalMs": 119.81800000000031,
+        "p95Ms": 0.203,
+        "p99Ms": 0.244,
+        "maxMs": 2.793
+      },
+      "paint": {
+        "count": 3411,
+        "inclusiveTotalMs": 494.9329999999988,
+        "p95Ms": 0.478,
+        "p99Ms": 0.531,
+        "maxMs": 2.793
+      },
+      "compositeAndRaster": {
+        "count": 24762,
+        "inclusiveTotalMs": 4608.763000001018,
+        "p95Ms": 0.751,
+        "p99Ms": 1.609,
+        "maxMs": 5.629
+      },
+      "gpuProcess": {
+        "count": 53833,
+        "inclusiveTotalMs": 32745.0950000071,
+        "p95Ms": 2.438,
+        "p99Ms": 3.467,
+        "maxMs": 49.746
+      }
+    },
+    "topEvents": {
+      "rendererMainThread": [
+        {
+          "name": "RunTask",
+          "count": 4933,
+          "inclusiveTotalMs": 1026.295999999983,
+          "p95Ms": 1.594,
+          "p99Ms": 2.245,
+          "maxMs": 73.029
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 4203,
+          "inclusiveTotalMs": 1013.2879999999598,
+          "p95Ms": 1.613,
+          "p99Ms": 2.285,
+          "maxMs": 73.006
+        },
+        {
+          "name": "ProxyMain::BeginMainFrame",
+          "count": 497,
+          "inclusiveTotalMs": 918.9879999999994,
+          "p95Ms": 2.332,
+          "p99Ms": 4.935,
+          "maxMs": 73.003
+        },
+        {
+          "name": "LocalFrameView::RunPaintLifecyclePhase",
+          "count": 501,
+          "inclusiveTotalMs": 394.0939999999999,
+          "p95Ms": 0.909,
+          "p99Ms": 1.032,
+          "maxMs": 2.341
+        },
+        {
+          "name": "Paint",
+          "count": 1923,
+          "inclusiveTotalMs": 356.2079999999996,
+          "p95Ms": 0.497,
+          "p99Ms": 0.546,
+          "maxMs": 1.923
+        },
+        {
+          "name": "FunctionCall",
+          "count": 1215,
+          "inclusiveTotalMs": 172.28100000000012,
+          "p95Ms": 0.25,
+          "p99Ms": 0.708,
+          "maxMs": 6.557
+        },
+        {
+          "name": "FireAnimationFrame",
+          "count": 994,
+          "inclusiveTotalMs": 135.2960000000003,
+          "p95Ms": 0.266,
+          "p99Ms": 0.508,
+          "maxMs": 1.836
+        },
+        {
+          "name": "Layerize",
+          "count": 497,
+          "inclusiveTotalMs": 131.6890000000002,
+          "p95Ms": 0.309,
+          "p99Ms": 0.386,
+          "maxMs": 0.68
+        },
+        {
+          "name": "LocalFrameView::RunStyleAndLayoutLifecyclePhases",
+          "count": 501,
+          "inclusiveTotalMs": 128.44499999999988,
+          "p95Ms": 0.308,
+          "p99Ms": 0.403,
+          "maxMs": 2.893
+        },
+        {
+          "name": "Commit",
+          "count": 497,
+          "inclusiveTotalMs": 104.1740000000003,
+          "p95Ms": 0.71,
+          "p99Ms": 0.754,
+          "maxMs": 0.805
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 497,
+          "inclusiveTotalMs": 94.95100000000015,
+          "p95Ms": 0.217,
+          "p99Ms": 0.502,
+          "maxMs": 2.793
+        },
+        {
+          "name": "LayerTreeHost::WaitForCommitCompletion",
+          "count": 497,
+          "inclusiveTotalMs": 92.9540000000006,
+          "p95Ms": 0.009,
+          "p99Ms": 0.017,
+          "maxMs": 71.161
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "count": 497,
+          "inclusiveTotalMs": 87.74200000000008,
+          "p95Ms": 0.675,
+          "p99Ms": 0.7,
+          "maxMs": 0.737
+        },
+        {
+          "name": "UpdateLayer",
+          "count": 620,
+          "inclusiveTotalMs": 62.63900000000001,
+          "p95Ms": 0.148,
+          "p99Ms": 0.161,
+          "maxMs": 0.191
+        },
+        {
+          "name": "TimerFire",
+          "count": 20,
+          "inclusiveTotalMs": 45.221,
+          "p95Ms": 3.865,
+          "p99Ms": 6.65,
+          "maxMs": 6.65
+        },
+        {
+          "name": "PrePaint",
+          "count": 502,
+          "inclusiveTotalMs": 38.77900000000008,
+          "p95Ms": 0.095,
+          "p99Ms": 0.106,
+          "maxMs": 0.314
+        },
+        {
+          "name": "LocalFrameView::RunPrePaintLifecyclePhase",
+          "count": 500,
+          "inclusiveTotalMs": 27.960999999999935,
+          "p95Ms": 0.071,
+          "p99Ms": 0.082,
+          "maxMs": 0.292
+        },
+        {
+          "name": "LocalFrameView::layout",
+          "count": 497,
+          "inclusiveTotalMs": 25.805000000000057,
+          "p95Ms": 0.079,
+          "p99Ms": 0.138,
+          "maxMs": 0.165
+        },
+        {
+          "name": "Layout",
+          "count": 497,
+          "inclusiveTotalMs": 24.867000000000044,
+          "p95Ms": 0.077,
+          "p99Ms": 0.136,
+          "maxMs": 0.162
+        },
+        {
+          "name": "LocalFrameView::performLayout",
+          "count": 497,
+          "inclusiveTotalMs": 21.908999999999974,
+          "p95Ms": 0.071,
+          "p99Ms": 0.118,
+          "maxMs": 0.142
+        },
+        {
+          "name": "MajorGC",
+          "count": 6,
+          "inclusiveTotalMs": 10.149000000000001,
+          "p95Ms": 2.265,
+          "p99Ms": 2.265,
+          "maxMs": 2.265
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "count": 6,
+          "inclusiveTotalMs": 10.006,
+          "p95Ms": 2.241,
+          "p99Ms": 2.241,
+          "maxMs": 2.241
+        },
+        {
+          "name": "LocalFrameView::RunCompositingInputsLifecyclePhase",
+          "count": 501,
+          "inclusiveTotalMs": 9.917999999999997,
+          "p95Ms": 0.024,
+          "p99Ms": 0.034,
+          "maxMs": 0.043
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL",
+          "count": 77,
+          "inclusiveTotalMs": 9.036999999999997,
+          "p95Ms": 0.353,
+          "p99Ms": 1.246,
+          "maxMs": 1.246
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL_EMBEDDER_TRACING",
+          "count": 70,
+          "inclusiveTotalMs": 6.193000000000004,
+          "p95Ms": 0.325,
+          "p99Ms": 1.225,
+          "maxMs": 1.225
+        }
+      ],
+      "paint": [
+        {
+          "name": "Paint",
+          "count": 1923,
+          "inclusiveTotalMs": 356.2079999999996,
+          "p95Ms": 0.497,
+          "p99Ms": 0.546,
+          "maxMs": 1.923
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 497,
+          "inclusiveTotalMs": 94.95100000000015,
+          "p95Ms": 0.217,
+          "p99Ms": 0.502,
+          "maxMs": 2.793
+        },
+        {
+          "name": "PrePaint",
+          "count": 502,
+          "inclusiveTotalMs": 38.77900000000008,
+          "p95Ms": 0.095,
+          "p99Ms": 0.106,
+          "maxMs": 0.314
+        },
+        {
+          "name": "PaintImage",
+          "count": 489,
+          "inclusiveTotalMs": 4.994999999999984,
+          "p95Ms": 0.016,
+          "p99Ms": 0.02,
+          "maxMs": 0.04
+        }
+      ],
+      "compositeAndRaster": [
+        {
+          "name": "RasterTask",
+          "count": 6869,
+          "inclusiveTotalMs": 3814.798,
+          "p95Ms": 1.411,
+          "p99Ms": 2.57,
+          "maxMs": 5.629
+        },
+        {
+          "name": "LayerTreeHostImpl::FinishCommit",
+          "count": 498,
+          "inclusiveTotalMs": 292.49100000000004,
+          "p95Ms": 0.701,
+          "p99Ms": 0.736,
+          "maxMs": 0.811
+        },
+        {
+          "name": "Commit",
+          "count": 498,
+          "inclusiveTotalMs": 104.1920000000003,
+          "p95Ms": 0.71,
+          "p99Ms": 0.754,
+          "maxMs": 0.805
+        },
+        {
+          "name": "LayerTreeHostImpl::CommitComplete",
+          "count": 498,
+          "inclusiveTotalMs": 81.12999999999998,
+          "p95Ms": 0.203,
+          "p99Ms": 0.268,
+          "maxMs": 0.442
+        },
+        {
+          "name": "TileManager::PrepareTiles",
+          "count": 498,
+          "inclusiveTotalMs": 69.3340000000001,
+          "p95Ms": 0.176,
+          "p99Ms": 0.242,
+          "maxMs": 0.298
+        },
+        {
+          "name": "LayerTreeHostImpl::ActivateSyncTree",
+          "count": 498,
+          "inclusiveTotalMs": 68.34399999999994,
+          "p95Ms": 0.176,
+          "p99Ms": 0.401,
+          "maxMs": 0.829
+        },
+        {
+          "name": "TileManager::AssignGpuMemoryToTiles",
+          "count": 519,
+          "inclusiveTotalMs": 56.11899999999999,
+          "p95Ms": 0.141,
+          "p99Ms": 0.235,
+          "maxMs": 0.292
+        },
+        {
+          "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+          "count": 1043,
+          "inclusiveTotalMs": 30.497999999999898,
+          "p95Ms": 0.059,
+          "p99Ms": 0.142,
+          "maxMs": 1.615
+        },
+        {
+          "name": "LayerTreeHostImpl::PrepareToDraw",
+          "count": 498,
+          "inclusiveTotalMs": 25.141,
+          "p95Ms": 0.088,
+          "p99Ms": 0.159,
+          "maxMs": 0.177
+        },
+        {
+          "name": "LayerTreeHostImpl::CalculateRenderPasses",
+          "count": 498,
+          "inclusiveTotalMs": 19.309000000000033,
+          "p95Ms": 0.069,
+          "p99Ms": 0.104,
+          "maxMs": 0.115
+        },
+        {
+          "name": "TileManager::ScheduleTasks",
+          "count": 519,
+          "inclusiveTotalMs": 14.67599999999998,
+          "p95Ms": 0.038,
+          "p99Ms": 0.044,
+          "maxMs": 0.049
+        },
+        {
+          "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+          "count": 1287,
+          "inclusiveTotalMs": 12.83499999999953,
+          "p95Ms": 0.011,
+          "p99Ms": 0.021,
+          "maxMs": 1.585
+        },
+        {
+          "name": "LayerTreeHostImpl::NotifyTileStateChanged",
+          "count": 7236,
+          "inclusiveTotalMs": 7.592000000000791,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.034
+        },
+        {
+          "name": "TileManager::PrepareToDraw",
+          "count": 498,
+          "inclusiveTotalMs": 2.9769999999999843,
+          "p95Ms": 0.009,
+          "p99Ms": 0.015,
+          "maxMs": 0.041
+        },
+        {
+          "name": "TileManager::IsReadyToActivate",
+          "count": 540,
+          "inclusiveTotalMs": 2.3609999999999904,
+          "p95Ms": 0.008,
+          "p99Ms": 0.012,
+          "maxMs": 0.017
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForActivation",
+          "count": 518,
+          "inclusiveTotalMs": 2.127999999999986,
+          "p95Ms": 0.008,
+          "p99Ms": 0.011,
+          "maxMs": 0.013
+        },
+        {
+          "name": "LayerTreeHostImpl::BeginCommit",
+          "count": 497,
+          "inclusiveTotalMs": 1.8679999999999854,
+          "p95Ms": 0.006,
+          "p99Ms": 0.008,
+          "maxMs": 0.014
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForDraw",
+          "count": 518,
+          "inclusiveTotalMs": 1.2139999999999957,
+          "p95Ms": 0.006,
+          "p99Ms": 0.008,
+          "maxMs": 0.014
+        },
+        {
+          "name": "TileManager::IsReadyToDraw",
+          "count": 442,
+          "inclusiveTotalMs": 0.7190000000000005,
+          "p95Ms": 0.003,
+          "p99Ms": 0.009,
+          "maxMs": 0.011
+        },
+        {
+          "name": "LayerTreeHostImpl::BuildHitTestData",
+          "count": 416,
+          "inclusiveTotalMs": 0.4870000000000004,
+          "p95Ms": 0.002,
+          "p99Ms": 0.004,
+          "maxMs": 0.005
+        },
+        {
+          "name": "TileManager::DidFinishRunningAllTileTasks",
+          "count": 368,
+          "inclusiveTotalMs": 0.4090000000000003,
+          "p95Ms": 0.001,
+          "p99Ms": 0.005,
+          "maxMs": 0.014
+        },
+        {
+          "name": "LayerTreeHostImpl::DidNotProduceFrame",
+          "count": 6,
+          "inclusiveTotalMs": 0.14100000000000001,
+          "p95Ms": 0.051,
+          "p99Ms": 0.051,
+          "maxMs": 0.051
+        }
+      ],
+      "gpuProcess": [
+        {
+          "name": "Graphics.Pipeline",
+          "count": 5502,
+          "inclusiveTotalMs": 4005.2230000000113,
+          "p95Ms": 2.499,
+          "p99Ms": 13.472,
+          "maxMs": 49.74
+        },
+        {
+          "name": "RunTask",
+          "count": 2719,
+          "inclusiveTotalMs": 3668.753000000062,
+          "p95Ms": 2.577,
+          "p99Ms": 47.968,
+          "maxMs": 49.746
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 2716,
+          "inclusiveTotalMs": 3664.8250000000235,
+          "p95Ms": 2.577,
+          "p99Ms": 47.967,
+          "maxMs": 49.744
+        },
+        {
+          "name": "DisplayScheduler::OnBeginFrameDeadline",
+          "count": 500,
+          "inclusiveTotalMs": 3567.5200000000013,
+          "p95Ms": 48.094,
+          "p99Ms": 49.211,
+          "maxMs": 49.743
+        },
+        {
+          "name": "DisplayScheduler::DrawAndSwap",
+          "count": 497,
+          "inclusiveTotalMs": 3566.949000000002,
+          "p95Ms": 48.1,
+          "p99Ms": 49.242,
+          "maxMs": 49.741
+        },
+        {
+          "name": "Display::DrawAndSwap",
+          "count": 497,
+          "inclusiveTotalMs": 3566.5159999999973,
+          "p95Ms": 48.1,
+          "p99Ms": 49.24,
+          "maxMs": 49.74
+        },
+        {
+          "name": "DirectRenderer::DrawFrame",
+          "count": 497,
+          "inclusiveTotalMs": 3515.446000000004,
+          "p95Ms": 47.976,
+          "p99Ms": 49.077,
+          "maxMs": 49.61
+        },
+        {
+          "name": "DirectRenderer::DrawRenderPass",
+          "count": 507,
+          "inclusiveTotalMs": 3509.664,
+          "p95Ms": 47.946,
+          "p99Ms": 48.644,
+          "maxMs": 49.589
+        },
+        {
+          "name": "SoftwareRenderer::DoDrawQuad",
+          "count": 30841,
+          "inclusiveTotalMs": 3491.923999999702,
+          "p95Ms": 0.102,
+          "p99Ms": 0.271,
+          "maxMs": 25.51
+        },
+        {
+          "name": "SimpleWatcher::OnHandleReady",
+          "count": 569,
+          "inclusiveTotalMs": 63.2229999999999,
+          "p95Ms": 0.192,
+          "p99Ms": 0.271,
+          "maxMs": 0.412
+        },
+        {
+          "name": "Receive mojo message",
+          "count": 556,
+          "inclusiveTotalMs": 47.01600000000008,
+          "p95Ms": 0.151,
+          "p99Ms": 0.208,
+          "maxMs": 0.385
+        },
+        {
+          "name": "Surface::CommitFrame",
+          "count": 498,
+          "inclusiveTotalMs": 15.374999999999956,
+          "p95Ms": 0.051,
+          "p99Ms": 0.067,
+          "maxMs": 0.131
+        },
+        {
+          "name": "ExternalBeginFrameSource::OnBeginFrame",
+          "count": 502,
+          "inclusiveTotalMs": 15.237999999999978,
+          "p95Ms": 0.04,
+          "p99Ms": 0.049,
+          "maxMs": 0.086
+        },
+        {
+          "name": "Surface::ActivateFrame",
+          "count": 498,
+          "inclusiveTotalMs": 14.322999999999974,
+          "p95Ms": 0.048,
+          "p99Ms": 0.065,
+          "maxMs": 0.083
+        },
+        {
+          "name": "Scheduler::RunTask",
+          "count": 632,
+          "inclusiveTotalMs": 7.118999999999993,
+          "p95Ms": 0.026,
+          "p99Ms": 0.044,
+          "maxMs": 0.06
+        },
+        {
+          "name": "GpuChannel::ExecuteDeferredRequest",
+          "count": 630,
+          "inclusiveTotalMs": 6.235999999999972,
+          "p95Ms": 0.024,
+          "p99Ms": 0.042,
+          "maxMs": 0.057
+        },
+        {
+          "name": "SharedImageStub::OnDestroySharedImage",
+          "count": 622,
+          "inclusiveTotalMs": 5.638999999999975,
+          "p95Ms": 0.021,
+          "p99Ms": 0.032,
+          "maxMs": 0.055
+        },
+        {
+          "name": "DisplayScheduler::BeginFrame",
+          "count": 501,
+          "inclusiveTotalMs": 4.385999999999985,
+          "p95Ms": 0.012,
+          "p99Ms": 0.016,
+          "maxMs": 0.044
+        },
+        {
+          "name": "DisplayScheduler::ScheduleBeginFrameDeadline",
+          "count": 1301,
+          "inclusiveTotalMs": 2.6989999999999448,
+          "p95Ms": 0.003,
+          "p99Ms": 0.004,
+          "maxMs": 0.037
+        },
+        {
+          "name": "SoftwareRenderer::SwapBuffers",
+          "count": 498,
+          "inclusiveTotalMs": 2.06699999999999,
+          "p95Ms": 0.006,
+          "p99Ms": 0.009,
+          "maxMs": 0.012
+        },
+        {
+          "name": "DirectRenderer::DrawFrame ProcessForOverlays",
+          "count": 496,
+          "inclusiveTotalMs": 0.8910000000000007,
+          "p95Ms": 0.003,
+          "p99Ms": 0.004,
+          "maxMs": 0.011
+        },
+        {
+          "name": "GpuChannelMessageFilter::FlushDeferredRequests",
+          "count": 17,
+          "inclusiveTotalMs": 0.712,
+          "p95Ms": 0.312,
+          "p99Ms": 0.312,
+          "maxMs": 0.312
+        },
+        {
+          "name": "Using new deadline",
+          "count": 660,
+          "inclusiveTotalMs": 0.7110000000000005,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.033
+        },
+        {
+          "name": "SendBeginFrameDecision",
+          "count": 475,
+          "inclusiveTotalMs": 0.6870000000000005,
+          "p95Ms": 0.004,
+          "p99Ms": 0.005,
+          "maxMs": 0.009
+        },
+        {
+          "name": "SoftwareRenderer::FinishDrawingFrame",
+          "count": 290,
+          "inclusiveTotalMs": 0.3010000000000002,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.003
+        }
+      ]
+    },
+    "interpretation": {
+      "unit": "milliseconds",
+      "durationType": "inclusive trace event duration",
+      "additive": false,
+      "warning": "Trace categories overlap and must not be summed into a total. GPU process event time is not GPU utilization, power, or presented-frame telemetry."
+    }
+  },
+  {
+    "backend": "headed",
+    "file": ".review/p1-5-a/headed/gsap-1920.trace.json.gz",
+    "traceEventCount": 618313,
+    "processNames": {
+      "8176": "Browser",
+      "8192": "GPU Process",
+      "8504": "Renderer"
+    },
+    "threadNames": {
+      "0:0": "swapper",
+      "8176:278635": "CrBrowserMain",
+      "8504:280285": "Compositor",
+      "8504:280186": "CrRendererMain",
+      "8192:278701": "CrGpuMain",
+      "8192:278737": "PerfettoTrace",
+      "8504:280257": "PerfettoTrace",
+      "8176:278680": "PerfettoTrace",
+      "8504:280263": "ThreadPoolForegroundWorker",
+      "8504:280265": "Chrome_ChildIOThread",
+      "8192:278780": "Chrome_ChildIOThread",
+      "8192:278782": "VizCompositorThread",
+      "8176:278736": "DevToolsPipeHandlerWriteThread",
+      "8176:278687": "Chrome_IOThread",
+      "8192:280381": "CVDisplayLink",
+      "8192:280295": "CVDisplayLink",
+      "8504:280266": "ThreadPoolForegroundWorker",
+      "8504:280383": "ThreadPoolForegroundWorker",
+      "8504:280385": "ThreadPoolForegroundWorker",
+      "8504:280393": "ThreadPoolForegroundWorker",
+      "8176:278681": "ThreadPoolServiceThread",
+      "8176:278682": "ThreadPoolForegroundWorker",
+      "8504:280415": "ThreadPoolForegroundWorker",
+      "8504:280402": "ThreadPoolForegroundWorker",
+      "8504:280417": "ThreadPoolForegroundWorker",
+      "8504:280403": "ThreadPoolForegroundWorker",
+      "8504:280416": "ThreadPoolForegroundWorker",
+      "8504:280418": "ThreadPoolForegroundWorker",
+      "8504:280419": "ThreadPoolForegroundWorker",
+      "8504:280420": "ThreadPoolForegroundWorker",
+      "8504:280421": "ThreadPoolForegroundWorker",
+      "8504:280422": "ThreadPoolForegroundWorker",
+      "8504:280460": "ThreadPoolForegroundWorker",
+      "8504:280459": "ThreadPoolForegroundWorker",
+      "8504:280423": "ThreadPoolForegroundWorker",
+      "8504:280262": "ThreadPoolServiceThread",
+      "8504:280458": "ThreadPoolForegroundWorker"
+    },
+    "userTimingMarks": [
+      {
+        "name": "P15A:trace-start",
+        "timestampUs": 9148975190
+      },
+      {
+        "name": "P15A:trace-end",
+        "timestampUs": 9158977992
+      }
+    ],
+    "costs": {
+      "rendererMainThread": {
+        "count": 58748,
+        "inclusiveTotalMs": 8732.175000004214,
+        "p95Ms": 0.695,
+        "p99Ms": 3.649,
+        "maxMs": 5.303
+      },
+      "scriptAndAnimationCalculation": {
+        "count": 2221,
+        "inclusiveTotalMs": 374.043999999999,
+        "p95Ms": 0.581,
+        "p99Ms": 1.46,
+        "maxMs": 4.275
+      },
+      "layoutAndStyle": {
+        "count": 1204,
+        "inclusiveTotalMs": 567.1839999999994,
+        "p95Ms": 2.591,
+        "p99Ms": 2.811,
+        "maxMs": 3.024
+      },
+      "paint": {
+        "count": 4460,
+        "inclusiveTotalMs": 1068.4429999999982,
+        "p95Ms": 0.58,
+        "p99Ms": 2.631,
+        "maxMs": 3.024
+      },
+      "compositeAndRaster": {
+        "count": 20522,
+        "inclusiveTotalMs": 682.849999999916,
+        "p95Ms": 0.141,
+        "p99Ms": 0.187,
+        "maxMs": 0.458
+      },
+      "gpuProcess": {
+        "count": 106568,
+        "inclusiveTotalMs": 18382.295000008522,
+        "p95Ms": 1.231,
+        "p99Ms": 2.842,
+        "maxMs": 4.565
+      }
+    },
+    "topEvents": {
+      "rendererMainThread": [
+        {
+          "name": "RunTask",
+          "count": 9051,
+          "inclusiveTotalMs": 1778.8819999998743,
+          "p95Ms": 1.749,
+          "p99Ms": 4.36,
+          "maxMs": 5.303
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 7528,
+          "inclusiveTotalMs": 1753.7179999999232,
+          "p95Ms": 1.815,
+          "p99Ms": 4.402,
+          "maxMs": 5.292
+        },
+        {
+          "name": "ProxyMain::BeginMainFrame",
+          "count": 1001,
+          "inclusiveTotalMs": 1604.564999999999,
+          "p95Ms": 4.495,
+          "p99Ms": 4.888,
+          "maxMs": 5.29
+        },
+        {
+          "name": "LocalFrameView::RunStyleAndLayoutLifecyclePhases",
+          "count": 1006,
+          "inclusiveTotalMs": 579.0590000000005,
+          "p95Ms": 2.678,
+          "p99Ms": 2.901,
+          "maxMs": 3.11
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 600,
+          "inclusiveTotalMs": 537.6069999999995,
+          "p95Ms": 2.683,
+          "p99Ms": 2.863,
+          "maxMs": 3.024
+        },
+        {
+          "name": "LocalFrameView::RunPaintLifecyclePhase",
+          "count": 1005,
+          "inclusiveTotalMs": 497.6720000000001,
+          "p95Ms": 0.922,
+          "p99Ms": 0.992,
+          "maxMs": 2.745
+        },
+        {
+          "name": "Paint",
+          "count": 2300,
+          "inclusiveTotalMs": 469.69799999999947,
+          "p95Ms": 0.542,
+          "p99Ms": 0.599,
+          "maxMs": 2.32
+        },
+        {
+          "name": "FunctionCall",
+          "count": 2201,
+          "inclusiveTotalMs": 332.5459999999989,
+          "p95Ms": 0.55,
+          "p99Ms": 0.669,
+          "maxMs": 4.212
+        },
+        {
+          "name": "FireAnimationFrame",
+          "count": 2002,
+          "inclusiveTotalMs": 307.70899999999995,
+          "p95Ms": 0.57,
+          "p99Ms": 0.699,
+          "maxMs": 1.507
+        },
+        {
+          "name": "Layerize",
+          "count": 887,
+          "inclusiveTotalMs": 158.52600000000044,
+          "p95Ms": 0.295,
+          "p99Ms": 0.342,
+          "maxMs": 0.515
+        },
+        {
+          "name": "Commit",
+          "count": 1001,
+          "inclusiveTotalMs": 118.69700000000033,
+          "p95Ms": 0.211,
+          "p99Ms": 0.243,
+          "maxMs": 0.334
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "count": 604,
+          "inclusiveTotalMs": 85.68700000000003,
+          "p95Ms": 0.182,
+          "p99Ms": 0.208,
+          "maxMs": 0.29
+        },
+        {
+          "name": "UpdateLayer",
+          "count": 1358,
+          "inclusiveTotalMs": 66.58599999999954,
+          "p95Ms": 0.138,
+          "p99Ms": 0.155,
+          "maxMs": 0.241
+        },
+        {
+          "name": "PrePaint",
+          "count": 1006,
+          "inclusiveTotalMs": 54.742000000000196,
+          "p95Ms": 0.113,
+          "p99Ms": 0.122,
+          "maxMs": 0.379
+        },
+        {
+          "name": "TimerFire",
+          "count": 20,
+          "inclusiveTotalMs": 41.498000000000005,
+          "p95Ms": 4.221,
+          "p99Ms": 4.275,
+          "maxMs": 4.275
+        },
+        {
+          "name": "LocalFrameView::RunPrePaintLifecyclePhase",
+          "count": 1005,
+          "inclusiveTotalMs": 41.396000000000015,
+          "p95Ms": 0.092,
+          "p99Ms": 0.101,
+          "maxMs": 0.357
+        },
+        {
+          "name": "LocalFrameView::layout",
+          "count": 604,
+          "inclusiveTotalMs": 30.94300000000001,
+          "p95Ms": 0.085,
+          "p99Ms": 0.123,
+          "maxMs": 0.171
+        },
+        {
+          "name": "Layout",
+          "count": 604,
+          "inclusiveTotalMs": 29.577000000000034,
+          "p95Ms": 0.082,
+          "p99Ms": 0.12,
+          "maxMs": 0.168
+        },
+        {
+          "name": "LocalFrameView::performLayout",
+          "count": 604,
+          "inclusiveTotalMs": 26.33600000000002,
+          "p95Ms": 0.077,
+          "p99Ms": 0.103,
+          "maxMs": 0.151
+        },
+        {
+          "name": "MajorGC",
+          "count": 6,
+          "inclusiveTotalMs": 22.647,
+          "p95Ms": 4.717,
+          "p99Ms": 4.717,
+          "maxMs": 4.717
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "count": 6,
+          "inclusiveTotalMs": 22.506999999999998,
+          "p95Ms": 4.692,
+          "p99Ms": 4.692,
+          "maxMs": 4.692
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL",
+          "count": 80,
+          "inclusiveTotalMs": 21.068,
+          "p95Ms": 1.082,
+          "p99Ms": 1.332,
+          "maxMs": 1.332
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL_EMBEDDER_TRACING",
+          "count": 69,
+          "inclusiveTotalMs": 18.615000000000006,
+          "p95Ms": 1.081,
+          "p99Ms": 1.327,
+          "maxMs": 1.327
+        },
+        {
+          "name": "LocalFrameView::RunCompositingInputsLifecyclePhase",
+          "count": 979,
+          "inclusiveTotalMs": 11.420999999999967,
+          "p95Ms": 0.021,
+          "p99Ms": 0.024,
+          "maxMs": 0.03
+        },
+        {
+          "name": "LocalFrameView::ScheduleAnimation",
+          "count": 2990,
+          "inclusiveTotalMs": 10.971999999999838,
+          "p95Ms": 0.01,
+          "p99Ms": 0.013,
+          "maxMs": 0.028
+        }
+      ],
+      "paint": [
+        {
+          "name": "UpdateLayoutTree",
+          "count": 600,
+          "inclusiveTotalMs": 537.6069999999995,
+          "p95Ms": 2.683,
+          "p99Ms": 2.863,
+          "maxMs": 3.024
+        },
+        {
+          "name": "Paint",
+          "count": 2300,
+          "inclusiveTotalMs": 469.69799999999947,
+          "p95Ms": 0.542,
+          "p99Ms": 0.599,
+          "maxMs": 2.32
+        },
+        {
+          "name": "PrePaint",
+          "count": 1006,
+          "inclusiveTotalMs": 54.742000000000196,
+          "p95Ms": 0.113,
+          "p99Ms": 0.122,
+          "maxMs": 0.379
+        },
+        {
+          "name": "PaintImage",
+          "count": 554,
+          "inclusiveTotalMs": 6.395999999999967,
+          "p95Ms": 0.017,
+          "p99Ms": 0.026,
+          "maxMs": 0.043
+        }
+      ],
+      "compositeAndRaster": [
+        {
+          "name": "RasterTask",
+          "count": 1961,
+          "inclusiveTotalMs": 163.71400000000096,
+          "p95Ms": 0.159,
+          "p99Ms": 0.193,
+          "maxMs": 0.31
+        },
+        {
+          "name": "Commit",
+          "count": 1002,
+          "inclusiveTotalMs": 118.72400000000033,
+          "p95Ms": 0.211,
+          "p99Ms": 0.243,
+          "maxMs": 0.334
+        },
+        {
+          "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+          "count": 1657,
+          "inclusiveTotalMs": 68.57000000000028,
+          "p95Ms": 0.142,
+          "p99Ms": 0.182,
+          "maxMs": 0.458
+        },
+        {
+          "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+          "count": 1717,
+          "inclusiveTotalMs": 61.50199999999919,
+          "p95Ms": 0.131,
+          "p99Ms": 0.165,
+          "maxMs": 0.436
+        },
+        {
+          "name": "LayerTreeHostImpl::ActivateSyncTree",
+          "count": 606,
+          "inclusiveTotalMs": 53.554,
+          "p95Ms": 0.141,
+          "p99Ms": 0.173,
+          "maxMs": 0.42
+        },
+        {
+          "name": "LayerTreeHostImpl::CommitComplete",
+          "count": 605,
+          "inclusiveTotalMs": 52.718000000000124,
+          "p95Ms": 0.106,
+          "p99Ms": 0.128,
+          "maxMs": 0.176
+        },
+        {
+          "name": "TileManager::PrepareTiles",
+          "count": 1002,
+          "inclusiveTotalMs": 51.68200000000001,
+          "p95Ms": 0.076,
+          "p99Ms": 0.088,
+          "maxMs": 0.146
+        },
+        {
+          "name": "TileManager::ScheduleTasks",
+          "count": 1002,
+          "inclusiveTotalMs": 24.716999999999878,
+          "p95Ms": 0.035,
+          "p99Ms": 0.043,
+          "maxMs": 0.094
+        },
+        {
+          "name": "LayerTreeHostImpl::FinishCommit",
+          "count": 605,
+          "inclusiveTotalMs": 23.75000000000002,
+          "p95Ms": 0.049,
+          "p99Ms": 0.058,
+          "maxMs": 0.064
+        },
+        {
+          "name": "TileManager::AssignGpuMemoryToTiles",
+          "count": 1002,
+          "inclusiveTotalMs": 20.889999999999997,
+          "p95Ms": 0.038,
+          "p99Ms": 0.045,
+          "maxMs": 0.077
+        },
+        {
+          "name": "LayerTreeHostImpl::PrepareToDraw",
+          "count": 606,
+          "inclusiveTotalMs": 10.84399999999999,
+          "p95Ms": 0.023,
+          "p99Ms": 0.028,
+          "maxMs": 0.046
+        },
+        {
+          "name": "LayerTreeHostImpl::DidNotProduceFrame",
+          "count": 399,
+          "inclusiveTotalMs": 10.75599999999998,
+          "p95Ms": 0.038,
+          "p99Ms": 0.051,
+          "maxMs": 0.06
+        },
+        {
+          "name": "LayerTreeHostImpl::CalculateRenderPasses",
+          "count": 606,
+          "inclusiveTotalMs": 5.509999999999984,
+          "p95Ms": 0.012,
+          "p99Ms": 0.015,
+          "maxMs": 0.035
+        },
+        {
+          "name": "LayerTreeHostImpl::BeginCommit",
+          "count": 605,
+          "inclusiveTotalMs": 3.260999999999971,
+          "p95Ms": 0.008,
+          "p99Ms": 0.011,
+          "maxMs": 0.018
+        },
+        {
+          "name": "TileManager::PrepareToDraw",
+          "count": 606,
+          "inclusiveTotalMs": 2.740999999999992,
+          "p95Ms": 0.007,
+          "p99Ms": 0.012,
+          "maxMs": 0.018
+        },
+        {
+          "name": "LayerTreeHostImpl::NotifyTileStateChanged",
+          "count": 2424,
+          "inclusiveTotalMs": 2.597999999999843,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.019
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForActivation",
+          "count": 1003,
+          "inclusiveTotalMs": 2.289999999999966,
+          "p95Ms": 0.004,
+          "p99Ms": 0.007,
+          "maxMs": 0.019
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForDraw",
+          "count": 983,
+          "inclusiveTotalMs": 1.9199999999999677,
+          "p95Ms": 0.003,
+          "p99Ms": 0.006,
+          "maxMs": 0.019
+        },
+        {
+          "name": "TileManager::IsReadyToActivate",
+          "count": 605,
+          "inclusiveTotalMs": 1.379999999999996,
+          "p95Ms": 0.004,
+          "p99Ms": 0.004,
+          "maxMs": 0.009
+        },
+        {
+          "name": "LayerTreeHostImpl::BuildHitTestData",
+          "count": 573,
+          "inclusiveTotalMs": 0.7300000000000005,
+          "p95Ms": 0.002,
+          "p99Ms": 0.005,
+          "maxMs": 0.016
+        },
+        {
+          "name": "TileManager::DidFinishRunningAllTileTasks",
+          "count": 530,
+          "inclusiveTotalMs": 0.5670000000000004,
+          "p95Ms": 0.001,
+          "p99Ms": 0.004,
+          "maxMs": 0.005
+        },
+        {
+          "name": "TileManager::IsReadyToDraw",
+          "count": 423,
+          "inclusiveTotalMs": 0.43200000000000033,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.004
+        }
+      ],
+      "gpuProcess": [
+        {
+          "name": "RunTask",
+          "count": 13806,
+          "inclusiveTotalMs": 1837.745999999887,
+          "p95Ms": 0.316,
+          "p99Ms": 2.78,
+          "maxMs": 4.565
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 13735,
+          "inclusiveTotalMs": 1822.9749999998448,
+          "p95Ms": 0.317,
+          "p99Ms": 2.781,
+          "maxMs": 4.563
+        },
+        {
+          "name": "Scheduler::RunTask",
+          "count": 2106,
+          "inclusiveTotalMs": 1659.343,
+          "p95Ms": 2.893,
+          "p99Ms": 3.249,
+          "maxMs": 4.559
+        },
+        {
+          "name": "GpuChannel::ExecuteDeferredRequest",
+          "count": 1494,
+          "inclusiveTotalMs": 1490.6239999999993,
+          "p95Ms": 2.963,
+          "p99Ms": 3.288,
+          "maxMs": 4.556
+        },
+        {
+          "name": "GPUTask",
+          "count": 1472,
+          "inclusiveTotalMs": 1483.8170000000014,
+          "p95Ms": 2.963,
+          "p99Ms": 3.286,
+          "maxMs": 4.555
+        },
+        {
+          "name": "CommandBuffer::Flush",
+          "count": 1460,
+          "inclusiveTotalMs": 1469.1729999999993,
+          "p95Ms": 2.957,
+          "p99Ms": 3.28,
+          "maxMs": 4.548
+        },
+        {
+          "name": "CommandBufferStub::OnAsyncFlush",
+          "count": 1460,
+          "inclusiveTotalMs": 1468.2529999999997,
+          "p95Ms": 2.957,
+          "p99Ms": 3.279,
+          "maxMs": 4.547
+        },
+        {
+          "name": "CommandBufferService:PutChanged",
+          "count": 1460,
+          "inclusiveTotalMs": 1464.5660000000014,
+          "p95Ms": 2.955,
+          "p99Ms": 3.278,
+          "maxMs": 4.544
+        },
+        {
+          "name": "RendererRasterWorker",
+          "count": 821,
+          "inclusiveTotalMs": 1330.1200000000015,
+          "p95Ms": 3.088,
+          "p99Ms": 3.363,
+          "maxMs": 4.549
+        },
+        {
+          "name": "RasterDecoderImpl::DoEndRasterCHROMIUM",
+          "count": 2564,
+          "inclusiveTotalMs": 741.7320000000014,
+          "p95Ms": 0.581,
+          "p99Ms": 0.705,
+          "maxMs": 1.078
+        },
+        {
+          "name": "RasterDecoderImpl::DoEndRasterCHROMIUM::Flush",
+          "count": 2564,
+          "inclusiveTotalMs": 726.8209999999988,
+          "p95Ms": 0.571,
+          "p99Ms": 0.695,
+          "maxMs": 1.066
+        },
+        {
+          "name": "RasterDecoderImpl::DoRasterCHROMIUM",
+          "count": 2564,
+          "inclusiveTotalMs": 665.8019999999989,
+          "p95Ms": 0.673,
+          "p99Ms": 0.742,
+          "maxMs": 0.96
+        },
+        {
+          "name": "RasterDecoderImpl::DoRasterCHROMIUM::Deserializing",
+          "count": 2564,
+          "inclusiveTotalMs": 662.2449999999983,
+          "p95Ms": 0.671,
+          "p99Ms": 0.741,
+          "maxMs": 0.957
+        },
+        {
+          "name": "Graphics.Pipeline",
+          "count": 8357,
+          "inclusiveTotalMs": 445.80599999999356,
+          "p95Ms": 0.24,
+          "p99Ms": 0.295,
+          "maxMs": 4.097
+        },
+        {
+          "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+          "count": 605,
+          "inclusiveTotalMs": 163.20999999999992,
+          "p95Ms": 0.358,
+          "p99Ms": 0.512,
+          "maxMs": 4.103
+        },
+        {
+          "name": "RendererMainThread",
+          "count": 641,
+          "inclusiveTotalMs": 140.26899999999978,
+          "p95Ms": 0.286,
+          "p99Ms": 0.361,
+          "maxMs": 0.513
+        },
+        {
+          "name": "SkiaOutputDevice->ScheduleOverlays()",
+          "count": 605,
+          "inclusiveTotalMs": 93.40599999999988,
+          "p95Ms": 0.245,
+          "p99Ms": 0.376,
+          "maxMs": 3.974
+        },
+        {
+          "name": "IOSurfaceImageBacking::WaitForCommandsToBeScheduled",
+          "count": 3550,
+          "inclusiveTotalMs": 74.16400000000037,
+          "p95Ms": 0.104,
+          "p99Ms": 0.194,
+          "maxMs": 3.938
+        },
+        {
+          "name": "IOSurfaceImageBacking::WaitForCommandsToBeScheduled::Dawn",
+          "count": 1959,
+          "inclusiveTotalMs": 71.21800000000003,
+          "p95Ms": 0.124,
+          "p99Ms": 0.233,
+          "maxMs": 3.936
+        },
+        {
+          "name": "SimpleWatcher::OnHandleReady",
+          "count": 3115,
+          "inclusiveTotalMs": 66.36900000000043,
+          "p95Ms": 0.053,
+          "p99Ms": 0.062,
+          "maxMs": 0.095
+        },
+        {
+          "name": "ImageTransportSurfaceOverlayMac::Present",
+          "count": 605,
+          "inclusiveTotalMs": 66.06799999999996,
+          "p95Ms": 0.134,
+          "p99Ms": 0.159,
+          "maxMs": 0.184
+        },
+        {
+          "name": "CommitPresentedFrameToCA",
+          "count": 605,
+          "inclusiveTotalMs": 62.88099999999995,
+          "p95Ms": 0.128,
+          "p99Ms": 0.153,
+          "maxMs": 0.177
+        },
+        {
+          "name": "DisplayScheduler::OnBeginFrameDeadline",
+          "count": 1001,
+          "inclusiveTotalMs": 42.8800000000002,
+          "p95Ms": 0.08,
+          "p99Ms": 0.087,
+          "maxMs": 0.104
+        },
+        {
+          "name": "Receive mojo message",
+          "count": 3101,
+          "inclusiveTotalMs": 41.96800000000035,
+          "p95Ms": 0.038,
+          "p99Ms": 0.044,
+          "maxMs": 0.055
+        },
+        {
+          "name": "DisplayScheduler::DrawAndSwap",
+          "count": 605,
+          "inclusiveTotalMs": 41.392000000000095,
+          "p95Ms": 0.083,
+          "p99Ms": 0.091,
+          "maxMs": 0.103
+        }
+      ]
+    },
+    "interpretation": {
+      "unit": "milliseconds",
+      "durationType": "inclusive trace event duration",
+      "additive": false,
+      "warning": "Trace categories overlap and must not be summed into a total. GPU process event time is not GPU utilization, power, or presented-frame telemetry."
+    }
+  },
+  {
+    "backend": "headed",
+    "file": ".review/p1-5-a/headed/gsap-3840.trace.json.gz",
+    "traceEventCount": 628041,
+    "processNames": {
+      "8176": "Browser",
+      "8192": "GPU Process",
+      "9051": "Renderer"
+    },
+    "threadNames": {
+      "0:0": "swapper",
+      "8176:278635": "CrBrowserMain",
+      "9051:282732": "Compositor",
+      "9051:282627": "CrRendererMain",
+      "8176:278680": "PerfettoTrace",
+      "8192:278737": "PerfettoTrace",
+      "9051:282709": "PerfettoTrace",
+      "8176:278736": "DevToolsPipeHandlerWriteThread",
+      "8176:278687": "Chrome_IOThread",
+      "9051:282717": "Chrome_ChildIOThread",
+      "8192:278782": "VizCompositorThread",
+      "8192:282813": "CVDisplayLink",
+      "8192:278701": "CrGpuMain",
+      "8192:282659": "CVDisplayLink",
+      "9051:282714": "ThreadPoolForegroundWorker",
+      "8192:278780": "Chrome_ChildIOThread",
+      "9051:282666": "StackSamplingProfiler",
+      "9051:282715": "ThreadPoolForegroundWorker",
+      "9051:282718": "ThreadPoolForegroundWorker",
+      "9051:282814": "ThreadPoolForegroundWorker",
+      "9051:282815": "ThreadPoolForegroundWorker",
+      "9051:282817": "ThreadPoolForegroundWorker",
+      "9051:282816": "ThreadPoolForegroundWorker",
+      "9051:282845": "ThreadPoolForegroundWorker",
+      "9051:282847": "ThreadPoolForegroundWorker",
+      "9051:282846": "ThreadPoolForegroundWorker",
+      "9051:282849": "ThreadPoolForegroundWorker",
+      "9051:282848": "ThreadPoolForegroundWorker",
+      "9051:282850": "ThreadPoolForegroundWorker",
+      "9051:282852": "ThreadPoolForegroundWorker",
+      "9051:282894": "ThreadPoolForegroundWorker",
+      "9051:282896": "ThreadPoolForegroundWorker",
+      "9051:282851": "ThreadPoolForegroundWorker",
+      "9051:282895": "ThreadPoolForegroundWorker",
+      "9051:282713": "ThreadPoolServiceThread",
+      "8176:278681": "ThreadPoolServiceThread",
+      "8176:278682": "ThreadPoolForegroundWorker",
+      "9051:282985": "ThreadPoolForegroundWorker",
+      "8176:278684": "ThreadPoolBackgroundWorker",
+      "8176:278637": "StackSamplingProfiler",
+      "8192:278718": "StackSamplingProfiler",
+      "8192:278777": "ThreadPoolServiceThread",
+      "8192:278778": "ThreadPoolForegroundWorker",
+      "8176:278783": "CacheThread_BlockFile"
+    },
+    "userTimingMarks": [
+      {
+        "name": "P15A:trace-start",
+        "timestampUs": 9198100906
+      },
+      {
+        "name": "P15A:trace-end",
+        "timestampUs": 9208103828
+      }
+    ],
+    "costs": {
+      "rendererMainThread": {
+        "count": 60134,
+        "inclusiveTotalMs": 9283.966000003462,
+        "p95Ms": 0.697,
+        "p99Ms": 3.947,
+        "maxMs": 12.654
+      },
+      "scriptAndAnimationCalculation": {
+        "count": 2220,
+        "inclusiveTotalMs": 398.4189999999997,
+        "p95Ms": 0.613,
+        "p99Ms": 1.481,
+        "maxMs": 4.282
+      },
+      "layoutAndStyle": {
+        "count": 1207,
+        "inclusiveTotalMs": 585.7840000000002,
+        "p95Ms": 2.668,
+        "p99Ms": 2.813,
+        "maxMs": 4.058
+      },
+      "paint": {
+        "count": 4478,
+        "inclusiveTotalMs": 1117.5129999999933,
+        "p95Ms": 0.604,
+        "p99Ms": 2.702,
+        "maxMs": 4.058
+      },
+      "compositeAndRaster": {
+        "count": 20998,
+        "inclusiveTotalMs": 700.473999999913,
+        "p95Ms": 0.138,
+        "p99Ms": 0.19,
+        "maxMs": 0.53
+      },
+      "gpuProcess": {
+        "count": 108076,
+        "inclusiveTotalMs": 17749.876000007727,
+        "p95Ms": 0.924,
+        "p99Ms": 2.84,
+        "maxMs": 7.408
+      }
+    },
+    "topEvents": {
+      "rendererMainThread": [
+        {
+          "name": "RunTask",
+          "count": 9435,
+          "inclusiveTotalMs": 1882.6059999999484,
+          "p95Ms": 1.773,
+          "p99Ms": 4.485,
+          "maxMs": 12.654
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 7729,
+          "inclusiveTotalMs": 1856.4099999999544,
+          "p95Ms": 1.856,
+          "p99Ms": 4.55,
+          "maxMs": 12.642
+        },
+        {
+          "name": "ProxyMain::BeginMainFrame",
+          "count": 1000,
+          "inclusiveTotalMs": 1684.0460000000028,
+          "p95Ms": 4.661,
+          "p99Ms": 4.938,
+          "maxMs": 6.717
+        },
+        {
+          "name": "LocalFrameView::RunStyleAndLayoutLifecyclePhases",
+          "count": 1005,
+          "inclusiveTotalMs": 598.973999999999,
+          "p95Ms": 2.766,
+          "p99Ms": 2.903,
+          "maxMs": 4.128
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 601,
+          "inclusiveTotalMs": 553.6160000000006,
+          "p95Ms": 2.739,
+          "p99Ms": 2.866,
+          "maxMs": 4.058
+        },
+        {
+          "name": "LocalFrameView::RunPaintLifecyclePhase",
+          "count": 1004,
+          "inclusiveTotalMs": 522.4430000000002,
+          "p95Ms": 0.95,
+          "p99Ms": 1.633,
+          "maxMs": 2.723
+        },
+        {
+          "name": "Paint",
+          "count": 2312,
+          "inclusiveTotalMs": 497.92700000000036,
+          "p95Ms": 0.563,
+          "p99Ms": 0.644,
+          "maxMs": 1.967
+        },
+        {
+          "name": "FunctionCall",
+          "count": 2200,
+          "inclusiveTotalMs": 355.23599999999897,
+          "p95Ms": 0.598,
+          "p99Ms": 0.822,
+          "maxMs": 4.222
+        },
+        {
+          "name": "FireAnimationFrame",
+          "count": 2000,
+          "inclusiveTotalMs": 330.7530000000003,
+          "p95Ms": 0.616,
+          "p99Ms": 0.807,
+          "maxMs": 2.05
+        },
+        {
+          "name": "Layerize",
+          "count": 877,
+          "inclusiveTotalMs": 163.84000000000077,
+          "p95Ms": 0.301,
+          "p99Ms": 0.361,
+          "maxMs": 0.853
+        },
+        {
+          "name": "Commit",
+          "count": 1000,
+          "inclusiveTotalMs": 121.79100000000041,
+          "p95Ms": 0.212,
+          "p99Ms": 0.253,
+          "maxMs": 0.53
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "count": 607,
+          "inclusiveTotalMs": 87.36400000000009,
+          "p95Ms": 0.187,
+          "p99Ms": 0.225,
+          "maxMs": 0.484
+        },
+        {
+          "name": "UpdateLayer",
+          "count": 1557,
+          "inclusiveTotalMs": 67.23299999999945,
+          "p95Ms": 0.133,
+          "p99Ms": 0.153,
+          "maxMs": 0.384
+        },
+        {
+          "name": "PrePaint",
+          "count": 1005,
+          "inclusiveTotalMs": 59.36000000000031,
+          "p95Ms": 0.122,
+          "p99Ms": 0.193,
+          "maxMs": 0.322
+        },
+        {
+          "name": "LocalFrameView::RunPrePaintLifecyclePhase",
+          "count": 1001,
+          "inclusiveTotalMs": 44.51800000000003,
+          "p95Ms": 0.1,
+          "p99Ms": 0.135,
+          "maxMs": 0.258
+        },
+        {
+          "name": "TimerFire",
+          "count": 20,
+          "inclusiveTotalMs": 43.183,
+          "p95Ms": 4.052,
+          "p99Ms": 4.282,
+          "maxMs": 4.282
+        },
+        {
+          "name": "MajorGC",
+          "count": 8,
+          "inclusiveTotalMs": 41.061,
+          "p95Ms": 12.601,
+          "p99Ms": 12.601,
+          "maxMs": 12.601
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "count": 8,
+          "inclusiveTotalMs": 40.798,
+          "p95Ms": 12.579,
+          "p99Ms": 12.579,
+          "maxMs": 12.579
+        },
+        {
+          "name": "LocalFrameView::layout",
+          "count": 606,
+          "inclusiveTotalMs": 33.51400000000003,
+          "p95Ms": 0.086,
+          "p99Ms": 0.144,
+          "maxMs": 0.289
+        },
+        {
+          "name": "Layout",
+          "count": 606,
+          "inclusiveTotalMs": 32.168000000000035,
+          "p95Ms": 0.082,
+          "p99Ms": 0.141,
+          "maxMs": 0.283
+        },
+        {
+          "name": "LocalFrameView::performLayout",
+          "count": 606,
+          "inclusiveTotalMs": 28.579000000000022,
+          "p95Ms": 0.074,
+          "p99Ms": 0.119,
+          "maxMs": 0.268
+        },
+        {
+          "name": "V8.GC_MC_MARK",
+          "count": 8,
+          "inclusiveTotalMs": 18.891,
+          "p95Ms": 9.324,
+          "p99Ms": 9.324,
+          "maxMs": 9.324
+        },
+        {
+          "name": "V8.GC_MC_INCREMENTAL",
+          "count": 118,
+          "inclusiveTotalMs": 18.721999999999994,
+          "p95Ms": 1.031,
+          "p99Ms": 1.081,
+          "maxMs": 1.143
+        },
+        {
+          "name": "V8.GC_MC_MARK_FULL_CLOSURE_PARALLEL",
+          "count": 8,
+          "inclusiveTotalMs": 18.475,
+          "p95Ms": 9.277,
+          "p99Ms": 9.277,
+          "maxMs": 9.277
+        },
+        {
+          "name": "V8.GC_MC_MARK_WEAK_CLOSURE_EPHEMERON_MARKING",
+          "count": 25,
+          "inclusiveTotalMs": 17.992999999999995,
+          "p95Ms": 8.536,
+          "p99Ms": 9.254,
+          "maxMs": 9.254
+        }
+      ],
+      "paint": [
+        {
+          "name": "UpdateLayoutTree",
+          "count": 601,
+          "inclusiveTotalMs": 553.6160000000006,
+          "p95Ms": 2.739,
+          "p99Ms": 2.866,
+          "maxMs": 4.058
+        },
+        {
+          "name": "Paint",
+          "count": 2312,
+          "inclusiveTotalMs": 497.92700000000036,
+          "p95Ms": 0.563,
+          "p99Ms": 0.644,
+          "maxMs": 1.967
+        },
+        {
+          "name": "PrePaint",
+          "count": 1005,
+          "inclusiveTotalMs": 59.36000000000031,
+          "p95Ms": 0.122,
+          "p99Ms": 0.193,
+          "maxMs": 0.322
+        },
+        {
+          "name": "PaintImage",
+          "count": 560,
+          "inclusiveTotalMs": 6.609999999999971,
+          "p95Ms": 0.017,
+          "p99Ms": 0.029,
+          "maxMs": 0.092
+        }
+      ],
+      "compositeAndRaster": [
+        {
+          "name": "RasterTask",
+          "count": 2149,
+          "inclusiveTotalMs": 162.34700000000046,
+          "p95Ms": 0.153,
+          "p99Ms": 0.192,
+          "maxMs": 0.278
+        },
+        {
+          "name": "Commit",
+          "count": 1001,
+          "inclusiveTotalMs": 121.8400000000004,
+          "p95Ms": 0.212,
+          "p99Ms": 0.253,
+          "maxMs": 0.53
+        },
+        {
+          "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+          "count": 1661,
+          "inclusiveTotalMs": 69.34600000000023,
+          "p95Ms": 0.147,
+          "p99Ms": 0.182,
+          "maxMs": 0.263
+        },
+        {
+          "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+          "count": 1768,
+          "inclusiveTotalMs": 62.06099999999923,
+          "p95Ms": 0.135,
+          "p99Ms": 0.167,
+          "maxMs": 0.25
+        },
+        {
+          "name": "LayerTreeHostImpl::CommitComplete",
+          "count": 608,
+          "inclusiveTotalMs": 55.988000000000035,
+          "p95Ms": 0.118,
+          "p99Ms": 0.132,
+          "maxMs": 0.294
+        },
+        {
+          "name": "TileManager::PrepareTiles",
+          "count": 1003,
+          "inclusiveTotalMs": 55.19999999999991,
+          "p95Ms": 0.084,
+          "p99Ms": 0.099,
+          "maxMs": 0.265
+        },
+        {
+          "name": "LayerTreeHostImpl::ActivateSyncTree",
+          "count": 608,
+          "inclusiveTotalMs": 53.69400000000003,
+          "p95Ms": 0.146,
+          "p99Ms": 0.166,
+          "maxMs": 0.24
+        },
+        {
+          "name": "TileManager::ScheduleTasks",
+          "count": 1003,
+          "inclusiveTotalMs": 26.62099999999993,
+          "p95Ms": 0.04,
+          "p99Ms": 0.053,
+          "maxMs": 0.218
+        },
+        {
+          "name": "LayerTreeHostImpl::FinishCommit",
+          "count": 608,
+          "inclusiveTotalMs": 24.90599999999999,
+          "p95Ms": 0.05,
+          "p99Ms": 0.055,
+          "maxMs": 0.105
+        },
+        {
+          "name": "TileManager::AssignGpuMemoryToTiles",
+          "count": 1003,
+          "inclusiveTotalMs": 22.291000000000054,
+          "p95Ms": 0.044,
+          "p99Ms": 0.051,
+          "maxMs": 0.066
+        },
+        {
+          "name": "LayerTreeHostImpl::PrepareToDraw",
+          "count": 608,
+          "inclusiveTotalMs": 11.892000000000008,
+          "p95Ms": 0.025,
+          "p99Ms": 0.029,
+          "maxMs": 0.038
+        },
+        {
+          "name": "LayerTreeHostImpl::DidNotProduceFrame",
+          "count": 395,
+          "inclusiveTotalMs": 11.589999999999977,
+          "p95Ms": 0.041,
+          "p99Ms": 0.055,
+          "maxMs": 0.064
+        },
+        {
+          "name": "LayerTreeHostImpl::CalculateRenderPasses",
+          "count": 608,
+          "inclusiveTotalMs": 6.275999999999981,
+          "p95Ms": 0.013,
+          "p99Ms": 0.016,
+          "maxMs": 0.023
+        },
+        {
+          "name": "LayerTreeHostImpl::BeginCommit",
+          "count": 608,
+          "inclusiveTotalMs": 3.3599999999999683,
+          "p95Ms": 0.009,
+          "p99Ms": 0.012,
+          "maxMs": 0.035
+        },
+        {
+          "name": "TileManager::PrepareToDraw",
+          "count": 608,
+          "inclusiveTotalMs": 2.710999999999992,
+          "p95Ms": 0.007,
+          "p99Ms": 0.01,
+          "maxMs": 0.022
+        },
+        {
+          "name": "LayerTreeHostImpl::NotifyTileStateChanged",
+          "count": 2574,
+          "inclusiveTotalMs": 2.6769999999998255,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.008
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForActivation",
+          "count": 1003,
+          "inclusiveTotalMs": 2.2779999999999663,
+          "p95Ms": 0.004,
+          "p99Ms": 0.005,
+          "maxMs": 0.013
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForDraw",
+          "count": 982,
+          "inclusiveTotalMs": 2.0649999999999595,
+          "p95Ms": 0.004,
+          "p99Ms": 0.008,
+          "maxMs": 0.016
+        },
+        {
+          "name": "TileManager::IsReadyToActivate",
+          "count": 607,
+          "inclusiveTotalMs": 1.4469999999999947,
+          "p95Ms": 0.004,
+          "p99Ms": 0.006,
+          "maxMs": 0.008
+        },
+        {
+          "name": "LayerTreeHostImpl::BuildHitTestData",
+          "count": 605,
+          "inclusiveTotalMs": 0.8620000000000007,
+          "p95Ms": 0.002,
+          "p99Ms": 0.005,
+          "maxMs": 0.017
+        },
+        {
+          "name": "TileManager::DidFinishRunningAllTileTasks",
+          "count": 533,
+          "inclusiveTotalMs": 0.5550000000000004,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.005
+        },
+        {
+          "name": "TileManager::IsReadyToDraw",
+          "count": 455,
+          "inclusiveTotalMs": 0.46700000000000036,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.003
+        }
+      ],
+      "gpuProcess": [
+        {
+          "name": "RunTask",
+          "count": 13788,
+          "inclusiveTotalMs": 1795.2149999999033,
+          "p95Ms": 0.404,
+          "p99Ms": 2.783,
+          "maxMs": 7.408
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 13750,
+          "inclusiveTotalMs": 1780.0039999998558,
+          "p95Ms": 0.404,
+          "p99Ms": 2.782,
+          "maxMs": 7.407
+        },
+        {
+          "name": "Scheduler::RunTask",
+          "count": 2122,
+          "inclusiveTotalMs": 1605.1729999999998,
+          "p95Ms": 2.91,
+          "p99Ms": 3.244,
+          "maxMs": 7.404
+        },
+        {
+          "name": "GpuChannel::ExecuteDeferredRequest",
+          "count": 1509,
+          "inclusiveTotalMs": 1416.094999999998,
+          "p95Ms": 3.013,
+          "p99Ms": 3.329,
+          "maxMs": 7.402
+        },
+        {
+          "name": "GPUTask",
+          "count": 1481,
+          "inclusiveTotalMs": 1406.388999999999,
+          "p95Ms": 3.012,
+          "p99Ms": 3.334,
+          "maxMs": 7.398
+        },
+        {
+          "name": "CommandBuffer::Flush",
+          "count": 1469,
+          "inclusiveTotalMs": 1391.1520000000012,
+          "p95Ms": 3.006,
+          "p99Ms": 3.328,
+          "maxMs": 7.389
+        },
+        {
+          "name": "CommandBufferStub::OnAsyncFlush",
+          "count": 1469,
+          "inclusiveTotalMs": 1390.2530000000029,
+          "p95Ms": 3.005,
+          "p99Ms": 3.328,
+          "maxMs": 7.389
+        },
+        {
+          "name": "CommandBufferService:PutChanged",
+          "count": 1469,
+          "inclusiveTotalMs": 1386.5479999999986,
+          "p95Ms": 3.003,
+          "p99Ms": 3.325,
+          "maxMs": 7.386
+        },
+        {
+          "name": "RendererRasterWorker",
+          "count": 830,
+          "inclusiveTotalMs": 1250.5460000000012,
+          "p95Ms": 3.138,
+          "p99Ms": 3.449,
+          "maxMs": 7.391
+        },
+        {
+          "name": "RasterDecoderImpl::DoEndRasterCHROMIUM",
+          "count": 2745,
+          "inclusiveTotalMs": 689.9520000000001,
+          "p95Ms": 0.531,
+          "p99Ms": 0.629,
+          "maxMs": 1.573
+        },
+        {
+          "name": "RasterDecoderImpl::DoEndRasterCHROMIUM::Flush",
+          "count": 2745,
+          "inclusiveTotalMs": 673.795000000001,
+          "p95Ms": 0.523,
+          "p99Ms": 0.62,
+          "maxMs": 1.565
+        },
+        {
+          "name": "RasterDecoderImpl::DoRasterCHROMIUM",
+          "count": 2745,
+          "inclusiveTotalMs": 636.8569999999992,
+          "p95Ms": 0.596,
+          "p99Ms": 0.688,
+          "maxMs": 0.895
+        },
+        {
+          "name": "RasterDecoderImpl::DoRasterCHROMIUM::Deserializing",
+          "count": 2745,
+          "inclusiveTotalMs": 632.9149999999992,
+          "p95Ms": 0.594,
+          "p99Ms": 0.686,
+          "maxMs": 0.893
+        },
+        {
+          "name": "Graphics.Pipeline",
+          "count": 8329,
+          "inclusiveTotalMs": 478.2609999999967,
+          "p95Ms": 0.254,
+          "p99Ms": 0.383,
+          "maxMs": 5.764
+        },
+        {
+          "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+          "count": 606,
+          "inclusiveTotalMs": 183.45600000000002,
+          "p95Ms": 0.466,
+          "p99Ms": 1.101,
+          "maxMs": 5.768
+        },
+        {
+          "name": "RendererMainThread",
+          "count": 641,
+          "inclusiveTotalMs": 141.8689999999999,
+          "p95Ms": 0.286,
+          "p99Ms": 0.418,
+          "maxMs": 1.057
+        },
+        {
+          "name": "SkiaOutputDevice->ScheduleOverlays()",
+          "count": 606,
+          "inclusiveTotalMs": 111.01200000000013,
+          "p95Ms": 0.331,
+          "p99Ms": 0.984,
+          "maxMs": 5.616
+        },
+        {
+          "name": "IOSurfaceImageBacking::WaitForCommandsToBeScheduled",
+          "count": 3744,
+          "inclusiveTotalMs": 91.22200000000224,
+          "p95Ms": 0.14,
+          "p99Ms": 0.272,
+          "maxMs": 5.56
+        },
+        {
+          "name": "IOSurfaceImageBacking::WaitForCommandsToBeScheduled::Dawn",
+          "count": 2010,
+          "inclusiveTotalMs": 88.16200000000079,
+          "p95Ms": 0.208,
+          "p99Ms": 0.317,
+          "maxMs": 5.558
+        },
+        {
+          "name": "SimpleWatcher::OnHandleReady",
+          "count": 3122,
+          "inclusiveTotalMs": 68.9310000000005,
+          "p95Ms": 0.055,
+          "p99Ms": 0.065,
+          "maxMs": 0.122
+        },
+        {
+          "name": "ImageTransportSurfaceOverlayMac::Present",
+          "count": 606,
+          "inclusiveTotalMs": 68.6369999999998,
+          "p95Ms": 0.141,
+          "p99Ms": 0.158,
+          "maxMs": 0.246
+        },
+        {
+          "name": "CommitPresentedFrameToCA",
+          "count": 606,
+          "inclusiveTotalMs": 65.41399999999994,
+          "p95Ms": 0.136,
+          "p99Ms": 0.153,
+          "maxMs": 0.237
+        },
+        {
+          "name": "DisplayScheduler::OnBeginFrameDeadline",
+          "count": 1001,
+          "inclusiveTotalMs": 44.33300000000012,
+          "p95Ms": 0.083,
+          "p99Ms": 0.094,
+          "maxMs": 0.14
+        },
+        {
+          "name": "Receive mojo message",
+          "count": 3104,
+          "inclusiveTotalMs": 43.36600000000026,
+          "p95Ms": 0.039,
+          "p99Ms": 0.045,
+          "maxMs": 0.075
+        },
+        {
+          "name": "DisplayScheduler::DrawAndSwap",
+          "count": 607,
+          "inclusiveTotalMs": 42.77500000000005,
+          "p95Ms": 0.085,
+          "p99Ms": 0.102,
+          "maxMs": 0.138
+        }
+      ]
+    },
+    "interpretation": {
+      "unit": "milliseconds",
+      "durationType": "inclusive trace event duration",
+      "additive": false,
+      "warning": "Trace categories overlap and must not be summed into a total. GPU process event time is not GPU utilization, power, or presented-frame telemetry."
+    }
+  },
+  {
+    "backend": "headed",
+    "file": ".review/p1-5-a/headed/legacy-1920.trace.json.gz",
+    "traceEventCount": 918641,
+    "processNames": {
+      "8176": "Browser",
+      "8192": "GPU Process",
+      "8206": "Renderer"
+    },
+    "threadNames": {
+      "0:0": "swapper",
+      "8176:278635": "CrBrowserMain",
+      "8206:278890": "Compositor",
+      "8206:278851": "CrRendererMain",
+      "8192:278737": "PerfettoTrace",
+      "8176:278680": "PerfettoTrace",
+      "8192:279004": "CVDisplayLink",
+      "8192:278701": "CrGpuMain",
+      "8206:278870": "PerfettoTrace",
+      "8192:278910": "CVDisplayLink",
+      "8192:278782": "VizCompositorThread",
+      "8206:278881": "Chrome_ChildIOThread",
+      "8176:278736": "DevToolsPipeHandlerWriteThread",
+      "8192:278780": "Chrome_ChildIOThread",
+      "8176:278687": "Chrome_IOThread",
+      "8206:278878": "ThreadPoolForegroundWorker",
+      "8192:278778": "ThreadPoolForegroundWorker",
+      "8206:278883": "ThreadPoolForegroundWorker",
+      "8206:279006": "ThreadPoolForegroundWorker",
+      "8206:279007": "ThreadPoolForegroundWorker",
+      "8206:279008": "ThreadPoolForegroundWorker",
+      "8192:278718": "StackSamplingProfiler",
+      "8192:278781": "ThreadPoolForegroundWorker",
+      "8176:278637": "StackSamplingProfiler",
+      "8176:278682": "ThreadPoolForegroundWorker",
+      "8176:278681": "ThreadPoolServiceThread",
+      "8176:278688": "MemoryInfra",
+      "8206:279009": "ThreadPoolForegroundWorker",
+      "8206:279028": "ThreadPoolForegroundWorker",
+      "8206:279022": "ThreadPoolForegroundWorker",
+      "8206:279030": "ThreadPoolForegroundWorker",
+      "8206:279029": "ThreadPoolForegroundWorker",
+      "8206:279032": "ThreadPoolForegroundWorker",
+      "8206:279034": "ThreadPoolForegroundWorker",
+      "8206:279035": "ThreadPoolForegroundWorker",
+      "8206:279031": "ThreadPoolForegroundWorker",
+      "8206:279033": "ThreadPoolForegroundWorker",
+      "8206:279036": "ThreadPoolForegroundWorker",
+      "8206:279038": "ThreadPoolForegroundWorker",
+      "8206:279037": "ThreadPoolForegroundWorker",
+      "8206:279075": "ThreadPoolForegroundWorker",
+      "8206:278875": "ThreadPoolServiceThread",
+      "8176:278783": "CacheThread_BlockFile",
+      "8176:278683": "ThreadPoolForegroundWorker",
+      "8192:278813": "ThreadPoolForegroundWorker",
+      "8176:278684": "ThreadPoolBackgroundWorker"
+    },
+    "userTimingMarks": [
+      {
+        "name": "P15A:trace-start",
+        "timestampUs": 9122663430
+      },
+      {
+        "name": "P15A:trace-end",
+        "timestampUs": 9132665875
+      }
+    ],
+    "costs": {
+      "rendererMainThread": {
+        "count": 66093,
+        "inclusiveTotalMs": 14678.50800000525,
+        "p95Ms": 1.632,
+        "p99Ms": 4.175,
+        "maxMs": 20.094
+      },
+      "scriptAndAnimationCalculation": {
+        "count": 2219,
+        "inclusiveTotalMs": 521.3819999999984,
+        "p95Ms": 0.637,
+        "p99Ms": 1.585,
+        "maxMs": 5.31
+      },
+      "layoutAndStyle": {
+        "count": 2000,
+        "inclusiveTotalMs": 986.5679999999992,
+        "p95Ms": 2.596,
+        "p99Ms": 2.797,
+        "maxMs": 3.134
+      },
+      "paint": {
+        "count": 6511,
+        "inclusiveTotalMs": 1899.3279999999982,
+        "p95Ms": 1.395,
+        "p99Ms": 2.651,
+        "maxMs": 3.134
+      },
+      "compositeAndRaster": {
+        "count": 28361,
+        "inclusiveTotalMs": 1078.1809999998538,
+        "p95Ms": 0.145,
+        "p99Ms": 0.188,
+        "maxMs": 1.918
+      },
+      "gpuProcess": {
+        "count": 159354,
+        "inclusiveTotalMs": 32892.136000014885,
+        "p95Ms": 1.71,
+        "p99Ms": 3.051,
+        "maxMs": 10.009
+      }
+    },
+    "topEvents": {
+      "rendererMainThread": [
+        {
+          "name": "RunTask",
+          "count": 8068,
+          "inclusiveTotalMs": 2931.2789999999704,
+          "p95Ms": 2.803,
+          "p99Ms": 4.518,
+          "maxMs": 20.094
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 7522,
+          "inclusiveTotalMs": 2903.6160000001937,
+          "p95Ms": 3.29,
+          "p99Ms": 4.547,
+          "maxMs": 20.083
+        },
+        {
+          "name": "ProxyMain::BeginMainFrame",
+          "count": 1000,
+          "inclusiveTotalMs": 2686.7210000000027,
+          "p95Ms": 4.598,
+          "p99Ms": 4.951,
+          "maxMs": 5.844
+        },
+        {
+          "name": "LocalFrameView::RunStyleAndLayoutLifecyclePhases",
+          "count": 1004,
+          "inclusiveTotalMs": 1007.18,
+          "p95Ms": 2.751,
+          "p99Ms": 2.926,
+          "maxMs": 3.195
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 1000,
+          "inclusiveTotalMs": 926.8649999999992,
+          "p95Ms": 2.694,
+          "p99Ms": 2.869,
+          "maxMs": 3.134
+        },
+        {
+          "name": "LocalFrameView::RunPaintLifecyclePhase",
+          "count": 1004,
+          "inclusiveTotalMs": 890.1979999999996,
+          "p95Ms": 1.491,
+          "p99Ms": 2.419,
+          "maxMs": 3.113
+        },
+        {
+          "name": "Paint",
+          "count": 3724,
+          "inclusiveTotalMs": 864.2029999999978,
+          "p95Ms": 0.564,
+          "p99Ms": 1.277,
+          "maxMs": 2.166
+        },
+        {
+          "name": "FunctionCall",
+          "count": 2199,
+          "inclusiveTotalMs": 479.768999999999,
+          "p95Ms": 0.615,
+          "p99Ms": 1.011,
+          "maxMs": 5.186
+        },
+        {
+          "name": "FireAnimationFrame",
+          "count": 2000,
+          "inclusiveTotalMs": 461.08000000000044,
+          "p95Ms": 0.632,
+          "p99Ms": 0.958,
+          "maxMs": 1.735
+        },
+        {
+          "name": "Layerize",
+          "count": 1000,
+          "inclusiveTotalMs": 271.3330000000001,
+          "p95Ms": 0.326,
+          "p99Ms": 0.676,
+          "maxMs": 0.966
+        },
+        {
+          "name": "Commit",
+          "count": 1000,
+          "inclusiveTotalMs": 164.60900000000015,
+          "p95Ms": 0.206,
+          "p99Ms": 0.304,
+          "maxMs": 0.497
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "count": 1000,
+          "inclusiveTotalMs": 130.34299999999996,
+          "p95Ms": 0.171,
+          "p99Ms": 0.231,
+          "maxMs": 0.334
+        },
+        {
+          "name": "PrePaint",
+          "count": 1005,
+          "inclusiveTotalMs": 100.14699999999972,
+          "p95Ms": 0.184,
+          "p99Ms": 0.27,
+          "maxMs": 0.586
+        },
+        {
+          "name": "UpdateLayer",
+          "count": 2218,
+          "inclusiveTotalMs": 99.41200000000032,
+          "p95Ms": 0.124,
+          "p99Ms": 0.152,
+          "maxMs": 0.279
+        },
+        {
+          "name": "LocalFrameView::RunPrePaintLifecyclePhase",
+          "count": 1004,
+          "inclusiveTotalMs": 76.62099999999975,
+          "p95Ms": 0.135,
+          "p99Ms": 0.215,
+          "maxMs": 0.463
+        },
+        {
+          "name": "MajorGC",
+          "count": 9,
+          "inclusiveTotalMs": 66.506,
+          "p95Ms": 19.985,
+          "p99Ms": 19.985,
+          "maxMs": 19.985
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "count": 9,
+          "inclusiveTotalMs": 66.284,
+          "p95Ms": 19.96,
+          "p99Ms": 19.96,
+          "maxMs": 19.96
+        },
+        {
+          "name": "LocalFrameView::layout",
+          "count": 1000,
+          "inclusiveTotalMs": 61.96200000000003,
+          "p95Ms": 0.12,
+          "p99Ms": 0.24,
+          "maxMs": 0.615
+        },
+        {
+          "name": "Layout",
+          "count": 1000,
+          "inclusiveTotalMs": 59.70299999999984,
+          "p95Ms": 0.116,
+          "p99Ms": 0.235,
+          "maxMs": 0.498
+        },
+        {
+          "name": "LocalFrameView::performLayout",
+          "count": 1000,
+          "inclusiveTotalMs": 52.547999999999924,
+          "p95Ms": 0.106,
+          "p99Ms": 0.218,
+          "maxMs": 0.437
+        },
+        {
+          "name": "TimerFire",
+          "count": 20,
+          "inclusiveTotalMs": 41.61300000000001,
+          "p95Ms": 3.87,
+          "p99Ms": 5.31,
+          "maxMs": 5.31
+        },
+        {
+          "name": "V8.GC_MC_MARK",
+          "count": 9,
+          "inclusiveTotalMs": 35.748999999999995,
+          "p95Ms": 14.615,
+          "p99Ms": 14.615,
+          "maxMs": 14.615
+        },
+        {
+          "name": "V8.GC_MC_MARK_FULL_CLOSURE_PARALLEL",
+          "count": 9,
+          "inclusiveTotalMs": 35.26400000000001,
+          "p95Ms": 14.568,
+          "p99Ms": 14.568,
+          "maxMs": 14.568
+        },
+        {
+          "name": "V8.GC_MC_MARK_WEAK_CLOSURE_EPHEMERON_MARKING",
+          "count": 31,
+          "inclusiveTotalMs": 34.90499999999997,
+          "p95Ms": 8.169,
+          "p99Ms": 14.519,
+          "maxMs": 14.519
+        },
+        {
+          "name": "V8.GC_MC_MARK_EMBEDDER_TRACING",
+          "count": 24,
+          "inclusiveTotalMs": 34.64999999999999,
+          "p95Ms": 8.129,
+          "p99Ms": 14.477,
+          "maxMs": 14.477
+        }
+      ],
+      "paint": [
+        {
+          "name": "UpdateLayoutTree",
+          "count": 1000,
+          "inclusiveTotalMs": 926.8649999999992,
+          "p95Ms": 2.694,
+          "p99Ms": 2.869,
+          "maxMs": 3.134
+        },
+        {
+          "name": "Paint",
+          "count": 3724,
+          "inclusiveTotalMs": 864.2029999999978,
+          "p95Ms": 0.564,
+          "p99Ms": 1.277,
+          "maxMs": 2.166
+        },
+        {
+          "name": "PrePaint",
+          "count": 1005,
+          "inclusiveTotalMs": 100.14699999999972,
+          "p95Ms": 0.184,
+          "p99Ms": 0.27,
+          "maxMs": 0.586
+        },
+        {
+          "name": "PaintImage",
+          "count": 782,
+          "inclusiveTotalMs": 8.112999999999971,
+          "p95Ms": 0.016,
+          "p99Ms": 0.031,
+          "maxMs": 0.09
+        }
+      ],
+      "compositeAndRaster": [
+        {
+          "name": "RasterTask",
+          "count": 3231,
+          "inclusiveTotalMs": 263.4899999999992,
+          "p95Ms": 0.166,
+          "p99Ms": 0.235,
+          "maxMs": 1.918
+        },
+        {
+          "name": "Commit",
+          "count": 1001,
+          "inclusiveTotalMs": 164.66000000000017,
+          "p95Ms": 0.206,
+          "p99Ms": 0.304,
+          "maxMs": 0.497
+        },
+        {
+          "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+          "count": 2050,
+          "inclusiveTotalMs": 112.10399999999976,
+          "p95Ms": 0.148,
+          "p99Ms": 0.178,
+          "maxMs": 0.382
+        },
+        {
+          "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+          "count": 2566,
+          "inclusiveTotalMs": 101.81400000000156,
+          "p95Ms": 0.131,
+          "p99Ms": 0.163,
+          "maxMs": 0.359
+        },
+        {
+          "name": "LayerTreeHostImpl::CommitComplete",
+          "count": 1001,
+          "inclusiveTotalMs": 94.4009999999998,
+          "p95Ms": 0.117,
+          "p99Ms": 0.196,
+          "maxMs": 1.367
+        },
+        {
+          "name": "LayerTreeHostImpl::ActivateSyncTree",
+          "count": 1001,
+          "inclusiveTotalMs": 92.31399999999985,
+          "p95Ms": 0.142,
+          "p99Ms": 0.168,
+          "maxMs": 0.354
+        },
+        {
+          "name": "TileManager::PrepareTiles",
+          "count": 1003,
+          "inclusiveTotalMs": 69.0799999999999,
+          "p95Ms": 0.088,
+          "p99Ms": 0.147,
+          "maxMs": 1.279
+        },
+        {
+          "name": "LayerTreeHostImpl::FinishCommit",
+          "count": 1001,
+          "inclusiveTotalMs": 40.066999999999915,
+          "p95Ms": 0.05,
+          "p99Ms": 0.11,
+          "maxMs": 0.283
+        },
+        {
+          "name": "TileManager::AssignGpuMemoryToTiles",
+          "count": 1003,
+          "inclusiveTotalMs": 32.03100000000001,
+          "p95Ms": 0.043,
+          "p99Ms": 0.063,
+          "maxMs": 0.129
+        },
+        {
+          "name": "TileManager::ScheduleTasks",
+          "count": 1003,
+          "inclusiveTotalMs": 31.02499999999993,
+          "p95Ms": 0.04,
+          "p99Ms": 0.067,
+          "maxMs": 1.25
+        },
+        {
+          "name": "LayerTreeHostImpl::PrepareToDraw",
+          "count": 1001,
+          "inclusiveTotalMs": 30.005999999999823,
+          "p95Ms": 0.061,
+          "p99Ms": 0.082,
+          "maxMs": 0.342
+        },
+        {
+          "name": "LayerTreeHostImpl::CalculateRenderPasses",
+          "count": 1001,
+          "inclusiveTotalMs": 13.672999999999906,
+          "p95Ms": 0.028,
+          "p99Ms": 0.039,
+          "maxMs": 0.1
+        },
+        {
+          "name": "TileManager::PrepareToDraw",
+          "count": 1001,
+          "inclusiveTotalMs": 9.79099999999994,
+          "p95Ms": 0.021,
+          "p99Ms": 0.03,
+          "maxMs": 0.073
+        },
+        {
+          "name": "LayerTreeHostImpl::BeginCommit",
+          "count": 1001,
+          "inclusiveTotalMs": 5.532999999999933,
+          "p95Ms": 0.008,
+          "p99Ms": 0.014,
+          "maxMs": 0.224
+        },
+        {
+          "name": "LayerTreeHostImpl::NotifyTileStateChanged",
+          "count": 3902,
+          "inclusiveTotalMs": 4.125999999999727,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.023
+        },
+        {
+          "name": "TileManager::IsReadyToDraw",
+          "count": 1001,
+          "inclusiveTotalMs": 3.3419999999999757,
+          "p95Ms": 0.008,
+          "p99Ms": 0.011,
+          "maxMs": 0.049
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForActivation",
+          "count": 1003,
+          "inclusiveTotalMs": 2.9929999999999755,
+          "p95Ms": 0.005,
+          "p99Ms": 0.008,
+          "maxMs": 0.017
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForDraw",
+          "count": 1003,
+          "inclusiveTotalMs": 2.807999999999961,
+          "p95Ms": 0.006,
+          "p99Ms": 0.01,
+          "maxMs": 0.02
+        },
+        {
+          "name": "TileManager::IsReadyToActivate",
+          "count": 1000,
+          "inclusiveTotalMs": 2.2239999999999753,
+          "p95Ms": 0.004,
+          "p99Ms": 0.006,
+          "maxMs": 0.01
+        },
+        {
+          "name": "LayerTreeHostImpl::BuildHitTestData",
+          "count": 995,
+          "inclusiveTotalMs": 1.9319999999999673,
+          "p95Ms": 0.005,
+          "p99Ms": 0.007,
+          "maxMs": 0.018
+        },
+        {
+          "name": "TileManager::DidFinishRunningAllTileTasks",
+          "count": 590,
+          "inclusiveTotalMs": 0.6600000000000005,
+          "p95Ms": 0.001,
+          "p99Ms": 0.005,
+          "maxMs": 0.019
+        },
+        {
+          "name": "LayerTreeHostImpl::DidNotProduceFrame",
+          "count": 3,
+          "inclusiveTotalMs": 0.10700000000000001,
+          "p95Ms": 0.064,
+          "p99Ms": 0.064,
+          "maxMs": 0.064
+        }
+      ],
+      "gpuProcess": [
+        {
+          "name": "RunTask",
+          "count": 19809,
+          "inclusiveTotalMs": 3261.4150000000604,
+          "p95Ms": 1.358,
+          "p99Ms": 3.014,
+          "maxMs": 10.009
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 19701,
+          "inclusiveTotalMs": 3238.0510000000213,
+          "p95Ms": 1.381,
+          "p99Ms": 3.012,
+          "maxMs": 10.007
+        },
+        {
+          "name": "Scheduler::RunTask",
+          "count": 3474,
+          "inclusiveTotalMs": 2944.119999999999,
+          "p95Ms": 3.063,
+          "p99Ms": 3.807,
+          "maxMs": 10.004
+        },
+        {
+          "name": "GpuChannel::ExecuteDeferredRequest",
+          "count": 2467,
+          "inclusiveTotalMs": 2659.521000000007,
+          "p95Ms": 3.159,
+          "p99Ms": 4.183,
+          "maxMs": 10.001
+        },
+        {
+          "name": "GPUTask",
+          "count": 2436,
+          "inclusiveTotalMs": 2648.8710000000137,
+          "p95Ms": 3.158,
+          "p99Ms": 4.174,
+          "maxMs": 9.998
+        },
+        {
+          "name": "CommandBuffer::Flush",
+          "count": 2422,
+          "inclusiveTotalMs": 2630.858000000001,
+          "p95Ms": 3.148,
+          "p99Ms": 4.158,
+          "maxMs": 9.989
+        },
+        {
+          "name": "CommandBufferStub::OnAsyncFlush",
+          "count": 2422,
+          "inclusiveTotalMs": 2629.2139999999977,
+          "p95Ms": 3.146,
+          "p99Ms": 4.157,
+          "maxMs": 9.988
+        },
+        {
+          "name": "CommandBufferService:PutChanged",
+          "count": 2422,
+          "inclusiveTotalMs": 2623.007000000003,
+          "p95Ms": 3.142,
+          "p99Ms": 4.154,
+          "maxMs": 9.985
+        },
+        {
+          "name": "RendererRasterWorker",
+          "count": 1363,
+          "inclusiveTotalMs": 2474.2259999999915,
+          "p95Ms": 3.328,
+          "p99Ms": 4.598,
+          "maxMs": 9.99
+        },
+        {
+          "name": "RasterDecoderImpl::DoEndRasterCHROMIUM",
+          "count": 4230,
+          "inclusiveTotalMs": 1328.074999999998,
+          "p95Ms": 0.663,
+          "p99Ms": 0.96,
+          "maxMs": 7.724
+        },
+        {
+          "name": "RasterDecoderImpl::DoEndRasterCHROMIUM::Flush",
+          "count": 4230,
+          "inclusiveTotalMs": 1300.360999999999,
+          "p95Ms": 0.653,
+          "p99Ms": 0.945,
+          "maxMs": 7.71
+        },
+        {
+          "name": "RasterDecoderImpl::DoRasterCHROMIUM",
+          "count": 4230,
+          "inclusiveTotalMs": 1198.378999999996,
+          "p95Ms": 0.699,
+          "p99Ms": 1.198,
+          "maxMs": 2.993
+        },
+        {
+          "name": "RasterDecoderImpl::DoRasterCHROMIUM::Deserializing",
+          "count": 4230,
+          "inclusiveTotalMs": 1191.4919999999993,
+          "p95Ms": 0.697,
+          "p99Ms": 1.195,
+          "maxMs": 2.99
+        },
+        {
+          "name": "Graphics.Pipeline",
+          "count": 11105,
+          "inclusiveTotalMs": 900.629999999993,
+          "p95Ms": 0.293,
+          "p99Ms": 0.68,
+          "maxMs": 4.086
+        },
+        {
+          "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+          "count": 1000,
+          "inclusiveTotalMs": 275.392,
+          "p95Ms": 0.379,
+          "p99Ms": 1.05,
+          "maxMs": 4.089
+        },
+        {
+          "name": "SkiaOutputDevice->ScheduleOverlays()",
+          "count": 1000,
+          "inclusiveTotalMs": 159.94999999999993,
+          "p95Ms": 0.263,
+          "p99Ms": 0.876,
+          "maxMs": 3.978
+        },
+        {
+          "name": "RendererMainThread",
+          "count": 1062,
+          "inclusiveTotalMs": 158.92600000000004,
+          "p95Ms": 0.223,
+          "p99Ms": 0.281,
+          "maxMs": 0.901
+        },
+        {
+          "name": "IOSurfaceImageBacking::WaitForCommandsToBeScheduled",
+          "count": 5871,
+          "inclusiveTotalMs": 127.43700000000408,
+          "p95Ms": 0.112,
+          "p99Ms": 0.209,
+          "maxMs": 3.94
+        },
+        {
+          "name": "IOSurfaceImageBacking::WaitForCommandsToBeScheduled::Dawn",
+          "count": 3236,
+          "inclusiveTotalMs": 122.1410000000014,
+          "p95Ms": 0.143,
+          "p99Ms": 0.282,
+          "maxMs": 3.938
+        },
+        {
+          "name": "SimpleWatcher::OnHandleReady",
+          "count": 4453,
+          "inclusiveTotalMs": 110.47000000000192,
+          "p95Ms": 0.058,
+          "p99Ms": 0.124,
+          "maxMs": 0.924
+        },
+        {
+          "name": "ImageTransportSurfaceOverlayMac::Present",
+          "count": 1000,
+          "inclusiveTotalMs": 109.23699999999971,
+          "p95Ms": 0.139,
+          "p99Ms": 0.197,
+          "maxMs": 0.369
+        },
+        {
+          "name": "CommitPresentedFrameToCA",
+          "count": 1000,
+          "inclusiveTotalMs": 103.92499999999978,
+          "p95Ms": 0.133,
+          "p99Ms": 0.188,
+          "maxMs": 0.355
+        },
+        {
+          "name": "DisplayScheduler::OnBeginFrameDeadline",
+          "count": 1001,
+          "inclusiveTotalMs": 84.55299999999977,
+          "p95Ms": 0.181,
+          "p99Ms": 0.266,
+          "maxMs": 0.973
+        },
+        {
+          "name": "DisplayScheduler::DrawAndSwap",
+          "count": 1000,
+          "inclusiveTotalMs": 83.38699999999973,
+          "p95Ms": 0.179,
+          "p99Ms": 0.264,
+          "maxMs": 0.966
+        },
+        {
+          "name": "Display::DrawAndSwap",
+          "count": 1000,
+          "inclusiveTotalMs": 82.48399999999975,
+          "p95Ms": 0.177,
+          "p99Ms": 0.262,
+          "maxMs": 0.964
+        }
+      ]
+    },
+    "interpretation": {
+      "unit": "milliseconds",
+      "durationType": "inclusive trace event duration",
+      "additive": false,
+      "warning": "Trace categories overlap and must not be summed into a total. GPU process event time is not GPU utilization, power, or presented-frame telemetry."
+    }
+  },
+  {
+    "backend": "headed",
+    "file": ".review/p1-5-a/headed/legacy-3840.trace.json.gz",
+    "traceEventCount": 928105,
+    "processNames": {
+      "8176": "Browser",
+      "8192": "GPU Process",
+      "8749": "Renderer"
+    },
+    "threadNames": {
+      "0:0": "swapper",
+      "8176:278635": "CrBrowserMain",
+      "8749:281320": "Compositor",
+      "8749:281207": "CrRendererMain",
+      "8176:278680": "PerfettoTrace",
+      "8749:281291": "PerfettoTrace",
+      "8192:278737": "PerfettoTrace",
+      "8192:278701": "CrGpuMain",
+      "8749:281297": "ThreadPoolForegroundWorker",
+      "8176:278736": "DevToolsPipeHandlerWriteThread",
+      "8176:278687": "Chrome_IOThread",
+      "8749:281300": "Chrome_ChildIOThread",
+      "8192:281287": "CVDisplayLink",
+      "8192:281382": "CVDisplayLink",
+      "8192:278782": "VizCompositorThread",
+      "8192:278780": "Chrome_ChildIOThread",
+      "8749:281298": "ThreadPoolForegroundWorker",
+      "8749:281301": "ThreadPoolForegroundWorker",
+      "8749:281384": "ThreadPoolForegroundWorker",
+      "8749:281385": "ThreadPoolForegroundWorker",
+      "8749:281254": "StackSamplingProfiler",
+      "8176:278682": "ThreadPoolForegroundWorker",
+      "8176:278688": "MemoryInfra",
+      "8176:278681": "ThreadPoolServiceThread",
+      "8749:281386": "ThreadPoolForegroundWorker",
+      "8749:281404": "ThreadPoolForegroundWorker",
+      "8749:281414": "ThreadPoolForegroundWorker",
+      "8749:281415": "ThreadPoolForegroundWorker",
+      "8749:281416": "ThreadPoolForegroundWorker",
+      "8749:281417": "ThreadPoolForegroundWorker",
+      "8749:281418": "ThreadPoolForegroundWorker",
+      "8749:281419": "ThreadPoolForegroundWorker",
+      "8749:281420": "ThreadPoolForegroundWorker",
+      "8749:281421": "ThreadPoolForegroundWorker",
+      "8749:281423": "ThreadPoolForegroundWorker",
+      "8749:281425": "ThreadPoolForegroundWorker",
+      "8749:281422": "ThreadPoolForegroundWorker",
+      "8749:281296": "ThreadPoolServiceThread",
+      "8192:278778": "ThreadPoolForegroundWorker",
+      "8192:278781": "ThreadPoolForegroundWorker",
+      "8749:281424": "ThreadPoolForegroundWorker",
+      "8176:278684": "ThreadPoolBackgroundWorker",
+      "8176:278783": "CacheThread_BlockFile"
+    },
+    "userTimingMarks": [
+      {
+        "name": "P15A:trace-start",
+        "timestampUs": 9171622122
+      },
+      {
+        "name": "P15A:trace-end",
+        "timestampUs": 9181625579
+      }
+    ],
+    "costs": {
+      "rendererMainThread": {
+        "count": 69332,
+        "inclusiveTotalMs": 15495.14800000558,
+        "p95Ms": 1.66,
+        "p99Ms": 4.227,
+        "maxMs": 16.015
+      },
+      "scriptAndAnimationCalculation": {
+        "count": 2220,
+        "inclusiveTotalMs": 594.8869999999968,
+        "p95Ms": 0.792,
+        "p99Ms": 1.954,
+        "maxMs": 3.968
+      },
+      "layoutAndStyle": {
+        "count": 2000,
+        "inclusiveTotalMs": 1023.8760000000019,
+        "p95Ms": 2.601,
+        "p99Ms": 2.808,
+        "maxMs": 3.027
+      },
+      "paint": {
+        "count": 6506,
+        "inclusiveTotalMs": 1997.492999999986,
+        "p95Ms": 1.457,
+        "p99Ms": 2.68,
+        "maxMs": 3.027
+      },
+      "compositeAndRaster": {
+        "count": 28839,
+        "inclusiveTotalMs": 1122.674999999831,
+        "p95Ms": 0.146,
+        "p99Ms": 0.185,
+        "maxMs": 0.611
+      },
+      "gpuProcess": {
+        "count": 160959,
+        "inclusiveTotalMs": 33258.25900001256,
+        "p95Ms": 1.498,
+        "p99Ms": 3.109,
+        "maxMs": 6.956
+      }
+    },
+    "topEvents": {
+      "rendererMainThread": [
+        {
+          "name": "RunTask",
+          "count": 9783,
+          "inclusiveTotalMs": 3100.947999999905,
+          "p95Ms": 2.747,
+          "p99Ms": 4.545,
+          "maxMs": 16.015
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 8455,
+          "inclusiveTotalMs": 3070.7410000001087,
+          "p95Ms": 3.218,
+          "p99Ms": 4.575,
+          "maxMs": 16.001
+        },
+        {
+          "name": "ProxyMain::BeginMainFrame",
+          "count": 1000,
+          "inclusiveTotalMs": 2875.9230000000025,
+          "p95Ms": 4.667,
+          "p99Ms": 5.111,
+          "maxMs": 5.948
+        },
+        {
+          "name": "LocalFrameView::RunStyleAndLayoutLifecyclePhases",
+          "count": 1005,
+          "inclusiveTotalMs": 1047.5779999999995,
+          "p95Ms": 2.78,
+          "p99Ms": 2.913,
+          "maxMs": 3.086
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "count": 1000,
+          "inclusiveTotalMs": 960.9820000000019,
+          "p95Ms": 2.706,
+          "p99Ms": 2.847,
+          "maxMs": 3.027
+        },
+        {
+          "name": "LocalFrameView::RunPaintLifecyclePhase",
+          "count": 1004,
+          "inclusiveTotalMs": 942.657,
+          "p95Ms": 1.681,
+          "p99Ms": 2.367,
+          "maxMs": 3.429
+        },
+        {
+          "name": "Paint",
+          "count": 3721,
+          "inclusiveTotalMs": 919.983,
+          "p95Ms": 0.603,
+          "p99Ms": 1.321,
+          "maxMs": 2.2
+        },
+        {
+          "name": "FunctionCall",
+          "count": 2200,
+          "inclusiveTotalMs": 555.0699999999972,
+          "p95Ms": 0.761,
+          "p99Ms": 1.397,
+          "maxMs": 3.881
+        },
+        {
+          "name": "FireAnimationFrame",
+          "count": 2000,
+          "inclusiveTotalMs": 542.054,
+          "p95Ms": 0.793,
+          "p99Ms": 1.305,
+          "maxMs": 2.592
+        },
+        {
+          "name": "Layerize",
+          "count": 1000,
+          "inclusiveTotalMs": 283.1359999999995,
+          "p95Ms": 0.327,
+          "p99Ms": 0.743,
+          "maxMs": 1.091
+        },
+        {
+          "name": "Commit",
+          "count": 1000,
+          "inclusiveTotalMs": 165.64400000000015,
+          "p95Ms": 0.202,
+          "p99Ms": 0.338,
+          "maxMs": 0.593
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "count": 1000,
+          "inclusiveTotalMs": 130.13600000000017,
+          "p95Ms": 0.16,
+          "p99Ms": 0.272,
+          "maxMs": 0.462
+        },
+        {
+          "name": "PrePaint",
+          "count": 1005,
+          "inclusiveTotalMs": 107.71999999999971,
+          "p95Ms": 0.203,
+          "p99Ms": 0.274,
+          "maxMs": 0.601
+        },
+        {
+          "name": "UpdateLayer",
+          "count": 2536,
+          "inclusiveTotalMs": 97.92600000000076,
+          "p95Ms": 0.113,
+          "p99Ms": 0.134,
+          "maxMs": 0.31
+        },
+        {
+          "name": "LocalFrameView::RunPrePaintLifecyclePhase",
+          "count": 1004,
+          "inclusiveTotalMs": 81.44999999999983,
+          "p95Ms": 0.148,
+          "p99Ms": 0.204,
+          "maxMs": 0.349
+        },
+        {
+          "name": "LocalFrameView::layout",
+          "count": 1000,
+          "inclusiveTotalMs": 65.59299999999996,
+          "p95Ms": 0.168,
+          "p99Ms": 0.243,
+          "maxMs": 0.401
+        },
+        {
+          "name": "Layout",
+          "count": 1000,
+          "inclusiveTotalMs": 62.893999999999934,
+          "p95Ms": 0.162,
+          "p99Ms": 0.235,
+          "maxMs": 0.397
+        },
+        {
+          "name": "LocalFrameView::performLayout",
+          "count": 1000,
+          "inclusiveTotalMs": 56.20099999999992,
+          "p95Ms": 0.151,
+          "p99Ms": 0.222,
+          "maxMs": 0.357
+        },
+        {
+          "name": "MajorGC",
+          "count": 6,
+          "inclusiveTotalMs": 49.376999999999995,
+          "p95Ms": 15.903,
+          "p99Ms": 15.903,
+          "maxMs": 15.903
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "count": 6,
+          "inclusiveTotalMs": 49.233999999999995,
+          "p95Ms": 15.877,
+          "p99Ms": 15.877,
+          "maxMs": 15.877
+        },
+        {
+          "name": "TimerFire",
+          "count": 20,
+          "inclusiveTotalMs": 39.81699999999999,
+          "p95Ms": 3.927,
+          "p99Ms": 3.968,
+          "maxMs": 3.968
+        },
+        {
+          "name": "LocalFrameView::RunCompositingInputsLifecyclePhase",
+          "count": 1002,
+          "inclusiveTotalMs": 23.74399999999989,
+          "p95Ms": 0.049,
+          "p99Ms": 0.063,
+          "maxMs": 0.349
+        },
+        {
+          "name": "V8.GC_MC_MARK",
+          "count": 6,
+          "inclusiveTotalMs": 22.561,
+          "p95Ms": 11.709,
+          "p99Ms": 11.709,
+          "maxMs": 11.709
+        },
+        {
+          "name": "V8.GC_MC_MARK_FULL_CLOSURE_PARALLEL",
+          "count": 6,
+          "inclusiveTotalMs": 22.255,
+          "p95Ms": 11.659,
+          "p99Ms": 11.659,
+          "maxMs": 11.659
+        },
+        {
+          "name": "V8.GC_MC_MARK_WEAK_CLOSURE_EPHEMERON_MARKING",
+          "count": 22,
+          "inclusiveTotalMs": 21.970999999999997,
+          "p95Ms": 5.959,
+          "p99Ms": 11.628,
+          "maxMs": 11.628
+        }
+      ],
+      "paint": [
+        {
+          "name": "UpdateLayoutTree",
+          "count": 1000,
+          "inclusiveTotalMs": 960.9820000000019,
+          "p95Ms": 2.706,
+          "p99Ms": 2.847,
+          "maxMs": 3.027
+        },
+        {
+          "name": "Paint",
+          "count": 3721,
+          "inclusiveTotalMs": 919.983,
+          "p95Ms": 0.603,
+          "p99Ms": 1.321,
+          "maxMs": 2.2
+        },
+        {
+          "name": "PrePaint",
+          "count": 1005,
+          "inclusiveTotalMs": 107.71999999999971,
+          "p95Ms": 0.203,
+          "p99Ms": 0.274,
+          "maxMs": 0.601
+        },
+        {
+          "name": "PaintImage",
+          "count": 780,
+          "inclusiveTotalMs": 8.80799999999995,
+          "p95Ms": 0.018,
+          "p99Ms": 0.029,
+          "maxMs": 0.051
+        }
+      ],
+      "compositeAndRaster": [
+        {
+          "name": "RasterTask",
+          "count": 3528,
+          "inclusiveTotalMs": 269.25799999999873,
+          "p95Ms": 0.156,
+          "p99Ms": 0.223,
+          "maxMs": 0.526
+        },
+        {
+          "name": "Commit",
+          "count": 1001,
+          "inclusiveTotalMs": 165.70000000000013,
+          "p95Ms": 0.202,
+          "p99Ms": 0.338,
+          "maxMs": 0.593
+        },
+        {
+          "name": "TileManager::CheckForCompletedTasksAndIssueSignals",
+          "count": 2044,
+          "inclusiveTotalMs": 116.15899999999945,
+          "p95Ms": 0.154,
+          "p99Ms": 0.197,
+          "maxMs": 0.335
+        },
+        {
+          "name": "TileManager::CheckPendingGpuWorkAndIssueSignals",
+          "count": 2499,
+          "inclusiveTotalMs": 105.41000000000138,
+          "p95Ms": 0.137,
+          "p99Ms": 0.176,
+          "maxMs": 0.319
+        },
+        {
+          "name": "LayerTreeHostImpl::CommitComplete",
+          "count": 1001,
+          "inclusiveTotalMs": 100.8039999999997,
+          "p95Ms": 0.13,
+          "p99Ms": 0.24,
+          "maxMs": 0.611
+        },
+        {
+          "name": "LayerTreeHostImpl::ActivateSyncTree",
+          "count": 1002,
+          "inclusiveTotalMs": 95.20799999999994,
+          "p95Ms": 0.153,
+          "p99Ms": 0.188,
+          "maxMs": 0.31
+        },
+        {
+          "name": "TileManager::PrepareTiles",
+          "count": 1002,
+          "inclusiveTotalMs": 72.75199999999985,
+          "p95Ms": 0.1,
+          "p99Ms": 0.164,
+          "maxMs": 0.335
+        },
+        {
+          "name": "LayerTreeHostImpl::FinishCommit",
+          "count": 1001,
+          "inclusiveTotalMs": 42.30399999999994,
+          "p95Ms": 0.054,
+          "p99Ms": 0.13,
+          "maxMs": 0.18
+        },
+        {
+          "name": "LayerTreeHostImpl::PrepareToDraw",
+          "count": 1001,
+          "inclusiveTotalMs": 35.50300000000005,
+          "p95Ms": 0.071,
+          "p99Ms": 0.096,
+          "maxMs": 0.163
+        },
+        {
+          "name": "TileManager::AssignGpuMemoryToTiles",
+          "count": 1002,
+          "inclusiveTotalMs": 35.1189999999999,
+          "p95Ms": 0.051,
+          "p99Ms": 0.076,
+          "maxMs": 0.251
+        },
+        {
+          "name": "TileManager::ScheduleTasks",
+          "count": 1002,
+          "inclusiveTotalMs": 31.20299999999992,
+          "p95Ms": 0.044,
+          "p99Ms": 0.076,
+          "maxMs": 0.127
+        },
+        {
+          "name": "LayerTreeHostImpl::CalculateRenderPasses",
+          "count": 1001,
+          "inclusiveTotalMs": 16.39299999999991,
+          "p95Ms": 0.032,
+          "p99Ms": 0.041,
+          "maxMs": 0.076
+        },
+        {
+          "name": "TileManager::PrepareToDraw",
+          "count": 1001,
+          "inclusiveTotalMs": 10.952999999999923,
+          "p95Ms": 0.024,
+          "p99Ms": 0.032,
+          "maxMs": 0.101
+        },
+        {
+          "name": "LayerTreeHostImpl::BeginCommit",
+          "count": 1001,
+          "inclusiveTotalMs": 5.75299999999994,
+          "p95Ms": 0.009,
+          "p99Ms": 0.015,
+          "maxMs": 0.044
+        },
+        {
+          "name": "LayerTreeHostImpl::NotifyTileStateChanged",
+          "count": 4178,
+          "inclusiveTotalMs": 4.394999999999804,
+          "p95Ms": 0.001,
+          "p99Ms": 0.002,
+          "maxMs": 0.01
+        },
+        {
+          "name": "TileManager::IsReadyToDraw",
+          "count": 1001,
+          "inclusiveTotalMs": 3.8459999999999717,
+          "p95Ms": 0.009,
+          "p99Ms": 0.013,
+          "maxMs": 0.04
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForActivation",
+          "count": 1003,
+          "inclusiveTotalMs": 2.963999999999971,
+          "p95Ms": 0.005,
+          "p99Ms": 0.008,
+          "maxMs": 0.016
+        },
+        {
+          "name": "LayerTreeHostImpl::BuildHitTestData",
+          "count": 1001,
+          "inclusiveTotalMs": 2.943999999999928,
+          "p95Ms": 0.007,
+          "p99Ms": 0.01,
+          "maxMs": 0.18
+        },
+        {
+          "name": "TileManager::DidFinishRunningTileTasksRequiredForDraw",
+          "count": 1002,
+          "inclusiveTotalMs": 2.884999999999956,
+          "p95Ms": 0.006,
+          "p99Ms": 0.013,
+          "maxMs": 0.041
+        },
+        {
+          "name": "TileManager::IsReadyToActivate",
+          "count": 1000,
+          "inclusiveTotalMs": 2.462999999999972,
+          "p95Ms": 0.004,
+          "p99Ms": 0.006,
+          "maxMs": 0.026
+        },
+        {
+          "name": "TileManager::DidFinishRunningAllTileTasks",
+          "count": 566,
+          "inclusiveTotalMs": 0.6110000000000004,
+          "p95Ms": 0.002,
+          "p99Ms": 0.003,
+          "maxMs": 0.004
+        },
+        {
+          "name": "LayerTreeHostImpl::DidNotProduceFrame",
+          "count": 2,
+          "inclusiveTotalMs": 0.048,
+          "p95Ms": 0.029,
+          "p99Ms": 0.029,
+          "maxMs": 0.029
+        }
+      ],
+      "gpuProcess": [
+        {
+          "name": "RunTask",
+          "count": 19192,
+          "inclusiveTotalMs": 3312.375000000042,
+          "p95Ms": 1.318,
+          "p99Ms": 3.099,
+          "maxMs": 6.956
+        },
+        {
+          "name": "ThreadControllerImpl::RunTask",
+          "count": 19075,
+          "inclusiveTotalMs": 3288.824000000004,
+          "p95Ms": 1.339,
+          "p99Ms": 3.099,
+          "maxMs": 6.954
+        },
+        {
+          "name": "Scheduler::RunTask",
+          "count": 3515,
+          "inclusiveTotalMs": 2978.3920000000085,
+          "p95Ms": 3.143,
+          "p99Ms": 4.179,
+          "maxMs": 6.948
+        },
+        {
+          "name": "GpuChannel::ExecuteDeferredRequest",
+          "count": 2507,
+          "inclusiveTotalMs": 2644.7020000000107,
+          "p95Ms": 3.283,
+          "p99Ms": 4.324,
+          "maxMs": 6.944
+        },
+        {
+          "name": "GPUTask",
+          "count": 2467,
+          "inclusiveTotalMs": 2629.8060000000087,
+          "p95Ms": 3.28,
+          "p99Ms": 4.327,
+          "maxMs": 6.941
+        },
+        {
+          "name": "CommandBuffer::Flush",
+          "count": 2453,
+          "inclusiveTotalMs": 2610.604999999996,
+          "p95Ms": 3.268,
+          "p99Ms": 4.31,
+          "maxMs": 6.933
+        },
+        {
+          "name": "CommandBufferStub::OnAsyncFlush",
+          "count": 2453,
+          "inclusiveTotalMs": 2608.7439999999947,
+          "p95Ms": 3.267,
+          "p99Ms": 4.309,
+          "maxMs": 6.932
+        },
+        {
+          "name": "CommandBufferService:PutChanged",
+          "count": 2453,
+          "inclusiveTotalMs": 2602.325999999994,
+          "p95Ms": 3.261,
+          "p99Ms": 4.305,
+          "maxMs": 6.929
+        },
+        {
+          "name": "RendererRasterWorker",
+          "count": 1393,
+          "inclusiveTotalMs": 2449.4419999999986,
+          "p95Ms": 3.531,
+          "p99Ms": 4.553,
+          "maxMs": 6.934
+        },
+        {
+          "name": "RasterDecoderImpl::DoEndRasterCHROMIUM",
+          "count": 4526,
+          "inclusiveTotalMs": 1264.799999999998,
+          "p95Ms": 0.648,
+          "p99Ms": 1.015,
+          "maxMs": 1.641
+        },
+        {
+          "name": "RasterDecoderImpl::DoEndRasterCHROMIUM::Flush",
+          "count": 4526,
+          "inclusiveTotalMs": 1235.1589999999937,
+          "p95Ms": 0.635,
+          "p99Ms": 0.999,
+          "maxMs": 1.624
+        },
+        {
+          "name": "RasterDecoderImpl::DoRasterCHROMIUM",
+          "count": 4525,
+          "inclusiveTotalMs": 1226.4540000000013,
+          "p95Ms": 0.649,
+          "p99Ms": 1.18,
+          "maxMs": 2.329
+        },
+        {
+          "name": "RasterDecoderImpl::DoRasterCHROMIUM::Deserializing",
+          "count": 4525,
+          "inclusiveTotalMs": 1218.9239999999927,
+          "p95Ms": 0.647,
+          "p99Ms": 1.177,
+          "maxMs": 2.324
+        },
+        {
+          "name": "Graphics.Pipeline",
+          "count": 11115,
+          "inclusiveTotalMs": 1060.6809999999896,
+          "p95Ms": 0.342,
+          "p99Ms": 0.858,
+          "maxMs": 6.571
+        },
+        {
+          "name": "SkiaOutputSurfaceImplOnGpu::SwapBuffers",
+          "count": 1000,
+          "inclusiveTotalMs": 323.85299999999995,
+          "p95Ms": 0.47,
+          "p99Ms": 1.171,
+          "maxMs": 6.576
+        },
+        {
+          "name": "SkiaOutputDevice->ScheduleOverlays()",
+          "count": 1000,
+          "inclusiveTotalMs": 202.01100000000005,
+          "p95Ms": 0.345,
+          "p99Ms": 1.04,
+          "maxMs": 6.423
+        },
+        {
+          "name": "IOSurfaceImageBacking::WaitForCommandsToBeScheduled",
+          "count": 6325,
+          "inclusiveTotalMs": 167.76800000000725,
+          "p95Ms": 0.162,
+          "p99Ms": 0.286,
+          "maxMs": 6.002
+        },
+        {
+          "name": "RendererMainThread",
+          "count": 1063,
+          "inclusiveTotalMs": 163.49000000000004,
+          "p95Ms": 0.241,
+          "p99Ms": 0.326,
+          "maxMs": 0.837
+        },
+        {
+          "name": "IOSurfaceImageBacking::WaitForCommandsToBeScheduled::Dawn",
+          "count": 3332,
+          "inclusiveTotalMs": 162.19800000000367,
+          "p95Ms": 0.228,
+          "p99Ms": 0.353,
+          "maxMs": 6
+        },
+        {
+          "name": "SimpleWatcher::OnHandleReady",
+          "count": 4459,
+          "inclusiveTotalMs": 126.32200000000228,
+          "p95Ms": 0.073,
+          "p99Ms": 0.14,
+          "maxMs": 0.701
+        },
+        {
+          "name": "ImageTransportSurfaceOverlayMac::Present",
+          "count": 1000,
+          "inclusiveTotalMs": 115.34499999999976,
+          "p95Ms": 0.149,
+          "p99Ms": 0.204,
+          "maxMs": 0.402
+        },
+        {
+          "name": "CommitPresentedFrameToCA",
+          "count": 1000,
+          "inclusiveTotalMs": 109.80399999999986,
+          "p95Ms": 0.142,
+          "p99Ms": 0.193,
+          "maxMs": 0.388
+        },
+        {
+          "name": "DisplayScheduler::OnBeginFrameDeadline",
+          "count": 1000,
+          "inclusiveTotalMs": 93.40099999999963,
+          "p95Ms": 0.198,
+          "p99Ms": 0.235,
+          "maxMs": 0.743
+        },
+        {
+          "name": "DisplayScheduler::DrawAndSwap",
+          "count": 1000,
+          "inclusiveTotalMs": 92.1469999999996,
+          "p95Ms": 0.195,
+          "p99Ms": 0.233,
+          "maxMs": 0.74
+        },
+        {
+          "name": "Display::DrawAndSwap",
+          "count": 1000,
+          "inclusiveTotalMs": 91.19499999999965,
+          "p95Ms": 0.193,
+          "p99Ms": 0.231,
+          "maxMs": 0.738
+        }
+      ]
+    },
+    "interpretation": {
+      "unit": "milliseconds",
+      "durationType": "inclusive trace event duration",
+      "additive": false,
+      "warning": "Trace categories overlap and must not be summed into a total. GPU process event time is not GPU utilization, power, or presented-frame telemetry."
+    }
+  }
+]

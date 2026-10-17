@@ -1,0 +1,1771 @@
+[
+  {
+    "backend": "headless",
+    "id": "legacy-1920",
+    "engine": "legacy",
+    "engineType": "Legacy MotionDirector via native RAF",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    },
+    "headless": true,
+    "duration": {
+      "requestedMs": 60000,
+      "actualMs": 60003
+    },
+    "calibration": {
+      "intervalCount": 300,
+      "measuredMs": 5000,
+      "rateHz": 60.00240009600384,
+      "intervalMeanMs": 16.666,
+      "intervalP50Ms": 16.699999999999818,
+      "intervalP95Ms": 16.799999999999727,
+      "intervalP99Ms": 16.800000000000182,
+      "intervalMaxMs": 16.800000000000182,
+      "interpretation": "Headless browser scheduling cadence estimate; physical display refresh is not observable and remains unknown."
+    },
+    "sampleCounts": {
+      "timeSeries": 61,
+      "browserRafIntervals": 3540,
+      "engineCallbackIntervals": 3540,
+      "directorFrequencySamples": 61,
+      "longTasks": 0
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 3540,
+        "measuredMs": 60003,
+        "rateHz": 60.00254248061359,
+        "intervalMeanMs": 16.665960451977398,
+        "intervalP50Ms": 16.69999999999709,
+        "intervalP95Ms": 16.700000000004366,
+        "intervalP99Ms": 16.80000000000291,
+        "intervalMaxMs": 16.80000000000291,
+        "meaning": "Independent native requestAnimationFrame callback cadence. Proxy for browser scheduling opportunities only; not actual presented FPS."
+      },
+      "engineClock": {
+        "kind": "Legacy requestAnimationFrame callback",
+        "intervalCount": 3540,
+        "measuredMs": 60003,
+        "rateHz": 60.00254248061359,
+        "intervalMeanMs": 16.665960451977398,
+        "intervalP50Ms": 16.69999999999709,
+        "intervalP95Ms": 16.700000000004366,
+        "intervalP99Ms": 16.80000000000291,
+        "intervalMaxMs": 16.80000000000291,
+        "maxPendingCallbacks": 1,
+        "callbackCost": {
+          "count": 3600,
+          "totalMs": 583.9999997839332,
+          "meanMs": 0.16222222216220367,
+          "p95Ms": 0.2999999988824129,
+          "p99Ms": 0.30000000074505806,
+          "maxMs": 0.5
+        },
+        "meaning": "Legacy MotionDirector host callback cadence."
+      },
+      "gsapTicker": null,
+      "motionDirector": {
+        "sampleCount": 61,
+        "meanHz": 60,
+        "p05Hz": 60,
+        "p50Hz": 60,
+        "p95Hz": 60,
+        "minHz": 60,
+        "maxHz": 60,
+        "source": "Existing MotionDirector internal one-second sample, read from the debug panel once per second."
+      },
+      "missedCallbackOpportunities": {
+        "available": true,
+        "referenceIntervalMs": 16.699999999999818,
+        "observedCallbacks": 3540,
+        "estimatedMissedCallbackOpportunities": 0,
+        "estimatedMissedOpportunityPercent": 0,
+        "caveat": "Callback scheduling proxy only; this is not compositor presentation telemetry or actual displayed-frame loss."
+      },
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "collectionOverhead": {
+        "browserProbeCallbackCost": {
+          "count": 3600,
+          "totalMs": 5.299999995157123,
+          "meanMs": 0.0014722222208769784,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097,
+          "maxMs": 0.10000000149011612
+        },
+        "note": "The independent RAF probe adds one minimal callback per browser scheduling opportunity. Trace, screenshot, and video overhead are excluded from this formal phase."
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 8.715741999999999,
+      "ScriptDuration": 0.9433630000000001,
+      "LayoutDuration": 0.130156,
+      "RecalcStyleDuration": 2.4151149999999997,
+      "JSHeapUsedSize": 4506840,
+      "Nodes": 76,
+      "LayoutCount": 3600,
+      "RecalcStyleCount": 3601,
+      "note": "CDP cumulative deltas for the formal timing window. These do not include compositor/raster/GPU cost."
+    },
+    "qualityPolicy": {
+      "observationOnly": true,
+      "fpsWindowMs": 1000,
+      "downshiftCondition": "MotionDirector internal update frequency < 45 Hz for 5 consecutive one-second windows",
+      "recoveryCondition": "MotionDirector internal update frequency >= 52 Hz for 10 consecutive one-second windows",
+      "lowFpsHz": 45,
+      "lowDurationMs": 5000,
+      "recoveryFpsHz": 52,
+      "recoveryDurationMs": 10000,
+      "note": "Copied from the unmodified baseline config for interpretation; this runner does not change thresholds or behavior."
+    },
+    "qualityTransitions": {
+      "transitions": [],
+      "downshifts": 0,
+      "recoveries": 0,
+      "consecutiveDownshifts": 0,
+      "consecutiveRecoveries": 0
+    },
+    "pulseRequests": [
+      {
+        "scheduledAtMs": 10000,
+        "observedAtMs": 10038,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 30000,
+        "observedAtMs": 30109,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 50000,
+        "observedAtMs": 50180,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      }
+    ],
+    "resonanceRejectedBecauseLow": 0,
+    "rendererClassification": {
+      "acceleration": "software",
+      "backend": "SwiftShader",
+      "confidence": "high"
+    },
+    "webgl": {
+      "available": true,
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "unmaskedVendor": "Google Inc. (Google)",
+      "debugExtensionAvailable": true,
+      "collection": "temporary canvas WebGL context; WEBGL_debug_renderer_info when available"
+    },
+    "errors": [],
+    "networkFailures": [
+      {
+        "url": "http://127.0.0.1:3051/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3051/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "networkClassification": {
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "abortedRscPrefetches": 2,
+      "otherNetworkFailures": 0,
+      "interpretation": "RSC ERR_ABORTED entries are retained raw. They are hidden engine-link prefetches cancelled during page/context teardown, not HTTP failures."
+    }
+  },
+  {
+    "backend": "headless",
+    "id": "gsap-1920",
+    "engine": "gsap",
+    "engineType": "GSAP ticker adapter -> MotionDirector",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    },
+    "headless": true,
+    "duration": {
+      "requestedMs": 60000,
+      "actualMs": 60003
+    },
+    "calibration": {
+      "intervalCount": 300,
+      "measuredMs": 5000,
+      "rateHz": 60.003600216012956,
+      "intervalMeanMs": 16.66566666666667,
+      "intervalP50Ms": 16.699999999999818,
+      "intervalP95Ms": 16.700000000000728,
+      "intervalP99Ms": 16.80000000000001,
+      "intervalMaxMs": 16.800000000000182,
+      "interpretation": "Headless browser scheduling cadence estimate; physical display refresh is not observable and remains unknown."
+    },
+    "sampleCounts": {
+      "timeSeries": 61,
+      "browserRafIntervals": 3540,
+      "engineCallbackIntervals": 3540,
+      "directorFrequencySamples": 61,
+      "longTasks": 0
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 3540,
+        "measuredMs": 60003,
+        "rateHz": 60.0025424806136,
+        "intervalMeanMs": 16.665960451977398,
+        "intervalP50Ms": 16.69999999999709,
+        "intervalP95Ms": 16.799999999995634,
+        "intervalP99Ms": 16.80000000000291,
+        "intervalMaxMs": 16.80000000000291,
+        "meaning": "Independent native requestAnimationFrame callback cadence. Proxy for browser scheduling opportunities only; not actual presented FPS."
+      },
+      "engineClock": {
+        "kind": "GSAP ticker underlying requestAnimationFrame callback",
+        "intervalCount": 3540,
+        "measuredMs": 60003,
+        "rateHz": 60.0025424806136,
+        "intervalMeanMs": 16.665960451977398,
+        "intervalP50Ms": 16.69999999999709,
+        "intervalP95Ms": 16.799999999995634,
+        "intervalP99Ms": 16.80000000000291,
+        "intervalMaxMs": 16.80000000000291,
+        "maxPendingCallbacks": 1,
+        "callbackCost": {
+          "count": 3600,
+          "totalMs": 664.9000006169081,
+          "meanMs": 0.1846944446158078,
+          "p95Ms": 0.30000000074505806,
+          "p99Ms": 0.30000000074505806,
+          "maxMs": 0.40000000037252903
+        },
+        "meaning": "Browser RAF callbacks driving GSAP ticker; GSAP listener updates may be throttled below this cadence."
+      },
+      "gsapTicker": {
+        "configuredCapHz": 60,
+        "observedListenerUpdateHzEstimate": 59.970491803278684,
+        "method": "Current createHost has one pending MotionDirector job per GSAP ticker listener update. The listener rate is therefore inferred 1:1 from Director updates, while underlying ticker RAF is measured separately above.",
+        "independentDirectInstrumentation": false
+      },
+      "motionDirector": {
+        "sampleCount": 61,
+        "meanHz": 59.970491803278684,
+        "p05Hz": 60,
+        "p50Hz": 60,
+        "p95Hz": 60,
+        "minHz": 58.1,
+        "maxHz": 60.1,
+        "source": "Existing MotionDirector internal one-second sample, read from the debug panel once per second."
+      },
+      "missedCallbackOpportunities": {
+        "available": true,
+        "referenceIntervalMs": 16.699999999999818,
+        "observedCallbacks": 3540,
+        "estimatedMissedCallbackOpportunities": 0,
+        "estimatedMissedOpportunityPercent": 0,
+        "caveat": "Callback scheduling proxy only; this is not compositor presentation telemetry or actual displayed-frame loss."
+      },
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "collectionOverhead": {
+        "browserProbeCallbackCost": {
+          "count": 3600,
+          "totalMs": 4.199999991804361,
+          "meanMs": 0.0011666666643901005,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097,
+          "maxMs": 0.10000000149011612
+        },
+        "note": "The independent RAF probe adds one minimal callback per browser scheduling opportunity. Trace, screenshot, and video overhead are excluded from this formal phase."
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 8.742627,
+      "ScriptDuration": 1.016798,
+      "LayoutDuration": 0.130007,
+      "RecalcStyleDuration": 2.421541,
+      "JSHeapUsedSize": 3382160,
+      "Nodes": 62,
+      "LayoutCount": 3600,
+      "RecalcStyleCount": 3601,
+      "note": "CDP cumulative deltas for the formal timing window. These do not include compositor/raster/GPU cost."
+    },
+    "qualityPolicy": {
+      "observationOnly": true,
+      "fpsWindowMs": 1000,
+      "downshiftCondition": "MotionDirector internal update frequency < 45 Hz for 5 consecutive one-second windows",
+      "recoveryCondition": "MotionDirector internal update frequency >= 52 Hz for 10 consecutive one-second windows",
+      "lowFpsHz": 45,
+      "lowDurationMs": 5000,
+      "recoveryFpsHz": 52,
+      "recoveryDurationMs": 10000,
+      "note": "Copied from the unmodified baseline config for interpretation; this runner does not change thresholds or behavior."
+    },
+    "qualityTransitions": {
+      "transitions": [],
+      "downshifts": 0,
+      "recoveries": 0,
+      "consecutiveDownshifts": 0,
+      "consecutiveRecoveries": 0
+    },
+    "pulseRequests": [
+      {
+        "scheduledAtMs": 10000,
+        "observedAtMs": 10036,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 30000,
+        "observedAtMs": 30101,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 50000,
+        "observedAtMs": 50176,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      }
+    ],
+    "resonanceRejectedBecauseLow": 0,
+    "rendererClassification": {
+      "acceleration": "software",
+      "backend": "SwiftShader",
+      "confidence": "high"
+    },
+    "webgl": {
+      "available": true,
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "unmaskedVendor": "Google Inc. (Google)",
+      "debugExtensionAvailable": true,
+      "collection": "temporary canvas WebGL context; WEBGL_debug_renderer_info when available"
+    },
+    "errors": [],
+    "networkFailures": [
+      {
+        "url": "http://127.0.0.1:3051/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3051/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "networkClassification": {
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "abortedRscPrefetches": 2,
+      "otherNetworkFailures": 0,
+      "interpretation": "RSC ERR_ABORTED entries are retained raw. They are hidden engine-link prefetches cancelled during page/context teardown, not HTTP failures."
+    }
+  },
+  {
+    "backend": "headless",
+    "id": "legacy-3840",
+    "engine": "legacy",
+    "engineType": "Legacy MotionDirector via native RAF",
+    "viewport": {
+      "width": 3840,
+      "height": 2160,
+      "deviceScaleFactor": 1
+    },
+    "headless": true,
+    "duration": {
+      "requestedMs": 60000,
+      "actualMs": 60003
+    },
+    "calibration": {
+      "intervalCount": 300,
+      "measuredMs": 5000,
+      "rateHz": 60.002400096003846,
+      "intervalMeanMs": 16.665999999999997,
+      "intervalP50Ms": 16.699999999999818,
+      "intervalP95Ms": 16.799999999999727,
+      "intervalP99Ms": 16.800000000000182,
+      "intervalMaxMs": 16.800000000000182,
+      "interpretation": "Headless browser scheduling cadence estimate; physical display refresh is not observable and remains unknown."
+    },
+    "sampleCounts": {
+      "timeSeries": 61,
+      "browserRafIntervals": 2720,
+      "engineCallbackIntervals": 2720,
+      "directorFrequencySamples": 61,
+      "longTasks": 0
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 2720,
+        "measuredMs": 60003,
+        "rateHz": 46.683818393081225,
+        "intervalMeanMs": 21.420698529411748,
+        "intervalP50Ms": 16.69999999999891,
+        "intervalP95Ms": 50,
+        "intervalP99Ms": 50.099999999999454,
+        "intervalMaxMs": 66.59999999999991,
+        "meaning": "Independent native requestAnimationFrame callback cadence. Proxy for browser scheduling opportunities only; not actual presented FPS."
+      },
+      "engineClock": {
+        "kind": "Legacy requestAnimationFrame callback",
+        "intervalCount": 2720,
+        "measuredMs": 60003,
+        "rateHz": 46.683818393081225,
+        "intervalMeanMs": 21.420698529411748,
+        "intervalP50Ms": 16.69999999999891,
+        "intervalP95Ms": 50,
+        "intervalP99Ms": 50.099999999999454,
+        "intervalMaxMs": 66.59999999999991,
+        "maxPendingCallbacks": 1,
+        "callbackCost": {
+          "count": 2780,
+          "totalMs": 342.99999963492155,
+          "meanMs": 0.12338129483270559,
+          "p95Ms": 0.2000000011175871,
+          "p99Ms": 0.30000000074505806,
+          "maxMs": 0.40000000037252903
+        },
+        "meaning": "Legacy MotionDirector host callback cadence."
+      },
+      "gsapTicker": null,
+      "motionDirector": {
+        "sampleCount": 61,
+        "meanHz": 46.61475409836065,
+        "p05Hz": 20.7,
+        "p50Hz": 60,
+        "p95Hz": 60,
+        "minHz": 20.3,
+        "maxHz": 60,
+        "source": "Existing MotionDirector internal one-second sample, read from the debug panel once per second."
+      },
+      "missedCallbackOpportunities": {
+        "available": true,
+        "referenceIntervalMs": 16.699999999999818,
+        "observedCallbacks": 2720,
+        "estimatedMissedCallbackOpportunities": 776,
+        "estimatedMissedOpportunityPercent": 22.19679633867277,
+        "caveat": "Callback scheduling proxy only; this is not compositor presentation telemetry or actual displayed-frame loss."
+      },
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "collectionOverhead": {
+        "browserProbeCallbackCost": {
+          "count": 2780,
+          "totalMs": 3.400000002235174,
+          "meanMs": 0.0012230215835378323,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097,
+          "maxMs": 0.10000000149011612
+        },
+        "note": "The independent RAF probe adds one minimal callback per browser scheduling opportunity. Trace, screenshot, and video overhead are excluded from this formal phase."
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 3.867927,
+      "ScriptDuration": 0.690843,
+      "LayoutDuration": 0.101772,
+      "RecalcStyleDuration": 0.486267,
+      "JSHeapUsedSize": 3195636,
+      "Nodes": 30,
+      "LayoutCount": 2780,
+      "RecalcStyleCount": 2781,
+      "note": "CDP cumulative deltas for the formal timing window. These do not include compositor/raster/GPU cost."
+    },
+    "qualityPolicy": {
+      "observationOnly": true,
+      "fpsWindowMs": 1000,
+      "downshiftCondition": "MotionDirector internal update frequency < 45 Hz for 5 consecutive one-second windows",
+      "recoveryCondition": "MotionDirector internal update frequency >= 52 Hz for 10 consecutive one-second windows",
+      "lowFpsHz": 45,
+      "lowDurationMs": 5000,
+      "recoveryFpsHz": 52,
+      "recoveryDurationMs": 10000,
+      "note": "Copied from the unmodified baseline config for interpretation; this runner does not change thresholds or behavior."
+    },
+    "qualityTransitions": {
+      "transitions": [
+        {
+          "elapsedMs": 5013,
+          "from": "normal",
+          "to": "low",
+          "directorUpdateHz": 21,
+          "engineCallbackHz": 21.05263157894737,
+          "browserRafProxyHz": 21.05263157894737,
+          "engineIntervalP95Ms": 50.099999999999454
+        },
+        {
+          "elapsedMs": 15081,
+          "from": "low",
+          "to": "normal",
+          "directorUpdateHz": 60,
+          "engineCallbackHz": 57.9350300020692,
+          "browserRafProxyHz": 57.9350300020692,
+          "engineIntervalP95Ms": 16.799999999999272
+        },
+        {
+          "elapsedMs": 20096,
+          "from": "normal",
+          "to": "low",
+          "directorUpdateHz": 20.7,
+          "engineCallbackHz": 20.691082143596063,
+          "browserRafProxyHz": 20.691082143596063,
+          "engineIntervalP95Ms": 50
+        },
+        {
+          "elapsedMs": 31135,
+          "from": "low",
+          "to": "normal",
+          "directorUpdateHz": 60,
+          "engineCallbackHz": 21.723388848660456,
+          "browserRafProxyHz": 21.723388848660456,
+          "engineIntervalP95Ms": 50.099999999998545
+        },
+        {
+          "elapsedMs": 36152,
+          "from": "normal",
+          "to": "low",
+          "directorUpdateHz": 20.7,
+          "engineCallbackHz": 52.75680148960357,
+          "browserRafProxyHz": 52.75680148960357,
+          "engineIntervalP95Ms": 49.900000000001455
+        },
+        {
+          "elapsedMs": 46185,
+          "from": "low",
+          "to": "normal",
+          "directorUpdateHz": 60,
+          "engineCallbackHz": 27.36842105263158,
+          "browserRafProxyHz": 27.36842105263158,
+          "engineIntervalP95Ms": 50.099999999998545
+        },
+        {
+          "elapsedMs": 51203,
+          "from": "normal",
+          "to": "low",
+          "directorUpdateHz": 20.7,
+          "engineCallbackHz": 35.003500350034955,
+          "browserRafProxyHz": 35.003500350034955,
+          "engineIntervalP95Ms": 50.099999999998545
+        }
+      ],
+      "downshifts": 4,
+      "recoveries": 3,
+      "consecutiveDownshifts": 4,
+      "consecutiveRecoveries": 3
+    },
+    "pulseRequests": [
+      {
+        "scheduledAtMs": 10000,
+        "observedAtMs": 10063,
+        "beforeLevel": "low",
+        "beforeState": "DEGRADED",
+        "afterLevel": "low",
+        "afterState": "DEGRADED",
+        "accepted": false,
+        "rejectionReason": "motion-level-not-normal",
+        "nextObservedState": "DEGRADED",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 30000,
+        "observedAtMs": 30132,
+        "beforeLevel": "low",
+        "beforeState": "DEGRADED",
+        "afterLevel": "low",
+        "afterState": "DEGRADED",
+        "accepted": false,
+        "rejectionReason": "motion-level-not-normal",
+        "nextObservedState": "AMBIENT",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 50000,
+        "observedAtMs": 50197,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "DEGRADED",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      }
+    ],
+    "resonanceRejectedBecauseLow": 2,
+    "rendererClassification": {
+      "acceleration": "software",
+      "backend": "SwiftShader",
+      "confidence": "high"
+    },
+    "webgl": {
+      "available": true,
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "unmaskedVendor": "Google Inc. (Google)",
+      "debugExtensionAvailable": true,
+      "collection": "temporary canvas WebGL context; WEBGL_debug_renderer_info when available"
+    },
+    "errors": [],
+    "networkFailures": [],
+    "networkClassification": {
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "abortedRscPrefetches": 0,
+      "otherNetworkFailures": 0,
+      "interpretation": "RSC ERR_ABORTED entries are retained raw. They are hidden engine-link prefetches cancelled during page/context teardown, not HTTP failures."
+    }
+  },
+  {
+    "backend": "headless",
+    "id": "gsap-3840",
+    "engine": "gsap",
+    "engineType": "GSAP ticker adapter -> MotionDirector",
+    "viewport": {
+      "width": 3840,
+      "height": 2160,
+      "deviceScaleFactor": 1
+    },
+    "headless": true,
+    "duration": {
+      "requestedMs": 60000,
+      "actualMs": 60003
+    },
+    "calibration": {
+      "intervalCount": 300,
+      "measuredMs": 5000,
+      "rateHz": 60.00240009600384,
+      "intervalMeanMs": 16.666,
+      "intervalP50Ms": 16.699999999999818,
+      "intervalP95Ms": 16.799999999999727,
+      "intervalP99Ms": 16.800000000000182,
+      "intervalMaxMs": 16.800000000000182,
+      "interpretation": "Headless browser scheduling cadence estimate; physical display refresh is not observable and remains unknown."
+    },
+    "sampleCounts": {
+      "timeSeries": 61,
+      "browserRafIntervals": 2752,
+      "engineCallbackIntervals": 2752,
+      "directorFrequencySamples": 61,
+      "longTasks": 0
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 2752,
+        "measuredMs": 60003,
+        "rateHz": 47.152596562589416,
+        "intervalMeanMs": 21.207739825581395,
+        "intervalP50Ms": 16.69999999999891,
+        "intervalP95Ms": 50,
+        "intervalP99Ms": 50.099999999998545,
+        "intervalMaxMs": 66.70000000000437,
+        "meaning": "Independent native requestAnimationFrame callback cadence. Proxy for browser scheduling opportunities only; not actual presented FPS."
+      },
+      "engineClock": {
+        "kind": "GSAP ticker underlying requestAnimationFrame callback",
+        "intervalCount": 2752,
+        "measuredMs": 60003,
+        "rateHz": 47.152596562589416,
+        "intervalMeanMs": 21.207739825581395,
+        "intervalP50Ms": 16.69999999999891,
+        "intervalP95Ms": 50,
+        "intervalP99Ms": 50.099999999998545,
+        "intervalMaxMs": 66.70000000000437,
+        "maxPendingCallbacks": 1,
+        "callbackCost": {
+          "count": 2812,
+          "totalMs": 375.3000002708286,
+          "meanMs": 0.13346372698109124,
+          "p95Ms": 0.2000000011175871,
+          "p99Ms": 0.30000000074505806,
+          "maxMs": 0.5
+        },
+        "meaning": "Browser RAF callbacks driving GSAP ticker; GSAP listener updates may be throttled below this cadence."
+      },
+      "gsapTicker": {
+        "configuredCapHz": 60,
+        "observedListenerUpdateHzEstimate": 45.839344262295086,
+        "method": "Current createHost has one pending MotionDirector job per GSAP ticker listener update. The listener rate is therefore inferred 1:1 from Director updates, while underlying ticker RAF is measured separately above.",
+        "independentDirectInstrumentation": false
+      },
+      "motionDirector": {
+        "sampleCount": 61,
+        "meanHz": 45.839344262295086,
+        "p05Hz": 20.6,
+        "p50Hz": 60,
+        "p95Hz": 60,
+        "minHz": 20.5,
+        "maxHz": 60.1,
+        "source": "Existing MotionDirector internal one-second sample, read from the debug panel once per second."
+      },
+      "missedCallbackOpportunities": {
+        "available": true,
+        "referenceIntervalMs": 16.699999999999818,
+        "observedCallbacks": 2752,
+        "estimatedMissedCallbackOpportunities": 750,
+        "estimatedMissedOpportunityPercent": 21.416333523700743,
+        "caveat": "Callback scheduling proxy only; this is not compositor presentation telemetry or actual displayed-frame loss."
+      },
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "collectionOverhead": {
+        "browserProbeCallbackCost": {
+          "count": 2812,
+          "totalMs": 5.400000000372529,
+          "meanMs": 0.0019203413941580828,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097,
+          "maxMs": 0.10000000149011612
+        },
+        "note": "The independent RAF probe adds one minimal callback per browser scheduling opportunity. Trace, screenshot, and video overhead are excluded from this formal phase."
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 3.895698,
+      "ScriptDuration": 0.717521,
+      "LayoutDuration": 0.097119,
+      "RecalcStyleDuration": 0.533343,
+      "JSHeapUsedSize": 554036,
+      "Nodes": 0,
+      "LayoutCount": 2811,
+      "RecalcStyleCount": 2812,
+      "note": "CDP cumulative deltas for the formal timing window. These do not include compositor/raster/GPU cost."
+    },
+    "qualityPolicy": {
+      "observationOnly": true,
+      "fpsWindowMs": 1000,
+      "downshiftCondition": "MotionDirector internal update frequency < 45 Hz for 5 consecutive one-second windows",
+      "recoveryCondition": "MotionDirector internal update frequency >= 52 Hz for 10 consecutive one-second windows",
+      "lowFpsHz": 45,
+      "lowDurationMs": 5000,
+      "recoveryFpsHz": 52,
+      "recoveryDurationMs": 10000,
+      "note": "Copied from the unmodified baseline config for interpretation; this runner does not change thresholds or behavior."
+    },
+    "qualityTransitions": {
+      "transitions": [
+        {
+          "elapsedMs": 4010,
+          "from": "normal",
+          "to": "low",
+          "directorUpdateHz": 20.7,
+          "engineCallbackHz": 20.691082143596123,
+          "browserRafProxyHz": 20.691082143596123,
+          "engineIntervalP95Ms": 50
+        },
+        {
+          "elapsedMs": 14045,
+          "from": "low",
+          "to": "normal",
+          "directorUpdateHz": 59.9,
+          "engineCallbackHz": 60.00203396725317,
+          "browserRafProxyHz": 60.00203396725317,
+          "engineIntervalP95Ms": 16.799999999999272
+        },
+        {
+          "elapsedMs": 20063,
+          "from": "normal",
+          "to": "low",
+          "directorUpdateHz": 20.6,
+          "engineCallbackHz": 55.005500550054926,
+          "browserRafProxyHz": 55.005500550054926,
+          "engineIntervalP95Ms": 33.29999999999927
+        },
+        {
+          "elapsedMs": 30095,
+          "from": "low",
+          "to": "normal",
+          "directorUpdateHz": 60,
+          "engineCallbackHz": 24.21307506053265,
+          "browserRafProxyHz": 24.21307506053265,
+          "engineIntervalP95Ms": 50.099999999998545
+        },
+        {
+          "elapsedMs": 35110,
+          "from": "normal",
+          "to": "low",
+          "directorUpdateHz": 20.9,
+          "engineCallbackHz": 37.00370037003695,
+          "browserRafProxyHz": 37.00370037003695,
+          "engineIntervalP95Ms": 50.099999999998545
+        },
+        {
+          "elapsedMs": 46146,
+          "from": "low",
+          "to": "normal",
+          "directorUpdateHz": 60,
+          "engineCallbackHz": 28.970512157268494,
+          "browserRafProxyHz": 28.970512157268494,
+          "engineIntervalP95Ms": 50
+        },
+        {
+          "elapsedMs": 51161,
+          "from": "normal",
+          "to": "low",
+          "directorUpdateHz": 20.9,
+          "engineCallbackHz": 36.20939375129325,
+          "browserRafProxyHz": 36.20939375129325,
+          "engineIntervalP95Ms": 50
+        }
+      ],
+      "downshifts": 4,
+      "recoveries": 3,
+      "consecutiveDownshifts": 4,
+      "consecutiveRecoveries": 3
+    },
+    "pulseRequests": [
+      {
+        "scheduledAtMs": 10000,
+        "observedAtMs": 10030,
+        "beforeLevel": "low",
+        "beforeState": "DEGRADED",
+        "afterLevel": "low",
+        "afterState": "DEGRADED",
+        "accepted": false,
+        "rejectionReason": "motion-level-not-normal",
+        "nextObservedState": "DEGRADED",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 30000,
+        "observedAtMs": 30095,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 50000,
+        "observedAtMs": 50157,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "DEGRADED",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      }
+    ],
+    "resonanceRejectedBecauseLow": 1,
+    "rendererClassification": {
+      "acceleration": "software",
+      "backend": "SwiftShader",
+      "confidence": "high"
+    },
+    "webgl": {
+      "available": true,
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "unmaskedVendor": "Google Inc. (Google)",
+      "debugExtensionAvailable": true,
+      "collection": "temporary canvas WebGL context; WEBGL_debug_renderer_info when available"
+    },
+    "errors": [],
+    "networkFailures": [
+      {
+        "url": "http://127.0.0.1:3051/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3051/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "networkClassification": {
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "abortedRscPrefetches": 2,
+      "otherNetworkFailures": 0,
+      "interpretation": "RSC ERR_ABORTED entries are retained raw. They are hidden engine-link prefetches cancelled during page/context teardown, not HTTP failures."
+    }
+  },
+  {
+    "backend": "headed",
+    "id": "legacy-1920",
+    "engine": "legacy",
+    "engineType": "Legacy MotionDirector via native RAF",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    },
+    "headless": false,
+    "duration": {
+      "requestedMs": 60000,
+      "actualMs": 60004
+    },
+    "calibration": {
+      "intervalCount": 501,
+      "measuredMs": 5000,
+      "rateHz": 99.9860298960225,
+      "intervalMeanMs": 10.001397205588823,
+      "intervalP50Ms": 10,
+      "intervalP95Ms": 10.899999999999977,
+      "intervalP99Ms": 11,
+      "intervalMaxMs": 11.200000000000045,
+      "interpretation": "Visible Chromium RAF scheduling cadence estimate; compare with system_profiler display data, but do not treat as compositor presentation telemetry."
+    },
+    "sampleCounts": {
+      "timeSeries": 61,
+      "browserRafIntervals": 5934,
+      "engineCallbackIntervals": 5934,
+      "directorFrequencySamples": 61,
+      "longTasks": 0
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 5934,
+        "measuredMs": 60004,
+        "rateHz": 99.88469663432,
+        "intervalMeanMs": 10.011543646781261,
+        "intervalP50Ms": 10,
+        "intervalP95Ms": 11,
+        "intervalP99Ms": 11,
+        "intervalMaxMs": 30.700000000004366,
+        "meaning": "Independent native requestAnimationFrame callback cadence. Proxy for browser scheduling opportunities only; not actual presented FPS."
+      },
+      "engineClock": {
+        "kind": "Legacy requestAnimationFrame callback",
+        "intervalCount": 5934,
+        "measuredMs": 60004,
+        "rateHz": 99.88469663432,
+        "intervalMeanMs": 10.011543646781261,
+        "intervalP50Ms": 10,
+        "intervalP95Ms": 11,
+        "intervalP99Ms": 11,
+        "intervalMaxMs": 30.700000000004366,
+        "maxPendingCallbacks": 1,
+        "callbackCost": {
+          "count": 5994,
+          "totalMs": 1491.699999568984,
+          "meanMs": 0.2488655321269576,
+          "p95Ms": 0.5,
+          "p99Ms": 0.7000000011175871,
+          "maxMs": 9.199999999254942
+        },
+        "meaning": "Legacy MotionDirector host callback cadence."
+      },
+      "gsapTicker": null,
+      "motionDirector": {
+        "sampleCount": 61,
+        "meanHz": 99.84918032786885,
+        "p05Hz": 99,
+        "p50Hz": 100,
+        "p95Hz": 100.1,
+        "minHz": 97.9,
+        "maxHz": 100.1,
+        "source": "Existing MotionDirector internal one-second sample, read from the debug panel once per second."
+      },
+      "missedCallbackOpportunities": {
+        "available": true,
+        "referenceIntervalMs": 10,
+        "observedCallbacks": 5934,
+        "estimatedMissedCallbackOpportunities": 6,
+        "estimatedMissedOpportunityPercent": 0.10101010101010101,
+        "caveat": "Callback scheduling proxy only; this is not compositor presentation telemetry or actual displayed-frame loss."
+      },
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "collectionOverhead": {
+        "browserProbeCallbackCost": {
+          "count": 5994,
+          "totalMs": 12.49999999254942,
+          "meanMs": 0.0020854187508424125,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097,
+          "maxMs": 0.19999999925494194
+        },
+        "note": "The independent RAF probe adds one minimal callback per browser scheduling opportunity. Trace, screenshot, and video overhead are excluded from this formal phase."
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 14.340836,
+      "ScriptDuration": 1.9723080000000002,
+      "LayoutDuration": 0.316625,
+      "RecalcStyleDuration": 4.5667539999999995,
+      "JSHeapUsedSize": 3084764,
+      "Nodes": 104,
+      "LayoutCount": 5995,
+      "RecalcStyleCount": 5995,
+      "note": "CDP cumulative deltas for the formal timing window. These do not include compositor/raster/GPU cost."
+    },
+    "qualityPolicy": {
+      "observationOnly": true,
+      "fpsWindowMs": 1000,
+      "downshiftCondition": "MotionDirector internal update frequency < 45 Hz for 5 consecutive one-second windows",
+      "recoveryCondition": "MotionDirector internal update frequency >= 52 Hz for 10 consecutive one-second windows",
+      "lowFpsHz": 45,
+      "lowDurationMs": 5000,
+      "recoveryFpsHz": 52,
+      "recoveryDurationMs": 10000,
+      "note": "Copied from the unmodified baseline config for interpretation; this runner does not change thresholds or behavior."
+    },
+    "qualityTransitions": {
+      "transitions": [],
+      "downshifts": 0,
+      "recoveries": 0,
+      "consecutiveDownshifts": 0,
+      "consecutiveRecoveries": 0
+    },
+    "pulseRequests": [
+      {
+        "scheduledAtMs": 10000,
+        "observedAtMs": 10046,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 30000,
+        "observedAtMs": 30137,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 50000,
+        "observedAtMs": 50237,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      }
+    ],
+    "resonanceRejectedBecauseLow": 0,
+    "rendererClassification": {
+      "acceleration": "hardware",
+      "backend": "ANGLE Metal",
+      "confidence": "high"
+    },
+    "webgl": {
+      "available": true,
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+      "unmaskedVendor": "Google Inc. (Apple)",
+      "debugExtensionAvailable": true,
+      "collection": "temporary canvas WebGL context; WEBGL_debug_renderer_info when available"
+    },
+    "errors": [],
+    "networkFailures": [],
+    "networkClassification": {
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "abortedRscPrefetches": 0,
+      "otherNetworkFailures": 0,
+      "interpretation": "RSC ERR_ABORTED entries are retained raw. They are hidden engine-link prefetches cancelled during page/context teardown, not HTTP failures."
+    }
+  },
+  {
+    "backend": "headed",
+    "id": "gsap-1920",
+    "engine": "gsap",
+    "engineType": "GSAP ticker adapter -> MotionDirector",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    },
+    "headless": false,
+    "duration": {
+      "requestedMs": 60000,
+      "actualMs": 60004
+    },
+    "calibration": {
+      "intervalCount": 501,
+      "measuredMs": 5000,
+      "rateHz": 100.0379385395659,
+      "intervalMeanMs": 9.99620758483034,
+      "intervalP50Ms": 10,
+      "intervalP95Ms": 10.900000000000091,
+      "intervalP99Ms": 11,
+      "intervalMaxMs": 11.099999999999909,
+      "interpretation": "Visible Chromium RAF scheduling cadence estimate; compare with system_profiler display data, but do not treat as compositor presentation telemetry."
+    },
+    "sampleCounts": {
+      "timeSeries": 61,
+      "browserRafIntervals": 5939,
+      "engineCallbackIntervals": 5939,
+      "directorFrequencySamples": 61,
+      "longTasks": 0
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 5939,
+        "measuredMs": 60004,
+        "rateHz": 99.97845219417269,
+        "intervalMeanMs": 10.002155244990737,
+        "intervalP50Ms": 10,
+        "intervalP95Ms": 10.900000000001455,
+        "intervalP99Ms": 11,
+        "intervalMaxMs": 21,
+        "meaning": "Independent native requestAnimationFrame callback cadence. Proxy for browser scheduling opportunities only; not actual presented FPS."
+      },
+      "engineClock": {
+        "kind": "GSAP ticker underlying requestAnimationFrame callback",
+        "intervalCount": 5939,
+        "measuredMs": 60004,
+        "rateHz": 99.97845219417269,
+        "intervalMeanMs": 10.002155244990737,
+        "intervalP50Ms": 10,
+        "intervalP95Ms": 10.900000000001455,
+        "intervalP99Ms": 11,
+        "intervalMaxMs": 21,
+        "maxPendingCallbacks": 1,
+        "callbackCost": {
+          "count": 5999,
+          "totalMs": 895.6999998353422,
+          "meanMs": 0.14930821800889185,
+          "p95Ms": 0.5,
+          "p99Ms": 0.6999999992549419,
+          "maxMs": 1.400000000372529
+        },
+        "meaning": "Browser RAF callbacks driving GSAP ticker; GSAP listener updates may be throttled below this cadence."
+      },
+      "gsapTicker": {
+        "configuredCapHz": 60,
+        "observedListenerUpdateHzEstimate": 59.9770491803279,
+        "method": "Current createHost has one pending MotionDirector job per GSAP ticker listener update. The listener rate is therefore inferred 1:1 from Director updates, while underlying ticker RAF is measured separately above.",
+        "independentDirectInstrumentation": false
+      },
+      "motionDirector": {
+        "sampleCount": 61,
+        "meanHz": 59.9770491803279,
+        "p05Hz": 59.8,
+        "p50Hz": 60,
+        "p95Hz": 60.4,
+        "minHz": 58.6,
+        "maxHz": 60.5,
+        "source": "Existing MotionDirector internal one-second sample, read from the debug panel once per second."
+      },
+      "missedCallbackOpportunities": {
+        "available": true,
+        "referenceIntervalMs": 10,
+        "observedCallbacks": 5939,
+        "estimatedMissedCallbackOpportunities": 1,
+        "estimatedMissedOpportunityPercent": 0.016835016835016835,
+        "caveat": "Callback scheduling proxy only; this is not compositor presentation telemetry or actual displayed-frame loss."
+      },
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "collectionOverhead": {
+        "browserProbeCallbackCost": {
+          "count": 5999,
+          "totalMs": 11.299999989569187,
+          "meanMs": 0.001883647272806999,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097,
+          "maxMs": 0.10000000149011612
+        },
+        "note": "The independent RAF probe adds one minimal callback per browser scheduling opportunity. Trace, screenshot, and video overhead are excluded from this formal phase."
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 8.741878,
+      "ScriptDuration": 1.3710829999999998,
+      "LayoutDuration": 0.173357,
+      "RecalcStyleDuration": 2.653651,
+      "JSHeapUsedSize": 5085872,
+      "Nodes": 73,
+      "LayoutCount": 3600,
+      "RecalcStyleCount": 3601,
+      "note": "CDP cumulative deltas for the formal timing window. These do not include compositor/raster/GPU cost."
+    },
+    "qualityPolicy": {
+      "observationOnly": true,
+      "fpsWindowMs": 1000,
+      "downshiftCondition": "MotionDirector internal update frequency < 45 Hz for 5 consecutive one-second windows",
+      "recoveryCondition": "MotionDirector internal update frequency >= 52 Hz for 10 consecutive one-second windows",
+      "lowFpsHz": 45,
+      "lowDurationMs": 5000,
+      "recoveryFpsHz": 52,
+      "recoveryDurationMs": 10000,
+      "note": "Copied from the unmodified baseline config for interpretation; this runner does not change thresholds or behavior."
+    },
+    "qualityTransitions": {
+      "transitions": [],
+      "downshifts": 0,
+      "recoveries": 0,
+      "consecutiveDownshifts": 0,
+      "consecutiveRecoveries": 0
+    },
+    "pulseRequests": [
+      {
+        "scheduledAtMs": 10000,
+        "observedAtMs": 10047,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 30000,
+        "observedAtMs": 30131,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 50000,
+        "observedAtMs": 50223,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      }
+    ],
+    "resonanceRejectedBecauseLow": 0,
+    "rendererClassification": {
+      "acceleration": "hardware",
+      "backend": "ANGLE Metal",
+      "confidence": "high"
+    },
+    "webgl": {
+      "available": true,
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+      "unmaskedVendor": "Google Inc. (Apple)",
+      "debugExtensionAvailable": true,
+      "collection": "temporary canvas WebGL context; WEBGL_debug_renderer_info when available"
+    },
+    "errors": [],
+    "networkFailures": [
+      {
+        "url": "http://127.0.0.1:3052/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3052/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "networkClassification": {
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "abortedRscPrefetches": 2,
+      "otherNetworkFailures": 0,
+      "interpretation": "RSC ERR_ABORTED entries are retained raw. They are hidden engine-link prefetches cancelled during page/context teardown, not HTTP failures."
+    }
+  },
+  {
+    "backend": "headed",
+    "id": "legacy-3840",
+    "engine": "legacy",
+    "engineType": "Legacy MotionDirector via native RAF",
+    "viewport": {
+      "width": 3840,
+      "height": 2160,
+      "deviceScaleFactor": 1
+    },
+    "headless": false,
+    "duration": {
+      "requestedMs": 60000,
+      "actualMs": 60004
+    },
+    "calibration": {
+      "intervalCount": 501,
+      "measuredMs": 5000,
+      "rateHz": 100.01197748233322,
+      "intervalMeanMs": 9.99880239520958,
+      "intervalP50Ms": 10,
+      "intervalP95Ms": 10.900000000000006,
+      "intervalP99Ms": 11,
+      "intervalMaxMs": 11.099999999999909,
+      "interpretation": "Visible Chromium RAF scheduling cadence estimate; compare with system_profiler display data, but do not treat as compositor presentation telemetry."
+    },
+    "sampleCounts": {
+      "timeSeries": 61,
+      "browserRafIntervals": 5933,
+      "engineCallbackIntervals": 5933,
+      "directorFrequencySamples": 61,
+      "longTasks": 0
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 5933,
+        "measuredMs": 60004,
+        "rateHz": 99.90822521028213,
+        "intervalMeanMs": 10.009185909320749,
+        "intervalP50Ms": 10,
+        "intervalP95Ms": 11,
+        "intervalP99Ms": 11,
+        "intervalMaxMs": 29,
+        "meaning": "Independent native requestAnimationFrame callback cadence. Proxy for browser scheduling opportunities only; not actual presented FPS."
+      },
+      "engineClock": {
+        "kind": "Legacy requestAnimationFrame callback",
+        "intervalCount": 5933,
+        "measuredMs": 60004,
+        "rateHz": 99.90822521028213,
+        "intervalMeanMs": 10.009185909320749,
+        "intervalP50Ms": 10,
+        "intervalP95Ms": 11,
+        "intervalP99Ms": 11,
+        "intervalMaxMs": 29,
+        "maxPendingCallbacks": 1,
+        "callbackCost": {
+          "count": 5993,
+          "totalMs": 1766.199999988079,
+          "meanMs": 0.2947104955761854,
+          "p95Ms": 0.599999999627471,
+          "p99Ms": 0.900000000372529,
+          "maxMs": 5.199999999254942
+        },
+        "meaning": "Legacy MotionDirector host callback cadence."
+      },
+      "gsapTicker": null,
+      "motionDirector": {
+        "sampleCount": 61,
+        "meanHz": 99.88360655737702,
+        "p05Hz": 99,
+        "p50Hz": 100,
+        "p95Hz": 100.1,
+        "minHz": 97,
+        "maxHz": 100.1,
+        "source": "Existing MotionDirector internal one-second sample, read from the debug panel once per second."
+      },
+      "missedCallbackOpportunities": {
+        "available": true,
+        "referenceIntervalMs": 10,
+        "observedCallbacks": 5933,
+        "estimatedMissedCallbackOpportunities": 5,
+        "estimatedMissedOpportunityPercent": 0.08420343550016841,
+        "caveat": "Callback scheduling proxy only; this is not compositor presentation telemetry or actual displayed-frame loss."
+      },
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "collectionOverhead": {
+        "browserProbeCallbackCost": {
+          "count": 5993,
+          "totalMs": 15.700000002980232,
+          "meanMs": 0.002619723010675827,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097,
+          "maxMs": 0.19999999925494194
+        },
+        "note": "The independent RAF probe adds one minimal callback per browser scheduling opportunity. Trace, screenshot, and video overhead are excluded from this formal phase."
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 15.25697,
+      "ScriptDuration": 2.286172,
+      "LayoutDuration": 0.342288,
+      "RecalcStyleDuration": 4.809687,
+      "JSHeapUsedSize": 3245520,
+      "Nodes": 59,
+      "LayoutCount": 5993,
+      "RecalcStyleCount": 5994,
+      "note": "CDP cumulative deltas for the formal timing window. These do not include compositor/raster/GPU cost."
+    },
+    "qualityPolicy": {
+      "observationOnly": true,
+      "fpsWindowMs": 1000,
+      "downshiftCondition": "MotionDirector internal update frequency < 45 Hz for 5 consecutive one-second windows",
+      "recoveryCondition": "MotionDirector internal update frequency >= 52 Hz for 10 consecutive one-second windows",
+      "lowFpsHz": 45,
+      "lowDurationMs": 5000,
+      "recoveryFpsHz": 52,
+      "recoveryDurationMs": 10000,
+      "note": "Copied from the unmodified baseline config for interpretation; this runner does not change thresholds or behavior."
+    },
+    "qualityTransitions": {
+      "transitions": [],
+      "downshifts": 0,
+      "recoveries": 0,
+      "consecutiveDownshifts": 0,
+      "consecutiveRecoveries": 0
+    },
+    "pulseRequests": [
+      {
+        "scheduledAtMs": 10000,
+        "observedAtMs": 10048,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 30000,
+        "observedAtMs": 30148,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 50000,
+        "observedAtMs": 50246,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      }
+    ],
+    "resonanceRejectedBecauseLow": 0,
+    "rendererClassification": {
+      "acceleration": "hardware",
+      "backend": "ANGLE Metal",
+      "confidence": "high"
+    },
+    "webgl": {
+      "available": true,
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+      "unmaskedVendor": "Google Inc. (Apple)",
+      "debugExtensionAvailable": true,
+      "collection": "temporary canvas WebGL context; WEBGL_debug_renderer_info when available"
+    },
+    "errors": [],
+    "networkFailures": [],
+    "networkClassification": {
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "abortedRscPrefetches": 0,
+      "otherNetworkFailures": 0,
+      "interpretation": "RSC ERR_ABORTED entries are retained raw. They are hidden engine-link prefetches cancelled during page/context teardown, not HTTP failures."
+    }
+  },
+  {
+    "backend": "headed",
+    "id": "gsap-3840",
+    "engine": "gsap",
+    "engineType": "GSAP ticker adapter -> MotionDirector",
+    "viewport": {
+      "width": 3840,
+      "height": 2160,
+      "deviceScaleFactor": 1
+    },
+    "headless": false,
+    "duration": {
+      "requestedMs": 60000,
+      "actualMs": 60003
+    },
+    "calibration": {
+      "intervalCount": 501,
+      "measuredMs": 5000,
+      "rateHz": 100.01597061407011,
+      "intervalMeanMs": 9.998403193612774,
+      "intervalP50Ms": 10,
+      "intervalP95Ms": 11,
+      "intervalP99Ms": 11,
+      "intervalMaxMs": 11.200000000000273,
+      "interpretation": "Visible Chromium RAF scheduling cadence estimate; compare with system_profiler display data, but do not treat as compositor presentation telemetry."
+    },
+    "sampleCounts": {
+      "timeSeries": 61,
+      "browserRafIntervals": 5940,
+      "engineCallbackIntervals": 5940,
+      "directorFrequencySamples": 61,
+      "longTasks": 0
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 5940,
+        "measuredMs": 60003,
+        "rateHz": 99.98703871720335,
+        "intervalMeanMs": 10.001296296296294,
+        "intervalP50Ms": 10,
+        "intervalP95Ms": 10.900000000001455,
+        "intervalP99Ms": 11,
+        "intervalMaxMs": 11.10000000000582,
+        "meaning": "Independent native requestAnimationFrame callback cadence. Proxy for browser scheduling opportunities only; not actual presented FPS."
+      },
+      "engineClock": {
+        "kind": "GSAP ticker underlying requestAnimationFrame callback",
+        "intervalCount": 5940,
+        "measuredMs": 60003,
+        "rateHz": 99.98703871720335,
+        "intervalMeanMs": 10.001296296296294,
+        "intervalP50Ms": 10,
+        "intervalP95Ms": 10.900000000001455,
+        "intervalP99Ms": 11,
+        "intervalMaxMs": 11.10000000000582,
+        "maxPendingCallbacks": 1,
+        "callbackCost": {
+          "count": 6000,
+          "totalMs": 1034.199999436736,
+          "meanMs": 0.17236666657278935,
+          "p95Ms": 0.599999999627471,
+          "p99Ms": 0.7999999988824129,
+          "maxMs": 6.099999999627471
+        },
+        "meaning": "Browser RAF callbacks driving GSAP ticker; GSAP listener updates may be throttled below this cadence."
+      },
+      "gsapTicker": {
+        "configuredCapHz": 60,
+        "observedListenerUpdateHzEstimate": 59.95901639344265,
+        "method": "Current createHost has one pending MotionDirector job per GSAP ticker listener update. The listener rate is therefore inferred 1:1 from Director updates, while underlying ticker RAF is measured separately above.",
+        "independentDirectInstrumentation": false
+      },
+      "motionDirector": {
+        "sampleCount": 61,
+        "meanHz": 59.95901639344265,
+        "p05Hz": 59.8,
+        "p50Hz": 59.9,
+        "p95Hz": 60.5,
+        "minHz": 58.5,
+        "maxHz": 60.6,
+        "source": "Existing MotionDirector internal one-second sample, read from the debug panel once per second."
+      },
+      "missedCallbackOpportunities": {
+        "available": true,
+        "referenceIntervalMs": 10,
+        "observedCallbacks": 5940,
+        "estimatedMissedCallbackOpportunities": 0,
+        "estimatedMissedOpportunityPercent": 0,
+        "caveat": "Callback scheduling proxy only; this is not compositor presentation telemetry or actual displayed-frame loss."
+      },
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "collectionOverhead": {
+        "browserProbeCallbackCost": {
+          "count": 6000,
+          "totalMs": 10.099999990314245,
+          "meanMs": 0.0016833333317190409,
+          "p95Ms": 0,
+          "p99Ms": 0.09999999962747097,
+          "maxMs": 0.2000000011175871
+        },
+        "note": "The independent RAF probe adds one minimal callback per browser scheduling opportunity. Trace, screenshot, and video overhead are excluded from this formal phase."
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 9.251047,
+      "ScriptDuration": 1.510691,
+      "LayoutDuration": 0.186249,
+      "RecalcStyleDuration": 2.746899,
+      "JSHeapUsedSize": 6069336,
+      "Nodes": 69,
+      "LayoutCount": 3602,
+      "RecalcStyleCount": 3615,
+      "note": "CDP cumulative deltas for the formal timing window. These do not include compositor/raster/GPU cost."
+    },
+    "qualityPolicy": {
+      "observationOnly": true,
+      "fpsWindowMs": 1000,
+      "downshiftCondition": "MotionDirector internal update frequency < 45 Hz for 5 consecutive one-second windows",
+      "recoveryCondition": "MotionDirector internal update frequency >= 52 Hz for 10 consecutive one-second windows",
+      "lowFpsHz": 45,
+      "lowDurationMs": 5000,
+      "recoveryFpsHz": 52,
+      "recoveryDurationMs": 10000,
+      "note": "Copied from the unmodified baseline config for interpretation; this runner does not change thresholds or behavior."
+    },
+    "qualityTransitions": {
+      "transitions": [],
+      "downshifts": 0,
+      "recoveries": 0,
+      "consecutiveDownshifts": 0,
+      "consecutiveRecoveries": 0
+    },
+    "pulseRequests": [
+      {
+        "scheduledAtMs": 10000,
+        "observedAtMs": 10038,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 30000,
+        "observedAtMs": 30130,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      },
+      {
+        "scheduledAtMs": 50000,
+        "observedAtMs": 50215,
+        "beforeLevel": "normal",
+        "beforeState": "AMBIENT",
+        "afterLevel": "normal",
+        "afterState": "AMBIENT",
+        "accepted": true,
+        "rejectionReason": null,
+        "nextObservedState": "PULSE",
+        "acceptanceMethod": "Derived from unchanged synchronous trigger preconditions; next one-second sample retained as corroborating observation because stage dataset updates on draw."
+      }
+    ],
+    "resonanceRejectedBecauseLow": 0,
+    "rendererClassification": {
+      "acceleration": "hardware",
+      "backend": "ANGLE Metal",
+      "confidence": "high"
+    },
+    "webgl": {
+      "available": true,
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+      "unmaskedVendor": "Google Inc. (Apple)",
+      "debugExtensionAvailable": true,
+      "collection": "temporary canvas WebGL context; WEBGL_debug_renderer_info when available"
+    },
+    "errors": [],
+    "networkFailures": [
+      {
+        "url": "http://127.0.0.1:3052/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3052/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "networkClassification": {
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "abortedRscPrefetches": 2,
+      "otherNetworkFailures": 0,
+      "interpretation": "RSC ERR_ABORTED entries are retained raw. They are hidden engine-link prefetches cancelled during page/context teardown, not HTTP failures."
+    }
+  }
+]

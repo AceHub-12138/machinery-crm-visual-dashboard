@@ -1,0 +1,331 @@
+{
+  "generatedAt": "2026-10-17T07:23:28.779Z",
+  "baselines": {
+    "p14": "df69d71f5b0cafcdab70a18f8e11be9f92cd163d",
+    "gsapPoc": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+    "p13": "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1"
+  },
+  "committedEvidence": [
+    "backend-records.json",
+    "formal-results.json",
+    "comparison.json",
+    "time-series.json",
+    "trace-summary.json",
+    "product-integrity.json"
+  ],
+  "rawEvidence": [
+    {
+      "path": ".review/p1-5-a/headless/legacy-1920-formal.json",
+      "bytes": 37718,
+      "sha256": "3e21a871e6b20beec08a25b99019c3bce42c130bbe63b485620b9709d73b6ed3",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-1920-trace-metadata.json",
+      "bytes": 1392,
+      "sha256": "431fe30afc1a931a81c18db5a20a1e6ed67a24a4e90d3f1cfe5d70b0de3b5d75",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-1920-visual.json",
+      "bytes": 777,
+      "sha256": "8be94768d08fe68c7afbd49a6705890e578ff8bc3eae0642d39536926ca4c6d2",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-1920-ambient.png",
+      "bytes": 1316716,
+      "sha256": "13ac13925712eb57867db1eba53ed4f44cefa5b6394197e2a059cba51f5b98f2",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-1920-pulse.png",
+      "bytes": 1323464,
+      "sha256": "deb185895faba170319ffe68ce2a3acda0db48c147400a46b486b874c40679d7",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-1920.trace.json.gz",
+      "bytes": 14828606,
+      "sha256": "28b6c7210130322b39117c5df264a000007c37af7f0df3cc3d956363f3f2054b",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-3840-formal.json",
+      "bytes": 83499,
+      "sha256": "55847c57d3fc79ae447f52cda1639494b0b1d6bf842e08ff3c1c17917adefe99",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-3840-trace-metadata.json",
+      "bytes": 1378,
+      "sha256": "37c1f693f2d1b52ea7a59b1f117b0bd7256b66b4f7b471dbc9ed6d5e945d32cf",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-3840-visual.json",
+      "bytes": 777,
+      "sha256": "2c0fe8e1397fa08003c8d68b9c82573bfc5a2d6ea570e6edf3bd7227b8efab3c",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-3840-ambient.png",
+      "bytes": 3396561,
+      "sha256": "402b5c5fcc453c8dfef14b03811980dfe924c504256582114804c1a52793a3d7",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-3840-pulse.png",
+      "bytes": 3373917,
+      "sha256": "ffcc6a1efdf671174f9d1d203b1f835e9c76c16f3ff6ad4c63546ebd4e1ff501",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/legacy-3840.trace.json.gz",
+      "bytes": 11538048,
+      "sha256": "7a1a826d2fc4171cb0120f774721f64a2e4e796eb29684ae60d24d603c42cbd7",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-1920-formal.json",
+      "bytes": 38156,
+      "sha256": "88c074f34dbe23e085360b9382f1699d8e548fb8a4ee1d057fdf943a4b8981e9",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-1920-trace-metadata.json",
+      "bytes": 1374,
+      "sha256": "da64fd5d1160ed0d9bbd522515dce7aff3ffdcc26d45f9e81548e7824c3bcae6",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-1920-visual.json",
+      "bytes": 773,
+      "sha256": "6dfe1e8c58795ad6232846b805c71a6867b9d773d5ee7484f156854593185c1e",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-1920-ambient.png",
+      "bytes": 1315794,
+      "sha256": "a5fcd374ea48c136aa2660660ee82fbefb521d318d7fb633bea20fd08582900b",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-1920-pulse.png",
+      "bytes": 1324744,
+      "sha256": "e851ba76463cc5db2dee26e891280fb2d1d0b4bb6785a69ed8e16db851b82a3a",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-1920.trace.json.gz",
+      "bytes": 14207724,
+      "sha256": "2b35e34e0ac3dd79cbecbe31d0eccfe7cea7f53b2d446a77c94607976e64baca",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-3840-formal.json",
+      "bytes": 86534,
+      "sha256": "0ff0271f7fda6fbc0ed27fb0360fa29d747c84d804874e44851ecd7a2b6fdd6a",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-3840-trace-metadata.json",
+      "bytes": 1375,
+      "sha256": "cc4b56323b8dd12d813b7f97081bbc06d9c74f62258d482bd7311cb4ab540d90",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-3840-visual.json",
+      "bytes": 773,
+      "sha256": "2ad7a7221470619b0de47b4bf32cfcae4967d0f7db9ccd3fad4f32a1085f41ed",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-3840-ambient.png",
+      "bytes": 3392729,
+      "sha256": "c4a8fe134b1c27475bab4001637ba2c48baf7702d84873a3f5ea7deceec320a6",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-3840-pulse.png",
+      "bytes": 3377155,
+      "sha256": "bdb1f509d5a7d94b4fef936cc756a45f9de48e2a76ef6d44aba26018429fb7ee",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headless/gsap-3840.trace.json.gz",
+      "bytes": 10916352,
+      "sha256": "1c4e9bf90a9da492a9e7af11057e78ccf49d4669ddc68a67be91b2f496c08850",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headless/benchmark.json",
+      "bytes": 304160,
+      "sha256": "2939b69a1838aac64395d6203d8411138846aae8a0594ace210fb3b1faa8419f",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headless/trace-summary.json",
+      "bytes": 81030,
+      "sha256": "864b610fcf4436616c964587c39213fbdbf291f478ae1bc855a1f47854d2d0dc",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-1920-formal.json",
+      "bytes": 36864,
+      "sha256": "ace3ff89b768135acf5ccda3a791c1043e29fd84fd44ede56eb790a10a7ad396",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-1920-trace-metadata.json",
+      "bytes": 1355,
+      "sha256": "ae4e9ef70cd4c1bf7cfe6c83400d41ce5302babdbc9bcf264d05cbcecdfb1d19",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-1920-visual.json",
+      "bytes": 751,
+      "sha256": "fe96f7b88ee874b275474b66de4cf4d958e3e34043e07ee1b58c9f30d679cb4f",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-1920-ambient.png",
+      "bytes": 1309285,
+      "sha256": "aff327188f3d4f514d250316d579f7c109540fce1ae48cbd75cf4319790b4ab8",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-1920-pulse.png",
+      "bytes": 1314497,
+      "sha256": "4cdedec148d0f356cf21c0431ea6f47346bf0d65a5c1f0033e9aba1dc06b09b7",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-1920.trace.json.gz",
+      "bytes": 21683237,
+      "sha256": "03b02aa7bf4255237e4c42ef7ec6fd3d30c3b460f8fe598a4a978786b3db6341",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-3840-formal.json",
+      "bytes": 36475,
+      "sha256": "493d68768b413cc4b8b50d6dc27f504f7e77ba4a624170d891ab7975d703f765",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-3840-trace-metadata.json",
+      "bytes": 1371,
+      "sha256": "156586a6503df3da11987ab36b8db6ed052ce45a0a8e10124f2ec6cb88e76f29",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-3840-visual.json",
+      "bytes": 751,
+      "sha256": "4a3de9ddb3f96d67e6ff6f255218587c49e0d897e94dd4de12ede6f894ebe9af",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-3840-ambient.png",
+      "bytes": 3445825,
+      "sha256": "c10a9c1270427d231d096e38e1915307647bb4fc8c6bc0d8bb66bcd98ccfabc4",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-3840-pulse.png",
+      "bytes": 3440459,
+      "sha256": "91c1c3d630e44a753acd574012881598ffc48805a9f2a0a2f298f868af627a24",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/legacy-3840.trace.json.gz",
+      "bytes": 22015793,
+      "sha256": "3f8f5425fd4ce55c10dcda5a640ccf34f33a704b9dac2752918d05feeaa0fce1",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-1920-formal.json",
+      "bytes": 37707,
+      "sha256": "3f340417e580724e95204d22a25c372296eced12b240de48671633d379ae9770",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-1920-trace-metadata.json",
+      "bytes": 1353,
+      "sha256": "9aaf3203c8af68524fd73a0b922c90ec3806c84592e544a19411105b342bb47a",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-1920-visual.json",
+      "bytes": 747,
+      "sha256": "70422914470ef2fd72b75826b9453ab2bfa83f6ad9e9a4a3134682d5fd4f5ab0",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-1920-ambient.png",
+      "bytes": 1307282,
+      "sha256": "5ebfcba79402d1d6575d6eb8d0936d24f8362e6be9b12e2df2ace9867187b9f8",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-1920-pulse.png",
+      "bytes": 1316252,
+      "sha256": "f68cc950cb1b1b8a42223a1e0793134ddfe40ba2abe11457b4335d31b520f65c",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-1920.trace.json.gz",
+      "bytes": 14286995,
+      "sha256": "5c10785d7ffd218a4840dfbbe5bbb1065ee92f4da4d739961d720e5396b7f2a2",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-3840-formal.json",
+      "bytes": 37454,
+      "sha256": "e16b6368b1193cc9ad1e054be98e3fe6986f0d4db4cde5a75e2aab9c174f4a2a",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-3840-trace-metadata.json",
+      "bytes": 1349,
+      "sha256": "d332ea6b24e43bdea76d8da6b0d1c098271d6ab8ed0cdd727c3de6513c0f8424",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-3840-visual.json",
+      "bytes": 747,
+      "sha256": "ba794af5d5cff4d4efbe94378f2cd908c3019b5ac6d378aa72de4360bb3f952c",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-3840-ambient.png",
+      "bytes": 3439831,
+      "sha256": "846923ab966160eebea230736a3a98d307de87da2f47910028946cc14feae569",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-3840-pulse.png",
+      "bytes": 3446993,
+      "sha256": "33ddff3a39e4603e1c06a5d7523afd432c080109bc8814d680908359bbc53a3e",
+      "phase": "visual"
+    },
+    {
+      "path": ".review/p1-5-a/headed/gsap-3840.trace.json.gz",
+      "bytes": 14579438,
+      "sha256": "e8a840316eada8f876c5479e0587392893ee45ee7538cab4d2fbe9b37fb329da",
+      "phase": "trace"
+    },
+    {
+      "path": ".review/p1-5-a/headed/benchmark.json",
+      "bytes": 191425,
+      "sha256": "a58ac4494142aa5f821daad0ace236c7e408fbbb846760f2760f82b234f18f6d",
+      "phase": "formal"
+    },
+    {
+      "path": ".review/p1-5-a/headed/trace-summary.json",
+      "bytes": 82948,
+      "sha256": "151059f23be5026e0388b0f2b9a8ceeac9c017cb0fcc9007744b9010b2072427",
+      "phase": "trace"
+    }
+  ],
+  "preservation": "P1.4 evidence lives under docs/nexus-p1-4 and was not overwritten. P1.5-A raw traces/screenshots live only under .review/p1-5-a."
+}
