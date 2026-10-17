@@ -1,0 +1,3908 @@
+[
+  {
+    "label": "clean",
+    "rows": [
+      {
+        "cycle": 0,
+        "at": 1792200864132,
+        "usedSize": 6591428,
+        "totalSize": 7012352,
+        "embedderHeapUsedSize": 3641456,
+        "backingStorageSize": 983515,
+        "documents": 3,
+        "nodes": 1205,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 1,
+        "at": 1792200866712,
+        "usedSize": 6827216,
+        "totalSize": 7536640,
+        "embedderHeapUsedSize": 3705008,
+        "backingStorageSize": 1270300,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 2,
+        "at": 1792200869304,
+        "usedSize": 7196076,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 4152240,
+        "backingStorageSize": 1270390,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 3,
+        "at": 1792200871878,
+        "usedSize": 7173472,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4741944,
+        "backingStorageSize": 1270656,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 4,
+        "at": 1792200874476,
+        "usedSize": 7344108,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4566760,
+        "backingStorageSize": 1270600,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 5,
+        "at": 1792200877052,
+        "usedSize": 7387180,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4681288,
+        "backingStorageSize": 1271176,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 6,
+        "at": 1792200879646,
+        "usedSize": 7476344,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 4102920,
+        "backingStorageSize": 1270577,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 7,
+        "at": 1792200882221,
+        "usedSize": 7486720,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4698976,
+        "backingStorageSize": 1271160,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 8,
+        "at": 1792200884814,
+        "usedSize": 7615632,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4566400,
+        "backingStorageSize": 1270754,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 9,
+        "at": 1792200887393,
+        "usedSize": 7601616,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4171000,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 10,
+        "at": 1792200889988,
+        "usedSize": 7750076,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4674896,
+        "backingStorageSize": 1270754,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 11,
+        "at": 1792200892883,
+        "usedSize": 7664092,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4192760,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 12,
+        "at": 1792200895483,
+        "usedSize": 7793500,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4607688,
+        "backingStorageSize": 1270757,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 13,
+        "at": 1792200898070,
+        "usedSize": 7688564,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4191680,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 14,
+        "at": 1792200900673,
+        "usedSize": 7833564,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4608280,
+        "backingStorageSize": 1270766,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 15,
+        "at": 1792200903261,
+        "usedSize": 7807732,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4846752,
+        "backingStorageSize": 1271171,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 16,
+        "at": 1792200905863,
+        "usedSize": 7936720,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4135024,
+        "backingStorageSize": 1270577,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 17,
+        "at": 1792200908448,
+        "usedSize": 7817844,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4195336,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 18,
+        "at": 1792200911052,
+        "usedSize": 8000984,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4128520,
+        "backingStorageSize": 1270577,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 19,
+        "at": 1792200913635,
+        "usedSize": 7847840,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4197096,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 20,
+        "at": 1792200916241,
+        "usedSize": 8060100,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4695048,
+        "backingStorageSize": 1270822,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 21,
+        "at": 1792200918833,
+        "usedSize": 7876136,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4199824,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 22,
+        "at": 1792200921426,
+        "usedSize": 8066468,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4641928,
+        "backingStorageSize": 1270766,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 23,
+        "at": 1792200924013,
+        "usedSize": 7905272,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4199144,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 24,
+        "at": 1792200926617,
+        "usedSize": 8068940,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4146192,
+        "backingStorageSize": 1270577,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 25,
+        "at": 1792200929202,
+        "usedSize": 7985040,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4895288,
+        "backingStorageSize": 1271166,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 26,
+        "at": 1792200931808,
+        "usedSize": 8138276,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4687704,
+        "backingStorageSize": 1270803,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 27,
+        "at": 1792200934395,
+        "usedSize": 7953372,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4204080,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 28,
+        "at": 1792200936995,
+        "usedSize": 8125392,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4131472,
+        "backingStorageSize": 1270577,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 29,
+        "at": 1792200939582,
+        "usedSize": 7981732,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4202968,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 30,
+        "at": 1792200942184,
+        "usedSize": 8174408,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4205144,
+        "backingStorageSize": 1270764,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 31,
+        "at": 1792200945062,
+        "usedSize": 8005264,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 3680816,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 32,
+        "at": 1792200947664,
+        "usedSize": 8195360,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4699848,
+        "backingStorageSize": 1270767,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 33,
+        "at": 1792200950250,
+        "usedSize": 8017112,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4208400,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 34,
+        "at": 1792200952850,
+        "usedSize": 8200048,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4742192,
+        "backingStorageSize": 1270764,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 35,
+        "at": 1792200955436,
+        "usedSize": 8073084,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4885936,
+        "backingStorageSize": 1271168,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 36,
+        "at": 1792200958035,
+        "usedSize": 8235968,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4768216,
+        "backingStorageSize": 1270755,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 37,
+        "at": 1792200960625,
+        "usedSize": 8130104,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4864304,
+        "backingStorageSize": 1271221,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 38,
+        "at": 1792200963221,
+        "usedSize": 8255176,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4671176,
+        "backingStorageSize": 1270751,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 39,
+        "at": 1792200965809,
+        "usedSize": 8086556,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4211992,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 40,
+        "at": 1792200968413,
+        "usedSize": 8245180,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4154144,
+        "backingStorageSize": 1270577,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 41,
+        "at": 1792200970996,
+        "usedSize": 8085812,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4213592,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 42,
+        "at": 1792200973598,
+        "usedSize": 8270988,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4160664,
+        "backingStorageSize": 1270577,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 43,
+        "at": 1792200976186,
+        "usedSize": 8165380,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4914776,
+        "backingStorageSize": 1271170,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 44,
+        "at": 1792200978788,
+        "usedSize": 8299256,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4771448,
+        "backingStorageSize": 1270765,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 45,
+        "at": 1792200981368,
+        "usedSize": 8167624,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4820624,
+        "backingStorageSize": 1270985,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 46,
+        "at": 1792200983966,
+        "usedSize": 8302164,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4674312,
+        "backingStorageSize": 1270765,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 47,
+        "at": 1792200986548,
+        "usedSize": 8183364,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4875040,
+        "backingStorageSize": 1271029,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 48,
+        "at": 1792200989150,
+        "usedSize": 8303344,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4638648,
+        "backingStorageSize": 1270751,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 49,
+        "at": 1792200991740,
+        "usedSize": 8128904,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4220328,
+        "backingStorageSize": 1270590,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 50,
+        "at": 1792200994337,
+        "usedSize": 8317392,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4682920,
+        "backingStorageSize": 1270754,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 51,
+        "at": 1792200997212,
+        "usedSize": 8140780,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4222248,
+        "backingStorageSize": 1270399,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 52,
+        "at": 1792200999814,
+        "usedSize": 8315716,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4719864,
+        "backingStorageSize": 1270498,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 53,
+        "at": 1792201002403,
+        "usedSize": 8197776,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4902368,
+        "backingStorageSize": 1270737,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 54,
+        "at": 1792201005010,
+        "usedSize": 8299020,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4053376,
+        "backingStorageSize": 1270369,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 55,
+        "at": 1792201007592,
+        "usedSize": 8142348,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4223816,
+        "backingStorageSize": 1270298,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 56,
+        "at": 1792201010194,
+        "usedSize": 8304484,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4175128,
+        "backingStorageSize": 1270303,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 57,
+        "at": 1792201012780,
+        "usedSize": 8207712,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4878056,
+        "backingStorageSize": 1270891,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 58,
+        "at": 1792201015377,
+        "usedSize": 8307400,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4160096,
+        "backingStorageSize": 1270340,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 59,
+        "at": 1792201017962,
+        "usedSize": 8147972,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4223968,
+        "backingStorageSize": 1270298,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 60,
+        "at": 1792201020567,
+        "usedSize": 8329244,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4762936,
+        "backingStorageSize": 1270489,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 61,
+        "at": 1792201023180,
+        "usedSize": 8200964,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4967056,
+        "backingStorageSize": 1271026,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 62,
+        "at": 1792201025779,
+        "usedSize": 8349100,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4714584,
+        "backingStorageSize": 1270714,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 63,
+        "at": 1792201028362,
+        "usedSize": 8221196,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4912560,
+        "backingStorageSize": 1270941,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 64,
+        "at": 1792201030964,
+        "usedSize": 8339752,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4809544,
+        "backingStorageSize": 1270520,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 65,
+        "at": 1792201033548,
+        "usedSize": 8209672,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 5042928,
+        "backingStorageSize": 1270724,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 66,
+        "at": 1792201036142,
+        "usedSize": 8347576,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4811616,
+        "backingStorageSize": 1270542,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 67,
+        "at": 1792201038726,
+        "usedSize": 8172680,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4226928,
+        "backingStorageSize": 1270298,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 68,
+        "at": 1792201041319,
+        "usedSize": 8355856,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4749336,
+        "backingStorageSize": 1270481,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 69,
+        "at": 1792201043905,
+        "usedSize": 8179288,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4229400,
+        "backingStorageSize": 1270306,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 70,
+        "at": 1792201046500,
+        "usedSize": 8363268,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4872736,
+        "backingStorageSize": 1270546,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 70.1,
+        "at": 1792201061825,
+        "usedSize": 8262072,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4225128,
+        "backingStorageSize": 1270369,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "label": "instrumented",
+    "rows": [
+      {
+        "cycle": 0,
+        "at": 1792201065376,
+        "usedSize": 6620440,
+        "totalSize": 7012352,
+        "embedderHeapUsedSize": 4166320,
+        "backingStorageSize": 983574,
+        "documents": 3,
+        "nodes": 1205,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 1,
+        "at": 1792201067961,
+        "usedSize": 6836484,
+        "totalSize": 7536640,
+        "embedderHeapUsedSize": 4229384,
+        "backingStorageSize": 1270332,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 2,
+        "at": 1792201070563,
+        "usedSize": 7212836,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4657016,
+        "backingStorageSize": 1270611,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 3,
+        "at": 1792201073144,
+        "usedSize": 7140596,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 4132600,
+        "backingStorageSize": 1270368,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 4,
+        "at": 1792201075744,
+        "usedSize": 7302680,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 4102936,
+        "backingStorageSize": 1270394,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 5,
+        "at": 1792201078322,
+        "usedSize": 7352184,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 4143160,
+        "backingStorageSize": 1270331,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 6,
+        "at": 1792201080917,
+        "usedSize": 7546088,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4587728,
+        "backingStorageSize": 1270648,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 7,
+        "at": 1792201083498,
+        "usedSize": 7492000,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4748800,
+        "backingStorageSize": 1270972,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 8,
+        "at": 1792201086090,
+        "usedSize": 7587100,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4088080,
+        "backingStorageSize": 1270431,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 9,
+        "at": 1792201088671,
+        "usedSize": 7668280,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4806072,
+        "backingStorageSize": 1270982,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 10,
+        "at": 1792201091268,
+        "usedSize": 7771900,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4580608,
+        "backingStorageSize": 1270618,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 11,
+        "at": 1792201093851,
+        "usedSize": 7724300,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4801504,
+        "backingStorageSize": 1270965,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 12,
+        "at": 1792201096449,
+        "usedSize": 7810816,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4712808,
+        "backingStorageSize": 1270609,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 13,
+        "at": 1792201099033,
+        "usedSize": 7750472,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4819632,
+        "backingStorageSize": 1270787,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 14,
+        "at": 1792201101631,
+        "usedSize": 7848548,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4629024,
+        "backingStorageSize": 1270608,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 15,
+        "at": 1792201104209,
+        "usedSize": 7785192,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4196488,
+        "backingStorageSize": 1270397,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 16,
+        "at": 1792201106801,
+        "usedSize": 7970836,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4657584,
+        "backingStorageSize": 1270592,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 17,
+        "at": 1792201109384,
+        "usedSize": 7868144,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4816784,
+        "backingStorageSize": 1270756,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 18,
+        "at": 1792201111981,
+        "usedSize": 8037156,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4657608,
+        "backingStorageSize": 1270618,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 19,
+        "at": 1792201114564,
+        "usedSize": 7920224,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4809000,
+        "backingStorageSize": 1270834,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 20,
+        "at": 1792201117164,
+        "usedSize": 8050328,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4685800,
+        "backingStorageSize": 1270630,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 21,
+        "at": 1792201119744,
+        "usedSize": 7955480,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4798992,
+        "backingStorageSize": 1271028,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 22,
+        "at": 1792201122341,
+        "usedSize": 8062016,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4140248,
+        "backingStorageSize": 1270394,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 23,
+        "at": 1792201124923,
+        "usedSize": 7921680,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4199528,
+        "backingStorageSize": 1270331,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 24,
+        "at": 1792201127517,
+        "usedSize": 8103812,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4643296,
+        "backingStorageSize": 1270543,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 25,
+        "at": 1792201130098,
+        "usedSize": 8005992,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4813144,
+        "backingStorageSize": 1270947,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 26,
+        "at": 1792201132693,
+        "usedSize": 8139944,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4640760,
+        "backingStorageSize": 1270627,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 27,
+        "at": 1792201135272,
+        "usedSize": 7968852,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4204576,
+        "backingStorageSize": 1270360,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 28,
+        "at": 1792201137869,
+        "usedSize": 8144960,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4136920,
+        "backingStorageSize": 1270365,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 29,
+        "at": 1792201140449,
+        "usedSize": 8038684,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4924048,
+        "backingStorageSize": 1270760,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 30,
+        "at": 1792201143044,
+        "usedSize": 8193972,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4687424,
+        "backingStorageSize": 1270618,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 31,
+        "at": 1792201145627,
+        "usedSize": 8071596,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4845808,
+        "backingStorageSize": 1270927,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 32,
+        "at": 1792201148220,
+        "usedSize": 8192920,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4165568,
+        "backingStorageSize": 1270532,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 33,
+        "at": 1792201150801,
+        "usedSize": 8039904,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4207712,
+        "backingStorageSize": 1270397,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 34,
+        "at": 1792201153394,
+        "usedSize": 8219552,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4697328,
+        "backingStorageSize": 1270627,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 35,
+        "at": 1792201155976,
+        "usedSize": 8095852,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4846040,
+        "backingStorageSize": 1271114,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 36,
+        "at": 1792201158573,
+        "usedSize": 8240476,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4141120,
+        "backingStorageSize": 1270625,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 37,
+        "at": 1792201161155,
+        "usedSize": 8096632,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4210728,
+        "backingStorageSize": 1270461,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 38,
+        "at": 1792201163754,
+        "usedSize": 8255792,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4166744,
+        "backingStorageSize": 1270365,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 39,
+        "at": 1792201166337,
+        "usedSize": 8108672,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4294640,
+        "backingStorageSize": 1270331,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 40,
+        "at": 1792201168933,
+        "usedSize": 8297536,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4603064,
+        "backingStorageSize": 1270619,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 41,
+        "at": 1792201171516,
+        "usedSize": 8175860,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4916192,
+        "backingStorageSize": 1270954,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 42,
+        "at": 1792201174110,
+        "usedSize": 8308300,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4631752,
+        "backingStorageSize": 1270618,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 43,
+        "at": 1792201176695,
+        "usedSize": 8204016,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4879512,
+        "backingStorageSize": 1271164,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 44,
+        "at": 1792201179289,
+        "usedSize": 8301552,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4161960,
+        "backingStorageSize": 1270532,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 45,
+        "at": 1792201181869,
+        "usedSize": 8144920,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4214272,
+        "backingStorageSize": 1270360,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 46,
+        "at": 1792201184463,
+        "usedSize": 8322316,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4640128,
+        "backingStorageSize": 1270531,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 47,
+        "at": 1792201187046,
+        "usedSize": 8191132,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4894848,
+        "backingStorageSize": 1270761,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 48,
+        "at": 1792201189641,
+        "usedSize": 8323516,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4676920,
+        "backingStorageSize": 1270620,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 49,
+        "at": 1792201192223,
+        "usedSize": 8193996,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4885704,
+        "backingStorageSize": 1270972,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 50,
+        "at": 1792201194815,
+        "usedSize": 8318164,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4126280,
+        "backingStorageSize": 1270431,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 51,
+        "at": 1792201197395,
+        "usedSize": 8204348,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4937032,
+        "backingStorageSize": 1270937,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 52,
+        "at": 1792201199988,
+        "usedSize": 8335516,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4726864,
+        "backingStorageSize": 1270592,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 53,
+        "at": 1792201202570,
+        "usedSize": 8161476,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4219760,
+        "backingStorageSize": 1270360,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 54,
+        "at": 1792201205165,
+        "usedSize": 8319704,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4147008,
+        "backingStorageSize": 1270365,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 55,
+        "at": 1792201207747,
+        "usedSize": 8164492,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4222984,
+        "backingStorageSize": 1270331,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 56,
+        "at": 1792201210336,
+        "usedSize": 8326328,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4175344,
+        "backingStorageSize": 1270365,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 57,
+        "at": 1792201212916,
+        "usedSize": 8169768,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4223512,
+        "backingStorageSize": 1270331,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 58,
+        "at": 1792201215505,
+        "usedSize": 8343984,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4699128,
+        "backingStorageSize": 1270565,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 59,
+        "at": 1792201218086,
+        "usedSize": 8168884,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4222640,
+        "backingStorageSize": 1270360,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 60,
+        "at": 1792201220682,
+        "usedSize": 8328048,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4176568,
+        "backingStorageSize": 1270365,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 61,
+        "at": 1792201223261,
+        "usedSize": 8220576,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4972592,
+        "backingStorageSize": 1270949,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 62,
+        "at": 1792201225856,
+        "usedSize": 8359124,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4667328,
+        "backingStorageSize": 1270620,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 63,
+        "at": 1792201228439,
+        "usedSize": 8241880,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 5002768,
+        "backingStorageSize": 1271027,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 388,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 64,
+        "at": 1792201231032,
+        "usedSize": 8360240,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4713496,
+        "backingStorageSize": 1270610,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 65,
+        "at": 1792201233614,
+        "usedSize": 8186780,
+        "totalSize": 8847360,
+        "embedderHeapUsedSize": 4224768,
+        "backingStorageSize": 1270360,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 66,
+        "at": 1792201236205,
+        "usedSize": 8367128,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4668952,
+        "backingStorageSize": 1270578,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 67,
+        "at": 1792201238787,
+        "usedSize": 8238560,
+        "totalSize": 9371648,
+        "embedderHeapUsedSize": 4930648,
+        "backingStorageSize": 1270786,
+        "documents": 3,
+        "nodes": 1197,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 68,
+        "at": 1792201241384,
+        "usedSize": 8354652,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4158568,
+        "backingStorageSize": 1270394,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 69,
+        "at": 1792201243966,
+        "usedSize": 8200772,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4229304,
+        "backingStorageSize": 1270331,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "legacy",
+          "audit": "null",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 70,
+        "at": 1792201246563,
+        "usedSize": 8366076,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4167104,
+        "backingStorageSize": 1270365,
+        "documents": 3,
+        "nodes": 1195,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 70.1,
+        "at": 1792201261597,
+        "usedSize": 8380856,
+        "totalSize": 9109504,
+        "embedderHeapUsedSize": 4221184,
+        "backingStorageSize": 1270365,
+        "documents": 3,
+        "nodes": 1196,
+        "jsEventListeners": 379,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "label": "dwell",
+    "rows": [
+      {
+        "cycle": 0,
+        "at": 1792201264857,
+        "usedSize": 6596428,
+        "totalSize": 7274496,
+        "embedderHeapUsedSize": 3639224,
+        "backingStorageSize": 983512,
+        "documents": 3,
+        "nodes": 1205,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 1,
+        "at": 1792201267388,
+        "usedSize": 6769448,
+        "totalSize": 7274496,
+        "embedderHeapUsedSize": 3646016,
+        "backingStorageSize": 983748,
+        "documents": 3,
+        "nodes": 1206,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 2,
+        "at": 1792201269911,
+        "usedSize": 6903836,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 4192784,
+        "backingStorageSize": 983926,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 3,
+        "at": 1792201272439,
+        "usedSize": 6956460,
+        "totalSize": 7536640,
+        "embedderHeapUsedSize": 3560064,
+        "backingStorageSize": 983752,
+        "documents": 3,
+        "nodes": 1207,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 4,
+        "at": 1792201274964,
+        "usedSize": 6965660,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4045040,
+        "backingStorageSize": 984092,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 387,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 5,
+        "at": 1792201277490,
+        "usedSize": 7038168,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3602776,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 6,
+        "at": 1792201280013,
+        "usedSize": 7081772,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4029360,
+        "backingStorageSize": 983933,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 7,
+        "at": 1792201282539,
+        "usedSize": 7003264,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3604464,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 8,
+        "at": 1792201285065,
+        "usedSize": 7134980,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3975960,
+        "backingStorageSize": 983991,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 9,
+        "at": 1792201287593,
+        "usedSize": 7042868,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3607320,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 10,
+        "at": 1792201290120,
+        "usedSize": 7144008,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3621040,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 11,
+        "at": 1792201292644,
+        "usedSize": 7107268,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4012416,
+        "backingStorageSize": 984126,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 12,
+        "at": 1792201295170,
+        "usedSize": 7164272,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3647144,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 13,
+        "at": 1792201297694,
+        "usedSize": 7118004,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3924896,
+        "backingStorageSize": 983943,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 14,
+        "at": 1792201300222,
+        "usedSize": 7167812,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3636576,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 15,
+        "at": 1792201302747,
+        "usedSize": 7148112,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3969272,
+        "backingStorageSize": 984254,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 16,
+        "at": 1792201305272,
+        "usedSize": 7212400,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3644632,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 17,
+        "at": 1792201307803,
+        "usedSize": 7138828,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3645448,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 18,
+        "at": 1792201310326,
+        "usedSize": 7243160,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3983952,
+        "backingStorageSize": 983943,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 19,
+        "at": 1792201312853,
+        "usedSize": 7224820,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3648672,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 20,
+        "at": 1792201315378,
+        "usedSize": 7216044,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4008128,
+        "backingStorageSize": 983940,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 21,
+        "at": 1792201317904,
+        "usedSize": 7250072,
+        "totalSize": 7798784,
+        "embedderHeapUsedSize": 3670616,
+        "backingStorageSize": 983764,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 22,
+        "at": 1792201320426,
+        "usedSize": 7275796,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4033712,
+        "backingStorageSize": 983942,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 23,
+        "at": 1792201322951,
+        "usedSize": 7318264,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3673192,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 24,
+        "at": 1792201325475,
+        "usedSize": 7270396,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 3993904,
+        "backingStorageSize": 984103,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 25,
+        "at": 1792201328000,
+        "usedSize": 7329220,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 3674040,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 26,
+        "at": 1792201330524,
+        "usedSize": 7331268,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3673704,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 27,
+        "at": 1792201333052,
+        "usedSize": 7343296,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3673064,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 28,
+        "at": 1792201335575,
+        "usedSize": 7376928,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4042072,
+        "backingStorageSize": 984234,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 387,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 29,
+        "at": 1792201338102,
+        "usedSize": 7256860,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3673760,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 30,
+        "at": 1792201340627,
+        "usedSize": 7368192,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 3976264,
+        "backingStorageSize": 984101,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 31,
+        "at": 1792201343153,
+        "usedSize": 7261160,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3667328,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 32,
+        "at": 1792201345682,
+        "usedSize": 7359760,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3675592,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 33,
+        "at": 1792201348207,
+        "usedSize": 7336492,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4038688,
+        "backingStorageSize": 984101,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 34,
+        "at": 1792201350732,
+        "usedSize": 7381016,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3676848,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 35,
+        "at": 1792201353257,
+        "usedSize": 7384352,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3676408,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 36,
+        "at": 1792201355783,
+        "usedSize": 8757376,
+        "totalSize": 10682368,
+        "embedderHeapUsedSize": 3918912,
+        "backingStorageSize": 983998,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 404,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 37,
+        "at": 1792201358314,
+        "usedSize": 7335092,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3675576,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 38,
+        "at": 1792201360838,
+        "usedSize": 7426012,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3675704,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 39,
+        "at": 1792201363364,
+        "usedSize": 7426652,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3675896,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 40,
+        "at": 1792201365888,
+        "usedSize": 7435580,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3677952,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 41,
+        "at": 1792201368414,
+        "usedSize": 7363856,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3678544,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 42,
+        "at": 1792201370938,
+        "usedSize": 7459784,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3678768,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 43,
+        "at": 1792201373465,
+        "usedSize": 7362960,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3677600,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 44,
+        "at": 1792201375991,
+        "usedSize": 7480084,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4053624,
+        "backingStorageSize": 984500,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 45,
+        "at": 1792201378517,
+        "usedSize": 7456092,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3678608,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 46,
+        "at": 1792201381043,
+        "usedSize": 7475316,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4009488,
+        "backingStorageSize": 984109,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 47,
+        "at": 1792201383569,
+        "usedSize": 7463972,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3679736,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 48,
+        "at": 1792201386093,
+        "usedSize": 7486400,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4040600,
+        "backingStorageSize": 984489,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 49,
+        "at": 1792201388619,
+        "usedSize": 7471828,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 3681960,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 50,
+        "at": 1792201391146,
+        "usedSize": 7473140,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3682344,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 51,
+        "at": 1792201393670,
+        "usedSize": 7477312,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3682216,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 52,
+        "at": 1792201396197,
+        "usedSize": 7475488,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3678288,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 53,
+        "at": 1792201398721,
+        "usedSize": 7474768,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 3686280,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 54,
+        "at": 1792201401248,
+        "usedSize": 7483528,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 3686288,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 55,
+        "at": 1792201403772,
+        "usedSize": 7495288,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4050784,
+        "backingStorageSize": 984138,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 56,
+        "at": 1792201406298,
+        "usedSize": 7510672,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3685336,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 57,
+        "at": 1792201408822,
+        "usedSize": 7509912,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4044776,
+        "backingStorageSize": 984222,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 58,
+        "at": 1792201411347,
+        "usedSize": 7514628,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 3686344,
+        "backingStorageSize": 983923,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 59,
+        "at": 1792201413872,
+        "usedSize": 7518636,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4022992,
+        "backingStorageSize": 984092,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 60,
+        "at": 1792201416421,
+        "usedSize": 7463124,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4063600,
+        "backingStorageSize": 984248,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 61,
+        "at": 1792201418948,
+        "usedSize": 7539512,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 3682920,
+        "backingStorageSize": 983928,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 62,
+        "at": 1792201421490,
+        "usedSize": 7559020,
+        "totalSize": 8585216,
+        "embedderHeapUsedSize": 4827048,
+        "backingStorageSize": 984202,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 63,
+        "at": 1792201424065,
+        "usedSize": 7518496,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4452128,
+        "backingStorageSize": 984113,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 64,
+        "at": 1792201426602,
+        "usedSize": 7625804,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4633312,
+        "backingStorageSize": 984116,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 65,
+        "at": 1792201429130,
+        "usedSize": 7609616,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4239032,
+        "backingStorageSize": 983928,
+        "documents": 3,
+        "nodes": 1207,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 66,
+        "at": 1792201431655,
+        "usedSize": 7625908,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4626432,
+        "backingStorageSize": 984114,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 67,
+        "at": 1792201434183,
+        "usedSize": 7606964,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4238904,
+        "backingStorageSize": 983928,
+        "documents": 3,
+        "nodes": 1207,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 68,
+        "at": 1792201436709,
+        "usedSize": 7605836,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4238032,
+        "backingStorageSize": 983928,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 69,
+        "at": 1792201439235,
+        "usedSize": 7584288,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4614560,
+        "backingStorageSize": 984169,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 70,
+        "at": 1792201441762,
+        "usedSize": 7633004,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4244976,
+        "backingStorageSize": 983928,
+        "documents": 3,
+        "nodes": 1208,
+        "jsEventListeners": 378,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      },
+      {
+        "cycle": 70.1,
+        "at": 1792201456784,
+        "usedSize": 7902252,
+        "totalSize": 10682368,
+        "embedderHeapUsedSize": 4659472,
+        "backingStorageSize": 984183,
+        "documents": 3,
+        "nodes": 1209,
+        "jsEventListeners": 404,
+        "dom": {
+          "engine": "gsap",
+          "audit": "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0}",
+          "stageCount": 1,
+          "canvases": 1,
+          "debugs": 1
+        }
+      }
+    ],
+    "errors": []
+  }
+]

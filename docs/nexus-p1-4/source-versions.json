@@ -1,0 +1,1091 @@
+{
+  "repositories": {
+    "crm": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm",
+      "head": "5d6941e0b82a5a46e76cce4227391bac5ea1650e",
+      "branch": "main",
+      "status": "",
+      "remote": "https://github.com/AceHub-12138/machinery-crm.git"
+    },
+    "desktop": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-desktop",
+      "head": "479a482a8fa2aa395a6abdd1cdd6f0d9249de825",
+      "branch": "main",
+      "status": "",
+      "remote": "https://github.com/AceHub-12138/machinery-crm-desktop.git"
+    },
+    "nexus": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-4-motion-audit",
+      "head": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "branch": "codex/nexus-p1-4-motion-audit",
+      "status": "?? docs/nexus-p1-4/\n?? scripts/p1-4/",
+      "remote": "https://github.com/AceHub-12138/machinery-crm-visual-dashboard.git"
+    }
+  },
+  "files": [
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/admin/cockpit/page.tsx",
+      "sha256": "4176248091815484222411b849d6f166f09800bb62affac7a8936fa4d0ce23dc",
+      "hits": 5,
+      "kinds": [
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/customers/[id]/edit/page.tsx",
+      "sha256": "27741f3b6b1fff33d6cbbac49841aec84e45cd4e69fae6a3b44ef32f9ba176b8",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/customers/[id]/page.tsx",
+      "sha256": "4fa13fbe87bf8d37c019f72e93c73d3b37915d63e0c7ffcd0e911a6015d02bd3",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/customers/new/page.tsx",
+      "sha256": "a3086e3bab07d180dc399e82edb540f99c538289ae04c78f13329dd7b5aa7c99",
+      "hits": 3,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/customers/page.tsx",
+      "sha256": "e537cb66287af1eaffc6b04ac34944164f1218f4c507267a60d8c85238a82d33",
+      "hits": 3,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/dashboard/erp/page.tsx",
+      "sha256": "dce0e2e8902af73dbecf56c3555c231b6deb1d58544b2c7dd5f7851f757e0bfe",
+      "hits": 4,
+      "kinds": [
+        "css",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/dashboard/page.tsx",
+      "sha256": "2f949db78513d25103bf5790282fcacde666764814cedb8c44b06d76ed6b97cb",
+      "hits": 10,
+      "kinds": [
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/erp/inventory/page.tsx",
+      "sha256": "cd305da6dd9cc9faeabacaaf12ff1f18a4c01cdc068b43ec2b0e885261edabee",
+      "hits": 1,
+      "kinds": [
+        "raf"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/erp/kit-check-results/page.tsx",
+      "sha256": "3cafc537f20dad7a47389ed0e840c2649fddeeb344b6c03964bcce5f08caf49f",
+      "hits": 3,
+      "kinds": [
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/erp/production-orders/[id]/page.tsx",
+      "sha256": "c2800d8e9bfb3e5216de348a0440ceb48c881f2001fc88aa6fc5cccf0fb15bfe",
+      "hits": 16,
+      "kinds": [
+        "gsap",
+        "lifecycle",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/erp/stock-in/page.tsx",
+      "sha256": "4a354466c990cd701a2c57b3f9619dbbd52f1cf73887117b74ab271d75837e33",
+      "hits": 1,
+      "kinds": [
+        "raf"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/erp/stock-out/page.tsx",
+      "sha256": "b1397ca0f89d0f7106623d5b7bd97167dbd0cb86f462169576122df917241178",
+      "hits": 1,
+      "kinds": [
+        "raf"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/products/[id]/page.tsx",
+      "sha256": "d5a3b32f10684312e0dc8294c4bfd05e358f81712b2e4e2edcb00dee94e3c537",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/products/page.tsx",
+      "sha256": "11d9a0c205a23d61f49e50bca39620a8905031a22dbdb78c28f634c86d11902c",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/(app)/reminders/page.tsx",
+      "sha256": "dd0ea8746a64924d074692a83593eeb5150a67737b6d08cdae11a83f03dd209e",
+      "hits": 2,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/globals.css",
+      "sha256": "11be6dc9ba95a8c881521c528dcb6ea961e1233fdaed3b6f7dfeda980b5b9db8",
+      "hits": 5,
+      "kinds": [
+        "css",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/app/login/page.tsx",
+      "sha256": "6038276d86b1ecc6e150fa62d8201aa83873e5e1b54ec1c0bc722b489405d5c5",
+      "hits": 13,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/customers/customer-lifecycle-bar.tsx",
+      "sha256": "c0c18f7a896537a38e4a6813f388ee523aca020b5b75aa78755f556e3e5ddde5",
+      "hits": 9,
+      "kinds": [
+        "gsap"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/dachuan-pet/ChatPanel.tsx",
+      "sha256": "8c88110a10f72a8c78d9020771cb7d3aa805eb42205311a7a494f195fe178aed",
+      "hits": 4,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/dachuan-pet/FloatingPet.module.css",
+      "sha256": "64ee8c0edd01f9f9aa7c2d5a9aeafb63bfd089226a4c5639128737b21526edbf",
+      "hits": 10,
+      "kinds": [
+        "css",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/dachuan-pet/FloatingPet.tsx",
+      "sha256": "ae2d161e31ad6382b642d1595eb72a8b223bf1297b5bd83d3384dd7baf4a3abd",
+      "hits": 4,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/dashboard/sales-target-card.tsx",
+      "sha256": "b885bfc0ddf243da55ca9a3d1b0c6c7ac56b798162bdaf3d19abc189918e12b6",
+      "hits": 2,
+      "kinds": [
+        "css",
+        "graphics"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/desktop-download.tsx",
+      "sha256": "ad6996176800279d84ccb05f5332a695dbccbc225177db947ba33bf1775e19b7",
+      "hits": 4,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/layout/app-shell.tsx",
+      "sha256": "787f736352d4b8e2bdd0390760e92eaa9ff2ad10a463ad52d45467680c45e345",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/layout/floating-sidebar.tsx",
+      "sha256": "984c11b7f5b4ec372369753308f17c664c1daa335076e71cd173999d7e658ecb",
+      "hits": 14,
+      "kinds": [
+        "css",
+        "gsap"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/layout/global-search-dialog.tsx",
+      "sha256": "e37a4fc6300676b8f1eb7445a0d6e2c85bb0d20afbdca5b3307f2c0ae96139c5",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/layout/sidebar.tsx",
+      "sha256": "2fecdab263505b68c7eb9b7136e3ad543fc46b69fbc8b01feebbf2d66b166132",
+      "hits": 7,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/layout/theme-control.tsx",
+      "sha256": "a1b9400bed6851b2e788353bb2cc609f4f62477734481418d83d919f6afc515e",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/layout/topbar.tsx",
+      "sha256": "245f7f559b7c28295cb436af44946e33c4c9c1143f9f8fd364fea943845527b6",
+      "hits": 2,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/layout/user-menu.tsx",
+      "sha256": "44d3b8712203f7132c6ea5b0c9574e240dd294db74f9b556d0cbc07630c4e23b",
+      "hits": 4,
+      "kinds": [
+        "css",
+        "raf"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/leads/lead-detail-client.tsx",
+      "sha256": "fefd32bbb9e167c67f130dc6d3eb07447dec46b367df1a0a6d3180937208b09b",
+      "hits": 17,
+      "kinds": [
+        "gsap",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/leads/lead-list-client.tsx",
+      "sha256": "ff4caa1910e99d0e4a923664dacdc0f4957fd538173d4217f0c62893b9a8f20b",
+      "hits": 10,
+      "kinds": [
+        "gsap",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/maps/amap-shipment-map.tsx",
+      "sha256": "d40b7337b5d92839e69f257c936abe70c1cb01a98404eb2b6039df00977b2cd1",
+      "hits": 8,
+      "kinds": [
+        "css",
+        "raf"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/motion/AnimatedNumber.tsx",
+      "sha256": "00323f35ecb9f369b68d0a9c8db70a6b00c00143a5891744a84882f26e7f338e",
+      "hits": 9,
+      "kinds": [
+        "gsap",
+        "lifecycle",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/motion/MotionPage.tsx",
+      "sha256": "e063f605033a39fb4ce33cbf78363c393df6f6439256dd5f91a956be998af0a1",
+      "hits": 9,
+      "kinds": [
+        "gsap",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/motion/StaggerContainer.tsx",
+      "sha256": "752934c6e65ba4f5e5c0f8717e50adac628812207aaa83883d5c094d848c88cf",
+      "hits": 8,
+      "kinds": [
+        "gsap",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/screen/AnimatedNumber.tsx",
+      "sha256": "1fd8d925fa8124d605e7aac7250356983392fe10c68d6bd9d44d2aa4f6258a74",
+      "hits": 5,
+      "kinds": [
+        "lifecycle",
+        "orchestration-consumer",
+        "raf"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/screen/HeaderBar.tsx",
+      "sha256": "2640a65a10dc5e6e2c59e29608fffec07dcf289003a145571befd78493c0c1ea",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/screen/KpiRail.tsx",
+      "sha256": "d159bda0eb3357f8d2603090bb3115bff800167009646ef81f760c596c103ddb",
+      "hits": 3,
+      "kinds": [
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/screen/ShipmentMap.tsx",
+      "sha256": "1a59a980123279817aae26fe3526289497e5d9bf2a68f8d2ba9bbe8bdeba82f5",
+      "hits": 2,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/screen/TargetRing.tsx",
+      "sha256": "1ec2ab96956542aa87cdbb4f9ab908e94e77b48b584aed0e8d8e974937cb75cd",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/screen/sales-screen.css",
+      "sha256": "024772356f0795c7ef1b83deebd10656b68890de9a84ac8ded24a6a77b0617ec",
+      "hits": 11,
+      "kinds": [
+        "css",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/ui/confirm-dialog.tsx",
+      "sha256": "90e41e67c5403affa59ed0240b892041498e29a6229a46ecef3116e7e512f5e6",
+      "hits": 8,
+      "kinds": [
+        "gsap",
+        "raf"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/ui/dialog.tsx",
+      "sha256": "1f47a288631388cdb5283f71ef43c2b6f9e0b14515a560a8d2503df23eeab28c",
+      "hits": 8,
+      "kinds": [
+        "gsap",
+        "raf"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/ui/loading-skeleton.tsx",
+      "sha256": "4c229dfe02382b559f95edc76be4f97f0b3203e1809db294a281f3da2f643e6d",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/ui/metric-card.tsx",
+      "sha256": "87800cde28df3087f09e5106b6eba559c93deaf373a34e8e0aea33650ccf903e",
+      "hits": 2,
+      "kinds": [
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/ui/segmented-control.tsx",
+      "sha256": "250f96ec46dd65ba3fb53579ff7cd1b7d4cccf1e508f6143bcc4fe0e3dffa398",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/xiaochuan/XiaochuanChat.tsx",
+      "sha256": "a7ecacafc0f41cbc2d3233d73e59512dbb28df87c3e882e4f40ce71be862862f",
+      "hits": 19,
+      "kinds": [
+        "css",
+        "graphics",
+        "gsap"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/xiaochuan/message-actions.tsx",
+      "sha256": "67f58b4496ebb75466b3c29df61061c9d1fe73fa8253468b8ea1004fa5bafce6",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/xiaochuan/spline-scene.tsx",
+      "sha256": "d0d88c8c1d13c62f63ad08d8e90b5d58b66e6788e99aa95cbc6d89d09a9425fe",
+      "hits": 6,
+      "kinds": [
+        "css",
+        "graphics"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/xiaochuan/spotlight.tsx",
+      "sha256": "d73630de96bf13308c24576bfbbfc514198e13bf0673c5ca3324a2b2f6ac506c",
+      "hits": 2,
+      "kinds": [
+        "css",
+        "other-engine"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/xiaochuan/xiaochuan-input.tsx",
+      "sha256": "5e24b909e8af47e9bb2f88fe468456dfddc8e460cb5cfce3ba7f0c5a21e2f855",
+      "hits": 8,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/components/xiaochuan/xiaochuan-login.tsx",
+      "sha256": "49563e38b47898dd56c1710df4edb1c9d64fd22efca66cadcfcec4bdddfeb5db",
+      "hits": 5,
+      "kinds": [
+        "css",
+        "graphics"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/hooks/useReducedMotion.ts",
+      "sha256": "952f97ec1c6aaeb56bc14a2abfe829dbb23579236a69849e73dabc3febe28c6d",
+      "hits": 1,
+      "kinds": [
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/lib/agent/cad/analyze.ts",
+      "sha256": "dbda22bd6b670f11c8bfe126479f9833f9977c0f6f68cf33319bf6aea1b3b0b2",
+      "hits": 1,
+      "kinds": [
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/lib/motion/config.ts",
+      "sha256": "6c967b2b53bbaa95c6078f40c2a50db13248d98796008165e2712b290edda8b9",
+      "hits": 5,
+      "kinds": [
+        "gsap"
+      ]
+    },
+    {
+      "repo": "crm",
+      "file": "src/lib/xiaochuan/pdf-page-render.ts",
+      "sha256": "e1c52496cdf2aed50eebecd48d8849acafebe6c93e166608ce19ab9ac604c796",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "electron/main.ts",
+      "sha256": "ec31feadaf3d847684968549fdca0fe94922253ff83ec2dc34dc2a28031b8629",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/App.tsx",
+      "sha256": "47ce09950887f54041956c4c574a0eb5df80f2574bafccb2ce30c85ac8ae8b2d",
+      "hits": 2,
+      "kinds": [
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/ParticleField.tsx",
+      "sha256": "3f90e60629206637e9be439df02c53cde7376f06c38f77bec59189c4316a2aa1",
+      "hits": 6,
+      "kinds": [
+        "graphics",
+        "lifecycle",
+        "orchestration-consumer",
+        "raf"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/Sidebar.tsx",
+      "sha256": "6523b702dcd9fbf7d90747114e0a76725e3aa1f4f0f7772cb242d42ba01521ca",
+      "hits": 4,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/TerritoryPicker.tsx",
+      "sha256": "e2f151beb58b1dd53f3a2547e62acc7401b737089bffc35f99a5d6ff9cddbb77",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/TitleBar.tsx",
+      "sha256": "e52218fceb8dd9e73d2a348a6fd3072a547537e657447ac4843ff7e6002f46ce",
+      "hits": 2,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/fx.tsx",
+      "sha256": "4a2a69b91445c96863eec4472e76b7318f3b6fa9157aea4dda4e080e5064c95f",
+      "hits": 9,
+      "kinds": [
+        "css",
+        "graphics",
+        "orchestration-consumer",
+        "raf"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/sales-screen-config.tsx",
+      "sha256": "9b50ac744137c3c3411c033d9f0ddbabd42c30af95f55f55119a5ea032b2c4c2",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/shipment-detail.tsx",
+      "sha256": "5b9dcb901cabe8b3843a9e3201ecfd0fc1b5aecaa2a79d3bd8b64189c2ce255f",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/ui.tsx",
+      "sha256": "fc190df670836715bd69b5c959850cfd650b7107948eca9a726609407c8d0ae7",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/components/update-banner.tsx",
+      "sha256": "21add743acfd4471c272f054546566a39233bcbb72294c886ff95ffd46545ab8",
+      "hits": 5,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/lib/motion.ts",
+      "sha256": "d5316de848b4691abd602336d804acbb38c006fdf924d2090a98ff387f27b69f",
+      "hits": 5,
+      "kinds": [
+        "gsap",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/lib/pdf-pages.ts",
+      "sha256": "35a6f09004a0c6e4a453a9d5e5eb397c79891dfadf4ebb2dc8f819b183c92538",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/styles.css",
+      "sha256": "7f5688d4ede89d60e645cacec5cf3c0166314b3ab6dde656c52fea33f1c47a7c",
+      "hits": 46,
+      "kinds": [
+        "css",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/AdminAgentView.tsx",
+      "sha256": "1e59965e3ffbeecc78a84c45a08f24fd59b34912e49d7887ec09f20c9bdc01d7",
+      "hits": 7,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/AdminCockpitView.tsx",
+      "sha256": "9c7a3a7f6dd1656295e2e736fcf11292ec063b3d51507919464072d030b02064",
+      "hits": 3,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/AdminConfigView.tsx",
+      "sha256": "585846a7e0c4c4ea846c17c357a62a81a536d1c8b494d0195ec177d2f049eb0d",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/AdminHealthView.tsx",
+      "sha256": "9f8e19baaa061a849638324d6a9a7b88c11a78b733c3054b46613d98f82d2180",
+      "hits": 2,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/AdminMasterDataView.tsx",
+      "sha256": "955482a29df3486a409ee8e3db0bc7821cb55bae90be9b725751c89b7130a462",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/ChatView.tsx",
+      "sha256": "cde664beac7b5100291441c40a06b00272f14031789a66867744e0cb8211f5df",
+      "hits": 11,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/ContractDeleteRequestsView.tsx",
+      "sha256": "26c4ad727eaca2089e5286a4a5c57301b53dc7f1309b6f500c1c250d10dfe398",
+      "hits": 3,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/ContractUnlockRequestsView.tsx",
+      "sha256": "fb976ff5abca8e4452a40f5d6c60cd0a9da5632232ca3bd4b1a549cde167270c",
+      "hits": 3,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/ContractsView.tsx",
+      "sha256": "651047ff25b5d1d57cb395dee542cf9924c1f88f854797141021dca6f0200f02",
+      "hits": 2,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/DashboardView.tsx",
+      "sha256": "ee0f0c60fed8bdd83714ff2998ffa8a473118af159a1d495e45625ed6ec51e6d",
+      "hits": 5,
+      "kinds": [
+        "css",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/LoginView.tsx",
+      "sha256": "306c091e5613265fa495e1abd11ad2c9eec106bce7c060b82d59a5a88c4a68ea",
+      "hits": 7,
+      "kinds": [
+        "css",
+        "lifecycle",
+        "orchestration-consumer",
+        "raf"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/OperationLogsView.tsx",
+      "sha256": "7325ed14408d397233f4154b87f491276b7c3e0df0d06e4594e58a08f7b57c4e",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/RemindersView.tsx",
+      "sha256": "694a3dc2e0c5e873e0f40de7c22b8f86201009cf8f74a6a5e6cba58c3a003de8",
+      "hits": 5,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/SettingsView.tsx",
+      "sha256": "5776e1f3775a25396cbc50d05195e20ce51155c939085316757513eb17a4184b",
+      "hits": 6,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/ShipmentsView.tsx",
+      "sha256": "c3ebe8f277f22e0f70f2215e2c8f5e1b271c9255253545f0df13811f88c5147c",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/TasksView.tsx",
+      "sha256": "60d79624c4611a53ce9c7edb1e80605b4ae46582b8868a53060ca9667c02c243",
+      "hits": 3,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/UsersView.tsx",
+      "sha256": "082d2c222a5a1f5f3de9fa324aff1a88d507ed9df81f32300ed43d35f0ffe123",
+      "hits": 17,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/erp/DashboardPage.tsx",
+      "sha256": "8dcd734bb5bf87ab8f55d6c5e0f617ce794f3ed2d0063fdf70ae2c2d1efe40c1",
+      "hits": 1,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/erp/WarehousePage.tsx",
+      "sha256": "a20d43530cf6010f3b8cc99fd29fc2df84833cf43ba5251c12c977b682f7ee62",
+      "hits": 2,
+      "kinds": [
+        "css"
+      ]
+    },
+    {
+      "repo": "desktop",
+      "file": "src/views/erp/print-sheet.tsx",
+      "sha256": "095533d61033ae5ce471da8232a36faedbaa14d4abd3843087f93197ddb4e277",
+      "hits": 3,
+      "kinds": [
+        "raf"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/app/globals.css",
+      "sha256": "f197f7d5208378f5b19c602cf8395526126fb9046c1958700bfb8448e1abe64f",
+      "hits": 14,
+      "kinds": [
+        "css",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/app/screen/sales/page.tsx",
+      "sha256": "c70104ef24a807e77649aa5026e8ae49f8023dcb835e575c72240972810491d4",
+      "hits": 1,
+      "kinds": [
+        "gsap"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/overlay/AnswerCard.tsx",
+      "sha256": "594560d7ca0851dabaad557222e63d33cc62bc4b2df2c1ac1a992948e87676aa",
+      "hits": 5,
+      "kinds": [
+        "graphics",
+        "raf"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/overlay/JarvisCore.tsx",
+      "sha256": "4671f50081b8751200a10ae9f75a29b72d50c10c5d62cb965f1bf7af9d1a8c73",
+      "hits": 9,
+      "kinds": [
+        "graphics",
+        "raf"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/overlay/OverlayStage.tsx",
+      "sha256": "8383aacb99373a56968f7f6a9f1ab2f0b34d0d71b0d9e00a73d8165e72fdad76",
+      "hits": 6,
+      "kinds": [
+        "raf"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/overlay/cards/CardMetrics.tsx",
+      "sha256": "f5ac92b907eccf37bff406937a60702c9e78377087886a5ad38bc82a1a6b06fe",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/overlay/cards/CompletionRingCard.tsx",
+      "sha256": "8d9ddc5378efc0caeb70aafcee7cf0d6167431196c7329a129f1e046a8455594",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/overlay/cards/RegionCard.tsx",
+      "sha256": "986df01fbbe90576b741a7ecc469d46e4d4d5e83e58ac41b29ff5077ff33c580",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/overlay/overlay.css",
+      "sha256": "270b70976764a58061794f3ddcee5e06b0b08aa74916d30838e4d611c77843c0",
+      "hits": 9,
+      "kinds": [
+        "css",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/AnimatedNumber.tsx",
+      "sha256": "bbf2796e3af0cf25a15e10a9f10445f579b4ecd96a732a5608231956e3a57153",
+      "hits": 1,
+      "kinds": [
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/KpiRail.tsx",
+      "sha256": "9ffb5907bd112d6741b66c89d06d49afc75944f44cd944685f3380df73ac1c4f",
+      "hits": 3,
+      "kinds": [
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/MachineThumbnail.tsx",
+      "sha256": "62349eee93e4be4e13866bc427b2db66fd3f957842e0665a13f7e366f7f483b5",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/NexusPanels.tsx",
+      "sha256": "d1a6065bd4dde0cef5ba199bdf396741849b9bf76593dc6470318a5d8da0bcaf",
+      "hits": 10,
+      "kinds": [
+        "graphics",
+        "orchestration-consumer"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/ScreenStage.tsx",
+      "sha256": "5058c1801dee6243f8655dce4058df00dca7f71663f993f57fa1ad5d55515fa4",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/ShipmentMap.tsx",
+      "sha256": "e886eebdea938e9f6babc5718717e4f4a2048482108b5bc752a40f1b9882af4f",
+      "hits": 2,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/TargetRing.tsx",
+      "sha256": "35dac7401c13eb6ab5a6485c8a29a062e1d709d3cd6b7b0d9c242d756b0e5269",
+      "hits": 1,
+      "kinds": [
+        "graphics"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/motion/GsapMotionProvider.tsx",
+      "sha256": "5ca204fbacb1161c87c9ad7309e1565fc8f5098604379deb9269aa1b3099f449",
+      "hits": 7,
+      "kinds": [
+        "gsap",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/motion/GsapScene.ts",
+      "sha256": "9c74f7b52f6a6c8ad1e4a9617cde2c8de42123f85e278bdd5d84f1d2263aedb6",
+      "hits": 9,
+      "kinds": [
+        "gsap",
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/motion/MotionProvider.tsx",
+      "sha256": "68a1f552b3514767ec16db92176e01c1a532b9d5834d718d08cd490f414dde09",
+      "hits": 6,
+      "kinds": [
+        "gsap",
+        "lifecycle",
+        "raf"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/components/screen/motion/useSceneMotion.ts",
+      "sha256": "9a4a4b60bacc101e24bc567adc9a6fd21cab698326f2077228aafc8efc978653",
+      "hits": 2,
+      "kinds": [
+        "graphics",
+        "gsap"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/lib/use-reduced-motion.ts",
+      "sha256": "1a7f2ff1b74e74b873b0addcd573c93a34e346502b264862948ec4982073716b",
+      "hits": 1,
+      "kinds": [
+        "lifecycle"
+      ]
+    },
+    {
+      "repo": "nexus",
+      "file": "src/lib/voice/card-presentation.ts",
+      "sha256": "cf05758a5d8960e3c564254aa306dcadf2ea474b5252adceb2fa7f6888cc9e06",
+      "hits": 1,
+      "kinds": [
+        "other-engine"
+      ]
+    }
+  ]
+}

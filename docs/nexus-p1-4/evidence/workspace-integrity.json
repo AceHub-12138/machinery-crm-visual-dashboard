@@ -1,0 +1,96 @@
+{
+  "before": {
+    "crm": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm",
+      "head": "5d6941e0b82a5a46e76cce4227391bac5ea1650e",
+      "branch": "main",
+      "status": "",
+      "trackedDiff": "",
+      "remote": "https://github.com/AceHub-12138/machinery-crm.git"
+    },
+    "desktop": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-desktop",
+      "head": "479a482a8fa2aa395a6abdd1cdd6f0d9249de825",
+      "branch": "main",
+      "status": "",
+      "trackedDiff": "",
+      "remote": "https://github.com/AceHub-12138/machinery-crm-desktop.git"
+    },
+    "nexus": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-4-motion-audit",
+      "head": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "branch": "codex/nexus-p1-4-motion-audit",
+      "status": "M next-env.d.ts",
+      "trackedDiff": "next-env.d.ts | 1 +\n 1 file changed, 1 insertion(+)",
+      "remote": "https://github.com/AceHub-12138/machinery-crm-visual-dashboard.git"
+    },
+    "poc": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-gsap-poc",
+      "head": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "branch": "codex/nexus-gsap-poc",
+      "status": "",
+      "trackedDiff": "",
+      "remote": "https://github.com/AceHub-12138/machinery-crm-visual-dashboard.git"
+    },
+    "p13": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-3",
+      "head": "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1",
+      "branch": "codex/nexus-p1-3-visual",
+      "status": "",
+      "trackedDiff": "",
+      "remote": "https://github.com/AceHub-12138/machinery-crm-visual-dashboard.git"
+    },
+    "screen-main": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard",
+      "head": "a43fb6ce427307024dfb97a7889d9af9ebf58da9",
+      "branch": "main",
+      "status": "M next-env.d.ts\n?? docs/audits/\n?? \"docs/design/answer-card-mockups/\\346\\225\\210\\346\\236\\234\\345\\233\\276_1_\\345\\214\\272\\345\\237\\237\\345\\217\\221\\350\\277\\220\\345\\210\\206\\345\\270\\203.png\"\n?? \"docs/design/answer-card-mockups/\\346\\225\\210\\346\\236\\234\\345\\233\\276_2_\\347\\233\\256\\346\\240\\207\\345\\256\\214\\346\\210\\220\\347\\216\\207.png\"\n?? \"docs/design/answer-card-mockups/\\346\\225\\210\\346\\236\\234\\345\\233\\276_3_\\345\\220\\210\\345\\220\\214\\351\\242\\235\\347\\233\\256\\346\\240\\207\\350\\277\\233\\345\\272\\246.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_1_\\351\\224\\200\\345\\224\\256\\346\\203\\205\\345\\206\\265.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_2_\\347\\233\\256\\346\\240\\207\\345\\256\\214\\346\\210\\220\\347\\216\\207.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_3_\\345\\214\\272\\345\\237\\237\\345\\217\\221\\350\\264\\247.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_4_\\345\\217\\221\\350\\264\\247\\345\\256\\211\\346\\216\\222.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_5_\\346\\226\\260\\345\\242\\236\\345\\256\\242\\346\\210\\267.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_6_\\350\\267\\237\\350\\277\\233\\345\\276\\205\\345\\212\\236.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_7_\\345\\233\\236\\346\\254\\276.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_8_\\347\\255\\224\\344\\270\\215\\344\\270\\212\\346\\235\\245.png\"",
+      "trackedDiff": "next-env.d.ts | 1 +\n 1 file changed, 1 insertion(+)",
+      "remote": "https://github.com/AceHub-12138/machinery-crm-visual-dashboard.git"
+    }
+  },
+  "after": {
+    "crm": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm",
+      "head": "5d6941e0b82a5a46e76cce4227391bac5ea1650e",
+      "branch": "main",
+      "status": ""
+    },
+    "desktop": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-desktop",
+      "head": "479a482a8fa2aa395a6abdd1cdd6f0d9249de825",
+      "branch": "main",
+      "status": ""
+    },
+    "nexus": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-4-motion-audit",
+      "head": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "branch": "codex/nexus-p1-4-motion-audit",
+      "status": "?? docs/nexus-p1-4/\n?? scripts/p1-4/"
+    },
+    "poc": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-gsap-poc",
+      "head": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "branch": "codex/nexus-gsap-poc",
+      "status": ""
+    },
+    "p13": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-3",
+      "head": "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1",
+      "branch": "codex/nexus-p1-3-visual",
+      "status": ""
+    },
+    "screen-main": {
+      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard",
+      "head": "a43fb6ce427307024dfb97a7889d9af9ebf58da9",
+      "branch": "main",
+      "status": "M next-env.d.ts\n?? docs/audits/\n?? \"docs/design/answer-card-mockups/\\346\\225\\210\\346\\236\\234\\345\\233\\276_1_\\345\\214\\272\\345\\237\\237\\345\\217\\221\\350\\277\\220\\345\\210\\206\\345\\270\\203.png\"\n?? \"docs/design/answer-card-mockups/\\346\\225\\210\\346\\236\\234\\345\\233\\276_2_\\347\\233\\256\\346\\240\\207\\345\\256\\214\\346\\210\\220\\347\\216\\207.png\"\n?? \"docs/design/answer-card-mockups/\\346\\225\\210\\346\\236\\234\\345\\233\\276_3_\\345\\220\\210\\345\\220\\214\\351\\242\\235\\347\\233\\256\\346\\240\\207\\350\\277\\233\\345\\272\\246.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_1_\\351\\224\\200\\345\\224\\256\\346\\203\\205\\345\\206\\265.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_2_\\347\\233\\256\\346\\240\\207\\345\\256\\214\\346\\210\\220\\347\\216\\207.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_3_\\345\\214\\272\\345\\237\\237\\345\\217\\221\\350\\264\\247.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_4_\\345\\217\\221\\350\\264\\247\\345\\256\\211\\346\\216\\222.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_5_\\346\\226\\260\\345\\242\\236\\345\\256\\242\\346\\210\\267.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_6_\\350\\267\\237\\350\\277\\233\\345\\276\\205\\345\\212\\236.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_7_\\345\\233\\236\\346\\254\\276.png\"\n?? \"docs/design/answer-card-mockups/\\347\\216\\260\\347\\212\\266_8_\\347\\255\\224\\344\\270\\215\\344\\270\\212\\346\\235\\245.png\""
+    }
+  },
+  "productDiffFromPoC": "",
+  "p13IsAncestor": true,
+  "push": false,
+  "merge": false,
+  "deploy": false,
+  "task11": false
+}

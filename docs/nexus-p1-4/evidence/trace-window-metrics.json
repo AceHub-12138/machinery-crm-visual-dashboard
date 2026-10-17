@@ -1,0 +1,1382 @@
+[
+  {
+    "file": "gsap-1920-trace-metrics.json",
+    "actualMs": 12004,
+    "metrics": {
+      "measuredMs": 12004,
+      "callbacks": 721,
+      "fps": 60.003385240352074,
+      "intervalP95Ms": 16.700000000000728,
+      "intervalP99Ms": 16.80000000000109,
+      "missedVsyncEstimate": 0,
+      "missedVsyncPercent": 0,
+      "callbackP95Ms": 0.40000000037252903,
+      "callbackP99Ms": 0.5,
+      "callbackTotalMs": 213.39999999199063,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "AMBIENT",
+      "level": "normal"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.716116,
+      "ScriptDuration": 0.290664,
+      "LayoutDuration": 0.03975200000000001,
+      "RecalcStyleDuration": 0.118286
+    },
+    "errors": [],
+    "dom": {
+      "hidden": false,
+      "dpr": 1,
+      "canvas": [
+        {
+          "class": "nexus-particles",
+          "width": 1920,
+          "height": 1080,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1920,
+            "height": 1080,
+            "top": 0,
+            "right": 1920,
+            "bottom": 1080,
+            "left": 0
+          }
+        }
+      ],
+      "svgPaths": 451,
+      "svgs": 16,
+      "filters": [
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "circle",
+          "class": "nexus-dial-progress",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.6) 0px 0px 5px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 1 0.352941 0.235294 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 0.933333 0.490196 0.172549 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 0.933333 0.490196 0.172549 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        }
+      ],
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080,
+        "top": 0,
+        "right": 1920,
+        "bottom": 1080,
+        "left": 0
+      }
+    },
+    "segments": [
+      {
+        "time": 4181.0999999996275,
+        "fps": 60.00600060005997,
+        "p95Ms": 16.700000000000273,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5183.5999999996275,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.800000000000182,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6186.399999999441,
+        "fps": 60.00813669650123,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7189,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8191,
+        "fps": 60.00813669650123,
+        "p95Ms": 16.699999999999818,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 9193.699999999255,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 10196.899999999441,
+        "fps": 60.00600060006003,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 11199,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 12200.799999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 13203.299999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 14206.199999999255,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 15181.199999999255,
+        "fps": 60.0041382164287,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "file": "gsap-3840-trace-metrics.json",
+    "actualMs": 18003,
+    "metrics": {
+      "measuredMs": 18003,
+      "callbacks": 782,
+      "fps": 43.74187712196771,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.100000000000364,
+      "missedVsyncEstimate": 284,
+      "missedVsyncPercent": 27.099236641221374,
+      "callbackP95Ms": 0.5,
+      "callbackP99Ms": 0.599999999627471,
+      "callbackTotalMs": 245.49999994318932,
+      "longTasks": 1,
+      "longTaskTotalMs": 61,
+      "longTaskMaxMs": 61,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.7494470000000002,
+      "ScriptDuration": 0.35051299999999996,
+      "LayoutDuration": 0.048279,
+      "RecalcStyleDuration": 0.142091
+    },
+    "errors": [],
+    "dom": {
+      "hidden": false,
+      "dpr": 1,
+      "canvas": [
+        {
+          "class": "nexus-particles",
+          "width": 1920,
+          "height": 1080,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 3840,
+            "height": 2160,
+            "top": 0,
+            "right": 3840,
+            "bottom": 2160,
+            "left": 0
+          }
+        }
+      ],
+      "svgPaths": 451,
+      "svgs": 16,
+      "filters": [
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "circle",
+          "class": "nexus-dial-progress",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.6) 0px 0px 5px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 1 0.352941 0.235294 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 0.933333 0.490196 0.172549 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 0.933333 0.490196 0.172549 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        }
+      ],
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 3840,
+        "height": 2160,
+        "top": 0,
+        "right": 3840,
+        "bottom": 2160,
+        "left": 0
+      }
+    },
+    "segments": [
+      {
+        "time": 4190.5,
+        "fps": 20,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20.6
+      },
+      {
+        "time": 5193.5,
+        "fps": 20.691082143596102,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20.2
+      },
+      {
+        "time": 6196.299999999814,
+        "fps": 50.68790731354092,
+        "p95Ms": 49.900000000000546,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 20.4
+      },
+      {
+        "time": 7199.0999999996275,
+        "fps": 60.00600060005997,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 53.7
+      },
+      {
+        "time": 8201.099999999627,
+        "fps": 59.99593247915392,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 9204,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 10207.200000000186,
+        "fps": 60.00813669650129,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 11210.299999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 12212.599999999627,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.80000000000109,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 13214.799999999814,
+        "fps": 60,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 14215.900000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 15217,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 16219,
+        "fps": 26.318559848405105,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 60
+      },
+      {
+        "time": 17220.099999999627,
+        "fps": 20.341741253051282,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 21.2
+      },
+      {
+        "time": 18222.099999999627,
+        "fps": 19.63564961274134,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20.4
+      },
+      {
+        "time": 19224.700000000186,
+        "fps": 20.33967253127226,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 19.6
+      },
+      {
+        "time": 20227.599999999627,
+        "fps": 20.357869923925872,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20.2
+      },
+      {
+        "time": 21183,
+        "fps": 43.92543389757868,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 20.4
+      }
+    ]
+  },
+  {
+    "file": "headed-gsap-3840-trace-metrics.json",
+    "actualMs": 12004,
+    "metrics": {
+      "measuredMs": 12004,
+      "callbacks": 1201,
+      "fps": 99.98318197107287,
+      "intervalP95Ms": 10.900000000008731,
+      "intervalP99Ms": 11,
+      "missedVsyncEstimate": 0,
+      "missedVsyncPercent": 0,
+      "callbackP95Ms": 0.7000000001862645,
+      "callbackP99Ms": 1.3999999994412065,
+      "callbackTotalMs": 303.0000000698492,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "AMBIENT",
+      "level": "normal"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.711837000000001,
+      "ScriptDuration": 0.38838700000000004,
+      "LayoutDuration": 0.05283100000000002,
+      "RecalcStyleDuration": 0.1536280000000001
+    },
+    "segments": [
+      {
+        "time": 64240.10000000056,
+        "fps": 100.04001600640271,
+        "p95Ms": 10.900000000001455,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 65243.5,
+        "fps": 100.05053057099545,
+        "p95Ms": 10.900000000001455,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 66247.10000000056,
+        "fps": 100.00000000000072,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 67250.40000000037,
+        "fps": 99.95961227786665,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 68253.60000000056,
+        "fps": 99.93943064809295,
+        "p95Ms": 11,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 69257.20000000019,
+        "fps": 99.93943064809147,
+        "p95Ms": 11,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 70260.40000000037,
+        "fps": 100.01000100009914,
+        "p95Ms": 11,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 71263.60000000056,
+        "fps": 99.95961227786665,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 72266.29999999981,
+        "fps": 99.90917347865636,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 73270.10000000056,
+        "fps": 100,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 74273.5,
+        "fps": 100.04042037186683,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 75239.5,
+        "fps": 99.94794377928163,
+        "p95Ms": 10.89999999999418,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "file": "headed-legacy-3840-trace-metrics.json",
+    "actualMs": 12007,
+    "metrics": {
+      "measuredMs": 12007,
+      "callbacks": 1201,
+      "fps": 100.0075699590383,
+      "intervalP95Ms": 10.900000000008731,
+      "intervalP99Ms": 11,
+      "missedVsyncEstimate": 0,
+      "missedVsyncPercent": 0,
+      "callbackP95Ms": 1,
+      "callbackP99Ms": 1.2000000001862645,
+      "callbackTotalMs": 532.0999999437481,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "AMBIENT",
+      "level": "normal"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 2.904336999999998,
+      "ScriptDuration": 0.6299869999999999,
+      "LayoutDuration": 0.10114499999999998,
+      "RecalcStyleDuration": 0.2859959999999999
+    },
+    "segments": [
+      {
+        "time": 64275.699999999255,
+        "fps": 100.02000400079987,
+        "p95Ms": 10.89999999999418,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 65279,
+        "fps": 100.06064281382714,
+        "p95Ms": 10.900000000001455,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 66282.29999999981,
+        "fps": 100,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 67285.19999999925,
+        "fps": 100,
+        "p95Ms": 10.89999999999418,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 68288.39999999944,
+        "fps": 100.0707571009802,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 69292.59999999963,
+        "fps": 100.01000100010059,
+        "p95Ms": 10.80000000000291,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 70295.89999999944,
+        "fps": 99.91925716592623,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 71299.19999999925,
+        "fps": 100.08087343307753,
+        "p95Ms": 10.80000000000291,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 72301.39999999944,
+        "fps": 99.91925716592623,
+        "p95Ms": 10.80000000000291,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 73305.19999999925,
+        "fps": 100.01000100010059,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 74308.59999999963,
+        "fps": 100.01010203050872,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 75275.89999999944,
+        "fps": 99.98958441829068,
+        "p95Ms": 10.900000000008731,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "file": "legacy-1920-trace-metrics.json",
+    "actualMs": 12004,
+    "metrics": {
+      "measuredMs": 12004,
+      "callbacks": 720,
+      "fps": 60.002542480613556,
+      "intervalP95Ms": 16.700000000000728,
+      "intervalP99Ms": 16.800000000000182,
+      "missedVsyncEstimate": 0,
+      "missedVsyncPercent": 0,
+      "callbackP95Ms": 0.40000000037252903,
+      "callbackP99Ms": 0.40000000037252903,
+      "callbackTotalMs": 188.60000003688037,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "AMBIENT",
+      "level": "normal"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.6677139999999997,
+      "ScriptDuration": 0.264531,
+      "LayoutDuration": 0.039519,
+      "RecalcStyleDuration": 0.12230500000000002
+    },
+    "errors": [],
+    "dom": {
+      "hidden": false,
+      "dpr": 1,
+      "canvas": [
+        {
+          "class": "nexus-particles",
+          "width": 1920,
+          "height": 1080,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1920,
+            "height": 1080,
+            "top": 0,
+            "right": 1920,
+            "bottom": 1080,
+            "left": 0
+          }
+        }
+      ],
+      "svgPaths": 451,
+      "svgs": 16,
+      "filters": [
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "circle",
+          "class": "nexus-dial-progress",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.6) 0px 0px 5px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 1 0.352941 0.235294 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 0.933333 0.490196 0.172549 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 0.933333 0.490196 0.172549 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        }
+      ],
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080,
+        "top": 0,
+        "right": 1920,
+        "bottom": 1080,
+        "left": 0
+      }
+    },
+    "segments": [
+      {
+        "time": 4217.299999999814,
+        "fps": 60.00600060006,
+        "p95Ms": 16.700000000000273,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5221.399999999441,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.800000000000182,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6225,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.800000000000182,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7227.299999999814,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8229.899999999441,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.699999999999818,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 9233.5,
+        "fps": 60.01200240048003,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 10236.299999999814,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 11238.099999999627,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 12240,
+        "fps": 59.995932479153865,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 13242.699999999255,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 14245.5,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 15214.599999999627,
+        "fps": 60,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "file": "legacy-3840-trace-metrics.json",
+    "actualMs": 18003,
+    "metrics": {
+      "measuredMs": 18003,
+      "callbacks": 778,
+      "fps": 43.5967302452316,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.10000000000218,
+      "missedVsyncEstimate": 286,
+      "missedVsyncPercent": 27.342256214149142,
+      "callbackP95Ms": 0.5,
+      "callbackP99Ms": 0.5,
+      "callbackTotalMs": 219.00000000093132,
+      "longTasks": 2,
+      "longTaskTotalMs": 158,
+      "longTaskMaxMs": 94,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.803203,
+      "ScriptDuration": 0.327269,
+      "LayoutDuration": 0.047504,
+      "RecalcStyleDuration": 0.142092
+    },
+    "errors": [],
+    "dom": {
+      "hidden": false,
+      "dpr": 1,
+      "canvas": [
+        {
+          "class": "nexus-particles",
+          "width": 1920,
+          "height": 1080,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 3840,
+            "height": 2160,
+            "top": 0,
+            "right": 3840,
+            "bottom": 2160,
+            "left": 0
+          }
+        }
+      ],
+      "svgPaths": 451,
+      "svgs": 16,
+      "filters": [
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "ellipse",
+          "class": "nexus-pedestal-top",
+          "filter": "drop-shadow(rgb(238, 125, 44) 0px 0px 6px)"
+        },
+        {
+          "tag": "g",
+          "class": "nexus-metric-glyph",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.533) 0px 0px 5px)"
+        },
+        {
+          "tag": "circle",
+          "class": "nexus-dial-progress",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.6) 0px 0px 5px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 1 0.352941 0.235294 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 0.933333 0.490196 0.172549 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-alert-icon",
+          "filter": "drop-shadow(color(srgb 0.933333 0.490196 0.172549 / 0.55) 0px 0px 6px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        },
+        {
+          "tag": "svg",
+          "class": "nexus-machine-thumb",
+          "filter": "drop-shadow(rgba(238, 125, 44, 0.133) 0px 3px 8px)"
+        }
+      ],
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 3840,
+        "height": 2160,
+        "top": 0,
+        "right": 3840,
+        "bottom": 2160,
+        "left": 0
+      }
+    },
+    "segments": [
+      {
+        "time": 4217.299999999814,
+        "fps": 19.99999999999999,
+        "p95Ms": 50.09999999999991,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20
+      },
+      {
+        "time": 5219.799999999814,
+        "fps": 19.288469781397346,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20
+      },
+      {
+        "time": 6223.100000000559,
+        "fps": 53.796813573349866,
+        "p95Ms": 16.699999999999818,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 19
+      },
+      {
+        "time": 7227.299999999814,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 54
+      },
+      {
+        "time": 8229.900000000373,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 9234,
+        "fps": 60,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 10235.600000000559,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 11237.600000000559,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 12239.600000000559,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 13243,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 14246,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 15249.700000000186,
+        "fps": 60.00600060006003,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 60
+      },
+      {
+        "time": 16251.900000000373,
+        "fps": 23.157894736842106,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 60
+      },
+      {
+        "time": 17257,
+        "fps": 20.33967253127226,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20.3
+      },
+      {
+        "time": 18259.5,
+        "fps": 20.360051435919402,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20.3
+      },
+      {
+        "time": 19262.299999999814,
+        "fps": 20.357869923925872,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20.3
+      },
+      {
+        "time": 20264.700000000186,
+        "fps": 20.339672531272186,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": 20.7
+      },
+      {
+        "time": 21217.60000000056,
+        "fps": 41.453038071342995,
+        "p95Ms": 50.099999999998545,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": 20.3
+      }
+    ]
+  }
+]

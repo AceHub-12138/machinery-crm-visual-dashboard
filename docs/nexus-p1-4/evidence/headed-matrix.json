@@ -1,0 +1,2490 @@
+{
+  "platform": {
+    "at": "2026-10-17T01:44:18.855Z",
+    "browser": "153.0.8010.12",
+    "node": "v24.21.0",
+    "os": "24.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M1 Ultra",
+    "cores": 20,
+    "memory": 68719476736,
+    "gpu": {
+      "gpu": {
+        "devices": [
+          {
+            "vendorId": 4203,
+            "deviceId": 0,
+            "vendorString": "Google Inc. (Apple)",
+            "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Version 15.7.8 (Build 24G824))",
+            "driverVendor": "Apple",
+            "driverVersion": "15.7.8"
+          }
+        ],
+        "auxAttributes": {
+          "amdSwitchable": false,
+          "canSupportThreadedTextureMailbox": false,
+          "directRenderingVersion": "",
+          "displayType": "ANGLE_METAL",
+          "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+          "glImplementationParts": "(gl=egl-angle,angle=metal)",
+          "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Version 15.7.8 (Build 24G824))",
+          "glResetNotificationStrategy": 33362,
+          "glVendor": "Google Inc. (Apple)",
+          "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28646 git hash: a6bc9eff8444)",
+          "glWsExtensions": "",
+          "glWsVendor": "",
+          "glWsVersion": "",
+          "inProcessGpu": false,
+          "initializationTime": 0.06529,
+          "isAsan": false,
+          "isClangCoverage": false,
+          "jpegDecodeAcceleratorSupported": false,
+          "maxMsaaSamples": "4",
+          "optimus": false,
+          "passthroughCmdDecoder": true,
+          "pixelShaderVersion": "3.00",
+          "processCrashCount": 0,
+          "sandboxed": false,
+          "skiaBackendType": "GraphiteDawnMetal",
+          "subpixelFontRendering": true,
+          "targetCpuBits": 64,
+          "vertexShaderVersion": "3.00",
+          "visibilityCallbackCallCount": 0
+        },
+        "featureStatus": {
+          "2d_canvas": "enabled",
+          "direct_rendering_display_compositor": "disabled_off_ok",
+          "gpu_compositing": "enabled",
+          "multiple_raster_threads": "enabled_on",
+          "opengl": "enabled_on",
+          "rasterization": "enabled",
+          "raw_draw": "disabled_off_ok",
+          "skia_graphite": "enabled_on",
+          "trees_in_viz": "disabled_off",
+          "video_decode": "enabled",
+          "video_encode": "enabled",
+          "webgl": "enabled",
+          "webgpu": "enabled",
+          "webnn": "disabled_off"
+        },
+        "driverBugWorkarounds": [
+          "disable_2d_canvas_auto_flush",
+          "enable_webgl_timer_query_extensions",
+          "disabled_extension_GL_KHR_blend_equation_advanced",
+          "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+        ],
+        "videoDecoding": [],
+        "videoEncoding": []
+      },
+      "modelName": "Mac",
+      "modelVersion": "13.2",
+      "commandLine": "/Users/apple/Library/Caches/ms-playwright/chromium-1243/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --user-data-dir=/var/folders/8q/b0th_mh520sfn8rgkj08sz_m0000gn/T/playwright_chromiumdev_profile-7ttsfL --remote-debugging-pipe --no-startup-window --flag-switches-begin --flag-switches-end --enable-unsafe-swiftshader"
+    },
+    "command": {
+      "protocolError": "cdpSession.send: Protocol error (Browser.getBrowserCommandLine): Command line not returned because --enable-automation not set.",
+      "processCommandLine": "/Users/apple/Library/Caches/ms-playwright/chromium-1243/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --user-data-dir=/var/folders/8q/b0th_mh520sfn8rgkj08sz_m0000gn/T/playwright_chromiumdev_profile-7ttsfL --remote-debugging-pipe --no-startup-window"
+    },
+    "displays": [
+      {
+        "name": "Apple M1 Ultra",
+        "cores": "48",
+        "displays": [
+          {
+            "name": "27E2N1110",
+            "resolution": "1920 x 1080 @ 100.00Hz"
+          }
+        ]
+      }
+    ]
+  },
+  "results": [
+    {
+      "actualMs": 60006,
+      "metrics": {
+        "measuredMs": 60006,
+        "callbacks": 5938,
+        "fps": 99.11524718951452,
+        "intervalP95Ms": 11,
+        "intervalP99Ms": 11,
+        "missedVsyncEstimate": 31,
+        "missedVsyncPercent": 0.524623455745473,
+        "callbackP95Ms": 0.5,
+        "callbackP99Ms": 0.599999999627471,
+        "callbackTotalMs": 1583.7999996999279,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "state": "AMBIENT",
+        "level": "normal"
+      },
+      "cpuSeconds": {
+        "TaskDuration": 13.810891999999999,
+        "ScriptDuration": 2.056332,
+        "LayoutDuration": 0.324025,
+        "RecalcStyleDuration": 2.441458
+      },
+      "writes": null,
+      "engine": "legacy",
+      "width": 1920,
+      "errors": [],
+      "viewport": {
+        "innerWidth": 1920,
+        "innerHeight": 1080,
+        "outerWidth": 1922,
+        "outerHeight": 984,
+        "dpr": 1,
+        "hidden": false,
+        "screen": {
+          "width": 1920,
+          "height": 1080,
+          "availWidth": 1920,
+          "availHeight": 1080
+        },
+        "stage": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "left": 0
+        }
+      },
+      "segments": [
+        {
+          "time": 4430.799999999814,
+          "fps": 100.09910802775025,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 5435.700000000186,
+          "fps": 100.05053057099545,
+          "p95Ms": 10.900000000000546,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 6440.4000000003725,
+          "fps": 100,
+          "p95Ms": 10.900000000000546,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 7444.200000000186,
+          "fps": 99.98990001010004,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 8448.700000000186,
+          "fps": 100.01000100009996,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 9451.700000000186,
+          "fps": 100.08087343307716,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 10454,
+          "fps": 99.9091734786558,
+          "p95Ms": 10.899999999999636,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 11458.200000000186,
+          "fps": 99.9300489657241,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 12462.799999999814,
+          "fps": 75.77288341079012,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 13468,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 14470.600000000559,
+          "fps": 99.98990001009996,
+          "p95Ms": 10.899999999999636,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 15474.700000000186,
+          "fps": 100.10111223458038,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 16479.5,
+          "fps": 100.04001600640271,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 17483.900000000373,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 18489,
+          "fps": 100.01000100010023,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 19492.299999999814,
+          "fps": 99.95961227786775,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 20497.5,
+          "fps": 100.10010010010011,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 21500.200000000186,
+          "fps": 99.9192571659266,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 22502.900000000373,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 23506.10000000056,
+          "fps": 100.09008107296582,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 24509.400000000373,
+          "fps": 100.10111223458038,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 25512.700000000186,
+          "fps": 100.01010203050835,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 26516.10000000056,
+          "fps": 100.08087343307716,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 27521.200000000186,
+          "fps": 100.09008107296582,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 28523.5,
+          "fps": 82.81991718008264,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 29530.400000000373,
+          "fps": 99.91008092716541,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 30534.299999999814,
+          "fps": 99.92934288886639,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 31539.700000000186,
+          "fps": 100.01000100009986,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 32543.700000000186,
+          "fps": 100.01010203050798,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 33548.60000000056,
+          "fps": 99.94003597841274,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 34563.40000000037,
+          "fps": 100.04001600640271,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 35567.90000000037,
+          "fps": 99.94003597841309,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 36570.10000000056,
+          "fps": 100.09099181073718,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 37573,
+          "fps": 99.94952044422008,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 38575.200000000186,
+          "fps": 87.869912130088,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 39578.90000000037,
+          "fps": 100.09008107296582,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 40581.200000000186,
+          "fps": 99.97980206018941,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 41584.200000000186,
+          "fps": 99.98990001010014,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 42588.299999999814,
+          "fps": 100.0200040008006,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 43590.5,
+          "fps": 99.91925716592623,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 44594.200000000186,
+          "fps": 100.09099181073736,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 45600,
+          "fps": 99.99000099990016,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 46603.90000000037,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 47608.799999999814,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 48612,
+          "fps": 99.90917347865562,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 49618.40000000037,
+          "fps": 100.08006405124128,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 50621.90000000037,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 51625.299999999814,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 52630,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 53633.700000000186,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 54638.299999999814,
+          "fps": 99.95002498750625,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 55641.40000000037,
+          "fps": 100.06064281382642,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 56645.299999999814,
+          "fps": 100.01010203050798,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 57651.40000000037,
+          "fps": 99.99000099990016,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 58654.799999999814,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 59658.10000000056,
+          "fps": 100.08006405124128,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 60660.60000000056,
+          "fps": 100.09099181073718,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 61664.5,
+          "fps": 99.91925716592623,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 62667.5,
+          "fps": 99.99000099990016,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 63430.10000000056,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        }
+      ]
+    },
+    {
+      "actualMs": 60005,
+      "metrics": {
+        "measuredMs": 60005,
+        "callbacks": 6001,
+        "fps": 100.0018515744274,
+        "intervalP95Ms": 11,
+        "intervalP99Ms": 11,
+        "missedVsyncEstimate": 0,
+        "missedVsyncPercent": 0,
+        "callbackP95Ms": 0.5,
+        "callbackP99Ms": 0.6000000005587935,
+        "callbackTotalMs": 1000.1000000527129,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "state": "AMBIENT",
+        "level": "normal"
+      },
+      "cpuSeconds": {
+        "TaskDuration": 8.755137999999999,
+        "ScriptDuration": 1.416837,
+        "LayoutDuration": 0.190162,
+        "RecalcStyleDuration": 1.464833
+      },
+      "writes": null,
+      "engine": "gsap",
+      "width": 1920,
+      "errors": [],
+      "viewport": {
+        "innerWidth": 1920,
+        "innerHeight": 1080,
+        "outerWidth": 1922,
+        "outerHeight": 984,
+        "dpr": 1,
+        "hidden": false,
+        "screen": {
+          "width": 1920,
+          "height": 1080,
+          "availWidth": 1920,
+          "availHeight": 1080
+        },
+        "stage": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "left": 0
+        }
+      },
+      "segments": [
+        {
+          "time": 4217.100000000559,
+          "fps": 99.91008092716558,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 5220,
+          "fps": 100,
+          "p95Ms": 10.899999999999636,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 6223.200000000186,
+          "fps": 99.91925716592651,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 7226.100000000559,
+          "fps": 100.10111223458038,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 8230.700000000186,
+          "fps": 99.99000099989998,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 9233.800000000745,
+          "fps": 100.09099181073718,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 10236.600000000559,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 11239.700000000186,
+          "fps": 100.01000100010005,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 12242.200000000186,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 13245.100000000559,
+          "fps": 100.09099181073718,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 14252.400000000373,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 15254.900000000373,
+          "fps": 100.09099181073718,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 16257,
+          "fps": 100.09099181073718,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 17259.900000000373,
+          "fps": 100.05002501250625,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 18264.10000000056,
+          "fps": 99.9192571659266,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 19267.5,
+          "fps": 100.02020610224295,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 20272.10000000056,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 21275.700000000186,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 22279.400000000373,
+          "fps": 100.02000400080023,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 23280.700000000186,
+          "fps": 100.01010203050798,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 24284.200000000186,
+          "fps": 99.98990001010014,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 25288.60000000056,
+          "fps": 99.95961227786775,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 26295,
+          "fps": 100.10010010010011,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 27297.400000000373,
+          "fps": 99.90917347865562,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 28300.5,
+          "fps": 100.01000100010023,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 29302.5,
+          "fps": 99.90917347865562,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 30305.60000000056,
+          "fps": 99.9192571659266,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 31308.60000000056,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 32310.900000000373,
+          "fps": 100.08006405124092,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 33313.700000000186,
+          "fps": 99.99999999999963,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 34325.60000000056,
+          "fps": 100,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 35327.700000000186,
+          "fps": 100.03031221582327,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 36330.90000000037,
+          "fps": 100.01000100010059,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 37333.800000000745,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 38337.800000000745,
+          "fps": 100.04042037186757,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 39342.10000000056,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 40345.40000000037,
+          "fps": 100.09099181073718,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 41348.200000000186,
+          "fps": 100.04042037186757,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 42352.60000000056,
+          "fps": 99.93004896572356,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 43355.40000000037,
+          "fps": 100.01010203050872,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 44357.700000000186,
+          "fps": 99.91925716592623,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 45360.90000000037,
+          "fps": 99.91008092716541,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 46366,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 47371.10000000056,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 48375.60000000056,
+          "fps": 100.01010203050798,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 49379,
+          "fps": 100.09099181073718,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 50381.700000000186,
+          "fps": 100.0300090027011,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 51384,
+          "fps": 100.01010203050798,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 52386.800000000745,
+          "fps": 99.90917347865562,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 53390.10000000056,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 54393.10000000056,
+          "fps": 100.01010203050798,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 55396.40000000037,
+          "fps": 100.10111223458038,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 56398.60000000056,
+          "fps": 100.01010203050798,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 57402.60000000056,
+          "fps": 99.92006394884064,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 58406.300000000745,
+          "fps": 99.89909182643794,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 59409.300000000745,
+          "fps": 100.02000400079987,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 60412.10000000056,
+          "fps": 100.02020610224258,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 61415.90000000037,
+          "fps": 99.91925716592623,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 62422.5,
+          "fps": 99.99000099990016,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 63219.90000000037,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        }
+      ]
+    },
+    {
+      "actualMs": 60004,
+      "metrics": {
+        "measuredMs": 60004,
+        "callbacks": 6001,
+        "fps": 100.00572326980505,
+        "intervalP95Ms": 11,
+        "intervalP99Ms": 11,
+        "missedVsyncEstimate": 0,
+        "missedVsyncPercent": 0,
+        "callbackP95Ms": 0.5,
+        "callbackP99Ms": 0.599999999627471,
+        "callbackTotalMs": 1667.1000003106892,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "state": "AMBIENT",
+        "level": "normal"
+      },
+      "cpuSeconds": {
+        "TaskDuration": 14.143037,
+        "ScriptDuration": 2.15939,
+        "LayoutDuration": 0.327992,
+        "RecalcStyleDuration": 2.527394
+      },
+      "writes": null,
+      "engine": "legacy",
+      "width": 3840,
+      "errors": [],
+      "viewport": {
+        "innerWidth": 3840,
+        "innerHeight": 2160,
+        "outerWidth": 3842,
+        "outerHeight": 984,
+        "dpr": 1,
+        "hidden": false,
+        "screen": {
+          "width": 3840,
+          "height": 2160,
+          "availWidth": 3840,
+          "availHeight": 2160
+        },
+        "stage": {
+          "x": 0,
+          "y": 0,
+          "width": 3840,
+          "height": 2160,
+          "top": 0,
+          "right": 3840,
+          "bottom": 2160,
+          "left": 0
+        }
+      },
+      "segments": [
+        {
+          "time": 4216.399999999441,
+          "fps": 99.90009990009986,
+          "p95Ms": 10.900000000000546,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 5219.399999999441,
+          "fps": 100.10111223458038,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 6222.699999999255,
+          "fps": 100.10010010010011,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 7226.5999999996275,
+          "fps": 99.94952044422008,
+          "p95Ms": 10.900000000000546,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 8230.299999999814,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 9234.5,
+          "fps": 99.99000099989998,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 10237.799999999814,
+          "fps": 99.91925716592641,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 11243.199999999255,
+          "fps": 100.10010010010011,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 12246.299999999814,
+          "fps": 99.9192571659266,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 13253.399999999441,
+          "fps": 100.09008107296563,
+          "p95Ms": 10.899999999999636,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 14257.5,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 15263.799999999814,
+          "fps": 99.98000399920026,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 16266.699999999255,
+          "fps": 99.9091734786558,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 17269.599999999627,
+          "fps": 100.00000000000018,
+          "p95Ms": 10.899999999999636,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 18273.5,
+          "fps": 99.9800039992001,
+          "p95Ms": 10.899999999997817,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 19277.099999999627,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 20280.5,
+          "fps": 100.08087343307716,
+          "p95Ms": 10.899999999997817,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 21285.599999999627,
+          "fps": 99.920063948841,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 22288.199999999255,
+          "fps": 100.09099181073681,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 23291.599999999627,
+          "fps": 100.08006405124092,
+          "p95Ms": 10.899999999997817,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 24294.39999999944,
+          "fps": 100.0303122158229,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 25299.5,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 26303.599999999627,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 27306.699999999255,
+          "fps": 100.09099181073718,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 28310.39999999944,
+          "fps": 99.98990001010014,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 29314.5,
+          "fps": 100.0700490343241,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 30318.299999999814,
+          "fps": 100.07075710098057,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 31323.89999999944,
+          "fps": 99.920063948841,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 32326.799999999814,
+          "fps": 100.0404203718672,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 33330.59999999963,
+          "fps": 99.98990001010014,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 34344.39999999944,
+          "fps": 99.91097042239574,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 35348.5,
+          "fps": 100.08087343307679,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 36354.89999999944,
+          "fps": 100,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 37358.199999999255,
+          "fps": 99.97980206018941,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 38364.39999999944,
+          "fps": 100,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 39368.799999999814,
+          "fps": 100.09099181073644,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 40374.199999999255,
+          "fps": 99.94003597841309,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 41377.5,
+          "fps": 99.91925716592696,
+          "p95Ms": 10.799999999995634,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 42383.59999999963,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 43386.39999999944,
+          "fps": 99.90917347865562,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 44388.799999999814,
+          "fps": 99.95961227786812,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 45394.199999999255,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 46396.5,
+          "fps": 100,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 47398.799999999814,
+          "fps": 100,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 48401.5,
+          "fps": 100,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 49405.39999999944,
+          "fps": 99.90917347865636,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 50409.09999999963,
+          "fps": 100.04042037186757,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 51413.09999999963,
+          "fps": 99.9899000100994,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 52416.299999999814,
+          "fps": 100.05002501250625,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 53419.59999999963,
+          "fps": 99.89909182643794,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 54422.89999999944,
+          "fps": 100.06003602161356,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 55426,
+          "fps": 100.08087343307679,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 56428.59999999963,
+          "fps": 99.98990001010014,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 57432.299999999814,
+          "fps": 100.05002501250625,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 58435.299999999814,
+          "fps": 100.01010203050798,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 59439.299999999814,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 60442.199999999255,
+          "fps": 100.09008107296582,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 61444.59999999963,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 62447.699999999255,
+          "fps": 100.10111223458038,
+          "p95Ms": 10.89999999999418,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 63217.89999999944,
+          "fps": 99.96054189135829,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        }
+      ]
+    },
+    {
+      "actualMs": 60005,
+      "metrics": {
+        "measuredMs": 60005,
+        "callbacks": 6001,
+        "fps": 99.9877140159516,
+        "intervalP95Ms": 11,
+        "intervalP99Ms": 11,
+        "missedVsyncEstimate": 0,
+        "missedVsyncPercent": 0,
+        "callbackP95Ms": 0.5,
+        "callbackP99Ms": 0.6000000005587935,
+        "callbackTotalMs": 1116.8999999975786,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "state": "AMBIENT",
+        "level": "normal"
+      },
+      "cpuSeconds": {
+        "TaskDuration": 9.029615,
+        "ScriptDuration": 1.565989,
+        "LayoutDuration": 0.200773,
+        "RecalcStyleDuration": 1.523464
+      },
+      "writes": null,
+      "engine": "gsap",
+      "width": 3840,
+      "errors": [],
+      "viewport": {
+        "innerWidth": 3840,
+        "innerHeight": 2160,
+        "outerWidth": 3842,
+        "outerHeight": 985,
+        "dpr": 1,
+        "hidden": false,
+        "screen": {
+          "width": 3840,
+          "height": 2160,
+          "availWidth": 3840,
+          "availHeight": 2160
+        },
+        "stage": {
+          "x": 0,
+          "y": 0,
+          "width": 3840,
+          "height": 2160,
+          "top": 0,
+          "right": 3840,
+          "bottom": 2160,
+          "left": 0
+        }
+      },
+      "segments": [
+        {
+          "time": 4214.5,
+          "fps": 100.00000000000004,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 5218.100000000559,
+          "fps": 99.91008092716558,
+          "p95Ms": 10.899999999999636,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 6220.700000000186,
+          "fps": 100.01010203050816,
+          "p95Ms": 10.899999999999636,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 7223.9000000003725,
+          "fps": 99.9091734786558,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 8226.299999999814,
+          "fps": 99.91925716592651,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 9229.100000000559,
+          "fps": 99.9000999000999,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 10233,
+          "fps": 99.97980206018978,
+          "p95Ms": 10.899999999999636,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 11236.900000000373,
+          "fps": 99.98990001009996,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 12242.200000000186,
+          "fps": 99.99000099989998,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 13245.100000000559,
+          "fps": 99.94952044422008,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 14247.400000000373,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 15250.400000000373,
+          "fps": 99.98990001009996,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 16255.100000000559,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 17261.5,
+          "fps": 100.09008107296582,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 18263.900000000373,
+          "fps": 100.01010203050798,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 19266,
+          "fps": 100.09099181073718,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 20269.900000000373,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 21273.400000000373,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 22275.900000000373,
+          "fps": 99.95961227786738,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 23279.299999999814,
+          "fps": 100.01000100010023,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 24283.900000000373,
+          "fps": 99.89909182643794,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 25290.5,
+          "fps": 100.02000400080023,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 26294.200000000186,
+          "fps": 100.08087343307716,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 27296.900000000373,
+          "fps": 99.98990001009977,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 28299.299999999814,
+          "fps": 100.05002501250625,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 29303.299999999814,
+          "fps": 99.98990001010014,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 30305.799999999814,
+          "fps": 99.89909182643794,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 31309.900000000373,
+          "fps": 99.91008092716541,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 32312.400000000373,
+          "fps": 100.07075710098057,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 33314.40000000037,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 34327.10000000056,
+          "fps": 100.04952947003467,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 35330.10000000056,
+          "fps": 99.88901220865719,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 36334.10000000056,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 37340.10000000056,
+          "fps": 99.99000099990016,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 38343.60000000056,
+          "fps": 99.97980206019015,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 39347.799999999814,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 40349.90000000037,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 41352,
+          "fps": 100.08087343307753,
+          "p95Ms": 10.80000000000291,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 42355,
+          "fps": 100.05053057099545,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "PULSE",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 43359.700000000186,
+          "fps": 99.91008092716541,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 44361,
+          "fps": 100.05053057099545,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 45364.10000000056,
+          "fps": 99.90917347865562,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 46368.799999999814,
+          "fps": 100,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 47372.90000000037,
+          "fps": 99.93943064809221,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 48374.10000000056,
+          "fps": 99.98990001010014,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 49377.10000000056,
+          "fps": 100.08006405124128,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 50379.90000000037,
+          "fps": 99.97980206019015,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 51383.10000000056,
+          "fps": 100.03031221582327,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 52390.700000000186,
+          "fps": 100.02000400079987,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 53394,
+          "fps": 100.01010203050798,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 54397.10000000056,
+          "fps": 99.95002498750625,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 55399.5,
+          "fps": 100.05053057099545,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 56403.5,
+          "fps": 99.89909182643794,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 57407.200000000186,
+          "fps": 99.89909182643794,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 58410.5,
+          "fps": 99.9000999000999,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 59413.90000000037,
+          "fps": 99.9899000100994,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 60417.299999999814,
+          "fps": 100.01000100009986,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 61422.700000000186,
+          "fps": 99.89909182643794,
+          "p95Ms": 11,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 62425.799999999814,
+          "fps": 100.09099181073718,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        },
+        {
+          "time": 63216.200000000186,
+          "fps": 100,
+          "p95Ms": 10.900000000001455,
+          "level": "normal",
+          "state": "AMBIENT",
+          "particleVisibility": "visible",
+          "directorFPS": null
+        }
+      ]
+    }
+  ]
+}

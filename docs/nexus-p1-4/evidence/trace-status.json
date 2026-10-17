@@ -1,0 +1,22 @@
+{
+  "headed-gsap-3840-trace-status.json": {
+    "dataLossOccurred": false,
+    "traceFormat": "json",
+    "streamCompression": "none"
+  },
+  "gsap-3840-trace-status.json": {
+    "dataLossOccurred": false,
+    "traceFormat": "json",
+    "streamCompression": "none"
+  },
+  "headed-legacy-3840-trace-status.json": {
+    "dataLossOccurred": false,
+    "traceFormat": "json",
+    "streamCompression": "none"
+  },
+  "legacy-3840-trace-status.json": {
+    "dataLossOccurred": false,
+    "traceFormat": "json",
+    "streamCompression": "none"
+  }
+}

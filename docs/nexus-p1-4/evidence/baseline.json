@@ -1,0 +1,1111 @@
+{
+  "startedAt": "2026-10-17T01:08:14.432Z",
+  "baseline": "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1",
+  "platform": {
+    "os": "darwin",
+    "release": "24.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M1 Ultra",
+    "cores": 20,
+    "memoryBytes": 68719476736,
+    "node": "v24.21.0"
+  },
+  "policy": "Headless Chromium, deviceScaleFactor=1, real time, sequential modes, seeded random=713, production build, fixture only. No recording during timed samples. Dropped frames are estimated from animation RAF intervals, not GPU presentation telemetry. Forced GC only outside timed samples. One bounded run per engine/resolution, not statistical proof.",
+  "browser": "153.0.8010.12",
+  "fixtureSha256": "6150c9a69d51a8a90b2d1395f767e575b4e6da1412c77c3fd75d76b29aeb0218",
+  "finishedAt": "2026-10-17T01:25:37.557Z",
+  "results": [
+    {
+      "engine": "legacy",
+      "businessSha256": "8f733819a5fcfcb49bf964e8e9dec9f43163de471a7f32e88d768ecd773cafd9",
+      "fixtureGeneratedAt": "2026-10-17T01:08:15.177Z",
+      "width": 1920,
+      "height": 1080,
+      "metrics": {
+        "measuredMs": 120042,
+        "callbacks": 7203,
+        "fps": 60.00236610274552,
+        "intervalP95Ms": 16.70000000001164,
+        "intervalP99Ms": 16.80000000000291,
+        "missedVsyncEstimate": 0,
+        "missedVsyncPercent": 0,
+        "callbackP95Ms": 0.2999999998137355,
+        "callbackP99Ms": 0.30000000074505806,
+        "callbackTotalMs": 1231.3999999947846,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "timelines": "0",
+        "state": "AMBIENT",
+        "level": "normal"
+      },
+      "beforeGCHeap": {
+        "usedSize": 6408156,
+        "totalSize": 7274496,
+        "embedderHeapUsedSize": 5085528,
+        "backingStorageSize": 984539
+      },
+      "afterGCHeap": {
+        "usedSize": 7101660,
+        "totalSize": 8060928,
+        "embedderHeapUsedSize": 4827616,
+        "backingStorageSize": 984125
+      },
+      "retainedHeapDeltaBytes": 693504,
+      "cpuDeltaSeconds": {
+        "TaskDuration": 14.294373,
+        "ScriptDuration": 1.889732,
+        "LayoutDuration": 0.26986,
+        "RecalcStyleDuration": 2.367808
+      },
+      "errors": [],
+      "networkFailures": [
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "directorRecords": [],
+      "pulses": [
+        30033,
+        90099
+      ],
+      "blankAfterGC": {
+        "usedSize": 954684,
+        "totalSize": 1572864,
+        "embedderHeapUsedSize": 710312,
+        "backingStorageSize": 178,
+        "documents": 2,
+        "nodes": 8,
+        "jsEventListeners": 0
+      }
+    },
+    {
+      "engine": "gsap",
+      "businessSha256": "8f733819a5fcfcb49bf964e8e9dec9f43163de471a7f32e88d768ecd773cafd9",
+      "fixtureGeneratedAt": "2026-10-17T01:10:44.833Z",
+      "width": 1920,
+      "height": 1080,
+      "metrics": {
+        "measuredMs": 120049,
+        "callbacks": 7203,
+        "fps": 60.00241609284462,
+        "intervalP95Ms": 16.79999999998836,
+        "intervalP99Ms": 16.80000000000291,
+        "missedVsyncEstimate": 0,
+        "missedVsyncPercent": 0,
+        "callbackP95Ms": 0.2999999998137355,
+        "callbackP99Ms": 0.30000000074505806,
+        "callbackTotalMs": 1324.999999933876,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "timelines": "27",
+        "state": "AMBIENT",
+        "level": "normal"
+      },
+      "beforeGCHeap": {
+        "usedSize": 6754088,
+        "totalSize": 7536640,
+        "embedderHeapUsedSize": 5007272,
+        "backingStorageSize": 984434
+      },
+      "afterGCHeap": {
+        "usedSize": 7480244,
+        "totalSize": 8323072,
+        "embedderHeapUsedSize": 4773904,
+        "backingStorageSize": 984179
+      },
+      "retainedHeapDeltaBytes": 726156,
+      "cpuDeltaSeconds": {
+        "TaskDuration": 14.671475000000001,
+        "ScriptDuration": 1.974958,
+        "LayoutDuration": 0.284316,
+        "RecalcStyleDuration": 2.3994590000000002
+      },
+      "errors": [],
+      "networkFailures": [
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "directorRecords": [],
+      "pulses": [
+        30024,
+        90095
+      ],
+      "blankAfterGC": {
+        "usedSize": 954856,
+        "totalSize": 1310720,
+        "embedderHeapUsedSize": 709808,
+        "backingStorageSize": 169,
+        "documents": 2,
+        "nodes": 8,
+        "jsEventListeners": 0
+      }
+    },
+    {
+      "engine": "legacy",
+      "businessSha256": "8f733819a5fcfcb49bf964e8e9dec9f43163de471a7f32e88d768ecd773cafd9",
+      "fixtureGeneratedAt": "2026-10-17T01:13:14.254Z",
+      "width": 3840,
+      "height": 2160,
+      "metrics": {
+        "measuredMs": 300077,
+        "callbacks": 14021,
+        "fps": 46.727414527493195,
+        "intervalP95Ms": 50,
+        "intervalP99Ms": 50.10000000000582,
+        "missedVsyncEstimate": 3983,
+        "missedVsyncPercent": 22.124090429372885,
+        "callbackP95Ms": 0.20000000018626451,
+        "callbackP99Ms": 0.2999999998137355,
+        "callbackTotalMs": 1834.7999999709427,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "timelines": "0",
+        "state": "DEGRADED",
+        "level": "low"
+      },
+      "beforeGCHeap": {
+        "usedSize": 6341496,
+        "totalSize": 7012352,
+        "embedderHeapUsedSize": 4127128,
+        "backingStorageSize": 983991
+      },
+      "afterGCHeap": {
+        "usedSize": 6829056,
+        "totalSize": 7995392,
+        "embedderHeapUsedSize": 4117864,
+        "backingStorageSize": 983741
+      },
+      "retainedHeapDeltaBytes": 487560,
+      "cpuDeltaSeconds": {
+        "TaskDuration": 19.702669,
+        "ScriptDuration": 3.394857,
+        "LayoutDuration": 0.544954,
+        "RecalcStyleDuration": 2.5870089999999997
+      },
+      "errors": [],
+      "networkFailures": [
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=QejwVN4zGcfF8bRw",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "directorRecords": [
+        {
+          "at": "2026-10-17T01:13:19.496Z",
+          "event": "fps-low",
+          "fps": 20.657092268345476,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:13:29.579Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:13:34.680Z",
+          "event": "fps-low",
+          "fps": 20.65709226834542,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:13:44.778Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:13:49.884Z",
+          "event": "fps-low",
+          "fps": 20.657092268345348,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:14:00.977Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:14:06.081Z",
+          "event": "fps-low",
+          "fps": 20.657092268345494,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:14:16.177Z",
+          "event": "fps-recovered",
+          "fps": 60.00983767830792,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:14:21.279Z",
+          "event": "fps-low",
+          "fps": 20.65506048981977,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:14:31.342Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:14:36.434Z",
+          "event": "fps-low",
+          "fps": 20.657092268345348,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:14:46.492Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:14:51.611Z",
+          "event": "fps-low",
+          "fps": 20.657092268345643,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:15:02.708Z",
+          "event": "fps-recovered",
+          "fps": 59.99400059993965,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:15:07.798Z",
+          "event": "fps-low",
+          "fps": 20.657092268345643,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:15:17.857Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:15:22.966Z",
+          "event": "fps-low",
+          "fps": 20.655060489820066,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:15:33.056Z",
+          "event": "fps-recovered",
+          "fps": 60.003934684241244,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:15:38.148Z",
+          "event": "fps-low",
+          "fps": 20.657092268345348,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:15:48.223Z",
+          "event": "fps-recovered",
+          "fps": 60.003934684241244,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:15:53.304Z",
+          "event": "fps-low",
+          "fps": 20.657092268345348,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:16:03.372Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:16:08.460Z",
+          "event": "fps-low",
+          "fps": 20.657092268345348,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:16:18.588Z",
+          "event": "fps-recovered",
+          "fps": 59.99803285138123,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:16:23.681Z",
+          "event": "fps-low",
+          "fps": 20.659124446630596,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:16:33.754Z",
+          "event": "fps-recovered",
+          "fps": 60.003934684241244,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:16:38.884Z",
+          "event": "fps-low",
+          "fps": 20.65506048981977,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:16:48.987Z",
+          "event": "fps-recovered",
+          "fps": 60.003934684242964,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:16:54.081Z",
+          "event": "fps-low",
+          "fps": 20.657092268345348,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:17:04.152Z",
+          "event": "fps-recovered",
+          "fps": 60.003934684241244,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:17:09.244Z",
+          "event": "fps-low",
+          "fps": 20.65506048981977,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:17:19.319Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:17:24.425Z",
+          "event": "fps-low",
+          "fps": 20.657092268345348,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:17:34.484Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:17:39.606Z",
+          "event": "fps-low",
+          "fps": 20.659124446630596,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:17:49.684Z",
+          "event": "fps-recovered",
+          "fps": 60.00983767830792,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:17:54.791Z",
+          "event": "fps-low",
+          "fps": 20.65506048981977,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:18:04.883Z",
+          "event": "fps-recovered",
+          "fps": 60.003934684242964,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:18:09.978Z",
+          "event": "fps-low",
+          "fps": 20.65506048981977,
+          "memoryBytes": 10000000,
+          "level": "low"
+        }
+      ],
+      "pulses": [
+        30022,
+        90079,
+        150174,
+        210307,
+        270483
+      ],
+      "blankAfterGC": {
+        "usedSize": 955880,
+        "totalSize": 1572864,
+        "embedderHeapUsedSize": 705176,
+        "backingStorageSize": 178,
+        "documents": 2,
+        "nodes": 8,
+        "jsEventListeners": 0
+      }
+    },
+    {
+      "engine": "gsap",
+      "businessSha256": "8f733819a5fcfcb49bf964e8e9dec9f43163de471a7f32e88d768ecd773cafd9",
+      "fixtureGeneratedAt": "2026-10-17T01:18:43.615Z",
+      "width": 3840,
+      "height": 2160,
+      "metrics": {
+        "measuredMs": 300098,
+        "callbacks": 14022,
+        "fps": 46.709995259373564,
+        "intervalP95Ms": 50,
+        "intervalP99Ms": 50.10000000000582,
+        "missedVsyncEstimate": 3990,
+        "missedVsyncPercent": 22.153128643606685,
+        "callbackP95Ms": 0.20000000018626451,
+        "callbackP99Ms": 0.2999999998137355,
+        "callbackTotalMs": 1973.8000001041219,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "timelines": "27",
+        "state": "DEGRADED",
+        "level": "low"
+      },
+      "beforeGCHeap": {
+        "usedSize": 6672684,
+        "totalSize": 7536640,
+        "embedderHeapUsedSize": 4082368,
+        "backingStorageSize": 983924
+      },
+      "afterGCHeap": {
+        "usedSize": 7285808,
+        "totalSize": 8257536,
+        "embedderHeapUsedSize": 4322848,
+        "backingStorageSize": 983808
+      },
+      "retainedHeapDeltaBytes": 613124,
+      "cpuDeltaSeconds": {
+        "TaskDuration": 19.73126,
+        "ScriptDuration": 3.5027749999999997,
+        "LayoutDuration": 0.512105,
+        "RecalcStyleDuration": 2.452651
+      },
+      "errors": [],
+      "networkFailures": [
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=XWsWt_cQU_SWVNyt",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=legacy&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:3047/screen/sales?layout=16x9&motion=gsap&debug=1&_rsc=BGM4wiLzhzdiEfrr",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "directorRecords": [
+        {
+          "at": "2026-10-17T01:18:48.921Z",
+          "event": "fps-low",
+          "fps": 20.68150482569584,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:18:59.023Z",
+          "event": "fps-recovered",
+          "fps": 60.00393468426358,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:19:04.113Z",
+          "event": "fps-low",
+          "fps": 20.62463170300153,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:19:14.098Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:19:19.214Z",
+          "event": "fps-low",
+          "fps": 20.65709226833411,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:19:30.264Z",
+          "event": "fps-recovered",
+          "fps": 59.994000599962355,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:19:35.376Z",
+          "event": "fps-low",
+          "fps": 20.55599060296448,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:19:45.479Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:19:50.588Z",
+          "event": "fps-low",
+          "fps": 20.5318732890143,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:20:00.679Z",
+          "event": "fps-recovered",
+          "fps": 59.99803285137093,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:20:05.782Z",
+          "event": "fps-low",
+          "fps": 20.66725715973595,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:20:15.862Z",
+          "event": "fps-recovered",
+          "fps": 59.958029379479036,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:20:20.989Z",
+          "event": "fps-low",
+          "fps": 20.527859237536656,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:20:32.044Z",
+          "event": "fps-recovered",
+          "fps": 60.02164715138766,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:20:37.153Z",
+          "event": "fps-low",
+          "fps": 20.551967116837627,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:20:47.243Z",
+          "event": "fps-recovered",
+          "fps": 60.05119117932197,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:20:52.358Z",
+          "event": "fps-low",
+          "fps": 20.519835841324472,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:21:02.408Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:21:07.519Z",
+          "event": "fps-low",
+          "fps": 20.592272994708605,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:21:17.575Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:21:22.698Z",
+          "event": "fps-low",
+          "fps": 20.562028786844053,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:21:32.774Z",
+          "event": "fps-recovered",
+          "fps": 59.9760095961392,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:21:37.874Z",
+          "event": "fps-low",
+          "fps": 20.541915289057837,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:21:47.973Z",
+          "event": "fps-recovered",
+          "fps": 60.02755363116396,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:21:53.080Z",
+          "event": "fps-low",
+          "fps": 20.598332515939187,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:22:03.172Z",
+          "event": "fps-recovered",
+          "fps": 60.057103475479714,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:22:08.274Z",
+          "event": "fps-low",
+          "fps": 20.99436969175702,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:22:18.355Z",
+          "event": "fps-recovered",
+          "fps": 59.96264622039828,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:22:23.460Z",
+          "event": "fps-low",
+          "fps": 21.29100938740343,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:22:33.554Z",
+          "event": "fps-recovered",
+          "fps": 59.99803285142589,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:22:38.735Z",
+          "event": "fps-low",
+          "fps": 21.188481171148943,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:22:48.836Z",
+          "event": "fps-recovered",
+          "fps": 60.03346127351871,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:22:54.015Z",
+          "event": "fps-low",
+          "fps": 21.305442572155663,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:23:04.102Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:23:09.279Z",
+          "event": "fps-low",
+          "fps": 21.30956993412637,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:23:19.352Z",
+          "event": "fps-recovered",
+          "fps": 59.96854109318603,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:23:24.535Z",
+          "event": "fps-low",
+          "fps": 21.270424441655187,
+          "memoryBytes": 10000000,
+          "level": "low"
+        },
+        {
+          "at": "2026-10-17T01:23:34.634Z",
+          "event": "fps-recovered",
+          "fps": 60,
+          "memoryBytes": 10000000,
+          "level": "normal"
+        },
+        {
+          "at": "2026-10-17T01:23:39.775Z",
+          "event": "fps-low",
+          "fps": 21.016431027898275,
+          "memoryBytes": 10000000,
+          "level": "low"
+        }
+      ],
+      "pulses": [
+        29948,
+        90005,
+        150110,
+        210240,
+        270375
+      ],
+      "blankAfterGC": {
+        "usedSize": 957500,
+        "totalSize": 1572864,
+        "embedderHeapUsedSize": 705136,
+        "backingStorageSize": 178,
+        "documents": 2,
+        "nodes": 8,
+        "jsEventListeners": 0
+      }
+    }
+  ],
+  "priorMetrics": [
+    {
+      "engine": "legacy",
+      "width": 1920,
+      "metrics": {
+        "measuredMs": 120044,
+        "callbacks": 7202,
+        "fps": 60.00238309700955,
+        "intervalP95Ms": 16.70000000001164,
+        "intervalP99Ms": 16.80000000000291,
+        "missedVsyncEstimate": 0,
+        "missedVsyncPercent": 0,
+        "callbackP95Ms": 0.20000000298023224,
+        "callbackP99Ms": 0.29999999701976776,
+        "callbackTotalMs": 964.8000001870096,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "timelines": "0",
+        "state": "AMBIENT",
+        "level": "normal"
+      }
+    },
+    {
+      "engine": "gsap",
+      "width": 1920,
+      "metrics": {
+        "measuredMs": 120047,
+        "callbacks": 7203,
+        "fps": 60.00236610274552,
+        "intervalP95Ms": 16.70000000001164,
+        "intervalP99Ms": 16.80000000000291,
+        "missedVsyncEstimate": 0,
+        "missedVsyncPercent": 0,
+        "callbackP95Ms": 0.20000000298023224,
+        "callbackP99Ms": 0.30000000074505806,
+        "callbackTotalMs": 1026.2000000663102,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "timelines": "27",
+        "state": "AMBIENT",
+        "level": "normal"
+      }
+    },
+    {
+      "engine": "legacy",
+      "width": 3840,
+      "metrics": {
+        "measuredMs": 300080,
+        "callbacks": 14132,
+        "fps": 47.09212540748636,
+        "intervalP95Ms": 50,
+        "intervalP99Ms": 50.10000000000582,
+        "missedVsyncEstimate": 3874,
+        "missedVsyncPercent": 21.51624548736462,
+        "callbackP95Ms": 0.19999999925494194,
+        "callbackP99Ms": 0.29999999701976776,
+        "callbackTotalMs": 1430.5000000335276,
+        "longTasks": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "maxPendingRAF": 1,
+        "timelines": "0",
+        "state": "DEGRADED",
+        "level": "low"
+      }
+    },
+    {
+      "engine": "gsap",
+      "width": 3840,
+      "metrics": {
+        "measuredMs": 300078,
+        "callbacks": 14053,
+        "fps": 46.81585862223713,
+        "intervalP95Ms": 50,
+        "intervalP99Ms": 50.10000000000582,
+        "missedVsyncEstimate": 3958,
+        "missedVsyncPercent": 21.976679622431984,
+        "callbackP95Ms": 0.20000000298023224,
+        "callbackP99Ms": 0.30000000074505806,
+        "callbackTotalMs": 1644.8999984674156,
+        "longTasks": 1,
+        "longTaskTotalMs": 62,
+        "longTaskMaxMs": 62,
+        "maxPendingRAF": 1,
+        "timelines": "27",
+        "state": "DEGRADED",
+        "level": "low"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2502 @@
+[
+  {
+    "round": 1,
+    "name": "control",
+    "css": "",
+    "actualMs": 24003,
+    "metrics": {
+      "measuredMs": 24003,
+      "callbacks": 1070,
+      "fps": 44.861705002123,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.100000000000364,
+      "missedVsyncEstimate": 353,
+      "missedVsyncPercent": 25.232308791994278,
+      "callbackP95Ms": 0.20000000018626451,
+      "callbackP99Ms": 0.2999999998137355,
+      "callbackTotalMs": 123.20000005606562,
+      "longTasks": 1,
+      "longTaskTotalMs": 83,
+      "longTaskMaxMs": 83,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.423562,
+      "ScriptDuration": 0.246064,
+      "LayoutDuration": 0.031936,
+      "RecalcStyleDuration": 0.15490900000000002
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4168.0999999996275,
+        "fps": 20.688941760628946,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5170.5,
+        "fps": 21.427040925648157,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6173.5,
+        "fps": 21.05263157894737,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7175.799999999814,
+        "fps": 21.35882831570383,
+        "p95Ms": 50.099999999999454,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8177.9000000003725,
+        "fps": 47.36343542784968,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9179.799999999814,
+        "fps": 60.00813669650123,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10182.599999999627,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11185.599999999627,
+        "fps": 60.00600060006003,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12187.400000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13190,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14192,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15194.5,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16197.099999999627,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17199,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18201.200000000186,
+        "fps": 32.63157894736842,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 19203.400000000373,
+        "fps": 21.356656157835875,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 20207,
+        "fps": 21.427040925648136,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 21209,
+        "fps": 21.429336762027233,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 22212.599999999627,
+        "fps": 21.00210021002097,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 23216.099999999627,
+        "fps": 42.412330609289306,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24218.099999999627,
+        "fps": 60.00600060006014,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25220.799999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26224.599999999627,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27168.5,
+        "fps": 60.00214293367625,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 1,
+    "name": "canvas-hidden",
+    "css": ".nexus-particles{visibility:hidden!important}",
+    "actualMs": 24003,
+    "metrics": {
+      "measuredMs": 24003,
+      "callbacks": 1436,
+      "fps": 59.874653346111074,
+      "intervalP95Ms": 16.700000000000728,
+      "intervalP99Ms": 16.800000000000182,
+      "missedVsyncEstimate": 3,
+      "missedVsyncPercent": 0.21201413427561835,
+      "callbackP95Ms": 0.20000000018626451,
+      "callbackP99Ms": 0.2999999998137355,
+      "callbackTotalMs": 186.7999997921288,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "AMBIENT",
+      "level": "normal"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.589868,
+      "ScriptDuration": 0.31278700000000004,
+      "LayoutDuration": 0.041896,
+      "RecalcStyleDuration": 0.199053
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4211.700000000186,
+        "fps": 56.894589841729605,
+        "p95Ms": 16.799999999999727,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 5215.4000000003725,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 6217,
+        "fps": 59.99593247915392,
+        "p95Ms": 16.800000000000182,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 7221.5,
+        "fps": 60.00600060005997,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 8224.200000000186,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9227,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10229.900000000373,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11232.400000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12234.799999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13237.299999999814,
+        "fps": 60,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14241.200000000186,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15243.900000000373,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16245.900000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17249.900000000373,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18251.799999999814,
+        "fps": 60.00203396725295,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 19255.5,
+        "fps": 60,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 20259.099999999627,
+        "fps": 59.995932479153865,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 21261.700000000186,
+        "fps": 60.00203396725295,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 22263.599999999627,
+        "fps": 60.00203396725295,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 23266.599999999627,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24269.5,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25272.200000000186,
+        "fps": 60,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26274.900000000373,
+        "fps": 60.00203396725295,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27211.599999999627,
+        "fps": 60.00436395374195,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 1,
+    "name": "map-hidden",
+    "css": ".nexus-map-frame{visibility:hidden!important}",
+    "actualMs": 24003,
+    "metrics": {
+      "measuredMs": 24003,
+      "callbacks": 1083,
+      "fps": 45.35506721886496,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.099999999999454,
+      "missedVsyncEstimate": 342,
+      "missedVsyncPercent": 24.411134903640257,
+      "callbackP95Ms": 0.2999999998137355,
+      "callbackP99Ms": 0.30000000074505806,
+      "callbackTotalMs": 137.0999999428168,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.3336860000000001,
+      "ScriptDuration": 0.263353,
+      "LayoutDuration": 0.033631999999999995,
+      "RecalcStyleDuration": 0.16903199999999996
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4173.5,
+        "fps": 21.356656157835854,
+        "p95Ms": 50.09999999999991,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5174.899999999441,
+        "fps": 22.109917877447902,
+        "p95Ms": 50.099999999999454,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6178.0999999996275,
+        "fps": 21.725636250775906,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7179.799999999814,
+        "fps": 21.427040925648157,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8183.200000000186,
+        "fps": 51.00510051005102,
+        "p95Ms": 49.899999999999636,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9184.700000000186,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10186.5,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11189.299999999814,
+        "fps": 60,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12192,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13194.599999999627,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14196.599999999627,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15200.099999999627,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16203.399999999441,
+        "fps": 59.99400059993999,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17207.299999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18210.89999999944,
+        "fps": 29.998965552911947,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 19214.599999999627,
+        "fps": 21.725636250775867,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 20218.200000000186,
+        "fps": 22.107590272660246,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 21219.89999999944,
+        "fps": 22.105263157894736,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 22223.5,
+        "fps": 22.10759027266033,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 23226.099999999627,
+        "fps": 47.584566049446536,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24229.5,
+        "fps": 60.00203396725295,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25233.099999999627,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26237.599999999627,
+        "fps": 60.00600060005992,
+        "p95Ms": 16.80000000000291,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27174.700000000186,
+        "fps": 60.004363953742185,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 1,
+    "name": "mask-off",
+    "css": ".nexus-map-frame{-webkit-mask-image:none!important;mask-image:none!important}",
+    "actualMs": 24003,
+    "metrics": {
+      "measuredMs": 24003,
+      "callbacks": 1081,
+      "fps": 45.20513379778722,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.100000000000364,
+      "missedVsyncEstimate": 346,
+      "missedVsyncPercent": 24.66143977191732,
+      "callbackP95Ms": 0.20000000018626451,
+      "callbackP99Ms": 0.2999999998137355,
+      "callbackTotalMs": 131.89999998826534,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.372588,
+      "ScriptDuration": 0.25245700000000004,
+      "LayoutDuration": 0.03361,
+      "RecalcStyleDuration": 0.160729
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4170.299999999814,
+        "fps": 21.00000000000001,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5172,
+        "fps": 21.81976871045166,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6175.700000000186,
+        "fps": 21.725636250775906,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7177.299999999814,
+        "fps": 21.727884117951373,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8181,
+        "fps": 51.727705358990306,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9184.599999999627,
+        "fps": 60,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10188,
+        "fps": 60.00813669650129,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11190.200000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12194.200000000186,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13197.599999999627,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14199.5,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15203.700000000186,
+        "fps": 60,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16206.299999999814,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17208.099999999627,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18210.400000000373,
+        "fps": 29.473684210526315,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 19214.099999999627,
+        "fps": 21.72563625077595,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 20217.700000000186,
+        "fps": 21.723388848660374,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 21220.200000000186,
+        "fps": 21.356656157835875,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 22223.700000000186,
+        "fps": 21.427040925648136,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 23227.299999999814,
+        "fps": 47,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24231,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25234.5,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26238.299999999814,
+        "fps": 60,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27169.700000000186,
+        "fps": 60.004363953742185,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 1,
+    "name": "filters-off",
+    "css": "#screen-stage *{filter:none!important}",
+    "actualMs": 24004,
+    "metrics": {
+      "measuredMs": 24004,
+      "callbacks": 1077,
+      "fps": 45.06644411632535,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.09999999999991,
+      "missedVsyncEstimate": 349,
+      "missedVsyncPercent": 24.893009985734665,
+      "callbackP95Ms": 0.20000000018626451,
+      "callbackP99Ms": 0.2999999998137355,
+      "callbackTotalMs": 123.19999999459833,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.34756,
+      "ScriptDuration": 0.24795900000000004,
+      "LayoutDuration": 0.033426,
+      "RecalcStyleDuration": 0.15763400000000002
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4178.100000000559,
+        "fps": 20.99999999999999,
+        "p95Ms": 50.09999999999991,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5179.600000000559,
+        "fps": 21.429336762027233,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6183.299999999814,
+        "fps": 21.054847878724086,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7186.4000000003725,
+        "fps": 21.35882831570383,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8190,
+        "fps": 52.88852725793324,
+        "p95Ms": 33.399999999999636,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9193.799999999814,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10197.799999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11201.600000000559,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12204.5,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13208.5,
+        "fps": 60,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14212.400000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15216.200000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.80000000000109,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16219.100000000559,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17222.5,
+        "fps": 60.00600060006014,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18224.799999999814,
+        "fps": 29.495524816924306,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 19227.10000000056,
+        "fps": 21.429336762027233,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 20230.5,
+        "fps": 21.354484441732733,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 21234.299999999814,
+        "fps": 21.429336762027233,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 22236.5,
+        "fps": 21.429336762027233,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 23238.60000000056,
+        "fps": 43.725849094976546,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24241.799999999814,
+        "fps": 60.00600060005992,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25246.5,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26249.5,
+        "fps": 60.00203396725295,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27178.200000000186,
+        "fps": 60.00436395374195,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "name": "filters-off",
+    "css": "#screen-stage *{filter:none!important}",
+    "actualMs": 24002,
+    "metrics": {
+      "measuredMs": 24002,
+      "callbacks": 1072,
+      "fps": 44.94767541602335,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.100000000000364,
+      "missedVsyncEstimate": 351,
+      "missedVsyncPercent": 25.089349535382414,
+      "callbackP95Ms": 0.20000000018626451,
+      "callbackP99Ms": 0.2999999998137355,
+      "callbackTotalMs": 120.700000109151,
+      "longTasks": 1,
+      "longTaskTotalMs": 80,
+      "longTaskMaxMs": 80,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.4179119999999998,
+      "ScriptDuration": 0.24241200000000002,
+      "LayoutDuration": 0.033067,
+      "RecalcStyleDuration": 0.15599200000000002
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4208.200000000186,
+        "fps": 21.05263157894737,
+        "p95Ms": 50.09999999999991,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5211.5999999996275,
+        "fps": 21.356656157835875,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6214,
+        "fps": 21.429336762027212,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7215.700000000186,
+        "fps": 20.691082143596102,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8219.200000000186,
+        "fps": 49.4788925150016,
+        "p95Ms": 33.399999999999636,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9221.799999999814,
+        "fps": 60.00600060006003,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10223.700000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11227.399999999441,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12229.200000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13232.799999999814,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14235,
+        "fps": 60.00600060006003,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15237.700000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16240.399999999441,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17242.200000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18246.099999999627,
+        "fps": 29.489526133821503,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 19249.799999999814,
+        "fps": 21.429336762027233,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 20252,
+        "fps": 21.356656157835875,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 21255.5,
+        "fps": 21.429336762027148,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 22256.200000000186,
+        "fps": 21.35448444173281,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 23259.700000000186,
+        "fps": 45.26315789473684,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24262.700000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25266.39999999944,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26268.5,
+        "fps": 59.994000599940094,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27208.5,
+        "fps": 60.004363953742185,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "name": "mask-off",
+    "css": ".nexus-map-frame{-webkit-mask-image:none!important;mask-image:none!important}",
+    "actualMs": 24002,
+    "metrics": {
+      "measuredMs": 24002,
+      "callbacks": 1077,
+      "fps": 45.06625124114084,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.09999999999991,
+      "missedVsyncEstimate": 349,
+      "missedVsyncPercent": 24.893009985734665,
+      "callbackP95Ms": 0.20000000018626451,
+      "callbackP99Ms": 0.2999999998137355,
+      "callbackTotalMs": 124.29999991972,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.3793060000000001,
+      "ScriptDuration": 0.244098,
+      "LayoutDuration": 0.03367,
+      "RecalcStyleDuration": 0.157889
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4201.4000000003725,
+        "fps": 20.997900209979004,
+        "p95Ms": 50.09999999999991,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5204,
+        "fps": 21.429336762027212,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6206.9000000003725,
+        "fps": 21.356656157835875,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7208.799999999814,
+        "fps": 21.81976871045166,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8211.200000000186,
+        "fps": 49.004900490049025,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9214.900000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10217.5,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11220,
+        "fps": 60.00600060006003,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12224.200000000186,
+        "fps": 60.00813669650129,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13227.900000000373,
+        "fps": 60.00813669650129,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14229.700000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15233.400000000373,
+        "fps": 60.00813669650129,
+        "p95Ms": 16.80000000000109,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16237.100000000559,
+        "fps": 60,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17238.400000000373,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18240.60000000056,
+        "fps": 30.002069108214293,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 19244.10000000056,
+        "fps": 21.819768710451704,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 20247,
+        "fps": 21.356656157835875,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 21248.799999999814,
+        "fps": 21.356656157835875,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 22252.60000000056,
+        "fps": 21.429336762027148,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 23255.200000000186,
+        "fps": 46,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24259.299999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25261.700000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26265.5,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27201.299999999814,
+        "fps": 60.004363953742185,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "name": "map-hidden",
+    "css": ".nexus-map-frame{visibility:hidden!important}",
+    "actualMs": 24002,
+    "metrics": {
+      "measuredMs": 24002,
+      "callbacks": 1079,
+      "fps": 45.15107421039118,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.100000000000364,
+      "missedVsyncEstimate": 347,
+      "missedVsyncPercent": 24.750356633380886,
+      "callbackP95Ms": 0.2999999998137355,
+      "callbackP99Ms": 0.30000000074505806,
+      "callbackTotalMs": 129.59999995026737,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.317037,
+      "ScriptDuration": 0.255515,
+      "LayoutDuration": 0.033754,
+      "RecalcStyleDuration": 0.16901099999999997
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4171.299999999814,
+        "fps": 21.05263157894737,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5174,
+        "fps": 22.10293653299654,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6177.199999999255,
+        "fps": 22.105263157894736,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7180.199999999255,
+        "fps": 21.723388848660395,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8181.899999999441,
+        "fps": 51.72770535899026,
+        "p95Ms": 33.400000000000546,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9184.699999999255,
+        "fps": 59.99400059993999,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10188.799999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11191,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12194.799999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13198.5,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14202.299999999814,
+        "fps": 60.00600060006003,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15206.199999999255,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16209.899999999441,
+        "fps": 60.00813669650129,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17212.799999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18214.699999999255,
+        "fps": 31.526492423472007,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 19218.39999999944,
+        "fps": 21.723388848660374,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 20220.199999999255,
+        "fps": 21.72563625077595,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 21221.799999999814,
+        "fps": 21.431633090441476,
+        "p95Ms": 50.10000000000218,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 22225.699999999255,
+        "fps": 21,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 23227.39999999944,
+        "fps": 43.44677769732075,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24232.89999999944,
+        "fps": 60,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25235.099999999627,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.799999999999272,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26238.89999999944,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27170,
+        "fps": 60.004363953742185,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "name": "canvas-hidden",
+    "css": ".nexus-particles{visibility:hidden!important}",
+    "actualMs": 24004,
+    "metrics": {
+      "measuredMs": 24004,
+      "callbacks": 1436,
+      "fps": 59.83279023352584,
+      "intervalP95Ms": 16.700000000000728,
+      "intervalP99Ms": 16.80000000000109,
+      "missedVsyncEstimate": 4,
+      "missedVsyncPercent": 0.2824858757062147,
+      "callbackP95Ms": 0.20000000018626451,
+      "callbackP99Ms": 0.2999999998137355,
+      "callbackTotalMs": 190.2999999858439,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "AMBIENT",
+      "level": "normal"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.5736210000000002,
+      "ScriptDuration": 0.309761,
+      "LayoutDuration": 0.03972900000000001,
+      "RecalcStyleDuration": 0.197276
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4174.600000000559,
+        "fps": 55.939788445890976,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 5176.299999999814,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 6179.600000000559,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 7181.4000000003725,
+        "fps": 60.00203396725312,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 8185.9000000003725,
+        "fps": 60.00600060006003,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9189.900000000373,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10193.799999999814,
+        "fps": 59.995932479153865,
+        "p95Ms": 16.80000000000109,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11196.400000000373,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12198.200000000186,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13200,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14202.100000000559,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15205.799999999814,
+        "fps": 60,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16207.799999999814,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17211.5,
+        "fps": 59.99593247915409,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18213.400000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 19217.200000000186,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 20220.299999999814,
+        "fps": 60.00600060006014,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 21222.400000000373,
+        "fps": 59.99593247915409,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 22226.299999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 23230.10000000056,
+        "fps": 59.995932479153865,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24232.10000000056,
+        "fps": 60.00203396725295,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25236.60000000056,
+        "fps": 60.00600060005992,
+        "p95Ms": 16.799999999999272,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26238.900000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27175.5,
+        "fps": 59.997818261154094,
+        "p95Ms": 16.700000000000728,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "name": "control",
+    "css": "",
+    "actualMs": 24004,
+    "metrics": {
+      "measuredMs": 24004,
+      "callbacks": 1078,
+      "fps": 45.20520331619196,
+      "intervalP95Ms": 50,
+      "intervalP99Ms": 50.099999999999454,
+      "missedVsyncEstimate": 345,
+      "missedVsyncPercent": 24.660471765546816,
+      "callbackP95Ms": 0.20000000018626451,
+      "callbackP99Ms": 0.2999999998137355,
+      "callbackTotalMs": 129.00000001583248,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "longTaskMaxMs": 0,
+      "maxPendingRAF": 1,
+      "state": "DEGRADED",
+      "level": "low"
+    },
+    "cpuSeconds": {
+      "TaskDuration": 1.363553,
+      "ScriptDuration": 0.247566,
+      "LayoutDuration": 0.033281,
+      "RecalcStyleDuration": 0.15701900000000002
+    },
+    "writes": null,
+    "errors": [],
+    "segments": [
+      {
+        "time": 4213.9000000003725,
+        "fps": 20.688941760628946,
+        "p95Ms": 50.100000000000364,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 5217.5999999996275,
+        "fps": 21.05263157894737,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 6220,
+        "fps": 21.35882831570383,
+        "p95Ms": 50.099999999999454,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 7223.5999999996275,
+        "fps": 21.054847878724086,
+        "p95Ms": 50.099999999999454,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 8227,
+        "fps": 56.90047589488933,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 9230.700000000186,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 10234.700000000186,
+        "fps": 60,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 11238.599999999627,
+        "fps": 59.99593247915398,
+        "p95Ms": 16.80000000000109,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 12241.900000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 13243.700000000186,
+        "fps": 60.00813669650129,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 14246.400000000373,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 15247.299999999814,
+        "fps": 60.00203396725317,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 16251.099999999627,
+        "fps": 60.00203396725306,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 17254.299999999814,
+        "fps": 59.99999999999989,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 18256.200000000186,
+        "fps": 24.82929857231537,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 19259.299999999814,
+        "fps": 21.054847878724125,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 20262.900000000373,
+        "fps": 21.427040925648136,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 21264.700000000186,
+        "fps": 21.356656157835875,
+        "p95Ms": 50.099999999998545,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 22268.099999999627,
+        "fps": 21.429336762027233,
+        "p95Ms": 50,
+        "level": "normal",
+        "state": "AMBIENT",
+        "particleVisibility": "visible",
+        "directorFPS": null
+      },
+      {
+        "time": 23271.599999999627,
+        "fps": 48.815214075053426,
+        "p95Ms": 50,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 24272.400000000373,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 25274.900000000373,
+        "fps": 60.008136696501175,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 26277.599999999627,
+        "fps": 59.995932479153865,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      },
+      {
+        "time": 27214.299999999814,
+        "fps": 59.997818261154094,
+        "p95Ms": 16.700000000000728,
+        "level": "low",
+        "state": "DEGRADED",
+        "particleVisibility": "hidden",
+        "directorFPS": null
+      }
+    ]
+  }
+]
