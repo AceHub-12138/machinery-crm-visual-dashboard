@@ -1,0 +1,1029 @@
+{
+  "source": ".review/p1-5-b/headless-swiftshader/long-candidate60/report.json",
+  "generatedAt": "2026-10-19T08:22:14.364Z",
+  "duration": {
+    "requestedMs": 1800000,
+    "actualMs": 1800004
+  },
+  "engine": "legacy",
+  "backend": "headless-swiftshader",
+  "initialViewport": {
+    "width": 3840,
+    "height": 2160
+  },
+  "loadRelief": {
+    "requestedAtMs": 1500000,
+    "appliedAtMs": 1500189,
+    "method": "viewport reduction with all visual modules retained"
+  },
+  "transitionCounts": {
+    "total": 55,
+    "downshifts": 1,
+    "probeStarts": 27,
+    "probeFailures": 26,
+    "fullRecoveries": 1
+  },
+  "transitions": [
+    {
+      "index": 1,
+      "atMs": 3007,
+      "atMinutes": 0.050116666666666664,
+      "sincePreviousMs": 3007,
+      "from": "normal",
+      "to": "low",
+      "reason": "severe-low-frequency",
+      "updateHz": 20.7,
+      "intervalP95Ms": 50.100000000000364
+    },
+    {
+      "index": 2,
+      "atMs": 13050,
+      "atMinutes": 0.2175,
+      "sincePreviousMs": 10043,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.799999999999272
+    },
+    {
+      "index": 3,
+      "atMs": 14059,
+      "atMinutes": 0.23431666666666667,
+      "sincePreviousMs": 1009,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 60,
+      "intervalP95Ms": 50
+    },
+    {
+      "index": 4,
+      "atMs": 34137,
+      "atMinutes": 0.56895,
+      "sincePreviousMs": 20078,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.700000000004366
+    },
+    {
+      "index": 5,
+      "atMs": 35145,
+      "atMinutes": 0.58575,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 52.4,
+      "intervalP95Ms": 50.099999999998545
+    },
+    {
+      "index": 6,
+      "atMs": 75291,
+      "atMinutes": 1.25485,
+      "sincePreviousMs": 40146,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000001164
+    },
+    {
+      "index": 7,
+      "atMs": 76300,
+      "atMinutes": 1.2716666666666667,
+      "sincePreviousMs": 1009,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 42.3,
+      "intervalP95Ms": 50.10000000000582
+    },
+    {
+      "index": 8,
+      "atMs": 136515,
+      "atMinutes": 2.27525,
+      "sincePreviousMs": 60215,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000001164
+    },
+    {
+      "index": 9,
+      "atMs": 137522,
+      "atMinutes": 2.2920333333333334,
+      "sincePreviousMs": 1007,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 60,
+      "intervalP95Ms": 50.10000000000582
+    },
+    {
+      "index": 10,
+      "atMs": 197723,
+      "atMinutes": 3.2953833333333336,
+      "sincePreviousMs": 60201,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.79999999998836
+    },
+    {
+      "index": 11,
+      "atMs": 198732,
+      "atMinutes": 3.3122,
+      "sincePreviousMs": 1009,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 50.3,
+      "intervalP95Ms": 50.10000000000582
+    },
+    {
+      "index": 12,
+      "atMs": 258931,
+      "atMinutes": 4.3155166666666664,
+      "sincePreviousMs": 60199,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.79999999998836
+    },
+    {
+      "index": 13,
+      "atMs": 259940,
+      "atMinutes": 4.332333333333334,
+      "sincePreviousMs": 1009,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 36.8,
+      "intervalP95Ms": 50
+    },
+    {
+      "index": 14,
+      "atMs": 320142,
+      "atMinutes": 5.3357,
+      "sincePreviousMs": 60202,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000001164
+    },
+    {
+      "index": 15,
+      "atMs": 321150,
+      "atMinutes": 5.3525,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 60,
+      "intervalP95Ms": 50.100000000034925
+    },
+    {
+      "index": 16,
+      "atMs": 381351,
+      "atMinutes": 6.35585,
+      "sincePreviousMs": 60201,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000001164
+    },
+    {
+      "index": 17,
+      "atMs": 382361,
+      "atMinutes": 6.372683333333334,
+      "sincePreviousMs": 1010,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 48.4,
+      "intervalP95Ms": 50.09999999997672
+    },
+    {
+      "index": 18,
+      "atMs": 442569,
+      "atMinutes": 7.37615,
+      "sincePreviousMs": 60208,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000001164
+    },
+    {
+      "index": 19,
+      "atMs": 443577,
+      "atMinutes": 7.39295,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 38.7,
+      "intervalP95Ms": 50.09999999997672
+    },
+    {
+      "index": 20,
+      "atMs": 503780,
+      "atMinutes": 8.396333333333333,
+      "sincePreviousMs": 60203,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000001164
+    },
+    {
+      "index": 21,
+      "atMs": 504790,
+      "atMinutes": 8.413166666666667,
+      "sincePreviousMs": 1010,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 60,
+      "intervalP95Ms": 50.100000000034925
+    },
+    {
+      "index": 22,
+      "atMs": 565000,
+      "atMinutes": 9.416666666666666,
+      "sincePreviousMs": 60210,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000006985
+    },
+    {
+      "index": 23,
+      "atMs": 566008,
+      "atMinutes": 9.433466666666666,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 52.3,
+      "intervalP95Ms": 50
+    },
+    {
+      "index": 24,
+      "atMs": 626205,
+      "atMinutes": 10.43675,
+      "sincePreviousMs": 60197,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.79999999993015
+    },
+    {
+      "index": 25,
+      "atMs": 627213,
+      "atMinutes": 10.45355,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 40.6,
+      "intervalP95Ms": 50.09999999997672
+    },
+    {
+      "index": 26,
+      "atMs": 687416,
+      "atMinutes": 11.456933333333334,
+      "sincePreviousMs": 60203,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000006985
+    },
+    {
+      "index": 27,
+      "atMs": 688425,
+      "atMinutes": 11.47375,
+      "sincePreviousMs": 1009,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 60,
+      "intervalP95Ms": 50.09999999997672
+    },
+    {
+      "index": 28,
+      "atMs": 748622,
+      "atMinutes": 12.477033333333333,
+      "sincePreviousMs": 60197,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000006985
+    },
+    {
+      "index": 29,
+      "atMs": 749629,
+      "atMinutes": 12.493816666666667,
+      "sincePreviousMs": 1007,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 50,
+      "intervalP95Ms": 50
+    },
+    {
+      "index": 30,
+      "atMs": 809835,
+      "atMinutes": 13.49725,
+      "sincePreviousMs": 60206,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000006985
+    },
+    {
+      "index": 31,
+      "atMs": 810842,
+      "atMinutes": 13.514033333333334,
+      "sincePreviousMs": 1007,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 36.4,
+      "intervalP95Ms": 50.09999999997672
+    },
+    {
+      "index": 32,
+      "atMs": 871051,
+      "atMinutes": 14.517516666666667,
+      "sincePreviousMs": 60209,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.79999999993015
+    },
+    {
+      "index": 33,
+      "atMs": 872058,
+      "atMinutes": 14.5343,
+      "sincePreviousMs": 1007,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 60,
+      "intervalP95Ms": 50.09999999997672
+    },
+    {
+      "index": 34,
+      "atMs": 932269,
+      "atMinutes": 15.537816666666666,
+      "sincePreviousMs": 60211,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.70000000006985
+    },
+    {
+      "index": 35,
+      "atMs": 933277,
+      "atMinutes": 15.554616666666666,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 44.5,
+      "intervalP95Ms": 50.09999999997672
+    },
+    {
+      "index": 36,
+      "atMs": 993474,
+      "atMinutes": 16.5579,
+      "sincePreviousMs": 60197,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.79999999993015
+    },
+    {
+      "index": 37,
+      "atMs": 994482,
+      "atMinutes": 16.5747,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 31.5,
+      "intervalP95Ms": 50.09999999997672
+    },
+    {
+      "index": 38,
+      "atMs": 1054686,
+      "atMinutes": 17.5781,
+      "sincePreviousMs": 60204,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.699999999953434
+    },
+    {
+      "index": 39,
+      "atMs": 1055694,
+      "atMinutes": 17.5949,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 58,
+      "intervalP95Ms": 50
+    },
+    {
+      "index": 40,
+      "atMs": 1115894,
+      "atMinutes": 18.598233333333333,
+      "sincePreviousMs": 60200,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.800000000046566
+    },
+    {
+      "index": 41,
+      "atMs": 1116901,
+      "atMinutes": 18.615016666666666,
+      "sincePreviousMs": 1007,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 38.7,
+      "intervalP95Ms": 50.0999999998603
+    },
+    {
+      "index": 42,
+      "atMs": 1177102,
+      "atMinutes": 19.618366666666667,
+      "sincePreviousMs": 60201,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.700000000186265
+    },
+    {
+      "index": 43,
+      "atMs": 1178110,
+      "atMinutes": 19.635166666666667,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 60,
+      "intervalP95Ms": 50.10000000009313
+    },
+    {
+      "index": 44,
+      "atMs": 1238304,
+      "atMinutes": 20.6384,
+      "sincePreviousMs": 60194,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.799999999813735
+    },
+    {
+      "index": 45,
+      "atMs": 1239312,
+      "atMinutes": 20.6552,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 50.2,
+      "intervalP95Ms": 50.0999999998603
+    },
+    {
+      "index": 46,
+      "atMs": 1299507,
+      "atMinutes": 21.65845,
+      "sincePreviousMs": 60195,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.700000000186265
+    },
+    {
+      "index": 47,
+      "atMs": 1300514,
+      "atMinutes": 21.675233333333335,
+      "sincePreviousMs": 1007,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 35.4,
+      "intervalP95Ms": 50.10000000009313
+    },
+    {
+      "index": 48,
+      "atMs": 1360714,
+      "atMinutes": 22.678566666666665,
+      "sincePreviousMs": 60200,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.800000000046566
+    },
+    {
+      "index": 49,
+      "atMs": 1361721,
+      "atMinutes": 22.69535,
+      "sincePreviousMs": 1007,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 60,
+      "intervalP95Ms": 50.10000000009313
+    },
+    {
+      "index": 50,
+      "atMs": 1421917,
+      "atMinutes": 23.698616666666666,
+      "sincePreviousMs": 60196,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.699999999953434
+    },
+    {
+      "index": 51,
+      "atMs": 1422925,
+      "atMinutes": 23.715416666666666,
+      "sincePreviousMs": 1008,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 48.4,
+      "intervalP95Ms": 50.10000000009313
+    },
+    {
+      "index": 52,
+      "atMs": 1483124,
+      "atMinutes": 24.718733333333333,
+      "sincePreviousMs": 60199,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.700000000186265
+    },
+    {
+      "index": 53,
+      "atMs": 1484134,
+      "atMinutes": 24.735566666666667,
+      "sincePreviousMs": 1010,
+      "from": "probe",
+      "to": "low",
+      "reason": "normal-load-probe-failed",
+      "updateHz": 35.8,
+      "intervalP95Ms": 50.0999999998603
+    },
+    {
+      "index": 54,
+      "atMs": 1544332,
+      "atMinutes": 25.738866666666667,
+      "sincePreviousMs": 60198,
+      "from": "low",
+      "to": "probe",
+      "reason": "scheduled-normal-load-probe",
+      "updateHz": 60,
+      "intervalP95Ms": 16.800000000046566
+    },
+    {
+      "index": 55,
+      "atMs": 1547347,
+      "atMinutes": 25.789116666666665,
+      "sincePreviousMs": 3015,
+      "from": "probe",
+      "to": "normal",
+      "reason": "normal-load-probe-passed",
+      "updateHz": 60,
+      "intervalP95Ms": 16.800000000046566
+    }
+  ],
+  "intervalsBetweenSwitchesMs": [
+    10043,
+    1009,
+    20078,
+    1008,
+    40146,
+    1009,
+    60215,
+    1007,
+    60201,
+    1009,
+    60199,
+    1009,
+    60202,
+    1008,
+    60201,
+    1010,
+    60208,
+    1008,
+    60203,
+    1010,
+    60210,
+    1008,
+    60197,
+    1008,
+    60203,
+    1009,
+    60197,
+    1007,
+    60206,
+    1007,
+    60209,
+    1007,
+    60211,
+    1008,
+    60197,
+    1008,
+    60204,
+    1008,
+    60200,
+    1007,
+    60201,
+    1008,
+    60194,
+    1008,
+    60195,
+    1007,
+    60200,
+    1007,
+    60196,
+    1008,
+    60199,
+    1010,
+    60198,
+    3015
+  ],
+  "recoveryAfterRelief": {
+    "atMs": 1547347,
+    "latencyMs": 47158
+  },
+  "resourceSamples": {
+    "total": 31,
+    "preRelief": 25,
+    "postRelief": 6
+  },
+  "trends": {
+    "heapUsedBytes": {
+      "samples": 31,
+      "first": 9257104,
+      "last": 9564080,
+      "min": 7271684,
+      "max": 12748260,
+      "slopePerMinute": -3388.2314695200384,
+      "increases": 17,
+      "decreases": 13,
+      "strictlyMonotonicIncrease": false
+    },
+    "domNodes": {
+      "samples": 31,
+      "first": 1216,
+      "last": 1227,
+      "min": 1215,
+      "max": 1309,
+      "slopePerMinute": -0.13120498463334762,
+      "increases": 15,
+      "decreases": 15,
+      "strictlyMonotonicIncrease": false
+    },
+    "eventListeners": {
+      "samples": 31,
+      "first": 413,
+      "last": 413,
+      "min": 378,
+      "max": 501,
+      "slopePerMinute": -0.35127764059444916,
+      "increases": 15,
+      "decreases": 14,
+      "strictlyMonotonicIncrease": false
+    },
+    "activeTimeouts": {
+      "samples": 31,
+      "first": 0,
+      "last": 0,
+      "min": 0,
+      "max": 0,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    },
+    "activeIntervals": {
+      "samples": 31,
+      "first": 3,
+      "last": 3,
+      "min": 3,
+      "max": 3,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    },
+    "pendingApplicationRaf": {
+      "samples": 31,
+      "first": 1,
+      "last": 1,
+      "min": 1,
+      "max": 1,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    },
+    "gsapLiveScenes": {
+      "samples": 0,
+      "first": null,
+      "last": null,
+      "min": null,
+      "max": null,
+      "slopePerMinute": null,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    },
+    "gsapLiveTimelines": {
+      "samples": 0,
+      "first": null,
+      "last": null,
+      "min": null,
+      "max": null,
+      "slopePerMinute": null,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    }
+  },
+  "preReliefTrends": {
+    "heapUsedBytes": {
+      "samples": 25,
+      "first": 9257104,
+      "last": 7463988,
+      "min": 7271684,
+      "max": 12748260,
+      "slopePerMinute": -50003.655129608465,
+      "increases": 13,
+      "decreases": 11,
+      "strictlyMonotonicIncrease": false
+    },
+    "domNodes": {
+      "samples": 25,
+      "first": 1216,
+      "last": 1217,
+      "min": 1215,
+      "max": 1309,
+      "slopePerMinute": -0.8659463910561294,
+      "increases": 12,
+      "decreases": 12,
+      "strictlyMonotonicIncrease": false
+    },
+    "eventListeners": {
+      "samples": 25,
+      "first": 413,
+      "last": 378,
+      "min": 378,
+      "max": 501,
+      "slopePerMinute": -1.35644702795965,
+      "increases": 12,
+      "decreases": 12,
+      "strictlyMonotonicIncrease": false
+    },
+    "activeTimeouts": {
+      "samples": 25,
+      "first": 0,
+      "last": 0,
+      "min": 0,
+      "max": 0,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    },
+    "activeIntervals": {
+      "samples": 25,
+      "first": 3,
+      "last": 3,
+      "min": 3,
+      "max": 3,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    },
+    "pendingApplicationRaf": {
+      "samples": 25,
+      "first": 1,
+      "last": 1,
+      "min": 1,
+      "max": 1,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    }
+  },
+  "postReliefTrends": {
+    "heapUsedBytes": {
+      "samples": 6,
+      "first": 10194916,
+      "last": 9564080,
+      "min": 9564080,
+      "max": 11503112,
+      "slopePerMinute": 49904.27079315854,
+      "increases": 3,
+      "decreases": 2,
+      "strictlyMonotonicIncrease": false
+    },
+    "domNodes": {
+      "samples": 6,
+      "first": 1291,
+      "last": 1227,
+      "min": 1227,
+      "max": 1309,
+      "slopePerMinute": -4.788607594051682,
+      "increases": 2,
+      "decreases": 3,
+      "strictlyMonotonicIncrease": false
+    },
+    "eventListeners": {
+      "samples": 6,
+      "first": 440,
+      "last": 413,
+      "min": 413,
+      "max": 484,
+      "slopePerMinute": 0.7189426679071597,
+      "increases": 2,
+      "decreases": 2,
+      "strictlyMonotonicIncrease": false
+    },
+    "activeTimeouts": {
+      "samples": 6,
+      "first": 0,
+      "last": 0,
+      "min": 0,
+      "max": 0,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    },
+    "activeIntervals": {
+      "samples": 6,
+      "first": 3,
+      "last": 3,
+      "min": 3,
+      "max": 3,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    },
+    "pendingApplicationRaf": {
+      "samples": 6,
+      "first": 1,
+      "last": 1,
+      "min": 1,
+      "max": 1,
+      "slopePerMinute": 0,
+      "increases": 0,
+      "decreases": 0,
+      "strictlyMonotonicIncrease": false
+    }
+  },
+  "postRunGc": {
+    "elapsedMs": 1800004,
+    "label": "post-run-gc",
+    "heap": {
+      "usedSize": 7429628,
+      "totalSize": 8257536,
+      "embedderHeapUsedSize": 4932384,
+      "backingStorageSize": 984239
+    },
+    "dom": {
+      "documents": 3,
+      "nodes": 1216,
+      "jsEventListeners": 378
+    },
+    "timers": {
+      "activeTimeouts": 0,
+      "activeIntervals": 3,
+      "pendingApplicationRaf": 1,
+      "timeoutsScheduled": 1,
+      "timeoutsFired": 1,
+      "intervalsScheduled": 3,
+      "intervalCallbacks": 3636
+    },
+    "gsapAudit": null,
+    "stageCount": 1,
+    "canvasCount": 1,
+    "debugCount": 1,
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "dpr": 1
+    }
+  },
+  "pageErrors": [],
+  "networkFailures": [
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "interpretationRules": {
+    "heap": "Natural heap samples may rise and fall with GC. A positive raw slope alone is not a leak; inspect monotonicity, DOM/listener/timer counts, and post-run forced-GC state together.",
+    "timers": "Cumulative scheduled/fired counters naturally rise. Leak assessment uses active timeout/interval and pending RAF counts.",
+    "recovery": "Viewport reduction retains all visual modules; it is a controlled load reduction, not a proposed production quality cut."
+  }
+}

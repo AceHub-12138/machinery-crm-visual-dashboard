@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-10-20T00:04:30.904Z",
+  "baseline": "957ff26b3202510316213dec93f8a0d98c0758b4",
+  "branch": "codex/nexus-p1-5-b-quality-strategy",
+  "headBeforeCommit": "957ff26b3202510316213dec93f8a0d98c0758b4",
+  "productDiff": [
+    "src/components/screen/motion/MotionDirector.test.ts",
+    "src/components/screen/motion/MotionDirector.ts",
+    "src/components/screen/motion/MotionProvider.tsx"
+  ],
+  "allowedProductChanges": [
+    "src/components/screen/motion/MotionDirector.test.ts",
+    "src/components/screen/motion/MotionDirector.ts",
+    "src/components/screen/motion/MotionProvider.tsx"
+  ],
+  "onlyAllowedExperimentalProductFilesChanged": true,
+  "defaultBehaviorGuard": "The only runtime change is gated by debug=1&qualityExperiment=external; constructor automaticQuality defaults true.",
+  "protectedWorktrees": [
+    {
+      "directory": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-3",
+      "expectedHead": "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1",
+      "actualHead": "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1",
+      "status": ""
+    },
+    {
+      "directory": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-gsap-poc",
+      "expectedHead": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "actualHead": "1f9e9cd6d78e12f85eee47d087c87191f90a0460",
+      "status": ""
+    },
+    {
+      "directory": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-4-motion-audit",
+      "expectedHead": "df69d71f5b0cafcdab70a18f8e11be9f92cd163d",
+      "actualHead": "df69d71f5b0cafcdab70a18f8e11be9f92cd163d",
+      "status": ""
+    },
+    {
+      "directory": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-a",
+      "expectedHead": "957ff26b3202510316213dec93f8a0d98c0758b4",
+      "actualHead": "957ff26b3202510316213dec93f8a0d98c0758b4",
+      "status": ""
+    }
+  ]
+}

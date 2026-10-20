@@ -9,11 +9,15 @@ export const useMotionRuntime = () => useContext(RuntimeContext);
 const Context = createContext<MotionDirector | null>(null);
 export const useMotionDirector = () => useContext(Context);
 export function MotionProvider({ children, dataTime, runtime }: { children: ReactNode; dataTime: string; runtime?: MotionRuntime }) {
-  const [director] = useState(() => new MotionDirector(runtime?.createHost() ?? {
-    request: fn => requestAnimationFrame(fn), cancel: id => cancelAnimationFrame(id),
-    now: () => performance.now(), wall: () => Date.now(),
-    memory: () => (performance as Performance & { memory?: { usedJSHeapSize: number } }).memory?.usedJSHeapSize ?? null,
-  }));
+  const [director] = useState(() => {
+    const params = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search);
+    const externalQualityExperiment = params?.get('debug') === '1' && params.get('qualityExperiment') === 'external';
+    return new MotionDirector(runtime?.createHost() ?? {
+      request: fn => requestAnimationFrame(fn), cancel: id => cancelAnimationFrame(id),
+      now: () => performance.now(), wall: () => Date.now(),
+      memory: () => (performance as Performance & { memory?: { usedJSHeapSize: number } }).memory?.usedJSHeapSize ?? null,
+    }, undefined, { automaticQuality: !externalQualityExperiment });
+  });
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     let simulated = false;
@@ -41,7 +45,7 @@ function MotionDebug({ director, dataTime }: { director: MotionDirector; dataTim
   const f = director.frame;
   const runtime = useMotionRuntime();
   if (!debug) return null;
-  return <aside className="nexus-motion-debug" aria-label="动效调试" data-state={f.state} data-level={f.motionLevel} data-paused={!director.running} data-clock={f.time} data-pulse-due-in={director.pulseDueIn}>
+  return <aside className="nexus-motion-debug" aria-label="动效调试" data-state={f.state} data-level={f.motionLevel} data-paused={!director.running} data-clock={f.time} data-pulse-due-in={director.pulseDueIn} data-quality-automation={director.automaticQuality ? "baseline" : "external-experiment"}>
     <p>状态 {f.state} · 共振 {(f.pulse * 100).toFixed(0)}%</p><p>FPS {f.fps.toFixed(1)} · 档位 {f.motionLevel} · 显著 {f.significant}/8</p>
     <p>页面 {String(f.pageVisible)} · 小川 {String(f.voiceActive)}</p><p>数据时间 {dataTime}</p>
     <p data-motion-engine>{runtime ? "GSAP" : "Legacy"}</p>

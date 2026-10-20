@@ -1,0 +1,4250 @@
+{
+  "generatedAt": "2026-10-20T00:04:30.768Z",
+  "source": ".review/p1-5-b/headless-swiftshader/long-candidate60/report.json",
+  "environment": {
+    "capturedAt": "2026-10-19T07:50:59.785Z",
+    "backend": "headless-swiftshader",
+    "headless": true,
+    "explicitLaunchArgs": [],
+    "browser": {
+      "name": "Chromium",
+      "version": "153.0.8010.12",
+      "commandLine": null
+    },
+    "operatingSystem": {
+      "platform": "darwin",
+      "release": "24.6.0",
+      "architecture": "arm64"
+    },
+    "hardware": {
+      "cpu": "Apple M1 Ultra",
+      "logicalCores": 20,
+      "memoryBytes": 68719476736
+    },
+    "gpu": {
+      "gpu": {
+        "devices": [
+          {
+            "vendorId": 65535,
+            "deviceId": 65535,
+            "vendorString": "Google Inc. (Google)",
+            "deviceString": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+            "driverVendor": "SwANGLE",
+            "driverVersion": "5.0.0"
+          }
+        ],
+        "auxAttributes": {
+          "amdSwitchable": false,
+          "canSupportThreadedTextureMailbox": false,
+          "directRenderingVersion": "",
+          "displayType": "ANGLE_SWIFTSHADER",
+          "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_copy_texture_3d GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_image GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_object_flags GL_ANGLE_memory_size GL_ANGLE_multi_draw GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_read_only_depth_stencil_feedback_loops GL_ANGLE_relaxed_vertex_attribute_type GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_robust_fragment_shader_output GL_ANGLE_robust_resource_initialization GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_texture_usage GL_ANGLE_translated_shader_source GL_ANGLE_vulkan_image GL_ANGLE_yuv_internal_format GL_APPLE_clip_distance GL_ARM_rgba8 GL_ARM_shader_framebuffer_fetch GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_compressed_texture GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_EGL_image_array GL_EXT_EGL_image_external_wrap_modes GL_EXT_EGL_image_storage GL_EXT_base_instance GL_EXT_blend_minmax GL_EXT_buffer_storage GL_EXT_clear_texture GL_EXT_clip_control GL_EXT_clip_cull_distance GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_copy_image GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_memory_object GL_EXT_memory_object_fd GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_read_format_bgra GL_EXT_robustness GL_EXT_sRGB GL_EXT_sRGB_write_control GL_EXT_semaphore GL_EXT_separate_shader_objects GL_EXT_shader_framebuffer_fetch GL_EXT_shader_framebuffer_fetch_non_coherent GL_EXT_shader_non_constant_global_initializers GL_EXT_shader_texture_lod GL_EXT_shadow_samplers GL_EXT_texture_border_clamp GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_lod_bias GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_sRGB_decode GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_EXT_texture_type_2_10_10_10_REV GL_EXT_unpack_subimage GL_KHR_blend_equation_advanced GL_KHR_debug GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KHR_texture_compression_astc_ldr GL_NV_fence GL_NV_framebuffer_blit GL_NV_pack_subimage GL_NV_pixel_buffer_object GL_NV_polygon_mode GL_NV_read_depth GL_NV_read_depth_stencil GL_NV_read_stencil GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_EGL_image_external_essl3 GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_compressed_paletted_texture GL_OES_copy_image GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_depth_texture_cube_map GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_shading GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_border_clamp GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_texture_storage_multisample_2d_array GL_OES_vertex_array_object GL_OES_vertex_half_float GL_OES_vertex_type_10_10_10_2 GL_OVR_multiview GL_OVR_multiview2 GL_QCOM_texture_lod_bias ",
+          "glImplementationParts": "(gl=egl-angle,angle=swiftshader)",
+          "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+          "glResetNotificationStrategy": 33362,
+          "glVendor": "Google Inc. (Google)",
+          "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28646 git hash: a6bc9eff8444)",
+          "glWsExtensions": "",
+          "glWsVendor": "",
+          "glWsVersion": "",
+          "inProcessGpu": false,
+          "initializationTime": 0.015691,
+          "isAsan": false,
+          "isClangCoverage": false,
+          "jpegDecodeAcceleratorSupported": false,
+          "maxMsaaSamples": "4",
+          "optimus": false,
+          "passthroughCmdDecoder": true,
+          "pixelShaderVersion": "3.00",
+          "processCrashCount": 0,
+          "sandboxed": false,
+          "skiaBackendType": "None",
+          "subpixelFontRendering": true,
+          "targetCpuBits": 64,
+          "vertexShaderVersion": "3.00",
+          "visibilityCallbackCallCount": 0
+        },
+        "featureStatus": {
+          "2d_canvas": "unavailable_software",
+          "direct_rendering_display_compositor": "disabled_off_ok",
+          "gpu_compositing": "disabled_software",
+          "multiple_raster_threads": "enabled_on",
+          "opengl": "disabled_off",
+          "rasterization": "disabled_software",
+          "raw_draw": "disabled_off_ok",
+          "skia_graphite": "disabled_off",
+          "trees_in_viz": "disabled_off",
+          "video_decode": "disabled_software",
+          "video_encode": "disabled_software",
+          "webgl": "unavailable_software",
+          "webgpu": "unavailable_software",
+          "webnn": "unavailable_software"
+        },
+        "driverBugWorkarounds": [],
+        "videoDecoding": [],
+        "videoEncoding": []
+      },
+      "modelName": "Mac",
+      "modelVersion": "13.2",
+      "commandLine": "/Users/apple/Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-arm64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/8q/b0th_mh520sfn8rgkj08sz_m0000gn/T/playwright_chromiumdev_profile-7fWZ9j --remote-debugging-pipe --no-startup-window --use-mock-keychain --use-gl=angle --use-angle=swiftshader-webgl --allow-pre-commit-input"
+    },
+    "display": {
+      "available": true,
+      "raw": {
+        "SPDisplaysDataType": [
+          {
+            "_name": "Apple M1 Ultra",
+            "spdisplays_mtlgpufamilysupport": "spdisplays_metal3",
+            "spdisplays_ndrvs": [
+              {
+                "_name": "27E2N1110",
+                "_spdisplays_display-product-id": "c35c",
+                "_spdisplays_display-serial-number": "3acd",
+                "_spdisplays_display-vendor-id": "410c",
+                "_spdisplays_display-week": "2",
+                "_spdisplays_display-year": "2025",
+                "_spdisplays_displayID": "1",
+                "_spdisplays_pixels": "1920 x 1080",
+                "_spdisplays_resolution": "1920 x 1080 @ 100.00Hz",
+                "spdisplays_main": "spdisplays_yes",
+                "spdisplays_mirror": "spdisplays_off",
+                "spdisplays_online": "spdisplays_yes",
+                "spdisplays_pixelresolution": "spdisplays_1080p",
+                "spdisplays_resolution": "1920 x 1080 @ 100.00Hz",
+                "spdisplays_rotation": "spdisplays_supported"
+              }
+            ],
+            "spdisplays_vendor": "sppci_vendor_Apple",
+            "sppci_bus": "spdisplays_builtin",
+            "sppci_cores": "48",
+            "sppci_device_type": "spdisplays_gpu",
+            "sppci_model": "Apple M1 Ultra"
+          }
+        ]
+      }
+    }
+  },
+  "rendererClassification": {
+    "acceleration": "software",
+    "backend": "SwiftShader",
+    "confidence": "high"
+  },
+  "fixtureSha256": "8f733819a5fcfcb49bf964e8e9dec9f43163de471a7f32e88d768ecd773cafd9",
+  "run": {
+    "id": "legacy-3840-r1",
+    "engine": "legacy",
+    "backend": "headless-swiftshader",
+    "duration": {
+      "requestedMs": 1800000,
+      "actualMs": 1800004
+    },
+    "calibration": {
+      "intervalCount": 180,
+      "measuredMs": 3000,
+      "rateHz": 60.00400026668445,
+      "intervalMeanMs": 16.665555555555553,
+      "intervalP50Ms": 16.699999999999932,
+      "intervalP95Ms": 16.700000000000273,
+      "intervalP99Ms": 16.800000000000182,
+      "intervalMaxMs": 16.800000000000182
+    },
+    "metrics": {
+      "browserRafProxy": {
+        "intervalCount": 104954,
+        "measuredMs": 1800004,
+        "rateHz": 59.32577512007421,
+        "intervalMeanMs": 16.856079806391396,
+        "intervalP50Ms": 16.699999999953434,
+        "intervalP95Ms": 16.799999999813735,
+        "intervalP99Ms": 16.800000000046566,
+        "intervalMaxMs": 83.40000000000146
+      },
+      "engineCallbacks": {
+        "intervalCount": 104931,
+        "measuredMs": 1800004,
+        "rateHz": 59.31277425466878,
+        "intervalMeanMs": 16.85977451849313,
+        "intervalP50Ms": 16.699999999953434,
+        "intervalP95Ms": 16.799999999813735,
+        "intervalP99Ms": 16.800000000046566,
+        "intervalMaxMs": 83.40000000000146
+      },
+      "engineCallbackCost": {
+        "count": 106725,
+        "totalMs": 13187.10000371188,
+        "meanMs": 0.12356148984503987,
+        "p95Ms": 0.20000000298023224,
+        "p99Ms": 0.20000000298023224,
+        "maxMs": 0.6999999992549419
+      },
+      "motionDirector": {
+        "meanHz": 59.28004459308807,
+        "p05Hz": 60,
+        "p50Hz": 60,
+        "p95Hz": 60,
+        "samples": 1794
+      },
+      "gsapTicker": null,
+      "callbackCostPerEstimatedDirectorUpdateMs": 0.12358543990111706,
+      "longTasks": {
+        "count": 0,
+        "totalDurationMs": 0,
+        "totalBlockingTimeMs": 0,
+        "p95Ms": null,
+        "p99Ms": null,
+        "maxMs": null
+      },
+      "calibrationReferenceHz": 60.00400026668445,
+      "collectionOverhead": {
+        "count": 106748,
+        "totalMs": 151.4000000283122,
+        "meanMs": 0.0014182935514324597,
+        "p95Ms": 0,
+        "p99Ms": 0.09999999776482582,
+        "maxMs": 0.10000000149011612
+      }
+    },
+    "mainThreadCdpDelta": {
+      "TaskDuration": 144.903355,
+      "ScriptDuration": 23.502447,
+      "LayoutDuration": 4.094447,
+      "RecalcStyleDuration": 18.927766000000002
+    },
+    "policyTransitions": [
+      {
+        "atMs": 3007,
+        "from": "normal",
+        "to": "low",
+        "reason": "severe-low-frequency",
+        "mode": "normal",
+        "targetHz": 60,
+        "completionRatio": 0.345,
+        "updateHz": 20.7,
+        "intervalP95Ms": 50.100000000000364,
+        "paused": false
+      },
+      {
+        "atMs": 13050,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.799999999999272,
+        "paused": false
+      },
+      {
+        "atMs": 14059,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 34137,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.700000000004366,
+        "paused": false
+      },
+      {
+        "atMs": 35145,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8733333333333333,
+        "updateHz": 52.4,
+        "intervalP95Ms": 50.099999999998545,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 75291,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false
+      },
+      {
+        "atMs": 76300,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.705,
+        "updateHz": 42.3,
+        "intervalP95Ms": 50.10000000000582,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 136515,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false
+      },
+      {
+        "atMs": 137522,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.10000000000582,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 197723,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999998836,
+        "paused": false
+      },
+      {
+        "atMs": 198732,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8383333333333333,
+        "updateHz": 50.3,
+        "intervalP95Ms": 50.10000000000582,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 258931,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999998836,
+        "paused": false
+      },
+      {
+        "atMs": 259940,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.6133333333333333,
+        "updateHz": 36.8,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 320142,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false
+      },
+      {
+        "atMs": 321150,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.100000000034925,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 381351,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false
+      },
+      {
+        "atMs": 382361,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8066666666666666,
+        "updateHz": 48.4,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 442569,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false
+      },
+      {
+        "atMs": 443577,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.645,
+        "updateHz": 38.7,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 503780,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false
+      },
+      {
+        "atMs": 504790,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.100000000034925,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 565000,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false
+      },
+      {
+        "atMs": 566008,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8716666666666666,
+        "updateHz": 52.3,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 626205,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999993015,
+        "paused": false
+      },
+      {
+        "atMs": 627213,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.6766666666666666,
+        "updateHz": 40.6,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 687416,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false
+      },
+      {
+        "atMs": 688425,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 748622,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false
+      },
+      {
+        "atMs": 749629,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8333333333333334,
+        "updateHz": 50,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 809835,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false
+      },
+      {
+        "atMs": 810842,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.6066666666666667,
+        "updateHz": 36.4,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 871051,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999993015,
+        "paused": false
+      },
+      {
+        "atMs": 872058,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 932269,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false
+      },
+      {
+        "atMs": 933277,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.7416666666666667,
+        "updateHz": 44.5,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 993474,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999993015,
+        "paused": false
+      },
+      {
+        "atMs": 994482,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.525,
+        "updateHz": 31.5,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1054686,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.699999999953434,
+        "paused": false
+      },
+      {
+        "atMs": 1055694,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.9666666666666667,
+        "updateHz": 58,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1115894,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.800000000046566,
+        "paused": false
+      },
+      {
+        "atMs": 1116901,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.645,
+        "updateHz": 38.7,
+        "intervalP95Ms": 50.0999999998603,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1177102,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.700000000186265,
+        "paused": false
+      },
+      {
+        "atMs": 1178110,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.10000000009313,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1238304,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.799999999813735,
+        "paused": false
+      },
+      {
+        "atMs": 1239312,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8366666666666667,
+        "updateHz": 50.2,
+        "intervalP95Ms": 50.0999999998603,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1299507,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.700000000186265,
+        "paused": false
+      },
+      {
+        "atMs": 1300514,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.59,
+        "updateHz": 35.4,
+        "intervalP95Ms": 50.10000000009313,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1360714,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.800000000046566,
+        "paused": false
+      },
+      {
+        "atMs": 1361721,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.10000000009313,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1421917,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.699999999953434,
+        "paused": false
+      },
+      {
+        "atMs": 1422925,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8066666666666666,
+        "updateHz": 48.4,
+        "intervalP95Ms": 50.10000000009313,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1483124,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.700000000186265,
+        "paused": false
+      },
+      {
+        "atMs": 1484134,
+        "from": "probe",
+        "to": "low",
+        "reason": "normal-load-probe-failed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.5966666666666666,
+        "updateHz": 35.8,
+        "intervalP95Ms": 50.0999999998603,
+        "paused": false,
+        "requiredHz": 54
+      },
+      {
+        "atMs": 1544332,
+        "from": "low",
+        "to": "probe",
+        "reason": "scheduled-normal-load-probe",
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.800000000046566,
+        "paused": false
+      },
+      {
+        "atMs": 1547347,
+        "from": "probe",
+        "to": "normal",
+        "reason": "normal-load-probe-passed",
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.800000000046566,
+        "paused": false,
+        "requiredHz": 54
+      }
+    ],
+    "pulseRequests": [
+      {
+        "elapsedMs": 15066,
+        "before": {
+          "level": "low",
+          "state": "DEGRADED"
+        },
+        "accepted": false,
+        "rejectedBecauseLow": true
+      },
+      {
+        "elapsedMs": 40165,
+        "before": {
+          "level": "low",
+          "state": "DEGRADED"
+        },
+        "accepted": false,
+        "rejectedBecauseLow": true
+      }
+    ],
+    "actions": [
+      {
+        "elapsedMs": 3007,
+        "atMs": 3007,
+        "mode": "normal",
+        "targetHz": 60,
+        "completionRatio": 0.345,
+        "updateHz": 20.7,
+        "intervalP95Ms": 50.100000000000364,
+        "paused": false,
+        "action": "enter-low",
+        "transition": {
+          "atMs": 3007,
+          "from": "normal",
+          "to": "low",
+          "reason": "severe-low-frequency",
+          "mode": "normal",
+          "targetHz": 60,
+          "completionRatio": 0.345,
+          "updateHz": 20.7,
+          "intervalP95Ms": 50.100000000000364,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 13050,
+        "atMs": 13050,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.799999999999272,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 13050,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.799999999999272,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 14059,
+        "atMs": 14059,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 14059,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 50,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 1,
+        "nextProbeAtMs": 34059
+      },
+      {
+        "elapsedMs": 34137,
+        "atMs": 34137,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.700000000004366,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 34137,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000004366,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 35145,
+        "atMs": 35145,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8733333333333333,
+        "updateHz": 52.4,
+        "intervalP95Ms": 50.099999999998545,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 35145,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.8733333333333333,
+          "updateHz": 52.4,
+          "intervalP95Ms": 50.099999999998545,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 2,
+        "nextProbeAtMs": 75145
+      },
+      {
+        "elapsedMs": 75291,
+        "atMs": 75291,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 75291,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 76300,
+        "atMs": 76300,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.705,
+        "updateHz": 42.3,
+        "intervalP95Ms": 50.10000000000582,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 76300,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.705,
+          "updateHz": 42.3,
+          "intervalP95Ms": 50.10000000000582,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 3,
+        "nextProbeAtMs": 136300
+      },
+      {
+        "elapsedMs": 136515,
+        "atMs": 136515,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 136515,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 137522,
+        "atMs": 137522,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.10000000000582,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 137522,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 50.10000000000582,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 4,
+        "nextProbeAtMs": 197522
+      },
+      {
+        "elapsedMs": 197723,
+        "atMs": 197723,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999998836,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 197723,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.79999999998836,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 198732,
+        "atMs": 198732,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8383333333333333,
+        "updateHz": 50.3,
+        "intervalP95Ms": 50.10000000000582,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 198732,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.8383333333333333,
+          "updateHz": 50.3,
+          "intervalP95Ms": 50.10000000000582,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 5,
+        "nextProbeAtMs": 258732
+      },
+      {
+        "elapsedMs": 258931,
+        "atMs": 258931,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999998836,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 258931,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.79999999998836,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 259940,
+        "atMs": 259940,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.6133333333333333,
+        "updateHz": 36.8,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 259940,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.6133333333333333,
+          "updateHz": 36.8,
+          "intervalP95Ms": 50,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 6,
+        "nextProbeAtMs": 319940
+      },
+      {
+        "elapsedMs": 320142,
+        "atMs": 320142,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 320142,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 321150,
+        "atMs": 321150,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.100000000034925,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 321150,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 50.100000000034925,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 7,
+        "nextProbeAtMs": 381150
+      },
+      {
+        "elapsedMs": 381351,
+        "atMs": 381351,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 381351,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 382361,
+        "atMs": 382361,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8066666666666666,
+        "updateHz": 48.4,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 382361,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.8066666666666666,
+          "updateHz": 48.4,
+          "intervalP95Ms": 50.09999999997672,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 8,
+        "nextProbeAtMs": 442361
+      },
+      {
+        "elapsedMs": 442569,
+        "atMs": 442569,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 442569,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 443577,
+        "atMs": 443577,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.645,
+        "updateHz": 38.7,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 443577,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.645,
+          "updateHz": 38.7,
+          "intervalP95Ms": 50.09999999997672,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 9,
+        "nextProbeAtMs": 503577
+      },
+      {
+        "elapsedMs": 503780,
+        "atMs": 503780,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000001164,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 503780,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 504790,
+        "atMs": 504790,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.100000000034925,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 504790,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 50.100000000034925,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 10,
+        "nextProbeAtMs": 564790
+      },
+      {
+        "elapsedMs": 565000,
+        "atMs": 565000,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 565000,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 566008,
+        "atMs": 566008,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8716666666666666,
+        "updateHz": 52.3,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 566008,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.8716666666666666,
+          "updateHz": 52.3,
+          "intervalP95Ms": 50,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 11,
+        "nextProbeAtMs": 626008
+      },
+      {
+        "elapsedMs": 626205,
+        "atMs": 626205,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999993015,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 626205,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.79999999993015,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 627213,
+        "atMs": 627213,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.6766666666666666,
+        "updateHz": 40.6,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 627213,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.6766666666666666,
+          "updateHz": 40.6,
+          "intervalP95Ms": 50.09999999997672,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 12,
+        "nextProbeAtMs": 687213
+      },
+      {
+        "elapsedMs": 687416,
+        "atMs": 687416,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 687416,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 688425,
+        "atMs": 688425,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 688425,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 50.09999999997672,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 13,
+        "nextProbeAtMs": 748425
+      },
+      {
+        "elapsedMs": 748622,
+        "atMs": 748622,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 748622,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 749629,
+        "atMs": 749629,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8333333333333334,
+        "updateHz": 50,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 749629,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.8333333333333334,
+          "updateHz": 50,
+          "intervalP95Ms": 50,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 14,
+        "nextProbeAtMs": 809629
+      },
+      {
+        "elapsedMs": 809835,
+        "atMs": 809835,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 809835,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 810842,
+        "atMs": 810842,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.6066666666666667,
+        "updateHz": 36.4,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 810842,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.6066666666666667,
+          "updateHz": 36.4,
+          "intervalP95Ms": 50.09999999997672,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 15,
+        "nextProbeAtMs": 870842
+      },
+      {
+        "elapsedMs": 871051,
+        "atMs": 871051,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999993015,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 871051,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.79999999993015,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 872058,
+        "atMs": 872058,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 872058,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 50.09999999997672,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 16,
+        "nextProbeAtMs": 932058
+      },
+      {
+        "elapsedMs": 932269,
+        "atMs": 932269,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.70000000006985,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 932269,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 933277,
+        "atMs": 933277,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.7416666666666667,
+        "updateHz": 44.5,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 933277,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.7416666666666667,
+          "updateHz": 44.5,
+          "intervalP95Ms": 50.09999999997672,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 17,
+        "nextProbeAtMs": 993277
+      },
+      {
+        "elapsedMs": 993474,
+        "atMs": 993474,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.79999999993015,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 993474,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.79999999993015,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 994482,
+        "atMs": 994482,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.525,
+        "updateHz": 31.5,
+        "intervalP95Ms": 50.09999999997672,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 994482,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.525,
+          "updateHz": 31.5,
+          "intervalP95Ms": 50.09999999997672,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 18,
+        "nextProbeAtMs": 1054482
+      },
+      {
+        "elapsedMs": 1054686,
+        "atMs": 1054686,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.699999999953434,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1054686,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.699999999953434,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1055694,
+        "atMs": 1055694,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.9666666666666667,
+        "updateHz": 58,
+        "intervalP95Ms": 50,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 1055694,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.9666666666666667,
+          "updateHz": 58,
+          "intervalP95Ms": 50,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 19,
+        "nextProbeAtMs": 1115694
+      },
+      {
+        "elapsedMs": 1115894,
+        "atMs": 1115894,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.800000000046566,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1115894,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1116901,
+        "atMs": 1116901,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.645,
+        "updateHz": 38.7,
+        "intervalP95Ms": 50.0999999998603,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 1116901,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.645,
+          "updateHz": 38.7,
+          "intervalP95Ms": 50.0999999998603,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 20,
+        "nextProbeAtMs": 1176901
+      },
+      {
+        "elapsedMs": 1177102,
+        "atMs": 1177102,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.700000000186265,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1177102,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000186265,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1178110,
+        "atMs": 1178110,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.10000000009313,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 1178110,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 50.10000000009313,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 21,
+        "nextProbeAtMs": 1238110
+      },
+      {
+        "elapsedMs": 1238304,
+        "atMs": 1238304,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.799999999813735,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1238304,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.799999999813735,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1239312,
+        "atMs": 1239312,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8366666666666667,
+        "updateHz": 50.2,
+        "intervalP95Ms": 50.0999999998603,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 1239312,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.8366666666666667,
+          "updateHz": 50.2,
+          "intervalP95Ms": 50.0999999998603,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 22,
+        "nextProbeAtMs": 1299312
+      },
+      {
+        "elapsedMs": 1299507,
+        "atMs": 1299507,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.700000000186265,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1299507,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000186265,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1300514,
+        "atMs": 1300514,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.59,
+        "updateHz": 35.4,
+        "intervalP95Ms": 50.10000000009313,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 1300514,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.59,
+          "updateHz": 35.4,
+          "intervalP95Ms": 50.10000000009313,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 23,
+        "nextProbeAtMs": 1360514
+      },
+      {
+        "elapsedMs": 1360714,
+        "atMs": 1360714,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.800000000046566,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1360714,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1361721,
+        "atMs": 1361721,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 50.10000000009313,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 1361721,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 50.10000000009313,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 24,
+        "nextProbeAtMs": 1421721
+      },
+      {
+        "elapsedMs": 1421917,
+        "atMs": 1421917,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.699999999953434,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1421917,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.699999999953434,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1422925,
+        "atMs": 1422925,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.8066666666666666,
+        "updateHz": 48.4,
+        "intervalP95Ms": 50.10000000009313,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 1422925,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.8066666666666666,
+          "updateHz": 48.4,
+          "intervalP95Ms": 50.10000000009313,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 25,
+        "nextProbeAtMs": 1482925
+      },
+      {
+        "elapsedMs": 1483124,
+        "atMs": 1483124,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.700000000186265,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1483124,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000186265,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1484134,
+        "atMs": 1484134,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 0.5966666666666666,
+        "updateHz": 35.8,
+        "intervalP95Ms": 50.0999999998603,
+        "paused": false,
+        "action": "probe-failed",
+        "transition": {
+          "atMs": 1484134,
+          "from": "probe",
+          "to": "low",
+          "reason": "normal-load-probe-failed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 0.5966666666666666,
+          "updateHz": 35.8,
+          "intervalP95Ms": 50.0999999998603,
+          "paused": false,
+          "requiredHz": 54
+        },
+        "probeFailures": 26,
+        "nextProbeAtMs": 1544134
+      },
+      {
+        "elapsedMs": 1500189,
+        "action": "reduce-render-load",
+        "method": "viewport 3840x2160 -> 1920x1080",
+        "visualModulesChanged": false
+      },
+      {
+        "elapsedMs": 1544332,
+        "atMs": 1544332,
+        "mode": "low",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.800000000046566,
+        "paused": false,
+        "action": "start-probe",
+        "transition": {
+          "atMs": 1544332,
+          "from": "low",
+          "to": "probe",
+          "reason": "scheduled-normal-load-probe",
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false
+        }
+      },
+      {
+        "elapsedMs": 1547347,
+        "atMs": 1547347,
+        "mode": "probe",
+        "targetHz": 60,
+        "completionRatio": 1,
+        "updateHz": 60,
+        "intervalP95Ms": 16.800000000046566,
+        "paused": false,
+        "action": "recover-normal",
+        "transition": {
+          "atMs": 1547347,
+          "from": "probe",
+          "to": "normal",
+          "reason": "normal-load-probe-passed",
+          "mode": "probe",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "requiredHz": 54
+        }
+      }
+    ],
+    "resourceTimeline": [
+      {
+        "elapsedMs": 1001,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9257104,
+          "totalSize": 15925248,
+          "embedderHeapUsedSize": 9060536,
+          "backingStorageSize": 1031318
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1216,
+          "jsEventListeners": 413
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 8
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 60236,
+        "label": "timed",
+        "heap": {
+          "usedSize": 11803676,
+          "totalSize": 21692416,
+          "embedderHeapUsedSize": 12437320,
+          "backingStorageSize": 1058694
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1309,
+          "jsEventListeners": 484
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 127
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 120459,
+        "label": "timed",
+        "heap": {
+          "usedSize": 10479080,
+          "totalSize": 22478848,
+          "embedderHeapUsedSize": 12057752,
+          "backingStorageSize": 1060918
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1302,
+          "jsEventListeners": 458
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 248
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 180666,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7772516,
+          "totalSize": 22740992,
+          "embedderHeapUsedSize": 7253704,
+          "backingStorageSize": 1042421
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1246,
+          "jsEventListeners": 405
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 369
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 240870,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7768384,
+          "totalSize": 23003136,
+          "embedderHeapUsedSize": 5802504,
+          "backingStorageSize": 1036297
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1228,
+          "jsEventListeners": 387
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 490
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 300077,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9905460,
+          "totalSize": 22675456,
+          "embedderHeapUsedSize": 7845728,
+          "backingStorageSize": 1008362
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1251,
+          "jsEventListeners": 422
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 611
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 360280,
+        "label": "timed",
+        "heap": {
+          "usedSize": 11278844,
+          "totalSize": 22413312,
+          "embedderHeapUsedSize": 11339216,
+          "backingStorageSize": 1002798
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1297,
+          "jsEventListeners": 484
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 732
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 420494,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7271684,
+          "totalSize": 22413312,
+          "embedderHeapUsedSize": 6582952,
+          "backingStorageSize": 998297
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1237,
+          "jsEventListeners": 387
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 853
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 480706,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9689784,
+          "totalSize": 22937600,
+          "embedderHeapUsedSize": 8871192,
+          "backingStorageSize": 999234
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1266,
+          "jsEventListeners": 440
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 974
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 540913,
+        "label": "timed",
+        "heap": {
+          "usedSize": 11394928,
+          "totalSize": 23199744,
+          "embedderHeapUsedSize": 10344184,
+          "backingStorageSize": 1007710
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1282,
+          "jsEventListeners": 466
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 1097
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 600125,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9638144,
+          "totalSize": 22937600,
+          "embedderHeapUsedSize": 8608752,
+          "backingStorageSize": 1008202
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1262,
+          "jsEventListeners": 431
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 1216
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 660328,
+        "label": "timed",
+        "heap": {
+          "usedSize": 12748260,
+          "totalSize": 22937600,
+          "embedderHeapUsedSize": 12235728,
+          "backingStorageSize": 1013004
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1307,
+          "jsEventListeners": 501
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 1337
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 720529,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7525460,
+          "totalSize": 23199744,
+          "embedderHeapUsedSize": 7153240,
+          "backingStorageSize": 995054
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1247,
+          "jsEventListeners": 405
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 1458
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 780737,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9792128,
+          "totalSize": 23461888,
+          "embedderHeapUsedSize": 10062472,
+          "backingStorageSize": 1008326
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1281,
+          "jsEventListeners": 440
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 1579
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 840947,
+        "label": "timed",
+        "heap": {
+          "usedSize": 11180380,
+          "totalSize": 23199744,
+          "embedderHeapUsedSize": 11857248,
+          "backingStorageSize": 1002564
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1305,
+          "jsEventListeners": 484
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 1702
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 900157,
+        "label": "timed",
+        "heap": {
+          "usedSize": 11371868,
+          "totalSize": 22937600,
+          "embedderHeapUsedSize": 10415512,
+          "backingStorageSize": 1015429
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1282,
+          "jsEventListeners": 457
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 1821
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 960369,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7483644,
+          "totalSize": 22937600,
+          "embedderHeapUsedSize": 6301560,
+          "backingStorageSize": 995203
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1236,
+          "jsEventListeners": 387
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 1942
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1020573,
+        "label": "timed",
+        "heap": {
+          "usedSize": 10335068,
+          "totalSize": 23199744,
+          "embedderHeapUsedSize": 9869904,
+          "backingStorageSize": 1000409
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1277,
+          "jsEventListeners": 440
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 2063
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1080782,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7417604,
+          "totalSize": 23199744,
+          "embedderHeapUsedSize": 4483576,
+          "backingStorageSize": 990242
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1215,
+          "jsEventListeners": 378
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 2184
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1140984,
+        "label": "timed",
+        "heap": {
+          "usedSize": 10945272,
+          "totalSize": 22937600,
+          "embedderHeapUsedSize": 7787232,
+          "backingStorageSize": 1000013
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1254,
+          "jsEventListeners": 448
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 2307
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1200183,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7484592,
+          "totalSize": 23199744,
+          "embedderHeapUsedSize": 5645672,
+          "backingStorageSize": 988183
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1227,
+          "jsEventListeners": 387
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 2426
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1260385,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9945668,
+          "totalSize": 23724032,
+          "embedderHeapUsedSize": 9154344,
+          "backingStorageSize": 1013221
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1267,
+          "jsEventListeners": 431
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 2547
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1320580,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7525376,
+          "totalSize": 23461888,
+          "embedderHeapUsedSize": 6151816,
+          "backingStorageSize": 998755
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1233,
+          "jsEventListeners": 387
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 2668
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1380787,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9814492,
+          "totalSize": 23461888,
+          "embedderHeapUsedSize": 10024392,
+          "backingStorageSize": 1003348
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1282,
+          "jsEventListeners": 440
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 2789
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1440986,
+        "label": "timed",
+        "heap": {
+          "usedSize": 7463988,
+          "totalSize": 23199744,
+          "embedderHeapUsedSize": 4794584,
+          "backingStorageSize": 993322
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1217,
+          "jsEventListeners": 378
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 2912
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 3840,
+          "height": 2160,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1500189,
+        "label": "timed",
+        "heap": {
+          "usedSize": 10194916,
+          "totalSize": 23724032,
+          "embedderHeapUsedSize": 10862640,
+          "backingStorageSize": 1017877
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1291,
+          "jsEventListeners": 440
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 3031
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 1920,
+          "height": 1080,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1560395,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9951284,
+          "totalSize": 23724032,
+          "embedderHeapUsedSize": 7635240,
+          "backingStorageSize": 1007980
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1258,
+          "jsEventListeners": 431
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 3152
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 1920,
+          "height": 1080,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1620583,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9990716,
+          "totalSize": 23986176,
+          "embedderHeapUsedSize": 8772456,
+          "backingStorageSize": 1000997
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1277,
+          "jsEventListeners": 440
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 3273
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 1920,
+          "height": 1080,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1680780,
+        "label": "timed",
+        "heap": {
+          "usedSize": 10205860,
+          "totalSize": 23461888,
+          "embedderHeapUsedSize": 8718896,
+          "backingStorageSize": 1003879
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1275,
+          "jsEventListeners": 440
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 3394
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 1920,
+          "height": 1080,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1740979,
+        "label": "timed",
+        "heap": {
+          "usedSize": 11503112,
+          "totalSize": 44171264,
+          "embedderHeapUsedSize": 12605808,
+          "backingStorageSize": 1030751
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1309,
+          "jsEventListeners": 484
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 3517
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 1920,
+          "height": 1080,
+          "dpr": 1
+        }
+      },
+      {
+        "elapsedMs": 1800000,
+        "label": "timed",
+        "heap": {
+          "usedSize": 9564080,
+          "totalSize": 44433408,
+          "embedderHeapUsedSize": 6137592,
+          "backingStorageSize": 985935
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 1227,
+          "jsEventListeners": 413
+        },
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 1,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 3636
+        },
+        "gsapAudit": null,
+        "stageCount": 1,
+        "canvasCount": 1,
+        "debugCount": 1,
+        "viewport": {
+          "width": 1920,
+          "height": 1080,
+          "dpr": 1
+        }
+      }
+    ],
+    "postRunGc": {
+      "elapsedMs": 1800004,
+      "label": "post-run-gc",
+      "heap": {
+        "usedSize": 7429628,
+        "totalSize": 8257536,
+        "embedderHeapUsedSize": 4932384,
+        "backingStorageSize": 984239
+      },
+      "dom": {
+        "documents": 3,
+        "nodes": 1216,
+        "jsEventListeners": 378
+      },
+      "timers": {
+        "activeTimeouts": 0,
+        "activeIntervals": 3,
+        "pendingApplicationRaf": 1,
+        "timeoutsScheduled": 1,
+        "timeoutsFired": 1,
+        "intervalsScheduled": 3,
+        "intervalCallbacks": 3636
+      },
+      "gsapAudit": null,
+      "stageCount": 1,
+      "canvasCount": 1,
+      "debugCount": 1,
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "dpr": 1
+      }
+    },
+    "loadRelief": {
+      "requestedAtMs": 1500000,
+      "appliedAtMs": 1500189,
+      "method": "viewport reduction with all visual modules retained"
+    },
+    "errors": [],
+    "networkFailures": [
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "http://127.0.0.1:3061/screen/sales?layout=16x9&motion=legacy&debug=1&qualityExperiment=external",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "minuteTimeline": [
+      {
+        "elapsedMs": 1001,
+        "phase": "normal",
+        "level": "normal",
+        "state": "AMBIENT",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 20.3,
+        "browserRafProxyHz": 20.339672531272242,
+        "engineCallbackHz": 20.339672531272242,
+        "engineIntervalP95Ms": 50.09999999999991,
+        "engineIntervalP99Ms": 66.70000000000027,
+        "callbackTotalMs": 3.099999997764826,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1001,
+          "mode": "normal",
+          "targetHz": 60,
+          "completionRatio": 0.3383333333333333,
+          "updateHz": 20.3,
+          "intervalP95Ms": 50.09999999999991,
+          "paused": false,
+          "action": "hold",
+          "lowEvidenceMs": 0,
+          "severeEvidenceMs": 0
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 61241,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967253396,
+        "engineCallbackHz": 60.002033967253396,
+        "engineIntervalP95Ms": 16.700000000004366,
+        "engineIntervalP99Ms": 16.80000000000291,
+        "callbackTotalMs": 8.100000012665987,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 61241,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000004366,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 75145
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 121464,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.008136696501396,
+        "engineCallbackHz": 60.008136696501396,
+        "engineIntervalP95Ms": 16.69999999999709,
+        "engineIntervalP99Ms": 16.80000000000291,
+        "callbackTotalMs": 8.00000000372529,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 121464,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.69999999999709,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 136300
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 181670,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 59.99593247915431,
+        "engineCallbackHz": 59.99593247915431,
+        "engineIntervalP95Ms": 16.70000000001164,
+        "engineIntervalP99Ms": 16.79999999998836,
+        "callbackTotalMs": 6.299999989569187,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 181670,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 197522
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 241875,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.006000600060354,
+        "engineCallbackHz": 60.006000600060354,
+        "engineIntervalP95Ms": 16.79999999998836,
+        "engineIntervalP99Ms": 16.800000000017462,
+        "callbackTotalMs": 6.399999998509884,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 241875,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.79999999998836,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 258732
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 302085,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00203396725384,
+        "engineCallbackHz": 60.00203396725384,
+        "engineIntervalP95Ms": 16.79999999998836,
+        "engineIntervalP99Ms": 16.79999999998836,
+        "callbackTotalMs": 7.8999999538064,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 302085,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.79999999998836,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 319940
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 362287,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00203396725384,
+        "engineCallbackHz": 60.00203396725384,
+        "engineIntervalP95Ms": 16.70000000001164,
+        "engineIntervalP99Ms": 16.79999999998836,
+        "callbackTotalMs": 5.300000008195639,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 362287,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 381150
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 422501,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.70000000001164,
+        "engineIntervalP99Ms": 16.79999999998836,
+        "callbackTotalMs": 6.800000008195639,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 422501,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000001164,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 442361
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 482713,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00203396725384,
+        "engineCallbackHz": 60.00203396725384,
+        "engineIntervalP95Ms": 16.79999999998836,
+        "engineIntervalP99Ms": 16.79999999998836,
+        "callbackTotalMs": 6.200000002980232,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 482713,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.79999999998836,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 503577
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 542921,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60,
+        "engineCallbackHz": 60,
+        "engineIntervalP95Ms": 16.70000000006985,
+        "engineIntervalP99Ms": 16.79999999993015,
+        "callbackTotalMs": 7.6999999806284904,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 542921,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 564790
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 603137,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00203396725739,
+        "engineCallbackHz": 60.00203396725739,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.3000000193715096,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 603137,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 626008
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 663340,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 6.1999999806284904,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 663340,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 687213
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 723541,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.70000000006985,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.699999988079071,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 723541,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 748425
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 783750,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00203396725739,
+        "engineCallbackHz": 60.00203396725739,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.099999990314245,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 783750,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 809629
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 843958,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00203396725739,
+        "engineCallbackHz": 60.00203396725739,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.500000033527613,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 843958,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 870842
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 904174,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.70000000006985,
+        "engineIntervalP99Ms": 16.79999999993015,
+        "callbackTotalMs": 7.000000011175871,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 904174,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 932058
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 964381,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00203396725739,
+        "engineCallbackHz": 60.00203396725739,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.000000040978193,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 964381,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 993277
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1024587,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.008136696496955,
+        "engineCallbackHz": 60.008136696496955,
+        "engineIntervalP95Ms": 16.70000000006985,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 6.6999999806284904,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1024587,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.70000000006985,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1054482
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1084796,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00813669648985,
+        "engineCallbackHz": 60.00813669648985,
+        "engineIntervalP95Ms": 16.700000000186265,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 6.399999998509884,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1084796,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000186265,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1115694
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1144996,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 6.000000040978193,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1144996,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1176901
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1205198,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.299999989569187,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1205198,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1238110
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1265402,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00813669650406,
+        "engineCallbackHz": 60.00813669650406,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.899999976158142,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1265402,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1299312
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1325596,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 59.995932479159634,
+        "engineCallbackHz": 59.995932479159634,
+        "engineIntervalP95Ms": 16.799999999813735,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.799999985843897,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1325596,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.799999999813735,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1360514
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1385804,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.00813669650406,
+        "engineCallbackHz": 60.00813669650406,
+        "engineIntervalP95Ms": 16.700000000186265,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.300000008195639,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1385804,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000186265,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1421721
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1446004,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.500000011175871,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1446004,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1482925
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1506208,
+        "phase": "low",
+        "level": "low",
+        "state": "DEGRADED",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 7.3999999687075615,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1506208,
+          "mode": "low",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "nextProbeAtMs": 1544134
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1566414,
+        "phase": "normal",
+        "level": "normal",
+        "state": "AMBIENT",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.700000000186265,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 9.700000014156103,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1566414,
+          "mode": "normal",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000186265,
+          "paused": false,
+          "action": "hold",
+          "lowEvidenceMs": 0,
+          "severeEvidenceMs": 0
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1626603,
+        "phase": "normal",
+        "level": "normal",
+        "state": "AMBIENT",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 9.300000056624413,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1626603,
+          "mode": "normal",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "lowEvidenceMs": 0,
+          "severeEvidenceMs": 0
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1686796,
+        "phase": "normal",
+        "level": "normal",
+        "state": "AMBIENT",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.800000000046566,
+        "engineIntervalP99Ms": 16.800000000046566,
+        "callbackTotalMs": 6.89999994635582,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1686796,
+          "mode": "normal",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.800000000046566,
+          "paused": false,
+          "action": "hold",
+          "lowEvidenceMs": 0,
+          "severeEvidenceMs": 0
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1746999,
+        "phase": "normal",
+        "level": "normal",
+        "state": "AMBIENT",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 60.002033967250284,
+        "engineCallbackHz": 60.002033967250284,
+        "engineIntervalP95Ms": 16.700000000186265,
+        "engineIntervalP99Ms": 16.799999999813735,
+        "callbackTotalMs": 7.699999995529652,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1746999,
+          "mode": "normal",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000186265,
+          "paused": false,
+          "action": "hold",
+          "lowEvidenceMs": 0,
+          "severeEvidenceMs": 0
+        },
+        "audit": "null"
+      },
+      {
+        "elapsedMs": 1800000,
+        "phase": "normal",
+        "level": "normal",
+        "state": "AMBIENT",
+        "paused": false,
+        "qualityAutomation": "external-experiment",
+        "directorUpdateHz": 60,
+        "browserRafProxyHz": 59.997551120365856,
+        "engineCallbackHz": 59.997551120365856,
+        "engineIntervalP95Ms": 16.700000000186265,
+        "engineIntervalP99Ms": 16.700000000186265,
+        "callbackTotalMs": 7.400000009685755,
+        "longTasks": 0,
+        "policy": {
+          "atMs": 1800000,
+          "mode": "normal",
+          "targetHz": 60,
+          "completionRatio": 1,
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000186265,
+          "paused": false,
+          "action": "hold",
+          "lowEvidenceMs": 0,
+          "severeEvidenceMs": 0
+        },
+        "audit": "null"
+      }
+    ]
+  }
+}

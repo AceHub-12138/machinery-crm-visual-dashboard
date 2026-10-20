@@ -1,0 +1,688 @@
+{
+  "source": "P1.5-A committed one-second timelines",
+  "generatedAt": "2026-10-17T08:13:34.228Z",
+  "results": [
+    {
+      "backend": "headless",
+      "id": "legacy-1920",
+      "engine": "legacy",
+      "width": 1920,
+      "browserRafReferenceHz": 60.00240009600384,
+      "engineConfiguredCapHz": 60.00240009600384,
+      "sourceLoads": {
+        "normalLoad": {
+          "updateHz": 60,
+          "intervalP95Ms": 16.799999999995634
+        },
+        "lowLoad": {
+          "updateHz": 60,
+          "intervalP95Ms": 16.799999999995634
+        }
+      },
+      "oldPolicy": {
+        "downshifts": 0,
+        "recoveries": 0
+      },
+      "candidateNoRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "probeStarts": 0,
+        "probeFailures": 0,
+        "transitions": []
+      },
+      "candidateWithModeledRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "recoveryAtMs": null,
+        "transitions": []
+      }
+    },
+    {
+      "backend": "headless",
+      "id": "gsap-1920",
+      "engine": "gsap",
+      "width": 1920,
+      "browserRafReferenceHz": 60.003600216012956,
+      "engineConfiguredCapHz": 60,
+      "sourceLoads": {
+        "normalLoad": {
+          "updateHz": 60,
+          "intervalP95Ms": 16.799999999995634
+        },
+        "lowLoad": {
+          "updateHz": 60,
+          "intervalP95Ms": 16.799999999995634
+        }
+      },
+      "oldPolicy": {
+        "downshifts": 0,
+        "recoveries": 0
+      },
+      "candidateNoRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "probeStarts": 0,
+        "probeFailures": 0,
+        "transitions": []
+      },
+      "candidateWithModeledRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "recoveryAtMs": null,
+        "transitions": []
+      }
+    },
+    {
+      "backend": "headless",
+      "id": "legacy-3840",
+      "engine": "legacy",
+      "width": 3840,
+      "browserRafReferenceHz": 60.002400096003846,
+      "engineConfiguredCapHz": 60.002400096003846,
+      "sourceLoads": {
+        "normalLoad": {
+          "updateHz": 20.7,
+          "intervalP95Ms": 50.099999999998545
+        },
+        "lowLoad": {
+          "updateHz": 60,
+          "intervalP95Ms": 16.700000000004366
+        }
+      },
+      "oldPolicy": {
+        "downshifts": 4,
+        "recoveries": 3
+      },
+      "candidateNoRelief": {
+        "finalMode": "low",
+        "fullRecoveries": 0,
+        "probeStarts": 4,
+        "probeFailures": 4,
+        "transitions": [
+          {
+            "atMs": 2000,
+            "from": "normal",
+            "to": "low",
+            "reason": "severe-low-frequency",
+            "mode": "normal",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.34498619999999997,
+            "updateHz": 20.7,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false
+          },
+          {
+            "atMs": 12000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.9999599999999998,
+            "updateHz": 60,
+            "intervalP95Ms": 16.700000000004366,
+            "paused": false
+          },
+          {
+            "atMs": 13000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.34498619999999997,
+            "updateHz": 20.7,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54.002160086403464
+          },
+          {
+            "atMs": 33000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.9999599999999998,
+            "updateHz": 60,
+            "intervalP95Ms": 16.700000000004366,
+            "paused": false
+          },
+          {
+            "atMs": 34000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.34498619999999997,
+            "updateHz": 20.7,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54.002160086403464
+          },
+          {
+            "atMs": 74000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.9999599999999998,
+            "updateHz": 60,
+            "intervalP95Ms": 16.700000000004366,
+            "paused": false
+          },
+          {
+            "atMs": 75000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.34498619999999997,
+            "updateHz": 20.7,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54.002160086403464
+          },
+          {
+            "atMs": 135000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.9999599999999998,
+            "updateHz": 60,
+            "intervalP95Ms": 16.700000000004366,
+            "paused": false
+          },
+          {
+            "atMs": 136000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.34498619999999997,
+            "updateHz": 20.7,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54.002160086403464
+          }
+        ]
+      },
+      "candidateWithModeledRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 1,
+        "recoveryAtMs": 77000,
+        "transitions": [
+          {
+            "atMs": 2000,
+            "from": "normal",
+            "to": "low",
+            "reason": "severe-low-frequency",
+            "mode": "normal",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.34498619999999997,
+            "updateHz": 20.7,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false
+          },
+          {
+            "atMs": 12000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.9999599999999998,
+            "updateHz": 60,
+            "intervalP95Ms": 16.700000000004366,
+            "paused": false
+          },
+          {
+            "atMs": 13000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.34498619999999997,
+            "updateHz": 20.7,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54.002160086403464
+          },
+          {
+            "atMs": 33000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.9999599999999998,
+            "updateHz": 60,
+            "intervalP95Ms": 16.700000000004366,
+            "paused": false
+          },
+          {
+            "atMs": 34000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.34498619999999997,
+            "updateHz": 20.7,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54.002160086403464
+          },
+          {
+            "atMs": 74000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.9999599999999998,
+            "updateHz": 60,
+            "intervalP95Ms": 16.700000000004366,
+            "paused": false
+          },
+          {
+            "atMs": 77000,
+            "from": "probe",
+            "to": "normal",
+            "reason": "normal-load-probe-passed",
+            "mode": "probe",
+            "targetHz": 60.002400096003846,
+            "completionRatio": 0.9999599999999998,
+            "updateHz": 60,
+            "intervalP95Ms": 16.700000000004366,
+            "paused": false,
+            "requiredHz": 54.002160086403464
+          }
+        ]
+      }
+    },
+    {
+      "backend": "headless",
+      "id": "gsap-3840",
+      "engine": "gsap",
+      "width": 3840,
+      "browserRafReferenceHz": 60.00240009600384,
+      "engineConfiguredCapHz": 60,
+      "sourceLoads": {
+        "normalLoad": {
+          "updateHz": 20.9,
+          "intervalP95Ms": 50.099999999998545
+        },
+        "lowLoad": {
+          "updateHz": 60,
+          "intervalP95Ms": 16.799999999995634
+        }
+      },
+      "oldPolicy": {
+        "downshifts": 4,
+        "recoveries": 3
+      },
+      "candidateNoRelief": {
+        "finalMode": "low",
+        "fullRecoveries": 0,
+        "probeStarts": 4,
+        "probeFailures": 4,
+        "transitions": [
+          {
+            "atMs": 2000,
+            "from": "normal",
+            "to": "low",
+            "reason": "severe-low-frequency",
+            "mode": "normal",
+            "targetHz": 60,
+            "completionRatio": 0.34833333333333333,
+            "updateHz": 20.9,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false
+          },
+          {
+            "atMs": 12000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60,
+            "completionRatio": 1,
+            "updateHz": 60,
+            "intervalP95Ms": 16.799999999995634,
+            "paused": false
+          },
+          {
+            "atMs": 13000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60,
+            "completionRatio": 0.34833333333333333,
+            "updateHz": 20.9,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54
+          },
+          {
+            "atMs": 33000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60,
+            "completionRatio": 1,
+            "updateHz": 60,
+            "intervalP95Ms": 16.799999999995634,
+            "paused": false
+          },
+          {
+            "atMs": 34000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60,
+            "completionRatio": 0.34833333333333333,
+            "updateHz": 20.9,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54
+          },
+          {
+            "atMs": 74000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60,
+            "completionRatio": 1,
+            "updateHz": 60,
+            "intervalP95Ms": 16.799999999995634,
+            "paused": false
+          },
+          {
+            "atMs": 75000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60,
+            "completionRatio": 0.34833333333333333,
+            "updateHz": 20.9,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54
+          },
+          {
+            "atMs": 135000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60,
+            "completionRatio": 1,
+            "updateHz": 60,
+            "intervalP95Ms": 16.799999999995634,
+            "paused": false
+          },
+          {
+            "atMs": 136000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60,
+            "completionRatio": 0.34833333333333333,
+            "updateHz": 20.9,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54
+          }
+        ]
+      },
+      "candidateWithModeledRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 1,
+        "recoveryAtMs": 77000,
+        "transitions": [
+          {
+            "atMs": 2000,
+            "from": "normal",
+            "to": "low",
+            "reason": "severe-low-frequency",
+            "mode": "normal",
+            "targetHz": 60,
+            "completionRatio": 0.34833333333333333,
+            "updateHz": 20.9,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false
+          },
+          {
+            "atMs": 12000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60,
+            "completionRatio": 1,
+            "updateHz": 60,
+            "intervalP95Ms": 16.799999999995634,
+            "paused": false
+          },
+          {
+            "atMs": 13000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60,
+            "completionRatio": 0.34833333333333333,
+            "updateHz": 20.9,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54
+          },
+          {
+            "atMs": 33000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60,
+            "completionRatio": 1,
+            "updateHz": 60,
+            "intervalP95Ms": 16.799999999995634,
+            "paused": false
+          },
+          {
+            "atMs": 34000,
+            "from": "probe",
+            "to": "low",
+            "reason": "normal-load-probe-failed",
+            "mode": "probe",
+            "targetHz": 60,
+            "completionRatio": 0.34833333333333333,
+            "updateHz": 20.9,
+            "intervalP95Ms": 50.099999999998545,
+            "paused": false,
+            "requiredHz": 54
+          },
+          {
+            "atMs": 74000,
+            "from": "low",
+            "to": "probe",
+            "reason": "scheduled-normal-load-probe",
+            "mode": "low",
+            "targetHz": 60,
+            "completionRatio": 1,
+            "updateHz": 60,
+            "intervalP95Ms": 16.799999999995634,
+            "paused": false
+          },
+          {
+            "atMs": 77000,
+            "from": "probe",
+            "to": "normal",
+            "reason": "normal-load-probe-passed",
+            "mode": "probe",
+            "targetHz": 60,
+            "completionRatio": 1,
+            "updateHz": 60,
+            "intervalP95Ms": 16.799999999995634,
+            "paused": false,
+            "requiredHz": 54
+          }
+        ]
+      }
+    },
+    {
+      "backend": "headed",
+      "id": "legacy-1920",
+      "engine": "legacy",
+      "width": 1920,
+      "browserRafReferenceHz": 99.9860298960225,
+      "engineConfiguredCapHz": 99.9860298960225,
+      "sourceLoads": {
+        "normalLoad": {
+          "updateHz": 100,
+          "intervalP95Ms": 10.900000000001455
+        },
+        "lowLoad": {
+          "updateHz": 100,
+          "intervalP95Ms": 10.900000000001455
+        }
+      },
+      "oldPolicy": {
+        "downshifts": 0,
+        "recoveries": 0
+      },
+      "candidateNoRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "probeStarts": 0,
+        "probeFailures": 0,
+        "transitions": []
+      },
+      "candidateWithModeledRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "recoveryAtMs": null,
+        "transitions": []
+      }
+    },
+    {
+      "backend": "headed",
+      "id": "gsap-1920",
+      "engine": "gsap",
+      "width": 1920,
+      "browserRafReferenceHz": 100.0379385395659,
+      "engineConfiguredCapHz": 60,
+      "sourceLoads": {
+        "normalLoad": {
+          "updateHz": 60,
+          "intervalP95Ms": 10.900000000001455
+        },
+        "lowLoad": {
+          "updateHz": 60,
+          "intervalP95Ms": 10.900000000001455
+        }
+      },
+      "oldPolicy": {
+        "downshifts": 0,
+        "recoveries": 0
+      },
+      "candidateNoRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "probeStarts": 0,
+        "probeFailures": 0,
+        "transitions": []
+      },
+      "candidateWithModeledRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "recoveryAtMs": null,
+        "transitions": []
+      }
+    },
+    {
+      "backend": "headed",
+      "id": "legacy-3840",
+      "engine": "legacy",
+      "width": 3840,
+      "browserRafReferenceHz": 100.01197748233322,
+      "engineConfiguredCapHz": 100.01197748233322,
+      "sourceLoads": {
+        "normalLoad": {
+          "updateHz": 100,
+          "intervalP95Ms": 11
+        },
+        "lowLoad": {
+          "updateHz": 100,
+          "intervalP95Ms": 11
+        }
+      },
+      "oldPolicy": {
+        "downshifts": 0,
+        "recoveries": 0
+      },
+      "candidateNoRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "probeStarts": 0,
+        "probeFailures": 0,
+        "transitions": []
+      },
+      "candidateWithModeledRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "recoveryAtMs": null,
+        "transitions": []
+      }
+    },
+    {
+      "backend": "headed",
+      "id": "gsap-3840",
+      "engine": "gsap",
+      "width": 3840,
+      "browserRafReferenceHz": 100.01597061407011,
+      "engineConfiguredCapHz": 60,
+      "sourceLoads": {
+        "normalLoad": {
+          "updateHz": 59.9,
+          "intervalP95Ms": 10.900000000001455
+        },
+        "lowLoad": {
+          "updateHz": 59.9,
+          "intervalP95Ms": 10.900000000001455
+        }
+      },
+      "oldPolicy": {
+        "downshifts": 0,
+        "recoveries": 0
+      },
+      "candidateNoRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "probeStarts": 0,
+        "probeFailures": 0,
+        "transitions": []
+      },
+      "candidateWithModeledRelief": {
+        "finalMode": "normal",
+        "fullRecoveries": 0,
+        "recoveryAtMs": null,
+        "transitions": []
+      }
+    }
+  ]
+}

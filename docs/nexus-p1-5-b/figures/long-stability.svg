@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
+<rect width="100%" height="100%" fill="#10151b"/>
+<text x="80" y="42" fill="#e8edf2" font-family="system-ui" font-size="26" font-weight="700">P1.5-B GPT-6 Luna · 30分钟稳定性</text>
+<text x="80" y="78" fill="#e8edf2" font-family="system-ui" font-size="19">Director更新频率与质量状态</text>
+<line x1="80" y1="380" x2="1530" y2="380" stroke="#33404d"/>
+<line x1="80" y1="322" x2="1530" y2="322" stroke="#33404d"/>
+<line x1="80" y1="264" x2="1530" y2="264" stroke="#33404d"/>
+<line x1="80" y1="206" x2="1530" y2="206" stroke="#33404d"/>
+<line x1="80" y1="148" x2="1530" y2="148" stroke="#33404d"/>
+<line x1="80" y1="90" x2="1530" y2="90" stroke="#33404d"/>
+<text x="80" y="508" fill="#e8edf2" font-family="system-ui" font-size="19">JS Heap（MiB）</text>
+<line x1="80" y1="810" x2="1530" y2="810" stroke="#33404d"/>
+<line x1="80" y1="752" x2="1530" y2="752" stroke="#33404d"/>
+<line x1="80" y1="694" x2="1530" y2="694" stroke="#33404d"/>
+<line x1="80" y1="636" x2="1530" y2="636" stroke="#33404d"/>
+<line x1="80" y1="578" x2="1530" y2="578" stroke="#33404d"/>
+<line x1="80" y1="520" x2="1530" y2="520" stroke="#33404d"/>
+<rect x="80" y="90" width="49.333333333333336" height="290" fill="#194d3a" opacity="0.33"/>
+<rect x="128.33333333333334" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="176.66666666666669" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="225" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="273.33333333333337" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="321.66666666666663" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="370" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="418.3333333333333" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="466.6666666666667" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="515" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="563.3333333333333" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="611.6666666666666" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="660" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="708.3333333333334" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="756.6666666666666" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="805" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="853.3333333333334" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="901.6666666666666" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="950" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="998.3333333333333" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="1046.6666666666665" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="1095" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="1143.3333333333333" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="1191.6666666666667" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="1240" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="1288.3333333333335" y="90" width="49.333333333333336" height="290" fill="#6f2430" opacity="0.33"/>
+<rect x="1336.6666666666667" y="90" width="49.333333333333336" height="290" fill="#194d3a" opacity="0.33"/>
+<rect x="1385" y="90" width="49.333333333333336" height="290" fill="#194d3a" opacity="0.33"/>
+<rect x="1433.3333333333333" y="90" width="49.333333333333336" height="290" fill="#194d3a" opacity="0.33"/>
+<rect x="1481.6666666666667" y="90" width="49.333333333333336" height="290" fill="#194d3a" opacity="0.33"/>
+<path d="M80.8,289.4 L129.3,112.3 L177.8,112.3 L226.3,112.3 L274.8,112.3 L323.3,112.3 L371.8,112.3 L420.3,112.3 L468.9,112.3 L517.4,112.3 L565.9,112.3 L614.4,112.3 L662.9,112.3 L711.4,112.3 L759.9,112.3 L808.4,112.3 L856.9,112.3 L905.4,112.3 L953.9,112.3 L1002.4,112.3 L1050.9,112.3 L1099.4,112.3 L1147.8,112.3 L1196.3,112.3 L1244.8,112.3 L1293.3,112.3 L1341.8,112.3 L1390.3,112.3 L1438.8,112.3 L1487.3,112.3 L1530.0,112.3" fill="none" stroke="#36c5f0" stroke-width="3"/>
+<path d="M80.8,627.1 L128.5,576.8 L177.0,603.0 L225.5,656.5 L274.0,656.5 L321.7,614.3 L370.2,587.2 L418.7,666.4 L467.2,618.6 L515.7,584.9 L563.4,619.6 L611.9,558.2 L660.4,661.3 L708.9,616.6 L757.4,589.1 L805.1,585.4 L853.6,662.2 L902.1,605.8 L950.6,663.5 L999.1,593.8 L1046.8,662.1 L1095.3,613.5 L1143.8,661.3 L1192.3,616.1 L1240.8,662.6 L1288.5,608.6 L1337.0,613.4 L1385.5,612.6 L1434.0,608.4 L1482.5,582.8 L1530.0,621.1" fill="none" stroke="#ee7d2c" stroke-width="3"/>
+<line x1="1288.4855833333334" y1="70" x2="1288.4855833333334" y2="830" stroke="#f4d35e" stroke-width="3" stroke-dasharray="8 5"/>
+<text x="1296.4855833333334" y="78" fill="#f4d35e" font-family="system-ui" font-size="14">25:00 降低视口负载</text>
+<text x="80" y="850" text-anchor="middle" fill="#9ba8b4" font-family="system-ui" font-size="13">0m</text>
+<text x="321.66666666666663" y="850" text-anchor="middle" fill="#9ba8b4" font-family="system-ui" font-size="13">5m</text>
+<text x="563.3333333333333" y="850" text-anchor="middle" fill="#9ba8b4" font-family="system-ui" font-size="13">10m</text>
+<text x="805" y="850" text-anchor="middle" fill="#9ba8b4" font-family="system-ui" font-size="13">15m</text>
+<text x="1046.6666666666665" y="850" text-anchor="middle" fill="#9ba8b4" font-family="system-ui" font-size="13">20m</text>
+<text x="1288.3333333333335" y="850" text-anchor="middle" fill="#9ba8b4" font-family="system-ui" font-size="13">25m</text>
+<text x="1530" y="850" text-anchor="middle" fill="#9ba8b4" font-family="system-ui" font-size="13">30m</text>
+<text x="80" y="885" fill="#9ba8b4" font-family="system-ui" font-size="13">红=low，黄=probe，绿=normal；堆为自然GC锯齿，结束强制GC后7.43MiB。</text>
+</svg>

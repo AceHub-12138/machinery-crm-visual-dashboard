@@ -10,6 +10,7 @@ export interface MotionHost {
   now: () => number; wall: () => number; memory: () => number | null;
 }
 export interface PerformanceRecord { at: string; event: string; fps: number; memoryBytes: number | null; level: MotionLevel }
+export interface MotionDirectorOptions { automaticQuality?: boolean }
 /** One owner of one outstanding rAF. No timers, catch-up queue, or component clocks. */
 export class MotionDirector {
   private id: number | null = null;
@@ -32,9 +33,11 @@ export class MotionDirector {
   setSelection(key: string | null) { this.selectedKey = key; this.selectionAt = this.frame.time; }
   readonly records: PerformanceRecord[] = [];
   frame: MotionFrame = { time: 0, state: 'BOOT', pageVisible: true, voiceActive: false, motionLevel: 'normal', pulse: 0, fps: 60, significant: 0 };
-  constructor(private host: MotionHost, readonly pulseInterval = motionConfig.pulseInterval as number) {
+  readonly automaticQuality: boolean;
+  constructor(private host: MotionHost, readonly pulseInterval = motionConfig.pulseInterval as number, options: MotionDirectorOptions = {}) {
     if (pulseInterval < 120_000 || pulseInterval > 180_000) throw new Error('Pulse interval must be 120–180 seconds');
     this.nextPulse = pulseInterval;
+    this.automaticQuality = options.automaticQuality ?? true;
   }
   subscribe = (fn: () => void) => { this.listeners.add(fn); return () => { this.listeners.delete(fn); }; };
   getSnapshot = () => this.snapshot;
@@ -79,8 +82,8 @@ export class MotionDirector {
       this.frame.fps = (this.sampleFrames - 1) * 1000 / this.sampleTime;
       if (this.frame.fps < motionConfig.lowFps) this.lowTime += this.sampleTime; else this.lowTime = 0;
       if (this.frame.fps >= motionConfig.recoveryFps) this.recoveryTime += this.sampleTime; else this.recoveryTime = 0;
-      if (!this.forcedLow && this.lowTime >= motionConfig.lowDuration && this.frame.motionLevel === 'normal') this.setLevel('low', 'fps-low');
-      else if (!this.forcedLow && this.recoveryTime >= motionConfig.recoveryDuration && this.frame.motionLevel === 'low') this.setLevel('normal', 'fps-recovered');
+      if (this.automaticQuality && !this.forcedLow && this.lowTime >= motionConfig.lowDuration && this.frame.motionLevel === 'normal') this.setLevel('low', 'fps-low');
+      else if (this.automaticQuality && !this.forcedLow && this.recoveryTime >= motionConfig.recoveryDuration && this.frame.motionLevel === 'low') this.setLevel('normal', 'fps-recovered');
       this.sampleTime = 0; this.sampleFrames = 1;
     }
     if (this.frame.state === 'INTRO' && this.frame.time >= this.introEnd) this.stable();

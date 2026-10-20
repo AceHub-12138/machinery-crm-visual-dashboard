@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { MotionDirector } from './MotionDirector';
-function rig() {
+function rig(options: { automaticQuality?: boolean } = {}) {
   let now = 0, next = 0, requested = 0, cancelled = 0;
   const pending = new Map<number, (time: number) => void>();
-  const director = new MotionDirector({ request: fn => { requested++; pending.set(++next, fn); return next; }, cancel: id => { cancelled++; pending.delete(id); }, now: () => now, wall: () => 1_000_000 + now, memory: () => 10_000 });
+  const director = new MotionDirector({ request: fn => { requested++; pending.set(++next, fn); return next; }, cancel: id => { cancelled++; pending.delete(id); }, now: () => now, wall: () => 1_000_000 + now, memory: () => 10_000 }, undefined, options);
   const step = (delta = 1000 / 60) => { now += delta; const entries = [...pending.values()]; pending.clear(); entries.forEach(fn => fn(now)); };
   const run = (ms: number, delta = 1000 / 60) => { for (let i = 0; i < Math.ceil(ms / delta); i++) step(delta); };
   return { director, pending, step, run, stats: () => ({ requested, cancelled }) };
@@ -54,6 +54,14 @@ describe('MotionDirector', () => {
     expect(r.director.frame.motionLevel).toBe('low'); expect(r.director.frame.state).toBe('DEGRADED');
     expect(r.director.triggerPulse()).toBe(false); expect(r.director.records[0].event).toBe('fps-low');
     r.run(12_000); expect(r.director.frame.motionLevel).toBe('normal'); expect(r.director.records[1].event).toBe('fps-recovered');
+  });
+  it('keeps the baseline policy by default but lets the explicit experiment controller own manual quality', () => {
+    const r = rig(), experimental = rig({ automaticQuality: false });
+    r.director.start(); r.run(6100, 40); expect(r.director.frame.motionLevel).toBe('low');
+    experimental.director.start(); experimental.run(8_000, 40);
+    expect(experimental.director.frame.fps).toBeLessThan(45); expect(experimental.director.frame.motionLevel).toBe('normal');
+    experimental.director.forceLow(true); expect(experimental.director.frame.motionLevel).toBe('low');
+    experimental.director.forceLow(false); expect(experimental.director.frame.motionLevel).toBe('normal');
   });
   it('reduced motion is static, respects manual low mode, and creates no pending frame', () => {
     const r = rig(); r.director.start(); r.director.forceLow(true); r.director.setEnvironment({ reduced: true });

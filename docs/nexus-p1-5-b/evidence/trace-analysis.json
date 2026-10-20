@@ -1,0 +1,5720 @@
+{
+  "generatedAt": "2026-10-19T08:36:11.182Z",
+  "runs": [
+    {
+      "backend": "headless-swiftshader",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-1920-r1.trace.json.gz",
+      "traceEventCount": 311966,
+      "costs": {
+        "rendererMain": {
+          "count": 40083,
+          "inclusiveTotalMs": 6616.727000002207,
+          "p95Ms": 0.819,
+          "p99Ms": 2.327,
+          "maxMs": 4.87
+        },
+        "scriptAnimation": {
+          "count": 1139,
+          "inclusiveTotalMs": 169.60699999999997,
+          "p95Ms": 0.243,
+          "p99Ms": 2.752,
+          "maxMs": 3.778
+        },
+        "layoutStyle": {
+          "count": 960,
+          "inclusiveTotalMs": 283.3329999999999,
+          "p95Ms": 2.11,
+          "p99Ms": 2.275,
+          "maxMs": 2.424
+        },
+        "paint": {
+          "count": 3278,
+          "inclusiveTotalMs": 679.152999999998,
+          "p95Ms": 0.545,
+          "p99Ms": 2.158,
+          "maxMs": 2.424
+        },
+        "compositeRaster": {
+          "count": 20941,
+          "inclusiveTotalMs": 6404.416000000807,
+          "p95Ms": 1.74,
+          "p99Ms": 5.784,
+          "maxMs": 8.555
+        },
+        "gpuProcess": {
+          "count": 56177,
+          "inclusiveTotalMs": 25095.75200000403,
+          "p95Ms": 5.623,
+          "p99Ms": 5.826,
+          "maxMs": 6.459
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-1920-r2.trace.json.gz",
+      "traceEventCount": 305936,
+      "costs": {
+        "rendererMain": {
+          "count": 36228,
+          "inclusiveTotalMs": 6556.200000001646,
+          "p95Ms": 0.866,
+          "p99Ms": 2.401,
+          "maxMs": 5.121
+        },
+        "scriptAnimation": {
+          "count": 1139,
+          "inclusiveTotalMs": 173.73299999999978,
+          "p95Ms": 0.245,
+          "p99Ms": 2.757,
+          "maxMs": 4.354
+        },
+        "layoutStyle": {
+          "count": 960,
+          "inclusiveTotalMs": 281.3939999999997,
+          "p95Ms": 2.087,
+          "p99Ms": 2.273,
+          "maxMs": 2.56
+        },
+        "paint": {
+          "count": 3282,
+          "inclusiveTotalMs": 676.2959999999983,
+          "p95Ms": 0.535,
+          "p99Ms": 2.123,
+          "maxMs": 2.56
+        },
+        "compositeRaster": {
+          "count": 20883,
+          "inclusiveTotalMs": 6405.23600000079,
+          "p95Ms": 1.743,
+          "p99Ms": 5.81,
+          "maxMs": 8.441
+        },
+        "gpuProcess": {
+          "count": 56050,
+          "inclusiveTotalMs": 25372.741000003214,
+          "p95Ms": 5.657,
+          "p99Ms": 5.966,
+          "maxMs": 6.765
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-1920-r3.trace.json.gz",
+      "traceEventCount": 314133,
+      "costs": {
+        "rendererMain": {
+          "count": 41576,
+          "inclusiveTotalMs": 6645.244000002137,
+          "p95Ms": 0.806,
+          "p99Ms": 2.355,
+          "maxMs": 4.848
+        },
+        "scriptAnimation": {
+          "count": 1141,
+          "inclusiveTotalMs": 173.0119999999997,
+          "p95Ms": 0.239,
+          "p99Ms": 2.907,
+          "maxMs": 4.29
+        },
+        "layoutStyle": {
+          "count": 962,
+          "inclusiveTotalMs": 284.6789999999998,
+          "p95Ms": 2.106,
+          "p99Ms": 2.357,
+          "maxMs": 2.598
+        },
+        "paint": {
+          "count": 3284,
+          "inclusiveTotalMs": 678.2660000000003,
+          "p95Ms": 0.539,
+          "p99Ms": 2.206,
+          "maxMs": 2.598
+        },
+        "compositeRaster": {
+          "count": 20969,
+          "inclusiveTotalMs": 6411.019000000792,
+          "p95Ms": 1.743,
+          "p99Ms": 5.83,
+          "maxMs": 8.398
+        },
+        "gpuProcess": {
+          "count": 56166,
+          "inclusiveTotalMs": 25245.76300000304,
+          "p95Ms": 5.628,
+          "p99Ms": 5.898,
+          "maxMs": 6.584
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-3840-r1.trace.json.gz",
+      "traceEventCount": 177275,
+      "costs": {
+        "rendererMain": {
+          "count": 18930,
+          "inclusiveTotalMs": 2537.8649999998597,
+          "p95Ms": 0.705,
+          "p99Ms": 2.467,
+          "maxMs": 6.316
+        },
+        "scriptAnimation": {
+          "count": 504,
+          "inclusiveTotalMs": 114.42100000000005,
+          "p95Ms": 0.366,
+          "p99Ms": 3.821,
+          "maxMs": 6.299
+        },
+        "layoutStyle": {
+          "count": 326,
+          "inclusiveTotalMs": 96.80600000000013,
+          "p95Ms": 2.063,
+          "p99Ms": 2.213,
+          "maxMs": 2.399
+        },
+        "paint": {
+          "count": 1205,
+          "inclusiveTotalMs": 236.418,
+          "p95Ms": 0.547,
+          "p99Ms": 2.096,
+          "maxMs": 2.399
+        },
+        "compositeRaster": {
+          "count": 10849,
+          "inclusiveTotalMs": 4488.441000000369,
+          "p95Ms": 2.435,
+          "p99Ms": 5.025,
+          "maxMs": 5.512
+        },
+        "gpuProcess": {
+          "count": 52919,
+          "inclusiveTotalMs": 70565.41399999952,
+          "p95Ms": 0.114,
+          "p99Ms": 47.82,
+          "maxMs": 50.065
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-3840-r2.trace.json.gz",
+      "traceEventCount": 180255,
+      "costs": {
+        "rendererMain": {
+          "count": 19078,
+          "inclusiveTotalMs": 2520.3889999999146,
+          "p95Ms": 0.707,
+          "p99Ms": 2.428,
+          "maxMs": 4.71
+        },
+        "scriptAnimation": {
+          "count": 499,
+          "inclusiveTotalMs": 107.75000000000004,
+          "p95Ms": 0.383,
+          "p99Ms": 3.825,
+          "maxMs": 4.01
+        },
+        "layoutStyle": {
+          "count": 326,
+          "inclusiveTotalMs": 99.28500000000015,
+          "p95Ms": 2.093,
+          "p99Ms": 2.266,
+          "maxMs": 2.392
+        },
+        "paint": {
+          "count": 1202,
+          "inclusiveTotalMs": 239.79399999999978,
+          "p95Ms": 0.54,
+          "p99Ms": 2.144,
+          "maxMs": 2.392
+        },
+        "compositeRaster": {
+          "count": 10950,
+          "inclusiveTotalMs": 4557.945000000368,
+          "p95Ms": 2.46,
+          "p99Ms": 5.025,
+          "maxMs": 5.667
+        },
+        "gpuProcess": {
+          "count": 53990,
+          "inclusiveTotalMs": 72092.64099999961,
+          "p95Ms": 0.113,
+          "p99Ms": 47.809,
+          "maxMs": 48.795
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-3840-r3.trace.json.gz",
+      "traceEventCount": 179430,
+      "costs": {
+        "rendererMain": {
+          "count": 18941,
+          "inclusiveTotalMs": 2503.0309999999267,
+          "p95Ms": 0.703,
+          "p99Ms": 2.41,
+          "maxMs": 4.802
+        },
+        "scriptAnimation": {
+          "count": 500,
+          "inclusiveTotalMs": 106.05300000000007,
+          "p95Ms": 0.367,
+          "p99Ms": 3.743,
+          "maxMs": 3.893
+        },
+        "layoutStyle": {
+          "count": 326,
+          "inclusiveTotalMs": 97.209,
+          "p95Ms": 2.095,
+          "p99Ms": 2.208,
+          "maxMs": 2.401
+        },
+        "paint": {
+          "count": 1208,
+          "inclusiveTotalMs": 237.8319999999997,
+          "p95Ms": 0.551,
+          "p99Ms": 2.127,
+          "maxMs": 2.401
+        },
+        "compositeRaster": {
+          "count": 10903,
+          "inclusiveTotalMs": 4496.404000000359,
+          "p95Ms": 2.429,
+          "p99Ms": 5.034,
+          "maxMs": 5.605
+        },
+        "gpuProcess": {
+          "count": 54017,
+          "inclusiveTotalMs": 70582.7229999991,
+          "p95Ms": 0.112,
+          "p99Ms": 47.846,
+          "maxMs": 48.806
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-1920-r1.trace.json.gz",
+      "traceEventCount": 306122,
+      "costs": {
+        "rendererMain": {
+          "count": 36144,
+          "inclusiveTotalMs": 6435.378000001619,
+          "p95Ms": 0.84,
+          "p99Ms": 2.355,
+          "maxMs": 6.401
+        },
+        "scriptAnimation": {
+          "count": 1142,
+          "inclusiveTotalMs": 170.53099999999966,
+          "p95Ms": 0.22,
+          "p99Ms": 2.94,
+          "maxMs": 6.381
+        },
+        "layoutStyle": {
+          "count": 960,
+          "inclusiveTotalMs": 280.01599999999996,
+          "p95Ms": 2.057,
+          "p99Ms": 2.23,
+          "maxMs": 2.495
+        },
+        "paint": {
+          "count": 3282,
+          "inclusiveTotalMs": 668.260999999995,
+          "p95Ms": 0.542,
+          "p99Ms": 2.115,
+          "maxMs": 2.495
+        },
+        "compositeRaster": {
+          "count": 21013,
+          "inclusiveTotalMs": 6317.248000000832,
+          "p95Ms": 1.732,
+          "p99Ms": 5.846,
+          "maxMs": 8.491
+        },
+        "gpuProcess": {
+          "count": 56126,
+          "inclusiveTotalMs": 25327.556000003457,
+          "p95Ms": 5.633,
+          "p99Ms": 5.94,
+          "maxMs": 6.752
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-1920-r2.trace.json.gz",
+      "traceEventCount": 308819,
+      "costs": {
+        "rendererMain": {
+          "count": 37838,
+          "inclusiveTotalMs": 6382.70600000153,
+          "p95Ms": 0.809,
+          "p99Ms": 2.329,
+          "maxMs": 7.128
+        },
+        "scriptAnimation": {
+          "count": 1141,
+          "inclusiveTotalMs": 167.44899999999978,
+          "p95Ms": 0.218,
+          "p99Ms": 2.696,
+          "maxMs": 7.104
+        },
+        "layoutStyle": {
+          "count": 960,
+          "inclusiveTotalMs": 276.4119999999996,
+          "p95Ms": 2.056,
+          "p99Ms": 2.21,
+          "maxMs": 2.39
+        },
+        "paint": {
+          "count": 3276,
+          "inclusiveTotalMs": 665.3609999999994,
+          "p95Ms": 0.524,
+          "p99Ms": 2.088,
+          "maxMs": 2.39
+        },
+        "compositeRaster": {
+          "count": 20973,
+          "inclusiveTotalMs": 6318.540000000886,
+          "p95Ms": 1.758,
+          "p99Ms": 5.85,
+          "maxMs": 8.569
+        },
+        "gpuProcess": {
+          "count": 56407,
+          "inclusiveTotalMs": 25228.772000002282,
+          "p95Ms": 5.606,
+          "p99Ms": 5.93,
+          "maxMs": 6.486
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-1920-r3.trace.json.gz",
+      "traceEventCount": 317608,
+      "costs": {
+        "rendererMain": {
+          "count": 43282,
+          "inclusiveTotalMs": 6457.285000002426,
+          "p95Ms": 0.747,
+          "p99Ms": 2.218,
+          "maxMs": 11.146
+        },
+        "scriptAnimation": {
+          "count": 1139,
+          "inclusiveTotalMs": 159.54099999999985,
+          "p95Ms": 0.225,
+          "p99Ms": 2.543,
+          "maxMs": 3.643
+        },
+        "layoutStyle": {
+          "count": 962,
+          "inclusiveTotalMs": 278.6649999999996,
+          "p95Ms": 2.053,
+          "p99Ms": 2.209,
+          "maxMs": 2.502
+        },
+        "paint": {
+          "count": 3284,
+          "inclusiveTotalMs": 661.8029999999977,
+          "p95Ms": 0.525,
+          "p99Ms": 2.104,
+          "maxMs": 2.502
+        },
+        "compositeRaster": {
+          "count": 21237,
+          "inclusiveTotalMs": 6352.38600000088,
+          "p95Ms": 1.746,
+          "p99Ms": 5.815,
+          "maxMs": 8.451
+        },
+        "gpuProcess": {
+          "count": 56272,
+          "inclusiveTotalMs": 25160.17800000287,
+          "p95Ms": 5.591,
+          "p99Ms": 5.896,
+          "maxMs": 6.317
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-3840-r1.trace.json.gz",
+      "traceEventCount": 179310,
+      "costs": {
+        "rendererMain": {
+          "count": 19330,
+          "inclusiveTotalMs": 2468.077999999854,
+          "p95Ms": 0.694,
+          "p99Ms": 2.404,
+          "maxMs": 6.224
+        },
+        "scriptAnimation": {
+          "count": 499,
+          "inclusiveTotalMs": 107.56399999999998,
+          "p95Ms": 0.36,
+          "p99Ms": 3.757,
+          "maxMs": 6.207
+        },
+        "layoutStyle": {
+          "count": 326,
+          "inclusiveTotalMs": 95.43299999999999,
+          "p95Ms": 2.074,
+          "p99Ms": 2.22,
+          "maxMs": 2.34
+        },
+        "paint": {
+          "count": 1202,
+          "inclusiveTotalMs": 235.7190000000003,
+          "p95Ms": 0.539,
+          "p99Ms": 2.097,
+          "maxMs": 2.34
+        },
+        "compositeRaster": {
+          "count": 10750,
+          "inclusiveTotalMs": 4452.243000000341,
+          "p95Ms": 2.454,
+          "p99Ms": 5.014,
+          "maxMs": 5.584
+        },
+        "gpuProcess": {
+          "count": 53858,
+          "inclusiveTotalMs": 70476.60799999729,
+          "p95Ms": 0.113,
+          "p99Ms": 47.778,
+          "maxMs": 49.504
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-3840-r2.trace.json.gz",
+      "traceEventCount": 175388,
+      "costs": {
+        "rendererMain": {
+          "count": 16608,
+          "inclusiveTotalMs": 2503.017000000008,
+          "p95Ms": 0.742,
+          "p99Ms": 2.456,
+          "maxMs": 5.764
+        },
+        "scriptAnimation": {
+          "count": 501,
+          "inclusiveTotalMs": 108.24700000000024,
+          "p95Ms": 0.371,
+          "p99Ms": 3.673,
+          "maxMs": 5.741
+        },
+        "layoutStyle": {
+          "count": 328,
+          "inclusiveTotalMs": 99.902,
+          "p95Ms": 2.269,
+          "p99Ms": 2.386,
+          "maxMs": 2.559
+        },
+        "paint": {
+          "count": 1210,
+          "inclusiveTotalMs": 242.3969999999998,
+          "p95Ms": 0.544,
+          "p99Ms": 2.295,
+          "maxMs": 2.559
+        },
+        "compositeRaster": {
+          "count": 10728,
+          "inclusiveTotalMs": 4484.128000000366,
+          "p95Ms": 2.461,
+          "p99Ms": 5.029,
+          "maxMs": 5.544
+        },
+        "gpuProcess": {
+          "count": 53997,
+          "inclusiveTotalMs": 74093.67299999805,
+          "p95Ms": 0.116,
+          "p99Ms": 47.805,
+          "maxMs": 49.511
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-3840-r3.trace.json.gz",
+      "traceEventCount": 176596,
+      "costs": {
+        "rendererMain": {
+          "count": 17496,
+          "inclusiveTotalMs": 2463.817999999939,
+          "p95Ms": 0.727,
+          "p99Ms": 2.406,
+          "maxMs": 4.71
+        },
+        "scriptAnimation": {
+          "count": 503,
+          "inclusiveTotalMs": 98.228,
+          "p95Ms": 0.361,
+          "p99Ms": 3.407,
+          "maxMs": 3.867
+        },
+        "layoutStyle": {
+          "count": 326,
+          "inclusiveTotalMs": 95.74900000000014,
+          "p95Ms": 2.121,
+          "p99Ms": 2.247,
+          "maxMs": 2.281
+        },
+        "paint": {
+          "count": 1198,
+          "inclusiveTotalMs": 237.95500000000013,
+          "p95Ms": 0.558,
+          "p99Ms": 2.156,
+          "maxMs": 2.281
+        },
+        "compositeRaster": {
+          "count": 10758,
+          "inclusiveTotalMs": 4415.162000000337,
+          "p95Ms": 2.441,
+          "p99Ms": 5.023,
+          "maxMs": 5.562
+        },
+        "gpuProcess": {
+          "count": 54029,
+          "inclusiveTotalMs": 70328.94699999732,
+          "p95Ms": 0.112,
+          "p99Ms": 47.743,
+          "maxMs": 48.958
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/gsap-1920-r1.trace.json.gz",
+      "traceEventCount": 375153,
+      "costs": {
+        "rendererMain": {
+          "count": 53532,
+          "inclusiveTotalMs": 6127.819000002877,
+          "p95Ms": 0.476,
+          "p99Ms": 2.347,
+          "maxMs": 13.526
+        },
+        "scriptAnimation": {
+          "count": 1781,
+          "inclusiveTotalMs": 197.77199999999922,
+          "p95Ms": 0.353,
+          "p99Ms": 0.723,
+          "maxMs": 4.168
+        },
+        "layoutStyle": {
+          "count": 962,
+          "inclusiveTotalMs": 286.24299999999926,
+          "p95Ms": 2.012,
+          "p99Ms": 2.167,
+          "maxMs": 2.577
+        },
+        "paint": {
+          "count": 3601,
+          "inclusiveTotalMs": 764.1109999999981,
+          "p95Ms": 0.557,
+          "p99Ms": 2.073,
+          "maxMs": 2.577
+        },
+        "compositeRaster": {
+          "count": 16085,
+          "inclusiveTotalMs": 512.4869999999522,
+          "p95Ms": 0.134,
+          "p99Ms": 0.182,
+          "maxMs": 0.544
+        },
+        "gpuProcess": {
+          "count": 84812,
+          "inclusiveTotalMs": 13201.835000005649,
+          "p95Ms": 1.119,
+          "p99Ms": 2.564,
+          "maxMs": 4.437
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/gsap-1920-r2.trace.json.gz",
+      "traceEventCount": 373794,
+      "costs": {
+        "rendererMain": {
+          "count": 49529,
+          "inclusiveTotalMs": 6023.29300000218,
+          "p95Ms": 0.542,
+          "p99Ms": 2.719,
+          "maxMs": 24.237
+        },
+        "scriptAnimation": {
+          "count": 2111,
+          "inclusiveTotalMs": 190.3079999999995,
+          "p95Ms": 0.292,
+          "p99Ms": 0.572,
+          "maxMs": 3.816
+        },
+        "layoutStyle": {
+          "count": 963,
+          "inclusiveTotalMs": 269.9969999999997,
+          "p95Ms": 1.979,
+          "p99Ms": 2.17,
+          "maxMs": 2.398
+        },
+        "paint": {
+          "count": 3716,
+          "inclusiveTotalMs": 767.6609999999998,
+          "p95Ms": 0.589,
+          "p99Ms": 2.032,
+          "maxMs": 2.398
+        },
+        "compositeRaster": {
+          "count": 16286,
+          "inclusiveTotalMs": 515.5399999999528,
+          "p95Ms": 0.133,
+          "p99Ms": 0.19,
+          "maxMs": 0.562
+        },
+        "gpuProcess": {
+          "count": 83887,
+          "inclusiveTotalMs": 12760.355000005477,
+          "p95Ms": 1.155,
+          "p99Ms": 2.54,
+          "maxMs": 4.041
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/gsap-1920-r3.trace.json.gz",
+      "traceEventCount": 361332,
+      "costs": {
+        "rendererMain": {
+          "count": 48205,
+          "inclusiveTotalMs": 5721.6430000020855,
+          "p95Ms": 0.525,
+          "p99Ms": 2.079,
+          "maxMs": 13.879
+        },
+        "scriptAnimation": {
+          "count": 1840,
+          "inclusiveTotalMs": 189.09999999999945,
+          "p95Ms": 0.224,
+          "p99Ms": 0.809,
+          "maxMs": 4.015
+        },
+        "layoutStyle": {
+          "count": 970,
+          "inclusiveTotalMs": 273.02799999999974,
+          "p95Ms": 1.99,
+          "p99Ms": 2.156,
+          "maxMs": 2.361
+        },
+        "paint": {
+          "count": 3587,
+          "inclusiveTotalMs": 701.3029999999995,
+          "p95Ms": 0.547,
+          "p99Ms": 2.046,
+          "maxMs": 2.361
+        },
+        "compositeRaster": {
+          "count": 16153,
+          "inclusiveTotalMs": 503.8199999999545,
+          "p95Ms": 0.133,
+          "p99Ms": 0.176,
+          "maxMs": 0.526
+        },
+        "gpuProcess": {
+          "count": 83620,
+          "inclusiveTotalMs": 13294.69600000508,
+          "p95Ms": 1.227,
+          "p99Ms": 2.575,
+          "maxMs": 4.958
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/gsap-3840-r1.trace.json.gz",
+      "traceEventCount": 366840,
+      "costs": {
+        "rendererMain": {
+          "count": 50345,
+          "inclusiveTotalMs": 6653.213000002958,
+          "p95Ms": 0.568,
+          "p99Ms": 3.368,
+          "maxMs": 15.653
+        },
+        "scriptAnimation": {
+          "count": 1779,
+          "inclusiveTotalMs": 223.17599999999965,
+          "p95Ms": 0.475,
+          "p99Ms": 0.95,
+          "maxMs": 5.208
+        },
+        "layoutStyle": {
+          "count": 967,
+          "inclusiveTotalMs": 303.0480000000002,
+          "p95Ms": 2.037,
+          "p99Ms": 2.173,
+          "maxMs": 2.504
+        },
+        "paint": {
+          "count": 3579,
+          "inclusiveTotalMs": 837.6039999999955,
+          "p95Ms": 0.713,
+          "p99Ms": 2.087,
+          "maxMs": 2.504
+        },
+        "compositeRaster": {
+          "count": 16554,
+          "inclusiveTotalMs": 518.7289999999543,
+          "p95Ms": 0.127,
+          "p99Ms": 0.181,
+          "maxMs": 0.688
+        },
+        "gpuProcess": {
+          "count": 84058,
+          "inclusiveTotalMs": 12087.388000004463,
+          "p95Ms": 0.9,
+          "p99Ms": 2.532,
+          "maxMs": 6.901
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/gsap-3840-r2.trace.json.gz",
+      "traceEventCount": 367646,
+      "costs": {
+        "rendererMain": {
+          "count": 51880,
+          "inclusiveTotalMs": 6314.063000003399,
+          "p95Ms": 0.517,
+          "p99Ms": 2.536,
+          "maxMs": 6.068
+        },
+        "scriptAnimation": {
+          "count": 1821,
+          "inclusiveTotalMs": 214.16999999999942,
+          "p95Ms": 0.339,
+          "p99Ms": 0.762,
+          "maxMs": 6.037
+        },
+        "layoutStyle": {
+          "count": 962,
+          "inclusiveTotalMs": 291.46699999999964,
+          "p95Ms": 2.012,
+          "p99Ms": 2.193,
+          "maxMs": 2.77
+        },
+        "paint": {
+          "count": 3570,
+          "inclusiveTotalMs": 797.1439999999943,
+          "p95Ms": 0.6,
+          "p99Ms": 2.078,
+          "maxMs": 2.77
+        },
+        "compositeRaster": {
+          "count": 16349,
+          "inclusiveTotalMs": 533.7909999999503,
+          "p95Ms": 0.131,
+          "p99Ms": 0.187,
+          "maxMs": 0.573
+        },
+        "gpuProcess": {
+          "count": 84217,
+          "inclusiveTotalMs": 12645.247000004796,
+          "p95Ms": 0.933,
+          "p99Ms": 2.599,
+          "maxMs": 7.188
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/gsap-3840-r3.trace.json.gz",
+      "traceEventCount": 363725,
+      "costs": {
+        "rendererMain": {
+          "count": 50089,
+          "inclusiveTotalMs": 6658.554000002865,
+          "p95Ms": 0.581,
+          "p99Ms": 3.386,
+          "maxMs": 13.318
+        },
+        "scriptAnimation": {
+          "count": 1809,
+          "inclusiveTotalMs": 233.6449999999996,
+          "p95Ms": 0.456,
+          "p99Ms": 0.863,
+          "maxMs": 6.227
+        },
+        "layoutStyle": {
+          "count": 969,
+          "inclusiveTotalMs": 302.5279999999998,
+          "p95Ms": 2.027,
+          "p99Ms": 2.148,
+          "maxMs": 2.392
+        },
+        "paint": {
+          "count": 3570,
+          "inclusiveTotalMs": 845.8609999999954,
+          "p95Ms": 0.712,
+          "p99Ms": 2.064,
+          "maxMs": 2.479
+        },
+        "compositeRaster": {
+          "count": 16512,
+          "inclusiveTotalMs": 536.2469999999475,
+          "p95Ms": 0.129,
+          "p99Ms": 0.186,
+          "maxMs": 0.575
+        },
+        "gpuProcess": {
+          "count": 84033,
+          "inclusiveTotalMs": 12326.634000004751,
+          "p95Ms": 0.921,
+          "p99Ms": 2.553,
+          "maxMs": 6.74
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/legacy-1920-r1.trace.json.gz",
+      "traceEventCount": 370408,
+      "costs": {
+        "rendererMain": {
+          "count": 52102,
+          "inclusiveTotalMs": 6241.683000002895,
+          "p95Ms": 0.52,
+          "p99Ms": 2.869,
+          "maxMs": 8.253
+        },
+        "scriptAnimation": {
+          "count": 1820,
+          "inclusiveTotalMs": 202.664999999999,
+          "p95Ms": 0.358,
+          "p99Ms": 0.763,
+          "maxMs": 8.238
+        },
+        "layoutStyle": {
+          "count": 969,
+          "inclusiveTotalMs": 286.21499999999975,
+          "p95Ms": 1.944,
+          "p99Ms": 2.15,
+          "maxMs": 2.625
+        },
+        "paint": {
+          "count": 4004,
+          "inclusiveTotalMs": 804.1769999999941,
+          "p95Ms": 0.591,
+          "p99Ms": 1.98,
+          "maxMs": 2.625
+        },
+        "compositeRaster": {
+          "count": 16151,
+          "inclusiveTotalMs": 506.9299999999535,
+          "p95Ms": 0.133,
+          "p99Ms": 0.18,
+          "maxMs": 0.659
+        },
+        "gpuProcess": {
+          "count": 84586,
+          "inclusiveTotalMs": 12815.328000005262,
+          "p95Ms": 1.092,
+          "p99Ms": 2.52,
+          "maxMs": 10.03
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/legacy-1920-r2.trace.json.gz",
+      "traceEventCount": 353358,
+      "costs": {
+        "rendererMain": {
+          "count": 45395,
+          "inclusiveTotalMs": 6683.01800000193,
+          "p95Ms": 0.733,
+          "p99Ms": 3.346,
+          "maxMs": 12.192
+        },
+        "scriptAnimation": {
+          "count": 1779,
+          "inclusiveTotalMs": 192.70199999999912,
+          "p95Ms": 0.407,
+          "p99Ms": 0.762,
+          "maxMs": 3.743
+        },
+        "layoutStyle": {
+          "count": 967,
+          "inclusiveTotalMs": 285.45900000000006,
+          "p95Ms": 1.936,
+          "p99Ms": 2.116,
+          "maxMs": 2.369
+        },
+        "paint": {
+          "count": 3600,
+          "inclusiveTotalMs": 876.6769999999998,
+          "p95Ms": 1.268,
+          "p99Ms": 1.983,
+          "maxMs": 2.369
+        },
+        "compositeRaster": {
+          "count": 16312,
+          "inclusiveTotalMs": 530.344999999951,
+          "p95Ms": 0.134,
+          "p99Ms": 0.199,
+          "maxMs": 0.554
+        },
+        "gpuProcess": {
+          "count": 82626,
+          "inclusiveTotalMs": 12405.383000005166,
+          "p95Ms": 1.17,
+          "p99Ms": 2.464,
+          "maxMs": 4.399
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/legacy-1920-r3.trace.json.gz",
+      "traceEventCount": 362776,
+      "costs": {
+        "rendererMain": {
+          "count": 51038,
+          "inclusiveTotalMs": 5835.8220000027695,
+          "p95Ms": 0.474,
+          "p99Ms": 2.122,
+          "maxMs": 15.189
+        },
+        "scriptAnimation": {
+          "count": 1781,
+          "inclusiveTotalMs": 175.65399999999946,
+          "p95Ms": 0.213,
+          "p99Ms": 0.638,
+          "maxMs": 3.757
+        },
+        "layoutStyle": {
+          "count": 965,
+          "inclusiveTotalMs": 279.75599999999963,
+          "p95Ms": 2.05,
+          "p99Ms": 2.191,
+          "maxMs": 2.326
+        },
+        "paint": {
+          "count": 3604,
+          "inclusiveTotalMs": 716.6929999999925,
+          "p95Ms": 0.543,
+          "p99Ms": 2.085,
+          "maxMs": 2.326
+        },
+        "compositeRaster": {
+          "count": 16157,
+          "inclusiveTotalMs": 508.4429999999527,
+          "p95Ms": 0.136,
+          "p99Ms": 0.176,
+          "maxMs": 0.645
+        },
+        "gpuProcess": {
+          "count": 83033,
+          "inclusiveTotalMs": 13305.421000005515,
+          "p95Ms": 1.241,
+          "p99Ms": 2.629,
+          "maxMs": 5.83
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/legacy-3840-r1.trace.json.gz",
+      "traceEventCount": 364216,
+      "costs": {
+        "rendererMain": {
+          "count": 49750,
+          "inclusiveTotalMs": 7187.651000002825,
+          "p95Ms": 0.674,
+          "p99Ms": 3.449,
+          "maxMs": 15.202
+        },
+        "scriptAnimation": {
+          "count": 1781,
+          "inclusiveTotalMs": 245.93199999999896,
+          "p95Ms": 0.521,
+          "p99Ms": 0.884,
+          "maxMs": 10.667
+        },
+        "layoutStyle": {
+          "count": 970,
+          "inclusiveTotalMs": 325.603,
+          "p95Ms": 2,
+          "p99Ms": 2.161,
+          "maxMs": 2.624
+        },
+        "paint": {
+          "count": 3610,
+          "inclusiveTotalMs": 936.6169999999998,
+          "p95Ms": 1.415,
+          "p99Ms": 2.069,
+          "maxMs": 3.685
+        },
+        "compositeRaster": {
+          "count": 16503,
+          "inclusiveTotalMs": 526.0719999999535,
+          "p95Ms": 0.128,
+          "p99Ms": 0.184,
+          "maxMs": 0.549
+        },
+        "gpuProcess": {
+          "count": 84371,
+          "inclusiveTotalMs": 12250.688000004635,
+          "p95Ms": 0.92,
+          "p99Ms": 2.511,
+          "maxMs": 6.908
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/legacy-3840-r2.trace.json.gz",
+      "traceEventCount": 364597,
+      "costs": {
+        "rendererMain": {
+          "count": 49381,
+          "inclusiveTotalMs": 6336.521000002761,
+          "p95Ms": 0.555,
+          "p99Ms": 2.7,
+          "maxMs": 7.637
+        },
+        "scriptAnimation": {
+          "count": 1865,
+          "inclusiveTotalMs": 207.09699999999955,
+          "p95Ms": 0.254,
+          "p99Ms": 0.615,
+          "maxMs": 7.624
+        },
+        "layoutStyle": {
+          "count": 970,
+          "inclusiveTotalMs": 303.6439999999999,
+          "p95Ms": 2.125,
+          "p99Ms": 2.357,
+          "maxMs": 2.608
+        },
+        "paint": {
+          "count": 3623,
+          "inclusiveTotalMs": 803.391999999997,
+          "p95Ms": 0.603,
+          "p99Ms": 2.161,
+          "maxMs": 2.608
+        },
+        "compositeRaster": {
+          "count": 16576,
+          "inclusiveTotalMs": 558.7129999999418,
+          "p95Ms": 0.136,
+          "p99Ms": 0.194,
+          "maxMs": 0.577
+        },
+        "gpuProcess": {
+          "count": 85698,
+          "inclusiveTotalMs": 13069.971000004864,
+          "p95Ms": 0.943,
+          "p99Ms": 2.574,
+          "maxMs": 6.552
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headed-metal/trace-shared60/legacy-3840-r3.trace.json.gz",
+      "traceEventCount": 369358,
+      "costs": {
+        "rendererMain": {
+          "count": 53050,
+          "inclusiveTotalMs": 6677.073000003717,
+          "p95Ms": 0.537,
+          "p99Ms": 3.324,
+          "maxMs": 8.369
+        },
+        "scriptAnimation": {
+          "count": 1778,
+          "inclusiveTotalMs": 216.91199999999904,
+          "p95Ms": 0.43,
+          "p99Ms": 0.695,
+          "maxMs": 8.352
+        },
+        "layoutStyle": {
+          "count": 965,
+          "inclusiveTotalMs": 304.64899999999994,
+          "p95Ms": 1.974,
+          "p99Ms": 2.166,
+          "maxMs": 2.436
+        },
+        "paint": {
+          "count": 3594,
+          "inclusiveTotalMs": 871.8909999999964,
+          "p95Ms": 1.042,
+          "p99Ms": 2.021,
+          "maxMs": 2.466
+        },
+        "compositeRaster": {
+          "count": 16509,
+          "inclusiveTotalMs": 542.7429999999486,
+          "p95Ms": 0.131,
+          "p99Ms": 0.189,
+          "maxMs": 0.537
+        },
+        "gpuProcess": {
+          "count": 84921,
+          "inclusiveTotalMs": 12190.577000004841,
+          "p95Ms": 0.887,
+          "p99Ms": 2.523,
+          "maxMs": 6.213
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-1920-r1.trace.json.gz",
+      "traceEventCount": 365633,
+      "costs": {
+        "rendererMain": {
+          "count": 48354,
+          "inclusiveTotalMs": 6729.109000002427,
+          "p95Ms": 0.68,
+          "p99Ms": 2.205,
+          "maxMs": 10.046
+        },
+        "scriptAnimation": {
+          "count": 1779,
+          "inclusiveTotalMs": 179.6549999999996,
+          "p95Ms": 0.222,
+          "p99Ms": 0.466,
+          "maxMs": 4.016
+        },
+        "layoutStyle": {
+          "count": 968,
+          "inclusiveTotalMs": 264.9669999999995,
+          "p95Ms": 2.013,
+          "p99Ms": 2.2,
+          "maxMs": 2.449
+        },
+        "paint": {
+          "count": 3574,
+          "inclusiveTotalMs": 685.5539999999944,
+          "p95Ms": 0.554,
+          "p99Ms": 2.064,
+          "maxMs": 2.449
+        },
+        "compositeRaster": {
+          "count": 23488,
+          "inclusiveTotalMs": 6342.726000000949,
+          "p95Ms": 1.432,
+          "p99Ms": 4.822,
+          "maxMs": 8.6
+        },
+        "gpuProcess": {
+          "count": 62977,
+          "inclusiveTotalMs": 21549.81500000213,
+          "p95Ms": 4.694,
+          "p99Ms": 5.038,
+          "maxMs": 5.595
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-1920-r2.trace.json.gz",
+      "traceEventCount": 356052,
+      "costs": {
+        "rendererMain": {
+          "count": 46404,
+          "inclusiveTotalMs": 6546.231000001886,
+          "p95Ms": 0.687,
+          "p99Ms": 2.205,
+          "maxMs": 7.35
+        },
+        "scriptAnimation": {
+          "count": 1777,
+          "inclusiveTotalMs": 177.2689999999999,
+          "p95Ms": 0.223,
+          "p99Ms": 0.458,
+          "maxMs": 3.914
+        },
+        "layoutStyle": {
+          "count": 964,
+          "inclusiveTotalMs": 270.3379999999994,
+          "p95Ms": 2.046,
+          "p99Ms": 2.218,
+          "maxMs": 2.467
+        },
+        "paint": {
+          "count": 3590,
+          "inclusiveTotalMs": 660.8709999999982,
+          "p95Ms": 0.509,
+          "p99Ms": 2.101,
+          "maxMs": 2.467
+        },
+        "compositeRaster": {
+          "count": 23471,
+          "inclusiveTotalMs": 6346.96000000091,
+          "p95Ms": 1.427,
+          "p99Ms": 4.818,
+          "maxMs": 8.452
+        },
+        "gpuProcess": {
+          "count": 62830,
+          "inclusiveTotalMs": 21507.01600000224,
+          "p95Ms": 4.681,
+          "p99Ms": 4.998,
+          "maxMs": 5.573
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "gsap",
+      "width": 1920,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-1920-r3.trace.json.gz",
+      "traceEventCount": 356680,
+      "costs": {
+        "rendererMain": {
+          "count": 47145,
+          "inclusiveTotalMs": 6627.569000002123,
+          "p95Ms": 0.685,
+          "p99Ms": 2.194,
+          "maxMs": 11.814
+        },
+        "scriptAnimation": {
+          "count": 1793,
+          "inclusiveTotalMs": 176.57700000000028,
+          "p95Ms": 0.223,
+          "p99Ms": 0.422,
+          "maxMs": 3.829
+        },
+        "layoutStyle": {
+          "count": 965,
+          "inclusiveTotalMs": 268.1779999999997,
+          "p95Ms": 2.022,
+          "p99Ms": 2.221,
+          "maxMs": 2.494
+        },
+        "paint": {
+          "count": 3607,
+          "inclusiveTotalMs": 665.0149999999957,
+          "p95Ms": 0.524,
+          "p99Ms": 2.1,
+          "maxMs": 2.494
+        },
+        "compositeRaster": {
+          "count": 23609,
+          "inclusiveTotalMs": 6371.078000001038,
+          "p95Ms": 1.421,
+          "p99Ms": 4.811,
+          "maxMs": 8.745
+        },
+        "gpuProcess": {
+          "count": 62494,
+          "inclusiveTotalMs": 21658.581000001686,
+          "p95Ms": 4.67,
+          "p99Ms": 5.116,
+          "maxMs": 5.686
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-3840-r1.trace.json.gz",
+      "traceEventCount": 362066,
+      "costs": {
+        "rendererMain": {
+          "count": 40150,
+          "inclusiveTotalMs": 6601.9470000021865,
+          "p95Ms": 0.682,
+          "p99Ms": 2.396,
+          "maxMs": 19.762
+        },
+        "scriptAnimation": {
+          "count": 1341,
+          "inclusiveTotalMs": 156.14200000000014,
+          "p95Ms": 0.25,
+          "p99Ms": 2.779,
+          "maxMs": 3.99
+        },
+        "layoutStyle": {
+          "count": 727,
+          "inclusiveTotalMs": 210.53100000000006,
+          "p95Ms": 2.072,
+          "p99Ms": 2.28,
+          "maxMs": 2.375
+        },
+        "paint": {
+          "count": 2714,
+          "inclusiveTotalMs": 521.0419999999973,
+          "p95Ms": 0.553,
+          "p99Ms": 2.118,
+          "maxMs": 2.375
+        },
+        "compositeRaster": {
+          "count": 25145,
+          "inclusiveTotalMs": 9640.608000001435,
+          "p95Ms": 2.219,
+          "p99Ms": 4.991,
+          "maxMs": 5.592
+        },
+        "gpuProcess": {
+          "count": 74285,
+          "inclusiveTotalMs": 69119.07399998797,
+          "p95Ms": 0.697,
+          "p99Ms": 19.835,
+          "maxMs": 20.876
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-3840-r2.trace.json.gz",
+      "traceEventCount": 362474,
+      "costs": {
+        "rendererMain": {
+          "count": 40228,
+          "inclusiveTotalMs": 6342.603000001765,
+          "p95Ms": 0.678,
+          "p99Ms": 2.36,
+          "maxMs": 22.355
+        },
+        "scriptAnimation": {
+          "count": 1443,
+          "inclusiveTotalMs": 156.44499999999965,
+          "p95Ms": 0.242,
+          "p99Ms": 2.59,
+          "maxMs": 3.807
+        },
+        "layoutStyle": {
+          "count": 715,
+          "inclusiveTotalMs": 216.0599999999997,
+          "p95Ms": 2.182,
+          "p99Ms": 2.347,
+          "maxMs": 2.451
+        },
+        "paint": {
+          "count": 2713,
+          "inclusiveTotalMs": 521.2329999999992,
+          "p95Ms": 0.557,
+          "p99Ms": 2.219,
+          "maxMs": 2.451
+        },
+        "compositeRaster": {
+          "count": 25103,
+          "inclusiveTotalMs": 9663.850000001408,
+          "p95Ms": 2.258,
+          "p99Ms": 5.023,
+          "maxMs": 13.586
+        },
+        "gpuProcess": {
+          "count": 73447,
+          "inclusiveTotalMs": 67912.52199998852,
+          "p95Ms": 0.675,
+          "p99Ms": 20.047,
+          "maxMs": 21.52
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "gsap",
+      "width": 3840,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-3840-r3.trace.json.gz",
+      "traceEventCount": 348167,
+      "costs": {
+        "rendererMain": {
+          "count": 33149,
+          "inclusiveTotalMs": 7212.448000001369,
+          "p95Ms": 0.78,
+          "p99Ms": 3.828,
+          "maxMs": 20.2
+        },
+        "scriptAnimation": {
+          "count": 1345,
+          "inclusiveTotalMs": 153.33299999999994,
+          "p95Ms": 0.244,
+          "p99Ms": 2.584,
+          "maxMs": 4.026
+        },
+        "layoutStyle": {
+          "count": 707,
+          "inclusiveTotalMs": 216.81399999999994,
+          "p95Ms": 2.139,
+          "p99Ms": 2.258,
+          "maxMs": 2.556
+        },
+        "paint": {
+          "count": 2661,
+          "inclusiveTotalMs": 514.6979999999996,
+          "p95Ms": 0.553,
+          "p99Ms": 2.166,
+          "maxMs": 2.556
+        },
+        "compositeRaster": {
+          "count": 24731,
+          "inclusiveTotalMs": 9665.758000001431,
+          "p95Ms": 2.284,
+          "p99Ms": 5.01,
+          "maxMs": 5.572
+        },
+        "gpuProcess": {
+          "count": 72935,
+          "inclusiveTotalMs": 66843.49099998895,
+          "p95Ms": 0.669,
+          "p99Ms": 19.859,
+          "maxMs": 21.3
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-1920-r1.trace.json.gz",
+      "traceEventCount": 360998,
+      "costs": {
+        "rendererMain": {
+          "count": 47471,
+          "inclusiveTotalMs": 6682.151000001884,
+          "p95Ms": 0.686,
+          "p99Ms": 2.207,
+          "maxMs": 13.649
+        },
+        "scriptAnimation": {
+          "count": 1808,
+          "inclusiveTotalMs": 176.24699999999976,
+          "p95Ms": 0.208,
+          "p99Ms": 0.394,
+          "maxMs": 4.21
+        },
+        "layoutStyle": {
+          "count": 970,
+          "inclusiveTotalMs": 273.0599999999992,
+          "p95Ms": 2.086,
+          "p99Ms": 2.333,
+          "maxMs": 2.465
+        },
+        "paint": {
+          "count": 3596,
+          "inclusiveTotalMs": 674.8649999999972,
+          "p95Ms": 0.53,
+          "p99Ms": 2.152,
+          "maxMs": 2.465
+        },
+        "compositeRaster": {
+          "count": 23710,
+          "inclusiveTotalMs": 6388.210000001016,
+          "p95Ms": 1.407,
+          "p99Ms": 4.801,
+          "maxMs": 8.607
+        },
+        "gpuProcess": {
+          "count": 64368,
+          "inclusiveTotalMs": 21589.506000001416,
+          "p95Ms": 4.645,
+          "p99Ms": 5.038,
+          "maxMs": 5.659
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-1920-r2.trace.json.gz",
+      "traceEventCount": 359591,
+      "costs": {
+        "rendererMain": {
+          "count": 47693,
+          "inclusiveTotalMs": 6499.047000001948,
+          "p95Ms": 0.677,
+          "p99Ms": 2.155,
+          "maxMs": 5.277
+        },
+        "scriptAnimation": {
+          "count": 1833,
+          "inclusiveTotalMs": 173.16799999999952,
+          "p95Ms": 0.211,
+          "p99Ms": 0.401,
+          "maxMs": 4.134
+        },
+        "layoutStyle": {
+          "count": 966,
+          "inclusiveTotalMs": 266.32699999999966,
+          "p95Ms": 2.004,
+          "p99Ms": 2.222,
+          "maxMs": 2.301
+        },
+        "paint": {
+          "count": 3593,
+          "inclusiveTotalMs": 664.350999999996,
+          "p95Ms": 0.525,
+          "p99Ms": 2.061,
+          "maxMs": 2.301
+        },
+        "compositeRaster": {
+          "count": 23493,
+          "inclusiveTotalMs": 6326.0170000009575,
+          "p95Ms": 1.421,
+          "p99Ms": 4.794,
+          "maxMs": 8.777
+        },
+        "gpuProcess": {
+          "count": 62665,
+          "inclusiveTotalMs": 21416.332000001992,
+          "p95Ms": 4.677,
+          "p99Ms": 4.993,
+          "maxMs": 5.464
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "legacy",
+      "width": 1920,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-1920-r3.trace.json.gz",
+      "traceEventCount": 363719,
+      "costs": {
+        "rendererMain": {
+          "count": 51752,
+          "inclusiveTotalMs": 6660.971000003259,
+          "p95Ms": 0.661,
+          "p99Ms": 2.165,
+          "maxMs": 25.527
+        },
+        "scriptAnimation": {
+          "count": 1789,
+          "inclusiveTotalMs": 179.01100000000025,
+          "p95Ms": 0.209,
+          "p99Ms": 0.411,
+          "maxMs": 7.085
+        },
+        "layoutStyle": {
+          "count": 964,
+          "inclusiveTotalMs": 264.8449999999995,
+          "p95Ms": 1.998,
+          "p99Ms": 2.199,
+          "maxMs": 2.377
+        },
+        "paint": {
+          "count": 3601,
+          "inclusiveTotalMs": 665.2519999999976,
+          "p95Ms": 0.528,
+          "p99Ms": 2.035,
+          "maxMs": 2.377
+        },
+        "compositeRaster": {
+          "count": 23365,
+          "inclusiveTotalMs": 6319.057000001005,
+          "p95Ms": 1.435,
+          "p99Ms": 4.797,
+          "maxMs": 8.446
+        },
+        "gpuProcess": {
+          "count": 62501,
+          "inclusiveTotalMs": 21593.43900000201,
+          "p95Ms": 4.695,
+          "p99Ms": 5.075,
+          "maxMs": 5.518
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 1,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-3840-r1.trace.json.gz",
+      "traceEventCount": 364625,
+      "costs": {
+        "rendererMain": {
+          "count": 36242,
+          "inclusiveTotalMs": 7475.519000001641,
+          "p95Ms": 0.773,
+          "p99Ms": 2.552,
+          "maxMs": 39.392
+        },
+        "scriptAnimation": {
+          "count": 1058,
+          "inclusiveTotalMs": 146.28900000000013,
+          "p95Ms": 0.229,
+          "p99Ms": 2.833,
+          "maxMs": 3.605
+        },
+        "layoutStyle": {
+          "count": 784,
+          "inclusiveTotalMs": 226.14399999999978,
+          "p95Ms": 2.158,
+          "p99Ms": 2.273,
+          "maxMs": 2.529
+        },
+        "paint": {
+          "count": 2749,
+          "inclusiveTotalMs": 554.6820000000001,
+          "p95Ms": 0.552,
+          "p99Ms": 2.172,
+          "maxMs": 2.529
+        },
+        "compositeRaster": {
+          "count": 25937,
+          "inclusiveTotalMs": 10161.203000001518,
+          "p95Ms": 2.243,
+          "p99Ms": 5,
+          "maxMs": 5.554
+        },
+        "gpuProcess": {
+          "count": 78093,
+          "inclusiveTotalMs": 77094.96199998651,
+          "p95Ms": 0.894,
+          "p99Ms": 19.907,
+          "maxMs": 21.025
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 2,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-3840-r2.trace.json.gz",
+      "traceEventCount": 364001,
+      "costs": {
+        "rendererMain": {
+          "count": 36229,
+          "inclusiveTotalMs": 7469.4240000017635,
+          "p95Ms": 0.751,
+          "p99Ms": 2.522,
+          "maxMs": 36.804
+        },
+        "scriptAnimation": {
+          "count": 1074,
+          "inclusiveTotalMs": 150.16699999999997,
+          "p95Ms": 0.234,
+          "p99Ms": 2.857,
+          "maxMs": 4.182
+        },
+        "layoutStyle": {
+          "count": 776,
+          "inclusiveTotalMs": 231.01699999999985,
+          "p95Ms": 2.183,
+          "p99Ms": 2.465,
+          "maxMs": 2.562
+        },
+        "paint": {
+          "count": 2729,
+          "inclusiveTotalMs": 560.2189999999989,
+          "p95Ms": 0.559,
+          "p99Ms": 2.229,
+          "maxMs": 2.562
+        },
+        "compositeRaster": {
+          "count": 25909,
+          "inclusiveTotalMs": 10234.151000001568,
+          "p95Ms": 2.27,
+          "p99Ms": 4.997,
+          "maxMs": 17.225
+        },
+        "gpuProcess": {
+          "count": 77040,
+          "inclusiveTotalMs": 76410.83399998864,
+          "p95Ms": 0.881,
+          "p99Ms": 20.118,
+          "maxMs": 21.89
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "legacy",
+      "width": 3840,
+      "repetition": 3,
+      "file": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-3840-r3.trace.json.gz",
+      "traceEventCount": 350853,
+      "costs": {
+        "rendererMain": {
+          "count": 29656,
+          "inclusiveTotalMs": 7662.844000001007,
+          "p95Ms": 0.931,
+          "p99Ms": 3.619,
+          "maxMs": 21.959
+        },
+        "scriptAnimation": {
+          "count": 1018,
+          "inclusiveTotalMs": 149.21399999999994,
+          "p95Ms": 0.241,
+          "p99Ms": 2.813,
+          "maxMs": 3.917
+        },
+        "layoutStyle": {
+          "count": 771,
+          "inclusiveTotalMs": 229.77299999999977,
+          "p95Ms": 2.164,
+          "p99Ms": 2.385,
+          "maxMs": 3.535
+        },
+        "paint": {
+          "count": 2701,
+          "inclusiveTotalMs": 561.0839999999985,
+          "p95Ms": 0.564,
+          "p99Ms": 2.233,
+          "maxMs": 3.535
+        },
+        "compositeRaster": {
+          "count": 25673,
+          "inclusiveTotalMs": 10183.976000001538,
+          "p95Ms": 2.297,
+          "p99Ms": 4.996,
+          "maxMs": 5.569
+        },
+        "gpuProcess": {
+          "count": 76983,
+          "inclusiveTotalMs": 75524.59799998725,
+          "p95Ms": 0.874,
+          "p99Ms": 19.982,
+          "maxMs": 20.799
+        }
+      },
+      "interpretation": {
+        "additive": false,
+        "note": "Inclusive events overlap across nesting and threads. GPU process time is not GPU utilization or presentation FPS."
+      }
+    }
+  ],
+  "summary": [
+    {
+      "backend": "headless-swiftshader",
+      "engine": "gsap",
+      "width": 1920,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 40083,
+          "p25": 36228,
+          "p75": 41576,
+          "iqr": 5348,
+          "min": 36228,
+          "max": 41576,
+          "mad": 1493
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6616.727000002207,
+          "p25": 6556.200000001646,
+          "p75": 6645.244000002137,
+          "iqr": 89.044000000491,
+          "min": 6556.200000001646,
+          "max": 6645.244000002137,
+          "mad": 28.516999999929794
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.819,
+          "p25": 0.806,
+          "p75": 0.866,
+          "iqr": 0.05999999999999994,
+          "min": 0.806,
+          "max": 0.866,
+          "mad": 0.0129999999999999
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.355,
+          "p25": 2.327,
+          "p75": 2.401,
+          "iqr": 0.07399999999999984,
+          "min": 2.327,
+          "max": 2.401,
+          "mad": 0.028000000000000025
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 4.87,
+          "p25": 4.848,
+          "p75": 5.121,
+          "iqr": 0.2730000000000006,
+          "min": 4.848,
+          "max": 5.121,
+          "mad": 0.02200000000000024
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1139,
+          "p25": 1139,
+          "p75": 1141,
+          "iqr": 2,
+          "min": 1139,
+          "max": 1141,
+          "mad": 0
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 173.0119999999997,
+          "p25": 169.60699999999997,
+          "p75": 173.73299999999978,
+          "iqr": 4.125999999999806,
+          "min": 169.60699999999997,
+          "max": 173.73299999999978,
+          "mad": 0.7210000000000889
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.243,
+          "p25": 0.239,
+          "p75": 0.245,
+          "iqr": 0.006000000000000005,
+          "min": 0.239,
+          "max": 0.245,
+          "mad": 0.0020000000000000018
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 2.757,
+          "p25": 2.752,
+          "p75": 2.907,
+          "iqr": 0.15500000000000025,
+          "min": 2.752,
+          "max": 2.907,
+          "mad": 0.0050000000000003375
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 4.29,
+          "p25": 3.778,
+          "p75": 4.354,
+          "iqr": 0.5760000000000001,
+          "min": 3.778,
+          "max": 4.354,
+          "mad": 0.06400000000000006
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 960,
+          "p25": 960,
+          "p75": 962,
+          "iqr": 2,
+          "min": 960,
+          "max": 962,
+          "mad": 0
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 283.3329999999999,
+          "p25": 281.3939999999997,
+          "p75": 284.6789999999998,
+          "iqr": 3.285000000000082,
+          "min": 281.3939999999997,
+          "max": 284.6789999999998,
+          "mad": 1.34599999999989
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.106,
+          "p25": 2.087,
+          "p75": 2.11,
+          "iqr": 0.022999999999999687,
+          "min": 2.087,
+          "max": 2.11,
+          "mad": 0.0040000000000000036
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.275,
+          "p25": 2.273,
+          "p75": 2.357,
+          "iqr": 0.08400000000000007,
+          "min": 2.273,
+          "max": 2.357,
+          "mad": 0.0019999999999997797
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.56,
+          "p25": 2.424,
+          "p75": 2.598,
+          "iqr": 0.17399999999999993,
+          "min": 2.424,
+          "max": 2.598,
+          "mad": 0.03799999999999981
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 3282,
+          "p25": 3278,
+          "p75": 3284,
+          "iqr": 6,
+          "min": 3278,
+          "max": 3284,
+          "mad": 2
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 678.2660000000003,
+          "p25": 676.2959999999983,
+          "p75": 679.152999999998,
+          "iqr": 2.85699999999963,
+          "min": 676.2959999999983,
+          "max": 679.152999999998,
+          "mad": 0.8869999999976699
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.539,
+          "p25": 0.535,
+          "p75": 0.545,
+          "iqr": 0.010000000000000009,
+          "min": 0.535,
+          "max": 0.545,
+          "mad": 0.0040000000000000036
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.158,
+          "p25": 2.123,
+          "p75": 2.206,
+          "iqr": 0.08299999999999974,
+          "min": 2.123,
+          "max": 2.206,
+          "mad": 0.0349999999999997
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.56,
+          "p25": 2.424,
+          "p75": 2.598,
+          "iqr": 0.17399999999999993,
+          "min": 2.424,
+          "max": 2.598,
+          "mad": 0.03799999999999981
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 20941,
+          "p25": 20883,
+          "p75": 20969,
+          "iqr": 86,
+          "min": 20883,
+          "max": 20969,
+          "mad": 28
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6405.23600000079,
+          "p25": 6404.416000000807,
+          "p75": 6411.019000000792,
+          "iqr": 6.602999999985514,
+          "min": 6404.416000000807,
+          "max": 6411.019000000792,
+          "mad": 0.8199999999833381
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 1.743,
+          "p25": 1.74,
+          "p75": 1.743,
+          "iqr": 0.0030000000000001137,
+          "min": 1.74,
+          "max": 1.743,
+          "mad": 0
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 5.81,
+          "p25": 5.784,
+          "p75": 5.83,
+          "iqr": 0.04600000000000026,
+          "min": 5.784,
+          "max": 5.83,
+          "mad": 0.020000000000000462
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 8.441,
+          "p25": 8.398,
+          "p75": 8.555,
+          "iqr": 0.15700000000000003,
+          "min": 8.398,
+          "max": 8.555,
+          "mad": 0.04300000000000104
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 56166,
+          "p25": 56050,
+          "p75": 56177,
+          "iqr": 127,
+          "min": 56050,
+          "max": 56177,
+          "mad": 11
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 25245.76300000304,
+          "p25": 25095.75200000403,
+          "p75": 25372.741000003214,
+          "iqr": 276.98899999918285,
+          "min": 25095.75200000403,
+          "max": 25372.741000003214,
+          "mad": 126.97800000017378
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 5.628,
+          "p25": 5.623,
+          "p75": 5.657,
+          "iqr": 0.03399999999999981,
+          "min": 5.623,
+          "max": 5.657,
+          "mad": 0.004999999999999893
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 5.898,
+          "p25": 5.826,
+          "p75": 5.966,
+          "iqr": 0.14000000000000057,
+          "min": 5.826,
+          "max": 5.966,
+          "mad": 0.0680000000000005
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 6.584,
+          "p25": 6.459,
+          "p75": 6.765,
+          "iqr": 0.30600000000000005,
+          "min": 6.459,
+          "max": 6.765,
+          "mad": 0.125
+        }
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "gsap",
+      "width": 3840,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 18941,
+          "p25": 18930,
+          "p75": 19078,
+          "iqr": 148,
+          "min": 18930,
+          "max": 19078,
+          "mad": 11
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 2520.3889999999146,
+          "p25": 2503.0309999999267,
+          "p75": 2537.8649999998597,
+          "iqr": 34.833999999932985,
+          "min": 2503.0309999999267,
+          "max": 2537.8649999998597,
+          "mad": 17.357999999987896
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.705,
+          "p25": 0.703,
+          "p75": 0.707,
+          "iqr": 0.0040000000000000036,
+          "min": 0.703,
+          "max": 0.707,
+          "mad": 0.0020000000000000018
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.428,
+          "p25": 2.41,
+          "p75": 2.467,
+          "iqr": 0.05699999999999994,
+          "min": 2.41,
+          "max": 2.467,
+          "mad": 0.017999999999999794
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 4.802,
+          "p25": 4.71,
+          "p75": 6.316,
+          "iqr": 1.6059999999999999,
+          "min": 4.71,
+          "max": 6.316,
+          "mad": 0.09199999999999964
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 500,
+          "p25": 499,
+          "p75": 504,
+          "iqr": 5,
+          "min": 499,
+          "max": 504,
+          "mad": 1
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 107.75000000000004,
+          "p25": 106.05300000000007,
+          "p75": 114.42100000000005,
+          "iqr": 8.36799999999998,
+          "min": 106.05300000000007,
+          "max": 114.42100000000005,
+          "mad": 1.6969999999999743
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.367,
+          "p25": 0.366,
+          "p75": 0.383,
+          "iqr": 0.017000000000000015,
+          "min": 0.366,
+          "max": 0.383,
+          "mad": 0.0010000000000000009
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 3.821,
+          "p25": 3.743,
+          "p75": 3.825,
+          "iqr": 0.0820000000000003,
+          "min": 3.743,
+          "max": 3.825,
+          "mad": 0.0040000000000000036
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 4.01,
+          "p25": 3.893,
+          "p75": 6.299,
+          "iqr": 2.4060000000000006,
+          "min": 3.893,
+          "max": 6.299,
+          "mad": 0.11699999999999999
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 326,
+          "p25": 326,
+          "p75": 326,
+          "iqr": 0,
+          "min": 326,
+          "max": 326,
+          "mad": 0
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 97.209,
+          "p25": 96.80600000000013,
+          "p75": 99.28500000000015,
+          "iqr": 2.4790000000000276,
+          "min": 96.80600000000013,
+          "max": 99.28500000000015,
+          "mad": 0.4029999999998779
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.093,
+          "p25": 2.063,
+          "p75": 2.095,
+          "iqr": 0.03200000000000003,
+          "min": 2.063,
+          "max": 2.095,
+          "mad": 0.002000000000000224
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.213,
+          "p25": 2.208,
+          "p75": 2.266,
+          "iqr": 0.05799999999999983,
+          "min": 2.208,
+          "max": 2.266,
+          "mad": 0.004999999999999893
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.399,
+          "p25": 2.392,
+          "p75": 2.401,
+          "iqr": 0.008999999999999897,
+          "min": 2.392,
+          "max": 2.401,
+          "mad": 0.0019999999999997797
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 1205,
+          "p25": 1202,
+          "p75": 1208,
+          "iqr": 6,
+          "min": 1202,
+          "max": 1208,
+          "mad": 3
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 237.8319999999997,
+          "p25": 236.418,
+          "p75": 239.79399999999978,
+          "iqr": 3.3759999999997774,
+          "min": 236.418,
+          "max": 239.79399999999978,
+          "mad": 1.413999999999703
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.547,
+          "p25": 0.54,
+          "p75": 0.551,
+          "iqr": 0.01100000000000001,
+          "min": 0.54,
+          "max": 0.551,
+          "mad": 0.0040000000000000036
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.127,
+          "p25": 2.096,
+          "p75": 2.144,
+          "iqr": 0.04800000000000004,
+          "min": 2.096,
+          "max": 2.144,
+          "mad": 0.017000000000000348
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.399,
+          "p25": 2.392,
+          "p75": 2.401,
+          "iqr": 0.008999999999999897,
+          "min": 2.392,
+          "max": 2.401,
+          "mad": 0.0019999999999997797
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 10903,
+          "p25": 10849,
+          "p75": 10950,
+          "iqr": 101,
+          "min": 10849,
+          "max": 10950,
+          "mad": 47
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 4496.404000000359,
+          "p25": 4488.441000000369,
+          "p75": 4557.945000000368,
+          "iqr": 69.503999999999,
+          "min": 4488.441000000369,
+          "max": 4557.945000000368,
+          "mad": 7.962999999989734
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 2.435,
+          "p25": 2.429,
+          "p75": 2.46,
+          "iqr": 0.03100000000000014,
+          "min": 2.429,
+          "max": 2.46,
+          "mad": 0.006000000000000227
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 5.025,
+          "p25": 5.025,
+          "p75": 5.034,
+          "iqr": 0.008999999999999453,
+          "min": 5.025,
+          "max": 5.034,
+          "mad": 0
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 5.605,
+          "p25": 5.512,
+          "p75": 5.667,
+          "iqr": 0.15500000000000025,
+          "min": 5.512,
+          "max": 5.667,
+          "mad": 0.06199999999999939
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 53990,
+          "p25": 52919,
+          "p75": 54017,
+          "iqr": 1098,
+          "min": 52919,
+          "max": 54017,
+          "mad": 27
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 70582.7229999991,
+          "p25": 70565.41399999952,
+          "p75": 72092.64099999961,
+          "iqr": 1527.2270000000863,
+          "min": 70565.41399999952,
+          "max": 72092.64099999961,
+          "mad": 17.308999999571824
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 0.113,
+          "p25": 0.112,
+          "p75": 0.114,
+          "iqr": 0.0020000000000000018,
+          "min": 0.112,
+          "max": 0.114,
+          "mad": 0.0010000000000000009
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 47.82,
+          "p25": 47.809,
+          "p75": 47.846,
+          "iqr": 0.036999999999999034,
+          "min": 47.809,
+          "max": 47.846,
+          "mad": 0.011000000000002785
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 48.806,
+          "p25": 48.795,
+          "p75": 50.065,
+          "iqr": 1.269999999999996,
+          "min": 48.795,
+          "max": 50.065,
+          "mad": 0.01099999999999568
+        }
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "legacy",
+      "width": 1920,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 37838,
+          "p25": 36144,
+          "p75": 43282,
+          "iqr": 7138,
+          "min": 36144,
+          "max": 43282,
+          "mad": 1694
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6435.378000001619,
+          "p25": 6382.70600000153,
+          "p75": 6457.285000002426,
+          "iqr": 74.57900000089649,
+          "min": 6382.70600000153,
+          "max": 6457.285000002426,
+          "mad": 21.907000000807784
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.809,
+          "p25": 0.747,
+          "p75": 0.84,
+          "iqr": 0.09299999999999997,
+          "min": 0.747,
+          "max": 0.84,
+          "mad": 0.030999999999999917
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.329,
+          "p25": 2.218,
+          "p75": 2.355,
+          "iqr": 0.137,
+          "min": 2.218,
+          "max": 2.355,
+          "mad": 0.0259999999999998
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 7.128,
+          "p25": 6.401,
+          "p75": 11.146,
+          "iqr": 4.745000000000001,
+          "min": 6.401,
+          "max": 11.146,
+          "mad": 0.7270000000000003
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1141,
+          "p25": 1139,
+          "p75": 1142,
+          "iqr": 3,
+          "min": 1139,
+          "max": 1142,
+          "mad": 1
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 167.44899999999978,
+          "p25": 159.54099999999985,
+          "p75": 170.53099999999966,
+          "iqr": 10.98999999999981,
+          "min": 159.54099999999985,
+          "max": 170.53099999999966,
+          "mad": 3.08199999999988
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.22,
+          "p25": 0.218,
+          "p75": 0.225,
+          "iqr": 0.007000000000000006,
+          "min": 0.218,
+          "max": 0.225,
+          "mad": 0.0020000000000000018
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 2.696,
+          "p25": 2.543,
+          "p75": 2.94,
+          "iqr": 0.3969999999999998,
+          "min": 2.543,
+          "max": 2.94,
+          "mad": 0.15300000000000002
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 6.381,
+          "p25": 3.643,
+          "p75": 7.104,
+          "iqr": 3.4610000000000003,
+          "min": 3.643,
+          "max": 7.104,
+          "mad": 0.7229999999999999
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 960,
+          "p25": 960,
+          "p75": 962,
+          "iqr": 2,
+          "min": 960,
+          "max": 962,
+          "mad": 0
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 278.6649999999996,
+          "p25": 276.4119999999996,
+          "p75": 280.01599999999996,
+          "iqr": 3.604000000000383,
+          "min": 276.4119999999996,
+          "max": 280.01599999999996,
+          "mad": 1.3510000000003402
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.056,
+          "p25": 2.053,
+          "p75": 2.057,
+          "iqr": 0.0040000000000000036,
+          "min": 2.053,
+          "max": 2.057,
+          "mad": 0.0009999999999998899
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.21,
+          "p25": 2.209,
+          "p75": 2.23,
+          "iqr": 0.020999999999999908,
+          "min": 2.209,
+          "max": 2.23,
+          "mad": 0.0009999999999998899
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.495,
+          "p25": 2.39,
+          "p75": 2.502,
+          "iqr": 0.11199999999999966,
+          "min": 2.39,
+          "max": 2.502,
+          "mad": 0.006999999999999673
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 3282,
+          "p25": 3276,
+          "p75": 3284,
+          "iqr": 8,
+          "min": 3276,
+          "max": 3284,
+          "mad": 2
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 665.3609999999994,
+          "p25": 661.8029999999977,
+          "p75": 668.260999999995,
+          "iqr": 6.4579999999972415,
+          "min": 661.8029999999977,
+          "max": 668.260999999995,
+          "mad": 2.8999999999955435
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.525,
+          "p25": 0.524,
+          "p75": 0.542,
+          "iqr": 0.018000000000000016,
+          "min": 0.524,
+          "max": 0.542,
+          "mad": 0.0010000000000000009
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.104,
+          "p25": 2.088,
+          "p75": 2.115,
+          "iqr": 0.027000000000000135,
+          "min": 2.088,
+          "max": 2.115,
+          "mad": 0.01100000000000012
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.495,
+          "p25": 2.39,
+          "p75": 2.502,
+          "iqr": 0.11199999999999966,
+          "min": 2.39,
+          "max": 2.502,
+          "mad": 0.006999999999999673
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 21013,
+          "p25": 20973,
+          "p75": 21237,
+          "iqr": 264,
+          "min": 20973,
+          "max": 21237,
+          "mad": 40
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6318.540000000886,
+          "p25": 6317.248000000832,
+          "p75": 6352.38600000088,
+          "iqr": 35.13800000004812,
+          "min": 6317.248000000832,
+          "max": 6352.38600000088,
+          "mad": 1.2920000000540313
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 1.746,
+          "p25": 1.732,
+          "p75": 1.758,
+          "iqr": 0.026000000000000023,
+          "min": 1.732,
+          "max": 1.758,
+          "mad": 0.01200000000000001
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 5.846,
+          "p25": 5.815,
+          "p75": 5.85,
+          "iqr": 0.034999999999999254,
+          "min": 5.815,
+          "max": 5.85,
+          "mad": 0.0039999999999995595
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 8.491,
+          "p25": 8.451,
+          "p75": 8.569,
+          "iqr": 0.11800000000000033,
+          "min": 8.451,
+          "max": 8.569,
+          "mad": 0.03999999999999915
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 56272,
+          "p25": 56126,
+          "p75": 56407,
+          "iqr": 281,
+          "min": 56126,
+          "max": 56407,
+          "mad": 135
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 25228.772000002282,
+          "p25": 25160.17800000287,
+          "p75": 25327.556000003457,
+          "iqr": 167.37800000058633,
+          "min": 25160.17800000287,
+          "max": 25327.556000003457,
+          "mad": 68.59399999941161
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 5.606,
+          "p25": 5.591,
+          "p75": 5.633,
+          "iqr": 0.041999999999999815,
+          "min": 5.591,
+          "max": 5.633,
+          "mad": 0.01499999999999968
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 5.93,
+          "p25": 5.896,
+          "p75": 5.94,
+          "iqr": 0.04400000000000048,
+          "min": 5.896,
+          "max": 5.94,
+          "mad": 0.010000000000000675
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 6.486,
+          "p25": 6.317,
+          "p75": 6.752,
+          "iqr": 0.4349999999999996,
+          "min": 6.317,
+          "max": 6.752,
+          "mad": 0.1689999999999996
+        }
+      }
+    },
+    {
+      "backend": "headless-swiftshader",
+      "engine": "legacy",
+      "width": 3840,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 17496,
+          "p25": 16608,
+          "p75": 19330,
+          "iqr": 2722,
+          "min": 16608,
+          "max": 19330,
+          "mad": 888
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 2468.077999999854,
+          "p25": 2463.817999999939,
+          "p75": 2503.017000000008,
+          "iqr": 39.19900000006919,
+          "min": 2463.817999999939,
+          "max": 2503.017000000008,
+          "mad": 4.2599999999151805
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.727,
+          "p25": 0.694,
+          "p75": 0.742,
+          "iqr": 0.04800000000000004,
+          "min": 0.694,
+          "max": 0.742,
+          "mad": 0.015000000000000013
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.406,
+          "p25": 2.404,
+          "p75": 2.456,
+          "iqr": 0.052000000000000046,
+          "min": 2.404,
+          "max": 2.456,
+          "mad": 0.002000000000000224
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 5.764,
+          "p25": 4.71,
+          "p75": 6.224,
+          "iqr": 1.5140000000000002,
+          "min": 4.71,
+          "max": 6.224,
+          "mad": 0.45999999999999996
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 501,
+          "p25": 499,
+          "p75": 503,
+          "iqr": 4,
+          "min": 499,
+          "max": 503,
+          "mad": 2
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 107.56399999999998,
+          "p25": 98.228,
+          "p75": 108.24700000000024,
+          "iqr": 10.019000000000247,
+          "min": 98.228,
+          "max": 108.24700000000024,
+          "mad": 0.6830000000002627
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.361,
+          "p25": 0.36,
+          "p75": 0.371,
+          "iqr": 0.01100000000000001,
+          "min": 0.36,
+          "max": 0.371,
+          "mad": 0.0010000000000000009
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 3.673,
+          "p25": 3.407,
+          "p75": 3.757,
+          "iqr": 0.3500000000000001,
+          "min": 3.407,
+          "max": 3.757,
+          "mad": 0.08400000000000007
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 5.741,
+          "p25": 3.867,
+          "p75": 6.207,
+          "iqr": 2.34,
+          "min": 3.867,
+          "max": 6.207,
+          "mad": 0.4660000000000002
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 326,
+          "p25": 326,
+          "p75": 328,
+          "iqr": 2,
+          "min": 326,
+          "max": 328,
+          "mad": 0
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 95.74900000000014,
+          "p25": 95.43299999999999,
+          "p75": 99.902,
+          "iqr": 4.469000000000008,
+          "min": 95.43299999999999,
+          "max": 99.902,
+          "mad": 0.3160000000001446
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.121,
+          "p25": 2.074,
+          "p75": 2.269,
+          "iqr": 0.19500000000000028,
+          "min": 2.074,
+          "max": 2.269,
+          "mad": 0.04700000000000015
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.247,
+          "p25": 2.22,
+          "p75": 2.386,
+          "iqr": 0.16599999999999993,
+          "min": 2.22,
+          "max": 2.386,
+          "mad": 0.02699999999999969
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.34,
+          "p25": 2.281,
+          "p75": 2.559,
+          "iqr": 0.278,
+          "min": 2.281,
+          "max": 2.559,
+          "mad": 0.05899999999999972
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 1202,
+          "p25": 1198,
+          "p75": 1210,
+          "iqr": 12,
+          "min": 1198,
+          "max": 1210,
+          "mad": 4
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 237.95500000000013,
+          "p25": 235.7190000000003,
+          "p75": 242.3969999999998,
+          "iqr": 6.677999999999486,
+          "min": 235.7190000000003,
+          "max": 242.3969999999998,
+          "mad": 2.2359999999998195
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.544,
+          "p25": 0.539,
+          "p75": 0.558,
+          "iqr": 0.019000000000000017,
+          "min": 0.539,
+          "max": 0.558,
+          "mad": 0.0050000000000000044
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.156,
+          "p25": 2.097,
+          "p75": 2.295,
+          "iqr": 0.19799999999999995,
+          "min": 2.097,
+          "max": 2.295,
+          "mad": 0.05900000000000016
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.34,
+          "p25": 2.281,
+          "p75": 2.559,
+          "iqr": 0.278,
+          "min": 2.281,
+          "max": 2.559,
+          "mad": 0.05899999999999972
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 10750,
+          "p25": 10728,
+          "p75": 10758,
+          "iqr": 30,
+          "min": 10728,
+          "max": 10758,
+          "mad": 8
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 4452.243000000341,
+          "p25": 4415.162000000337,
+          "p75": 4484.128000000366,
+          "iqr": 68.96600000002945,
+          "min": 4415.162000000337,
+          "max": 4484.128000000366,
+          "mad": 31.885000000024775
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 2.454,
+          "p25": 2.441,
+          "p75": 2.461,
+          "iqr": 0.020000000000000018,
+          "min": 2.441,
+          "max": 2.461,
+          "mad": 0.006999999999999673
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 5.023,
+          "p25": 5.014,
+          "p75": 5.029,
+          "iqr": 0.01499999999999968,
+          "min": 5.014,
+          "max": 5.029,
+          "mad": 0.006000000000000227
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 5.562,
+          "p25": 5.544,
+          "p75": 5.584,
+          "iqr": 0.040000000000000036,
+          "min": 5.544,
+          "max": 5.584,
+          "mad": 0.018000000000000682
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 53997,
+          "p25": 53858,
+          "p75": 54029,
+          "iqr": 171,
+          "min": 53858,
+          "max": 54029,
+          "mad": 32
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 70476.60799999729,
+          "p25": 70328.94699999732,
+          "p75": 74093.67299999805,
+          "iqr": 3764.7260000007227,
+          "min": 70328.94699999732,
+          "max": 74093.67299999805,
+          "mad": 147.66099999996368
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 0.113,
+          "p25": 0.112,
+          "p75": 0.116,
+          "iqr": 0.0040000000000000036,
+          "min": 0.112,
+          "max": 0.116,
+          "mad": 0.0010000000000000009
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 47.778,
+          "p25": 47.743,
+          "p75": 47.805,
+          "iqr": 0.06199999999999761,
+          "min": 47.743,
+          "max": 47.805,
+          "mad": 0.027000000000001023
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 49.504,
+          "p25": 48.958,
+          "p75": 49.511,
+          "iqr": 0.5530000000000044,
+          "min": 48.958,
+          "max": 49.511,
+          "mad": 0.007000000000005002
+        }
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "gsap",
+      "width": 1920,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 49529,
+          "p25": 48205,
+          "p75": 53532,
+          "iqr": 5327,
+          "min": 48205,
+          "max": 53532,
+          "mad": 1324
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6023.29300000218,
+          "p25": 5721.6430000020855,
+          "p75": 6127.819000002877,
+          "iqr": 406.17600000079165,
+          "min": 5721.6430000020855,
+          "max": 6127.819000002877,
+          "mad": 104.52600000069742
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.525,
+          "p25": 0.476,
+          "p75": 0.542,
+          "iqr": 0.06600000000000006,
+          "min": 0.476,
+          "max": 0.542,
+          "mad": 0.017000000000000015
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.347,
+          "p25": 2.079,
+          "p75": 2.719,
+          "iqr": 0.6399999999999997,
+          "min": 2.079,
+          "max": 2.719,
+          "mad": 0.2679999999999998
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 13.879,
+          "p25": 13.526,
+          "p75": 24.237,
+          "iqr": 10.710999999999999,
+          "min": 13.526,
+          "max": 24.237,
+          "mad": 0.35299999999999976
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1840,
+          "p25": 1781,
+          "p75": 2111,
+          "iqr": 330,
+          "min": 1781,
+          "max": 2111,
+          "mad": 59
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 190.3079999999995,
+          "p25": 189.09999999999945,
+          "p75": 197.77199999999922,
+          "iqr": 8.67199999999977,
+          "min": 189.09999999999945,
+          "max": 197.77199999999922,
+          "mad": 1.2080000000000553
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.292,
+          "p25": 0.224,
+          "p75": 0.353,
+          "iqr": 0.12899999999999998,
+          "min": 0.224,
+          "max": 0.353,
+          "mad": 0.061
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 0.723,
+          "p25": 0.572,
+          "p75": 0.809,
+          "iqr": 0.2370000000000001,
+          "min": 0.572,
+          "max": 0.809,
+          "mad": 0.08600000000000008
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 4.015,
+          "p25": 3.816,
+          "p75": 4.168,
+          "iqr": 0.3520000000000003,
+          "min": 3.816,
+          "max": 4.168,
+          "mad": 0.15300000000000047
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 963,
+          "p25": 962,
+          "p75": 970,
+          "iqr": 8,
+          "min": 962,
+          "max": 970,
+          "mad": 1
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 273.02799999999974,
+          "p25": 269.9969999999997,
+          "p75": 286.24299999999926,
+          "iqr": 16.245999999999583,
+          "min": 269.9969999999997,
+          "max": 286.24299999999926,
+          "mad": 3.0310000000000628
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 1.99,
+          "p25": 1.979,
+          "p75": 2.012,
+          "iqr": 0.03299999999999992,
+          "min": 1.979,
+          "max": 2.012,
+          "mad": 0.010999999999999899
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.167,
+          "p25": 2.156,
+          "p75": 2.17,
+          "iqr": 0.01399999999999979,
+          "min": 2.156,
+          "max": 2.17,
+          "mad": 0.0030000000000001137
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.398,
+          "p25": 2.361,
+          "p75": 2.577,
+          "iqr": 0.21599999999999975,
+          "min": 2.361,
+          "max": 2.577,
+          "mad": 0.03699999999999992
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 3601,
+          "p25": 3587,
+          "p75": 3716,
+          "iqr": 129,
+          "min": 3587,
+          "max": 3716,
+          "mad": 14
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 764.1109999999981,
+          "p25": 701.3029999999995,
+          "p75": 767.6609999999998,
+          "iqr": 66.35800000000029,
+          "min": 701.3029999999995,
+          "max": 767.6609999999998,
+          "mad": 3.5500000000017735
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.557,
+          "p25": 0.547,
+          "p75": 0.589,
+          "iqr": 0.041999999999999926,
+          "min": 0.547,
+          "max": 0.589,
+          "mad": 0.010000000000000009
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.046,
+          "p25": 2.032,
+          "p75": 2.073,
+          "iqr": 0.040999999999999925,
+          "min": 2.032,
+          "max": 2.073,
+          "mad": 0.01399999999999979
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.398,
+          "p25": 2.361,
+          "p75": 2.577,
+          "iqr": 0.21599999999999975,
+          "min": 2.361,
+          "max": 2.577,
+          "mad": 0.03699999999999992
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 16153,
+          "p25": 16085,
+          "p75": 16286,
+          "iqr": 201,
+          "min": 16085,
+          "max": 16286,
+          "mad": 68
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 512.4869999999522,
+          "p25": 503.8199999999545,
+          "p75": 515.5399999999528,
+          "iqr": 11.719999999998265,
+          "min": 503.8199999999545,
+          "max": 515.5399999999528,
+          "mad": 3.0530000000005657
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 0.133,
+          "p25": 0.133,
+          "p75": 0.134,
+          "iqr": 0.0010000000000000009,
+          "min": 0.133,
+          "max": 0.134,
+          "mad": 0
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 0.182,
+          "p25": 0.176,
+          "p75": 0.19,
+          "iqr": 0.014000000000000012,
+          "min": 0.176,
+          "max": 0.19,
+          "mad": 0.006000000000000005
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 0.544,
+          "p25": 0.526,
+          "p75": 0.562,
+          "iqr": 0.03600000000000003,
+          "min": 0.526,
+          "max": 0.562,
+          "mad": 0.018000000000000016
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 83887,
+          "p25": 83620,
+          "p75": 84812,
+          "iqr": 1192,
+          "min": 83620,
+          "max": 84812,
+          "mad": 267
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 13201.835000005649,
+          "p25": 12760.355000005477,
+          "p75": 13294.69600000508,
+          "iqr": 534.3409999996038,
+          "min": 12760.355000005477,
+          "max": 13294.69600000508,
+          "mad": 92.86099999943144
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 1.155,
+          "p25": 1.119,
+          "p75": 1.227,
+          "iqr": 0.1080000000000001,
+          "min": 1.119,
+          "max": 1.227,
+          "mad": 0.03600000000000003
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 2.564,
+          "p25": 2.54,
+          "p75": 2.575,
+          "iqr": 0.03500000000000014,
+          "min": 2.54,
+          "max": 2.575,
+          "mad": 0.01100000000000012
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 4.437,
+          "p25": 4.041,
+          "p75": 4.958,
+          "iqr": 0.9169999999999998,
+          "min": 4.041,
+          "max": 4.958,
+          "mad": 0.3959999999999999
+        }
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "gsap",
+      "width": 3840,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 50345,
+          "p25": 50089,
+          "p75": 51880,
+          "iqr": 1791,
+          "min": 50089,
+          "max": 51880,
+          "mad": 256
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6653.213000002958,
+          "p25": 6314.063000003399,
+          "p75": 6658.554000002865,
+          "iqr": 344.4909999994661,
+          "min": 6314.063000003399,
+          "max": 6658.554000002865,
+          "mad": 5.340999999906671
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.568,
+          "p25": 0.517,
+          "p75": 0.581,
+          "iqr": 0.06399999999999995,
+          "min": 0.517,
+          "max": 0.581,
+          "mad": 0.013000000000000012
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 3.368,
+          "p25": 2.536,
+          "p75": 3.386,
+          "iqr": 0.8500000000000001,
+          "min": 2.536,
+          "max": 3.386,
+          "mad": 0.018000000000000238
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 13.318,
+          "p25": 6.068,
+          "p75": 15.653,
+          "iqr": 9.585,
+          "min": 6.068,
+          "max": 15.653,
+          "mad": 2.335000000000001
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1809,
+          "p25": 1779,
+          "p75": 1821,
+          "iqr": 42,
+          "min": 1779,
+          "max": 1821,
+          "mad": 12
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 223.17599999999965,
+          "p25": 214.16999999999942,
+          "p75": 233.6449999999996,
+          "iqr": 19.475000000000193,
+          "min": 214.16999999999942,
+          "max": 233.6449999999996,
+          "mad": 9.006000000000228
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.456,
+          "p25": 0.339,
+          "p75": 0.475,
+          "iqr": 0.13599999999999995,
+          "min": 0.339,
+          "max": 0.475,
+          "mad": 0.01899999999999996
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 0.863,
+          "p25": 0.762,
+          "p75": 0.95,
+          "iqr": 0.18799999999999994,
+          "min": 0.762,
+          "max": 0.95,
+          "mad": 0.08699999999999997
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 6.037,
+          "p25": 5.208,
+          "p75": 6.227,
+          "iqr": 1.0190000000000001,
+          "min": 5.208,
+          "max": 6.227,
+          "mad": 0.1900000000000004
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 967,
+          "p25": 962,
+          "p75": 969,
+          "iqr": 7,
+          "min": 962,
+          "max": 969,
+          "mad": 2
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 302.5279999999998,
+          "p25": 291.46699999999964,
+          "p75": 303.0480000000002,
+          "iqr": 11.581000000000529,
+          "min": 291.46699999999964,
+          "max": 303.0480000000002,
+          "mad": 0.5200000000003797
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.027,
+          "p25": 2.012,
+          "p75": 2.037,
+          "iqr": 0.02499999999999991,
+          "min": 2.012,
+          "max": 2.037,
+          "mad": 0.009999999999999787
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.173,
+          "p25": 2.148,
+          "p75": 2.193,
+          "iqr": 0.04499999999999993,
+          "min": 2.148,
+          "max": 2.193,
+          "mad": 0.020000000000000018
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.504,
+          "p25": 2.392,
+          "p75": 2.77,
+          "iqr": 0.3780000000000001,
+          "min": 2.392,
+          "max": 2.77,
+          "mad": 0.1120000000000001
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 3570,
+          "p25": 3570,
+          "p75": 3579,
+          "iqr": 9,
+          "min": 3570,
+          "max": 3579,
+          "mad": 0
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 837.6039999999955,
+          "p25": 797.1439999999943,
+          "p75": 845.8609999999954,
+          "iqr": 48.71700000000112,
+          "min": 797.1439999999943,
+          "max": 845.8609999999954,
+          "mad": 8.256999999999948
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.712,
+          "p25": 0.6,
+          "p75": 0.713,
+          "iqr": 0.11299999999999999,
+          "min": 0.6,
+          "max": 0.713,
+          "mad": 0.0010000000000000009
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.078,
+          "p25": 2.064,
+          "p75": 2.087,
+          "iqr": 0.02300000000000013,
+          "min": 2.064,
+          "max": 2.087,
+          "mad": 0.009000000000000341
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.504,
+          "p25": 2.479,
+          "p75": 2.77,
+          "iqr": 0.2909999999999999,
+          "min": 2.479,
+          "max": 2.77,
+          "mad": 0.02499999999999991
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 16512,
+          "p25": 16349,
+          "p75": 16554,
+          "iqr": 205,
+          "min": 16349,
+          "max": 16554,
+          "mad": 42
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 533.7909999999503,
+          "p25": 518.7289999999543,
+          "p75": 536.2469999999475,
+          "iqr": 17.517999999993208,
+          "min": 518.7289999999543,
+          "max": 536.2469999999475,
+          "mad": 2.455999999997289
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 0.129,
+          "p25": 0.127,
+          "p75": 0.131,
+          "iqr": 0.0040000000000000036,
+          "min": 0.127,
+          "max": 0.131,
+          "mad": 0.0020000000000000018
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 0.186,
+          "p25": 0.181,
+          "p75": 0.187,
+          "iqr": 0.006000000000000005,
+          "min": 0.181,
+          "max": 0.187,
+          "mad": 0.0010000000000000009
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 0.575,
+          "p25": 0.573,
+          "p75": 0.688,
+          "iqr": 0.11499999999999999,
+          "min": 0.573,
+          "max": 0.688,
+          "mad": 0.0020000000000000018
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 84058,
+          "p25": 84033,
+          "p75": 84217,
+          "iqr": 184,
+          "min": 84033,
+          "max": 84217,
+          "mad": 25
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 12326.634000004751,
+          "p25": 12087.388000004463,
+          "p75": 12645.247000004796,
+          "iqr": 557.8590000003333,
+          "min": 12087.388000004463,
+          "max": 12645.247000004796,
+          "mad": 239.2460000002884
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 0.921,
+          "p25": 0.9,
+          "p75": 0.933,
+          "iqr": 0.03300000000000003,
+          "min": 0.9,
+          "max": 0.933,
+          "mad": 0.01200000000000001
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 2.553,
+          "p25": 2.532,
+          "p75": 2.599,
+          "iqr": 0.06700000000000017,
+          "min": 2.532,
+          "max": 2.599,
+          "mad": 0.020999999999999908
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 6.901,
+          "p25": 6.74,
+          "p75": 7.188,
+          "iqr": 0.4479999999999995,
+          "min": 6.74,
+          "max": 7.188,
+          "mad": 0.1609999999999996
+        }
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "legacy",
+      "width": 1920,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 51038,
+          "p25": 45395,
+          "p75": 52102,
+          "iqr": 6707,
+          "min": 45395,
+          "max": 52102,
+          "mad": 1064
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6241.683000002895,
+          "p25": 5835.8220000027695,
+          "p75": 6683.01800000193,
+          "iqr": 847.1959999991604,
+          "min": 5835.8220000027695,
+          "max": 6683.01800000193,
+          "mad": 405.8610000001254
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.52,
+          "p25": 0.474,
+          "p75": 0.733,
+          "iqr": 0.259,
+          "min": 0.474,
+          "max": 0.733,
+          "mad": 0.04600000000000004
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.869,
+          "p25": 2.122,
+          "p75": 3.346,
+          "iqr": 1.2240000000000002,
+          "min": 2.122,
+          "max": 3.346,
+          "mad": 0.47699999999999987
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 12.192,
+          "p25": 8.253,
+          "p75": 15.189,
+          "iqr": 6.936,
+          "min": 8.253,
+          "max": 15.189,
+          "mad": 2.997
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1781,
+          "p25": 1779,
+          "p75": 1820,
+          "iqr": 41,
+          "min": 1779,
+          "max": 1820,
+          "mad": 2
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 192.70199999999912,
+          "p25": 175.65399999999946,
+          "p75": 202.664999999999,
+          "iqr": 27.01099999999954,
+          "min": 175.65399999999946,
+          "max": 202.664999999999,
+          "mad": 9.96299999999988
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.358,
+          "p25": 0.213,
+          "p75": 0.407,
+          "iqr": 0.19399999999999998,
+          "min": 0.213,
+          "max": 0.407,
+          "mad": 0.04899999999999999
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 0.762,
+          "p25": 0.638,
+          "p75": 0.763,
+          "iqr": 0.125,
+          "min": 0.638,
+          "max": 0.763,
+          "mad": 0.0010000000000000009
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 3.757,
+          "p25": 3.743,
+          "p75": 8.238,
+          "iqr": 4.494999999999999,
+          "min": 3.743,
+          "max": 8.238,
+          "mad": 0.014000000000000234
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 967,
+          "p25": 965,
+          "p75": 969,
+          "iqr": 4,
+          "min": 965,
+          "max": 969,
+          "mad": 2
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 285.45900000000006,
+          "p25": 279.75599999999963,
+          "p75": 286.21499999999975,
+          "iqr": 6.459000000000117,
+          "min": 279.75599999999963,
+          "max": 286.21499999999975,
+          "mad": 0.7559999999996876
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 1.944,
+          "p25": 1.936,
+          "p75": 2.05,
+          "iqr": 0.11399999999999988,
+          "min": 1.936,
+          "max": 2.05,
+          "mad": 0.008000000000000007
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.15,
+          "p25": 2.116,
+          "p75": 2.191,
+          "iqr": 0.07499999999999973,
+          "min": 2.116,
+          "max": 2.191,
+          "mad": 0.03399999999999981
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.369,
+          "p25": 2.326,
+          "p75": 2.625,
+          "iqr": 0.29899999999999993,
+          "min": 2.326,
+          "max": 2.625,
+          "mad": 0.04300000000000015
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 3604,
+          "p25": 3600,
+          "p75": 4004,
+          "iqr": 404,
+          "min": 3600,
+          "max": 4004,
+          "mad": 4
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 804.1769999999941,
+          "p25": 716.6929999999925,
+          "p75": 876.6769999999998,
+          "iqr": 159.9840000000073,
+          "min": 716.6929999999925,
+          "max": 876.6769999999998,
+          "mad": 72.50000000000568
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.591,
+          "p25": 0.543,
+          "p75": 1.268,
+          "iqr": 0.725,
+          "min": 0.543,
+          "max": 1.268,
+          "mad": 0.04799999999999993
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 1.983,
+          "p25": 1.98,
+          "p75": 2.085,
+          "iqr": 0.10499999999999998,
+          "min": 1.98,
+          "max": 2.085,
+          "mad": 0.0030000000000001137
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.369,
+          "p25": 2.326,
+          "p75": 2.625,
+          "iqr": 0.29899999999999993,
+          "min": 2.326,
+          "max": 2.625,
+          "mad": 0.04300000000000015
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 16157,
+          "p25": 16151,
+          "p75": 16312,
+          "iqr": 161,
+          "min": 16151,
+          "max": 16312,
+          "mad": 6
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 508.4429999999527,
+          "p25": 506.9299999999535,
+          "p75": 530.344999999951,
+          "iqr": 23.41499999999752,
+          "min": 506.9299999999535,
+          "max": 530.344999999951,
+          "mad": 1.512999999999181
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 0.134,
+          "p25": 0.133,
+          "p75": 0.136,
+          "iqr": 0.0030000000000000027,
+          "min": 0.133,
+          "max": 0.136,
+          "mad": 0.0010000000000000009
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 0.18,
+          "p25": 0.176,
+          "p75": 0.199,
+          "iqr": 0.02300000000000002,
+          "min": 0.176,
+          "max": 0.199,
+          "mad": 0.0040000000000000036
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 0.645,
+          "p25": 0.554,
+          "p75": 0.659,
+          "iqr": 0.10499999999999998,
+          "min": 0.554,
+          "max": 0.659,
+          "mad": 0.014000000000000012
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 83033,
+          "p25": 82626,
+          "p75": 84586,
+          "iqr": 1960,
+          "min": 82626,
+          "max": 84586,
+          "mad": 407
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 12815.328000005262,
+          "p25": 12405.383000005166,
+          "p75": 13305.421000005515,
+          "iqr": 900.0380000003497,
+          "min": 12405.383000005166,
+          "max": 13305.421000005515,
+          "mad": 409.9450000000961
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 1.17,
+          "p25": 1.092,
+          "p75": 1.241,
+          "iqr": 0.14900000000000002,
+          "min": 1.092,
+          "max": 1.241,
+          "mad": 0.07100000000000017
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 2.52,
+          "p25": 2.464,
+          "p75": 2.629,
+          "iqr": 0.16500000000000004,
+          "min": 2.464,
+          "max": 2.629,
+          "mad": 0.05600000000000005
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 5.83,
+          "p25": 4.399,
+          "p75": 10.03,
+          "iqr": 5.630999999999999,
+          "min": 4.399,
+          "max": 10.03,
+          "mad": 1.431
+        }
+      }
+    },
+    {
+      "backend": "headed-metal",
+      "engine": "legacy",
+      "width": 3840,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 49750,
+          "p25": 49381,
+          "p75": 53050,
+          "iqr": 3669,
+          "min": 49381,
+          "max": 53050,
+          "mad": 369
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6677.073000003717,
+          "p25": 6336.521000002761,
+          "p75": 7187.651000002825,
+          "iqr": 851.1300000000638,
+          "min": 6336.521000002761,
+          "max": 7187.651000002825,
+          "mad": 340.55200000095647
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.555,
+          "p25": 0.537,
+          "p75": 0.674,
+          "iqr": 0.137,
+          "min": 0.537,
+          "max": 0.674,
+          "mad": 0.018000000000000016
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 3.324,
+          "p25": 2.7,
+          "p75": 3.449,
+          "iqr": 0.7489999999999997,
+          "min": 2.7,
+          "max": 3.449,
+          "mad": 0.125
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 8.369,
+          "p25": 7.637,
+          "p75": 15.202,
+          "iqr": 7.565,
+          "min": 7.637,
+          "max": 15.202,
+          "mad": 0.7320000000000002
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1781,
+          "p25": 1778,
+          "p75": 1865,
+          "iqr": 87,
+          "min": 1778,
+          "max": 1865,
+          "mad": 3
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 216.91199999999904,
+          "p25": 207.09699999999955,
+          "p75": 245.93199999999896,
+          "iqr": 38.83499999999941,
+          "min": 207.09699999999955,
+          "max": 245.93199999999896,
+          "mad": 9.814999999999486
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.43,
+          "p25": 0.254,
+          "p75": 0.521,
+          "iqr": 0.267,
+          "min": 0.254,
+          "max": 0.521,
+          "mad": 0.09100000000000003
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 0.695,
+          "p25": 0.615,
+          "p75": 0.884,
+          "iqr": 0.269,
+          "min": 0.615,
+          "max": 0.884,
+          "mad": 0.07999999999999996
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 8.352,
+          "p25": 7.624,
+          "p75": 10.667,
+          "iqr": 3.043,
+          "min": 7.624,
+          "max": 10.667,
+          "mad": 0.7280000000000006
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 970,
+          "p25": 965,
+          "p75": 970,
+          "iqr": 5,
+          "min": 965,
+          "max": 970,
+          "mad": 0
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 304.64899999999994,
+          "p25": 303.6439999999999,
+          "p75": 325.603,
+          "iqr": 21.959000000000117,
+          "min": 303.6439999999999,
+          "max": 325.603,
+          "mad": 1.0050000000000523
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2,
+          "p25": 1.974,
+          "p75": 2.125,
+          "iqr": 0.15100000000000002,
+          "min": 1.974,
+          "max": 2.125,
+          "mad": 0.026000000000000023
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.166,
+          "p25": 2.161,
+          "p75": 2.357,
+          "iqr": 0.19600000000000017,
+          "min": 2.161,
+          "max": 2.357,
+          "mad": 0.004999999999999893
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.608,
+          "p25": 2.436,
+          "p75": 2.624,
+          "iqr": 0.18800000000000017,
+          "min": 2.436,
+          "max": 2.624,
+          "mad": 0.016000000000000014
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 3610,
+          "p25": 3594,
+          "p75": 3623,
+          "iqr": 29,
+          "min": 3594,
+          "max": 3623,
+          "mad": 13
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 871.8909999999964,
+          "p25": 803.391999999997,
+          "p75": 936.6169999999998,
+          "iqr": 133.22500000000286,
+          "min": 803.391999999997,
+          "max": 936.6169999999998,
+          "mad": 64.72600000000341
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 1.042,
+          "p25": 0.603,
+          "p75": 1.415,
+          "iqr": 0.812,
+          "min": 0.603,
+          "max": 1.415,
+          "mad": 0.373
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.069,
+          "p25": 2.021,
+          "p75": 2.161,
+          "iqr": 0.14000000000000012,
+          "min": 2.021,
+          "max": 2.161,
+          "mad": 0.04800000000000004
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.608,
+          "p25": 2.466,
+          "p75": 3.685,
+          "iqr": 1.2189999999999999,
+          "min": 2.466,
+          "max": 3.685,
+          "mad": 0.1419999999999999
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 16509,
+          "p25": 16503,
+          "p75": 16576,
+          "iqr": 73,
+          "min": 16503,
+          "max": 16576,
+          "mad": 6
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 542.7429999999486,
+          "p25": 526.0719999999535,
+          "p75": 558.7129999999418,
+          "iqr": 32.64099999998825,
+          "min": 526.0719999999535,
+          "max": 558.7129999999418,
+          "mad": 15.969999999993206
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 0.131,
+          "p25": 0.128,
+          "p75": 0.136,
+          "iqr": 0.008000000000000007,
+          "min": 0.128,
+          "max": 0.136,
+          "mad": 0.0030000000000000027
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 0.189,
+          "p25": 0.184,
+          "p75": 0.194,
+          "iqr": 0.010000000000000009,
+          "min": 0.184,
+          "max": 0.194,
+          "mad": 0.0050000000000000044
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 0.549,
+          "p25": 0.537,
+          "p75": 0.577,
+          "iqr": 0.039999999999999925,
+          "min": 0.537,
+          "max": 0.577,
+          "mad": 0.01200000000000001
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 84921,
+          "p25": 84371,
+          "p75": 85698,
+          "iqr": 1327,
+          "min": 84371,
+          "max": 85698,
+          "mad": 550
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 12250.688000004635,
+          "p25": 12190.577000004841,
+          "p75": 13069.971000004864,
+          "iqr": 879.3940000000221,
+          "min": 12190.577000004841,
+          "max": 13069.971000004864,
+          "mad": 60.11099999979342
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 0.92,
+          "p25": 0.887,
+          "p75": 0.943,
+          "iqr": 0.05599999999999994,
+          "min": 0.887,
+          "max": 0.943,
+          "mad": 0.02299999999999991
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 2.523,
+          "p25": 2.511,
+          "p75": 2.574,
+          "iqr": 0.06299999999999972,
+          "min": 2.511,
+          "max": 2.574,
+          "mad": 0.01200000000000001
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 6.552,
+          "p25": 6.213,
+          "p75": 6.908,
+          "iqr": 0.6950000000000003,
+          "min": 6.213,
+          "max": 6.908,
+          "mad": 0.3389999999999995
+        }
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "gsap",
+      "width": 1920,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 47145,
+          "p25": 46404,
+          "p75": 48354,
+          "iqr": 1950,
+          "min": 46404,
+          "max": 48354,
+          "mad": 741
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6627.569000002123,
+          "p25": 6546.231000001886,
+          "p75": 6729.109000002427,
+          "iqr": 182.87800000054085,
+          "min": 6546.231000001886,
+          "max": 6729.109000002427,
+          "mad": 81.33800000023712
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.685,
+          "p25": 0.68,
+          "p75": 0.687,
+          "iqr": 0.007000000000000006,
+          "min": 0.68,
+          "max": 0.687,
+          "mad": 0.0020000000000000018
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.205,
+          "p25": 2.194,
+          "p75": 2.205,
+          "iqr": 0.01100000000000012,
+          "min": 2.194,
+          "max": 2.205,
+          "mad": 0
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 10.046,
+          "p25": 7.35,
+          "p75": 11.814,
+          "iqr": 4.464,
+          "min": 7.35,
+          "max": 11.814,
+          "mad": 1.7680000000000007
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1779,
+          "p25": 1777,
+          "p75": 1793,
+          "iqr": 16,
+          "min": 1777,
+          "max": 1793,
+          "mad": 2
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 177.2689999999999,
+          "p25": 176.57700000000028,
+          "p75": 179.6549999999996,
+          "iqr": 3.077999999999321,
+          "min": 176.57700000000028,
+          "max": 179.6549999999996,
+          "mad": 0.6919999999996094
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.223,
+          "p25": 0.222,
+          "p75": 0.223,
+          "iqr": 0.0010000000000000009,
+          "min": 0.222,
+          "max": 0.223,
+          "mad": 0
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 0.458,
+          "p25": 0.422,
+          "p75": 0.466,
+          "iqr": 0.04400000000000004,
+          "min": 0.422,
+          "max": 0.466,
+          "mad": 0.008000000000000007
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 3.914,
+          "p25": 3.829,
+          "p75": 4.016,
+          "iqr": 0.18699999999999983,
+          "min": 3.829,
+          "max": 4.016,
+          "mad": 0.08499999999999996
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 965,
+          "p25": 964,
+          "p75": 968,
+          "iqr": 4,
+          "min": 964,
+          "max": 968,
+          "mad": 1
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 268.1779999999997,
+          "p25": 264.9669999999995,
+          "p75": 270.3379999999994,
+          "iqr": 5.370999999999924,
+          "min": 264.9669999999995,
+          "max": 270.3379999999994,
+          "mad": 2.159999999999684
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.022,
+          "p25": 2.013,
+          "p75": 2.046,
+          "iqr": 0.03299999999999992,
+          "min": 2.013,
+          "max": 2.046,
+          "mad": 0.008999999999999897
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.218,
+          "p25": 2.2,
+          "p75": 2.221,
+          "iqr": 0.020999999999999908,
+          "min": 2.2,
+          "max": 2.221,
+          "mad": 0.0030000000000001137
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.467,
+          "p25": 2.449,
+          "p75": 2.494,
+          "iqr": 0.04500000000000037,
+          "min": 2.449,
+          "max": 2.494,
+          "mad": 0.018000000000000238
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 3590,
+          "p25": 3574,
+          "p75": 3607,
+          "iqr": 33,
+          "min": 3574,
+          "max": 3607,
+          "mad": 16
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 665.0149999999957,
+          "p25": 660.8709999999982,
+          "p75": 685.5539999999944,
+          "iqr": 24.68299999999624,
+          "min": 660.8709999999982,
+          "max": 685.5539999999944,
+          "mad": 4.143999999997504
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.524,
+          "p25": 0.509,
+          "p75": 0.554,
+          "iqr": 0.04500000000000004,
+          "min": 0.509,
+          "max": 0.554,
+          "mad": 0.015000000000000013
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.1,
+          "p25": 2.064,
+          "p75": 2.101,
+          "iqr": 0.03699999999999992,
+          "min": 2.064,
+          "max": 2.101,
+          "mad": 0.0009999999999998899
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.467,
+          "p25": 2.449,
+          "p75": 2.494,
+          "iqr": 0.04500000000000037,
+          "min": 2.449,
+          "max": 2.494,
+          "mad": 0.018000000000000238
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 23488,
+          "p25": 23471,
+          "p75": 23609,
+          "iqr": 138,
+          "min": 23471,
+          "max": 23609,
+          "mad": 17
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6346.96000000091,
+          "p25": 6342.726000000949,
+          "p75": 6371.078000001038,
+          "iqr": 28.352000000088992,
+          "min": 6342.726000000949,
+          "max": 6371.078000001038,
+          "mad": 4.23399999996127
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 1.427,
+          "p25": 1.421,
+          "p75": 1.432,
+          "iqr": 0.010999999999999899,
+          "min": 1.421,
+          "max": 1.432,
+          "mad": 0.004999999999999893
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 4.818,
+          "p25": 4.811,
+          "p75": 4.822,
+          "iqr": 0.01100000000000012,
+          "min": 4.811,
+          "max": 4.822,
+          "mad": 0.004000000000000448
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 8.6,
+          "p25": 8.452,
+          "p75": 8.745,
+          "iqr": 0.29299999999999926,
+          "min": 8.452,
+          "max": 8.745,
+          "mad": 0.14499999999999957
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 62830,
+          "p25": 62494,
+          "p75": 62977,
+          "iqr": 483,
+          "min": 62494,
+          "max": 62977,
+          "mad": 147
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 21549.81500000213,
+          "p25": 21507.01600000224,
+          "p75": 21658.581000001686,
+          "iqr": 151.56499999944572,
+          "min": 21507.01600000224,
+          "max": 21658.581000001686,
+          "mad": 42.79899999988993
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 4.681,
+          "p25": 4.67,
+          "p75": 4.694,
+          "iqr": 0.02400000000000002,
+          "min": 4.67,
+          "max": 4.694,
+          "mad": 0.01100000000000012
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 5.038,
+          "p25": 4.998,
+          "p75": 5.116,
+          "iqr": 0.11799999999999944,
+          "min": 4.998,
+          "max": 5.116,
+          "mad": 0.040000000000000036
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 5.595,
+          "p25": 5.573,
+          "p75": 5.686,
+          "iqr": 0.11299999999999955,
+          "min": 5.573,
+          "max": 5.686,
+          "mad": 0.021999999999999353
+        }
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "gsap",
+      "width": 3840,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 40150,
+          "p25": 33149,
+          "p75": 40228,
+          "iqr": 7079,
+          "min": 33149,
+          "max": 40228,
+          "mad": 78
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6601.9470000021865,
+          "p25": 6342.603000001765,
+          "p75": 7212.448000001369,
+          "iqr": 869.8449999996037,
+          "min": 6342.603000001765,
+          "max": 7212.448000001369,
+          "mad": 259.34400000042115
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.682,
+          "p25": 0.678,
+          "p75": 0.78,
+          "iqr": 0.10199999999999998,
+          "min": 0.678,
+          "max": 0.78,
+          "mad": 0.0040000000000000036
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.396,
+          "p25": 2.36,
+          "p75": 3.828,
+          "iqr": 1.468,
+          "min": 2.36,
+          "max": 3.828,
+          "mad": 0.03600000000000003
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 20.2,
+          "p25": 19.762,
+          "p75": 22.355,
+          "iqr": 2.593,
+          "min": 19.762,
+          "max": 22.355,
+          "mad": 0.43799999999999883
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1345,
+          "p25": 1341,
+          "p75": 1443,
+          "iqr": 102,
+          "min": 1341,
+          "max": 1443,
+          "mad": 4
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 156.14200000000014,
+          "p25": 153.33299999999994,
+          "p75": 156.44499999999965,
+          "iqr": 3.1119999999997106,
+          "min": 153.33299999999994,
+          "max": 156.44499999999965,
+          "mad": 0.3029999999995141
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.244,
+          "p25": 0.242,
+          "p75": 0.25,
+          "iqr": 0.008000000000000007,
+          "min": 0.242,
+          "max": 0.25,
+          "mad": 0.0020000000000000018
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 2.59,
+          "p25": 2.584,
+          "p75": 2.779,
+          "iqr": 0.19499999999999984,
+          "min": 2.584,
+          "max": 2.779,
+          "mad": 0.005999999999999783
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 3.99,
+          "p25": 3.807,
+          "p75": 4.026,
+          "iqr": 0.21899999999999986,
+          "min": 3.807,
+          "max": 4.026,
+          "mad": 0.03599999999999959
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 715,
+          "p25": 707,
+          "p75": 727,
+          "iqr": 20,
+          "min": 707,
+          "max": 727,
+          "mad": 8
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 216.0599999999997,
+          "p25": 210.53100000000006,
+          "p75": 216.81399999999994,
+          "iqr": 6.282999999999873,
+          "min": 210.53100000000006,
+          "max": 216.81399999999994,
+          "mad": 0.7540000000002465
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.139,
+          "p25": 2.072,
+          "p75": 2.182,
+          "iqr": 0.10999999999999988,
+          "min": 2.072,
+          "max": 2.182,
+          "mad": 0.04300000000000015
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.28,
+          "p25": 2.258,
+          "p75": 2.347,
+          "iqr": 0.08899999999999997,
+          "min": 2.258,
+          "max": 2.347,
+          "mad": 0.021999999999999797
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.451,
+          "p25": 2.375,
+          "p75": 2.556,
+          "iqr": 0.18100000000000005,
+          "min": 2.375,
+          "max": 2.556,
+          "mad": 0.07600000000000007
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 2713,
+          "p25": 2661,
+          "p75": 2714,
+          "iqr": 53,
+          "min": 2661,
+          "max": 2714,
+          "mad": 1
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 521.0419999999973,
+          "p25": 514.6979999999996,
+          "p75": 521.2329999999992,
+          "iqr": 6.534999999999513,
+          "min": 514.6979999999996,
+          "max": 521.2329999999992,
+          "mad": 0.1910000000018499
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.553,
+          "p25": 0.553,
+          "p75": 0.557,
+          "iqr": 0.0040000000000000036,
+          "min": 0.553,
+          "max": 0.557,
+          "mad": 0
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.166,
+          "p25": 2.118,
+          "p75": 2.219,
+          "iqr": 0.10099999999999998,
+          "min": 2.118,
+          "max": 2.219,
+          "mad": 0.04800000000000004
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.451,
+          "p25": 2.375,
+          "p75": 2.556,
+          "iqr": 0.18100000000000005,
+          "min": 2.375,
+          "max": 2.556,
+          "mad": 0.07600000000000007
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 25103,
+          "p25": 24731,
+          "p75": 25145,
+          "iqr": 414,
+          "min": 24731,
+          "max": 25145,
+          "mad": 42
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 9663.850000001408,
+          "p25": 9640.608000001435,
+          "p75": 9665.758000001431,
+          "iqr": 25.149999999995998,
+          "min": 9640.608000001435,
+          "max": 9665.758000001431,
+          "mad": 1.908000000023094
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 2.258,
+          "p25": 2.219,
+          "p75": 2.284,
+          "iqr": 0.06499999999999995,
+          "min": 2.219,
+          "max": 2.284,
+          "mad": 0.0259999999999998
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 5.01,
+          "p25": 4.991,
+          "p75": 5.023,
+          "iqr": 0.03200000000000003,
+          "min": 4.991,
+          "max": 5.023,
+          "mad": 0.0129999999999999
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 5.592,
+          "p25": 5.572,
+          "p75": 13.586,
+          "iqr": 8.014,
+          "min": 5.572,
+          "max": 13.586,
+          "mad": 0.019999999999999574
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 73447,
+          "p25": 72935,
+          "p75": 74285,
+          "iqr": 1350,
+          "min": 72935,
+          "max": 74285,
+          "mad": 512
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 67912.52199998852,
+          "p25": 66843.49099998895,
+          "p75": 69119.07399998797,
+          "iqr": 2275.5829999990237,
+          "min": 66843.49099998895,
+          "max": 69119.07399998797,
+          "mad": 1069.0309999995661
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 0.675,
+          "p25": 0.669,
+          "p75": 0.697,
+          "iqr": 0.027999999999999914,
+          "min": 0.669,
+          "max": 0.697,
+          "mad": 0.006000000000000005
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 19.859,
+          "p25": 19.835,
+          "p75": 20.047,
+          "iqr": 0.21199999999999974,
+          "min": 19.835,
+          "max": 20.047,
+          "mad": 0.02400000000000091
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 21.3,
+          "p25": 20.876,
+          "p75": 21.52,
+          "iqr": 0.6439999999999984,
+          "min": 20.876,
+          "max": 21.52,
+          "mad": 0.21999999999999886
+        }
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "legacy",
+      "width": 1920,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 47693,
+          "p25": 47471,
+          "p75": 51752,
+          "iqr": 4281,
+          "min": 47471,
+          "max": 51752,
+          "mad": 222
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6660.971000003259,
+          "p25": 6499.047000001948,
+          "p75": 6682.151000001884,
+          "iqr": 183.1039999999366,
+          "min": 6499.047000001948,
+          "max": 6682.151000001884,
+          "mad": 21.179999998625135
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.677,
+          "p25": 0.661,
+          "p75": 0.686,
+          "iqr": 0.025000000000000022,
+          "min": 0.661,
+          "max": 0.686,
+          "mad": 0.009000000000000008
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.165,
+          "p25": 2.155,
+          "p75": 2.207,
+          "iqr": 0.052000000000000046,
+          "min": 2.155,
+          "max": 2.207,
+          "mad": 0.010000000000000231
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 13.649,
+          "p25": 5.277,
+          "p75": 25.527,
+          "iqr": 20.25,
+          "min": 5.277,
+          "max": 25.527,
+          "mad": 8.372
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1808,
+          "p25": 1789,
+          "p75": 1833,
+          "iqr": 44,
+          "min": 1789,
+          "max": 1833,
+          "mad": 19
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 176.24699999999976,
+          "p25": 173.16799999999952,
+          "p75": 179.01100000000025,
+          "iqr": 5.843000000000728,
+          "min": 173.16799999999952,
+          "max": 179.01100000000025,
+          "mad": 2.764000000000493
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.209,
+          "p25": 0.208,
+          "p75": 0.211,
+          "iqr": 0.0030000000000000027,
+          "min": 0.208,
+          "max": 0.211,
+          "mad": 0.0010000000000000009
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 0.401,
+          "p25": 0.394,
+          "p75": 0.411,
+          "iqr": 0.01699999999999996,
+          "min": 0.394,
+          "max": 0.411,
+          "mad": 0.007000000000000006
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 4.21,
+          "p25": 4.134,
+          "p75": 7.085,
+          "iqr": 2.9509999999999996,
+          "min": 4.134,
+          "max": 7.085,
+          "mad": 0.07599999999999962
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 966,
+          "p25": 964,
+          "p75": 970,
+          "iqr": 6,
+          "min": 964,
+          "max": 970,
+          "mad": 2
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 266.32699999999966,
+          "p25": 264.8449999999995,
+          "p75": 273.0599999999992,
+          "iqr": 8.21499999999969,
+          "min": 264.8449999999995,
+          "max": 273.0599999999992,
+          "mad": 1.4820000000001414
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.004,
+          "p25": 1.998,
+          "p75": 2.086,
+          "iqr": 0.08799999999999986,
+          "min": 1.998,
+          "max": 2.086,
+          "mad": 0.006000000000000005
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.222,
+          "p25": 2.199,
+          "p75": 2.333,
+          "iqr": 0.13400000000000034,
+          "min": 2.199,
+          "max": 2.333,
+          "mad": 0.02300000000000013
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.377,
+          "p25": 2.301,
+          "p75": 2.465,
+          "iqr": 0.1639999999999997,
+          "min": 2.301,
+          "max": 2.465,
+          "mad": 0.07599999999999962
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 3596,
+          "p25": 3593,
+          "p75": 3601,
+          "iqr": 8,
+          "min": 3593,
+          "max": 3601,
+          "mad": 3
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 665.2519999999976,
+          "p25": 664.350999999996,
+          "p75": 674.8649999999972,
+          "iqr": 10.514000000001147,
+          "min": 664.350999999996,
+          "max": 674.8649999999972,
+          "mad": 0.9010000000015452
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.528,
+          "p25": 0.525,
+          "p75": 0.53,
+          "iqr": 0.0050000000000000044,
+          "min": 0.525,
+          "max": 0.53,
+          "mad": 0.0020000000000000018
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.061,
+          "p25": 2.035,
+          "p75": 2.152,
+          "iqr": 0.11699999999999999,
+          "min": 2.035,
+          "max": 2.152,
+          "mad": 0.0259999999999998
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.377,
+          "p25": 2.301,
+          "p75": 2.465,
+          "iqr": 0.1639999999999997,
+          "min": 2.301,
+          "max": 2.465,
+          "mad": 0.07599999999999962
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 23493,
+          "p25": 23365,
+          "p75": 23710,
+          "iqr": 345,
+          "min": 23365,
+          "max": 23710,
+          "mad": 128
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 6326.0170000009575,
+          "p25": 6319.057000001005,
+          "p75": 6388.210000001016,
+          "iqr": 69.15300000001116,
+          "min": 6319.057000001005,
+          "max": 6388.210000001016,
+          "mad": 6.959999999952743
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 1.421,
+          "p25": 1.407,
+          "p75": 1.435,
+          "iqr": 0.028000000000000025,
+          "min": 1.407,
+          "max": 1.435,
+          "mad": 0.014000000000000012
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 4.797,
+          "p25": 4.794,
+          "p75": 4.801,
+          "iqr": 0.007000000000000561,
+          "min": 4.794,
+          "max": 4.801,
+          "mad": 0.0030000000000001137
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 8.607,
+          "p25": 8.446,
+          "p75": 8.777,
+          "iqr": 0.3309999999999995,
+          "min": 8.446,
+          "max": 8.777,
+          "mad": 0.1609999999999996
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 62665,
+          "p25": 62501,
+          "p75": 64368,
+          "iqr": 1867,
+          "min": 62501,
+          "max": 64368,
+          "mad": 164
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 21589.506000001416,
+          "p25": 21416.332000001992,
+          "p75": 21593.43900000201,
+          "iqr": 177.10700000001816,
+          "min": 21416.332000001992,
+          "max": 21593.43900000201,
+          "mad": 3.9330000005938928
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 4.677,
+          "p25": 4.645,
+          "p75": 4.695,
+          "iqr": 0.05000000000000071,
+          "min": 4.645,
+          "max": 4.695,
+          "mad": 0.018000000000000682
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 5.038,
+          "p25": 4.993,
+          "p75": 5.075,
+          "iqr": 0.08199999999999985,
+          "min": 4.993,
+          "max": 5.075,
+          "mad": 0.03699999999999992
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 5.518,
+          "p25": 5.464,
+          "p75": 5.659,
+          "iqr": 0.1949999999999994,
+          "min": 5.464,
+          "max": 5.659,
+          "mad": 0.05399999999999938
+        }
+      }
+    },
+    {
+      "backend": "headed-swiftshader",
+      "engine": "legacy",
+      "width": 3840,
+      "repetitions": 3,
+      "metrics": {
+        "rendererMain.count": {
+          "count": 3,
+          "median": 36229,
+          "p25": 29656,
+          "p75": 36242,
+          "iqr": 6586,
+          "min": 29656,
+          "max": 36242,
+          "mad": 13
+        },
+        "rendererMain.inclusiveTotalMs": {
+          "count": 3,
+          "median": 7475.519000001641,
+          "p25": 7469.4240000017635,
+          "p75": 7662.844000001007,
+          "iqr": 193.41999999924337,
+          "min": 7469.4240000017635,
+          "max": 7662.844000001007,
+          "mad": 6.094999999877473
+        },
+        "rendererMain.p95Ms": {
+          "count": 3,
+          "median": 0.773,
+          "p25": 0.751,
+          "p75": 0.931,
+          "iqr": 0.18000000000000005,
+          "min": 0.751,
+          "max": 0.931,
+          "mad": 0.02200000000000002
+        },
+        "rendererMain.p99Ms": {
+          "count": 3,
+          "median": 2.552,
+          "p25": 2.522,
+          "p75": 3.619,
+          "iqr": 1.0970000000000004,
+          "min": 2.522,
+          "max": 3.619,
+          "mad": 0.03000000000000025
+        },
+        "rendererMain.maxMs": {
+          "count": 3,
+          "median": 36.804,
+          "p25": 21.959,
+          "p75": 39.392,
+          "iqr": 17.433000000000003,
+          "min": 21.959,
+          "max": 39.392,
+          "mad": 2.588000000000001
+        },
+        "scriptAnimation.count": {
+          "count": 3,
+          "median": 1058,
+          "p25": 1018,
+          "p75": 1074,
+          "iqr": 56,
+          "min": 1018,
+          "max": 1074,
+          "mad": 16
+        },
+        "scriptAnimation.inclusiveTotalMs": {
+          "count": 3,
+          "median": 149.21399999999994,
+          "p25": 146.28900000000013,
+          "p75": 150.16699999999997,
+          "iqr": 3.877999999999844,
+          "min": 146.28900000000013,
+          "max": 150.16699999999997,
+          "mad": 0.9530000000000314
+        },
+        "scriptAnimation.p95Ms": {
+          "count": 3,
+          "median": 0.234,
+          "p25": 0.229,
+          "p75": 0.241,
+          "iqr": 0.011999999999999983,
+          "min": 0.229,
+          "max": 0.241,
+          "mad": 0.0050000000000000044
+        },
+        "scriptAnimation.p99Ms": {
+          "count": 3,
+          "median": 2.833,
+          "p25": 2.813,
+          "p75": 2.857,
+          "iqr": 0.04400000000000004,
+          "min": 2.813,
+          "max": 2.857,
+          "mad": 0.020000000000000018
+        },
+        "scriptAnimation.maxMs": {
+          "count": 3,
+          "median": 3.917,
+          "p25": 3.605,
+          "p75": 4.182,
+          "iqr": 0.5770000000000004,
+          "min": 3.605,
+          "max": 4.182,
+          "mad": 0.26500000000000057
+        },
+        "layoutStyle.count": {
+          "count": 3,
+          "median": 776,
+          "p25": 771,
+          "p75": 784,
+          "iqr": 13,
+          "min": 771,
+          "max": 784,
+          "mad": 5
+        },
+        "layoutStyle.inclusiveTotalMs": {
+          "count": 3,
+          "median": 229.77299999999977,
+          "p25": 226.14399999999978,
+          "p75": 231.01699999999985,
+          "iqr": 4.873000000000076,
+          "min": 226.14399999999978,
+          "max": 231.01699999999985,
+          "mad": 1.244000000000085
+        },
+        "layoutStyle.p95Ms": {
+          "count": 3,
+          "median": 2.164,
+          "p25": 2.158,
+          "p75": 2.183,
+          "iqr": 0.02499999999999991,
+          "min": 2.158,
+          "max": 2.183,
+          "mad": 0.006000000000000227
+        },
+        "layoutStyle.p99Ms": {
+          "count": 3,
+          "median": 2.385,
+          "p25": 2.273,
+          "p75": 2.465,
+          "iqr": 0.19199999999999973,
+          "min": 2.273,
+          "max": 2.465,
+          "mad": 0.08000000000000007
+        },
+        "layoutStyle.maxMs": {
+          "count": 3,
+          "median": 2.562,
+          "p25": 2.529,
+          "p75": 3.535,
+          "iqr": 1.0060000000000002,
+          "min": 2.529,
+          "max": 3.535,
+          "mad": 0.03299999999999992
+        },
+        "paint.count": {
+          "count": 3,
+          "median": 2729,
+          "p25": 2701,
+          "p75": 2749,
+          "iqr": 48,
+          "min": 2701,
+          "max": 2749,
+          "mad": 20
+        },
+        "paint.inclusiveTotalMs": {
+          "count": 3,
+          "median": 560.2189999999989,
+          "p25": 554.6820000000001,
+          "p75": 561.0839999999985,
+          "iqr": 6.401999999998338,
+          "min": 554.6820000000001,
+          "max": 561.0839999999985,
+          "mad": 0.8649999999995543
+        },
+        "paint.p95Ms": {
+          "count": 3,
+          "median": 0.559,
+          "p25": 0.552,
+          "p75": 0.564,
+          "iqr": 0.0119999999999999,
+          "min": 0.552,
+          "max": 0.564,
+          "mad": 0.004999999999999893
+        },
+        "paint.p99Ms": {
+          "count": 3,
+          "median": 2.229,
+          "p25": 2.172,
+          "p75": 2.233,
+          "iqr": 0.06099999999999994,
+          "min": 2.172,
+          "max": 2.233,
+          "mad": 0.0040000000000000036
+        },
+        "paint.maxMs": {
+          "count": 3,
+          "median": 2.562,
+          "p25": 2.529,
+          "p75": 3.535,
+          "iqr": 1.0060000000000002,
+          "min": 2.529,
+          "max": 3.535,
+          "mad": 0.03299999999999992
+        },
+        "compositeRaster.count": {
+          "count": 3,
+          "median": 25909,
+          "p25": 25673,
+          "p75": 25937,
+          "iqr": 264,
+          "min": 25673,
+          "max": 25937,
+          "mad": 28
+        },
+        "compositeRaster.inclusiveTotalMs": {
+          "count": 3,
+          "median": 10183.976000001538,
+          "p25": 10161.203000001518,
+          "p75": 10234.151000001568,
+          "iqr": 72.94800000004943,
+          "min": 10161.203000001518,
+          "max": 10234.151000001568,
+          "mad": 22.773000000019238
+        },
+        "compositeRaster.p95Ms": {
+          "count": 3,
+          "median": 2.27,
+          "p25": 2.243,
+          "p75": 2.297,
+          "iqr": 0.05400000000000027,
+          "min": 2.243,
+          "max": 2.297,
+          "mad": 0.027000000000000135
+        },
+        "compositeRaster.p99Ms": {
+          "count": 3,
+          "median": 4.997,
+          "p25": 4.996,
+          "p75": 5,
+          "iqr": 0.0039999999999995595,
+          "min": 4.996,
+          "max": 5,
+          "mad": 0.0009999999999994458
+        },
+        "compositeRaster.maxMs": {
+          "count": 3,
+          "median": 5.569,
+          "p25": 5.554,
+          "p75": 17.225,
+          "iqr": 11.671000000000001,
+          "min": 5.554,
+          "max": 17.225,
+          "mad": 0.01499999999999968
+        },
+        "gpuProcess.count": {
+          "count": 3,
+          "median": 77040,
+          "p25": 76983,
+          "p75": 78093,
+          "iqr": 1110,
+          "min": 76983,
+          "max": 78093,
+          "mad": 57
+        },
+        "gpuProcess.inclusiveTotalMs": {
+          "count": 3,
+          "median": 76410.83399998864,
+          "p25": 75524.59799998725,
+          "p75": 77094.96199998651,
+          "iqr": 1570.3639999992592,
+          "min": 75524.59799998725,
+          "max": 77094.96199998651,
+          "mad": 684.1279999978724
+        },
+        "gpuProcess.p95Ms": {
+          "count": 3,
+          "median": 0.881,
+          "p25": 0.874,
+          "p75": 0.894,
+          "iqr": 0.020000000000000018,
+          "min": 0.874,
+          "max": 0.894,
+          "mad": 0.007000000000000006
+        },
+        "gpuProcess.p99Ms": {
+          "count": 3,
+          "median": 19.982,
+          "p25": 19.907,
+          "p75": 20.118,
+          "iqr": 0.21099999999999852,
+          "min": 19.907,
+          "max": 20.118,
+          "mad": 0.07499999999999929
+        },
+        "gpuProcess.maxMs": {
+          "count": 3,
+          "median": 21.025,
+          "p25": 20.799,
+          "p75": 21.89,
+          "iqr": 1.091000000000001,
+          "min": 20.799,
+          "max": 21.89,
+          "mad": 0.2259999999999991
+        }
+      }
+    }
+  ],
+  "caveat": "Trace phase is separate from formal timing; inclusive event durations are non-additive."
+}

@@ -1,0 +1,317 @@
+{
+  "generatedAt": "2026-10-20T00:04:31.122Z",
+  "rawFiles": [
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/frequency-shared60/report.json",
+      "kind": "frequency-report",
+      "bytes": 123937,
+      "sha256": "4e36270c0ce8f519234fe445bcb47c66bcacd691005dbd949e3007ae9ed6bad4"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/frequency-native/report.json",
+      "kind": "frequency-report",
+      "bytes": 123684,
+      "sha256": "dd1a616efaaec52da8749b718cb8cc123b84cceee2cd7d75bfb8b9d323b757cf"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/strategy-candidate60/report.json",
+      "kind": "strategy-report",
+      "bytes": 603797,
+      "sha256": "467c55957934ff75c15771119549a553ebde622840ac0f99155219d55b2bf0ca"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-1920-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9084815,
+      "sha256": "bf93aabfe65083f09c7f04d285e2e66bd972f341ec1270f7baefce6574721d21"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-1920-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9057759,
+      "sha256": "ec7f78ded585e83b3b8ea331a3a7e0431a7a245a33f029f96cae6b976f470dd7"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-1920-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9138139,
+      "sha256": "a43893b493b9668079b10d86f2ed68b8bc3b7a7adf5d159ddc4de125d01cca42"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-3840-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 4445784,
+      "sha256": "7a094f3692c31ee5ff2720a3fdcd9205ba748bf87feeacf33e2b26b9fb772cc6"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-3840-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 4543287,
+      "sha256": "62a3a24c18cc75f37aeccbc2c7fe5af3fbabf5ab8060a879ae47ff88f5ac2e9a"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/gsap-3840-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 4507499,
+      "sha256": "cfcb56c77a9bd6b76a9e305bcfa3ee832e21d39c08ccb4b8579ddb10bfa46400"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-1920-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9559137,
+      "sha256": "8beb5e722a1aecc80506235820c7b10f917bc5b5395cefc20fc810dbd174b28a"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-1920-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9583588,
+      "sha256": "07e5176b25168aa1b230cba84197a57415d235b77c199442e5e5aaf546675c28"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-1920-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9655007,
+      "sha256": "c768b0ce38a221b4d6f73eba19b7925fe1c36754221748c0e646d1047f678026"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-3840-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 4583064,
+      "sha256": "33a0d248d6b8ceacdfa1a2be08142655f5409975f596a5b055723ea77946cf81"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-3840-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 4550394,
+      "sha256": "3b51e99ea1b2122afeb697ffe8787ddd9f8eebcdda84ebfbfb202fa850e65db2"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/trace-shared60/legacy-3840-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 4536557,
+      "sha256": "25d218ca7d51ba6f85cd370de201c5c875ace9c79c3f56d20400a78089e35c8a"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/frequency-shared60/report.json",
+      "kind": "frequency-report",
+      "bytes": 120725,
+      "sha256": "27581dd5ee9d506139954c53aee1297aa29d7880003381f3468fe5b518105d1e"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/frequency-native/report.json",
+      "kind": "frequency-report",
+      "bytes": 121109,
+      "sha256": "4732d4b65a1b27e4106638dda80518bd54464405c55ceaaa9ea770bcabbb7355"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/strategy-candidate60/report.json",
+      "kind": "strategy-report",
+      "bytes": 563087,
+      "sha256": "3b3b7ff50bf2f647cbdc4986b8055f6105f3c99ec650a38eb19653f4cc3f609d"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/gsap-1920-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9352268,
+      "sha256": "9d77647196aaceaa2dc57b332634c52c9c15dd9314866dac2626abe01c9dd56d"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/gsap-1920-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9500474,
+      "sha256": "249f110417ec44f674522d1f2aac3ef6a5ed0b256055c5d8a893e6cad736a166"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/gsap-1920-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9300279,
+      "sha256": "604724d1253d743f79e158ee50f64ec770ebdec073426ecefcd699dbbf067d23"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/gsap-3840-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9460642,
+      "sha256": "e13bb871b030b8c574809c8e99ad50655179a6cb8843bd85c92bb8dc6bd0ff98"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/gsap-3840-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9451484,
+      "sha256": "ad91ac62a331c997091aaef25fc38b2af0a7cbef170017b96781cb089748d5bb"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/gsap-3840-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9417690,
+      "sha256": "3fafdf823bf5fd26f965862c846c602814a296bd17a60fcf41b3f52a9c53c0f4"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/legacy-1920-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9488611,
+      "sha256": "76dcc99cd37f0cf145355e03c9cc7151f4268e24cabccde3df14a1f01915808c"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/legacy-1920-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9197672,
+      "sha256": "bb0b10a100db242984d7754ff9d7b3d05344a97c58df2f6f92566ed5a97f9f21"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/legacy-1920-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9252271,
+      "sha256": "e00f3f72f3ae318c8a6ade91fcdd04df5d9951148d34012dfe4848ab9d598acf"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/legacy-3840-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9426760,
+      "sha256": "5a180c1bd2f0661e5d3324a2fd00fc5c4611462cca5f61041b1191307cc290e8"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/legacy-3840-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9539694,
+      "sha256": "5ab58ea1dd2c8e486e83e05da9defd283b30a5572f0e8083f2c4f7d7a475372e"
+    },
+    {
+      "path": ".review/p1-5-b/headed-metal/trace-shared60/legacy-3840-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9482688,
+      "sha256": "a95e7e72401c47d45166f627c1d800b435fd54b7fd4af91e976f16a45fe1cc62"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/frequency-shared60/report.json",
+      "kind": "frequency-report",
+      "bytes": 121381,
+      "sha256": "bbc4906b870a49bd3620f8b76a368a9bec652951ddb19e0f9cb3e16d3bf05511"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/frequency-native/report.json",
+      "kind": "frequency-report",
+      "bytes": 121370,
+      "sha256": "4cc936d7faaf8f6563af2facd5f693286df93966f50f30d965b9740d3111c82b"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/strategy-candidate60/report.json",
+      "kind": "strategy-report",
+      "bytes": 564166,
+      "sha256": "af1461a0e45f273990117cfae8ef0744547f02fa054238d9f94e9ff61f440716"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-1920-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 10011406,
+      "sha256": "936d0fdb3f963697daaa8bb78808aa47b88afdbfc13a39ed351a0d44574b7c2e"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-1920-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9876086,
+      "sha256": "ad616d30c1b6c43c7df6a3d45cd6c96886a3258c97e3c65864e472703226be1b"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-1920-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9918346,
+      "sha256": "d851406431a905b6b8282e6672363cb97f82625762d0f1bdd146516536e7e5d3"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-3840-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9900501,
+      "sha256": "cf8e08d11c3d847d97d050d0872181f6d249368eba73d21be9ce307e158cd052"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-3840-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9891406,
+      "sha256": "b9208ede56a1dfaabdb0602b93c5119d7de193a08caa2752889b1b3c6f0279cd"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/gsap-3840-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9708199,
+      "sha256": "4fefc7661a24df604d9cdb040af6dee784cb95b82ff213960a4de0669a477e0a"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-1920-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 10030701,
+      "sha256": "c1721becdffd4fef71b4df7c9f2c2cc8ac8bd4d4603d918099b807647b118e87"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-1920-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9979449,
+      "sha256": "a971dd10953f47fdeb8b78bfba73d2a413ba921e545a4e53061bb41dcfa78bbe"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-1920-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 9928483,
+      "sha256": "e379eeab2b0fd886dc500986f2396f90e7575db71013116ff4f970a153a76d02"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-3840-r1.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 10201633,
+      "sha256": "57c9178356fc4c8a5bc398b7f4d532649e47b0268f9a729298a8b305a850aff3"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-3840-r2.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 10194004,
+      "sha256": "2a6e5e93c5d3a9f677d527061157df4061b59e5039852965babaa09edb0e68c5"
+    },
+    {
+      "path": ".review/p1-5-b/headed-swiftshader/trace-shared60/legacy-3840-r3.trace.json.gz",
+      "kind": "raw-trace",
+      "bytes": 10032946,
+      "sha256": "3cc9f76f341799f8daa861d595eff2c2073a9b917c692d65bdcc63c0a05e1a6e"
+    },
+    {
+      "path": ".review/p1-5-b/headless-swiftshader/long-candidate60/report.json",
+      "kind": "long-report",
+      "bytes": 1711945,
+      "sha256": "8425cb6de42d1d3a52f9a668c2df185c95d563f66b6a047b8e40d29543ee3604"
+    },
+    {
+      "path": ".review/p1-5-b/e2e-results.json",
+      "kind": "test-result",
+      "bytes": 5272,
+      "sha256": "f37cf7fa0c778395b40bd240e8ea140003da1f730497e3dd90518273e75c229e"
+    },
+    {
+      "path": ".review/gsap-poc/p1-5-b-functional-results.json",
+      "kind": "test-result",
+      "bytes": 14866,
+      "sha256": "63657e133fb162b92a6a069fdaf6a914bd4cb47a1786de97be0154356dcfa405"
+    },
+    {
+      "path": ".review/gsap-poc/p1-5-b-functional-rerun.json",
+      "kind": "test-result",
+      "bytes": 3267,
+      "sha256": "0c78f6258576b534075512d69751413b42a0f584b136abc0fa0cff8d7b1fb2b3"
+    },
+    {
+      "path": ".review/gsap-poc/p1-5-b-functional-final.json",
+      "kind": "test-result",
+      "bytes": 10584,
+      "sha256": "0f06731d78f3ab89470582a33a12c7d70976f28715f95c70132b56952952e35c"
+    },
+    {
+      "path": ".review/gsap-poc/p1-5-b-legacy-regression.json",
+      "kind": "test-result",
+      "bytes": 67167,
+      "sha256": "ceb0bb1320feae68d3eb7ec9185ebd4317bb0482331ca11eff6a2662bc906da8"
+    },
+    {
+      "path": ".review/gsap-poc/p1-5-b-gsap-regression.json",
+      "kind": "test-result",
+      "bytes": 67160,
+      "sha256": "cf75d9f12d2be80403ad8ed1ec3c20f23f39812b410e2f168f6fcff832aef384"
+    }
+  ]
+}
