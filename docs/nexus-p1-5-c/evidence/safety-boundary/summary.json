@@ -1,0 +1,303 @@
+{
+  "baseline": "b3d5c1133e5809e272529d5b2c6cff8595f1d3d6",
+  "branch": "codex/nexus-p1-5-c-safety-boundary",
+  "unit": {
+    "files": 53,
+    "total": 686,
+    "passed": 686,
+    "failed": 0
+  },
+  "browser": [
+    {
+      "name": "network",
+      "path": ".review/p1-5-c-safety/boundary-final-production-results.json",
+      "sha256": "f51591dd633d4e03d877297fd0ccb88fb353f31eb2d012ab30d712feb6365d82",
+      "stats": {
+        "startTime": "2026-10-20T07:46:28.275Z",
+        "duration": 3297.1899999999996,
+        "expected": 28,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "integration",
+      "path": ".review/p1-5-c/safety-integration-results.json",
+      "sha256": "325af9047a07ca0f8fd64cf3585d019c330406a7fe6c8fe9f28d68f2c69ad0cb",
+      "stats": {
+        "startTime": "2026-10-20T07:28:04.179Z",
+        "duration": 99723.70999999999,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "denied",
+      "path": ".review/p1-5-c/safety-denied-results.json",
+      "sha256": "e122a4fc95a8a4e2ce5813aa5ed1993a7f2d259830cc1e57b894273877be8b8e",
+      "stats": {
+        "startTime": "2026-10-20T07:29:44.419Z",
+        "duration": 2573.0879999999997,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "historical",
+      "path": ".review/p1-5-b/e2e-results.json",
+      "sha256": "99aa8e1bf6435c7938b0d960b0dddd7b91ef1b9add9c5f1e18c4d543c28fc639",
+      "stats": {
+        "startTime": "2026-10-20T07:29:47.546Z",
+        "duration": 2445.7599999999998,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "poc",
+      "path": ".review/gsap-poc/safety-poc.json",
+      "sha256": "3ac541bc38adb0663eb678e29918c4e10a01d3f1deae9fed7229b6fcdcf764c1",
+      "stats": {
+        "startTime": "2026-10-20T07:29:50.559Z",
+        "duration": 96929.66399999999,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "legacy",
+      "path": ".review/gsap-poc/safety-legacy.json",
+      "sha256": "410c9438a094f79da36504f0213733535bdb94d8b604eb04e690bbf0d9d38f4b",
+      "stats": {
+        "startTime": "2026-10-20T07:31:28.000Z",
+        "duration": 342841.855,
+        "expected": 63,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "gsap",
+      "path": ".review/gsap-poc/safety-gsap.json",
+      "sha256": "f164aecb366c55fddcb4848111a3c60bc2b6d0f8c9424b5f64e2f0e6fb2d6952",
+      "stats": {
+        "startTime": "2026-10-20T07:37:11.341Z",
+        "duration": 340897.93200000003,
+        "expected": 63,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    }
+  ],
+  "resumeAudit": {
+    "cycles": 30,
+    "immediateZeroRaf": 12,
+    "settledSingleRaf": 30,
+    "listenerGrowthMin": 45,
+    "listenerGrowthMax": 60
+  },
+  "execution": {
+    "regressions": [
+      {
+        "name": "integration",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "playwright",
+          "test",
+          "-c",
+          "e2e/p1-5-c.config.ts"
+        ],
+        "environment": {
+          "NEXUS_QUALITY_PERMISSION": "local-candidate",
+          "P15C_E2E_LABEL": "safety-integration"
+        }
+      },
+      {
+        "name": "denied",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "playwright",
+          "test",
+          "-c",
+          "e2e/p1-5-c.config.ts",
+          "--grep",
+          "server permission"
+        ],
+        "environment": {
+          "NEXUS_QUALITY_PERMISSION": "denied",
+          "P15C_E2E_LABEL": "safety-denied"
+        }
+      },
+      {
+        "name": "historical",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "playwright",
+          "test",
+          "-c",
+          "e2e/p1-5-b.config.ts"
+        ],
+        "environment": {}
+      },
+      {
+        "name": "poc",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "playwright",
+          "test",
+          "-c",
+          "e2e/gsap-poc.config.ts"
+        ],
+        "environment": {
+          "GSAP_RESULT_NAME": "safety-poc"
+        }
+      },
+      {
+        "name": "legacy",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "playwright",
+          "test",
+          "-c",
+          "e2e/gsap-poc.config.ts"
+        ],
+        "environment": {
+          "GSAP_REGRESSION": "1",
+          "NEXUS_MOTION_ENGINE": "legacy",
+          "GSAP_RESULT_NAME": "safety-legacy"
+        }
+      },
+      {
+        "name": "gsap",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "playwright",
+          "test",
+          "-c",
+          "e2e/gsap-poc.config.ts"
+        ],
+        "environment": {
+          "GSAP_REGRESSION": "1",
+          "NEXUS_MOTION_ENGINE": "gsap",
+          "GSAP_RESULT_NAME": "safety-gsap"
+        }
+      }
+    ],
+    "final": [
+      {
+        "name": "build",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "build"
+        ],
+        "environment": {}
+      },
+      {
+        "name": "network-final",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "playwright",
+          "test",
+          "-c",
+          "e2e/p1-5-c-safety.config.ts"
+        ],
+        "environment": {
+          "NEXUS_SAFETY_LABEL": "boundary-final-latest"
+        }
+      },
+      {
+        "name": "unit",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "vitest",
+          "run",
+          "--reporter=json",
+          "--outputFile=.review/p1-5-c-safety/unit-final.json"
+        ],
+        "environment": {}
+      },
+      {
+        "name": "typecheck",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "exec",
+          "tsc",
+          "--noEmit"
+        ],
+        "environment": {}
+      },
+      {
+        "name": "lint",
+        "exitCode": 0,
+        "command": [
+          "pnpm",
+          "lint"
+        ],
+        "environment": {}
+      }
+    ],
+    "postChecks": [
+      {
+        "name": "network-production",
+        "exitCode": 0
+      },
+      {
+        "name": "typecheck-production",
+        "exitCode": 0
+      },
+      {
+        "name": "lint-production",
+        "exitCode": 0
+      }
+    ]
+  },
+  "buildId": "_Q7HstrffpTf90ptrXJma",
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 2
+  },
+  "scope": {
+    "visualTimingChanged": false,
+    "qualityParametersChanged": false,
+    "gsapCapChanged": false,
+    "general196Rerun": false,
+    "longSoaksRerun": false,
+    "productionOrLedAccepted": false
+  }
+}

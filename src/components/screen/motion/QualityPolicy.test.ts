@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { candidateParameters as c, effectiveTargetHz, probeDelayMs, ProbeQualityPolicy, type QualitySample } from './QualityPolicy';
 import { resolveQualityMode as resolveServerMode } from './quality-permission';
-const resolveQualityMode = (params: Record<string, string | string[] | undefined>, grant?: string) => resolveServerMode(params, grant, '127.0.0.1:3026');
+const resolveQualityMode = (params: Record<string, string | string[] | undefined>, grant?: string) => resolveServerMode(params, grant, '127.0.0.1:3026', true);
 function rig() {
   const policy = new ProbeQualityPolicy(); let at = 0;
   const step = (hz = 60, p95 = 16.7, extra: Partial<QualitySample> = {}) => {
@@ -87,7 +87,7 @@ describe('server experimental permission', () => {
   it.each([undefined, '', 'true', 'candidate', 'invalid'])('denies URL-only control with permission %s', permission => {
     for(const mode of ['candidate','shadow','external']) expect(resolveQualityMode({debug:'1',qualityExperiment:mode}, permission)).toBe('baseline');
   });
-  it('denies non-local hosts even with a server grant', () => { for (const host of [null, 'company.example', '127.0.0.1.attacker.test', 'localhost.example']) expect(resolveServerMode({ debug: '1', qualityExperiment: 'candidate' }, 'local-candidate', host)).toBe('baseline'); });
+  it('denies non-local hosts even with a server grant', () => { for (const host of [null, 'company.example', '127.0.0.1.attacker.test', 'localhost.example']) expect(resolveServerMode({ debug: '1', qualityExperiment: 'candidate' }, 'local-candidate', host, true)).toBe('baseline'); });
   it('separates shadow permission from control and rejects old/invalid/multiple parameters', () => {
     expect(resolveQualityMode({debug:'1',qualityExperiment:'candidate'},'local-shadow')).toBe('baseline');
     expect(resolveQualityMode({debug:'1',qualityExperiment:'shadow'},'local-shadow')).toBe('shadow');

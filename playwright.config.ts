@@ -18,7 +18,7 @@ export default defineConfig({
   webServer: [
     { cwd: path.resolve("."), command: "node e2e/nexus-fixture-server.mjs", url: "http://127.0.0.1:3199", reuseExistingServer: false },
   {
-    command: `pnpm exec next start --hostname 127.0.0.1 --port ${port}`,
+    command: `node scripts/p1-5-c/local-server.mjs --port ${port}`,
     url: `${baseURL}/screen/sales`, reuseExistingServer: false,
     env: { NEXUS_QUALITY_PERMISSION: 'local-candidate', TZ: "Asia/Shanghai", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only" }, timeout: 60_000,
   }],

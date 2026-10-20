@@ -15,7 +15,7 @@ async function waitQuality(page,quality){await page.waitForFunction(q=>document.
 try{
   for(const url of [base,fixture]){let busy=false;try{await fetch(url);busy=true;}catch{}if(busy)throw Error(`Occupied ${url}`);}
   serve(['e2e/nexus-fixture-server.mjs']);await ready(fixture);
-  serve(['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port','3072'],{SCREEN_PLATFORM_URL:fixture,SCREEN_PUBLIC_ID:'fixture-only',NEXUS_QUALITY_PERMISSION:'local-candidate'});await ready(`${base}/screen/sales?source=mock`);
+  serve(['scripts/p1-5-c/local-server.mjs','--port','3072'],{SCREEN_PLATFORM_URL:fixture,SCREEN_PUBLIC_ID:'fixture-only',NEXUS_QUALITY_PERMISSION:'local-candidate'});await ready(`${base}/screen/sales?source=mock`);
   browser=await chromium.launch({headless:false});const cdp=await browser.newBrowserCDPSession();report.environment={browser:browser.version(),gpu:await cdp.send('SystemInfo.getInfo'),headless:false,dpr:1};
   for(const engine of (process.env.P15C_VISUAL_ENGINES??'legacy,gsap').split(','))for(const width of (process.env.P15C_VISUAL_WIDTHS??'1280,1792,1920,3840').split(',').map(Number)){
     const video=width===1920,context=await browser.newContext({viewport:{width,height:Math.round(width*9/16)},deviceScaleFactor:1,reducedMotion:'no-preference',...(video?{recordVideo:{dir:path.join(out,'videos'),size:{width:1280,height:720}}}:{})});await context.addInitScript(installProbe,60);

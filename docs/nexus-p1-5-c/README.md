@@ -1,5 +1,7 @@
 # DACHUAN NEXUS P1.5-C · 类型化质量策略与受控灰度准备
 
+> 安全补强版本基于 `b3d5c11`；本轮实际网络边界、回归结果与未实施的重校准方案见 [07-safety-boundary.md](07-safety-boundary.md)。下表为原 P1.5-C 施工记录，不冒充本轮重新执行的结果。
+
 施工分支：`codex/nexus-p1-5-c-quality-integration`。基线依次为 P1.5-B `2584284e3e7b994d0510d9d53b2a302e3aa740bc`、P1.5-A `957ff26b3202510316213dec93f8a0d98c0758b4`、P1.4 `df69d71`。
 
 默认入口保持 Legacy + Baseline。Candidate 和 Shadow 只接受明确服务端本地许可及回环地址；历史 `qualityExperiment=external` 已失效。仅本地施工、测试、提交；没有推送、合并、部署、数据库变更、生产灰度或 Task 11。

@@ -1,0 +1,21 @@
+{
+  "baseline": "b3d5c1133e5809e272529d5b2c6cff8595f1d3d6",
+  "rawReport": ".review/p1-5-c-safety/boundary-before-results.json",
+  "rawSha256": "91fc929703a0f7b2c0a38cba1865c8fd8e5a1748ff9ea0d8fe81186976de8afb",
+  "stats": {
+    "startTime": "2026-10-20T07:23:02.946Z",
+    "duration": 1439.339,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "failures": [
+    {
+      "title": "ordinary Next denies candidate despite forged localhost Host and server grant",
+      "status": "failed",
+      "message": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 2\n+ Received  + 2\n\n  Object {\n-   \"manual\": false,\n-   \"mode\": \"baseline\",\n+   \"manual\": true,\n+   \"mode\": \"candidate\",\n  }"
+    }
+  ],
+  "note": "Expected rejection fails on baseline; no original assertion was weakened."
+}

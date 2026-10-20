@@ -22,7 +22,7 @@ function snapshot(){const probe=window.__p15cProbe.snapshot(true),intervals=prob
 try {
   for(const url of [base,fixture]){let busy=false;try{await fetch(url);busy=true;}catch{}if(busy)throw Error(`Occupied ${url}`);}
   server(['e2e/nexus-fixture-server.mjs']);await ready(fixture);
-  server(['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{SCREEN_PLATFORM_URL:fixture,SCREEN_PUBLIC_ID:'fixture-only',NEXUS_QUALITY_PERMISSION:'local-candidate',TZ:'Asia/Shanghai'});await ready(`${base}/screen/sales?source=mock`);
+  server(['scripts/p1-5-c/local-server.mjs','--port',String(port)],{SCREEN_PLATFORM_URL:fixture,SCREEN_PUBLIC_ID:'fixture-only',NEXUS_QUALITY_PERMISSION:'local-candidate',TZ:'Asia/Shanghai'});await ready(`${base}/screen/sales?source=mock`);
   browser=await chromium.launch({headless:process.env.P15C_HEADED!=='1'});
   const bc=await browser.newBrowserCDPSession();report.environment={browser:browser.version(),gpu:await bc.send('SystemInfo.getInfo'),cpu:os.cpus()[0].model,memoryBytes:os.totalmem(),headless:process.env.P15C_HEADED!=='1',dpr:1};
   const context=await browser.newContext({viewport:{width,height:Math.round(width*9/16)},deviceScaleFactor:1,reducedMotion:'no-preference'});await context.addInitScript(installProbe,60);

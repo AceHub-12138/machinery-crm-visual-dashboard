@@ -1,0 +1,90 @@
+{
+  "baseline": "b3d5c1133e5809e272529d5b2c6cff8595f1d3d6",
+  "allUnchanged": true,
+  "files": [
+    {
+      "path": "src/components/screen/motion/QualityPolicy.ts",
+      "baselineSha256": "07d27d42dfff42275e06c2c6b49bf3052a53168ba53e1333d623c0d3e00fada4",
+      "currentSha256": "07d27d42dfff42275e06c2c6b49bf3052a53168ba53e1333d623c0d3e00fada4",
+      "unchanged": true
+    },
+    {
+      "path": "src/components/screen/motion/config.ts",
+      "baselineSha256": "85db4484ecd198a08929581e9389a3c08646d4e119bdedcb8e3e16538a380fb0",
+      "currentSha256": "85db4484ecd198a08929581e9389a3c08646d4e119bdedcb8e3e16538a380fb0",
+      "unchanged": true
+    },
+    {
+      "path": "src/components/screen/motion/MotionDirector.ts",
+      "baselineSha256": "2bf0b42471dd7781d98b14bbd887d5df67af55af351afdd521db0b811d149bf8",
+      "currentSha256": "2bf0b42471dd7781d98b14bbd887d5df67af55af351afdd521db0b811d149bf8",
+      "unchanged": true
+    },
+    {
+      "path": "src/components/screen/motion/MotionProvider.tsx",
+      "baselineSha256": "42a9709cbb6416ab61d854934e7519da205bfadaea45bfc158ef92155e97416a",
+      "currentSha256": "42a9709cbb6416ab61d854934e7519da205bfadaea45bfc158ef92155e97416a",
+      "unchanged": true
+    },
+    {
+      "path": "src/components/screen/motion/GsapTickerOwner.ts",
+      "baselineSha256": "97bce4c0e00f8af53ca446f257d772583ee776243d088dfa4141974e14ae227c",
+      "currentSha256": "97bce4c0e00f8af53ca446f257d772583ee776243d088dfa4141974e14ae227c",
+      "unchanged": true
+    },
+    {
+      "path": "src/components/screen/motion/GsapScene.ts",
+      "baselineSha256": "9c74f7b52f6a6c8ad1e4a9617cde2c8de42123f85e278bdd5d84f1d2263aedb6",
+      "currentSha256": "9c74f7b52f6a6c8ad1e4a9617cde2c8de42123f85e278bdd5d84f1d2263aedb6",
+      "unchanged": true
+    },
+    {
+      "path": "src/components/screen/motion/useSceneMotion.ts",
+      "baselineSha256": "e4a60ea9ea93f44fec2970680a76723e343745ca23dbf5c2272c5af70c69c240",
+      "currentSha256": "e4a60ea9ea93f44fec2970680a76723e343745ca23dbf5c2272c5af70c69c240",
+      "unchanged": true
+    },
+    {
+      "path": "src/components/screen/ScreenStage.tsx",
+      "baselineSha256": "5058c1801dee6243f8655dce4058df00dca7f71663f993f57fa1ad5d55515fa4",
+      "currentSha256": "5058c1801dee6243f8655dce4058df00dca7f71663f993f57fa1ad5d55515fa4",
+      "unchanged": true
+    },
+    {
+      "path": "src/components/screen/ShipmentMap.tsx",
+      "baselineSha256": "e886eebdea938e9f6babc5718717e4f4a2048482108b5bc752a40f1b9882af4f",
+      "currentSha256": "e886eebdea938e9f6babc5718717e4f4a2048482108b5bc752a40f1b9882af4f",
+      "unchanged": true
+    },
+    {
+      "path": "e2e/gsap-poc.spec.ts",
+      "baselineSha256": "fb8ca422fef6f02a79f1e7bb2cedeef7081fe5caf77a14f3da5582d2737524e2",
+      "currentSha256": "fb8ca422fef6f02a79f1e7bb2cedeef7081fe5caf77a14f3da5582d2737524e2",
+      "unchanged": true
+    },
+    {
+      "path": "e2e/p1-5-c-lifecycle.spec.ts",
+      "baselineSha256": "a15e62f753d42bad01dc1fa7b8b1ec642e5599f1eb16767756a4757a43a10f53",
+      "currentSha256": "a15e62f753d42bad01dc1fa7b8b1ec642e5599f1eb16767756a4757a43a10f53",
+      "unchanged": true
+    },
+    {
+      "path": "e2e/p1-5-c.spec.ts",
+      "baselineSha256": "e36a265da96aa0269f0c58d7053dd250ba6aa405249f2663ab4ebfbf1fa307ae",
+      "currentSha256": "e36a265da96aa0269f0c58d7053dd250ba6aa405249f2663ab4ebfbf1fa307ae",
+      "unchanged": true
+    },
+    {
+      "path": "package.json",
+      "baselineSha256": "80895fc25b257a5c9c776140014c40cb3a8e4bdbd2d42f30b812497cfce2580f",
+      "currentSha256": "80895fc25b257a5c9c776140014c40cb3a8e4bdbd2d42f30b812497cfce2580f",
+      "unchanged": true
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "baselineSha256": "32e6974eab52b6e2d96ee170f4b64b9cfdb49c3ef10bbd0a30d25f88368df8bb",
+      "currentSha256": "32e6974eab52b6e2d96ee170f4b64b9cfdb49c3ef10bbd0a30d25f88368df8bb",
+      "unchanged": true
+    }
+  ]
+}

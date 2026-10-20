@@ -1,0 +1,379 @@
+diff --git a/e2e/nexus.config.ts b/e2e/nexus.config.ts
+index fb28031..47d4c2a 100644
+--- a/e2e/nexus.config.ts
++++ b/e2e/nexus.config.ts
+@@ -9 +9 @@ export default defineConfig({
+-    { cwd: path.resolve(import.meta.dirname, ".."), command: `pnpm exec next start --hostname 127.0.0.1 --port ${port}`, url: `http://127.0.0.1:${port}/screen/sales?source=mock`, reuseExistingServer: false, env: { NEXUS_QUALITY_PERMISSION: 'local-candidate', SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only", TZ: "Asia/Shanghai" } },
++    { cwd: path.resolve(import.meta.dirname, ".."), command: `node scripts/p1-5-c/local-server.mjs --port ${port}`, url: `http://127.0.0.1:${port}/screen/sales?source=mock`, reuseExistingServer: false, env: { NEXUS_QUALITY_PERMISSION: 'local-candidate', SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only", TZ: "Asia/Shanghai" } },
+diff --git a/e2e/p1-5-c-safety.config.ts b/e2e/p1-5-c-safety.config.ts
+new file mode 100644
+index 0000000..3428a0f
+--- /dev/null
++++ b/e2e/p1-5-c-safety.config.ts
+@@ -0,0 +1,18 @@
++import { defineConfig } from '@playwright/test';
++import path from 'node:path';
++const label = process.env.NEXUS_SAFETY_LABEL ?? 'boundary-final';
++const common = { cwd: path.resolve('.'), reuseExistingServer: false, timeout: 60000 };
++const environment = { SCREEN_PLATFORM_URL: 'http://127.0.0.1:3199', SCREEN_PUBLIC_ID: 'fixture-only', TZ: 'Asia/Shanghai' };
++export default defineConfig({
++  testDir: '.', testMatch: 'p1-5-c-safety.spec.ts', workers: 1, fullyParallel: false, timeout: 30000,
++  outputDir: path.resolve(`.review/p1-5-c-safety/${label}-traces`),
++  reporter: [['line'], ['json', { outputFile: path.resolve(`.review/p1-5-c-safety/${label}-results.json`) }]],
++  webServer: [
++    { ...common, command: 'node e2e/nexus-fixture-server.mjs', url: 'http://127.0.0.1:3199' },
++    { ...common, command: 'pnpm exec next start --hostname 127.0.0.1 --port 3082', url: 'http://127.0.0.1:3082/screen/sales', env: { ...environment, NEXUS_QUALITY_PERMISSION: 'local-candidate' } },
++    ...(process.env.NEXUS_SAFETY_ORDINARY_ONLY === '1' ? [] : [
++      { ...common, command: 'node scripts/p1-5-c/local-server.mjs --port 3081', url: 'http://127.0.0.1:3081/screen/sales', env: { ...environment, NEXUS_QUALITY_PERMISSION: 'local-candidate', HOSTNAME: '0.0.0.0' } },
++      { ...common, command: 'node scripts/p1-5-c/local-server.mjs --port 3083', url: 'http://127.0.0.1:3083/screen/sales', env: { ...environment, NEXUS_QUALITY_PERMISSION: 'local-shadow' } },
++    ]),
++  ],
++});
+diff --git a/e2e/p1-5-c-safety.spec.ts b/e2e/p1-5-c-safety.spec.ts
+new file mode 100644
+index 0000000..52a3f03
+--- /dev/null
++++ b/e2e/p1-5-c-safety.spec.ts
+@@ -0,0 +1,73 @@
++import { test, expect } from '@playwright/test';
++import { get, createServer, request as forward } from 'node:http';
++
++async function decision(port: number, query: string, headers: Record<string, string> = {}, debug = true) {
++  const search = [debug ? 'debug=1' : '', query].filter(Boolean).join('&');
++  const html = await new Promise<string>((resolve, reject) => {
++    const req = get({ hostname: '127.0.0.1', port, path: `/screen/sales${search ? `?${search}` : ''}`, headers: { Host: `localhost:${port}`, ...headers } }, res => {
++      let body = ''; res.setEncoding('utf8'); res.on('data', chunk => { body += chunk; });
++      res.on('end', () => res.statusCode === 200 ? resolve(body) : reject(new Error(`HTTP ${res.statusCode}`)));
++    });
++    req.on('error', reject); req.setTimeout(15000, () => req.destroy(new Error('Request timed out')));
++  });
++  // These are the actual server-selected props in the Next Flight response, before client calibration.
++  const text = html.replace(/\\+"/g, '"');
++  const mode = text.match(/"qualityMode":"(baseline|shadow|candidate)"/)?.[1];
++  const manual = text.match(/"manualQualityAllowed":(true|false)/)?.[1];
++  expect(mode).toBeDefined(); expect(manual).toBeDefined();
++  return { mode, manual: manual === 'true' };
++}
++for (const mode of ['candidate', 'shadow']) for (const host of ['localhost', '127.0.0.1']) {
++  test(`ordinary Next denies ${mode} despite forged ${host} Host and server grant`, async () => {
++    expect(await decision(3082, `qualityExperiment=${mode}`, { Host: `${host}:3082` })).toEqual({ mode: 'baseline', manual: false });
++  });
++}
++test('ordinary Next denies forged boundary headers and keeps default/old production URLs protected', async () => {
++  for (const query of ['', 'qualityExperiment=external', 'qualityExperiment=candidate']) {
++    expect(await decision(3082, query, { 'X-Nexus-Quality-Boundary': 'verified', 'X-Forwarded-Host': 'localhost:3082' })).toEqual({ mode: 'baseline', manual: false });
++  }
++});
++test('ordinary production route without debug or experiment is Baseline with no manual control', async () => {
++  expect(await decision(3082, '', {}, false)).toEqual({ mode: 'baseline', manual: false });
++});
++for (const mode of ['candidate', 'shadow']) test(`verified loopback launcher permits explicit ${mode}`, async () => {
++  expect(await decision(3081, `qualityExperiment=${mode}`)).toEqual({ mode, manual: true });
++});
++for (const host of ['company.example', 'localhost.example', '127.0.0.1.attacker.test']) test(`loopback launcher denies untrusted Host ${host}`, async () => {
++  expect(await decision(3081, 'qualityExperiment=candidate', { Host: host })).toEqual({ mode: 'baseline', manual: false });
++});
++for (const [name, value] of [
++  ['Forwarded', 'for=203.0.113.9;host=localhost'], ['Via', '1.1 local-proxy'],
++  ['X-Forwarded-For', '203.0.113.9'], ['X-Forwarded-For', '127.0.0.1'],
++  ['X-Forwarded-Host', 'localhost:3081'], ['X-Forwarded-Proto', 'http'],
++  ['X-Forwarded-Port', '3081'], ['X-Real-IP', '203.0.113.9'],
++  ['X-Nexus-Quality-Boundary', 'verified'], ['X-Nexus-Quality-Permission', 'local-candidate'],
++]) test(`loopback launcher refuses forwarded/forged ${name}=${value}`, async () => {
++  for (const mode of ['candidate', 'shadow']) expect(await decision(3081, `qualityExperiment=${mode}`, { [name]: value })).toEqual({ mode: 'baseline', manual: false });
++});
++for (const query of ['qualityExperiment=external', 'qualityExperiment=invalid', 'qualityExperiment=candidate&qualityExperiment=shadow', '']) {
++  test(`verified service does not expand URL permission: ${query || 'default'}`, async () => {
++    expect((await decision(3081, query)).mode).toBe('baseline');
++  });
++}
++test('verified shadow grant never gives Candidate or manual control', async () => {
++  expect(await decision(3083, 'qualityExperiment=candidate')).toEqual({ mode: 'baseline', manual: false });
++  expect(await decision(3083, 'qualityExperiment=shadow')).toEqual({ mode: 'shadow', manual: false });
++});
++test('an actual local forwarding proxy cannot grant either mode with a localhost Host', async () => {
++  const proxy = createServer((req, res) => {
++    const upstream = forward({ hostname: '127.0.0.1', port: 3081, path: req.url, headers: { ...req.headers, host: 'localhost:3081', forwarded: 'for=203.0.113.9' } }, response => {
++      res.writeHead(response.statusCode ?? 502, response.headers); response.pipe(res);
++    });
++    upstream.on('error', () => { res.statusCode = 502; res.end(); }); req.pipe(upstream);
++  });
++  await new Promise<void>(resolve => proxy.listen(0, '127.0.0.1', resolve));
++  const bound = proxy.address(); if (!bound || typeof bound === 'string') throw new Error('Missing proxy listener');
++  try {
++    for (const mode of ['candidate', 'shadow']) expect(await decision(bound.port, `qualityExperiment=${mode}`)).toEqual({ mode: 'baseline', manual: false });
++  } finally { proxy.closeAllConnections(); await new Promise<void>(resolve => proxy.close(() => resolve())); }
++});
++test('request context cannot leak between concurrent direct and forwarded requests', async () => {
++  const results = await Promise.all(Array.from({ length: 20 }, (_, i) => decision(3081, 'qualityExperiment=candidate', i % 2 ? { Forwarded: 'for=203.0.113.9' } : {})));
++  results.forEach((result, i) => expect(result).toEqual(i % 2 ? { mode: 'baseline', manual: false } : { mode: 'candidate', manual: true }));
++});
+diff --git a/e2e/p1-5-c.config.ts b/e2e/p1-5-c.config.ts
+index 05aef72..d4de30e 100644
+--- a/e2e/p1-5-c.config.ts
++++ b/e2e/p1-5-c.config.ts
+@@ -5 +5 @@ const label=process.env.P15C_E2E_LABEL??'integration';
+-export default defineConfig({ ...base, testMatch:'p1-5-c*.spec.ts',timeout:90000,
++export default defineConfig({ ...base, testMatch:['p1-5-c.spec.ts','p1-5-c-lifecycle.spec.ts'],timeout:90000,
+diff --git a/playwright.config.ts b/playwright.config.ts
+index 3a13abd..131d88d 100644
+--- a/playwright.config.ts
++++ b/playwright.config.ts
+@@ -21 +21 @@ export default defineConfig({
+-    command: `pnpm exec next start --hostname 127.0.0.1 --port ${port}`,
++    command: `node scripts/p1-5-c/local-server.mjs --port ${port}`,
+diff --git a/scripts/p1-5-c/local-server.mjs b/scripts/p1-5-c/local-server.mjs
+new file mode 100644
+index 0000000..6345777
+--- /dev/null
++++ b/scripts/p1-5-c/local-server.mjs
+@@ -0,0 +1,35 @@
++/** Opt-in test launcher. The listener address is fixed, not configurable by headers or env. */
++import { createServer } from 'node:http';
++import next from 'next';
++import { installLocalQualityBoundary } from '../../src/server/local-quality-boundary.mjs';
++
++const args = process.argv.slice(2);
++if (args.length !== 2 || args[0] !== '--port' || !/^\d+$/.test(args[1])
++  || Number(args[1]) < 1 || Number(args[1]) > 65535) throw new Error('Usage: node scripts/p1-5-c/local-server.mjs --port <1..65535>');
++const port = Number(args[1]);
++const hostname = '127.0.0.1';
++const boundary = installLocalQualityBoundary();
++const app = next({ dev: false, hostname, port });
++await app.prepare();
++const handle = app.getRequestHandler();
++const server = createServer((request, response) => {
++  boundary.run(request, server, () => {
++    Promise.resolve(handle(request, response)).catch(error => {
++      console.error(error.message);
++      if (!response.headersSent) response.statusCode = 500;
++      response.end();
++    });
++  });
++});
++await new Promise((resolve, reject) => { server.once('error', reject); server.listen({ host: hostname, port, exclusive: true }, resolve); });
++const bound = server.address();
++if (!bound || typeof bound === 'string' || bound.address !== hostname) throw new Error('Loopback listener could not be verified');
++console.log(`NEXUS local test server: http://${hostname}:${bound.port}`);
++let closing = false;
++async function close() {
++  if (closing) return; closing = true;
++  server.closeAllConnections();
++  await Promise.all([app.close(), new Promise(resolve => server.close(resolve))]);
++  process.exit(0);
++}
++process.on('SIGTERM', close); process.on('SIGINT', close);
+diff --git a/scripts/p1-5-c/run.mjs b/scripts/p1-5-c/run.mjs
+index f984b61..62bd062 100644
+--- a/scripts/p1-5-c/run.mjs
++++ b/scripts/p1-5-c/run.mjs
+@@ -25 +25 @@ try {
+-  server(['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{SCREEN_PLATFORM_URL:fixture,SCREEN_PUBLIC_ID:'fixture-only',NEXUS_QUALITY_PERMISSION:'local-candidate',TZ:'Asia/Shanghai'});await ready(`${base}/screen/sales?source=mock`);
++  server(['scripts/p1-5-c/local-server.mjs','--port',String(port)],{SCREEN_PLATFORM_URL:fixture,SCREEN_PUBLIC_ID:'fixture-only',NEXUS_QUALITY_PERMISSION:'local-candidate',TZ:'Asia/Shanghai'});await ready(`${base}/screen/sales?source=mock`);
+diff --git a/scripts/p1-5-c/visual.mjs b/scripts/p1-5-c/visual.mjs
+index 3dd4e66..b249b60 100644
+--- a/scripts/p1-5-c/visual.mjs
++++ b/scripts/p1-5-c/visual.mjs
+@@ -18 +18 @@ try{
+-  serve(['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port','3072'],{SCREEN_PLATFORM_URL:fixture,SCREEN_PUBLIC_ID:'fixture-only',NEXUS_QUALITY_PERMISSION:'local-candidate'});await ready(`${base}/screen/sales?source=mock`);
++  serve(['scripts/p1-5-c/local-server.mjs','--port','3072'],{SCREEN_PLATFORM_URL:fixture,SCREEN_PUBLIC_ID:'fixture-only',NEXUS_QUALITY_PERMISSION:'local-candidate'});await ready(`${base}/screen/sales?source=mock`);
+diff --git a/src/app/screen/sales/page.tsx b/src/app/screen/sales/page.tsx
+index 3061d52..7d396a2 100644
+--- a/src/app/screen/sales/page.tsx
++++ b/src/app/screen/sales/page.tsx
+@@ -7,0 +8 @@ import { headers } from 'next/headers';
++import { hasVerifiedLocalQualityBoundary } from '@/server/local-quality-request';
+@@ -11,0 +13 @@ export default async function SalesScreenPage({ searchParams }: { searchParams:
++  const verifiedBoundary = hasVerifiedLocalQualityBoundary();
+@@ -17 +19 @@ export default async function SalesScreenPage({ searchParams }: { searchParams:
+-  return <Experience manualQualityAllowed={process.env.NEXUS_QUALITY_PERMISSION === "local-candidate" && localQualityPermission(process.env.NEXUS_QUALITY_PERMISSION, requestHost)} qualityMode={resolveQualityMode(params, process.env.NEXUS_QUALITY_PERMISSION, requestHost)} demoMode={params.demo === "1"} initialPayload={payload} source={source} layout={layout} kiosk={params.kiosk === "1"} fit={params.fit === "1" || (params.fit !== "0" && layout.fit)} initialNow={initialNow} voice={params.voiceLive === "1" ? "live" : params.voiceDemo === "1" ? "demo" : null} lite={params.lite === "1"} hubUrl={sanitizeHubParam(typeof params.hub === "string" ? params.hub : null) ?? undefined}/>;
++  return <Experience manualQualityAllowed={process.env.NEXUS_QUALITY_PERMISSION === "local-candidate" && localQualityPermission(process.env.NEXUS_QUALITY_PERMISSION, requestHost, verifiedBoundary)} qualityMode={resolveQualityMode(params, process.env.NEXUS_QUALITY_PERMISSION, requestHost, verifiedBoundary)} demoMode={params.demo === "1"} initialPayload={payload} source={source} layout={layout} kiosk={params.kiosk === "1"} fit={params.fit === "1" || (params.fit !== "0" && layout.fit)} initialNow={initialNow} voice={params.voiceLive === "1" ? "live" : params.voiceDemo === "1" ? "demo" : null} lite={params.lite === "1"} hubUrl={sanitizeHubParam(typeof params.hub === "string" ? params.hub : null) ?? undefined}/>;
+diff --git a/src/components/screen/motion/QualityPolicy.test.ts b/src/components/screen/motion/QualityPolicy.test.ts
+index 3669e4b..c4c8121 100644
+--- a/src/components/screen/motion/QualityPolicy.test.ts
++++ b/src/components/screen/motion/QualityPolicy.test.ts
+@@ -4 +4 @@ import { resolveQualityMode as resolveServerMode } from './quality-permission';
+-const resolveQualityMode = (params: Record<string, string | string[] | undefined>, grant?: string) => resolveServerMode(params, grant, '127.0.0.1:3026');
++const resolveQualityMode = (params: Record<string, string | string[] | undefined>, grant?: string) => resolveServerMode(params, grant, '127.0.0.1:3026', true);
+@@ -90 +90 @@ describe('server experimental permission', () => {
+-  it('denies non-local hosts even with a server grant', () => { for (const host of [null, 'company.example', '127.0.0.1.attacker.test', 'localhost.example']) expect(resolveServerMode({ debug: '1', qualityExperiment: 'candidate' }, 'local-candidate', host)).toBe('baseline'); });
++  it('denies non-local hosts even with a server grant', () => { for (const host of [null, 'company.example', '127.0.0.1.attacker.test', 'localhost.example']) expect(resolveServerMode({ debug: '1', qualityExperiment: 'candidate' }, 'local-candidate', host, true)).toBe('baseline'); });
+diff --git a/src/components/screen/motion/quality-permission.test.ts b/src/components/screen/motion/quality-permission.test.ts
+new file mode 100644
+index 0000000..bbc4a27
+--- /dev/null
++++ b/src/components/screen/motion/quality-permission.test.ts
+@@ -0,0 +1,24 @@
++import { describe, it, expect } from 'vitest';
++import { localQualityPermission, resolveQualityMode } from './quality-permission';
++
++describe('quality permission requires a verified server request boundary', () => {
++  it.each([undefined, false, null, 0, 1, 'true', {}])('never treats %s as an attestation', proof => {
++    for (const mode of ['candidate', 'shadow']) {
++      const params = { debug: '1', qualityExperiment: mode };
++      expect(resolveQualityMode(params, 'local-candidate', 'localhost:3081', proof as boolean)).toBe('baseline');
++      expect(localQualityPermission('local-candidate', '127.0.0.1:3081', proof as boolean)).toBe(false);
++    }
++  });
++  it('defaults to deny even with both a valid permission and loopback-looking Host', () => {
++    for (const host of ['localhost', '127.0.0.1:3081', '[::1]:3081']) {
++      expect(resolveQualityMode({ debug: '1', qualityExperiment: 'candidate' }, 'local-candidate', host)).toBe('baseline');
++    }
++  });
++  it.each([undefined, '', 'true', 'candidate', 'local-candidate ', 'LOCAL-CANDIDATE', 'invalid'])('rejects invalid permission %s on an attested service', grant => {
++    for (const mode of ['candidate', 'shadow']) expect(resolveQualityMode({ debug: '1', qualityExperiment: mode }, grant, 'localhost:3081', true)).toBe('baseline');
++  });
++  it('does not turn shadow permission into Candidate or manual control permission', () => {
++    expect(resolveQualityMode({ debug: '1', qualityExperiment: 'shadow' }, 'local-shadow', 'localhost:3081', true)).toBe('shadow');
++    expect(resolveQualityMode({ debug: '1', qualityExperiment: 'candidate' }, 'local-shadow', 'localhost:3081', true)).toBe('baseline');
++  });
++});
+diff --git a/src/components/screen/motion/quality-permission.ts b/src/components/screen/motion/quality-permission.ts
+index 76a19d3..70ecea1 100644
+--- a/src/components/screen/motion/quality-permission.ts
++++ b/src/components/screen/motion/quality-permission.ts
+@@ -2,2 +2,2 @@ import type { QualityMode } from './QualityPolicy';
+-export function localQualityPermission(permission: string | undefined, host: string | null) {
+-  return !!host && /^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(host) && ['local-shadow', 'local-candidate'].includes(permission ?? '');
++export function localQualityPermission(permission: string | undefined, host: string | null, verifiedBoundary = false) {
++  return verifiedBoundary === true && !!host && /^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(host) && ['local-shadow', 'local-candidate'].includes(permission ?? '');
+@@ -5,3 +5,3 @@ export function localQualityPermission(permission: string | undefined, host: str
+-/** Evaluated on the server. No NEXT_PUBLIC grant and no URL-only bypass. */
+-export function resolveQualityMode(params: Record<string, string | string[] | undefined>, permission: string | undefined, host: string | null): QualityMode {
+-  if (!localQualityPermission(permission, host)) return 'baseline';
++/** Host is an additional check, never proof of the listener or peer's network boundary. */
++export function resolveQualityMode(params: Record<string, string | string[] | undefined>, permission: string | undefined, host: string | null, verifiedBoundary = false): QualityMode {
++  if (!localQualityPermission(permission, host, verifiedBoundary)) return 'baseline';
+diff --git a/src/server/local-quality-boundary.mjs b/src/server/local-quality-boundary.mjs
+new file mode 100644
+index 0000000..37f65d4
+--- /dev/null
++++ b/src/server/local-quality-boundary.mjs
+@@ -0,0 +1,53 @@
++import { AsyncLocalStorage } from 'node:async_hooks';
++import { isIP } from 'node:net';
++
++const readerKey = Symbol.for('dachuan.nexus.local-quality-boundary.v1');
++const loopback = address => typeof address === 'string' && (
++  isIP(address) === 4 && address.split('.')[0] === '127'
++  || address === '::1'
++  || address.startsWith('::ffff:') && isIP(address.slice(7)) === 4 && address.slice(7).split('.')[0] === '127'
++);
++
++/** Inspect the raw request BEFORE Next adds its own x-forwarded-* defaults.
++ * @param {Pick<import('node:http').IncomingMessage, 'headers' | 'socket'>} request
++ * @param {Pick<import('node:http').Server, 'address'>} server
++ */
++export function verifyLoopbackQualityRequest(request, server) {
++  const bound = server.address();
++  if (!bound || typeof bound === 'string' || !loopback(bound.address)) return false;
++  if (!loopback(request.socket.localAddress) || !loopback(request.socket.remoteAddress)
++    || !Number.isInteger(bound.port) || bound.port <= 0 || bound.port > 65535
++    || bound.port !== request.socket.localPort) return false;
++  return !Object.keys(request.headers).some(name => {
++    const key = name.toLowerCase();
++    return key === 'forwarded' || key === 'via' || key === 'x-real-ip' || key === 'proxy-connection'
++      || key.startsWith('x-forwarded-') || key.startsWith('x-nexus-quality-');
++  });
++}
++
++export function createLocalQualityBoundary() {
++  /** @type {AsyncLocalStorage<boolean>} */
++  const context = new AsyncLocalStorage();
++  return {
++    /** @template T
++     * @param {Pick<import('node:http').IncomingMessage, 'headers' | 'socket'>} request
++     * @param {Pick<import('node:http').Server, 'address'>} server
++     * @param {() => T} handler
++     */
++    run: (request, server, handler) => context.run(verifyLoopbackQualityRequest(request, server), handler),
++    verified: () => context.getStore() === true,
++  };
++}
++
++/** Server process memory only: no request header, environment assertion, token or client API. */
++export function installLocalQualityBoundary() {
++  if (Reflect.has(globalThis, readerKey)) throw new Error('Local quality boundary already installed');
++  const boundary = createLocalQualityBoundary();
++  Object.defineProperty(globalThis, readerKey, { value: boundary.verified, writable: false, configurable: false });
++  return boundary;
++}
++
++export function verifiedLocalQualityRequest() {
++  const reader = Reflect.get(globalThis, readerKey);
++  try { return typeof reader === 'function' && reader() === true; } catch { return false; }
++}
+diff --git a/src/server/local-quality-boundary.test.ts b/src/server/local-quality-boundary.test.ts
+new file mode 100644
+index 0000000..4bf12dc
+--- /dev/null
++++ b/src/server/local-quality-boundary.test.ts
+@@ -0,0 +1,57 @@
++import { describe, it, expect } from 'vitest';
++import { createServer, type IncomingMessage } from 'node:http';
++import { spawnSync } from 'node:child_process';
++import { createLocalQualityBoundary, verifiedLocalQualityRequest, verifyLoopbackQualityRequest } from './local-quality-boundary.mjs';
++const request = (headers = {}, localAddress: string | undefined = '127.0.0.1', remoteAddress: string | undefined = '127.0.0.1', localPort = 3081) => ({ headers, socket: { localAddress, remoteAddress, localPort } }) as unknown as IncomingMessage;
++const server = (address = '127.0.0.1', port = 3081) => ({ address: () => ({ address, family: 'IPv4', port }) });
++describe('raw Node loopback boundary', () => {
++  it('does not trust Host, env flags or a missing per-request context', () => {
++    expect(verifiedLocalQualityRequest()).toBe(false);
++    expect(verifyLoopbackQualityRequest(request({ host: 'localhost' }), server('0.0.0.0'))).toBe(false);
++    expect(verifyLoopbackQualityRequest(request({ host: 'localhost' }), server('::'))).toBe(false);
++    expect(verifyLoopbackQualityRequest(request(), { address: () => null })).toBe(false);
++    expect(verifyLoopbackQualityRequest(request(), { address: () => '/tmp/test.sock' })).toBe(false);
++  });
++  it.each(['192.0.2.1', '10.0.0.1', '::ffff:192.0.2.1', 'localhost', ''])('rejects unverified peer or local address %s', address => {
++    expect(verifyLoopbackQualityRequest(request({}, '127.0.0.1', address), server())).toBe(false);
++    expect(verifyLoopbackQualityRequest(request({}, address), server())).toBe(false);
++  });
++  it('requires the actual socket port to match the verified listener', () => {
++    expect(verifyLoopbackQualityRequest(request({}, '127.0.0.1', '127.0.0.1', 3082), server())).toBe(false);
++    expect(verifyLoopbackQualityRequest(request(), server('127.0.0.1', 0))).toBe(false);
++    expect(verifyLoopbackQualityRequest(request(), server())).toBe(true);
++  });
++  it('fails closed when socket address or port evidence is absent', () => {
++    for (const key of ['localAddress', 'remoteAddress', 'localPort']) {
++      const req = request(); Object.assign(req.socket, { [key]: undefined });
++      expect(verifyLoopbackQualityRequest(req, server())).toBe(false);
++    }
++    const missingPort = { address: () => ({ address: '127.0.0.1', family: 'IPv4' }) } as unknown as ReturnType<typeof server>;
++    const req = request(); Object.assign(req.socket, { localPort: undefined });
++    expect(verifyLoopbackQualityRequest(req, missingPort)).toBe(false);
++  });
++  it.each(['forwarded', 'via', 'x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port', 'x-real-ip', 'proxy-connection', 'x-nexus-quality-boundary'])('rejects the presence of raw %s even when empty', name => {
++    expect(verifyLoopbackQualityRequest(request({ [name]: '' }), server())).toBe(false);
++  });
++  it('isolates overlapping real HTTP requests and snapshots raw headers before Next mutation', async () => {
++    const boundary = createLocalQualityBoundary();
++    const http = createServer((req, res) => boundary.run(req, http, async () => {
++      // Next fills these defaults later; they must not create a false rejection or a new grant.
++      req.headers['x-forwarded-host'] = 'localhost';
++      await new Promise(resolve => setTimeout(resolve, 2)); res.end(String(boundary.verified()));
++    }));
++    await new Promise<void>(resolve => http.listen(0, '127.0.0.1', resolve));
++    const bound = http.address(); if (!bound || typeof bound === 'string') throw new Error('Missing listener');
++    try {
++      const results = await Promise.all(Array.from({ length: 12 }, async (_, i) => {
++        const response = await fetch(`http://127.0.0.1:${bound.port}`, { headers: i % 2 ? { Forwarded: 'for=192.0.2.1' } : {} }); return response.text();
++      }));
++      expect(results).toEqual(Array.from({ length: 12 }, (_, i) => i % 2 ? 'false' : 'true'));
++      expect(boundary.verified()).toBe(false);
++    } finally { http.closeAllConnections(); await new Promise<void>(resolve => http.close(() => resolve())); }
++  });
++  it.each([['--hostname', '0.0.0.0'], ['--port', '0'], ['--port', '65536']])('the local launcher rejects unsafe or invalid CLI %s %s', (flag, value) => {
++    const result = spawnSync(process.execPath, ['scripts/p1-5-c/local-server.mjs', flag, value], { encoding: 'utf8' });
++    expect(result.status).not.toBe(0); expect(result.stderr).toContain('Usage:');
++  });
++});
+diff --git a/src/server/local-quality-request.ts b/src/server/local-quality-request.ts
+new file mode 100644
+index 0000000..251b0dc
+--- /dev/null
++++ b/src/server/local-quality-request.ts
+@@ -0,0 +1,5 @@
++import 'server-only';
++import { verifiedLocalQualityRequest } from './local-quality-boundary.mjs';
++
++/** An ordinary Next server has no attested request context and always returns false. */
++export const hasVerifiedLocalQualityBoundary = () => verifiedLocalQualityRequest();

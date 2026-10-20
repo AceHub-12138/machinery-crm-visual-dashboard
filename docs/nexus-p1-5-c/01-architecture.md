@@ -56,3 +56,14 @@ stateDiagram-v2
 计数在 listener 函数入口递增，包含 GSAP wake 的同步调用，独立于 Director 派发数。`tickerAudit()` 是只读快照，提供实际累计次数、首末时刻、自有 active listener 和 60Hz 上限；窗口频率通过两次计数差 / 实际墙钟间隔计算，不能把 Director FPS 重新标成 ticker 实测。
 
 每个 host 只保留一组单次请求，暂停和卸载移除自己的 listener。同步 wake 不得在 `request()` 返回 ID 前执行 Director 回调；`requesting` 守卫确保 RAF 语义。所有权检查防止场景初始化/更新恰逢 Director 帧内 `id=null` 时误睡眠。
+
+
+## b3d5c11 后的本地许可安全补强
+
+Host 只作附加过滤，不证明网络来源。实验现在还必须有专用本地启动器创建的请求级网络证明：实际 listener、socket 本地地址与对端地址均为回环，端口与 listener 一致，并且原始请求没有代理/转发或伪造边界头。检查发生于 Next 填充自己的转发默认值之前；随后使用 AsyncLocalStorage 隔离请求，服务端入口只能读取本请求的结果，不靠请求头、URL 或环境变量自证边界。
+
+普通 Next 服务没有安装请求上下文，因此即使设置 local-candidate、伪造 localhost Host 也只能得到 Baseline 且不能手动改档。专用启动器固定监听 127.0.0.1，不接受 hostname 选项；原 local-shadow 的权限不会升级。没有新增外部 API、密钥、遥测或质量控制者。
+
+这一证明限定受控测试服务的 TCP 回环边界，不是用户身份认证。禁止将其通过反向代理、端口转发或隧道暴露；携带已知转发头的请求拒绝实验。任意去掉所有标识的本机中继无法仅靠最终 TCP 连接辨识，不把该机制宣称为这类部署或生产灰度的授权。缺少证明、无法核对边界时安全拒绝。
+
+动画与重校准时序源文件本轮未变。[详细提案与证据](07-safety-boundary.md)。

@@ -1,0 +1,36 @@
+{
+  "reference": "existing read-only audit package fingerprint",
+  "before": {
+    "head": "b3d5c1133e5809e272529d5b2c6cff8595f1d3d6",
+    "branch": "codex/nexus-p1-5-c-quality-integration",
+    "status": "",
+    "tracked": {
+      "files": 554,
+      "bytes": 84795058,
+      "sha256": "e91cef4993d773eaf478eac99100b28a7acbe0129b1fab4396fe16abdb4a82b7"
+    },
+    "testResults": {
+      "files": 501,
+      "bytes": 369071693,
+      "sha256": "bf1b71f36d530cc3d83b04b2ba323c6b5d594e066d02c9e8426e742a429dad11"
+    },
+    "main": "a43fb6ce427307024dfb97a7889d9af9ebf58da9"
+  },
+  "after": {
+    "head": "b3d5c1133e5809e272529d5b2c6cff8595f1d3d6",
+    "branch": "codex/nexus-p1-5-c-quality-integration",
+    "status": "",
+    "tracked": {
+      "files": 554,
+      "bytes": 84795058,
+      "sha256": "e91cef4993d773eaf478eac99100b28a7acbe0129b1fab4396fe16abdb4a82b7"
+    },
+    "testResults": {
+      "files": 501,
+      "bytes": 369071693,
+      "sha256": "bf1b71f36d530cc3d83b04b2ba323c6b5d594e066d02c9e8426e742a429dad11"
+    },
+    "main": "a43fb6ce427307024dfb97a7889d9af9ebf58da9"
+  },
+  "equal": true
+}
