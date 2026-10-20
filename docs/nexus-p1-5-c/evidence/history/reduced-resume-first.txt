@@ -1,0 +1,46 @@
+[WebServer] (node:14753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:14755) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:14756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 1 test using 1 worker
+
+(node:14763) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] e2e/p1-5-c-lifecycle.spec.ts:3:1 › GSAP reduced-motion resume: immediate scheduling window versus real progress across 30 cycles
+  1) e2e/p1-5-c-lifecycle.spec.ts:3:1 › GSAP reduced-motion resume: immediate scheduling window versus real progress across 30 cycles
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 90
+    Received:   60
+
+      19 |     await page.clock.runFor(1000);await expect(debug).toHaveAttribute('data-paused','false');const settled=await read();
+      20 |     // Keep the historical post-resume RAF assertion intact; transient snapshots are recorded separately.
+    > 21 |     expect(settled.loop).toEqual({pending:1,max:1});expect(settled.ticker.activeListeners).toBe(1);expect(settled.ticker.listenerUpdates).toBeGreaterThan(staticState.ticker.listenerUpdates+30);expect(settled.ticker.liveScenes).toBe(1);expect(settled.ticker.rootAnimations).toBe(0);
+         |                                                                                                                                           ^
+      22 |     evidence.push({cycle:i+1,staticState,immediate,settled});
+      23 |   }
+      24 |   mkdirSync('.review/p1-5-c',{recursive:true});writeFileSync('.review/p1-5-c/reduced-resume-30.json',JSON.stringify(evidence,null,2));
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c/e2e/p1-5-c-lifecycle.spec.ts:21:139
+
+    Error Context: .review/p1-5-c/reduced-resume-30-traces/p1-5-c-lifecycle-GSAP-redu-cd5d1-l-progress-across-30-cycles/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-5-c/reduced-resume-30-traces/p1-5-c-lifecycle-GSAP-redu-cd5d1-l-progress-across-30-cycles/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-5-c/reduced-resume-30-traces/p1-5-c-lifecycle-GSAP-redu-cd5d1-l-progress-across-30-cycles/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    e2e/p1-5-c-lifecycle.spec.ts:3:1 › GSAP reduced-motion resume: immediate scheduling window versus real progress across 30 cycles

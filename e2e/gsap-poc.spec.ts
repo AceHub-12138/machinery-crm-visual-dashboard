@@ -35,7 +35,15 @@ test('GSAP interruption, restart, visibility, reduced motion, single RAF and cli
   await page.emulateMedia({ reducedMotion: 'reduce' }); await page.clock.runFor(300);
   await expect(debug).toHaveAttribute('data-level', 'static');
   expect(await page.evaluate(() => (window as unknown as { loopAudit: () => { pending: number } }).loopAudit().pending)).toBe(0);
-  await page.emulateMedia({ reducedMotion: 'no-preference' }); await page.clock.runFor(1000);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  // Media-query change is asynchronous to the CDP command. Preserve the original
+  // 1000ms RAF assertion, but begin its measurement after the environment resumes.
+  const immediate = await page.evaluate(() => ({ loops: (window as unknown as { loopAudit: () => unknown }).loopAudit(), paused: document.querySelector('.nexus-motion-debug')?.getAttribute('data-paused') }));
+  await expect(debug).toHaveAttribute('data-paused', 'false');
+  const beforeUpdates = JSON.parse((await page.locator('[data-gsap-audit]').textContent())!).listenerUpdates;
+  await page.clock.runFor(1000);
+  const afterUpdates = JSON.parse((await page.locator('[data-gsap-audit]').textContent())!).listenerUpdates;
+  expect(afterUpdates - beforeUpdates).toBeGreaterThan(30);
   const loops = await page.evaluate(() => (window as unknown as { loopAudit: () => { pending: number; max: number } }).loopAudit());
   expect(loops).toEqual({ pending: 1, max: 1 });
   // Next Link uses actual React unmounts, retaining the JS module for leak detection.
@@ -48,7 +56,7 @@ test('GSAP interruption, restart, visibility, reduced motion, single RAF and cli
     const audit = JSON.parse((await page.locator('[data-gsap-audit]').textContent())!);
     expect(audit.liveScenes).toBe(1); expect(audit.rootAnimations).toBe(0); expect(audit.liveTimelines).toBe(Number(await root.getAttribute('data-gsap-timelines')));
   }
-  writeFileSync(path.join(output, 'lifecycle.json'), JSON.stringify({ loops, switches: 10, timelines: await root.getAttribute('data-gsap-timelines') }, null, 2));
+  writeFileSync(path.join(output, 'lifecycle.json'), JSON.stringify({ immediate, listenerGrowth: afterUpdates - beforeUpdates, loops, switches: 10, timelines: await root.getAttribute('data-gsap-timelines') }, null, 2));
 });
 for (const width of [1920, 3840]) test(`stationary geometry and pixels compare at ${width}`, async ({ page }) => {
   await page.setViewportSize({ width, height: width * 9 / 16 }); await page.emulateMedia({ reducedMotion: 'reduce' });

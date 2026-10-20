@@ -1,0 +1,14 @@
+{
+  "source": ".review/p1-5-c/display-environment.json",
+  "gpu": "Apple M1 Ultra",
+  "metalSupport": "spdisplays_metal3",
+  "physicalDisplays": [
+    {
+      "model": "27E2N1110",
+      "resolution": "1920 x 1080 @ 100.00Hz",
+      "pixels": "1920 x 1080"
+    }
+  ],
+  "scope": "3840x2160 is a browser virtual viewport. Physical display refresh switching and LED acceptance remain unverified.",
+  "serialAndHardwareIdentifiersOmitted": true
+}

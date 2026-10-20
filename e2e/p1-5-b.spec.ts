@@ -2,11 +2,11 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ request }) => { await request.get('http://127.0.0.1:3199/control?reset=1'); });
 
-for (const engine of ['legacy', 'gsap']) test(`external quality experiment remains isolated and lifecycle-safe: ${engine}`, async ({ page }) => {
+for (const engine of ['legacy', 'gsap']) test(`historical external URL falls back to protected baseline: ${engine}`, async ({ page }) => {
   await page.goto(`/screen/sales?debug=1&motion=${engine}&qualityExperiment=external`);
   const stage = page.locator('#screen-stage'), debug = page.locator('.nexus-motion-debug');
   await expect(stage).toHaveAttribute('data-motion-engine', engine);
-  await expect(debug).toHaveAttribute('data-quality-automation', 'external-experiment');
+  await expect(debug).toHaveAttribute('data-quality-automation', 'baseline');
   await page.getByRole('button', { name: '强制低档' }).click();
   await expect(stage).toHaveAttribute('data-motion-level', 'low');
   await page.getByRole('button', { name: '触发共振' }).click();

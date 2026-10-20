@@ -5,7 +5,8 @@ const port = Number(process.env.PLAYWRIGHT_PORT ?? 3017);
 const baseURL = `http://127.0.0.1:${port}`;
 export default defineConfig({
   testDir: "./e2e",
-  testIgnore: ["**/nexus.spec.ts", "**/nexus-motion.spec.ts"],
+  // Motion-specific suites run in their own configs with reducedMotion=no-preference.
+  testIgnore: ["**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
   fullyParallel: false,
   workers: 1,
   timeout: 30_000,
@@ -19,6 +20,6 @@ export default defineConfig({
   {
     command: `pnpm exec next start --hostname 127.0.0.1 --port ${port}`,
     url: `${baseURL}/screen/sales`, reuseExistingServer: false,
-    env: { TZ: "Asia/Shanghai", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only" }, timeout: 60_000,
+    env: { NEXUS_QUALITY_PERMISSION: 'local-candidate', TZ: "Asia/Shanghai", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only" }, timeout: 60_000,
   }],
 });

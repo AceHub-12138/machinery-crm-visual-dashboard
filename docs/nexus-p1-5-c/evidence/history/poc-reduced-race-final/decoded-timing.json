@@ -1,0 +1,201 @@
+[
+  {
+    "type": "decoded-snapshot",
+    "timestamp": 5760.2,
+    "attrs": [
+      [
+        "ASIDE",
+        {
+          "class": "nexus-motion-debug",
+          "aria-label": "\u52a8\u6548\u8c03\u8bd5",
+          "data-state": "AMBIENT",
+          "data-level": "static",
+          "data-paused": "true",
+          "data-clock": "10736",
+          "data-pulse-due-in": "150000",
+          "data-quality-automation": "baseline",
+          "data-quality-state": "normal",
+          "data-quality-target": "60"
+        },
+        [
+          [
+            10,
+            54
+          ]
+        ]
+      ],
+      [
+        "OUTPUT",
+        {
+          "hidden": "",
+          "data-gsap-audit": "true"
+        },
+        "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0,\"configuredCapHz\":60,\"activeListeners\":0,\"listenerUpdates\":646,\"firstAtMs\":32,\"lastAtMs\":11088}"
+      ]
+    ]
+  },
+  {
+    "type": "decoded-snapshot",
+    "timestamp": 5765.375,
+    "attrs": [
+      [
+        "ASIDE",
+        {
+          "__playwright_target__": "",
+          "class": "nexus-motion-debug",
+          "aria-label": "\u52a8\u6548\u8c03\u8bd5",
+          "data-state": "AMBIENT",
+          "data-level": "static",
+          "data-paused": "true",
+          "data-clock": "10736",
+          "data-pulse-due-in": "150000",
+          "data-quality-automation": "baseline",
+          "data-quality-state": "normal",
+          "data-quality-target": "60"
+        },
+        [
+          [
+            12,
+            54
+          ]
+        ]
+      ]
+    ]
+  },
+  {
+    "type": "decoded-snapshot",
+    "timestamp": 5766.862,
+    "attrs": [
+      [
+        "ASIDE",
+        {
+          "class": "nexus-motion-debug",
+          "aria-label": "\u52a8\u6548\u8c03\u8bd5",
+          "data-state": "AMBIENT",
+          "data-level": "static",
+          "data-paused": "true",
+          "data-clock": "10736",
+          "data-pulse-due-in": "150000",
+          "data-quality-automation": "baseline",
+          "data-quality-state": "normal",
+          "data-quality-target": "60"
+        },
+        [
+          [
+            13,
+            54
+          ]
+        ]
+      ]
+    ]
+  },
+  {
+    "type": "before",
+    "callId": "call@85",
+    "startTime": 5768.788,
+    "class": "Page",
+    "method": "emulateMedia",
+    "params": {
+      "reducedMotion": "no-preference"
+    },
+    "stepId": "pw:api@77"
+  },
+  {
+    "type": "after",
+    "callId": "call@85",
+    "endTime": 5770.09
+  },
+  {
+    "type": "before",
+    "callId": "call@87",
+    "startTime": 5776.577,
+    "class": "BrowserContext",
+    "method": "clockRunFor",
+    "params": {
+      "ticksNumber": 1000
+    },
+    "stepId": "pw:api@78"
+  },
+  {
+    "type": "after",
+    "callId": "call@87",
+    "endTime": 5780.141
+  },
+  {
+    "type": "before",
+    "callId": "call@89",
+    "startTime": 5780.672,
+    "class": "Frame",
+    "method": "evaluateExpression",
+    "params": {
+      "expression": "() => window.loopAudit()",
+      "isFunction": true,
+      "arg": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      }
+    },
+    "stepId": "pw:api@79"
+  },
+  {
+    "type": "after",
+    "callId": "call@89",
+    "endTime": 5782.801,
+    "result": {
+      "value": {
+        "o": [
+          {
+            "k": "pending",
+            "v": {
+              "n": 0
+            }
+          },
+          {
+            "k": "max",
+            "v": {
+              "n": 1
+            }
+          }
+        ],
+        "id": 1
+      }
+    }
+  },
+  {
+    "type": "decoded-snapshot",
+    "timestamp": 5787.233,
+    "attrs": [
+      [
+        "ASIDE",
+        {
+          "class": "nexus-motion-debug",
+          "aria-label": "\u52a8\u6548\u8c03\u8bd5",
+          "data-state": "AMBIENT",
+          "data-level": "normal",
+          "data-paused": "false",
+          "data-clock": "10736",
+          "data-pulse-due-in": "150000",
+          "data-quality-automation": "baseline",
+          "data-quality-state": "normal",
+          "data-quality-target": "60"
+        },
+        [
+          [
+            18,
+            54
+          ]
+        ]
+      ],
+      [
+        "OUTPUT",
+        {
+          "hidden": "",
+          "data-gsap-audit": "true"
+        },
+        "{\"liveScenes\":1,\"liveTimelines\":27,\"rootAnimations\":0,\"configuredCapHz\":60,\"activeListeners\":1,\"listenerUpdates\":646,\"firstAtMs\":32,\"lastAtMs\":11088}"
+      ]
+    ]
+  }
+]

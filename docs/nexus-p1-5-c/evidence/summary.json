@@ -1,0 +1,375 @@
+{
+  "baseline": "2584284e3e7b994d0510d9d53b2a302e3aa740bc",
+  "branch": "codex/nexus-p1-5-c-quality-integration",
+  "unit": {
+    "files": 51,
+    "tests": 649,
+    "passed": 649,
+    "failed": 0
+  },
+  "finalChecks": [
+    {
+      "name": "legacy-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "gsap-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "general-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "unit-final",
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck-final",
+      "exitCode": 0
+    },
+    {
+      "name": "lint-final",
+      "exitCode": 0
+    }
+  ],
+  "soaks": [
+    {
+      "engine": "gsap",
+      "status": "passed",
+      "actualMs": 1800081,
+      "counts": {
+        "downshifts": 1,
+        "probeStarts": 27,
+        "probeFailures": 26,
+        "recoveries": 1
+      },
+      "timers": {
+        "activeTimeouts": {
+          "first": 0,
+          "last": 0,
+          "min": 0,
+          "max": 0,
+          "mean": 0
+        },
+        "activeIntervals": {
+          "first": 3,
+          "last": 3,
+          "min": 3,
+          "max": 3,
+          "mean": 3
+        },
+        "pendingApplicationRaf": {
+          "first": 1,
+          "last": 1,
+          "min": 1,
+          "max": 1,
+          "mean": 1
+        }
+      },
+      "ticker": {
+        "independentDirectInstrumentation": true,
+        "configuredCapHz": 60,
+        "totalCallsAtFinal": 106005,
+        "validExternalWindows": 1678,
+        "normalLoadIncludesProbe": true,
+        "rateClock": "counter difference / listener snapshot lastAtMs difference; exclude interrupted and transitioning intervals",
+        "sampledNormalLoadHz": {
+          "first": 20.758851343612502,
+          "last": 59.99612928206832,
+          "min": 20.758851343612502,
+          "max": 60.060060060233454,
+          "mean": 59.67598023933555
+        },
+        "sampledLowLoadHz": {
+          "first": 60.05719733079123,
+          "last": 59.99213217934235,
+          "min": 30.476190476190474,
+          "max": 60.189165949957605,
+          "mean": 59.91727754495058
+        },
+        "listenerCount": {
+          "first": 1,
+          "last": 1,
+          "min": 1,
+          "max": 1,
+          "mean": 1
+        },
+        "scenes": {
+          "first": 1,
+          "last": 1,
+          "min": 1,
+          "max": 1,
+          "mean": 1
+        },
+        "timelines": {
+          "first": 27,
+          "last": 27,
+          "min": 27,
+          "max": 27,
+          "mean": 27
+        },
+        "rootAnimations": {
+          "first": 0,
+          "last": 0,
+          "min": 0,
+          "max": 0,
+          "mean": 0
+        }
+      },
+      "resources": {
+        "JSHeapUsedSize": {
+          "first": 8708068,
+          "last": 13107696,
+          "min": 7179780,
+          "max": 17232728,
+          "mean": 12087040.64516129,
+          "slopePerMinute": 119885.43412225576
+        },
+        "Nodes": {
+          "first": 1562,
+          "last": 1249,
+          "min": 1201,
+          "max": 1562,
+          "mean": 1252.6129032258063,
+          "slopePerMinute": -1.077832892472479
+        },
+        "JSEventListeners": {
+          "first": 666,
+          "last": 403,
+          "min": 370,
+          "max": 666,
+          "mean": 424.741935483871,
+          "slopePerMinute": -0.6812386428567492
+        }
+      },
+      "recoveryDelayMs": 50576,
+      "errors": []
+    },
+    {
+      "engine": "legacy",
+      "status": "passed",
+      "actualMs": 600064,
+      "counts": {
+        "downshifts": 1,
+        "probeStarts": 10,
+        "probeFailures": 9,
+        "recoveries": 1
+      },
+      "timers": {
+        "activeTimeouts": {
+          "first": 0,
+          "last": 0,
+          "min": 0,
+          "max": 0,
+          "mean": 0
+        },
+        "activeIntervals": {
+          "first": 3,
+          "last": 3,
+          "min": 3,
+          "max": 3,
+          "mean": 3
+        },
+        "pendingApplicationRaf": {
+          "first": 1,
+          "last": 1,
+          "min": 1,
+          "max": 1,
+          "mean": 1
+        }
+      },
+      "ticker": null,
+      "resources": {
+        "JSHeapUsedSize": {
+          "first": 7684192,
+          "last": 6620100,
+          "min": 6620100,
+          "max": 13966760,
+          "mean": 10509251.636363637,
+          "slopePerMinute": -151835.07424663578
+        },
+        "Nodes": {
+          "first": 1559,
+          "last": 1311,
+          "min": 1218,
+          "max": 1559,
+          "mean": 1279.6363636363637,
+          "slopePerMinute": -15.181578584191067
+        },
+        "JSEventListeners": {
+          "first": 677,
+          "last": 503,
+          "min": 381,
+          "max": 677,
+          "mean": 454.8181818181818,
+          "slopePerMinute": -12.74152053912579
+        }
+      },
+      "recoveryDelayMs": 26384,
+      "errors": []
+    }
+  ],
+  "regression": [
+    {
+      "name": "integration",
+      "path": ".review/p1-5-c/integration-delivery-results.json",
+      "stats": {
+        "startTime": "2026-10-20T05:04:55.849Z",
+        "duration": 96096.976,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "name": "denied",
+      "path": ".review/p1-5-c/denied-results.json",
+      "stats": {
+        "startTime": "2026-10-20T01:00:03.174Z",
+        "duration": 2993.8650000000002,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "name": "legacy",
+      "path": ".review/gsap-poc/p15c-legacy-regression.json",
+      "stats": {
+        "startTime": "2026-10-20T05:50:05.889Z",
+        "duration": 330794.549,
+        "expected": 63,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "name": "gsap",
+      "path": ".review/gsap-poc/p15c-gsap-regression.json",
+      "stats": {
+        "startTime": "2026-10-20T05:55:37.090Z",
+        "duration": 328874.62799999997,
+        "expected": 63,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "name": "poc",
+      "path": ".review/gsap-poc/p15c-poc-delivery.json",
+      "stats": {
+        "startTime": "2026-10-20T05:08:22.566Z",
+        "duration": 92852.383,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "name": "historical-entry",
+      "path": ".review/p1-5-b/e2e-results.json",
+      "stats": {
+        "startTime": "2026-10-20T01:11:12.796Z",
+        "duration": 2877.928,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "name": "reduced-resume-30",
+      "path": ".review/p1-5-c/reduced-resume-30-final-results.json",
+      "stats": {
+        "startTime": "2026-10-20T01:24:40.830Z",
+        "duration": 12431.913,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "name": "baseline-tail",
+      "path": ".review/p1-5-c/baseline-tail-results.json",
+      "stats": {
+        "startTime": "2026-10-20T01:22:45.447Z",
+        "duration": 8608.13,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "name": "general",
+      "stats": {
+        "startTime": "2026-10-20T06:01:06.462Z",
+        "duration": 676478.153,
+        "expected": 196,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "failures": []
+    }
+  ],
+  "caveats": [
+    "Local evidence only; no LED/human visual acceptance.",
+    "Actual listener calls and RAF dispatches are not displayed frames.",
+    "Legacy product remains uncapped; tests inject a shared 60Hz RAF cap.",
+    "P1.5-B historical failing trace zip could not be located; committed failure description preserved.",
+    "Effective calibration below 52Hz exits experiment without changing B thresholds."
+  ],
+  "visual": {
+    "status": "passed",
+    "scenarios": 8,
+    "frames": 56,
+    "videos": [
+      {
+        "engine": "legacy",
+        "path": ".review/p1-5-c/visual/videos/page@51d12ac3c65c122f15f0b1474ca0c2ef.webm"
+      },
+      {
+        "engine": "gsap",
+        "path": ".review/p1-5-c/visual/videos/page@4ff8e93c207b890388dd4a8ece7a0367.webm"
+      }
+    ],
+    "errors": []
+  },
+  "resumeAudit": {
+    "cycles": 30,
+    "immediateZeroRaf": 8,
+    "settledSingleRaf": 30,
+    "listenerGrowth": {
+      "first": 60,
+      "last": 54,
+      "min": 46,
+      "max": 60,
+      "mean": 53.666666666666664
+    }
+  }
+}

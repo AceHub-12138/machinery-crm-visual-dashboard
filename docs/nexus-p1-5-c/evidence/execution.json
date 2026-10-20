@@ -1,0 +1,100 @@
+{
+  "buildAndIntegration": [
+    {
+      "name": "delivery-build",
+      "exitCode": 0,
+      "command": [
+        "pnpm",
+        "build"
+      ],
+      "environment": {}
+    },
+    {
+      "name": "integration-delivery",
+      "exitCode": 0,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/p1-5-c.config.ts"
+      ],
+      "environment": {
+        "NEXUS_QUALITY_PERMISSION": "local-candidate",
+        "P15C_E2E_LABEL": "integration-delivery"
+      }
+    }
+  ],
+  "runtime": [
+    {
+      "name": "poc-delivery",
+      "exitCode": 0,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/gsap-poc.config.ts"
+      ],
+      "environment": {
+        "GSAP_RESULT_NAME": "p15c-poc-delivery"
+      }
+    },
+    {
+      "name": "gsap-soak",
+      "exitCode": 0,
+      "command": [
+        "node",
+        "scripts/p1-5-c/run.mjs"
+      ],
+      "environment": {
+        "P15C_PHASE": "soak",
+        "P15C_ENGINE": "gsap",
+        "P15C_DURATION_MS": "1800000",
+        "P15C_RELIEF_AT_MS": "1500000"
+      }
+    },
+    {
+      "name": "legacy-soak",
+      "exitCode": 0,
+      "command": [
+        "node",
+        "scripts/p1-5-c/run.mjs"
+      ],
+      "environment": {
+        "P15C_PHASE": "soak",
+        "P15C_ENGINE": "legacy",
+        "P15C_DURATION_MS": "600000",
+        "P15C_RELIEF_AT_MS": "480000"
+      }
+    }
+  ],
+  "finalChecks": [
+    {
+      "name": "legacy-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "gsap-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "general-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "unit-final",
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck-final",
+      "exitCode": 0
+    },
+    {
+      "name": "lint-final",
+      "exitCode": 0
+    }
+  ]
+}

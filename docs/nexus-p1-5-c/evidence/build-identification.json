@@ -1,0 +1,18 @@
+{
+  "baseline": "2584284e3e7b994d0510d9d53b2a302e3aa740bc",
+  "branch": "codex/nexus-p1-5-c-quality-integration",
+  "buildId": "ybUJlLGtMMnW8TdCFTN76",
+  "command": "pnpm build",
+  "buildResult": {
+    "name": "delivery-build",
+    "exitCode": 0,
+    "command": [
+      "pnpm",
+      "build"
+    ],
+    "environment": {}
+  },
+  "productHashList": "product-inputs.json",
+  "buildOutput": "build.txt",
+  "sourceVerification": "140 listed files unchanged through completion of both formal soaks"
+}

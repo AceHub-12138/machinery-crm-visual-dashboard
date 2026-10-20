@@ -79,7 +79,8 @@ export function useSceneMotion(payload: PublicScreenPayload, onSelect: (key: str
         if (sweep && time >= nextSweep) { sweepStart = time; nextSweep = time + between(c.rulerInterval); }
       }
       if (previousSelectionAt !== director.selectionAt) { previousSelectionAt = director.selectionAt; nextFocus = time + between(c.focusInterval); }
-      if (motionLevel === 'low') flights = flights.slice(0, 1);
+      const qualityMix = director.qualityMode === 'candidate' ? Math.min(1, Math.max(0, (time - director.qualityChangedAt) / c.reset)) : 1;
+      if (motionLevel === 'low' && qualityMix >= 1) flights = flights.slice(0, 1);
       flights = flights.filter(f => time - f.start < c.routeTravel + c.arrival);
       const selected = !paused && !isPulse && time - director.selectionAt < c.focusHighlight ? director.selectedKey : null;
       const linked = selected === null ? null : linkTarget(routes, localKeys, selected);
@@ -96,9 +97,10 @@ export function useSceneMotion(payload: PublicScreenPayload, onSelect: (key: str
         const focused = route.key === focus, focusProgress = focused ? (time - director.selectionAt) / c.focusHighlight : 0;
         const lightStart = c.pulseMapRise + route.order * (c.pulseRoutesFull - c.pulseMapRise - c.pulseRouteRamp);
         const routeIntensity = pulsing && seconds >= lightStart ? (gsapRoute?.intensity ?? smooth((seconds - lightStart) / c.pulseRouteRamp)) * decay : 0;
+        const flightAlpha = motionLevel === 'low' && flight && flights.indexOf(flight) > 0 ? 1 - qualityMix : 1;
         route.group.dataset.routeBright = String(routeIntensity > 0 || focused || !!flight);
-        attr(route.light, 'opacity', routeIntensity || (focused ? .7 : flight ? .35 : 0));
-        attr(route.traveler, 'opacity', moving ? 1 : 0); attr(route.glow, 'opacity', moving ? 1 : 0); attr(route.tail, 'opacity', moving ? 1 : 0);
+        attr(route.light, 'opacity', routeIntensity || (focused ? .7 : flight ? .35 * flightAlpha : 0));
+        attr(route.traveler, 'opacity', moving ? flightAlpha : 0); attr(route.glow, 'opacity', moving ? flightAlpha : 0); attr(route.tail, 'opacity', moving ? flightAlpha : 0);
         if (moving) {
           const position = travel * 100, index = Math.min(99, Math.floor(position)), mix = position - index;
           const a = route.points[index], b = route.points[index + 1], x = a.x + (b.x - a.x) * mix, y = a.y + (b.y - a.y) * mix;
@@ -109,10 +111,10 @@ export function useSceneMotion(payload: PublicScreenPayload, onSelect: (key: str
         // Only the top unit cities ripple during the resonance; the rest brighten their dot without a ring.
         const pulseRipple = pulsing && route.pulseRipple && seconds >= c.pulseRoutesFull && seconds < c.pulseHoldEnd ? (gsapRoute?.ripple === 1 ? 0 : gsapRoute?.ripple) ?? (seconds - c.pulseRoutesFull) / c.pulseRippleCycle % 1 : -1;
         const rippleProgress = pulseRipple >= 0 ? pulseRipple : focused ? focusProgress : Math.max(0, arrival);
-        const rippleAlpha = pulsing ? pulseRipple >= 0 ? .95 * (1 - pulseRipple) : 0 : arriving ? (1 - arrival) * .7 : focused ? (1 - focusProgress) * .7 : 0;
+        const rippleAlpha = pulsing ? pulseRipple >= 0 ? .95 * (1 - pulseRipple) : 0 : arriving ? (1 - arrival) * .7 * flightAlpha : focused ? (1 - focusProgress) * .7 : 0;
         attr(route.ripple, 'opacity', rippleAlpha); attr(route.ripple, 'r', (8 + rippleProgress * 16) / scale);
         attr(route.dot, 'r', Number(route.dot.dataset.normalRadius) * (focused ? 1.6 : 1));
-        attr(route.city, 'opacity', pulsing ? routeIntensity * .95 : focused ? .7 : arriving ? (1 - arrival) * .7 : 0);
+        attr(route.city, 'opacity', pulsing ? routeIntensity * .95 : focused ? .7 : arriving ? (1 - arrival) * .7 * flightAlpha : 0);
         attr(route.city, 'r', (focused ? 12.8 : 8) / scale);
       }
       if (origin) { const breath = gsapScene?.sampleBreath(time) ?? wave(time, c.originCycle); attr(origin, 'r', (paused ? 20 : localFocus ? 36 : 16 + breath * 12 + intensity * 16) / scale); attr(origin, 'opacity', localFocus ? 1 : paused ? .35 : (.35 + breath * .45) * (1 - intensity) + intensity); origin.dataset.originFocus = String(localFocus); if (!paused && !isPulse && !localFocus) significant++; }
@@ -121,7 +123,8 @@ export function useSceneMotion(payload: PublicScreenPayload, onSelect: (key: str
       const scanning = !paused && !numericCount && !isPulse && time - sweepStart < c.rulerSweep;
       if (sweep) { sweep.style.opacity = scanning ? '.35' : '0'; sweep.style.left = `${scanning ? (time - sweepStart) / c.rulerSweep * 100 : 0}%`; if (scanning) significant++; }
       if (ctx) {
-        const particlesEnabled = !paused && motionLevel === 'normal' && significant < c.maxSignificant;
+        const particlesEnabled = !paused && (motionLevel === 'normal' || qualityMix < 1) && significant < c.maxSignificant;
+        canvas.style.opacity = String(motionLevel === 'normal' ? qualityMix : 1 - qualityMix);
         canvas.style.visibility = particlesEnabled ? 'visible' : 'hidden';
         if (particlesEnabled) {
           ctx.clearRect(0, 0, width, height); ctx.fillStyle = '#EE7D2C';
@@ -130,10 +133,10 @@ export function useSceneMotion(payload: PublicScreenPayload, onSelect: (key: str
         }
       }
       frame.significant = paused ? 0 : significant; root.dataset.motionSignificant = String(frame.significant);
-      if (paused) runtime?.sleep();
+      if (paused) runtime?.settleIdle();
       schedule.current = { nextRoute, nextFocus, nextSweep, sweepStart, focusIndex, flights };
     });
-    if (!director.running) runtime?.sleep();
+    if (!director.running) runtime?.settleIdle();
     return () => { unregister(); gsapScene?.dispose(); root.dataset.gsapTimelines = "0"; ctx?.clearRect(0, 0, width, height); };
   }, [director, onSelect, payload, runtime]);
   return select;

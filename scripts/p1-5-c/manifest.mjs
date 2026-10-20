@@ -1,0 +1,11 @@
+import {createHash} from 'node:crypto';
+import {readFileSync,writeFileSync,readdirSync,statSync,existsSync} from 'node:fs';
+import path from 'node:path';
+const walk=dir=>existsSync(dir)?readdirSync(dir).flatMap(name=>{const p=path.join(dir,name);return statSync(p).isDirectory()?walk(p):[p];}):[];
+const hash=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const manifest='docs/nexus-p1-5-c/evidence/manifest.json';
+const roots=['docs/nexus-p1-5-c','scripts/p1-5-c','.review/p1-5-c'];
+const files=roots.flatMap(walk).filter(p=>p!==manifest).map(p=>({path:p,bytes:statSync(p).size,sha256:hash(p),committedIntention:!p.startsWith('.review/')}));
+for(const p of ['.review/gsap-poc/functional-results.json','.review/gsap-poc/p15c-poc-delivery.json','.review/gsap-poc/p15c-legacy-regression.json','.review/gsap-poc/p15c-gsap-regression.json','.review/p1-5-b/e2e-results.json'])if(existsSync(p))files.push({path:p,bytes:statSync(p).size,sha256:hash(p),committedIntention:false});
+writeFileSync(manifest,JSON.stringify({algorithm:'SHA-256',generatedAt:new Date().toISOString(),rawArtifactsAreLocal:true,files,historicalMissingTrace:{path:'/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-b/.review/gsap-poc/legacy-traces/',status:'zip missing at read-only inspection; only .last-run.json exists',failureDescription:'docs/nexus-p1-5-b/06-regression.md'}},null,2));
+console.log(JSON.stringify({files:files.length,bytes:files.reduce((n,f)=>n+f.bytes,0)}));

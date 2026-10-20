@@ -1,0 +1,99 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 test /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c
+> vitest run -- --reporter=json --outputFile=.review/p1-5-c/unit-initial.json
+
+
+ RUN  v3.2.7 /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c
+
+ ✓ src/lib/freshness.test.ts (2 tests) 20ms
+ ✓ src/lib/voice/microphone-barge.test.ts (9 tests) 9ms
+ ✓ services/voice-orchestrator/test/http-input.test.ts (6 tests) 47ms
+ ❯ src/components/screen/motion/MotionDirector.test.ts (14 tests | 1 failed) 28ms
+   ✓ MotionDirector > owns only one frame loop for all registered effects and cleans up without timers 2ms
+   ✓ MotionDirector > intro finishes within 2.5 seconds; automatic pulse is timed from completion 6ms
+   ✓ MotionDirector > restarts intro from the current clock and rejects restart while interrupted 0ms
+   ✓ MotionDirector > hidden page pauses the clock, clears pulse, and resumes stable without catch-up 4ms
+   ✓ MotionDirector > voice wake cancels pulse immediately, blocks retrigger, and restarts interval on exit 1ms
+   ✓ MotionDirector > five seconds below 45fps degrades, and ten seconds recovered upgrades 1ms
+   ✓ MotionDirector > has one policy owner; shadow observes while candidate alone controls quality 1ms
+   ✓ MotionDirector > fails safely to baseline on throwing or malformed policies 0ms
+   × MotionDirector > candidate preserves backoff and drops stale evidence on hidden/voice/reduced/recalibration 7ms
+     → expected 'low' to be 'normal' // Object.is equality
+   ✓ MotionDirector > reserves a stable probe after bounded INTRO deferral without interrupting the current cue 1ms
+   ✓ MotionDirector > reduced motion is static, respects manual low mode, and creates no pending frame 0ms
+   ✓ MotionDirector > logs fps and available memory every ten minutes with a bounded buffer 5ms
+   ✓ MotionDirector > admits at most eight independent significant effects 0ms
+   ✓ MotionDirector > rejects pulse configurations outside the allowed interval 0ms
+ ✓ src/lib/feed-mask.test.ts (2 tests) 9ms
+ ✓ src/lib/voice/input.test.ts (13 tests) 35ms
+ ✓ services/voice-orchestrator/test/scripted.test.ts (12 tests) 39ms
+ ✓ src/components/overlay/JarvisCore.test.tsx (2 tests) 116ms
+ ✓ services/voice-orchestrator/test/utterance.test.ts (3 tests) 36ms
+ ✓ services/voice-orchestrator/test/datasource.test.ts (7 tests) 12ms
+ ✓ src/lib/voice/task12.test.ts (15 tests) 44ms
+ ✓ src/lib/voice/pcm-player.test.ts (26 tests) 199ms
+ ✓ src/lib/screen-map-routes.test.ts (8 tests) 72ms
+ ✓ services/voice-orchestrator/test/inject-context.test.ts (10 tests) 24ms
+ ✓ src/lib/voice/params.test.ts (28 tests) 29ms
+ ✓ src/lib/nexus-p2-visual.test.tsx (4 tests) 88ms
+ ✓ src/lib/voice/card-builders.test.ts (13 tests) 30ms
+ ✓ src/lib/font-scale.test.ts (5 tests) 30ms
+ ✓ src/lib/public-screen-payload.test.ts (3 tests) 75ms
+ ✓ src/lib/format.test.ts (6 tests) 15ms
+ ✓ services/voice-orchestrator/test/orchestrator.test.ts (33 tests) 299ms
+ ✓ src/lib/geo.test.ts (13 tests) 30ms
+ ✓ services/voice-orchestrator/test/trace.test.ts (23 tests) 11ms
+ ✓ src/lib/voice/screen-data-reconcile.test.ts (40 tests) 69ms
+ ✓ src/lib/layout.test.ts (32 tests) 11ms
+ ✓ src/components/screen/motion/QualityPolicy.test.ts (23 tests) 5ms
+ ✓ services/voice-orchestrator/test/llm.test.ts (11 tests) 10ms
+ ✓ src/lib/nexus-fields.test.tsx (9 tests) 352ms
+ ✓ src/lib/screen-snapshot.test.ts (4 tests) 8ms
+ ✓ src/lib/voice/protocol.test.ts (24 tests) 8ms
+ ✓ src/lib/mock.test.ts (3 tests) 4ms
+ ✓ src/lib/voice/spoken-normalize.test.ts (35 tests) 5ms
+ ✓ src/lib/text-layout.test.ts (5 tests) 15ms
+ ✓ services/voice-orchestrator/test/platform-mcp.test.ts (6 tests) 9ms
+ ✓ src/components/screen/motion/GsapScene.test.ts (3 tests) 12ms
+ ✓ src/lib/voice/session-machine.test.ts (11 tests) 4ms
+ ✓ src/lib/voice/echo-similarity.test.ts (12 tests) 6ms
+ ✓ src/lib/voice/live-source.test.ts (9 tests) 4ms
+ ✓ services/voice-orchestrator/test/config.test.ts (9 tests) 4ms
+ ✓ src/lib/voice/microphone-mode.test.ts (1 test) 2ms
+ ✓ src/lib/voice/intents.test.ts (39 tests) 3ms
+ ✓ src/lib/voice/card-presentation.test.ts (4 tests) 3ms
+ ✓ src/lib/region-zone.test.ts (1 test) 2ms
+ ✓ services/voice-orchestrator/test/secrets.test.ts (1 test) 2ms
+ ✓ scripts/voice-echo-metrics.test.ts (4 tests) 2ms
+ ✓ src/lib/target.test.ts (2 tests) 2ms
+ ✓ services/voice-orchestrator/test/audio.test.ts (29 tests) 859ms
+ ✓ services/voice-orchestrator/test/listen-repair.test.ts (40 tests) 867ms
+ ✓ services/voice-orchestrator/test/ws-server.test.ts (19 tests) 1052ms
+   ✓ ws hub — 2026-09-30 审核修复 > 已声明角色的连接不受 hello 截止影响  403ms
+   ✓ ws hub — 2026-09-30 审核修复 > 心跳:idleTimeoutMs 内无任何入站数据 → 断开(审核 M5)  304ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/screen/motion/MotionDirector.test.ts > MotionDirector > candidate preserves backoff and drops stale evidence on hidden/voice/reduced/recalibration
+AssertionError: expected 'low' to be 'normal' // Object.is equality
+
+Expected: "normal"
+Received: "low"
+
+ ❯ src/components/screen/motion/MotionDirector.test.ts:83:57
+     81|     }
+     82|     r.director.setCalibration(100); expect(r.director.qualityDecision?…
+     83|     r.run(90_000); expect(r.director.frame.motionLevel).toBe('normal')…
+       |                                                         ^
+     84|     r.director.dispose();
+     85|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 48 passed (49)
+      Tests  1 failed | 632 passed (633)
+   Start at  06:20:21
+   Duration  1.55s (transform 2.84s, setup 0ms, collect 7.50s, tests 4.62s, environment 5ms, prepare 3.85s)
+
+ ELIFECYCLE  Test failed. See above for more details.

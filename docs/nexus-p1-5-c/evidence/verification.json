@@ -1,0 +1,46 @@
+{
+  "verifiedAt": "2026-10-20T06:18:51.593299+00:00",
+  "changedFiles": 80,
+  "localMarkdownLinks": 30,
+  "jsonFilesParsedBeforeManifest": 15,
+  "sourceFilesUnchangedSinceBuild": 140,
+  "svgXml": "valid",
+  "testScriptsSyntax": "passed",
+  "mainRefUnchanged": "a43fb6ce427307024dfb97a7889d9af9ebf58da9",
+  "testPortsReleased": [
+    3071,
+    3199,
+    3017
+  ],
+  "finalChecks": [
+    {
+      "name": "legacy-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "gsap-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "general-delivery",
+      "exitCode": 0
+    },
+    {
+      "name": "unit-final",
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck-final",
+      "exitCode": 0
+    },
+    {
+      "name": "lint-final",
+      "exitCode": 0
+    }
+  ],
+  "humanAndLedAcceptance": "pending",
+  "manifestValidation": "Performed separately after all generated files are frozen; manifest intentionally excludes itself.",
+  "postSummaryScriptLint": "passed",
+  "textEvidence": "Committed copies normalize line endings and trailing whitespace only; raw output remains under .review.",
+  "compactSnapshots": "Repeated qualityRecords omitted from pause/final snapshots; complete raw reports and transition evidence retained."
+}

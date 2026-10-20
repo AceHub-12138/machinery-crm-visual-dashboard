@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { MotionDirector } from './MotionDirector';
-function rig(options: { automaticQuality?: boolean } = {}) {
+import { MotionDirector, type MotionDirectorOptions } from './MotionDirector';
+function rig(options: MotionDirectorOptions = {}) {
   let now = 0, next = 0, requested = 0, cancelled = 0;
   const pending = new Map<number, (time: number) => void>();
   const director = new MotionDirector({ request: fn => { requested++; pending.set(++next, fn); return next; }, cancel: id => { cancelled++; pending.delete(id); }, now: () => now, wall: () => 1_000_000 + now, memory: () => 10_000 }, undefined, options);
@@ -55,13 +55,61 @@ describe('MotionDirector', () => {
     expect(r.director.triggerPulse()).toBe(false); expect(r.director.records[0].event).toBe('fps-low');
     r.run(12_000); expect(r.director.frame.motionLevel).toBe('normal'); expect(r.director.records[1].event).toBe('fps-recovered');
   });
-  it('keeps the baseline policy by default but lets the explicit experiment controller own manual quality', () => {
-    const r = rig(), experimental = rig({ automaticQuality: false });
-    r.director.start(); r.run(6100, 40); expect(r.director.frame.motionLevel).toBe('low');
-    experimental.director.start(); experimental.run(8_000, 40);
-    expect(experimental.director.frame.fps).toBeLessThan(45); expect(experimental.director.frame.motionLevel).toBe('normal');
-    experimental.director.forceLow(true); expect(experimental.director.frame.motionLevel).toBe('low');
-    experimental.director.forceLow(false); expect(experimental.director.frame.motionLevel).toBe('normal');
+  it('has one policy owner; shadow observes while candidate alone controls quality', () => {
+    for (const qualityMode of ['baseline', 'shadow', 'candidate'] as const) {
+      const r = rig({ qualityMode }); r.director.start(); r.run(3500, 50);
+      expect(r.director.frame.motionLevel).toBe(qualityMode === 'candidate' ? 'low' : 'normal');
+      if (qualityMode === 'shadow') expect(r.director.qualityDecision?.state).toBe('low');
+      if (qualityMode === 'candidate') { r.director.forceLow(false); expect(r.director.frame.motionLevel).toBe('low'); }
+      r.director.dispose();
+    }
+  });
+  it('fails safely to baseline on throwing or malformed policies', () => {
+    for (const policy of [{ sample: () => { throw new Error('test'); }, interrupt: () => { throw new Error('test'); } }, { sample: () => null, interrupt: () => null }]) {
+      const r = rig({ qualityMode: 'candidate', policy: policy as never }); r.director.start(); r.run(1800);
+      expect(r.director.qualityMode).toBe('baseline'); r.run(6100, 40); expect(r.director.frame.motionLevel).toBe('low'); r.director.dispose();
+    }
+  });
+  it('candidate preserves backoff and drops stale evidence on hidden/voice/reduced/recalibration', () => {
+    const r = rig({ qualityMode: 'candidate', engineCapHz: 60 }); r.director.start(); r.run(15_000, 50);
+    expect(r.director.qualityDecision?.failureCount).toBe(1);
+    for (const env of [{ pageVisible: false }, { voiceActive: true }, { reduced: true }]) {
+      r.director.setEnvironment(env); expect(r.pending.size).toBe(0); r.run(80_000);
+      r.director.setEnvironment({ pageVisible: true, voiceActive: false, reduced: false });
+      expect(r.director.frame.motionLevel).toBe('low'); expect(r.pending.size).toBe(1);
+      expect(r.director.qualityDecision?.failureCount).toBe(1);
+    }
+    r.director.setCalibration(100); expect(r.director.qualityDecision?.reason).toBe('reference-recalibrated');
+    r.run(90_000); expect(r.director.frame.motionLevel).toBe('normal'); expect(r.director.qualityDecision?.failureCount).toBe(0);
+    r.director.dispose();
+  });
+  it('does not starve recovery when frequent short voice takeovers leave enough quiet time for a full probe', () => {
+    const r = rig({ qualityMode: 'candidate', engineCapHz: 60 }); r.director.start(); r.run(15_000, 50); expect(r.director.qualityDecision?.failureCount).toBe(1);
+    for (let i = 0; i < 6; i++) { r.run(10_000); r.director.setEnvironment({ voiceActive: true }); r.run(1000); r.director.setEnvironment({ voiceActive: false }); }
+    expect(r.director.frame.motionLevel).toBe('normal'); expect(r.director.qualityRecords.some(d => d.reason === 'normal-load-probe-passed')).toBe(true); r.director.dispose();
+  });
+  it('distinguishes environmental pause from the id=null window inside active draw', () => {
+    const r = rig(); const seen: { running: boolean; paused: boolean }[] = []; r.director.register('audit', () => seen.push({ running: r.director.running, paused: r.director.paused }));
+    r.director.start(); r.step(); expect(seen.at(-1)).toEqual({ running: false, paused: false });
+    r.director.setEnvironment({ reduced: true }); expect(r.director.paused).toBe(true); expect(r.pending.size).toBe(0); r.director.dispose();
+  });
+  it('drops stale evidence if the host clock regresses while preserving the monotonic scene clock', () => {
+    const r = rig({ qualityMode: 'candidate' }); r.director.start(); r.run(1500, 50); const sceneTime = r.director.frame.time; r.step(-1000);
+    expect(r.director.frame.time).toBe(sceneTime); expect(r.director.qualityDecision?.reason).toBe('clock-regressed');
+    r.run(1200, 50); expect(r.director.frame.motionLevel).toBe('normal'); r.run(1200, 50); expect(r.director.frame.motionLevel).toBe('low'); r.director.dispose();
+  });
+  it('rejects unauthorized manual quality overrides even if debug DOM is tampered with', () => {
+    const r = rig({ manualQualityAllowed: false }); r.director.start(); r.director.forceLow(true); expect(r.director.frame.motionLevel).toBe('normal'); r.run(6100, 40); expect(r.director.frame.motionLevel).toBe('low'); r.director.forceLow(false); expect(r.director.frame.motionLevel).toBe('low'); r.director.dispose();
+  });
+  it('fails closed below the unchanged 52Hz probe floor instead of locking the experiment low forever', () => {
+    const r = rig({ qualityMode: 'candidate' }); r.director.start(); r.run(4000, 50); r.director.setCalibration(30);
+    expect(r.director.qualityMode).toBe('baseline'); expect(r.director.records.at(-1)?.event).toBe('reference-below-supported-probe-floor'); r.director.dispose();
+  });
+  it('reserves a stable probe after bounded INTRO deferral without interrupting the current cue', () => {
+    const r = rig({ qualityMode: 'candidate' }); r.director.start(); r.run(4000, 50);
+    for (let i = 0; i < 45; i++) { r.director.restartIntro(); r.run(1000); }
+    expect(r.director.qualityRecords.some(d => d.reason === 'probe-deferred-until-ambient')).toBe(true);
+    r.run(7000); expect(r.director.frame.motionLevel).toBe('normal'); r.director.dispose();
   });
   it('reduced motion is static, respects manual low mode, and creates no pending frame', () => {
     const r = rig(); r.director.start(); r.director.forceLow(true); r.director.setEnvironment({ reduced: true });

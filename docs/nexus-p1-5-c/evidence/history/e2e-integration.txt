@@ -1,0 +1,84 @@
+[WebServer] (node:9232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:9233) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:9244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 10 tests using 1 worker
+
+(node:9301) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/10] e2e/p1-5-c.spec.ts:4:76 › server permission resolves candidate
+[2/10] e2e/p1-5-c.spec.ts:4:76 › server permission resolves shadow
+[3/10] e2e/p1-5-c.spec.ts:4:76 › server permission resolves external
+[4/10] e2e/p1-5-c.spec.ts:4:76 › server permission resolves invalid
+[5/10] e2e/p1-5-c.spec.ts:4:76 › server permission resolves default
+[6/10] e2e/p1-5-c.spec.ts:11:82 › legacy candidate lifecycle and quality rollback
+[7/10] e2e/p1-5-c.spec.ts:11:82 › legacy shadow lifecycle and quality rollback
+[8/10] e2e/p1-5-c.spec.ts:11:82 › gsap candidate lifecycle and quality rollback
+[9/10] e2e/p1-5-c.spec.ts:11:82 › gsap shadow lifecycle and quality rollback
+[10/10] e2e/p1-5-c.spec.ts:36:1 › rapid engine and mode switches dispose old GSAP hosts/scenes
+  1) e2e/p1-5-c.spec.ts:36:1 › rapid engine and mode switches dispose old GSAP hosts/scenes ────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.nexus-motion-debug')
+    Expected: "baseline"
+    Received: "candidate"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.nexus-motion-debug') with timeout 5000ms
+      - waiting for locator('.nexus-motion-debug')
+        3 × locator resolved to <aside aria-label="动效调试" data-clock="8371" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-pulse-due-in="149599.5" data-quality-automation="candidate" data-quality-target="59.880239520962">…</aside>
+          - unexpected value "candidate"
+        2 × locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="8488.099999999627" data-quality-automation="candidate" data-quality-target="59.880239520962" data-pulse-due-in="149482.40000000037">…</aside>
+          - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="9004.299999999814" data-quality-automation="candidate" data-pulse-due-in="148966.2000000002" data-quality-target="59.880239520962">…</aside>
+        - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="9504.299999999814" data-quality-automation="candidate" data-pulse-due-in="148466.2000000002" data-quality-target="59.880239520962">…</aside>
+        - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="10004.399999999907" data-quality-automation="candidate" data-pulse-due-in="147966.1000000001" data-quality-target="59.880239520962">…</aside>
+        - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="10521.099999999627" data-quality-automation="candidate" data-quality-target="59.880239520962" data-pulse-due-in="147449.40000000037">…</aside>
+        - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="11054.299999999814" data-quality-automation="candidate" data-pulse-due-in="146916.2000000002" data-quality-target="59.880239520962">…</aside>
+        - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="11554.299999999814" data-quality-automation="candidate" data-pulse-due-in="146416.2000000002" data-quality-target="59.880239520962">…</aside>
+        - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="12054.299999999814" data-quality-automation="candidate" data-pulse-due-in="145916.2000000002" data-quality-target="59.880239520962">…</aside>
+        - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="12554.299999999814" data-quality-automation="candidate" data-pulse-due-in="145416.2000000002" data-quality-target="59.880239520962">…</aside>
+        - unexpected value "candidate"
+        - locator resolved to <aside aria-label="动效调试" data-level="normal" data-paused="false" data-state="AMBIENT" class="nexus-motion-debug" data-quality-state="normal" data-clock="13054.399999999907" data-quality-automation="candidate" data-pulse-due-in="144916.1000000001" data-quality-target="59.880239520962">…</aside>
+        - unexpected value "candidate"
+
+
+      46 |   // Same-engine client navigation must recreate its Director when its permission/mode changes.
+      47 |   await page.evaluate(()=>{const a=document.querySelector('a[href*="motion=gsap"]') as HTMLAnchorElement;a.href='/screen/sales?debug=1&motion=gsap';a.click();});
+    > 48 |   await expect(page.locator('.nexus-motion-debug')).toHaveAttribute('data-quality-automation','baseline');
+         |                                                     ^
+      49 | });
+      50 |
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c/e2e/p1-5-c.spec.ts:48:53
+
+    Error Context: .review/p1-5-c/integration-traces/p1-5-c-rapid-engine-and-mo-0ba60-spose-old-GSAP-hosts-scenes/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-5-c/integration-traces/p1-5-c-rapid-engine-and-mo-0ba60-spose-old-GSAP-hosts-scenes/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-5-c/integration-traces/p1-5-c-rapid-engine-and-mo-0ba60-spose-old-GSAP-hosts-scenes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    e2e/p1-5-c.spec.ts:36:1 › rapid engine and mode switches dispose old GSAP hosts/scenes ─────────
+  9 passed (31.9s)

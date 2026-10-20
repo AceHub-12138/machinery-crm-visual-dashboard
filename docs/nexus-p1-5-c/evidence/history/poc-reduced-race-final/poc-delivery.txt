@@ -1,0 +1,64 @@
+[WebServer] (node:27258) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:27260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:27261) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 8 tests using 1 worker
+
+(node:27268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/8] e2e/gsap-poc.spec.ts:15:1 › GSAP interruption, restart, visibility, reduced motion, single RAF and client engine switching
+  1) e2e/gsap-poc.spec.ts:15:1 › GSAP interruption, restart, visibility, reduced motion, single RAF and client engine switching
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+        "max": 1,
+    -   "pending": 1,
+    +   "pending": 0,
+      }
+
+      38 |   await page.emulateMedia({ reducedMotion: 'no-preference' }); await page.clock.runFor(1000);
+      39 |   const loops = await page.evaluate(() => (window as unknown as { loopAudit: () => { pending: number; max: number } }).loopAudit());
+    > 40 |   expect(loops).toEqual({ pending: 1, max: 1 });
+         |                 ^
+      41 |   // Next Link uses actual React unmounts, retaining the JS module for leak detection.
+      42 |   for (let i = 0; i < 5; i++) {
+      43 |     await page.getByRole('link', { name: '切换 Legacy', exact: true }).click();
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c/e2e/gsap-poc.spec.ts:40:17
+
+    Error Context: .review/gsap-poc/legacy-traces/gsap-poc-GSAP-interruption-75704-and-client-engine-switching/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/gsap-poc/legacy-traces/gsap-poc-GSAP-interruption-75704-and-client-engine-switching/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/gsap-poc/legacy-traces/gsap-poc-GSAP-interruption-75704-and-client-engine-switching/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:27279) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/8] e2e/gsap-poc.spec.ts:53:35 › stationary geometry and pixels compare at 1920
+[3/8] e2e/gsap-poc.spec.ts:53:35 › stationary geometry and pixels compare at 3840
+[4/8] e2e/gsap-poc.spec.ts:71:1 › GSAP twelve complete virtual resonance cycles and snapshot refreshes remain bounded
+[5/8] e2e/gsap-poc.spec.ts:86:76 › controlled visual legacy 1920: normal-level intro and pulse checkpoints
+[6/8] e2e/gsap-poc.spec.ts:86:76 › controlled visual gsap 1920: normal-level intro and pulse checkpoints
+[7/8] e2e/gsap-poc.spec.ts:86:76 › controlled visual legacy 3840: normal-level intro and pulse checkpoints
+[8/8] e2e/gsap-poc.spec.ts:86:76 › controlled visual gsap 3840: normal-level intro and pulse checkpoints
+  1 failed
+    e2e/gsap-poc.spec.ts:15:1 › GSAP interruption, restart, visibility, reduced motion, single RAF and client engine switching
+  7 passed (1.5m)
