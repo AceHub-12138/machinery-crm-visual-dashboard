@@ -1,0 +1,147 @@
+[WebServer] (node:3477) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3478) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3499) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 23 tests using 1 worker
+
+(node:3511) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 e2e/p1-6-1.spec.ts:20:34 › 3067 denies URL-only GSAP despite debug, review/quality flags and forged headers (195ms)
+(node:3518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 e2e/p1-6-1.spec.ts:20:34 › 3068 denies URL-only GSAP despite debug, review/quality flags and forged headers (105ms)
+(node:3524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 e2e/p1-6-1.spec.ts:28:1 › attested service requires one exact GSAP parameter; default/old/repeated values fail closed (181ms)
+  ✘   4 e2e/p1-6-1.spec.ts:36:1 › forwarded requests cannot acquire the trusted server context (14ms)
+(node:3525) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 e2e/p1-6-1.spec.ts:43:1 › review fixture stays private to the attested local launcher (64ms)
+  ✓   6 e2e/p1-6-1.spec.ts:48:1 › authorized non-debug GSAP does not publish a global audit (555ms)
+  ✓   7 e2e/p1-6-1.spec.ts:57:1 › rapid client route/mode switches revoke old closures and leave one live controller (1.9s)
+  ✓   8 e2e/p1-6.spec.ts:87:3 › legacy full interaction film (22.2s)
+  ✓   9 e2e/p1-6.spec.ts:109:5 › legacy 1280 geometry and performance (10.6s)
+  ✓  10 e2e/p1-6.spec.ts:109:5 › legacy 1792 geometry and performance (10.7s)
+  ✓  11 e2e/p1-6.spec.ts:109:5 › legacy 1920 geometry and performance (11.2s)
+  ✓  12 e2e/p1-6.spec.ts:109:5 › legacy 3840 geometry and performance (12.3s)
+  ✓  13 e2e/p1-6.spec.ts:122:3 › legacy audio failure reduced motion and repeated wake exit (10.1s)
+  ✓  14 e2e/p1-6.spec.ts:128:3 › legacy hidden restore early interruption navigation and reentry (11.7s)
+  ✓  15 e2e/p1-6.spec.ts:87:3 › gsap full interaction film (22.4s)
+  ✓  16 e2e/p1-6.spec.ts:109:5 › gsap 1280 geometry and performance (10.6s)
+  ✓  17 e2e/p1-6.spec.ts:109:5 › gsap 1792 geometry and performance (10.7s)
+  ✓  18 e2e/p1-6.spec.ts:109:5 › gsap 1920 geometry and performance (11.2s)
+  ✓  19 e2e/p1-6.spec.ts:109:5 › gsap 3840 geometry and performance (12.4s)
+  ✓  20 e2e/p1-6.spec.ts:122:3 › gsap audio failure reduced motion and repeated wake exit (10.1s)
+  ✓  21 e2e/p1-6.spec.ts:128:3 › gsap hidden restore early interruption navigation and reentry (11.8s)
+  ✓  22 e2e/p1-6.spec.ts:153:1 › main GSAP and overlay share the existing ticker owner without altering its cap (3.3s)
+  ✓  23 e2e/p1-6.spec.ts:161:1 › gsap P1.3 normal and long templates retain layout and spoken pagination (28.1s)
+
+
+  1) e2e/p1-6-1.spec.ts:20:34 › 3067 denies URL-only GSAP despite debug, review/quality flags and forged headers
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+        "auditAllowed": false,
+    -   "mode": "legacy",
+    +   "mode": "gsap",
+      }
+
+      20 | for (const port of [3067, 3068]) test(`${port} denies URL-only GSAP despite debug, review/quality flags and forged headers`, async ({ page }) => {
+      21 |   for (const headers of ([{}, { Host: "localhost", "X-Xiaochuan-Motion-Permission": "local-gsap" }, { "X-Forwarded-Host": "localhost", "X-Nexus-Quality-Boundary": "verified" }] as Array<Record<string, string>>)) {
+    > 22 |     expect(await decision(port, "xiaochuanMotion=gsap&debug=1&qualityExperiment=candidate", headers)).toEqual(legacy);
+         |                                                                                                       ^
+      23 |   }
+      24 |   await page.goto(`http://127.0.0.1:${port}/screen/sales?voiceLive=1&xiaochuanMotion=gsap&debug=1`);
+      25 |   await page.waitForTimeout(200);
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:22:103
+
+    Error Context: .review/p1-6-1/playwright/p1-6-1-3067-denies-URL-onl-fb7d0-ty-flags-and-forged-headers/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-1/playwright/p1-6-1-3067-denies-URL-onl-fb7d0-ty-flags-and-forged-headers/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-1/playwright/p1-6-1-3067-denies-URL-onl-fb7d0-ty-flags-and-forged-headers/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/p1-6-1.spec.ts:20:34 › 3068 denies URL-only GSAP despite debug, review/quality flags and forged headers
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+        "auditAllowed": false,
+    -   "mode": "legacy",
+    +   "mode": "gsap",
+      }
+
+      20 | for (const port of [3067, 3068]) test(`${port} denies URL-only GSAP despite debug, review/quality flags and forged headers`, async ({ page }) => {
+      21 |   for (const headers of ([{}, { Host: "localhost", "X-Xiaochuan-Motion-Permission": "local-gsap" }, { "X-Forwarded-Host": "localhost", "X-Nexus-Quality-Boundary": "verified" }] as Array<Record<string, string>>)) {
+    > 22 |     expect(await decision(port, "xiaochuanMotion=gsap&debug=1&qualityExperiment=candidate", headers)).toEqual(legacy);
+         |                                                                                                       ^
+      23 |   }
+      24 |   await page.goto(`http://127.0.0.1:${port}/screen/sales?voiceLive=1&xiaochuanMotion=gsap&debug=1`);
+      25 |   await page.waitForTimeout(200);
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:22:103
+
+    Error Context: .review/p1-6-1/playwright/p1-6-1-3068-denies-URL-onl-b5dd6-ty-flags-and-forged-headers/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-1/playwright/p1-6-1-3068-denies-URL-onl-b5dd6-ty-flags-and-forged-headers/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-1/playwright/p1-6-1-3068-denies-URL-onl-b5dd6-ty-flags-and-forged-headers/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) e2e/p1-6-1.spec.ts:36:1 › forwarded requests cannot acquire the trusted server context ────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+        "auditAllowed": false,
+    -   "mode": "legacy",
+    +   "mode": "gsap",
+      }
+
+      36 | test("forwarded requests cannot acquire the trusted server context", async () => {
+      37 |   for (const headers of ([{ Forwarded: "for=127.0.0.1" }, { Via: "1.1 proxy" }, { "X-Forwarded-For": "127.0.0.1" }, { "X-Nexus-Quality-Boundary": "verified" }] as Array<Record<string, string>>)) {
+    > 38 |     expect(await decision(3066, "xiaochuanMotion=gsap&debug=1", headers)).toEqual(legacy);
+         |                                                                           ^
+      39 |   }
+      40 |   const decisions = await Promise.all(Array.from({ length: 12 }, (_, i) => decision(3066, "xiaochuanMotion=gsap&debug=1", i % 2 ? { Forwarded: "for=127.0.0.1" } : {})));
+      41 |   decisions.forEach((result, i) => expect(result).toEqual(i % 2 ? legacy : { mode: "gsap", auditAllowed: true }));
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:38:75
+
+    Error Context: .review/p1-6-1/playwright/p1-6-1-forwarded-requests--92d4b--the-trusted-server-context/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-1/playwright/p1-6-1-forwarded-requests--92d4b--the-trusted-server-context/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-1/playwright/p1-6-1-forwarded-requests--92d4b--the-trusted-server-context/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    e2e/p1-6-1.spec.ts:20:34 › 3067 denies URL-only GSAP despite debug, review/quality flags and forged headers
+    e2e/p1-6-1.spec.ts:20:34 › 3068 denies URL-only GSAP despite debug, review/quality flags and forged headers
+    e2e/p1-6-1.spec.ts:36:1 › forwarded requests cannot acquire the trusted server context ─────────
+  20 passed (3.6m)

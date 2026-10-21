@@ -9,6 +9,7 @@ import { AnswerCard } from "@/components/overlay/AnswerCard";
 import "./overlay.css";
 import { amplitudeSource } from "./motion/amplitude-source";
 import { useXiaochuanMotion } from "./motion/useXiaochuanMotion";
+import type { XiaochuanMotionMode } from "./motion/permission";
 import {
   DEMO_LINES,
   DEMO_TIMING,
@@ -77,6 +78,8 @@ export function OverlayStage({
   lite = false,
   driver = "demo",
   hubUrl,
+  xiaochuanMotion = "legacy",
+  xiaochuanAuditAllowed = false,
 }: {
   payload: PublicScreenPayload;
   /** &lite=1:强制降级档(软件渲染环境预览演示用) */
@@ -85,9 +88,11 @@ export function OverlayStage({
   driver?: "demo" | "live";
   /** live 模式 hub 地址(缺省同主机 3210) */
   hubUrl?: string;
+  xiaochuanMotion?: XiaochuanMotionMode;
+  xiaochuanAuditAllowed?: boolean;
 }) {
   const reduced = useReducedMotion();
-  const motion = useXiaochuanMotion(reduced);
+  const motion = useXiaochuanMotion(reduced, xiaochuanMotion, xiaochuanAuditAllowed);
   const rootRef = useRef<HTMLDivElement>(null);
   const motionRef = useRef(motion);
   useEffect(() => { motionRef.current = motion; }, [motion]);

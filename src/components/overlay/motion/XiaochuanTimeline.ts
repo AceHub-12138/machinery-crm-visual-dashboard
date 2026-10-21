@@ -29,7 +29,7 @@ export class XiaochuanTimeline {
   private hidden = false;
   constructor(private host: MotionHost = createGsapHost(), public reduced = false) { XiaochuanTimeline.liveControllers++; }
   private now() { return this.host.clockNow?.() ?? performance.now(); }
-  subscribe(fn: () => void) { this.subscribers.add(fn); fn(); return () => { this.subscribers.delete(fn); }; }
+  subscribe(fn: () => void) { if (this.disposed) return () => {}; this.subscribers.add(fn); fn(); return () => { this.subscribers.delete(fn); }; }
   private emit() { this.subscribers.forEach(fn => fn()); }
   private cancelJob() { if (this.job !== null) this.host.cancel(this.job); this.job = null; }
   private kill(key: string) {
@@ -94,8 +94,9 @@ export class XiaochuanTimeline {
   geometry(x: number, y: number, at: number) {
     this.start("geometry", at, tl => { tl.to(this.visual, { coreX: x, coreY: y, duration: .6, ease: "power2.inOut" }); });
   }
-  setReduced(value: boolean) { this.reduced = value; this.sample(this.now()); this.schedule(); }
+  setReduced(value: boolean) { if (this.disposed) return; this.reduced = value; this.sample(this.now()); this.schedule(); }
   visibility(hidden: boolean) {
+    if (this.disposed) return;
     this.hidden = hidden;
     if (hidden) this.cancelJob();
     else { this.sample(this.now()); this.schedule(); }

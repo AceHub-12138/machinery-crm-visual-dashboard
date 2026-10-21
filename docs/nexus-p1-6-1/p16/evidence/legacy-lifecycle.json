@@ -1,0 +1,102 @@
+{
+  "hidden": null,
+  "restored": null,
+  "unmounted": null,
+  "navigated": null,
+  "final": null,
+  "reports": [
+    {
+      "type": "playback.metrics",
+      "at": 1792566652950,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566653842,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566654039,
+      "turnId": "00000000-0000-4000-8000-000000000002"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566654703,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566654930,
+      "turnId": "00000000-0000-4000-8000-000000000003"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566655569,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566655792,
+      "turnId": "00000000-0000-4000-8000-000000000004"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566656444,
+      "turnId": "00000000-0000-4000-8000-000000000005",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566656651,
+      "turnId": "00000000-0000-4000-8000-000000000005"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566657332,
+      "turnId": "00000000-0000-4000-8000-000000000006",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566657539,
+      "turnId": "00000000-0000-4000-8000-000000000006"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566658227,
+      "turnId": "00000000-0000-4000-8000-000000000007",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566658429,
+      "turnId": "00000000-0000-4000-8000-000000000007"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566660862,
+      "turnId": "00000000-0000-4000-8000-000000000008",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566661311,
+      "turnId": "00000000-0000-4000-8000-000000000009",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    }
+  ]
+}

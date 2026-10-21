@@ -24,4 +24,12 @@ describe('unique ticker owner',()=>{
     const host=createGsapHost();for(let i=0;i<30;i++){const id=host.request(()=>{});expect(tickerAudit().activeListeners).toBe(1);host.cancel(id);expect(tickerAudit().activeListeners).toBe(0);}
     expect(mock.ticker._listeners).toEqual([mock.root]);expect(mock.ticker.fps).toHaveBeenCalledTimes(1);
   });
+  it('canceling one scoped host never detaches another active host or sleeps the shared ticker',()=>{
+    const overlay=createGsapHost(), screen=createGsapHost();
+    const overlayId=overlay.request(()=>{}), screenId=screen.request(()=>{});
+    mock.ticker.sleep.mockClear(); expect(tickerAudit().activeListeners).toBe(2);
+    overlay.cancel(overlayId); expect(tickerAudit().activeListeners).toBe(1);
+    expect(mock.ticker.sleep).not.toHaveBeenCalled();
+    screen.cancel(screenId); expect(tickerAudit().activeListeners).toBe(0);
+  });
 });

@@ -1,0 +1,253 @@
+{
+  "rects": {
+    ".overlay-card-body": null,
+    ".overlay-card-header": null,
+    ".overlay-card-data": null,
+    ".overlay-shipment-badges": null,
+    ".overlay-pages-window": null,
+    ".overlay-shipment-caption": null,
+    ".overlay-shipments-block > p": null,
+    ".overlay-shipments-block > .overlay-page-dots": null,
+    ".overlay-spoken-section": null,
+    ".overlay-spoken-heading": null,
+    ".overlay-followups": null,
+    ".overlay-audio-notice": null,
+    ".nexus-feed": {
+      "x": 92,
+      "y": 760,
+      "width": 1736,
+      "height": 180,
+      "top": 760,
+      "right": 1828,
+      "bottom": 940,
+      "left": 92
+    },
+    ".nexus-feed > .nexus-title": {
+      "x": 92,
+      "y": 760,
+      "width": 1736,
+      "height": 42,
+      "top": 760,
+      "right": 1828,
+      "bottom": 802,
+      "left": 92
+    },
+    ".nexus-feed-grid": {
+      "x": 92,
+      "y": 802,
+      "width": 1736,
+      "height": 138,
+      "top": 802,
+      "right": 1828,
+      "bottom": 940,
+      "left": 92
+    },
+    ".nexus-feed-index": {
+      "x": 108,
+      "y": 808,
+      "width": 28,
+      "height": 28,
+      "top": 808,
+      "right": 136,
+      "bottom": 836,
+      "left": 108
+    }
+  },
+  "violations": [],
+  "items": [
+    {
+      "item": {
+        "x": 92,
+        "y": 838,
+        "width": 331.1875,
+        "height": 102,
+        "top": 838,
+        "right": 423.1875,
+        "bottom": 940,
+        "left": 92
+      },
+      "index": {
+        "x": 108,
+        "y": 808,
+        "width": 28,
+        "height": 28,
+        "top": 808,
+        "right": 136,
+        "bottom": 836,
+        "left": 108
+      },
+      "visual": {
+        "x": 107,
+        "y": 838,
+        "width": 92,
+        "height": 58,
+        "top": 838,
+        "right": 199,
+        "bottom": 896,
+        "left": 107
+      }
+    },
+    {
+      "item": {
+        "x": 443.1875,
+        "y": 838,
+        "width": 331.203125,
+        "height": 102,
+        "top": 838,
+        "right": 774.390625,
+        "bottom": 940,
+        "left": 443.1875
+      },
+      "index": {
+        "x": 459.1875,
+        "y": 808,
+        "width": 28,
+        "height": 28,
+        "top": 808,
+        "right": 487.1875,
+        "bottom": 836,
+        "left": 459.1875
+      },
+      "visual": {
+        "x": 458.1875,
+        "y": 838,
+        "width": 92,
+        "height": 58,
+        "top": 838,
+        "right": 550.1875,
+        "bottom": 896,
+        "left": 458.1875
+      }
+    },
+    {
+      "item": {
+        "x": 794.390625,
+        "y": 838,
+        "width": 331.203125,
+        "height": 102,
+        "top": 838,
+        "right": 1125.59375,
+        "bottom": 940,
+        "left": 794.390625
+      },
+      "index": {
+        "x": 810.390625,
+        "y": 808,
+        "width": 28,
+        "height": 28,
+        "top": 808,
+        "right": 838.390625,
+        "bottom": 836,
+        "left": 810.390625
+      },
+      "visual": {
+        "x": 809.390625,
+        "y": 838,
+        "width": 92,
+        "height": 58,
+        "top": 838,
+        "right": 901.390625,
+        "bottom": 896,
+        "left": 809.390625
+      }
+    },
+    {
+      "item": {
+        "x": 1145.59375,
+        "y": 838,
+        "width": 331.203125,
+        "height": 102,
+        "top": 838,
+        "right": 1476.796875,
+        "bottom": 940,
+        "left": 1145.59375
+      },
+      "index": {
+        "x": 1161.59375,
+        "y": 808,
+        "width": 28,
+        "height": 28,
+        "top": 808,
+        "right": 1189.59375,
+        "bottom": 836,
+        "left": 1161.59375
+      },
+      "visual": {
+        "x": 1160.59375,
+        "y": 838,
+        "width": 92,
+        "height": 58,
+        "top": 838,
+        "right": 1252.59375,
+        "bottom": 896,
+        "left": 1160.59375
+      }
+    },
+    {
+      "item": {
+        "x": 1496.796875,
+        "y": 838,
+        "width": 331.203125,
+        "height": 102,
+        "top": 838,
+        "right": 1828,
+        "bottom": 940,
+        "left": 1496.796875
+      },
+      "index": {
+        "x": 1512.796875,
+        "y": 808,
+        "width": 28,
+        "height": 28,
+        "top": 808,
+        "right": 1540.796875,
+        "bottom": 836,
+        "left": 1512.796875
+      },
+      "visual": {
+        "x": 1511.796875,
+        "y": 838,
+        "width": 92,
+        "height": 58,
+        "top": 838,
+        "right": 1603.796875,
+        "bottom": 896,
+        "left": 1511.796875
+      }
+    }
+  ],
+  "notes": [
+    {
+      "text": "人民币口径",
+      "rect": {
+        "x": 455,
+        "y": 207.5,
+        "width": 90,
+        "height": 27,
+        "top": 207.5,
+        "right": 545,
+        "bottom": 234.5,
+        "left": 455
+      },
+      "color": "rgb(138, 147, 160)",
+      "size": "18px"
+    },
+    {
+      "text": "人民币口径",
+      "rect": {
+        "x": 1721,
+        "y": 212.5,
+        "width": 90,
+        "height": 27,
+        "top": 212.5,
+        "right": 1811,
+        "bottom": 239.5,
+        "left": 1721
+      },
+      "color": "rgb(138, 147, 160)",
+      "size": "18px"
+    }
+  ],
+  "demo": "演示数据",
+  "textFailures": []
+}

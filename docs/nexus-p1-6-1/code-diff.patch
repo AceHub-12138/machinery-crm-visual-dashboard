@@ -1,0 +1,586 @@
+diff --git a/e2e/audio-test.ts b/e2e/audio-test.ts
+index 71c8875..9122847 100644
+--- a/e2e/audio-test.ts
++++ b/e2e/audio-test.ts
+@@ -1 +1 @@
+-import { test as base } from "@playwright/test";
++import { test as base } from "./xiaochuan-test";
+diff --git a/e2e/p1-3.spec.ts b/e2e/p1-3.spec.ts
+index 344fb52..3b79c90 100644
+--- a/e2e/p1-3.spec.ts
++++ b/e2e/p1-3.spec.ts
+@@ -2 +2 @@ import { useExperimentalEngine } from "./gsap-engine";
+-import { test, expect, type Page } from '@playwright/test';
++import { test, expect, type Page } from './xiaochuan-test';
+diff --git a/e2e/p1-6-1-regression.config.ts b/e2e/p1-6-1-regression.config.ts
+new file mode 100644
+index 0000000..fd12379
+--- /dev/null
++++ b/e2e/p1-6-1-regression.config.ts
+@@ -0,0 +1,16 @@
++import { defineConfig } from "@playwright/test";
++import path from "node:path";
++const label = process.env.P161_OVERLAY_MODE ?? "legacy";
++const report = process.env.P161_REGRESSION_REPORT ?? `${label}-regression`;
++export default defineConfig({
++  testDir: ".", testMatch: ["voice-*.spec.ts", "p1-3.spec.ts"], workers: 1, fullyParallel: false, timeout: 60000,
++  outputDir: path.resolve(`.review/p1-6-1/${report}`),
++  reporter: [["list"], ["json", { outputFile: path.resolve(`docs/nexus-p1-6-1/evidence/${report}.json`) }]],
++  use: { browserName: "chromium", baseURL: "http://127.0.0.1:3069", viewport: { width: 1920, height: 1080 },
++    deviceScaleFactor: 1, timezoneId: "Asia/Shanghai", reducedMotion: "reduce", trace: "retain-on-failure" },
++  webServer: [
++    { cwd: process.cwd(), command: "node e2e/nexus-fixture-server.mjs", url: "http://127.0.0.1:3199", reuseExistingServer: false },
++    { cwd: process.cwd(), command: "node scripts/p1-5-c/local-server.mjs --port 3069", url: "http://127.0.0.1:3069/screen/sales", reuseExistingServer: false,
++      env: { XIAOCHUAN_MOTION_PERMISSION: "local-gsap", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only", TZ: "Asia/Shanghai" }, timeout: 60000 },
++  ],
++});
+diff --git a/e2e/p1-6-1.config.ts b/e2e/p1-6-1.config.ts
+new file mode 100644
+index 0000000..7f26a54
+--- /dev/null
++++ b/e2e/p1-6-1.config.ts
+@@ -0,0 +1,22 @@
++import { defineConfig } from "@playwright/test";
++import path from "node:path";
++process.env.P16_OUTPUT_DIR ??= "docs/nexus-p1-6-1/p16";
++const common = { cwd: process.cwd(), reuseExistingServer: false, timeout: 60000 };
++const fixture = { TZ: "Asia/Shanghai", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only" };
++export default defineConfig({
++  testDir: ".", testMatch: ["p1-6.spec.ts", "p1-6-1.spec.ts"], workers: 1, fullyParallel: false, timeout: 90000,
++  outputDir: path.resolve(".review/p1-6-1/playwright"),
++  reporter: [["list"], ["json", { outputFile: path.resolve("docs/nexus-p1-6-1/evidence/browser-hardening.json") }]],
++  use: { browserName: "chromium", baseURL: "http://127.0.0.1:3066", viewport: { width: 1920, height: 1080 },
++    deviceScaleFactor: 1, reducedMotion: "no-preference", trace: "retain-on-failure",
++    launchOptions: { args: ["--autoplay-policy=no-user-gesture-required"] } },
++  webServer: [
++    { ...common, command: "node e2e/nexus-fixture-server.mjs", url: "http://127.0.0.1:3199" },
++    { ...common, command: "node scripts/p1-5-c/local-server.mjs --port 3066", url: "http://127.0.0.1:3066/screen/sales",
++      env: { ...fixture, XIAOCHUAN_MOTION_PERMISSION: "local-gsap", XIAOCHUAN_POC_REVIEW: "1" } },
++    { ...common, command: "node scripts/p1-5-c/local-server.mjs --port 3067", url: "http://127.0.0.1:3067/screen/sales",
++      env: { ...fixture, XIAOCHUAN_MOTION_PERMISSION: "", XIAOCHUAN_POC_REVIEW: "1", NEXUS_QUALITY_PERMISSION: "local-candidate" } },
++    { ...common, command: "pnpm exec next start --hostname 127.0.0.1 --port 3068", url: "http://127.0.0.1:3068/screen/sales",
++      env: { ...fixture, XIAOCHUAN_MOTION_PERMISSION: "local-gsap", XIAOCHUAN_POC_REVIEW: "1" } },
++  ],
++});
+diff --git a/e2e/p1-6-1.spec.ts b/e2e/p1-6-1.spec.ts
+new file mode 100644
+index 0000000..b0ee4d2
+--- /dev/null
++++ b/e2e/p1-6-1.spec.ts
+@@ -0,0 +1,74 @@
++import { test, expect, type Page } from "@playwright/test";
++import { get } from "node:http";
++type Audit = () => { liveControllers: number; liveTimelines: number; activeListeners: number; pendingJob: boolean } | null;
++type AuditWindow = Window & { __xiaochuanMotionAudit?: Audit; savedAudit?: Audit };
++async function decision(port: number, query: string, headers: Record<string, string> = {}) {
++  const html = await new Promise<string>((resolve, reject) => {
++    const req = get({ hostname: "127.0.0.1", port, path: `/screen/sales?${query}`, headers }, res => {
++      let body = ""; res.setEncoding("utf8"); res.on("data", chunk => { body += chunk; });
++      res.on("end", () => res.statusCode === 200 ? resolve(body) : reject(new Error(`HTTP ${res.statusCode}`)));
++    });
++    req.on("error", reject); req.setTimeout(15000, () => req.destroy(new Error("timeout")));
++  });
++  const flight = html.replace(/\\+"/g, '"');
++  // Match the adjacent server-selected props, never the echoed URL in Next's route tree.
++  const selection = flight.match(/"xiaochuanMotion":"(legacy|gsap)","xiaochuanAuditAllowed":(true|false)/);
++  const mode = selection?.[1];
++  const auditAllowed = selection?.[2];
++  expect(mode).toBeDefined(); expect(auditAllowed).toBeDefined();
++  return { mode, auditAllowed: auditAllowed === "true" };
++}
++const legacy = { mode: "legacy", auditAllowed: false };
++for (const port of [3067, 3068]) test(`${port} denies URL-only GSAP despite debug, review/quality flags and forged headers`, async ({ page }) => {
++  for (const headers of ([{}, { Host: "localhost", "X-Xiaochuan-Motion-Permission": "local-gsap" }, { "X-Forwarded-Host": "localhost", "X-Nexus-Quality-Boundary": "verified" }] as Array<Record<string, string>>)) {
++    expect(await decision(port, "xiaochuanMotion=gsap&debug=1&qualityExperiment=candidate", headers)).toEqual(legacy);
++  }
++  await page.goto(`http://127.0.0.1:${port}/screen/sales?voiceLive=1&xiaochuanMotion=gsap&debug=1`);
++  await page.waitForTimeout(200);
++  expect(await page.evaluate(() => typeof (window as AuditWindow).__xiaochuanMotionAudit)).toBe("undefined");
++});
++test("attested service requires one exact GSAP parameter; default/old/repeated values fail closed", async () => {
++  for (const query of ["", "motion=gsap", "xiaochuanMotion=true", "xiaochuanMotion=1", "xiaochuanMotion=GSAP", "xiaochuanMotion=gsap%20", "xiaochuanMotion=gsap&xiaochuanMotion=gsap", "xiaochuanMotion=gsap&xiaochuanMotion=legacy"]) {
++    expect(await decision(3066, `${query}&debug=1`)).toEqual(legacy);
++  }
++  expect(await decision(3066, "xiaochuanMotion=gsap")).toEqual({ mode: "gsap", auditAllowed: false });
++  expect(await decision(3066, "xiaochuanMotion=gsap&debug=1")).toEqual({ mode: "gsap", auditAllowed: true });
++  expect(await decision(3066, "xiaochuanMotion=gsap&debug=1&debug=1")).toEqual({ mode: "gsap", auditAllowed: false });
++});
++test("forwarded requests cannot acquire the trusted server context", async () => {
++  for (const headers of ([{ Forwarded: "for=127.0.0.1" }, { Via: "1.1 proxy" }, { "X-Forwarded-For": "127.0.0.1" }, { "X-Nexus-Quality-Boundary": "verified" }] as Array<Record<string, string>>)) {
++    expect(await decision(3066, "xiaochuanMotion=gsap&debug=1", headers)).toEqual(legacy);
++  }
++  const decisions = await Promise.all(Array.from({ length: 12 }, (_, i) => decision(3066, "xiaochuanMotion=gsap&debug=1", i % 2 ? { Forwarded: "for=127.0.0.1" } : {})));
++  decisions.forEach((result, i) => expect(result).toEqual(i % 2 ? legacy : { mode: "gsap", auditAllowed: true }));
++});
++test("review fixture stays private to the attested local launcher", async ({ request }) => {
++  expect((await request.get("http://127.0.0.1:3068/poc/xiaochuan?xiaochuanMotion=gsap")).status()).toBe(404);
++  expect((await request.get("http://127.0.0.1:3066/poc/xiaochuan?xiaochuanMotion=gsap", { headers: { Forwarded: "for=127.0.0.1" } })).status()).toBe(404);
++  expect((await request.get("http://127.0.0.1:3066/poc/xiaochuan?xiaochuanMotion=gsap")).status()).toBe(200);
++});
++test("authorized non-debug GSAP does not publish a global audit", async ({ page }) => {
++  await page.goto("/screen/sales?voiceLive=1&xiaochuanMotion=gsap");
++  await page.waitForTimeout(300);
++  expect(await page.evaluate(() => typeof (window as AuditWindow).__xiaochuanMotionAudit)).toBe("undefined");
++});
++async function clientNavigate(page: Page, href: string) {
++  // Use the real Next Link router, preserving this window and any saved diagnostic closure.
++  await page.locator(`a[href="${href}"]`).click();
++}
++test("rapid client route/mode switches revoke old closures and leave one live controller", async ({ page }) => {
++  await page.goto("/poc/xiaochuan?xiaochuanMotion=gsap");
++  for (let i = 0; i < 6; i++) {
++    await expect.poll(() => page.evaluate(() => (window as AuditWindow).__xiaochuanMotionAudit?.()?.liveControllers)).toBe(1);
++    await page.evaluate(() => { const w = window as AuditWindow; w.savedAudit = w.__xiaochuanMotionAudit; });
++    await clientNavigate(page, "/poc/xiaochuan?xiaochuanMotion=legacy");
++    await expect.poll(() => page.evaluate(() => typeof (window as AuditWindow).__xiaochuanMotionAudit)).toBe("undefined");
++    expect(await page.evaluate(() => (window as AuditWindow).savedAudit?.())).toBeNull();
++    await clientNavigate(page, "/poc/xiaochuan?xiaochuanMotion=gsap");
++  }
++  await expect.poll(() => page.evaluate(() => (window as AuditWindow).__xiaochuanMotionAudit?.()?.liveControllers)).toBe(1);
++  await page.evaluate(() => { const w = window as AuditWindow; w.savedAudit = w.__xiaochuanMotionAudit; });
++  await page.getByRole("button", { name: "卸载小川", exact: true }).click();
++  expect(await page.evaluate(() => typeof (window as AuditWindow).__xiaochuanMotionAudit)).toBe("undefined");
++  expect(await page.evaluate(() => (window as AuditWindow).savedAudit?.())).toBeNull();
++});
+diff --git a/e2e/p1-6.config.ts b/e2e/p1-6.config.ts
+index 5a2d958..7d2d867 100644
+--- a/e2e/p1-6.config.ts
++++ b/e2e/p1-6.config.ts
+@@ -6 +6 @@ export default defineConfig({ testDir: ".", testMatch: "p1-6.spec.ts", timeout:
+-    env: { TZ: "Asia/Shanghai", XIAOCHUAN_POC_REVIEW:"1", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only" }, timeout: 60000 }],
++    env: { TZ: "Asia/Shanghai", XIAOCHUAN_POC_REVIEW:"1", XIAOCHUAN_MOTION_PERMISSION:"local-gsap", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only" }, timeout: 60000 }],
+diff --git a/e2e/p1-6.spec.ts b/e2e/p1-6.spec.ts
+index e54b6a0..aaff287 100644
+--- a/e2e/p1-6.spec.ts
++++ b/e2e/p1-6.spec.ts
+@@ -10 +10 @@ import type { AnswerCardData } from "../src/lib/voice/session-machine";
+-const out = path.resolve("docs/nexus-p1-6");
++const out = path.resolve(process.env.P16_OUTPUT_DIR ?? "docs/nexus-p1-6");
+@@ -12 +12 @@ mkdirSync(`${out}/evidence`, {recursive:true}); mkdirSync(`${out}/media`, {recur
+-const pcm = [0,1].map(i=>readFileSync(`${out}/audio/${i}.pcm`));
++const pcm = [0,1].map(i=>readFileSync(path.resolve(`docs/nexus-p1-6/audio/${i}.pcm`)));
+@@ -73 +73 @@ async function open(page:Page,engine:string,route="/screen/sales") {
+-  await page.goto(`${route}${route.includes("?")?"&":"?"}voiceLive=1&xiaochuanMotion=${engine}&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
++  await page.goto(`${route}${route.includes("?")?"&":"?"}debug=1&voiceLive=1&xiaochuanMotion=${engine}&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
+@@ -74,0 +75,2 @@ async function open(page:Page,engine:string,route="/screen/sales") {
++  if(engine==="gsap") await expect.poll(()=>audit(page)).not.toBeNull();
++  else expect(await audit(page)).toBeNull();
+@@ -133,0 +136 @@ for(const engine of ["legacy","gsap"]) {
++    if(engine==="gsap") await page.evaluate(()=>{(window as any).p161SavedAudit=(window as any).__xiaochuanMotionAudit;});
+@@ -137 +140,2 @@ for(const engine of ["legacy","gsap"]) {
+-    const unmounted=await audit(page);if(unmounted){expect(unmounted.liveControllers).toBe(0);expect(unmounted.liveTimelines).toBe(0);expect(unmounted.subscribers).toBe(0);expect(unmounted.pendingJob).toBe(false);}
++    const unmounted=await audit(page);expect(unmounted).toBeNull();
++    if(engine==="gsap") expect(await page.evaluate(()=>(window as any).p161SavedAudit())).toBeNull();
+@@ -142 +146 @@ for(const engine of ["legacy","gsap"]) {
+-    const navigated=await audit(page);if(navigated){expect(navigated.liveControllers).toBe(0);expect(navigated.liveTimelines).toBe(0);expect(navigated.pendingJob).toBe(false);}
++    const navigated=await audit(page);expect(navigated).toBeNull();
+diff --git a/e2e/voice-cards.spec.ts b/e2e/voice-cards.spec.ts
+index c8b854b..e9f0f95 100644
+--- a/e2e/voice-cards.spec.ts
++++ b/e2e/voice-cards.spec.ts
+@@ -1 +1 @@
+-import { test, expect, type Page } from "@playwright/test";
++import { test, expect, type Page } from "./xiaochuan-test";
+diff --git a/e2e/xiaochuan-test.ts b/e2e/xiaochuan-test.ts
+new file mode 100644
+index 0000000..d8c8ce7
+--- /dev/null
++++ b/e2e/xiaochuan-test.ts
+@@ -0,0 +1,24 @@
++import { test as base, expect } from "@playwright/test";
++/** Opt-in regression fixture: existing tests keep their assertions and audio path.
++ * The URL is only a selector; the real production server still decides permission.
++ */
++export const test = base.extend<{ xiaochuanMode: void }>({
++  xiaochuanMode: [async ({ context }, use) => {
++    const mode = process.env.P161_OVERLAY_MODE;
++    if (mode !== "gsap" && mode !== "legacy") { await use(); return; }
++    const decisions: Array<Promise<string | undefined>> = [];
++    context.on("response", response => {
++      if (response.request().isNavigationRequest() && new URL(response.url()).pathname === "/screen/sales") {
++        decisions.push(response.text().then(html => html.replace(/\\+"/g, '"').match(/"xiaochuanMotion":"(legacy|gsap)","xiaochuanAuditAllowed":(?:true|false)/)?.[1]));
++      }
++    });
++    await context.route("**/screen/sales**", route => {
++      if (!route.request().isNavigationRequest()) return route.continue();
++      const url = new URL(route.request().url()); url.searchParams.set("xiaochuanMotion", mode);
++      return route.continue({ url: url.toString() });
++    });
++    await use();
++    for (const selected of await Promise.all(decisions)) expect(selected).toBe(mode);
++  }, { auto: true }],
++});
++export { expect, type Page } from "@playwright/test";
+diff --git a/playwright.config.ts b/playwright.config.ts
+index 4e4babd..49f9e2d 100644
+--- a/playwright.config.ts
++++ b/playwright.config.ts
+@@ -9 +9 @@ export default defineConfig({
+-  testIgnore: ["**/p1-6.spec.ts", "**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
++  testIgnore: ["**/p1-6.spec.ts", "**/p1-6-1.spec.ts", "**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
+diff --git a/scripts/p1-6-1-evidence.mjs b/scripts/p1-6-1-evidence.mjs
+new file mode 100644
+index 0000000..1b8f4e7
+--- /dev/null
++++ b/scripts/p1-6-1-evidence.mjs
+@@ -0,0 +1,83 @@
++import { execFileSync } from 'node:child_process';
++import { createHash } from 'node:crypto';
++import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
++const base = '1c09242cfb7c8a51fd34d687e67c24f475135372';
++const root = 'docs/nexus-p1-6-1';
++const git = (...args) => execFileSync('git', args, { encoding: 'utf8' });
++const hash = value => createHash('sha256').update(value).digest('hex');
++const old = path => execFileSync('git', ['show', `${base}:${path}`]);
++const protectedPaths = ['src/components/overlay/JarvisCore.tsx', 'src/components/overlay/AnswerCard.tsx',
++  'src/components/overlay/overlay.css', 'src/components/overlay/cards', 'src/components/overlay/spoken-pages.ts',
++  'src/components/screen/motion', 'src/lib/voice', 'src/lib/public-screen-payload.ts',
++  'services/voice-orchestrator/src', 'services/voice-local'];
++const files = git('ls-files', '-z', '--', ...protectedPaths).split('\0').filter(path => path && !/\.test\./.test(path));
++const unchanged = files.map(path => ({ path, baseSha256: hash(old(path)), currentSha256: hash(readFileSync(path)) }));
++const section = (path, start, end) => {
++  const before = old(path).toString(), after = readFileSync(path, 'utf8');
++  const extract = text => text.slice(text.indexOf(start), end ? text.indexOf(end) : undefined);
++  return { path, section: start, baseSha256: hash(extract(before)), currentSha256: hash(extract(after)) };
++};
++const sections = [
++  section('src/components/overlay/motion/XiaochuanTimeline.ts', '  /** One shared answer clock', '  setReduced('),
++  section('src/components/overlay/OverlayStage.tsx', '  const rootRef ='),
++];
++for (const entry of [...unchanged, ...sections]) {
++  if (entry.baseSha256 !== entry.currentSha256) throw new Error(`Behavior source changed: ${entry.path}`);
++}
++writeFileSync(`${root}/evidence/behavior-source-equivalence.json`, JSON.stringify({ base, unchanged, sections }, null, 2));
++
++function specs(suite) { return [...(suite.specs ?? []), ...(suite.suites ?? []).flatMap(specs)]; }
++const reports = ['browser-initial', 'browser-hardening', 'legacy-regression', 'legacy-context-recheck', 'gsap-regression',
++  'baseline-cpu-url-harness-initial', 'baseline-live-url-harness-initial',
++  'baseline-cpu', 'baseline-live', 'gsap-cpu-recheck', 'gsap-live-recheck'];
++const validation = reports.filter(name => existsSync(`${root}/evidence/${name}.json`)).map(name => {
++  const result = JSON.parse(readFileSync(`${root}/evidence/${name}.json`));
++  const tests = result.suites.flatMap(specs).map(spec => ({ title: spec.title, file: spec.file,
++    results: spec.tests.map(test => ({ status: test.status, attempts: test.results.map(attempt => attempt.status) })) }));
++  return { name, validModeComparison: !name.endsWith('-url-harness-initial'), stats: result.stats, tests };
++});
++writeFileSync(`${root}/evidence/validation-summary.json`, JSON.stringify(validation, null, 2));
++const sampleSummary = values => {
++  const sorted = values.toSorted((a, b) => a - b);
++  return { n: sorted.length, mean: sorted.reduce((a, b) => a + b, 0) / sorted.length,
++    p95: sorted[Math.floor((sorted.length - 1) * .95)] };
++};
++const film = (dir, engine) => {
++  const d = JSON.parse(readFileSync(`${dir}/${engine}-film.json`));
++  const at = Number(d.metrics.samples.find(s => Number(s.launchAt) > 0 && s.state === 'answering').launchAt);
++  const first = d.metrics.scheduled.find(s => s.at >= at);
++  return { engine, firstAudioScheduledMs: first.at - at, firstAudioOnsetMs: first.at - at + (first.when - first.contextTime) * 1000,
++    peak: d.metrics.peak, errors: d.errors, pcmSeconds: d.pcmSeconds, audit: d.audit,
++    playbackEvents: d.reports.filter(r => r.type.startsWith('playback.')).map(r => ({ type: r.type, turnId: r.turnId })),
++    rafIntervalMs: sampleSummary(d.metrics.frames) };
++};
++writeFileSync(`${root}/evidence/p16-comparison.json`, JSON.stringify({
++  note: 'Baseline is committed P1.6 evidence; timings are short browser observations, not a latency guarantee or venue acceptance.',
++  baseline: ['legacy', 'gsap'].map(engine => film('docs/nexus-p1-6/evidence', engine)),
++  current: ['legacy', 'gsap'].map(engine => film(`${root}/p16/evidence`, engine)),
++}, null, 2));
++if (existsSync(`${root}/evidence/gsap-p13`)) {
++  const modes = ['legacy', 'gsap'].map(mode => {
++    const dir = `${root}/evidence/${mode}-p13`;
++    return { mode, cases: readdirSync(dir).filter(name => name.endsWith('.json')).map(name => ({ name, ...JSON.parse(readFileSync(`${dir}/${name}`)) })) };
++  });
++  const deltas = [];
++  for (const before of modes[0].cases) {
++    const after = modes[1].cases.find(item => item.name === before.name);
++    if (!after) throw new Error(`Missing GSAP geometry case: ${before.name}`);
++    for (const [selector, rect] of Object.entries(before.rects)) {
++      const other = after.rects[selector];
++      if (!rect || !other) { if (rect !== other) deltas.push({ name: before.name, selector, before: rect, after: other }); continue; }
++      for (const key of ['x', 'y', 'width', 'height']) {
++        // Report actual deltas; do not introduce a new acceptance tolerance or alter existing assertions.
++        if (rect[key] !== other[key]) deltas.push({ name: before.name, selector, key, delta: other[key] - rect[key] });
++      }
++    }
++  }
++  writeFileSync(`${root}/evidence/p13-comparison.json`, JSON.stringify({
++    modes: modes.map(({ mode, cases }) => ({ mode, records: cases.length,
++      violations: cases.flatMap(item => item.violations), textFailures: cases.flatMap(item => item.textFailures) })),
++    rectangleDeltas: deltas,
++  }, null, 2));
++}
++console.log(JSON.stringify({ unchangedFiles: unchanged.length, identicalSections: sections.length, reports: validation.map(({ name, stats }) => ({ name, stats })) }, null, 2));
+diff --git a/src/app/poc/xiaochuan/page.tsx b/src/app/poc/xiaochuan/page.tsx
+index 3da56aa..0472f27 100644
+--- a/src/app/poc/xiaochuan/page.tsx
++++ b/src/app/poc/xiaochuan/page.tsx
+@@ -5,0 +6,2 @@ import { XiaochuanReview } from "./review";
++import { hasVerifiedLocalQualityBoundary } from "@/server/local-quality-request";
++import { resolveXiaochuanMotion } from "@/components/overlay/motion/permission";
+@@ -8,2 +10,4 @@ export const dynamic = "force-dynamic";
+-export default function XiaochuanReviewPage() {
+-  if (process.env.XIAOCHUAN_POC_REVIEW !== "1") notFound();
++export default async function XiaochuanReviewPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
++  const verifiedBoundary = hasVerifiedLocalQualityBoundary();
++  if (process.env.XIAOCHUAN_POC_REVIEW !== "1" || !verifiedBoundary) notFound();
++  const selection = resolveXiaochuanMotion(await searchParams, process.env.XIAOCHUAN_MOTION_PERMISSION, verifiedBoundary, true);
+@@ -11 +15 @@ export default function XiaochuanReviewPage() {
+-  return <XiaochuanReview payload={fromPublicSalesScreenPayload(fixture)}/>;
++  return <XiaochuanReview selection={selection} payload={fromPublicSalesScreenPayload(fixture)}/>;
+diff --git a/src/app/poc/xiaochuan/review.tsx b/src/app/poc/xiaochuan/review.tsx
+index 6f04048..3526ff7 100644
+--- a/src/app/poc/xiaochuan/review.tsx
++++ b/src/app/poc/xiaochuan/review.tsx
+@@ -6 +6,2 @@ import type { PublicScreenPayload } from "@/lib/public-screen-payload";
+-export function XiaochuanReview({payload}:{payload:PublicScreenPayload}) {
++import type { XiaochuanMotionSelection } from "@/components/overlay/motion/permission";
++export function XiaochuanReview({payload, selection}:{payload:PublicScreenPayload; selection:XiaochuanMotionSelection}) {
+@@ -11,0 +13,2 @@ export function XiaochuanReview({payload}:{payload:PublicScreenPayload}) {
++      <Link href={{pathname:"/poc/xiaochuan",query:{xiaochuanMotion:"legacy",...(hub?{hub}:{})}}}>Legacy 模式</Link>{" "}
++      <Link href={{pathname:"/poc/xiaochuan",query:{xiaochuanMotion:"gsap",...(hub?{hub}:{})}}}>GSAP 模式</Link>{" "}
+@@ -14 +17 @@ export function XiaochuanReview({payload}:{payload:PublicScreenPayload}) {
+-    {mounted ? <OverlayStage payload={payload} driver="live" hubUrl={hub}/> : null}
++    {mounted ? <OverlayStage key={`${selection.mode}:${selection.auditAllowed}`} xiaochuanMotion={selection.mode} xiaochuanAuditAllowed={selection.auditAllowed} payload={payload} driver="live" hubUrl={hub}/> : null}
+diff --git a/src/app/screen/sales/page.tsx b/src/app/screen/sales/page.tsx
+index 7d396a2..009d932 100644
+--- a/src/app/screen/sales/page.tsx
++++ b/src/app/screen/sales/page.tsx
+@@ -8,0 +9 @@ import { hasVerifiedLocalQualityBoundary } from '@/server/local-quality-request'
++import { resolveXiaochuanMotion } from '@/components/overlay/motion/permission';
+@@ -13,0 +15 @@ export default async function SalesScreenPage({ searchParams }: { searchParams:
++  const xiaochuan = resolveXiaochuanMotion(params, process.env.XIAOCHUAN_MOTION_PERMISSION, verifiedBoundary);
+@@ -19 +21 @@ export default async function SalesScreenPage({ searchParams }: { searchParams:
+-  return <Experience manualQualityAllowed={process.env.NEXUS_QUALITY_PERMISSION === "local-candidate" && localQualityPermission(process.env.NEXUS_QUALITY_PERMISSION, requestHost, verifiedBoundary)} qualityMode={resolveQualityMode(params, process.env.NEXUS_QUALITY_PERMISSION, requestHost, verifiedBoundary)} demoMode={params.demo === "1"} initialPayload={payload} source={source} layout={layout} kiosk={params.kiosk === "1"} fit={params.fit === "1" || (params.fit !== "0" && layout.fit)} initialNow={initialNow} voice={params.voiceLive === "1" ? "live" : params.voiceDemo === "1" ? "demo" : null} lite={params.lite === "1"} hubUrl={sanitizeHubParam(typeof params.hub === "string" ? params.hub : null) ?? undefined}/>;
++  return <Experience xiaochuanMotion={xiaochuan.mode} xiaochuanAuditAllowed={xiaochuan.auditAllowed} manualQualityAllowed={process.env.NEXUS_QUALITY_PERMISSION === "local-candidate" && localQualityPermission(process.env.NEXUS_QUALITY_PERMISSION, requestHost, verifiedBoundary)} qualityMode={resolveQualityMode(params, process.env.NEXUS_QUALITY_PERMISSION, requestHost, verifiedBoundary)} demoMode={params.demo === "1"} initialPayload={payload} source={source} layout={layout} kiosk={params.kiosk === "1"} fit={params.fit === "1" || (params.fit !== "0" && layout.fit)} initialNow={initialNow} voice={params.voiceLive === "1" ? "live" : params.voiceDemo === "1" ? "demo" : null} lite={params.lite === "1"} hubUrl={sanitizeHubParam(typeof params.hub === "string" ? params.hub : null) ?? undefined}/>;
+diff --git a/src/components/overlay/OverlayStage.tsx b/src/components/overlay/OverlayStage.tsx
+index 2a8aa4c..1f909b5 100644
+--- a/src/components/overlay/OverlayStage.tsx
++++ b/src/components/overlay/OverlayStage.tsx
+@@ -11,0 +12 @@ import { useXiaochuanMotion } from "./motion/useXiaochuanMotion";
++import type { XiaochuanMotionMode } from "./motion/permission";
+@@ -79,0 +81,2 @@ export function OverlayStage({
++  xiaochuanMotion = "legacy",
++  xiaochuanAuditAllowed = false,
+@@ -87,0 +91,2 @@ export function OverlayStage({
++  xiaochuanMotion?: XiaochuanMotionMode;
++  xiaochuanAuditAllowed?: boolean;
+@@ -90 +95 @@ export function OverlayStage({
+-  const motion = useXiaochuanMotion(reduced);
++  const motion = useXiaochuanMotion(reduced, xiaochuanMotion, xiaochuanAuditAllowed);
+diff --git a/src/components/overlay/motion/XiaochuanTimeline.test.ts b/src/components/overlay/motion/XiaochuanTimeline.test.ts
+index a9b2bf4..fb11932 100644
+--- a/src/components/overlay/motion/XiaochuanTimeline.test.ts
++++ b/src/components/overlay/motion/XiaochuanTimeline.test.ts
+@@ -13,0 +14,14 @@ describe("visual timeline isolation", () => {
++  it("does not accept subscriptions or retain callbacks after disposal", () => {
++    const { motion, jobs } = setup(); motion.dispose(); let calls = 0;
++    const unsubscribe = motion.subscribe(() => calls++);
++    motion.visibility(false); motion.setReduced(false); motion.answer(0);
++    expect(motion.audit().subscribers).toBe(0); expect(calls).toBe(0);
++    expect(jobs.size).toBe(0); unsubscribe();
++  });
++  it("a host callback already dequeued before disposal cannot revive jobs or subscribers", () => {
++    const { motion, jobs } = setup(); let calls = 0; motion.subscribe(() => calls++);
++    motion.answer(0); const late = [...jobs.values()][0]; expect(late).toBeTypeOf("function");
++    motion.dispose(); const before = calls; late(10000);
++    expect(calls).toBe(before); expect(jobs.size).toBe(0);
++    expect(motion.audit()).toMatchObject({ tracks: [], subscribers: 0, pendingJob: false });
++  });
+diff --git a/src/components/overlay/motion/XiaochuanTimeline.ts b/src/components/overlay/motion/XiaochuanTimeline.ts
+index ebec6c0..bcf3296 100644
+--- a/src/components/overlay/motion/XiaochuanTimeline.ts
++++ b/src/components/overlay/motion/XiaochuanTimeline.ts
+@@ -32 +32 @@ export class XiaochuanTimeline {
+-  subscribe(fn: () => void) { this.subscribers.add(fn); fn(); return () => { this.subscribers.delete(fn); }; }
++  subscribe(fn: () => void) { if (this.disposed) return () => {}; this.subscribers.add(fn); fn(); return () => { this.subscribers.delete(fn); }; }
+@@ -97 +97 @@ export class XiaochuanTimeline {
+-  setReduced(value: boolean) { this.reduced = value; this.sample(this.now()); this.schedule(); }
++  setReduced(value: boolean) { if (this.disposed) return; this.reduced = value; this.sample(this.now()); this.schedule(); }
+@@ -98,0 +99 @@ export class XiaochuanTimeline {
++    if (this.disposed) return;
+diff --git a/src/components/overlay/motion/permission.test.ts b/src/components/overlay/motion/permission.test.ts
+new file mode 100644
+index 0000000..7eacf12
+--- /dev/null
++++ b/src/components/overlay/motion/permission.test.ts
+@@ -0,0 +1,26 @@
++import { describe, expect, it } from "vitest";
++import { resolveXiaochuanMotion } from "./permission";
++const legacy = { mode: "legacy", auditAllowed: false };
++describe("independent server Xiaochuan permission", () => {
++  it.each([undefined, "", "1", "true", "local-candidate", "local-shadow", "LOCAL-GSAP", "local-gsap "])("denies missing/invalid/unrelated grant %s", grant => {
++    expect(resolveXiaochuanMotion({ xiaochuanMotion: "gsap", debug: "1" }, grant, true, true)).toEqual(legacy);
++  });
++  it("denies URL-only authorization without an attested request even with server flags", () => {
++    expect(resolveXiaochuanMotion({ xiaochuanMotion: "gsap", debug: "1" }, "local-gsap")).toEqual(legacy);
++    expect(resolveXiaochuanMotion({ xiaochuanMotion: "gsap" }, "local-gsap", false, true)).toEqual(legacy);
++  });
++  it.each([undefined, "", "legacy", "GSAP", "true", "1", "gsap ", ["gsap"], ["gsap", "gsap"], ["gsap", "legacy"]])("rejects absent, old, malformed or repeated modes %j", mode => {
++    expect(resolveXiaochuanMotion({ xiaochuanMotion: mode, debug: "1" }, "local-gsap", true, true)).toEqual(legacy);
++  });
++  it("requires the explicit Xiaochuan parameter, independent of main engine/quality/debug flags", () => {
++    expect(resolveXiaochuanMotion({ motion: "gsap", qualityExperiment: "candidate", debug: "1" }, "local-gsap", true)).toEqual(legacy);
++    expect(resolveXiaochuanMotion({ xiaochuanMotion: "gsap" }, "local-gsap", true)).toEqual({ mode: "gsap", auditAllowed: false });
++  });
++  it("grants audit only to exact debug=1 or the server-approved review page", () => {
++    for (const debug of [undefined, "true", "0", ["1", "1"]]) {
++      expect(resolveXiaochuanMotion({ xiaochuanMotion: "gsap", debug }, "local-gsap", true).auditAllowed).toBe(false);
++    }
++    expect(resolveXiaochuanMotion({ xiaochuanMotion: "gsap", debug: "1" }, "local-gsap", true)).toEqual({ mode: "gsap", auditAllowed: true });
++    expect(resolveXiaochuanMotion({ xiaochuanMotion: "gsap" }, "local-gsap", true, true)).toEqual({ mode: "gsap", auditAllowed: true });
++  });
++});
+diff --git a/src/components/overlay/motion/permission.ts b/src/components/overlay/motion/permission.ts
+new file mode 100644
+index 0000000..3761d52
+--- /dev/null
++++ b/src/components/overlay/motion/permission.ts
+@@ -0,0 +1,18 @@
++export type XiaochuanMotionMode = "legacy" | "gsap";
++export type XiaochuanMotionSelection = { mode: XiaochuanMotionMode; auditAllowed: boolean };
++
++/** Server-page decision. verifiedBoundary must come from raw socket/ALS attestation,
++ * never from Host, forwarded headers, URL flags or a browser-provided assertion.
++ * This permission is independent of the main screen quality experiment.
++ */
++export function resolveXiaochuanMotion(
++  params: Record<string, string | string[] | undefined>,
++  permission: string | undefined,
++  verifiedBoundary = false,
++  review = false,
++): XiaochuanMotionSelection {
++  if (verifiedBoundary !== true || permission !== "local-gsap" || params.xiaochuanMotion !== "gsap") {
++    return { mode: "legacy", auditAllowed: false };
++  }
++  return { mode: "gsap", auditAllowed: review || params.debug === "1" };
++}
+diff --git a/src/components/overlay/motion/useXiaochuanMotion.test.ts b/src/components/overlay/motion/useXiaochuanMotion.test.ts
+new file mode 100644
+index 0000000..26a350e
+--- /dev/null
++++ b/src/components/overlay/motion/useXiaochuanMotion.test.ts
+@@ -0,0 +1,64 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
++
++// Effect harness: real async hook setup/cleanup, without importing a browser renderer.
++const rig = vi.hoisted(() => ({
++  effects: [] as Array<() => void | (() => void)>,
++  instances: [] as Array<{ dispose: ReturnType<typeof vi.fn>; audit: ReturnType<typeof vi.fn> }>,
++}));
++vi.mock("react", () => ({
++  useState: () => [null, vi.fn()],
++  useEffect: (effect: () => void | (() => void)) => { rig.effects.push(effect); },
++}));
++vi.mock("./XiaochuanTimeline", () => ({ XiaochuanTimeline: class {
++  dispose = vi.fn(); audit = vi.fn(() => ({ alive: !this.dispose.mock.calls.length }));
++  visibility = vi.fn(); setReduced = vi.fn();
++  constructor() { rig.instances.push(this); }
++} }));
++import { useXiaochuanMotion } from "./useXiaochuanMotion";
++type AuditWindow = { location: { search: string }; __xiaochuanMotionAudit?: () => unknown };
++let target: AuditWindow;
++const cleanups: Array<() => void> = [];
++async function mount(mode = "gsap", audit = true) {
++  rig.effects.length = 0;
++  // This also exercises the pre-hardening hook, whose extra arguments are ignored at runtime.
++  (useXiaochuanMotion as (...args: unknown[]) => unknown)(false, mode, audit);
++  const cleanup = rig.effects[0]() ?? (() => {}); cleanups.push(cleanup);
++  await vi.dynamicImportSettled();
++  return cleanup;
++}
++beforeEach(() => {
++  rig.instances.length = 0;
++  target = { location: { search: "?xiaochuanMotion=gsap" } };
++  vi.stubGlobal("window", target);
++  vi.stubGlobal("document", { hidden: false, addEventListener: vi.fn(), removeEventListener: vi.fn() });
++});
++afterEach(() => { cleanups.splice(0).forEach(cleanup => cleanup()); vi.unstubAllGlobals(); });
++describe("server-selected Xiaochuan effect lifecycle", () => {
++  it("cannot enable GSAP from a URL when the server selects Legacy", async () => {
++    await mount("legacy", false);
++    expect(rig.instances).toHaveLength(0); expect(target.__xiaochuanMotionAudit).toBeUndefined();
++  });
++  it("runs authorized GSAP without publishing diagnostics outside approved debug", async () => {
++    await mount("gsap", false);
++    expect(rig.instances).toHaveLength(1); expect(target.__xiaochuanMotionAudit).toBeUndefined();
++  });
++  it("removes the global entry and revokes a saved audit closure on unmount", async () => {
++    const cleanup = await mount(); const saved = target.__xiaochuanMotionAudit!;
++    expect(saved()).toEqual({ alive: true }); cleanup();
++    expect(target.__xiaochuanMotionAudit).toBeUndefined(); expect(saved()).toBeNull();
++    expect(rig.instances[0].dispose).toHaveBeenCalledTimes(1);
++  });
++  it("old cleanup cannot delete a newer instance audit and no old closure can read it", async () => {
++    const oldCleanup = await mount(); const oldAudit = target.__xiaochuanMotionAudit!;
++    const newCleanup = await mount(); const newAudit = target.__xiaochuanMotionAudit!;
++    oldCleanup(); expect(target.__xiaochuanMotionAudit).toBe(newAudit);
++    expect(oldAudit()).toBeNull(); expect(newAudit()).toEqual({ alive: true });
++    newCleanup(); expect(target.__xiaochuanMotionAudit).toBeUndefined(); expect(newAudit()).toBeNull();
++  });
++  it("cancels an unmounted asynchronous import before it can register or create an instance", async () => {
++    rig.effects.length = 0;
++    (useXiaochuanMotion as (...args: unknown[]) => unknown)(false, "gsap", true);
++    rig.effects[0]()!(); await vi.dynamicImportSettled();
++    expect(rig.instances).toHaveLength(0); expect(target.__xiaochuanMotionAudit).toBeUndefined();
++  });
++});
+diff --git a/src/components/overlay/motion/useXiaochuanMotion.ts b/src/components/overlay/motion/useXiaochuanMotion.ts
+index 6fe8fe9..d229bf9 100644
+--- a/src/components/overlay/motion/useXiaochuanMotion.ts
++++ b/src/components/overlay/motion/useXiaochuanMotion.ts
+@@ -4,2 +4,4 @@ import type { XiaochuanTimeline } from "./XiaochuanTimeline";
+-/** Explicit local PoC switch. Legacy does not load the GSAP overlay module. */
+-export function useXiaochuanMotion(reduced: boolean) {
++import type { XiaochuanMotionMode } from "./permission";
++type AuditWindow = Window & { __xiaochuanMotionAudit?: () => ReturnType<XiaochuanTimeline["audit"]> | null };
++/** Server-selected experiment. Legacy does not load the GSAP overlay module. */
++export function useXiaochuanMotion(reduced: boolean, mode: XiaochuanMotionMode = "legacy", auditAllowed = false) {
+@@ -8 +10 @@ export function useXiaochuanMotion(reduced: boolean) {
+-    if (new URLSearchParams(window.location.search).get("xiaochuanMotion") !== "gsap") return;
++    if (mode !== "gsap") return;
+@@ -10,0 +13,2 @@ export function useXiaochuanMotion(reduced: boolean) {
++    const target = window as AuditWindow;
++    const audit = () => instance?.audit() ?? null;
+@@ -16,2 +20 @@ export function useXiaochuanMotion(reduced: boolean) {
+-      // Read-only diagnostics are exposed only with the explicit PoC switch.
+-      Object.assign(window, { __xiaochuanMotionAudit: () => instance!.audit() });
++      if (auditAllowed) target.__xiaochuanMotionAudit = audit;
+@@ -19,2 +22,9 @@ export function useXiaochuanMotion(reduced: boolean) {
+-    return () => { cancelled = true; document.removeEventListener("visibilitychange", visibility); instance?.dispose(); };
+-  }, []);
++    return () => {
++      cancelled = true;
++      document.removeEventListener("visibilitychange", visibility);
++      // An overlapping old cleanup must not remove a newer registration.
++      if (target.__xiaochuanMotionAudit === audit) delete target.__xiaochuanMotionAudit;
++      instance?.dispose(); instance = null; // revoke saved closures and release their controller reference
++      setMotion(null);
++    };
++  }, [mode, auditAllowed]);
+@@ -22 +32 @@ export function useXiaochuanMotion(reduced: boolean) {
+-  return motion;
++  return mode === "gsap" ? motion : null;
+diff --git a/src/components/screen/ScreenExperience.tsx b/src/components/screen/ScreenExperience.tsx
+index 6eceac3..c50b2bf 100644
+--- a/src/components/screen/ScreenExperience.tsx
++++ b/src/components/screen/ScreenExperience.tsx
+@@ -11,0 +12 @@ import type { QualityMode } from './motion/QualityPolicy';
++import type { XiaochuanMotionMode } from '@/components/overlay/motion/permission';
+@@ -12,0 +14 @@ export interface ScreenExperienceProps {
++  xiaochuanMotion?: XiaochuanMotionMode; xiaochuanAuditAllowed?: boolean;
+@@ -16 +18 @@ export interface ScreenExperienceProps {
+-export function ScreenExperience({ initialPayload, source, layout, kiosk, fit, initialNow, voice, lite, hubUrl, demoMode = false, qualityMode = 'baseline', manualQualityAllowed = false, MotionComponent = MotionProvider }: ScreenExperienceProps) {
++export function ScreenExperience({ initialPayload, source, layout, kiosk, fit, initialNow, voice, lite, hubUrl, demoMode = false, qualityMode = 'baseline', manualQualityAllowed = false, MotionComponent = MotionProvider, xiaochuanMotion = 'legacy', xiaochuanAuditAllowed = false }: ScreenExperienceProps) {
+@@ -36 +38 @@ export function ScreenExperience({ initialPayload, source, layout, kiosk, fit, i
+-    {payload && voice ? <OverlayErrorBoundary><OverlayStage payload={payload} driver={voice} lite={lite} hubUrl={hubUrl}/></OverlayErrorBoundary> : null}
++    {payload && voice ? <OverlayErrorBoundary><OverlayStage key={`${xiaochuanMotion}:${xiaochuanAuditAllowed}`} xiaochuanMotion={xiaochuanMotion} xiaochuanAuditAllowed={xiaochuanAuditAllowed} payload={payload} driver={voice} lite={lite} hubUrl={hubUrl}/></OverlayErrorBoundary> : null}
+diff --git a/src/components/screen/motion/GsapTickerOwner.test.ts b/src/components/screen/motion/GsapTickerOwner.test.ts
+index d2aee22..1552238 100644
+--- a/src/components/screen/motion/GsapTickerOwner.test.ts
++++ b/src/components/screen/motion/GsapTickerOwner.test.ts
+@@ -26,0 +27,8 @@ describe('unique ticker owner',()=>{
++  it('canceling one scoped host never detaches another active host or sleeps the shared ticker',()=>{
++    const overlay=createGsapHost(), screen=createGsapHost();
++    const overlayId=overlay.request(()=>{}), screenId=screen.request(()=>{});
++    mock.ticker.sleep.mockClear(); expect(tickerAudit().activeListeners).toBe(2);
++    overlay.cancel(overlayId); expect(tickerAudit().activeListeners).toBe(1);
++    expect(mock.ticker.sleep).not.toHaveBeenCalled();
++    screen.cancel(screenId); expect(tickerAudit().activeListeners).toBe(0);
++  });

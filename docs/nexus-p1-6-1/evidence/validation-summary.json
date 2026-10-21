@@ -1,0 +1,4068 @@
+[
+  {
+    "name": "browser-initial",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:09:27.850Z",
+      "duration": 216609.207,
+      "expected": 20,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "3067 denies URL-only GSAP despite debug, review/quality flags and forged headers",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3068 denies URL-only GSAP despite debug, review/quality flags and forged headers",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "attested service requires one exact GSAP parameter; default/old/repeated values fail closed",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "forwarded requests cannot acquire the trusted server context",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "review fixture stays private to the attested local launcher",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "authorized non-debug GSAP does not publish a global audit",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "rapid client route/mode switches revoke old closures and leave one live controller",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "legacy full interaction film",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "legacy 1280 geometry and performance",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "legacy 1792 geometry and performance",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "legacy 1920 geometry and performance",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "legacy 3840 geometry and performance",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "legacy audio failure reduced motion and repeated wake exit",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "legacy hidden restore early interruption navigation and reentry",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gsap full interaction film",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gsap 1280 geometry and performance",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gsap 1792 geometry and performance",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gsap 1920 geometry and performance",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gsap 3840 geometry and performance",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gsap audio failure reduced motion and repeated wake exit",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gsap hidden restore early interruption navigation and reentry",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main GSAP and overlay share the existing ticker owner without altering its cap",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "gsap P1.3 normal and long templates retain layout and spoken pagination",
+        "file": "p1-6.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "browser-hardening",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:13:27.198Z",
+      "duration": 6354.088000000001,
+      "expected": 7,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "3067 denies URL-only GSAP despite debug, review/quality flags and forged headers",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3068 denies URL-only GSAP despite debug, review/quality flags and forged headers",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "attested service requires one exact GSAP parameter; default/old/repeated values fail closed",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "forwarded requests cannot acquire the trusted server context",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "review fixture stays private to the attested local launcher",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "authorized non-debug GSAP does not publish a global audit",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "rapid client route/mode switches revoke old closures and leave one live controller",
+        "file": "p1-6-1.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "legacy-regression",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:14:03.804Z",
+      "duration": 647900.607,
+      "expected": 144,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "main 1280 no-preference normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 no-preference normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 no-preference normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1280 no-preference long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 no-preference long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 no-preference long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1280 reduce normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 reduce normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 reduce normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1280 reduce long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 reduce long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 reduce long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1792 no-preference normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 no-preference normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 no-preference normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1792 no-preference long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 no-preference long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 no-preference long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1792 reduce normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 reduce normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 reduce normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1792 reduce long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 reduce long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 reduce long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1920 no-preference normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 no-preference normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 no-preference normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1920 no-preference long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 no-preference long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 no-preference long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1920 reduce normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 reduce normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 reduce normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1920 reduce long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 reduce long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 reduce long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 3840 no-preference normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 no-preference normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 no-preference normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 3840 no-preference long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 no-preference long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 no-preference long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 3840 reduce normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 reduce normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 reduce normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 3840 reduce long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 reduce long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 reduce long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "demo badge requires explicit demo mode even when payload requests a notice",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "24kHz actual PcmPlayer blocks render sample-identically to a whole buffer",
+        "file": "voice-audio-quality.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "zero values, 180% and no duplicate brief body",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "15 shipments slide at 4s with five slots and three dots",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "demo automatically completes launch, answer and withdrawal for seven cards",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "overlay RAF callback CPU increment stays within 8ms at both resolutions",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "presentation reason no-data preserves lifecycle",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "presentation reason offline preserves lifecycle",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "presentation reason asr-miss preserves lifecycle",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "presentation reason interrupted preserves lifecycle",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "reduced motion renders whole answer and announces complete sentences",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "debug hints appear only with debug query",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "service degradation has its own status",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "normal motion live region never announces a partial sentence",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "300 character answer pages without hidden text 1920",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "300 character answer pages without hidden text 1280",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "300 character answer pages without hidden text 3840",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "single province 100% and large row counts remain contained",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real worklet/VAD interrupts an answer, then a long question survives the 8s window",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "silence is counted from actual open microphone; cached idle_exit then ambient",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "speech beginning at second 4 survives the listening deadline and becomes an answer",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Esc while listening closes server session and F9 starts a fresh session",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real KWS works after answering interruption: Escape",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real KWS works after answering interruption: disconnect",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real KWS works after answering interruption: supersede",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real KWS works after answering interruption: timeout",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "one-sentence greeting card finishes unfolding during speech",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real VAD echo rejection resumes the same answer with its card intact",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "full silence after an answer traverses long window, prompt, short window and warm exit",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "speech spanning the final sample and tail guard is preserved as one barge utterance",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "goodbye and fallback close without accepting speech during their playback",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "paused playback releases both ends on Escape",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "paused playback releases both ends on disconnect",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "200ms prerecorded speech cannot confirm a barge or submit a business question",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "configured 2s ordinary window reaches the browser and expires from actual ready",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "ordinary rate limit plays an apology and reopens instead of leaving the session",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "listening level follows real captured worklet audio at 20Hz",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "only the owner plays; a second screen failure cannot cut off audio; followup begins at actual drain",
+        "file": "voice-ownership.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "a suspended real AudioContext keeps the answer without followup; a click enables the next turn",
+        "file": "voice-ownership.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real PCM drives analyser and sentence highlight; followup waits for EOF and final sample",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "cached goodbye plays before closing and starts no new GPU request",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "superseding a live answer stops its sources and downloads; only the new turn drains",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "audio failure leaves the card readable and does not report successful playback",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Escape and hub disconnect stop audio immediately and restore the baseline",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Escape during followup closes the hub and a fresh question wakes the screen",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "one failed sentence preserves earlier audio and records skipped sentences with drained",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "a skipped first sentence still reports the actual first sound exactly once",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "a suspended context reports failure and a pointer gesture enables the next answer",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "legacy-context-recheck",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:25:22.937Z",
+      "duration": 23629.46,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "only the owner plays; a second screen failure cannot cut off audio; followup begins at actual drain",
+        "file": "voice-ownership.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "a suspended real AudioContext keeps the answer without followup; a click enables the next turn",
+        "file": "voice-ownership.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "gsap-regression",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:26:12.677Z",
+      "duration": 642699.521,
+      "expected": 142,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "main 1280 no-preference normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 no-preference normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 no-preference normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1280 no-preference long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 no-preference long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 no-preference long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1280 reduce normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 reduce normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 reduce normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1280 reduce long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 reduce long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1280 reduce long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1792 no-preference normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 no-preference normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 no-preference normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1792 no-preference long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 no-preference long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 no-preference long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1792 reduce normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 reduce normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 reduce normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1792 reduce long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 reduce long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1792 reduce long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1920 no-preference normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 no-preference normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 no-preference normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1920 no-preference long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 no-preference long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 no-preference long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1920 reduce normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 reduce normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 reduce normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 1920 reduce long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 reduce long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 1920 reduce long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 3840 no-preference normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 no-preference normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 no-preference normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 3840 no-preference long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 no-preference long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 no-preference long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 3840 reduce normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 reduce normal normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 reduce normal outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "main 3840 reduce long",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 reduce long normal",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "shipments 3840 reduce long outage",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "demo badge requires explicit demo mode even when payload requests a notice",
+        "file": "p1-3.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "24kHz actual PcmPlayer blocks render sample-identically to a whole buffer",
+        "file": "voice-audio-quality.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 normal unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1920 long unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 normal unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1280 long unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 normal unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long sales_progress",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long target_rate",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long region_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long upcoming_shipments",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long new_customers",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long followup_todo",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long collection",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3840 long unanswerable",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "zero values, 180% and no duplicate brief body",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "15 shipments slide at 4s with five slots and three dots",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "demo automatically completes launch, answer and withdrawal for seven cards",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "overlay RAF callback CPU increment stays within 8ms at both resolutions",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "presentation reason no-data preserves lifecycle",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "presentation reason offline preserves lifecycle",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "presentation reason asr-miss preserves lifecycle",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "presentation reason interrupted preserves lifecycle",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "reduced motion renders whole answer and announces complete sentences",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "debug hints appear only with debug query",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "service degradation has its own status",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "normal motion live region never announces a partial sentence",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "300 character answer pages without hidden text 1920",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "300 character answer pages without hidden text 1280",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "300 character answer pages without hidden text 3840",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "single province 100% and large row counts remain contained",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real worklet/VAD interrupts an answer, then a long question survives the 8s window",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "silence is counted from actual open microphone; cached idle_exit then ambient",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "speech beginning at second 4 survives the listening deadline and becomes an answer",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Esc while listening closes server session and F9 starts a fresh session",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real KWS works after answering interruption: Escape",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real KWS works after answering interruption: disconnect",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real KWS works after answering interruption: supersede",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real KWS works after answering interruption: timeout",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "one-sentence greeting card finishes unfolding during speech",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real VAD echo rejection resumes the same answer with its card intact",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "full silence after an answer traverses long window, prompt, short window and warm exit",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "speech spanning the final sample and tail guard is preserved as one barge utterance",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "goodbye and fallback close without accepting speech during their playback",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "paused playback releases both ends on Escape",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "paused playback releases both ends on disconnect",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "200ms prerecorded speech cannot confirm a barge or submit a business question",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "configured 2s ordinary window reaches the browser and expires from actual ready",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "ordinary rate limit plays an apology and reopens instead of leaving the session",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "listening level follows real captured worklet audio at 20Hz",
+        "file": "voice-input.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "only the owner plays; a second screen failure cannot cut off audio; followup begins at actual drain",
+        "file": "voice-ownership.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "a suspended real AudioContext keeps the answer without followup; a click enables the next turn",
+        "file": "voice-ownership.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "real PCM drives analyser and sentence highlight; followup waits for EOF and final sample",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "cached goodbye plays before closing and starts no new GPU request",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "superseding a live answer stops its sources and downloads; only the new turn drains",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "audio failure leaves the card readable and does not report successful playback",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Escape and hub disconnect stop audio immediately and restore the baseline",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Escape during followup closes the hub and a fresh question wakes the screen",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "one failed sentence preserves earlier audio and records skipped sentences with drained",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "a skipped first sentence still reports the actual first sound exactly once",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "a suspended context reports failure and a pointer gesture enables the next answer",
+        "file": "voice-playback.spec.ts",
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              "passed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "baseline-cpu-url-harness-initial",
+    "validModeComparison": false,
+    "stats": {
+      "startTime": "2026-10-21T07:38:15.234Z",
+      "duration": 19386.682999999997,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "overlay RAF callback CPU increment stays within 8ms at both resolutions",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "baseline-live-url-harness-initial",
+    "validModeComparison": false,
+    "stats": {
+      "startTime": "2026-10-21T07:39:15.548Z",
+      "duration": 4242.879000000001,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "normal motion live region never announces a partial sentence",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "baseline-cpu",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:40:10.510Z",
+      "duration": 12934.557,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "overlay RAF callback CPU increment stays within 8ms at both resolutions",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "baseline-live",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:41:00.287Z",
+      "duration": 6963.748,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "normal motion live region never announces a partial sentence",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "gsap-cpu-recheck",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:41:33.880Z",
+      "duration": 12880.29,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "overlay RAF callback CPU increment stays within 8ms at both resolutions",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "gsap-live-recheck",
+    "validModeComparison": true,
+    "stats": {
+      "startTime": "2026-10-21T07:42:29.454Z",
+      "duration": 6843.662,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "normal motion live region never announces a partial sentence",
+        "file": "voice-cards.spec.ts",
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              "failed"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

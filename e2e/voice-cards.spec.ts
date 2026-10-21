@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page } from "./xiaochuan-test";
 import { join } from "node:path";
 import { mkdir, writeFile } from "node:fs/promises";
 import { startVoiceHub, type VoiceHubServer } from "../services/voice-orchestrator/src/ws/ws-server";

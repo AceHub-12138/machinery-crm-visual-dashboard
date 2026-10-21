@@ -11,6 +11,20 @@ function setup(reduced = false) {
 const controllers: XiaochuanTimeline[] = [];
 afterEach(() => { controllers.splice(0).forEach(c => c.dispose()); expect(XiaochuanTimeline.liveTimelines).toBe(0); expect(XiaochuanTimeline.liveControllers).toBe(0); });
 describe("visual timeline isolation", () => {
+  it("does not accept subscriptions or retain callbacks after disposal", () => {
+    const { motion, jobs } = setup(); motion.dispose(); let calls = 0;
+    const unsubscribe = motion.subscribe(() => calls++);
+    motion.visibility(false); motion.setReduced(false); motion.answer(0);
+    expect(motion.audit().subscribers).toBe(0); expect(calls).toBe(0);
+    expect(jobs.size).toBe(0); unsubscribe();
+  });
+  it("a host callback already dequeued before disposal cannot revive jobs or subscribers", () => {
+    const { motion, jobs } = setup(); let calls = 0; motion.subscribe(() => calls++);
+    motion.answer(0); const late = [...jobs.values()][0]; expect(late).toBeTypeOf("function");
+    motion.dispose(); const before = calls; late(10000);
+    expect(calls).toBe(before); expect(jobs.size).toBe(0);
+    expect(motion.audit()).toMatchObject({ tracks: [], subscribers: 0, pendingJob: false });
+  });
   it("keeps the existing pulse/stream/unfold landmarks on one absolute clock", () => {
     const {motion, step, jobs} = setup(); motion.answer(0);
     step(120); expect(motion.visual.pulse).toBe(1); expect(motion.visual.stream).toBeCloseTo(20/350,5); expect(motion.visual.unfold).toBe(0);

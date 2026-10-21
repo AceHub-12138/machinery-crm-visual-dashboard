@@ -1,0 +1,13 @@
+[WebServer] (node:7732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7733) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:7734) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/voice-ownership.spec.ts:115:3 › only the owner plays; a second screen failure cannot cut off audio; followup begins at actual drain (7.3s)
+  ✓  2 e2e/voice-ownership.spec.ts:147:3 › a suspended real AudioContext keeps the answer without followup; a click enables the next turn (15.2s)
+
+  2 passed (23.6s)

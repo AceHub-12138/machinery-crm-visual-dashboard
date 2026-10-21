@@ -1,0 +1,163 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "e2e/p161-baseline.config.ts",
+      "--grep",
+      "overlay RAF callback CPU increment"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e/p161-baseline.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/.review/p161-baseline/baseline-cpu",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "voice-cards.spec.ts"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/docs/nexus-p1-6-1/evidence/baseline-cpu.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "voice-cards.spec.ts",
+      "file": "voice-cards.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "overlay RAF callback CPU increment stays within 8ms at both resolutions",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11508,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m8\u001b[39m\nReceived:    \u001b[31m9.399999998509884\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m8\u001b[39m\nReceived:    \u001b[31m9.399999998509884\u001b[39m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e/voice-cards.spec.ts:157:112",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e/voice-cards.spec.ts",
+                      "column": 112,
+                      "line": 157
+                    },
+                    "snippet": "  155 |     const p95=(values:number[])=>values.sort((a,b)=>a-b)[Math.floor(values.length*.95)]??0;\n  156 |     const record={viewport,metric:\"summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU\",baselineFrames:baseline.length,overlayFrames:active.length,baselineP95:p95(baseline),overlayP95:p95(active),incrementP95:Math.max(0,p95(active)-p95(baseline))};\n> 157 |     evidence.push({performance:record}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);\n      |                                                                                                                ^\n  158 |   }\n  159 | });\n  160 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e/voice-cards.spec.ts",
+                        "column": 112,
+                        "line": 157
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m8\u001b[39m\nReceived:    \u001b[31m9.399999998509884\u001b[39m\n\n  155 |     const p95=(values:number[])=>values.sort((a,b)=>a-b)[Math.floor(values.length*.95)]??0;\n  156 |     const record={viewport,metric:\"summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU\",baselineFrames:baseline.length,overlayFrames:active.length,baselineP95:p95(baseline),overlayP95:p95(active),incrementP95:Math.max(0,p95(active)-p95(baseline))};\n> 157 |     evidence.push({performance:record}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);\n      |                                                                                                                ^\n  158 |   }\n  159 | });\n  160 |\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e/voice-cards.spec.ts:157:112"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:40:11.512Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/.review/p161-baseline/baseline-cpu/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/.review/p161-baseline/baseline-cpu/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/.review/p161-baseline/baseline-cpu/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e/voice-cards.spec.ts",
+                    "column": 112,
+                    "line": 157
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ea44e424961dccc97d05-5e0c9ea81dab40ff026e",
+          "file": "voice-cards.spec.ts",
+          "line": 131,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T07:40:10.510Z",
+    "duration": 12934.557,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

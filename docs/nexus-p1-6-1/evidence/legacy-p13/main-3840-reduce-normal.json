@@ -1,0 +1,253 @@
+{
+  "rects": {
+    ".overlay-card-body": null,
+    ".overlay-card-header": null,
+    ".overlay-card-data": null,
+    ".overlay-shipment-badges": null,
+    ".overlay-pages-window": null,
+    ".overlay-shipment-caption": null,
+    ".overlay-shipments-block > p": null,
+    ".overlay-shipments-block > .overlay-page-dots": null,
+    ".overlay-spoken-section": null,
+    ".overlay-spoken-heading": null,
+    ".overlay-followups": null,
+    ".overlay-audio-notice": null,
+    ".nexus-feed": {
+      "x": 56,
+      "y": 1768,
+      "width": 3728,
+      "height": 360,
+      "top": 1768,
+      "right": 3784,
+      "bottom": 2128,
+      "left": 56
+    },
+    ".nexus-feed > .nexus-title": {
+      "x": 56,
+      "y": 1768,
+      "width": 3728,
+      "height": 84,
+      "top": 1768,
+      "right": 3784,
+      "bottom": 1852,
+      "left": 56
+    },
+    ".nexus-feed-grid": {
+      "x": 56,
+      "y": 1852,
+      "width": 3728,
+      "height": 276,
+      "top": 1852,
+      "right": 3784,
+      "bottom": 2128,
+      "left": 56
+    },
+    ".nexus-feed-index": {
+      "x": 88,
+      "y": 1864,
+      "width": 56,
+      "height": 56,
+      "top": 1864,
+      "right": 144,
+      "bottom": 1920,
+      "left": 88
+    }
+  },
+  "violations": [],
+  "items": [
+    {
+      "item": {
+        "x": 56,
+        "y": 1924,
+        "width": 713.59375,
+        "height": 204,
+        "top": 1924,
+        "right": 769.59375,
+        "bottom": 2128,
+        "left": 56
+      },
+      "index": {
+        "x": 88,
+        "y": 1864,
+        "width": 56,
+        "height": 56,
+        "top": 1864,
+        "right": 144,
+        "bottom": 1920,
+        "left": 88
+      },
+      "visual": {
+        "x": 86,
+        "y": 1924,
+        "width": 184,
+        "height": 116,
+        "top": 1924,
+        "right": 270,
+        "bottom": 2040,
+        "left": 86
+      }
+    },
+    {
+      "item": {
+        "x": 809.59375,
+        "y": 1924,
+        "width": 713.59375,
+        "height": 204,
+        "top": 1924,
+        "right": 1523.1875,
+        "bottom": 2128,
+        "left": 809.59375
+      },
+      "index": {
+        "x": 841.59375,
+        "y": 1864,
+        "width": 56,
+        "height": 56,
+        "top": 1864,
+        "right": 897.59375,
+        "bottom": 1920,
+        "left": 841.59375
+      },
+      "visual": {
+        "x": 839.59375,
+        "y": 1924,
+        "width": 184,
+        "height": 116,
+        "top": 1924,
+        "right": 1023.59375,
+        "bottom": 2040,
+        "left": 839.59375
+      }
+    },
+    {
+      "item": {
+        "x": 1563.1875,
+        "y": 1924,
+        "width": 713.59375,
+        "height": 204,
+        "top": 1924,
+        "right": 2276.78125,
+        "bottom": 2128,
+        "left": 1563.1875
+      },
+      "index": {
+        "x": 1595.1875,
+        "y": 1864,
+        "width": 56,
+        "height": 56,
+        "top": 1864,
+        "right": 1651.1875,
+        "bottom": 1920,
+        "left": 1595.1875
+      },
+      "visual": {
+        "x": 1593.1875,
+        "y": 1924,
+        "width": 184,
+        "height": 116,
+        "top": 1924,
+        "right": 1777.1875,
+        "bottom": 2040,
+        "left": 1593.1875
+      }
+    },
+    {
+      "item": {
+        "x": 2316.78125,
+        "y": 1924,
+        "width": 713.59375,
+        "height": 204,
+        "top": 1924,
+        "right": 3030.375,
+        "bottom": 2128,
+        "left": 2316.78125
+      },
+      "index": {
+        "x": 2348.78125,
+        "y": 1864,
+        "width": 56,
+        "height": 56,
+        "top": 1864,
+        "right": 2404.78125,
+        "bottom": 1920,
+        "left": 2348.78125
+      },
+      "visual": {
+        "x": 2346.78125,
+        "y": 1924,
+        "width": 184,
+        "height": 116,
+        "top": 1924,
+        "right": 2530.78125,
+        "bottom": 2040,
+        "left": 2346.78125
+      }
+    },
+    {
+      "item": {
+        "x": 3070.375,
+        "y": 1924,
+        "width": 713.59375,
+        "height": 204,
+        "top": 1924,
+        "right": 3783.96875,
+        "bottom": 2128,
+        "left": 3070.375
+      },
+      "index": {
+        "x": 3102.375,
+        "y": 1864,
+        "width": 56,
+        "height": 56,
+        "top": 1864,
+        "right": 3158.375,
+        "bottom": 1920,
+        "left": 3102.375
+      },
+      "visual": {
+        "x": 3100.375,
+        "y": 1924,
+        "width": 184,
+        "height": 116,
+        "top": 1924,
+        "right": 3284.375,
+        "bottom": 2040,
+        "left": 3100.375
+      }
+    }
+  ],
+  "notes": [
+    {
+      "text": "人民币口径",
+      "rect": {
+        "x": 782,
+        "y": 167,
+        "width": 180,
+        "height": 54,
+        "top": 167,
+        "right": 962,
+        "bottom": 221,
+        "left": 782
+      },
+      "color": "rgb(138, 147, 160)",
+      "size": "18px"
+    },
+    {
+      "text": "人民币口径",
+      "rect": {
+        "x": 3570,
+        "y": 177,
+        "width": 180,
+        "height": 54,
+        "top": 177,
+        "right": 3750,
+        "bottom": 231,
+        "left": 3570
+      },
+      "color": "rgb(138, 147, 160)",
+      "size": "18px"
+    }
+  ],
+  "demo": null,
+  "textFailures": []
+}

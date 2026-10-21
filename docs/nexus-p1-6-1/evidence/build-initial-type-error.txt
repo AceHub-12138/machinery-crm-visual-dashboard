@@ -1,0 +1,25 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 prebuild /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1
+> node scripts/prepare-voice-assets.mjs
+
+
+> dachuan-crm-visual-dashboard@0.1.0 build /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1
+> next build
+
+▲ Next.js 16.3.6 (Turbopack)
+✓ Running next.config.ts took 974ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.1s
+  Running TypeScript ...
+e2e/p1-6-1.spec.ts(22,93): error TS2345: Argument of type '{ Host?: undefined; "X-Xiaochuan-Motion-Permission"?: undefined; "X-Forwarded-Host"?: undefined; "X-Nexus-Quality-Boundary"?: undefined; } | { Host: string; "X-Xiaochuan-Motion-Permission": string; "X-Forwarded-Host"?: undefined; "X-Nexus-Quality-Boundary"?: undefined; } | { ...; }' is not assignable to parameter of type 'Record<string, string> | undefined'.
+  Type '{ Host?: undefined; "X-Xiaochuan-Motion-Permission"?: undefined; "X-Forwarded-Host"?: undefined; "X-Nexus-Quality-Boundary"?: undefined; }' is not assignable to type 'Record<string, string>'.
+    Property 'Host' is incompatible with index signature.
+      Type 'undefined' is not assignable to type 'string'.
+e2e/p1-6-1.spec.ts(38,65): error TS2345: Argument of type '{ Forwarded: string; Via?: undefined; "X-Forwarded-For"?: undefined; "X-Nexus-Quality-Boundary"?: undefined; } | { Via: string; Forwarded?: undefined; "X-Forwarded-For"?: undefined; "X-Nexus-Quality-Boundary"?: undefined; } | { ...; } | { ...; }' is not assignable to parameter of type 'Record<string, string> | undefined'.
+  Type '{ Forwarded: string; Via?: undefined; "X-Forwarded-For"?: undefined; "X-Nexus-Quality-Boundary"?: undefined; }' is not assignable to type 'Record<string, string>'.
+    Property 'Via' is incompatible with index signature.
+      Type 'undefined' is not assignable to type 'string'.
+Failed to type check.
+
+ ELIFECYCLE  Command failed with exit code 1.

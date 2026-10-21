@@ -1,0 +1,41 @@
+[
+  {
+    "name": "build",
+    "command": [
+      "pnpm",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 6.228
+  },
+  {
+    "name": "typescript",
+    "command": [
+      "pnpm",
+      "exec",
+      "tsc",
+      "--noEmit"
+    ],
+    "exitCode": 0,
+    "seconds": 1.406
+  },
+  {
+    "name": "lint",
+    "command": [
+      "pnpm",
+      "lint"
+    ],
+    "exitCode": 0,
+    "seconds": 5.74
+  },
+  {
+    "name": "diff-check",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exitCode": 0,
+    "seconds": 0.02
+  }
+]

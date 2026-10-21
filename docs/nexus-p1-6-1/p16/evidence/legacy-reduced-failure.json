@@ -1,0 +1,113 @@
+{
+  "audit": null,
+  "reports": [
+    {
+      "type": "playback.metrics",
+      "at": 1792566643011,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792566643020,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "sentenceIndex": 0,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792566643033,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "sentenceIndex": 1,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.failed",
+      "at": 1792566643034,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566645297,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792566645300,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "sentenceIndex": 0,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792566645315,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "sentenceIndex": 1,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.failed",
+      "at": 1792566645315,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566647567,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792566647571,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "sentenceIndex": 0,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792566647584,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "sentenceIndex": 1,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.failed",
+      "at": 1792566647584,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566649825,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792566649841,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "sentenceIndex": 0,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792566649863,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "sentenceIndex": 1,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.failed",
+      "at": 1792566649863,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "reason": "audio_unavailable"
+    }
+  ]
+}

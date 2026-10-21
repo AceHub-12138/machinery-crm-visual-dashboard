@@ -1,0 +1,194 @@
+[
+  {
+    "variant": "normal",
+    "intent": "sales_progress",
+    "kind": "target-progress",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "normal",
+    "intent": "target_rate",
+    "kind": "completion-ring",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "normal",
+    "intent": "region_shipments",
+    "kind": "region",
+    "pages": 1,
+    "bounds": {
+      "x": 495.40740966796875,
+      "y": 231.109375,
+      "width": 801.1851196289062,
+      "height": 554.6666870117188
+    }
+  },
+  {
+    "variant": "normal",
+    "intent": "upcoming_shipments",
+    "kind": "customers-shipments",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 554.6666870117188
+    }
+  },
+  {
+    "variant": "normal",
+    "intent": "new_customers",
+    "kind": "customer-kpi",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "normal",
+    "intent": "followup_todo",
+    "kind": "followup-buckets",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "normal",
+    "intent": "collection",
+    "kind": "collection-split",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "normal",
+    "intent": "unanswerable",
+    "kind": "brief",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 277.3333435058594
+    }
+  },
+  {
+    "variant": "long",
+    "intent": "sales_progress",
+    "kind": "target-progress",
+    "pages": 2,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "long",
+    "intent": "target_rate",
+    "kind": "completion-ring",
+    "pages": 2,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "long",
+    "intent": "region_shipments",
+    "kind": "region",
+    "pages": 1,
+    "bounds": {
+      "x": 495.40740966796875,
+      "y": 231.109375,
+      "width": 801.1851196289062,
+      "height": 554.6666870117188
+    }
+  },
+  {
+    "variant": "long",
+    "intent": "upcoming_shipments",
+    "kind": "customers-shipments",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 554.6666870117188
+    }
+  },
+  {
+    "variant": "long",
+    "intent": "new_customers",
+    "kind": "customer-kpi",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "long",
+    "intent": "followup_todo",
+    "kind": "followup-buckets",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "long",
+    "intent": "collection",
+    "kind": "collection-split",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 477.629638671875
+    }
+  },
+  {
+    "variant": "long",
+    "intent": "unanswerable",
+    "kind": "brief",
+    "pages": 1,
+    "bounds": {
+      "x": 557.0370483398438,
+      "y": 231.109375,
+      "width": 677.9258422851562,
+      "height": 277.3333435058594
+    }
+  }
+]

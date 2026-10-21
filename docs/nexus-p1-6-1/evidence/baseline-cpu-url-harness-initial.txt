@@ -1,0 +1,44 @@
+[WebServer] (node:18316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:18317) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:18334) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions (17.6s)
+
+
+  1) e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "function"
+    Received: "undefined"
+
+       at p161-baseline-test.ts:14
+
+      12 |     for (const page of context.pages()) {
+      13 |       if (new URL(page.url()).pathname === "/screen/sales") {
+    > 14 |         expect(await page.evaluate(() => typeof (window as Window & { __xiaochuanMotionAudit?: unknown }).__xiaochuanMotionAudit)).toBe("function");
+         |                                                                                                                                    ^
+      15 |       }
+      16 |     }
+      17 |   }, { auto: true }],
+        at Object.base.extend.baselineGsap.auto (/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline/e2e/p161-baseline-test.ts:14:132)
+
+    Error Context: .review/p161-baseline/baseline-cpu/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md
+
+    Error Context: .review/p161-baseline/baseline-cpu/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p161-baseline/baseline-cpu/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p161-baseline/baseline-cpu/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions

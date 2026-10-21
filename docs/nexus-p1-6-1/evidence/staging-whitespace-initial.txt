@@ -1,0 +1,1 @@
+Initial staged diff check found extra blank EOF lines in baseline-build.txt, build.txt, green-targeted-unit.txt, red-unit-settled.txt, red-unit.txt and unit-all.txt. Trimmed only trailing blank lines; test output and statuses are preserved.

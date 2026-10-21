@@ -1,0 +1,42 @@
+{
+  "sourceFiles": [
+    "e2e/audio-test.ts",
+    "e2e/p1-3.spec.ts",
+    "e2e/p1-6.config.ts",
+    "e2e/p1-6.spec.ts",
+    "e2e/voice-cards.spec.ts",
+    "e2e/p1-6-1-regression.config.ts",
+    "e2e/p1-6-1.config.ts",
+    "e2e/p1-6-1.spec.ts",
+    "e2e/xiaochuan-test.ts",
+    "playwright.config.ts",
+    "scripts/p1-6-1-evidence.mjs",
+    "src/app/poc/xiaochuan/page.tsx",
+    "src/app/poc/xiaochuan/review.tsx",
+    "src/app/screen/sales/page.tsx",
+    "src/components/overlay/OverlayStage.tsx",
+    "src/components/overlay/motion/XiaochuanTimeline.test.ts",
+    "src/components/overlay/motion/XiaochuanTimeline.ts",
+    "src/components/overlay/motion/useXiaochuanMotion.ts",
+    "src/components/overlay/motion/useXiaochuanMotion.test.ts",
+    "src/components/overlay/motion/permission.ts",
+    "src/components/overlay/motion/permission.test.ts",
+    "src/components/screen/ScreenExperience.tsx",
+    "src/components/screen/motion/GsapTickerOwner.test.ts"
+  ],
+  "productFiles": [
+    "src/app/poc/xiaochuan/page.tsx",
+    "src/app/poc/xiaochuan/review.tsx",
+    "src/app/screen/sales/page.tsx",
+    "src/components/overlay/OverlayStage.tsx",
+    "src/components/overlay/motion/XiaochuanTimeline.ts",
+    "src/components/overlay/motion/useXiaochuanMotion.ts",
+    "src/components/overlay/motion/permission.ts",
+    "src/components/screen/ScreenExperience.tsx"
+  ],
+  "productFileCount": 8,
+  "codeFileCount": 23,
+  "unexpectedChanges": [],
+  "protectedProductSourceFilesUnchanged": 79,
+  "forbiddenActionsPerformed": []
+}

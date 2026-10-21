@@ -1,0 +1,126 @@
+
+ RUN  v3.2.7 /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1
+
+ ❯ src/components/overlay/motion/useXiaochuanMotion.test.ts (5 tests | 4 failed) 14ms
+   × server-selected Xiaochuan effect lifecycle > cannot enable GSAP from a URL when the server selects Legacy 6ms
+     → expected [ XiaochuanTimeline{ …(4) } ] to have a length of +0 but got 1
+   × server-selected Xiaochuan effect lifecycle > runs authorized GSAP without publishing diagnostics outside approved debug 2ms
+     → expected [Function __xiaochuanMotionAudit] to be undefined
+   × server-selected Xiaochuan effect lifecycle > removes the global entry and revokes a saved audit closure on unmount 1ms
+     → expected [Function __xiaochuanMotionAudit] to be undefined
+   × server-selected Xiaochuan effect lifecycle > old cleanup cannot delete a newer instance audit and no old closure can read it 3ms
+     → expected { alive: false } to be null
+   ✓ server-selected Xiaochuan effect lifecycle > cancels an unmounted asynchronous import before it can register or create an instance 2ms
+ ❯ src/components/overlay/motion/XiaochuanTimeline.test.ts (6 tests | 1 failed) 12ms
+   × visual timeline isolation > does not accept subscriptions or retain callbacks after disposal 5ms
+     → expected 1 to be +0 // Object.is equality
+   ✓ visual timeline isolation > keeps the existing pulse/stream/unfold landmarks on one absolute clock 2ms
+   ✓ visual timeline isolation > folds the actual partial pose and replaces an old turn without listeners growing 1ms
+   ✓ visual timeline isolation > releases the host job while hidden and catches up instead of replaying 0ms
+   ✓ visual timeline isolation > finishes reduced-motion tracks without an animation job 0ms
+   ✓ visual timeline isolation > repeated wake/exit and dispose release all tracks and subscriptions 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/overlay/motion/XiaochuanTimeline.test.ts > visual timeline isolation > does not accept subscriptions or retain callbacks after disposal
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ src/components/overlay/motion/XiaochuanTimeline.test.ts:18:40
+     16|     const unsubscribe = motion.subscribe(() => calls++);
+     17|     motion.visibility(false); motion.setReduced(false); motion.answer(…
+     18|     expect(motion.audit().subscribers).toBe(0); expect(calls).toBe(0);
+       |                                        ^
+     19|     expect(jobs.size).toBe(0); unsubscribe();
+     20|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  src/components/overlay/motion/useXiaochuanMotion.test.ts > server-selected Xiaochuan effect lifecycle > cannot enable GSAP from a URL when the server selects Legacy
+AssertionError: expected [ XiaochuanTimeline{ …(4) } ] to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ src/components/overlay/motion/useXiaochuanMotion.test.ts:39:27
+     37|   it("cannot enable GSAP from a URL when the server selects Legacy", a…
+     38|     await mount("legacy", false);
+     39|     expect(rig.instances).toHaveLength(0); expect(target.__xiaochuanMo…
+       |                           ^
+     40|   });
+     41|   it("runs authorized GSAP without publishing diagnostics outside appr…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  src/components/overlay/motion/useXiaochuanMotion.test.ts > server-selected Xiaochuan effect lifecycle > runs authorized GSAP without publishing diagnostics outside approved debug
+AssertionError: expected [Function __xiaochuanMotionAudit] to be undefined
+
+- Expected:
+undefined
+
++ Received:
+[Function __xiaochuanMotionAudit]
+
+ ❯ src/components/overlay/motion/useXiaochuanMotion.test.ts:43:82
+     41|   it("runs authorized GSAP without publishing diagnostics outside appr…
+     42|     await mount("gsap", false);
+     43|     expect(rig.instances).toHaveLength(1); expect(target.__xiaochuanMo…
+       |                                                                                  ^
+     44|   });
+     45|   it("removes the global entry and revokes a saved audit closure on un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  src/components/overlay/motion/useXiaochuanMotion.test.ts > server-selected Xiaochuan effect lifecycle > removes the global entry and revokes a saved audit closure on unmount
+AssertionError: expected [Function __xiaochuanMotionAudit] to be undefined
+
+- Expected:
+undefined
+
++ Received:
+[Function __xiaochuanMotionAudit]
+
+ ❯ src/components/overlay/motion/useXiaochuanMotion.test.ts:48:43
+     46|     const cleanup = await mount(); const saved = target.__xiaochuanMot…
+     47|     expect(saved()).toEqual({ alive: true }); cleanup();
+     48|     expect(target.__xiaochuanMotionAudit).toBeUndefined(); expect(save…
+       |                                           ^
+     49|     expect(rig.instances[0].dispose).toHaveBeenCalledTimes(1);
+     50|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  src/components/overlay/motion/useXiaochuanMotion.test.ts > server-selected Xiaochuan effect lifecycle > old cleanup cannot delete a newer instance audit and no old closure can read it
+AssertionError: expected { alive: false } to be null
+
+- Expected:
+null
+
++ Received:
+{
+  "alive": false,
+}
+
+ ❯ src/components/overlay/motion/useXiaochuanMotion.test.ts:55:24
+     53|     const newCleanup = await mount(); const newAudit = target.__xiaoch…
+     54|     oldCleanup(); expect(target.__xiaochuanMotionAudit).toBe(newAudit);
+     55|     expect(oldAudit()).toBeNull(); expect(newAudit()).toEqual({ alive:…
+       |                        ^
+     56|     newCleanup(); expect(target.__xiaochuanMotionAudit).toBeUndefined(…
+     57|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 6 passed (11)
+   Start at  12:34:32
+   Duration  425ms (transform 121ms, setup 0ms, collect 164ms, tests 26ms, environment 0ms, prepare 85ms)

@@ -1,0 +1,234 @@
+[WebServer] (node:8260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:8262) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 144 tests using 1 worker
+
+(node:8263) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    1 e2e/p1-3.spec.ts:75:3 › main 1280 no-preference normal (3.5s)
+  ✓    2 e2e/p1-3.spec.ts:92:39 › shipments 1280 no-preference normal normal (5.4s)
+  ✓    3 e2e/p1-3.spec.ts:92:39 › shipments 1280 no-preference normal outage (5.3s)
+  ✓    4 e2e/p1-3.spec.ts:75:3 › main 1280 no-preference long (3.3s)
+  ✓    5 e2e/p1-3.spec.ts:92:39 › shipments 1280 no-preference long normal (5.4s)
+  ✓    6 e2e/p1-3.spec.ts:92:39 › shipments 1280 no-preference long outage (5.4s)
+  ✓    7 e2e/p1-3.spec.ts:75:3 › main 1280 reduce normal (652ms)
+  ✓    8 e2e/p1-3.spec.ts:92:39 › shipments 1280 reduce normal normal (1.7s)
+  ✓    9 e2e/p1-3.spec.ts:92:39 › shipments 1280 reduce normal outage (1.7s)
+  ✓   10 e2e/p1-3.spec.ts:75:3 › main 1280 reduce long (599ms)
+  ✓   11 e2e/p1-3.spec.ts:92:39 › shipments 1280 reduce long normal (2.0s)
+  ✓   12 e2e/p1-3.spec.ts:92:39 › shipments 1280 reduce long outage (1.8s)
+  ✓   13 e2e/p1-3.spec.ts:75:3 › main 1792 no-preference normal (3.4s)
+  ✓   14 e2e/p1-3.spec.ts:92:39 › shipments 1792 no-preference normal normal (5.4s)
+  ✓   15 e2e/p1-3.spec.ts:92:39 › shipments 1792 no-preference normal outage (5.3s)
+  ✓   16 e2e/p1-3.spec.ts:75:3 › main 1792 no-preference long (3.4s)
+  ✓   17 e2e/p1-3.spec.ts:92:39 › shipments 1792 no-preference long normal (5.4s)
+  ✓   18 e2e/p1-3.spec.ts:92:39 › shipments 1792 no-preference long outage (5.4s)
+  ✓   19 e2e/p1-3.spec.ts:75:3 › main 1792 reduce normal (733ms)
+  ✓   20 e2e/p1-3.spec.ts:92:39 › shipments 1792 reduce normal normal (1.8s)
+  ✓   21 e2e/p1-3.spec.ts:92:39 › shipments 1792 reduce normal outage (1.8s)
+  ✓   22 e2e/p1-3.spec.ts:75:3 › main 1792 reduce long (681ms)
+  ✓   23 e2e/p1-3.spec.ts:92:39 › shipments 1792 reduce long normal (1.8s)
+  ✓   24 e2e/p1-3.spec.ts:92:39 › shipments 1792 reduce long outage (1.8s)
+  ✓   25 e2e/p1-3.spec.ts:75:3 › main 1920 no-preference normal (3.5s)
+  ✓   26 e2e/p1-3.spec.ts:92:39 › shipments 1920 no-preference normal normal (5.9s)
+  ✓   27 e2e/p1-3.spec.ts:92:39 › shipments 1920 no-preference normal outage (5.9s)
+  ✓   28 e2e/p1-3.spec.ts:75:3 › main 1920 no-preference long (3.5s)
+  ✓   29 e2e/p1-3.spec.ts:92:39 › shipments 1920 no-preference long normal (6.0s)
+  ✓   30 e2e/p1-3.spec.ts:92:39 › shipments 1920 no-preference long outage (5.9s)
+  ✓   31 e2e/p1-3.spec.ts:75:3 › main 1920 reduce normal (781ms)
+  ✓   32 e2e/p1-3.spec.ts:92:39 › shipments 1920 reduce normal normal (1.9s)
+  ✓   33 e2e/p1-3.spec.ts:92:39 › shipments 1920 reduce normal outage (1.9s)
+  ✓   34 e2e/p1-3.spec.ts:75:3 › main 1920 reduce long (763ms)
+  ✓   35 e2e/p1-3.spec.ts:92:39 › shipments 1920 reduce long normal (2.0s)
+  ✓   36 e2e/p1-3.spec.ts:92:39 › shipments 1920 reduce long outage (2.0s)
+  ✓   37 e2e/p1-3.spec.ts:75:3 › main 3840 no-preference normal (4.2s)
+  ✓   38 e2e/p1-3.spec.ts:92:39 › shipments 3840 no-preference normal normal (10.8s)
+  ✓   39 e2e/p1-3.spec.ts:92:39 › shipments 3840 no-preference normal outage (10.9s)
+  ✓   40 e2e/p1-3.spec.ts:75:3 › main 3840 no-preference long (4.1s)
+  ✓   41 e2e/p1-3.spec.ts:92:39 › shipments 3840 no-preference long normal (11.0s)
+  ✓   42 e2e/p1-3.spec.ts:92:39 › shipments 3840 no-preference long outage (11.0s)
+  ✓   43 e2e/p1-3.spec.ts:75:3 › main 3840 reduce normal (1.3s)
+  ✓   44 e2e/p1-3.spec.ts:92:39 › shipments 3840 reduce normal normal (2.7s)
+  ✓   45 e2e/p1-3.spec.ts:92:39 › shipments 3840 reduce normal outage (2.8s)
+  ✓   46 e2e/p1-3.spec.ts:75:3 › main 3840 reduce long (1.3s)
+  ✓   47 e2e/p1-3.spec.ts:92:39 › shipments 3840 reduce long normal (2.9s)
+  ✓   48 e2e/p1-3.spec.ts:92:39 › shipments 3840 reduce long outage (2.8s)
+  ✓   49 e2e/p1-3.spec.ts:132:1 › demo badge requires explicit demo mode even when payload requests a notice (1.8s)
+  ✓   50 e2e/voice-audio-quality.spec.ts:7:1 › 24kHz actual PcmPlayer blocks render sample-identically to a whole buffer (171ms)
+  ✓   51 e2e/voice-cards.spec.ts:66:40 › 1920 normal sales_progress (680ms)
+  ✓   52 e2e/voice-cards.spec.ts:66:40 › 1920 normal target_rate (678ms)
+  ✓   53 e2e/voice-cards.spec.ts:66:40 › 1920 normal region_shipments (706ms)
+  ✓   54 e2e/voice-cards.spec.ts:66:40 › 1920 normal upcoming_shipments (719ms)
+  ✓   55 e2e/voice-cards.spec.ts:66:40 › 1920 normal new_customers (711ms)
+  ✓   56 e2e/voice-cards.spec.ts:66:40 › 1920 normal followup_todo (714ms)
+  ✓   57 e2e/voice-cards.spec.ts:66:40 › 1920 normal collection (686ms)
+  ✓   58 e2e/voice-cards.spec.ts:66:40 › 1920 normal unanswerable (639ms)
+  ✓   59 e2e/voice-cards.spec.ts:66:40 › 1920 long sales_progress (676ms)
+  ✓   60 e2e/voice-cards.spec.ts:66:40 › 1920 long target_rate (660ms)
+  ✓   61 e2e/voice-cards.spec.ts:66:40 › 1920 long region_shipments (575ms)
+  ✓   62 e2e/voice-cards.spec.ts:66:40 › 1920 long upcoming_shipments (594ms)
+  ✓   63 e2e/voice-cards.spec.ts:66:40 › 1920 long new_customers (561ms)
+  ✓   64 e2e/voice-cards.spec.ts:66:40 › 1920 long followup_todo (555ms)
+  ✓   65 e2e/voice-cards.spec.ts:66:40 › 1920 long collection (553ms)
+  ✓   66 e2e/voice-cards.spec.ts:66:40 › 1920 long unanswerable (549ms)
+  ✓   67 e2e/voice-cards.spec.ts:66:40 › 1280 normal sales_progress (541ms)
+  ✓   68 e2e/voice-cards.spec.ts:66:40 › 1280 normal target_rate (516ms)
+  ✓   69 e2e/voice-cards.spec.ts:66:40 › 1280 normal region_shipments (571ms)
+  ✓   70 e2e/voice-cards.spec.ts:66:40 › 1280 normal upcoming_shipments (539ms)
+  ✓   71 e2e/voice-cards.spec.ts:66:40 › 1280 normal new_customers (534ms)
+  ✓   72 e2e/voice-cards.spec.ts:66:40 › 1280 normal followup_todo (558ms)
+  ✓   73 e2e/voice-cards.spec.ts:66:40 › 1280 normal collection (545ms)
+  ✓   74 e2e/voice-cards.spec.ts:66:40 › 1280 normal unanswerable (529ms)
+  ✓   75 e2e/voice-cards.spec.ts:66:40 › 1280 long sales_progress (652ms)
+  ✓   76 e2e/voice-cards.spec.ts:66:40 › 1280 long target_rate (611ms)
+  ✓   77 e2e/voice-cards.spec.ts:66:40 › 1280 long region_shipments (543ms)
+  ✓   78 e2e/voice-cards.spec.ts:66:40 › 1280 long upcoming_shipments (552ms)
+  ✓   79 e2e/voice-cards.spec.ts:66:40 › 1280 long new_customers (536ms)
+  ✓   80 e2e/voice-cards.spec.ts:66:40 › 1280 long followup_todo (544ms)
+  ✓   81 e2e/voice-cards.spec.ts:66:40 › 1280 long collection (547ms)
+  ✓   82 e2e/voice-cards.spec.ts:66:40 › 1280 long unanswerable (520ms)
+  ✓   83 e2e/voice-cards.spec.ts:66:40 › 3840 normal sales_progress (715ms)
+  ✓   84 e2e/voice-cards.spec.ts:66:40 › 3840 normal target_rate (694ms)
+  ✓   85 e2e/voice-cards.spec.ts:66:40 › 3840 normal region_shipments (712ms)
+  ✓   86 e2e/voice-cards.spec.ts:66:40 › 3840 normal upcoming_shipments (707ms)
+  ✓   87 e2e/voice-cards.spec.ts:66:40 › 3840 normal new_customers (694ms)
+  ✓   88 e2e/voice-cards.spec.ts:66:40 › 3840 normal followup_todo (685ms)
+  ✓   89 e2e/voice-cards.spec.ts:66:40 › 3840 normal collection (688ms)
+  ✓   90 e2e/voice-cards.spec.ts:66:40 › 3840 normal unanswerable (686ms)
+  ✓   91 e2e/voice-cards.spec.ts:66:40 › 3840 long sales_progress (873ms)
+  ✓   92 e2e/voice-cards.spec.ts:66:40 › 3840 long target_rate (840ms)
+  ✓   93 e2e/voice-cards.spec.ts:66:40 › 3840 long region_shipments (726ms)
+  ✓   94 e2e/voice-cards.spec.ts:66:40 › 3840 long upcoming_shipments (733ms)
+  ✓   95 e2e/voice-cards.spec.ts:66:40 › 3840 long new_customers (705ms)
+  ✓   96 e2e/voice-cards.spec.ts:66:40 › 3840 long followup_todo (652ms)
+  ✓   97 e2e/voice-cards.spec.ts:66:40 › 3840 long collection (718ms)
+  ✓   98 e2e/voice-cards.spec.ts:66:40 › 3840 long unanswerable (687ms)
+  ✓   99 e2e/voice-cards.spec.ts:91:1 › zero values, 180% and no duplicate brief body (1.3s)
+  ✓  100 e2e/voice-cards.spec.ts:106:1 › 15 shipments slide at 4s with five slots and three dots (9.3s)
+  ✓  101 e2e/voice-cards.spec.ts:114:1 › demo automatically completes launch, answer and withdrawal for seven cards (2.0s)
+  ✘  102 e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions (11.4s)
+(node:10518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  103 e2e/voice-cards.spec.ts:161:163 › presentation reason no-data preserves lifecycle (744ms)
+  ✓  104 e2e/voice-cards.spec.ts:161:163 › presentation reason offline preserves lifecycle (547ms)
+  ✓  105 e2e/voice-cards.spec.ts:161:163 › presentation reason asr-miss preserves lifecycle (561ms)
+  ✓  106 e2e/voice-cards.spec.ts:161:163 › presentation reason interrupted preserves lifecycle (543ms)
+  ✓  107 e2e/voice-cards.spec.ts:170:1 › reduced motion renders whole answer and announces complete sentences (632ms)
+  ✓  108 e2e/voice-cards.spec.ts:180:1 › debug hints appear only with debug query (2.9s)
+  ✓  109 e2e/voice-cards.spec.ts:187:1 › service degradation has its own status (543ms)
+  ✘  110 e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence (5.5s)
+(node:10981) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  111 e2e/voice-cards.spec.ts:205:100 › 300 character answer pages without hidden text 1920 (1.1s)
+  ✓  112 e2e/voice-cards.spec.ts:205:100 › 300 character answer pages without hidden text 1280 (964ms)
+  ✓  113 e2e/voice-cards.spec.ts:205:100 › 300 character answer pages without hidden text 3840 (1.3s)
+  ✓  114 e2e/voice-cards.spec.ts:227:1 › single province 100% and large row counts remain contained (561ms)
+(node:10997) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  115 e2e/voice-input.spec.ts:51:1 › real worklet/VAD interrupts an answer, then a long question survives the 8s window (25.3s)
+  ✓  116 e2e/voice-input.spec.ts:64:1 › silence is counted from actual open microphone; cached idle_exit then ambient (11.7s)
+  ✓  117 e2e/voice-input.spec.ts:71:1 › speech beginning at second 4 survives the listening deadline and becomes an answer (17.7s)
+  ✓  118 e2e/voice-input.spec.ts:77:1 › Esc while listening closes server session and F9 starts a fresh session (8.1s)
+  ✓  119 e2e/voice-input.spec.ts:80:82 › real KWS works after answering interruption: Escape (15.6s)
+  ✓  120 e2e/voice-input.spec.ts:80:82 › real KWS works after answering interruption: disconnect (15.6s)
+  ✓  121 e2e/voice-input.spec.ts:80:82 › real KWS works after answering interruption: supersede (16.4s)
+  ✓  122 e2e/voice-input.spec.ts:80:82 › real KWS works after answering interruption: timeout (24.6s)
+  ✓  123 e2e/voice-input.spec.ts:93:1 › one-sentence greeting card finishes unfolding during speech (9.1s)
+  ✓  124 e2e/voice-input.spec.ts:101:1 › real VAD echo rejection resumes the same answer with its card intact (13.6s)
+  ✓  125 e2e/voice-input.spec.ts:113:1 › full silence after an answer traverses long window, prompt, short window and warm exit (30.0s)
+  ✓  126 e2e/voice-input.spec.ts:121:1 › speech spanning the final sample and tail guard is preserved as one barge utterance (14.1s)
+  ✓  127 e2e/voice-input.spec.ts:131:1 › goodbye and fallback close without accepting speech during their playback (18.8s)
+  ✓  128 e2e/voice-input.spec.ts:141:54 › paused playback releases both ends on Escape (12.5s)
+  ✓  129 e2e/voice-input.spec.ts:141:54 › paused playback releases both ends on disconnect (12.4s)
+  ✓  130 e2e/voice-input.spec.ts:151:1 › 200ms prerecorded speech cannot confirm a barge or submit a business question (11.3s)
+  ✓  131 e2e/voice-input.spec.ts:165:1 › configured 2s ordinary window reaches the browser and expires from actual ready (9.8s)
+  ✓  132 e2e/voice-input.spec.ts:172:1 › ordinary rate limit plays an apology and reopens instead of leaving the session (16.8s)
+  ✓  133 e2e/voice-input.spec.ts:182:1 › listening level follows real captured worklet audio at 20Hz (4.7s)
+(node:14609) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  134 e2e/voice-ownership.spec.ts:115:3 › only the owner plays; a second screen failure cannot cut off audio; followup begins at actual drain (7.3s)
+  ✓  135 e2e/voice-ownership.spec.ts:147:3 › a suspended real AudioContext keeps the answer without followup; a click enables the next turn (15.2s)
+(node:14725) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  136 e2e/voice-playback.spec.ts:112:1 › real PCM drives analyser and sentence highlight; followup waits for EOF and final sample (24.1s)
+  ✓  137 e2e/voice-playback.spec.ts:136:1 › cached goodbye plays before closing and starts no new GPU request (3.8s)
+  ✓  138 e2e/voice-playback.spec.ts:146:1 › superseding a live answer stops its sources and downloads; only the new turn drains (4.1s)
+  ✓  139 e2e/voice-playback.spec.ts:160:1 › audio failure leaves the card readable and does not report successful playback (11.2s)
+  ✓  140 e2e/voice-playback.spec.ts:169:1 › Escape and hub disconnect stop audio immediately and restore the baseline (7.4s)
+  ✓  141 e2e/voice-playback.spec.ts:188:1 › Escape during followup closes the hub and a fresh question wakes the screen (6.6s)
+  ✓  142 e2e/voice-playback.spec.ts:202:1 › one failed sentence preserves earlier audio and records skipped sentences with drained (4.9s)
+  ✓  143 e2e/voice-playback.spec.ts:218:1 › a skipped first sentence still reports the actual first sound exactly once (4.9s)
+  ✓  144 e2e/voice-playback.spec.ts:228:1 › a suspended context reports failure and a pointer gesture enables the next answer (7.9s)
+
+
+  1) e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 8
+    Received:    9.099999994039536
+
+      155 |     const p95=(values:number[])=>values.sort((a,b)=>a-b)[Math.floor(values.length*.95)]??0;
+      156 |     const record={viewport,metric:"summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",baselineFrames:baseline.length,overlayFrames:active.length,baselineP95:p95(baseline),overlayP95:p95(active),incrementP95:Math.max(0,p95(active)-p95(baseline))};
+    > 157 |     evidence.push({performance:record}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);
+          |                                                                                                                ^
+      158 |   }
+      159 | });
+      160 |
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts:157:112
+
+    Error Context: .review/p1-6-1/gsap-regression/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md
+
+    Error Context: .review/p1-6-1/gsap-regression/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-1/gsap-regression/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-1/gsap-regression/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence ──
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.overlay-card [aria-live]')
+    Expected: "第一句完整。"
+    Received: "第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.overlay-card [aria-live]') with timeout 5000ms
+      - waiting for locator('.overlay-card [aria-live]')
+        14 × locator resolved to <p class="sr-only" aria-live="polite" aria-atomic="true">第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。</p>
+           - unexpected value "第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。"
+
+
+      199 |   hub.broadcast({type:"answer.delta",at:Date.now(),seq:0,text:card.spoken,full:true,card});
+      200 |   hub.broadcast({type:"state.change",at:Date.now(),from:"thinking",to:"answering",turn:0});
+    > 201 |   await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第一句完整。");
+          |                                                           ^
+      202 |   await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。");
+      203 | });
+      204 |
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts:201:59
+
+    Error Context: .review/p1-6-1/gsap-regression/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/error-context.md
+
+    Error Context: .review/p1-6-1/gsap-regression/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-1/gsap-regression/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-1/gsap-regression/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions
+    e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence ───
+  142 passed (10.7m)

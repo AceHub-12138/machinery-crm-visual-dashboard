@@ -1,0 +1,127 @@
+{
+  "unchangedFiles": 79,
+  "identicalSections": 2,
+  "reports": [
+    {
+      "name": "browser-initial",
+      "stats": {
+        "startTime": "2026-10-21T07:09:27.850Z",
+        "duration": 216609.207,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "browser-hardening",
+      "stats": {
+        "startTime": "2026-10-21T07:13:27.198Z",
+        "duration": 6354.088000000001,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "legacy-regression",
+      "stats": {
+        "startTime": "2026-10-21T07:14:03.804Z",
+        "duration": 647900.607,
+        "expected": 144,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "legacy-context-recheck",
+      "stats": {
+        "startTime": "2026-10-21T07:25:22.937Z",
+        "duration": 23629.46,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "gsap-regression",
+      "stats": {
+        "startTime": "2026-10-21T07:26:12.677Z",
+        "duration": 642699.521,
+        "expected": 142,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "baseline-cpu-url-harness-initial",
+      "stats": {
+        "startTime": "2026-10-21T07:38:15.234Z",
+        "duration": 19386.682999999997,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "baseline-live-url-harness-initial",
+      "stats": {
+        "startTime": "2026-10-21T07:39:15.548Z",
+        "duration": 4242.879000000001,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "baseline-cpu",
+      "stats": {
+        "startTime": "2026-10-21T07:40:10.510Z",
+        "duration": 12934.557,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "baseline-live",
+      "stats": {
+        "startTime": "2026-10-21T07:41:00.287Z",
+        "duration": 6963.748,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "gsap-cpu-recheck",
+      "stats": {
+        "startTime": "2026-10-21T07:41:33.880Z",
+        "duration": 12880.29,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "gsap-live-recheck",
+      "stats": {
+        "startTime": "2026-10-21T07:42:29.454Z",
+        "duration": 6843.662,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    }
+  ]
+}

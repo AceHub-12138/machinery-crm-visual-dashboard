@@ -1,0 +1,26 @@
+import { test as base, expect } from "@playwright/test";
+export const test = base.extend<{ baselineGsap: void }>({
+  baselineGsap: [async ({ context }, use) => {
+    // P1.6 has no server selection prop. Use its original URL selector and
+    // independently verify its original audit hook after each selected test.
+    await context.route("**/screen/sales**", route => {
+      if (!route.request().isNavigationRequest()) return route.continue();
+      const url = new URL(route.request().url()); url.searchParams.set("xiaochuanMotion", "gsap");
+      return route.continue({ url: url.toString() });
+    });
+    // route.continue changes the server request but not window.location. The old
+    // P1.6 hook reads the browser URL, so set its selector before hydration too.
+    await context.addInitScript(() => {
+      if (window.location.pathname !== "/screen/sales") return;
+      const url = new URL(window.location.href); url.searchParams.set("xiaochuanMotion", "gsap");
+      window.history.replaceState(null, "", url);
+    });
+    await use();
+    for (const page of context.pages()) {
+      if (new URL(page.url()).pathname === "/screen/sales") {
+        expect(await page.evaluate(() => typeof (window as Window & { __xiaochuanMotionAudit?: unknown }).__xiaochuanMotionAudit)).toBe("function");
+      }
+    }
+  }, { auto: true }],
+});
+export { expect, type Page } from "@playwright/test";

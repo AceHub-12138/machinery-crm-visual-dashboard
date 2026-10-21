@@ -1,0 +1,30 @@
+[
+  {
+    "performance": {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 151,
+      "overlayFrames": 149,
+      "baselineP95": 0.30000000447034836,
+      "overlayP95": 3.5,
+      "incrementP95": 3.1999999955296516
+    }
+  },
+  {
+    "performance": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 150,
+      "overlayFrames": 151,
+      "baselineP95": 0.30000000447034836,
+      "overlayP95": 9.700000002980232,
+      "incrementP95": 9.399999998509884
+    }
+  }
+]

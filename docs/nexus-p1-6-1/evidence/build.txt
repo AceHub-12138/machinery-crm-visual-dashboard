@@ -1,0 +1,34 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 prebuild /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1
+> node scripts/prepare-voice-assets.mjs
+
+
+> dachuan-crm-visual-dashboard@0.1.0 build /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1
+> next build
+
+▲ Next.js 16.3.6 (Turbopack)
+✓ Running next.config.ts took 19ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 666ms
+  Running TypeScript ...
+  Finished TypeScript in 3.3s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/4) ...
+  Generating static pages using 8 workers (1/4)
+  Generating static pages using 8 workers (2/4)
+  Generating static pages using 8 workers (3/4)
+✓ Generating static pages using 8 workers (4/4) in 258ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/screen/crm
+├ ƒ /poc/xiaochuan
+├ ƒ /screen/sales
+└ ○ /voice-console
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand

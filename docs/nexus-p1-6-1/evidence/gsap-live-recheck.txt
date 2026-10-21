@@ -1,0 +1,51 @@
+[WebServer] (node:19493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19494) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:19508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence (5.6s)
+
+
+  1) e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence ──
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.overlay-card [aria-live]')
+    Expected: "第一句完整。"
+    Received: "第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.overlay-card [aria-live]') with timeout 5000ms
+      - waiting for locator('.overlay-card [aria-live]')
+        14 × locator resolved to <p class="sr-only" aria-live="polite" aria-atomic="true">第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。</p>
+           - unexpected value "第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。"
+
+
+      199 |   hub.broadcast({type:"answer.delta",at:Date.now(),seq:0,text:card.spoken,full:true,card});
+      200 |   hub.broadcast({type:"state.change",at:Date.now(),from:"thinking",to:"answering",turn:0});
+    > 201 |   await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第一句完整。");
+          |                                                           ^
+      202 |   await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。");
+      203 | });
+      204 |
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts:201:59
+
+    Error Context: .review/p1-6-1/gsap-live-recheck/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/error-context.md
+
+    Error Context: .review/p1-6-1/gsap-live-recheck/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-1/gsap-live-recheck/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-1/gsap-live-recheck/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence ───

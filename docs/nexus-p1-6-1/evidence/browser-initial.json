@@ -1,0 +1,983 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "e2e/p1-6-1.config.ts"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "p1-6.spec.ts",
+          "p1-6-1.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/docs/nexus-p1-6-1/evidence/browser-hardening.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "p1-6-1.spec.ts",
+      "file": "p1-6-1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "3067 denies URL-only GSAP despite debug, review/quality flags and forged headers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 195,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:22:103",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                      "column": 103,
+                      "line": 22
+                    },
+                    "snippet": "  20 | for (const port of [3067, 3068]) test(`${port} denies URL-only GSAP despite debug, review/quality flags and forged headers`, async ({ page }) => {\n  21 |   for (const headers of ([{}, { Host: \"localhost\", \"X-Xiaochuan-Motion-Permission\": \"local-gsap\" }, { \"X-Forwarded-Host\": \"localhost\", \"X-Nexus-Quality-Boundary\": \"verified\" }] as Array<Record<string, string>>)) {\n> 22 |     expect(await decision(port, \"xiaochuanMotion=gsap&debug=1&qualityExperiment=candidate\", headers)).toEqual(legacy);\n     |                                                                                                       ^\n  23 |   }\n  24 |   await page.goto(`http://127.0.0.1:${port}/screen/sales?voiceLive=1&xiaochuanMotion=gsap&debug=1`);\n  25 |   await page.waitForTimeout(200);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                        "column": 103,
+                        "line": 22
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  20 | for (const port of [3067, 3068]) test(`${port} denies URL-only GSAP despite debug, review/quality flags and forged headers`, async ({ page }) => {\n  21 |   for (const headers of ([{}, { Host: \"localhost\", \"X-Xiaochuan-Motion-Permission\": \"local-gsap\" }, { \"X-Forwarded-Host\": \"localhost\", \"X-Nexus-Quality-Boundary\": \"verified\" }] as Array<Record<string, string>>)) {\n> 22 |     expect(await decision(port, \"xiaochuanMotion=gsap&debug=1&qualityExperiment=candidate\", headers)).toEqual(legacy);\n     |                                                                                                       ^\n  23 |   }\n  24 |   await page.goto(`http://127.0.0.1:${port}/screen/sales?voiceLive=1&xiaochuanMotion=gsap&debug=1`);\n  25 |   await page.waitForTimeout(200);\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:22:103"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:30.340Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/playwright/p1-6-1-3067-denies-URL-onl-fb7d0-ty-flags-and-forged-headers/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/playwright/p1-6-1-3067-denies-URL-onl-fb7d0-ty-flags-and-forged-headers/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                    "column": 103,
+                    "line": 22
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2c6005c25e92b1f49461-746b85c3de8fe490c70a",
+          "file": "p1-6-1.spec.ts",
+          "line": 20,
+          "column": 34
+        },
+        {
+          "title": "3068 denies URL-only GSAP despite debug, review/quality flags and forged headers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 105,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:22:103",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                      "column": 103,
+                      "line": 22
+                    },
+                    "snippet": "  20 | for (const port of [3067, 3068]) test(`${port} denies URL-only GSAP despite debug, review/quality flags and forged headers`, async ({ page }) => {\n  21 |   for (const headers of ([{}, { Host: \"localhost\", \"X-Xiaochuan-Motion-Permission\": \"local-gsap\" }, { \"X-Forwarded-Host\": \"localhost\", \"X-Nexus-Quality-Boundary\": \"verified\" }] as Array<Record<string, string>>)) {\n> 22 |     expect(await decision(port, \"xiaochuanMotion=gsap&debug=1&qualityExperiment=candidate\", headers)).toEqual(legacy);\n     |                                                                                                       ^\n  23 |   }\n  24 |   await page.goto(`http://127.0.0.1:${port}/screen/sales?voiceLive=1&xiaochuanMotion=gsap&debug=1`);\n  25 |   await page.waitForTimeout(200);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                        "column": 103,
+                        "line": 22
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  20 | for (const port of [3067, 3068]) test(`${port} denies URL-only GSAP despite debug, review/quality flags and forged headers`, async ({ page }) => {\n  21 |   for (const headers of ([{}, { Host: \"localhost\", \"X-Xiaochuan-Motion-Permission\": \"local-gsap\" }, { \"X-Forwarded-Host\": \"localhost\", \"X-Nexus-Quality-Boundary\": \"verified\" }] as Array<Record<string, string>>)) {\n> 22 |     expect(await decision(port, \"xiaochuanMotion=gsap&debug=1&qualityExperiment=candidate\", headers)).toEqual(legacy);\n     |                                                                                                       ^\n  23 |   }\n  24 |   await page.goto(`http://127.0.0.1:${port}/screen/sales?voiceLive=1&xiaochuanMotion=gsap&debug=1`);\n  25 |   await page.waitForTimeout(200);\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:22:103"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:31.052Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/playwright/p1-6-1-3068-denies-URL-onl-b5dd6-ty-flags-and-forged-headers/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/playwright/p1-6-1-3068-denies-URL-onl-b5dd6-ty-flags-and-forged-headers/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                    "column": 103,
+                    "line": 22
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2c6005c25e92b1f49461-0892b0e968fb5a52d51e",
+          "file": "p1-6-1.spec.ts",
+          "line": 20,
+          "column": 34
+        },
+        {
+          "title": "attested service requires one exact GSAP parameter; default/old/repeated values fail closed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 181,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:31.544Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2c6005c25e92b1f49461-75c54fc9497033fadde5",
+          "file": "p1-6-1.spec.ts",
+          "line": 28,
+          "column": 1
+        },
+        {
+          "title": "forwarded requests cannot acquire the trusted server context",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 14,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:38:75",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                      "column": 75,
+                      "line": 38
+                    },
+                    "snippet": "  36 | test(\"forwarded requests cannot acquire the trusted server context\", async () => {\n  37 |   for (const headers of ([{ Forwarded: \"for=127.0.0.1\" }, { Via: \"1.1 proxy\" }, { \"X-Forwarded-For\": \"127.0.0.1\" }, { \"X-Nexus-Quality-Boundary\": \"verified\" }] as Array<Record<string, string>>)) {\n> 38 |     expect(await decision(3066, \"xiaochuanMotion=gsap&debug=1\", headers)).toEqual(legacy);\n     |                                                                           ^\n  39 |   }\n  40 |   const decisions = await Promise.all(Array.from({ length: 12 }, (_, i) => decision(3066, \"xiaochuanMotion=gsap&debug=1\", i % 2 ? { Forwarded: \"for=127.0.0.1\" } : {})));\n  41 |   decisions.forEach((result, i) => expect(result).toEqual(i % 2 ? legacy : { mode: \"gsap\", auditAllowed: true }));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                        "column": 75,
+                        "line": 38
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"auditAllowed\": false,\u001b[22m\n\u001b[32m-   \"mode\": \"legacy\",\u001b[39m\n\u001b[31m+   \"mode\": \"gsap\",\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  36 | test(\"forwarded requests cannot acquire the trusted server context\", async () => {\n  37 |   for (const headers of ([{ Forwarded: \"for=127.0.0.1\" }, { Via: \"1.1 proxy\" }, { \"X-Forwarded-For\": \"127.0.0.1\" }, { \"X-Nexus-Quality-Boundary\": \"verified\" }] as Array<Record<string, string>>)) {\n> 38 |     expect(await decision(3066, \"xiaochuanMotion=gsap&debug=1\", headers)).toEqual(legacy);\n     |                                                                           ^\n  39 |   }\n  40 |   const decisions = await Promise.all(Array.from({ length: 12 }, (_, i) => decision(3066, \"xiaochuanMotion=gsap&debug=1\", i % 2 ? { Forwarded: \"for=127.0.0.1\" } : {})));\n  41 |   decisions.forEach((result, i) => expect(result).toEqual(i % 2 ? legacy : { mode: \"gsap\", auditAllowed: true }));\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts:38:75"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:31.742Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/playwright/p1-6-1-forwarded-requests--92d4b--the-trusted-server-context/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/playwright/p1-6-1-forwarded-requests--92d4b--the-trusted-server-context/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1.spec.ts",
+                    "column": 75,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2c6005c25e92b1f49461-cc396b9daeb2c6f42567",
+          "file": "p1-6-1.spec.ts",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "title": "review fixture stays private to the attested local launcher",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 64,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:32.010Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2c6005c25e92b1f49461-7a4fbcbf85cbcce5abd9",
+          "file": "p1-6-1.spec.ts",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "authorized non-debug GSAP does not publish a global audit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 555,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:32.092Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2c6005c25e92b1f49461-528077cc718f4ef735e9",
+          "file": "p1-6-1.spec.ts",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "rapid client route/mode switches revoke old closures and leave one live controller",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1949,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:32.749Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2c6005c25e92b1f49461-5749c14f676e8012232a",
+          "file": "p1-6-1.spec.ts",
+          "line": 57,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "p1-6.spec.ts",
+      "file": "p1-6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "legacy full interaction film",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22188,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:34.759Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-d44bf3c8483bd4b455d7",
+          "file": "p1-6.spec.ts",
+          "line": 87,
+          "column": 3
+        },
+        {
+          "title": "legacy 1280 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10581,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:09:56.968Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-feb38984cc92d2027134",
+          "file": "p1-6.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "legacy 1792 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:10:07.556Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-4c6da9c4e7230a32900f",
+          "file": "p1-6.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "legacy 1920 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11249,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:10:18.244Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-79aa2d9ec4c7ea8610ef",
+          "file": "p1-6.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "legacy 3840 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12256,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:10:29.500Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-c30521a8298b6d048f6b",
+          "file": "p1-6.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "legacy audio failure reduced motion and repeated wake exit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10076,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:10:41.762Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-286ae12361944a41752c",
+          "file": "p1-6.spec.ts",
+          "line": 122,
+          "column": 3
+        },
+        {
+          "title": "legacy hidden restore early interruption navigation and reentry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11698,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:10:51.844Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-b0fa887b013cf62a0713",
+          "file": "p1-6.spec.ts",
+          "line": 128,
+          "column": 3
+        },
+        {
+          "title": "gsap full interaction film",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22416,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:11:03.549Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-8f91d1e073d3fc130602",
+          "file": "p1-6.spec.ts",
+          "line": 87,
+          "column": 3
+        },
+        {
+          "title": "gsap 1280 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10580,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:11:25.974Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-39706b4b650e87bee684",
+          "file": "p1-6.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "gsap 1792 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10711,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:11:36.565Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-605ac1a2fba20d4d282b",
+          "file": "p1-6.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "gsap 1920 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11194,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:11:47.284Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-137add104feca86edde3",
+          "file": "p1-6.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "gsap 3840 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12367,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:11:58.485Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-e741ef2020ec8d03f003",
+          "file": "p1-6.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "gsap audio failure reduced motion and repeated wake exit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10095,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:12:11.083Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-7aa89f674a74a9db75fb",
+          "file": "p1-6.spec.ts",
+          "line": 122,
+          "column": 3
+        },
+        {
+          "title": "gsap hidden restore early interruption navigation and reentry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11812,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:12:21.186Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-ae1ebba19484a3600c71",
+          "file": "p1-6.spec.ts",
+          "line": 128,
+          "column": 3
+        },
+        {
+          "title": "main GSAP and overlay share the existing ticker owner without altering its cap",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3255,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:12:33.006Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-a58815590636c9296878",
+          "file": "p1-6.spec.ts",
+          "line": 153,
+          "column": 1
+        },
+        {
+          "title": "gsap P1.3 normal and long templates retain layout and spoken pagination",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28101,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:12:36.267Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-bade46e2a111dc42157b",
+          "file": "p1-6.spec.ts",
+          "line": 161,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T07:09:27.850Z",
+    "duration": 216609.207,
+    "expected": 20,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

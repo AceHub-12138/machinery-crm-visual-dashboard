@@ -1,0 +1,24 @@
+[WebServer] (node:5214) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5215) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5217) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5218) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:5225) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/p1-6-1.spec.ts:22:34 › 3067 denies URL-only GSAP despite debug, review/quality flags and forged headers (491ms)
+  ✓  2 e2e/p1-6-1.spec.ts:22:34 › 3068 denies URL-only GSAP despite debug, review/quality flags and forged headers (466ms)
+  ✓  3 e2e/p1-6-1.spec.ts:30:1 › attested service requires one exact GSAP parameter; default/old/repeated values fail closed (171ms)
+  ✓  4 e2e/p1-6-1.spec.ts:38:1 › forwarded requests cannot acquire the trusted server context (157ms)
+  ✓  5 e2e/p1-6-1.spec.ts:45:1 › review fixture stays private to the attested local launcher (54ms)
+  ✓  6 e2e/p1-6-1.spec.ts:50:1 › authorized non-debug GSAP does not publish a global audit (506ms)
+  ✓  7 e2e/p1-6-1.spec.ts:59:1 › rapid client route/mode switches revoke old closures and leave one live controller (2.0s)
+
+  7 passed (6.4s)

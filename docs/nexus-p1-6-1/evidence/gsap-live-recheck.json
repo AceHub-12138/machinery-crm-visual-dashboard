@@ -1,0 +1,164 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "e2e/p1-6-1-regression.config.ts",
+      "--grep",
+      "normal motion live region"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/p1-6-1-regression.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/gsap-live-recheck",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "voice-*.spec.ts",
+          "p1-3.spec.ts"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/docs/nexus-p1-6-1/evidence/gsap-live-recheck.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "voice-cards.spec.ts",
+      "file": "voice-cards.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "normal motion live region never announces a partial sentence",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5613,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"第一句完整。\"\u001b[39m\nReceived: \u001b[31m\"第一句完整。\u001b[7m第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\">第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。</p>\u001b[22m\n\u001b[2m       - unexpected value \"第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"第一句完整。\"\u001b[39m\nReceived: \u001b[31m\"第一句完整。\u001b[7m第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\">第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。</p>\u001b[22m\n\u001b[2m       - unexpected value \"第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。\"\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts:201:59",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts",
+                      "column": 59,
+                      "line": 201
+                    },
+                    "snippet": "  199 |   hub.broadcast({type:\"answer.delta\",at:Date.now(),seq:0,text:card.spoken,full:true,card});\n  200 |   hub.broadcast({type:\"state.change\",at:Date.now(),from:\"thinking\",to:\"answering\",turn:0});\n> 201 |   await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(\"第一句完整。\");\n      |                                                           ^\n  202 |   await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(\"第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。\");\n  203 | });\n  204 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts",
+                        "column": 59,
+                        "line": 201
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"第一句完整。\"\u001b[39m\nReceived: \u001b[31m\"第一句完整。\u001b[7m第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\">第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。</p>\u001b[22m\n\u001b[2m       - unexpected value \"第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。\"\u001b[22m\n\n\n  199 |   hub.broadcast({type:\"answer.delta\",at:Date.now(),seq:0,text:card.spoken,full:true,card});\n  200 |   hub.broadcast({type:\"state.change\",at:Date.now(),from:\"thinking\",to:\"answering\",turn:0});\n> 201 |   await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(\"第一句完整。\");\n      |                                                           ^\n  202 |   await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(\"第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。\");\n  203 | });\n  204 |\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts:201:59"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:42:30.440Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/gsap-live-recheck/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/gsap-live-recheck/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/.review/p1-6-1/gsap-live-recheck/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts",
+                    "column": 59,
+                    "line": 201
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ea44e424961dccc97d05-c05bd87d173a3ed399d3",
+          "file": "voice-cards.spec.ts",
+          "line": 195,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T07:42:29.454Z",
+    "duration": 6843.662,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

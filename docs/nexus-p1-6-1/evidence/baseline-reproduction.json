@@ -1,0 +1,18 @@
+{
+  "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1-baseline",
+  "head": "1c09242cfb7c8a51fd34d687e67c24f475135372",
+  "productDiff": "",
+  "testDiff": "diff --git a/e2e/voice-cards.spec.ts b/e2e/voice-cards.spec.ts\nindex c8b854b..e042d76 100644\n--- a/e2e/voice-cards.spec.ts\n+++ b/e2e/voice-cards.spec.ts\n@@ -1 +1 @@\n-import { test, expect, type Page } from \"@playwright/test\";\n+import { test, expect, type Page } from \"./p161-baseline-test\";",
+  "note": "Only the test import and dedicated untracked baseline fixture/config differ. Product source is exactly 1c09242; original assertions are unchanged.",
+  "environment": {
+    "P161_DELIVERY_ROOT": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/docs/nexus-p1-6-1",
+    "P161_BASELINE_REPORT": "baseline-cpu or baseline-live"
+  },
+  "commands": [
+    "pnpm install --frozen-lockfile --offline",
+    "pnpm build",
+    "pnpm exec playwright test --config e2e/p161-baseline.config.ts --grep \"overlay RAF callback CPU increment\"",
+    "pnpm exec playwright test --config e2e/p161-baseline.config.ts --grep \"normal motion live region\""
+  ],
+  "fixtureModeEvidence": "After correcting the initial URL adapter, the original P1.6 global audit function is required to exist. Both valid reproduction runs passed this mode guard and failed the original product assertions."
+}

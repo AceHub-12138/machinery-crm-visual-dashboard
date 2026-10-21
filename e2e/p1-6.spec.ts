@@ -7,9 +7,9 @@ import { CARD_INTENTS, task12Card } from "./task12-fixtures";
 import { displaySpoken } from "../src/lib/voice/card-presentation";
 import { auditText } from "./layout-audit";
 import type { AnswerCardData } from "../src/lib/voice/session-machine";
-const out = path.resolve("docs/nexus-p1-6");
+const out = path.resolve(process.env.P16_OUTPUT_DIR ?? "docs/nexus-p1-6");
 mkdirSync(`${out}/evidence`, {recursive:true}); mkdirSync(`${out}/media`, {recursive:true});
-const pcm = [0,1].map(i=>readFileSync(`${out}/audio/${i}.pcm`));
+const pcm = [0,1].map(i=>readFileSync(path.resolve(`docs/nexus-p1-6/audio/${i}.pcm`)));
 const card: AnswerCardData = {kind:"customer-kpi",title:"本期客户概览 · 脱敏演示",newCustomers:12,totalCustomers:120,spoken:"本期新增客户十二家。客户总数为一百二十家。"};
 const speech = (id:string) => ({turnId:id,sentences:[{index:0,displayStart:0,displayEnd:10},{index:1,displayStart:10,displayEnd:21}]});
 let hub:VoiceHubServer, fail=false, autoFollowup=true, turn=0;
@@ -70,8 +70,10 @@ async function instrument(context:BrowserContext) {
   });
 }
 async function open(page:Page,engine:string,route="/screen/sales") {
-  await page.goto(`${route}${route.includes("?")?"&":"?"}voiceLive=1&xiaochuanMotion=${engine}&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
+  await page.goto(`${route}${route.includes("?")?"&":"?"}debug=1&voiceLive=1&xiaochuanMotion=${engine}&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
   await expect.poll(()=>hub.counts().screens).toBeGreaterThan(0);
+  if(engine==="gsap") await expect.poll(()=>audit(page)).not.toBeNull();
+  else expect(await audit(page)).toBeNull();
   await page.evaluate(()=>document.fonts.ready); await page.mouse.click(40,100); await page.waitForTimeout(500);
 }
 async function wake(page:Page){emit({type:"session.start",sessionId:"p16-fixture"});await expect(page.locator(".overlay-root")).toHaveCount(1);}
@@ -131,15 +133,17 @@ for(const engine of ["legacy","gsap"]) {
     const hidden=await audit(page);if(hidden)expect(hidden.pendingJob).toBe(false);
     await page.evaluate(()=>{Object.defineProperty(document,"hidden",{configurable:true,get:()=>false});document.dispatchEvent(new Event("visibilitychange"));});await page.waitForTimeout(100);await expect(page.locator(".overlay-card-body")).toHaveCSS("transform","matrix(1, 0, 0, 1, 0, 0)");
     const restored=await audit(page);
+    if(engine==="gsap") await page.evaluate(()=>{(window as any).p161SavedAudit=(window as any).__xiaochuanMotionAudit;});
     await page.getByRole("button",{name:"卸载小川",exact:true}).click();
     await expect.poll(()=>hub.counts().screens).toBe(0);
     const canvasCount=(await data(page)).canvasMs.length;await page.waitForTimeout(150);expect((await data(page)).canvasMs.length).toBe(canvasCount);
-    const unmounted=await audit(page);if(unmounted){expect(unmounted.liveControllers).toBe(0);expect(unmounted.liveTimelines).toBe(0);expect(unmounted.subscribers).toBe(0);expect(unmounted.pendingJob).toBe(false);}
+    const unmounted=await audit(page);expect(unmounted).toBeNull();
+    if(engine==="gsap") expect(await page.evaluate(()=>(window as any).p161SavedAudit())).toBeNull();
     await page.getByRole("button",{name:"重新挂载小川",exact:true}).click();await expect.poll(()=>hub.counts().screens).toBe(1);
     await wake(page);await listen(page);await answer(page);
     await page.getByRole("link",{name:"离开原型"}).click();await expect(page).toHaveURL(/voice-console/);
     await expect.poll(()=>hub.counts().screens).toBe(0);
-    const navigated=await audit(page);if(navigated){expect(navigated.liveControllers).toBe(0);expect(navigated.liveTimelines).toBe(0);expect(navigated.pendingJob).toBe(false);}
+    const navigated=await audit(page);expect(navigated).toBeNull();
     await page.goBack();await expect(page).toHaveURL(/poc\/xiaochuan/);if(await page.getByRole("button",{name:"重新挂载小川",exact:true}).count())await page.getByRole("button",{name:"重新挂载小川",exact:true}).click();await expect.poll(()=>hub.counts().screens).toBe(1);
     await wake(page);await listen(page);await answer(page);await close(page);
     const a=await audit(page);if(a){expect(a.liveControllers).toBe(1);expect(a.liveTimelines).toBe(0);expect(a.pendingJob).toBe(false);}

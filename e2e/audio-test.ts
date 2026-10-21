@@ -1,4 +1,4 @@
-import { test as base } from "@playwright/test";
+import { test as base } from "./xiaochuan-test";
 
 /** Optional native silent sink for machines whose physical audio clock stalls.
  * This still renders PCM, analyser and worklet samples; it changes no app code.

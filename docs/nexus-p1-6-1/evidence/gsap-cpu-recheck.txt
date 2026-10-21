@@ -1,0 +1,42 @@
+[WebServer] (node:19407) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:19410) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions (11.5s)
+
+
+  1) e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 8
+    Received:    9.600000001490116
+
+      155 |     const p95=(values:number[])=>values.sort((a,b)=>a-b)[Math.floor(values.length*.95)]??0;
+      156 |     const record={viewport,metric:"summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",baselineFrames:baseline.length,overlayFrames:active.length,baselineP95:p95(baseline),overlayP95:p95(active),incrementP95:Math.max(0,p95(active)-p95(baseline))};
+    > 157 |     evidence.push({performance:record}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);
+          |                                                                                                                ^
+      158 |   }
+      159 | });
+      160 |
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1/e2e/voice-cards.spec.ts:157:112
+
+    Error Context: .review/p1-6-1/gsap-cpu-recheck/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md
+
+    Error Context: .review/p1-6-1/gsap-cpu-recheck/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-1/gsap-cpu-recheck/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-1/gsap-cpu-recheck/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions

@@ -9,11 +9,13 @@ import { refreshScreenSnapshot } from "@/app/screen/sales/actions";
 import type { PublicScreenPayload } from "@/lib/public-screen-payload";
 import type { ScreenLayout } from "@/lib/screen-layout";
 import type { QualityMode } from './motion/QualityPolicy';
+import type { XiaochuanMotionMode } from '@/components/overlay/motion/permission';
 export interface ScreenExperienceProps {
+  xiaochuanMotion?: XiaochuanMotionMode; xiaochuanAuditAllowed?: boolean;
   qualityMode?: QualityMode; manualQualityAllowed?: boolean;
   initialPayload: PublicScreenPayload | null; source: "mock" | "public"; layout: ScreenLayout; kiosk: boolean; fit: boolean; initialNow: number; voice: "live" | "demo" | null; lite: boolean; hubUrl?: string; demoMode?: boolean; MotionComponent?: typeof MotionProvider;
 }
-export function ScreenExperience({ initialPayload, source, layout, kiosk, fit, initialNow, voice, lite, hubUrl, demoMode = false, qualityMode = 'baseline', manualQualityAllowed = false, MotionComponent = MotionProvider }: ScreenExperienceProps) {
+export function ScreenExperience({ initialPayload, source, layout, kiosk, fit, initialNow, voice, lite, hubUrl, demoMode = false, qualityMode = 'baseline', manualQualityAllowed = false, MotionComponent = MotionProvider, xiaochuanMotion = 'legacy', xiaochuanAuditAllowed = false }: ScreenExperienceProps) {
   const [payload, setPayload] = useState(initialPayload);
   const clock = useClock();
   useEffect(() => {
@@ -33,6 +35,6 @@ export function ScreenExperience({ initialPayload, source, layout, kiosk, fit, i
   const Provider = MotionComponent;
   return <Provider key={`${qualityMode}:${manualQualityAllowed}`} manualQualityAllowed={manualQualityAllowed} qualityMode={qualityMode} dataTime={payload?.generatedAt ?? "无快照"}>
     {payload ? <ScreenStage initialPayload={payload} layout={layout} kiosk={kiosk} initialFit={fit} demoMode={demoMode || voice === "demo"} now={clock || initialNow}/> : <main className="nexus-no-snapshot" role="status">数据暂不可用</main>}
-    {payload && voice ? <OverlayErrorBoundary><OverlayStage payload={payload} driver={voice} lite={lite} hubUrl={hubUrl}/></OverlayErrorBoundary> : null}
+    {payload && voice ? <OverlayErrorBoundary><OverlayStage key={`${xiaochuanMotion}:${xiaochuanAuditAllowed}`} xiaochuanMotion={xiaochuanMotion} xiaochuanAuditAllowed={xiaochuanAuditAllowed} payload={payload} driver={voice} lite={lite} hubUrl={hubUrl}/></OverlayErrorBoundary> : null}
   </Provider>;
 }

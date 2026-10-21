@@ -1,0 +1,17 @@
+{
+  "modes": [
+    {
+      "mode": "legacy",
+      "records": 116,
+      "violations": [],
+      "textFailures": []
+    },
+    {
+      "mode": "gsap",
+      "records": 116,
+      "violations": [],
+      "textFailures": []
+    }
+  ],
+  "rectangleDeltas": []
+}

@@ -1,0 +1,223 @@
+{
+  "hidden": {
+    "liveControllers": 1,
+    "liveTimelines": 3,
+    "tracks": [
+      "answer",
+      "caption",
+      "geometry"
+    ],
+    "subscribers": 3,
+    "pendingJob": false,
+    "rootAnimations": 0,
+    "hidden": true,
+    "canvasSample": {
+      "at": 7761.1,
+      "pulse": 0.485833,
+      "stream": 0,
+      "unfold": 0,
+      "fold": 0
+    },
+    "visual": {
+      "pulse": 0.485833,
+      "stream": 0,
+      "unfold": 0,
+      "fold": 0,
+      "foldFrom": 0,
+      "header": 0,
+      "metricsContent": 0,
+      "spoken": 0,
+      "followups": 0,
+      "opacity": 1,
+      "caption": 0.422164,
+      "presence": 1,
+      "formation": 1,
+      "collapse": 0,
+      "coreX": 960,
+      "coreY": 460.685074,
+      "typingMs": 0
+    },
+    "configuredCapHz": 60,
+    "activeListeners": 0,
+    "listenerUpdates": 372,
+    "firstAtMs": 95.20000000298023,
+    "lastAtMs": 6387.30000000447
+  },
+  "restored": {
+    "liveControllers": 1,
+    "liveTimelines": 0,
+    "tracks": [],
+    "subscribers": 3,
+    "pendingJob": false,
+    "rootAnimations": 0,
+    "hidden": false,
+    "canvasSample": {
+      "at": 8027.7,
+      "pulse": 1,
+      "stream": 1,
+      "unfold": 1,
+      "fold": 0
+    },
+    "visual": {
+      "pulse": 1,
+      "stream": 1,
+      "unfold": 1,
+      "fold": 0,
+      "foldFrom": 0,
+      "header": 1,
+      "metricsContent": 1,
+      "spoken": 1,
+      "followups": 1,
+      "opacity": 1,
+      "caption": 1,
+      "presence": 1,
+      "formation": 1,
+      "collapse": 0,
+      "coreX": 960,
+      "coreY": 225,
+      "typingMs": 0
+    },
+    "configuredCapHz": 60,
+    "activeListeners": 0,
+    "listenerUpdates": 372,
+    "firstAtMs": 95.20000000298023,
+    "lastAtMs": 6387.30000000447
+  },
+  "unmounted": null,
+  "navigated": null,
+  "final": {
+    "liveControllers": 1,
+    "liveTimelines": 0,
+    "tracks": [],
+    "subscribers": 2,
+    "pendingJob": false,
+    "rootAnimations": 0,
+    "hidden": false,
+    "canvasSample": {
+      "at": 10860.9,
+      "pulse": 0.1875,
+      "stream": 0,
+      "unfold": 0,
+      "fold": 1
+    },
+    "visual": {
+      "pulse": 0.1875,
+      "stream": 0,
+      "unfold": 0,
+      "fold": 1,
+      "foldFrom": 0,
+      "header": 0,
+      "metricsContent": 0,
+      "spoken": 0,
+      "followups": 0,
+      "opacity": 0,
+      "caption": 1,
+      "presence": 1,
+      "formation": 0.769528,
+      "collapse": 1,
+      "coreX": 960,
+      "coreY": 470,
+      "typingMs": 0
+    },
+    "configuredCapHz": 60,
+    "activeListeners": 0,
+    "listenerUpdates": 511,
+    "firstAtMs": 95.20000000298023,
+    "lastAtMs": 10945.10000000149
+  },
+  "reports": [
+    {
+      "type": "playback.metrics",
+      "at": 1792566742306,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566743170,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566743367,
+      "turnId": "00000000-0000-4000-8000-000000000002"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566744054,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566744250,
+      "turnId": "00000000-0000-4000-8000-000000000003"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566744936,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566745132,
+      "turnId": "00000000-0000-4000-8000-000000000004"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566745818,
+      "turnId": "00000000-0000-4000-8000-000000000005",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566746040,
+      "turnId": "00000000-0000-4000-8000-000000000005"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566746691,
+      "turnId": "00000000-0000-4000-8000-000000000006",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566746915,
+      "turnId": "00000000-0000-4000-8000-000000000006"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566747565,
+      "turnId": "00000000-0000-4000-8000-000000000007",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792566747755,
+      "turnId": "00000000-0000-4000-8000-000000000007"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566750293,
+      "turnId": "00000000-0000-4000-8000-000000000008",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792566750743,
+      "turnId": "00000000-0000-4000-8000-000000000009",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    }
+  ]
+}

@@ -6,7 +6,7 @@ const baseURL = `http://127.0.0.1:${port}`;
 export default defineConfig({
   testDir: "./e2e",
   // Motion-specific suites run in their own configs with reducedMotion=no-preference.
-  testIgnore: ["**/p1-6.spec.ts", "**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
+  testIgnore: ["**/p1-6.spec.ts", "**/p1-6-1.spec.ts", "**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
   fullyParallel: false,
   workers: 1,
   timeout: 30_000,
