@@ -82,6 +82,16 @@ describe('typed P1.5-B policy', () => {
     const r=rig();r.low();r.due();r.step(20,50);for(let i=0;i<20;i++)r.step();
     expect(r.step(60,16.7,{targetHz:100})).toMatchObject({state:'low',failureCount:1,reason:'reference-recalibrated'});
   });
+  it('reserving recalibration only defers new probes; degradation and an active probe still run', () => {
+    const r=rig();
+    expect(r.step(20,50,{probeAllowed:false}).state).toBe('normal');
+    expect(r.step(20,50,{probeAllowed:false})).toMatchObject({state:'low',reason:'severe-low-frequency'});
+    for(let i=0;i<12;i++)r.step(60,16.7,{probeAllowed:false});
+    expect(r.step(60,16.7,{probeAllowed:false})).toMatchObject({state:'low',reason:'probe-deferred-for-recalibration',nextProbeAtMs:12000});
+    expect(r.step().state).toBe('probe');
+    r.step(60,16.7,{probeAllowed:false});r.step(60,16.7,{probeAllowed:false});
+    expect(r.step(60,16.7,{probeAllowed:false})).toMatchObject({state:'normal',reason:'normal-load-probe-passed'});
+  });
 });
 describe('server experimental permission', () => {
   it.each([undefined, '', 'true', 'candidate', 'invalid'])('denies URL-only control with permission %s', permission => {

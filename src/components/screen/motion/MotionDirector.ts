@@ -1,5 +1,6 @@
 import { motionConfig } from './config';
 import { candidateParameters, effectiveTargetHz, ProbeQualityPolicy, type QualityDecision, type QualityMode, type QualityPolicy } from './QualityPolicy';
+import { DeferredRecalibration } from './DeferredRecalibration';
 export type SceneState = 'BOOT' | 'INTRO' | 'AMBIENT' | 'PULSE' | 'DEGRADED';
 export type MotionLevel = 'normal' | 'low' | 'static';
 export interface MotionFrame {
@@ -21,7 +22,7 @@ export class MotionDirector {
   private listeners = new Set<() => void>();
   private introStart = 0;
   get introTime() { return this.frame.time - this.introStart; }
-  restartIntro() { if (!this.enabled() || this.probeReserved || this.mode === 'candidate' && this.qualityDecision?.state === 'probe') return false; this.stable(); this.introStart = this.frame.time; this.introEnd = this.frame.time + motionConfig.intro; this.frame.state = "INTRO"; this.draw(); this.notify(); return true; }
+  restartIntro() { if (!this.enabled() || this.recalibration?.reserved || this.probeReserved || this.mode === 'candidate' && this.qualityDecision?.state === 'probe') return false; this.stable(); this.introStart = this.frame.time; this.introEnd = this.frame.time + motionConfig.intro; this.frame.state = "INTRO"; this.draw(); this.notify(); return true; }
   private introEnd = motionConfig.intro as number;
   private nextPulse = motionConfig.pulseInterval as number;
   private pulseStart = 0;
@@ -36,6 +37,23 @@ export class MotionDirector {
   private intervals: number[] = []; private windowStart: number | null = null;
   private windowNormalLoad = true;
   private engineCapHz: number | null;
+  private calibrationPaused = false;
+  recalibration: DeferredRecalibration | null = null;
+  /** Attached only after the existing startup calibration has completed. */
+  attachRecalibration(measure: (done: (referenceHz: number) => void) => () => void) {
+    this.recalibration?.dispose();
+    this.recalibration = new DeferredRecalibration({
+      now: () => this.host.clockNow?.() ?? this.host.now(),
+      context: () => ({ active: this.environmentActive(), phase: this.frame.state,
+        probe: this.qualityDecision?.state === 'probe',
+        pauseReason: !this.started ? 'stopped' : !this.frame.pageVisible ? 'hidden' : this.frame.voiceActive ? 'voice' : 'reduced-motion' }),
+      measure,
+      suspend: () => { this.calibrationPaused = true; this.stop(); this.notify(); },
+      resume: () => { if (!this.calibrationPaused) return; this.calibrationPaused = false; this.schedule(); this.notify(); },
+      apply: hz => this.setCalibration(hz), fallback: reason => this.fallback(reason),
+    });
+  }
+  requestRecalibration() { if (this.mode !== 'baseline') { this.recalibration?.request(); this.notify(); } }
   qualityDecision: QualityDecision | null = null;
   qualityChangedAt = -Infinity;
   readonly qualityRecords: QualityDecision[] = [];
@@ -74,6 +92,8 @@ export class MotionDirector {
   private fallback(reason: string) {
     this.mode = 'baseline'; this.policy = new ProbeQualityPolicy(); this.resetWindow();
     this.lowTime = this.recoveryTime = 0; this.forcedLow = false; this.log(reason);
+    this.recalibration?.cancel('baseline-fallback');
+    this.notify();
   }
   selectedKey: string | null = null;
   selectionAt = -Infinity;
@@ -96,21 +116,23 @@ export class MotionDirector {
     return () => { this.callbacks.delete(key); };
   }
   start() { if (this.started) return; this.started = true; this.frame.time = this.host.now(); this.frame.state = 'INTRO'; this.introEnd = motionConfig.intro; this.draw(); this.schedule(); }
-  dispose() { this.started = false; this.stop(); this.callbacks.clear(); this.listeners.clear(); }
+  dispose() { this.started = false; this.recalibration?.dispose(); this.stop(); this.callbacks.clear(); this.listeners.clear(); }
   private stop() { if (this.id !== null) this.host.cancel(this.id); this.id = null; this.last = null; this.sampleFrames = 0; this.sampleTime = 0; this.lowTime = 0; this.recoveryTime = 0; this.interruptQuality('clock-stopped'); }
-  private enabled() { return this.started && this.frame.pageVisible && !this.frame.voiceActive && !this.reduced; }
+  private environmentActive() { return this.started && this.frame.pageVisible && !this.frame.voiceActive && !this.reduced; }
+  private enabled() { return this.environmentActive() && !this.calibrationPaused; }
   private schedule() { if (this.enabled() && this.id === null) this.id = this.host.request(this.tick); }
   private stable() { this.frame.state = this.frame.motionLevel === 'low' ? 'DEGRADED' : 'AMBIENT'; this.frame.pulse = 0; this.nextPulse = this.frame.time + this.pulseInterval; }
   setEnvironment({ pageVisible, voiceActive, reduced }: { pageVisible?: boolean; voiceActive?: boolean; reduced?: boolean }) {
     if ((pageVisible === undefined || pageVisible === this.frame.pageVisible) && (voiceActive === undefined || voiceActive === this.frame.voiceActive) && (reduced === undefined || reduced === this.reduced)) return;
+    this.recalibration?.advance();
     if (pageVisible !== undefined) this.frame.pageVisible = pageVisible;
     if (voiceActive !== undefined) this.frame.voiceActive = voiceActive;
     if (reduced !== undefined) this.reduced = reduced;
     this.frame.motionLevel = this.reduced ? 'static' : this.mode === 'candidate' ? this.qualityDecision?.state === 'low' ? 'low' : 'normal' : this.forcedLow ? 'low' : this.frame.motionLevel === 'static' ? 'normal' : this.frame.motionLevel;
-    this.stop(); this.stable(); this.draw(); this.notify(); this.schedule();
+    this.stop(); this.stable(); this.draw(); this.recalibration?.advance(); this.notify(); this.schedule();
   }
   triggerPulse() {
-    if (!this.enabled() || this.frame.motionLevel !== 'normal' || this.frame.state === 'PULSE') return false;
+    if (!this.enabled() || this.recalibration?.reserved || this.frame.motionLevel !== 'normal' || this.frame.state === 'PULSE') return false;
     // A full-load probe must finish in an undisturbed stable window.
     if (this.mode === 'candidate' && this.qualityDecision?.state === 'probe') return false;
     this.frame.state = 'PULSE'; this.pulseStart = this.frame.time; this.frame.pulse = 0; this.notify(); return true;
@@ -132,6 +154,7 @@ export class MotionDirector {
     }
     const delta = this.last === null ? 0 : Math.max(0, now - this.last); this.last = now;
     this.frame.time += delta;
+    this.recalibration?.advance();
     if (this.mode !== 'baseline') {
       if (this.windowStart === null) this.windowStart = now;
       else if (delta > 0) this.intervals.push(delta);
@@ -142,6 +165,7 @@ export class MotionDirector {
           this.recordDecision(this.policy.sample({ atMs: now, targetHz: this.qualityTargetHz,
             updateHz: this.intervals.length * 1000 / (now - this.windowStart), intervalP95Ms: sorted[Math.ceil(sorted.length * .95) - 1],
             window: { startMs: this.windowStart, endMs: now, updates: this.intervals.length }, normalLoad: this.windowNormalLoad,
+            probeAllowed: !this.recalibration?.reserved,
             environment: { pageVisible: this.frame.pageVisible, voiceActive: this.frame.voiceActive, reduced: this.reduced, phase: this.frame.state, calibration: this.calibration } }));
         } catch { this.fallback('policy-exception'); }
         this.windowStart = now; this.intervals = []; this.windowNormalLoad = this.frame.motionLevel === 'normal';
@@ -165,6 +189,8 @@ export class MotionDirector {
     this.draw();
     if (this.frame.time - this.notifyTime >= 250) { this.notifyTime = this.frame.time; this.notify(); }
     this.schedule();
+    // The microtask rechecks all guards after draw/subscribers and the host tick have exited.
+    this.recalibration?.advance();
   };
   private draw() {
     this.frame.significant = 0;

@@ -1,0 +1,108 @@
+{
+  "status": "passed within documented local scope",
+  "baseline": "b35b93c230fc6c084895a4119196779f505bf2fb",
+  "buildId": "jnd-N6QqrV0JPxo-ldtcQ",
+  "vitest": {
+    "files": 54,
+    "passed": 703
+  },
+  "nodeReferenceTests": 31,
+  "browser": {
+    "runtime": {
+      "startTime": "2026-10-21T00:48:04.778Z",
+      "duration": 127126.771,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "native-and-probe": {
+      "startTime": "2026-10-21T01:07:00.050Z",
+      "duration": 19073.416,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "legacy-regression": {
+      "startTime": "2026-10-21T00:50:12.436Z",
+      "duration": 333436.96,
+      "expected": 63,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "gsap-regression": {
+      "startTime": "2026-10-21T00:55:46.379Z",
+      "duration": 332099.985,
+      "expected": 63,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "quality-integration": {
+      "startTime": "2026-10-21T01:01:19.025Z",
+      "duration": 96497.86499999999,
+      "expected": 15,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "safety-boundary": {
+      "startTime": "2026-10-21T01:02:56.071Z",
+      "duration": 3300.4710000000005,
+      "expected": 28,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "permission-denied": {
+      "startTime": "2026-10-21T01:02:59.888Z",
+      "duration": 2638.8979999999997,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "gsap-functional": {
+      "startTime": "2026-10-21T01:03:03.043Z",
+      "duration": 95449.231,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "browserPassingExecutions": 204,
+  "typecheckExitCode": 0,
+  "buildExitCode": 0,
+  "lint": {
+    "errors": 0,
+    "preexistingWarnings": 2
+  },
+  "pairedBaselineCheckpoints": 10,
+  "additionalCssControlledCheckpoints": 10,
+  "continuousVideosBefore": 2,
+  "continuousVideosAfter": 8,
+  "visualBackend": [
+    {
+      "vendorId": 4203,
+      "deviceId": 0,
+      "vendorString": "Google Inc. (Apple)",
+      "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Version 15.7.8 (Build 24G824))",
+      "driverVendor": "Apple",
+      "driverVersion": "15.7.8"
+    }
+  ],
+  "capture": {
+    "viewportDpr": 1,
+    "videoWidth": 1280,
+    "videoHeight": 720,
+    "videoFps": 25
+  },
+  "productionCandidateEnabled": false,
+  "pushed": false,
+  "merged": false,
+  "deployed": false,
+  "acceptanceLimit": "local engineering and captured visual evidence; not per-present-frame or venue/LED acceptance"
+}

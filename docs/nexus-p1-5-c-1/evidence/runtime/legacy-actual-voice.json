@@ -1,0 +1,220 @@
+{
+  "control": {
+    "timers": {
+      "activeTimeouts": 0,
+      "activeIntervals": 4,
+      "pendingApplicationRaf": 1,
+      "timeoutsScheduled": 2,
+      "timeoutsFired": 1,
+      "intervalsScheduled": 4,
+      "intervalCallbacks": 90
+    },
+    "ticker": null,
+    "state": {
+      "state": "AMBIENT",
+      "level": "normal",
+      "paused": "true",
+      "clock": "1281",
+      "pulseDueIn": "150000",
+      "qualityAutomation": "candidate",
+      "qualityState": "normal",
+      "qualityTarget": "62.5",
+      "recalibration": "idle"
+    }
+  },
+  "evidence": [
+    {
+      "stage": "waiting",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 4,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 5,
+          "timeoutsFired": 3,
+          "intervalsScheduled": 5,
+          "intervalCallbacks": 184
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "true",
+          "clock": "2833",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 9,
+          "timeoutsFired": 5,
+          "intervalsScheduled": 5,
+          "intervalCallbacks": 190
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "3841",
+          "pulseDueIn": "148992",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 8701,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 8701,
+          "activeMs": 0
+        },
+        {
+          "at": 8701,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 8701,
+          "activeMs": 0
+        },
+        {
+          "at": 14021,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 8701,
+          "activeMs": 0
+        },
+        {
+          "at": 14512,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 8701,
+          "activeMs": 491
+        }
+      ]
+    },
+    {
+      "stage": "measuring",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 4,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 11,
+          "timeoutsFired": 5,
+          "intervalsScheduled": 6,
+          "intervalCallbacks": 278
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "true",
+          "clock": "3905",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 15,
+          "timeoutsFired": 7,
+          "intervalsScheduled": 6,
+          "intervalCallbacks": 284
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "4865",
+          "pulseDueIn": "149040",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 8701,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 8701,
+          "activeMs": 0
+        },
+        {
+          "at": 8701,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 8701,
+          "activeMs": 0
+        },
+        {
+          "at": 14021,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 8701,
+          "activeMs": 0
+        },
+        {
+          "at": 14512,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 8701,
+          "activeMs": 491
+        },
+        {
+          "at": 15601,
+          "event": "requested",
+          "version": 2,
+          "firstRequestedAt": 15601,
+          "activeMs": 0
+        },
+        {
+          "at": 15601,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 15601,
+          "activeMs": 0
+        },
+        {
+          "at": 15601,
+          "event": "paused-voice",
+          "version": 2,
+          "firstRequestedAt": 15601,
+          "activeMs": 0
+        },
+        {
+          "at": 20921,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 15601,
+          "activeMs": 0
+        },
+        {
+          "at": 21408,
+          "event": "applied",
+          "version": 2,
+          "firstRequestedAt": 15601,
+          "activeMs": 487
+        }
+      ]
+    }
+  ]
+}

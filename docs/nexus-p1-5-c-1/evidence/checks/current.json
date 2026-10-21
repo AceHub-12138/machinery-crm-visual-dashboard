@@ -1,0 +1,198 @@
+{
+  "current": "finished",
+  "completed": [
+    {
+      "name": "runtime",
+      "exitCode": 0,
+      "elapsedSeconds": 127.638091375,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/p1-5-c-1.config.ts"
+      ],
+      "environment": {}
+    },
+    {
+      "name": "legacy-regression",
+      "exitCode": 0,
+      "elapsedSeconds": 333.99104720900004,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/gsap-poc.config.ts"
+      ],
+      "environment": {
+        "GSAP_REGRESSION": "1",
+        "NEXUS_MOTION_ENGINE": "legacy",
+        "GSAP_RESULT_NAME": "c1-legacy-regression"
+      }
+    },
+    {
+      "name": "gsap-regression",
+      "exitCode": 0,
+      "elapsedSeconds": 332.6050733750001,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/gsap-poc.config.ts"
+      ],
+      "environment": {
+        "GSAP_REGRESSION": "1",
+        "NEXUS_MOTION_ENGINE": "gsap",
+        "GSAP_RESULT_NAME": "c1-gsap-regression"
+      }
+    },
+    {
+      "name": "quality-integration",
+      "exitCode": 0,
+      "elapsedSeconds": 97.04465933300003,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/p1-5-c.config.ts"
+      ],
+      "environment": {
+        "NEXUS_QUALITY_PERMISSION": "local-candidate",
+        "P15C_E2E_LABEL": "c1-integration"
+      }
+    },
+    {
+      "name": "safety-boundary",
+      "exitCode": 0,
+      "elapsedSeconds": 3.850316375000034,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/p1-5-c-safety.config.ts"
+      ],
+      "environment": {
+        "NEXUS_SAFETY_LABEL": "c1-boundary"
+      }
+    },
+    {
+      "name": "permission-denied",
+      "exitCode": 0,
+      "elapsedSeconds": 3.152292750000015,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/p1-5-c.config.ts",
+        "--grep",
+        "server permission"
+      ],
+      "environment": {
+        "NEXUS_QUALITY_PERMISSION": "denied",
+        "P15C_E2E_LABEL": "c1-denied"
+      }
+    },
+    {
+      "name": "gsap-functional",
+      "exitCode": 0,
+      "elapsedSeconds": 95.96472495900002,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/gsap-poc.config.ts"
+      ],
+      "environment": {
+        "GSAP_RESULT_NAME": "c1-functional"
+      }
+    },
+    {
+      "name": "baseline-equivalence",
+      "exitCode": 1,
+      "elapsedSeconds": 34.74057479199996,
+      "command": [
+        "node",
+        "scripts/p1-5-c-1/baseline-equivalence.mjs"
+      ],
+      "environment": {}
+    },
+    {
+      "name": "visual",
+      "exitCode": 1,
+      "elapsedSeconds": 53.140417583000044,
+      "command": [
+        "node",
+        "scripts/p1-5-c-1/capture.mjs"
+      ],
+      "environment": {
+        "C1_PHASE": "fixed",
+        "C1_WIDTHS": "1280,1792,1920,3840"
+      }
+    },
+    {
+      "name": "native-and-probe",
+      "exitCode": 0,
+      "elapsedSeconds": 19.63462525,
+      "command": [
+        "pnpm",
+        "exec",
+        "playwright",
+        "test",
+        "-c",
+        "e2e/p1-5-c-1.config.ts",
+        "--grep",
+        "1792|active Candidate probe"
+      ],
+      "environment": {
+        "C1_E2E_LABEL": "native-and-probe"
+      }
+    },
+    {
+      "name": "baseline-equivalence",
+      "exitCode": 1,
+      "elapsedSeconds": 34.682436708,
+      "command": [
+        "node",
+        "scripts/p1-5-c-1/baseline-equivalence.mjs"
+      ],
+      "environment": {}
+    },
+    {
+      "name": "visual",
+      "exitCode": 0,
+      "elapsedSeconds": 146.892955709,
+      "command": [
+        "node",
+        "scripts/p1-5-c-1/capture.mjs"
+      ],
+      "environment": {
+        "C1_PHASE": "fixed",
+        "C1_WIDTHS": "1280,1792,1920,3840",
+        "C1_RESUME": "1"
+      }
+    },
+    {
+      "name": "baseline-equivalence",
+      "exitCode": 0,
+      "elapsedSeconds": 26.413656625,
+      "command": [
+        "node",
+        "scripts/p1-5-c-1/baseline-equivalence.mjs"
+      ],
+      "environment": {}
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "file": "history/partial-media/page@9428ea80f6e66c766b876595970ca37c.webm",
+    "sha256": "d10addfe46559f84783dcb8b71969ebb68dab6f9c395ce6657702a36951a12f1",
+    "accepted": false,
+    "reason": "capture stopped on controller resize delivery assertion; retained, excluded from final visual set"
+  }
+]

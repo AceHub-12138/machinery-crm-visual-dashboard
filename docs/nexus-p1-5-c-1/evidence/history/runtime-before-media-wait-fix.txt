@@ -1,0 +1,113 @@
+[WebServer] (node:58132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:58133) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 16 tests using 1 worker
+
+(node:58142) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/16] e2e/p1-5-c-1.spec.ts:22:49 › legacy 1280: fit is immediate while INTRO/PULSE reach natural ends
+[2/16] e2e/p1-5-c-1.spec.ts:22:49 › legacy 1792: fit is immediate while INTRO/PULSE reach natural ends
+[3/16] e2e/p1-5-c-1.spec.ts:22:49 › legacy 1920: fit is immediate while INTRO/PULSE reach natural ends
+[4/16] e2e/p1-5-c-1.spec.ts:22:49 › legacy 3840: fit is immediate while INTRO/PULSE reach natural ends
+[5/16] e2e/p1-5-c-1.spec.ts:48:3 › legacy: resize storm reserves the first active budget without indefinite delay
+[6/16] e2e/p1-5-c-1.spec.ts:60:3 › legacy: waiting/measurement takeover, recovery, teardown and engine switch release resources
+  1) e2e/p1-5-c-1.spec.ts:60:3 › legacy: waiting/measurement takeover, recovery, teardown and engine switch release resources 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.nexus-motion-debug')
+    Expected: "idle"
+    Received: "measuring"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.nexus-motion-debug') with timeout 5000ms
+      - waiting for locator('.nexus-motion-debug')
+        14 × locator resolved to <aside aria-label="动效调试" data-clock="5233" data-paused="true" data-level="normal" data-state="AMBIENT" class="nexus-motion-debug" data-pulse-due-in="150000" data-quality-target="62.5" data-quality-state="normal" data-recalibration="measuring" data-quality-automation="candidate">…</aside>
+           - unexpected value "measuring"
+
+
+      72 |       if (kind === 'hidden') await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')); });
+      73 |       if (kind === 'reduced') await page.emulateMedia({ reducedMotion: 'no-preference' });
+    > 74 |       await page.clock.runFor(1500); await expect(debug(page)).toHaveAttribute('data-recalibration', 'idle');
+         |                                                                ^
+      75 |       const resumed = await audit(page); expect(resumed.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 1 });
+      76 |       if (engine === 'gsap') expect(resumed.ticker).toMatchObject({ activeListeners: 1, liveScenes: 1, rootAnimations: 0 });
+      77 |       phases.push({ kind, stage, paused, resumed, log: await records(page) });
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:74:64
+
+    Error Context: .review/p1-5-c-1/traces/p1-5-c-1-legacy-waiting-me-995b2-ne-switch-release-resources/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-5-c-1/traces/p1-5-c-1-legacy-waiting-me-995b2-ne-switch-release-resources/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-5-c-1/traces/p1-5-c-1-legacy-waiting-me-995b2-ne-switch-release-resources/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:58230) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[7/16] e2e/p1-5-c-1.spec.ts:88:3 › legacy: default Baseline ignores every recalibration trigger
+[8/16] e2e/p1-5-c-1.spec.ts:95:3 › legacy: new version during measurement wins and a stalled finite measurement falls back
+[9/16] e2e/p1-5-c-1.spec.ts:22:49 › gsap 1280: fit is immediate while INTRO/PULSE reach natural ends
+[10/16] e2e/p1-5-c-1.spec.ts:22:49 › gsap 1792: fit is immediate while INTRO/PULSE reach natural ends
+[11/16] e2e/p1-5-c-1.spec.ts:22:49 › gsap 1920: fit is immediate while INTRO/PULSE reach natural ends
+[12/16] e2e/p1-5-c-1.spec.ts:22:49 › gsap 3840: fit is immediate while INTRO/PULSE reach natural ends
+[13/16] e2e/p1-5-c-1.spec.ts:48:3 › gsap: resize storm reserves the first active budget without indefinite delay
+[14/16] e2e/p1-5-c-1.spec.ts:60:3 › gsap: waiting/measurement takeover, recovery, teardown and engine switch release resources
+  2) e2e/p1-5-c-1.spec.ts:60:3 › gsap: waiting/measurement takeover, recovery, teardown and engine switch release resources 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.nexus-motion-debug')
+    Expected: "idle"
+    Received: "measuring"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.nexus-motion-debug') with timeout 5000ms
+      - waiting for locator('.nexus-motion-debug')
+        14 × locator resolved to <aside aria-label="动效调试" data-clock="6224" data-paused="true" data-level="normal" data-state="AMBIENT" data-quality-target="60" class="nexus-motion-debug" data-pulse-due-in="150000" data-quality-state="normal" data-recalibration="measuring" data-quality-automation="candidate">…</aside>
+           - unexpected value "measuring"
+
+
+      72 |       await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(60_000);
+      73 |       const paused = await audit(page); expect(paused.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 0 });
+    > 74 |       if (engine === 'gsap') expect(paused.ticker.activeListeners).toBe(0);
+         |                                                                ^
+      75 |       if (kind === 'voice') await page.evaluate(() => window.dispatchEvent(new CustomEvent('nexus-debug-voice', { detail: false })));
+      76 |       if (kind === 'hidden') await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')); });
+      77 |       if (kind === 'reduced') await page.emulateMedia({ reducedMotion: 'no-preference' });
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:74:64
+
+    Error Context: .review/p1-5-c-1/traces/p1-5-c-1-gsap-waiting-meas-8762f-ne-switch-release-resources/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-5-c-1/traces/p1-5-c-1-gsap-waiting-meas-8762f-ne-switch-release-resources/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-5-c-1/traces/p1-5-c-1-gsap-waiting-meas-8762f-ne-switch-release-resources/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:58489) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[15/16] e2e/p1-5-c-1.spec.ts:88:3 › gsap: default Baseline ignores every recalibration trigger
+[16/16] e2e/p1-5-c-1.spec.ts:95:3 › gsap: new version during measurement wins and a stalled finite measurement falls back
+  2 failed
+    e2e/p1-5-c-1.spec.ts:60:3 › legacy: waiting/measurement takeover, recovery, teardown and engine switch release resources 
+    e2e/p1-5-c-1.spec.ts:60:3 › gsap: waiting/measurement takeover, recovery, teardown and engine switch release resources 
+  14 passed (1.9m)

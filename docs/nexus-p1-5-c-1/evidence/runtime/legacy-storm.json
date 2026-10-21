@@ -1,0 +1,265 @@
+{
+  "log": [
+    {
+      "at": 1801,
+      "event": "requested",
+      "version": 1,
+      "firstRequestedAt": 1801,
+      "activeMs": 0
+    },
+    {
+      "at": 2801,
+      "event": "requested",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 1000
+    },
+    {
+      "at": 3801,
+      "event": "requested",
+      "version": 3,
+      "firstRequestedAt": 1801,
+      "activeMs": 2000
+    },
+    {
+      "at": 4801,
+      "event": "requested",
+      "version": 4,
+      "firstRequestedAt": 1801,
+      "activeMs": 3000
+    },
+    {
+      "at": 5801,
+      "event": "requested",
+      "version": 5,
+      "firstRequestedAt": 1801,
+      "activeMs": 4000
+    },
+    {
+      "at": 6801,
+      "event": "requested",
+      "version": 6,
+      "firstRequestedAt": 1801,
+      "activeMs": 5000
+    },
+    {
+      "at": 7801,
+      "event": "requested",
+      "version": 7,
+      "firstRequestedAt": 1801,
+      "activeMs": 6000
+    },
+    {
+      "at": 8801,
+      "event": "requested",
+      "version": 8,
+      "firstRequestedAt": 1801,
+      "activeMs": 7000
+    },
+    {
+      "at": 9801,
+      "event": "requested",
+      "version": 9,
+      "firstRequestedAt": 1801,
+      "activeMs": 8000
+    },
+    {
+      "at": 10801,
+      "event": "requested",
+      "version": 10,
+      "firstRequestedAt": 1801,
+      "activeMs": 9000
+    },
+    {
+      "at": 11801,
+      "event": "requested",
+      "version": 11,
+      "firstRequestedAt": 1801,
+      "activeMs": 10000
+    },
+    {
+      "at": 12801,
+      "event": "requested",
+      "version": 12,
+      "firstRequestedAt": 1801,
+      "activeMs": 11000
+    },
+    {
+      "at": 13801,
+      "event": "requested",
+      "version": 13,
+      "firstRequestedAt": 1801,
+      "activeMs": 12000
+    },
+    {
+      "at": 14801,
+      "event": "requested",
+      "version": 14,
+      "firstRequestedAt": 1801,
+      "activeMs": 13000
+    },
+    {
+      "at": 15801,
+      "event": "requested",
+      "version": 15,
+      "firstRequestedAt": 1801,
+      "activeMs": 14000
+    },
+    {
+      "at": 16801,
+      "event": "requested",
+      "version": 16,
+      "firstRequestedAt": 1801,
+      "activeMs": 15000
+    },
+    {
+      "at": 17801,
+      "event": "requested",
+      "version": 17,
+      "firstRequestedAt": 1801,
+      "activeMs": 16000
+    },
+    {
+      "at": 18801,
+      "event": "requested",
+      "version": 18,
+      "firstRequestedAt": 1801,
+      "activeMs": 17000
+    },
+    {
+      "at": 19801,
+      "event": "requested",
+      "version": 19,
+      "firstRequestedAt": 1801,
+      "activeMs": 18000
+    },
+    {
+      "at": 20801,
+      "event": "requested",
+      "version": 20,
+      "firstRequestedAt": 1801,
+      "activeMs": 19000
+    },
+    {
+      "at": 21801,
+      "event": "requested",
+      "version": 21,
+      "firstRequestedAt": 1801,
+      "activeMs": 20000
+    },
+    {
+      "at": 22801,
+      "event": "requested",
+      "version": 22,
+      "firstRequestedAt": 1801,
+      "activeMs": 21000
+    },
+    {
+      "at": 23801,
+      "event": "requested",
+      "version": 23,
+      "firstRequestedAt": 1801,
+      "activeMs": 22000
+    },
+    {
+      "at": 24801,
+      "event": "requested",
+      "version": 24,
+      "firstRequestedAt": 1801,
+      "activeMs": 23000
+    },
+    {
+      "at": 25801,
+      "event": "requested",
+      "version": 25,
+      "firstRequestedAt": 1801,
+      "activeMs": 24000
+    },
+    {
+      "at": 26801,
+      "event": "requested",
+      "version": 26,
+      "firstRequestedAt": 1801,
+      "activeMs": 25000
+    },
+    {
+      "at": 27801,
+      "event": "requested",
+      "version": 27,
+      "firstRequestedAt": 1801,
+      "activeMs": 26000
+    },
+    {
+      "at": 28801,
+      "event": "requested",
+      "version": 28,
+      "firstRequestedAt": 1801,
+      "activeMs": 27000
+    },
+    {
+      "at": 29801,
+      "event": "requested",
+      "version": 29,
+      "firstRequestedAt": 1801,
+      "activeMs": 28000
+    },
+    {
+      "at": 30801,
+      "event": "requested",
+      "version": 30,
+      "firstRequestedAt": 1801,
+      "activeMs": 29000
+    },
+    {
+      "at": 31801,
+      "event": "requested",
+      "version": 31,
+      "firstRequestedAt": 1801,
+      "activeMs": 30000
+    },
+    {
+      "at": 32801,
+      "event": "requested",
+      "version": 32,
+      "firstRequestedAt": 1801,
+      "activeMs": 31000
+    },
+    {
+      "at": 33008,
+      "event": "started",
+      "version": 32,
+      "firstRequestedAt": 1801,
+      "activeMs": 31207
+    },
+    {
+      "at": 33504,
+      "event": "applied",
+      "version": 32,
+      "firstRequestedAt": 1801,
+      "activeMs": 31703
+    }
+  ],
+  "after": {
+    "timers": {
+      "activeTimeouts": 0,
+      "activeIntervals": 3,
+      "pendingApplicationRaf": 1,
+      "timeoutsScheduled": 4,
+      "timeoutsFired": 1,
+      "intervalsScheduled": 3,
+      "intervalCallbacks": 72
+    },
+    "ticker": null,
+    "state": {
+      "state": "AMBIENT",
+      "level": "normal",
+      "paused": "false",
+      "clock": "35585",
+      "pulseDueIn": "146912",
+      "qualityAutomation": "candidate",
+      "qualityState": "normal",
+      "qualityTarget": "62.5",
+      "recalibration": "idle"
+    }
+  }
+}

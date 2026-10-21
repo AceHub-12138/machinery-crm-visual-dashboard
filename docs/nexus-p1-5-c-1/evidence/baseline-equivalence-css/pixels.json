@@ -1,0 +1,112 @@
+[
+  {
+    "name": "gsap-ambient",
+    "changedPixels": 494,
+    "fraction": 0.00023823302469135803,
+    "maxChannelDifference": 17,
+    "bbox": [
+      964,
+      409,
+      1524,
+      512
+    ]
+  },
+  {
+    "name": "gsap-completed",
+    "changedPixels": 1223,
+    "fraction": 0.0006770611890589569,
+    "maxChannelDifference": 26,
+    "bbox": [
+      898,
+      434,
+      944,
+      479
+    ]
+  },
+  {
+    "name": "gsap-intro",
+    "changedPixels": 0,
+    "fraction": 0.0,
+    "maxChannelDifference": 0,
+    "bbox": null
+  },
+  {
+    "name": "gsap-pulse",
+    "changedPixels": 3,
+    "fraction": 1.4467592592592592e-06,
+    "maxChannelDifference": 2,
+    "bbox": [
+      1651,
+      309,
+      1652,
+      312
+    ]
+  },
+  {
+    "name": "gsap-resize-in-pulse",
+    "changedPixels": 60,
+    "fraction": 3.321641156462585e-05,
+    "maxChannelDifference": 15,
+    "bbox": [
+      1352,
+      234,
+      1537,
+      325
+    ]
+  },
+  {
+    "name": "legacy-ambient",
+    "changedPixels": 1030,
+    "fraction": 0.0004967206790123457,
+    "maxChannelDifference": 24,
+    "bbox": [
+      963,
+      358,
+      1525,
+      513
+    ]
+  },
+  {
+    "name": "legacy-completed",
+    "changedPixels": 1077,
+    "fraction": 0.000596234587585034,
+    "maxChannelDifference": 26,
+    "bbox": [
+      899,
+      327,
+      1535,
+      479
+    ]
+  },
+  {
+    "name": "legacy-intro",
+    "changedPixels": 0,
+    "fraction": 0.0,
+    "maxChannelDifference": 0,
+    "bbox": null
+  },
+  {
+    "name": "legacy-pulse",
+    "changedPixels": 6,
+    "fraction": 2.8935185185185184e-06,
+    "maxChannelDifference": 1,
+    "bbox": [
+      1514,
+      208,
+      1519,
+      210
+    ]
+  },
+  {
+    "name": "legacy-resize-in-pulse",
+    "changedPixels": 4,
+    "fraction": 2.2144274376417234e-06,
+    "maxChannelDifference": 10,
+    "bbox": [
+      1527,
+      320,
+      1538,
+      342
+    ]
+  }
+]

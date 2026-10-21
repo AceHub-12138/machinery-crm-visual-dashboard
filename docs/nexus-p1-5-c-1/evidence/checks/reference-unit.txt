@@ -1,0 +1,39 @@
+✔ formal matrix covers two backends, two engines, and two resolutions exactly once (0.814291ms)
+✔ all formal windows are approximately sixty seconds with at least sixty timeline points (0.104375ms)
+✔ fixture, random conditions, and renderer classifications are comparable and explicit (0.081ms)
+✔ RAF, GSAP ticker estimate, and MotionDirector update fields remain distinct (0.0735ms)
+✔ quality timeline preserves software 4K oscillation instead of only an average (0.105625ms)
+✔ page and HTTP errors are zero while teardown RSC aborts remain explicitly classified (0.066ms)
+✔ all eight trace summaries retain non-additive cost caveats (0.295291ms)
+✔ product files match P1.4 and protected worktrees remain at their requested commits (0.221458ms)
+✔ raw evidence manifest covers trace and screenshot phases with SHA-256 values (0.263375ms)
+✔ nearest-rank percentiles do not interpolate away observed tail values (0.463917ms)
+✔ cadence summary reports rate and p95/p99 from interval samples (0.118833ms)
+✔ missed opportunities use the calibrated interval instead of a fixed 60Hz constant (0.16425ms)
+✔ long-task summary includes total blocking time above the 50ms threshold (0.625667ms)
+✔ renderer classification separates SwiftShader and Metal and otherwise stays unknown (0.299083ms)
+✔ quality transitions are derived from the timeline rather than final state (0.137792ms)
+✔ frequency and candidate matrices contain three isolated repetitions per scenario (0.518458ms)
+✔ same-target comparison separates healthy Metal from overloaded headless SwiftShader 4K (0.127333ms)
+✔ candidate avoids formal oscillation in the three repeated overloaded 4K runs (0.657583ms)
+✔ thirty-minute Luna run backs off, recovers after relief, and stays resource-stable (0.467166ms)
+✔ trace evidence has three repeats for all twelve same-target groups and remains non-additive (0.0785ms)
+✔ product diff is restricted to the explicit experimental quality isolation files (0.088333ms)
+✔ manifest retains all raw traces and reports with SHA-256 checksums (0.229417ms)
+✔ effective target is bounded by calibrated browser RAF and engine cap (0.487584ms)
+✔ probe backoff doubles and is capped (0.648791ms)
+✔ serious low frequency protects the page before the legacy five-second threshold (0.253458ms)
+✔ healthy low-mode cadence alone cannot recover normal quality (0.338125ms)
+✔ repeated failed probes back off instead of periodic normal/low oscillation (0.228833ms)
+✔ normal-load probe recovers after the modeled load improves (0.161875ms)
+✔ paused samples do not accumulate degradation evidence or switch mode (0.079958ms)
+✔ median and dispersion report robust center and spread for repeated runs (0.82375ms)
+✔ dispersion keeps unavailable samples explicit (0.081333ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 56.652208

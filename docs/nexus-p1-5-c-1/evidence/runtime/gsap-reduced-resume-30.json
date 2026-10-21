@@ -1,0 +1,1622 @@
+[
+  {
+    "cycle": 1,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 66,
+        "firstAtMs": 512,
+        "lastAtMs": 1584
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 66,
+        "firstAtMs": 512,
+        "lastAtMs": 1584
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 126,
+        "firstAtMs": 512,
+        "lastAtMs": 2800
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 2,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 134,
+        "firstAtMs": 512,
+        "lastAtMs": 2928
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 134,
+        "firstAtMs": 512,
+        "lastAtMs": 2928
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 189,
+        "firstAtMs": 512,
+        "lastAtMs": 4016
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 3,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 201,
+        "firstAtMs": 512,
+        "lastAtMs": 4208
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 201,
+        "firstAtMs": 512,
+        "lastAtMs": 4208
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 252,
+        "firstAtMs": 512,
+        "lastAtMs": 5248
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 4,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 267,
+        "firstAtMs": 512,
+        "lastAtMs": 5504
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 267,
+        "firstAtMs": 512,
+        "lastAtMs": 5504
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 314,
+        "firstAtMs": 512,
+        "lastAtMs": 6480
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 5,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 333,
+        "firstAtMs": 512,
+        "lastAtMs": 6800
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 333,
+        "firstAtMs": 512,
+        "lastAtMs": 6800
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 393,
+        "firstAtMs": 512,
+        "lastAtMs": 8000
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 6,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 401,
+        "firstAtMs": 512,
+        "lastAtMs": 8128
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 401,
+        "firstAtMs": 512,
+        "lastAtMs": 8128
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 455,
+        "firstAtMs": 512,
+        "lastAtMs": 9200
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 7,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 468,
+        "firstAtMs": 512,
+        "lastAtMs": 9408
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 468,
+        "firstAtMs": 512,
+        "lastAtMs": 9408
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 518,
+        "firstAtMs": 512,
+        "lastAtMs": 10432
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 8,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 534,
+        "firstAtMs": 512,
+        "lastAtMs": 10704
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 534,
+        "firstAtMs": 512,
+        "lastAtMs": 10704
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 580,
+        "firstAtMs": 512,
+        "lastAtMs": 11664
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 9,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 600,
+        "firstAtMs": 512,
+        "lastAtMs": 12000
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 600,
+        "firstAtMs": 512,
+        "lastAtMs": 12000
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 657,
+        "firstAtMs": 512,
+        "lastAtMs": 13152
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 10,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 667,
+        "firstAtMs": 512,
+        "lastAtMs": 13312
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 667,
+        "firstAtMs": 512,
+        "lastAtMs": 13312
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 721,
+        "firstAtMs": 512,
+        "lastAtMs": 14400
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 11,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 732,
+        "firstAtMs": 512,
+        "lastAtMs": 14576
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 732,
+        "firstAtMs": 512,
+        "lastAtMs": 14576
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 784,
+        "firstAtMs": 512,
+        "lastAtMs": 15664
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 12,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 792,
+        "firstAtMs": 512,
+        "lastAtMs": 15792
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 792,
+        "firstAtMs": 512,
+        "lastAtMs": 15792
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 847,
+        "firstAtMs": 512,
+        "lastAtMs": 17008
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 13,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 851,
+        "firstAtMs": 512,
+        "lastAtMs": 17088
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 851,
+        "firstAtMs": 512,
+        "lastAtMs": 17088
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 908,
+        "firstAtMs": 512,
+        "lastAtMs": 18352
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 14,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 918,
+        "firstAtMs": 512,
+        "lastAtMs": 18512
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 918,
+        "firstAtMs": 512,
+        "lastAtMs": 18512
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 971,
+        "firstAtMs": 512,
+        "lastAtMs": 19584
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 15,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 984,
+        "firstAtMs": 512,
+        "lastAtMs": 19792
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 984,
+        "firstAtMs": 512,
+        "lastAtMs": 19792
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1044,
+        "firstAtMs": 512,
+        "lastAtMs": 20992
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 16,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1044,
+        "firstAtMs": 512,
+        "lastAtMs": 20992
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1044,
+        "firstAtMs": 512,
+        "lastAtMs": 20992
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1097,
+        "firstAtMs": 512,
+        "lastAtMs": 22176
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 17,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1103,
+        "firstAtMs": 512,
+        "lastAtMs": 22288
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1103,
+        "firstAtMs": 512,
+        "lastAtMs": 22288
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1158,
+        "firstAtMs": 512,
+        "lastAtMs": 23520
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 18,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1163,
+        "firstAtMs": 512,
+        "lastAtMs": 23600
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1163,
+        "firstAtMs": 512,
+        "lastAtMs": 23600
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1221,
+        "firstAtMs": 512,
+        "lastAtMs": 24864
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 19,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1229,
+        "firstAtMs": 512,
+        "lastAtMs": 24992
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1229,
+        "firstAtMs": 512,
+        "lastAtMs": 24992
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1285,
+        "firstAtMs": 512,
+        "lastAtMs": 26128
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 20,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1289,
+        "firstAtMs": 512,
+        "lastAtMs": 26192
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1289,
+        "firstAtMs": 512,
+        "lastAtMs": 26192
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1347,
+        "firstAtMs": 512,
+        "lastAtMs": 27472
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 21,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1348,
+        "firstAtMs": 512,
+        "lastAtMs": 27488
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1348,
+        "firstAtMs": 512,
+        "lastAtMs": 27488
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1394,
+        "firstAtMs": 512,
+        "lastAtMs": 28560
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 22,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1416,
+        "firstAtMs": 512,
+        "lastAtMs": 28928
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1416,
+        "firstAtMs": 512,
+        "lastAtMs": 28928
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1472,
+        "firstAtMs": 512,
+        "lastAtMs": 30032
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 23,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1484,
+        "firstAtMs": 512,
+        "lastAtMs": 30224
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1484,
+        "firstAtMs": 512,
+        "lastAtMs": 30224
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1535,
+        "firstAtMs": 512,
+        "lastAtMs": 31248
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 24,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1551,
+        "firstAtMs": 512,
+        "lastAtMs": 31520
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1551,
+        "firstAtMs": 512,
+        "lastAtMs": 31520
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1597,
+        "firstAtMs": 512,
+        "lastAtMs": 32464
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 25,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1618,
+        "firstAtMs": 512,
+        "lastAtMs": 32816
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1618,
+        "firstAtMs": 512,
+        "lastAtMs": 32816
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1678,
+        "firstAtMs": 512,
+        "lastAtMs": 34000
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 26,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1686,
+        "firstAtMs": 512,
+        "lastAtMs": 34128
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1686,
+        "firstAtMs": 512,
+        "lastAtMs": 34128
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1737,
+        "firstAtMs": 512,
+        "lastAtMs": 35152
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 27,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1753,
+        "firstAtMs": 512,
+        "lastAtMs": 35408
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1753,
+        "firstAtMs": 512,
+        "lastAtMs": 35408
+      },
+      "paused": "false"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1801,
+        "firstAtMs": 512,
+        "lastAtMs": 36400
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 28,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1813,
+        "firstAtMs": 512,
+        "lastAtMs": 36592
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1813,
+        "firstAtMs": 512,
+        "lastAtMs": 36592
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1864,
+        "firstAtMs": 512,
+        "lastAtMs": 37744
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 29,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1879,
+        "firstAtMs": 512,
+        "lastAtMs": 38000
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1879,
+        "firstAtMs": 512,
+        "lastAtMs": 38000
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1927,
+        "firstAtMs": 512,
+        "lastAtMs": 38992
+      },
+      "paused": "false"
+    }
+  },
+  {
+    "cycle": 30,
+    "staticState": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1939,
+        "firstAtMs": 512,
+        "lastAtMs": 39200
+      },
+      "paused": "true"
+    },
+    "immediate": {
+      "loop": {
+        "pending": 0,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 1939,
+        "firstAtMs": 512,
+        "lastAtMs": 39200
+      },
+      "paused": "true"
+    },
+    "settled": {
+      "loop": {
+        "pending": 1,
+        "max": 1
+      },
+      "ticker": {
+        "liveScenes": 1,
+        "liveTimelines": 27,
+        "rootAnimations": 0,
+        "configuredCapHz": 60,
+        "activeListeners": 1,
+        "listenerUpdates": 1988,
+        "firstAtMs": 512,
+        "lastAtMs": 40320
+      },
+      "paused": "false"
+    }
+  }
+]

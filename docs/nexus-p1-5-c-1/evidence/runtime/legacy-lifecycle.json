@@ -1,0 +1,1054 @@
+{
+  "initial": {
+    "timers": {
+      "activeTimeouts": 0,
+      "activeIntervals": 3,
+      "pendingApplicationRaf": 1,
+      "timeoutsScheduled": 2,
+      "timeoutsFired": 1,
+      "intervalsScheduled": 3,
+      "intervalCallbacks": 2
+    },
+    "ticker": null,
+    "state": {
+      "state": "AMBIENT",
+      "level": "normal",
+      "paused": "false",
+      "clock": "1281",
+      "pulseDueIn": "148720",
+      "qualityAutomation": "candidate",
+      "qualityState": "normal",
+      "qualityTarget": "62.5",
+      "recalibration": "idle"
+    }
+  },
+  "phases": [
+    {
+      "kind": "voice",
+      "stage": "waiting",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 0,
+          "timeoutsScheduled": 3,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 123
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "true",
+          "clock": "1281",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 5,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 127
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "2049",
+          "pulseDueIn": "149232",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 1801,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 1801,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 61801,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 62288,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 487
+        }
+      ]
+    },
+    {
+      "kind": "voice",
+      "stage": "measuring",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 0,
+          "timeoutsScheduled": 7,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 248
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "true",
+          "clock": "2273",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 9,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 250
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "3073",
+          "pulseDueIn": "149200",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 1801,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 1801,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 61801,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 62288,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 487
+        },
+        {
+          "at": 63301,
+          "event": "requested",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "paused-voice",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123792,
+          "event": "applied",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 491
+        }
+      ]
+    },
+    {
+      "kind": "hidden",
+      "stage": "waiting",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 0,
+          "timeoutsScheduled": 10,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 371
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "true",
+          "clock": "3265",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 12,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 375
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "4097",
+          "pulseDueIn": "149168",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 1801,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 1801,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 61801,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 62288,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 487
+        },
+        {
+          "at": 63301,
+          "event": "requested",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "paused-voice",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123792,
+          "event": "applied",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 491
+        },
+        {
+          "at": 124801,
+          "event": "requested",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 124801,
+          "event": "paused-hidden",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 184801,
+          "event": "started",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 185296,
+          "event": "applied",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 495
+        }
+      ]
+    },
+    {
+      "kind": "hidden",
+      "stage": "measuring",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 0,
+          "timeoutsScheduled": 14,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 496
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "true",
+          "clock": "4241",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 16,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 498
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "5121",
+          "pulseDueIn": "149120",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 1801,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 1801,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 61801,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 62288,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 487
+        },
+        {
+          "at": 63301,
+          "event": "requested",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "paused-voice",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123792,
+          "event": "applied",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 491
+        },
+        {
+          "at": 124801,
+          "event": "requested",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 124801,
+          "event": "paused-hidden",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 184801,
+          "event": "started",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 185296,
+          "event": "applied",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 495
+        },
+        {
+          "at": 186301,
+          "event": "requested",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 186301,
+          "event": "started",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 186301,
+          "event": "paused-hidden",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 246301,
+          "event": "started",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 246784,
+          "event": "applied",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 483
+        }
+      ]
+    },
+    {
+      "kind": "reduced",
+      "stage": "waiting",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 0,
+          "timeoutsScheduled": 17,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 619
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "static",
+          "paused": "true",
+          "clock": "5233",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 19,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 623
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "6145",
+          "pulseDueIn": "149088",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 1801,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 1801,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 61801,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 62288,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 487
+        },
+        {
+          "at": 63301,
+          "event": "requested",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "paused-voice",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123792,
+          "event": "applied",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 491
+        },
+        {
+          "at": 124801,
+          "event": "requested",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 124801,
+          "event": "paused-hidden",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 184801,
+          "event": "started",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 185296,
+          "event": "applied",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 495
+        },
+        {
+          "at": 186301,
+          "event": "requested",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 186301,
+          "event": "started",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 186301,
+          "event": "paused-hidden",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 246301,
+          "event": "started",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 246784,
+          "event": "applied",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 483
+        },
+        {
+          "at": 247801,
+          "event": "requested",
+          "version": 5,
+          "firstRequestedAt": 247801,
+          "activeMs": 0
+        },
+        {
+          "at": 247801,
+          "event": "paused-reduced-motion",
+          "version": 5,
+          "firstRequestedAt": 247801,
+          "activeMs": 0
+        },
+        {
+          "at": 307801,
+          "event": "started",
+          "version": 5,
+          "firstRequestedAt": 247801,
+          "activeMs": 0
+        },
+        {
+          "at": 308288,
+          "event": "applied",
+          "version": 5,
+          "firstRequestedAt": 247801,
+          "activeMs": 487
+        }
+      ]
+    },
+    {
+      "kind": "reduced",
+      "stage": "measuring",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 0,
+          "timeoutsScheduled": 21,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 744
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "static",
+          "paused": "true",
+          "clock": "6225",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 23,
+          "timeoutsFired": 1,
+          "intervalsScheduled": 3,
+          "intervalCallbacks": 746
+        },
+        "ticker": null,
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "7169",
+          "pulseDueIn": "149056",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "62.5",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 1801,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 1801,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 61801,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 0
+        },
+        {
+          "at": 62288,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 1801,
+          "activeMs": 487
+        },
+        {
+          "at": 63301,
+          "event": "requested",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 63301,
+          "event": "paused-voice",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123301,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 0
+        },
+        {
+          "at": 123792,
+          "event": "applied",
+          "version": 2,
+          "firstRequestedAt": 63301,
+          "activeMs": 491
+        },
+        {
+          "at": 124801,
+          "event": "requested",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 124801,
+          "event": "paused-hidden",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 184801,
+          "event": "started",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 0
+        },
+        {
+          "at": 185296,
+          "event": "applied",
+          "version": 3,
+          "firstRequestedAt": 124801,
+          "activeMs": 495
+        },
+        {
+          "at": 186301,
+          "event": "requested",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 186301,
+          "event": "started",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 186301,
+          "event": "paused-hidden",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 246301,
+          "event": "started",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 0
+        },
+        {
+          "at": 246784,
+          "event": "applied",
+          "version": 4,
+          "firstRequestedAt": 186301,
+          "activeMs": 483
+        },
+        {
+          "at": 247801,
+          "event": "requested",
+          "version": 5,
+          "firstRequestedAt": 247801,
+          "activeMs": 0
+        },
+        {
+          "at": 247801,
+          "event": "paused-reduced-motion",
+          "version": 5,
+          "firstRequestedAt": 247801,
+          "activeMs": 0
+        },
+        {
+          "at": 307801,
+          "event": "started",
+          "version": 5,
+          "firstRequestedAt": 247801,
+          "activeMs": 0
+        },
+        {
+          "at": 308288,
+          "event": "applied",
+          "version": 5,
+          "firstRequestedAt": 247801,
+          "activeMs": 487
+        },
+        {
+          "at": 309301,
+          "event": "requested",
+          "version": 6,
+          "firstRequestedAt": 309301,
+          "activeMs": 0
+        },
+        {
+          "at": 309301,
+          "event": "started",
+          "version": 6,
+          "firstRequestedAt": 309301,
+          "activeMs": 0
+        },
+        {
+          "at": 309424,
+          "event": "paused-reduced-motion",
+          "version": 6,
+          "firstRequestedAt": 309301,
+          "activeMs": 123
+        },
+        {
+          "at": 369301,
+          "event": "started",
+          "version": 6,
+          "firstRequestedAt": 309301,
+          "activeMs": 123
+        },
+        {
+          "at": 369792,
+          "event": "applied",
+          "version": 6,
+          "firstRequestedAt": 309301,
+          "activeMs": 614
+        }
+      ]
+    }
+  ],
+  "switched": {
+    "timers": {
+      "activeTimeouts": 0,
+      "activeIntervals": 3,
+      "pendingApplicationRaf": 1,
+      "timeoutsScheduled": 26,
+      "timeoutsFired": 1,
+      "intervalsScheduled": 6,
+      "intervalCallbacks": 748
+    },
+    "ticker": {
+      "liveScenes": 1,
+      "liveTimelines": 27,
+      "rootAnimations": 0,
+      "configuredCapHz": 60,
+      "activeListeners": 1,
+      "listenerUpdates": 78,
+      "firstAtMs": 371392,
+      "lastAtMs": 372672
+    },
+    "state": {
+      "state": "AMBIENT",
+      "level": "normal",
+      "paused": "false",
+      "clock": "1280",
+      "pulseDueIn": "148720",
+      "qualityAutomation": "candidate",
+      "qualityState": "normal",
+      "qualityTarget": "60",
+      "recalibration": "idle"
+    }
+  },
+  "baseline": {
+    "timers": {
+      "activeTimeouts": 0,
+      "activeIntervals": 3,
+      "pendingApplicationRaf": 0,
+      "timeoutsScheduled": 28,
+      "timeoutsFired": 1,
+      "intervalsScheduled": 7,
+      "intervalCallbacks": 751
+    },
+    "ticker": {
+      "liveScenes": 1,
+      "liveTimelines": 27,
+      "rootAnimations": 0,
+      "configuredCapHz": 60,
+      "activeListeners": 0,
+      "listenerUpdates": 172,
+      "firstAtMs": 371392,
+      "lastAtMs": 374288
+    },
+    "state": {
+      "state": "AMBIENT",
+      "level": "static",
+      "paused": "true",
+      "clock": "1408",
+      "pulseDueIn": "150000",
+      "qualityAutomation": "baseline",
+      "qualityState": "normal",
+      "qualityTarget": "60",
+      "recalibration": "idle"
+    }
+  }
+}

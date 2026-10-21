@@ -1,0 +1,45 @@
+
+ RUN  v3.2.7 /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1
+
+ ❯ src/components/screen/motion/DeferredRecalibration.test.ts (15 tests | 1 failed) 21ms
+   ✓ deferred runtime recalibration > coalesces requests without extending first time/budget and consumes only after the tick 3ms
+   ✓ deferred runtime recalibration > reserves after 30 active seconds, with a finite deadline that repeated requests cannot reset 1ms
+   ✓ deferred runtime recalibration > has a finite deadline even when Director RAF stops unexpectedly 0ms
+   ✓ deferred runtime recalibration > pauses budget and cancels actual measurement on hidden, ignoring late completions 1ms
+   ✓ deferred runtime recalibration > pauses budget and cancels actual measurement on voice, ignoring late completions 1ms
+   ✓ deferred runtime recalibration > pauses budget and cancels actual measurement on reduced-motion, ignoring late completions 0ms
+   ✓ deferred runtime recalibration > discards an old version, measures the newest, and retains the original active budget 0ms
+   ✓ deferred runtime recalibration > waits for an existing probe and rechecks an environment change after queueing 0ms
+   ✓ deferred runtime recalibration > falls back on invalid/timeout results, unverified scene/clock and measurement exceptions 1ms
+   ✓ deferred runtime recalibration > cleans queued microtasks, deadline, measurement and stale results on dispose/engine switch 0ms
+   ✓ Director arbitration and evidence > INTRO reaches its natural end before measuring, with no draw reentry 2ms
+   ✓ Director arbitration and evidence > PULSE reaches its natural end before measuring, with no draw reentry 2ms
+   ✓ Director arbitration and evidence > blocks new cues after the active reservation without ending the current cue 2ms
+   × Director arbitration and evidence > waits for an actual Candidate probe, then clears target evidence and prevents overlap 5ms
+     → expected 'low' to be 'probe' // Object.is equality
+   ✓ Director arbitration and evidence > Baseline ignores recalibration requests and remains identical frame for frame 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/screen/motion/DeferredRecalibration.test.ts > Director arbitration and evidence > waits for an actual Candidate probe, then clears target evidence and prevents overlap
+AssertionError: expected 'low' to be 'probe' // Object.is equality
+
+Expected: "probe"
+Received: "low"
+
+ ❯ src/components/screen/motion/DeferredRecalibration.test.ts:105:84
+    103|   });
+    104|   it('waits for an actual Candidate probe, then clears target evidence…
+    105|     const r = directorRig(); r.run(14_000, 50); expect(r.d.qualityDeci…
+       |                                                                                    ^
+    106|     r.d.requestRecalibration(); await flush(); expect(r.completions.le…
+    107|     r.run(1500, 50); await flush(); expect(r.d.qualityDecision?.state)…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 passed (15)
+   Start at  06:05:32
+   Duration  330ms (transform 52ms, setup 0ms, collect 59ms, tests 21ms, environment 0ms, prepare 54ms)
+

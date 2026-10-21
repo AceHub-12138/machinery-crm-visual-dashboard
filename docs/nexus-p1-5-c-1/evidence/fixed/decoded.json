@@ -1,0 +1,218 @@
+[
+  {
+    "engine": "legacy",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "video": "legacy-1280-intro-pulse-resize.webm",
+    "contact": "legacy-1280-intro-pulse-resize-contact.png",
+    "media": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "24.520000"
+      }
+    },
+    "pulseCompletedAtSceneMs": 10010.099999999999,
+    "monotonicSceneClock": true,
+    "moduleCountsStable": true,
+    "modeRetained": true
+  },
+  {
+    "engine": "legacy",
+    "viewport": {
+      "width": 1792,
+      "height": 832
+    },
+    "video": "legacy-1792-intro-pulse-resize.webm",
+    "contact": "legacy-1792-intro-pulse-resize-contact.png",
+    "media": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "24.720000"
+      }
+    },
+    "pulseCompletedAtSceneMs": 10000.0,
+    "monotonicSceneClock": true,
+    "moduleCountsStable": true,
+    "modeRetained": true
+  },
+  {
+    "engine": "legacy",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "video": "legacy-1920-intro-pulse-resize.webm",
+    "contact": "legacy-1920-intro-pulse-resize-contact.png",
+    "media": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "24.760000"
+      }
+    },
+    "pulseCompletedAtSceneMs": 10000.899999999998,
+    "monotonicSceneClock": true,
+    "moduleCountsStable": true,
+    "modeRetained": true
+  },
+  {
+    "engine": "legacy",
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "video": "legacy-3840-intro-pulse-resize.webm",
+    "contact": "legacy-3840-intro-pulse-resize-contact.png",
+    "media": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "25.800000"
+      }
+    },
+    "pulseCompletedAtSceneMs": 10000.5,
+    "monotonicSceneClock": true,
+    "moduleCountsStable": true,
+    "modeRetained": true
+  },
+  {
+    "engine": "gsap",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "video": "gsap-1280-intro-pulse-resize.webm",
+    "contact": "gsap-1280-intro-pulse-resize-contact.png",
+    "media": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "24.480000"
+      }
+    },
+    "pulseCompletedAtSceneMs": 10000.10000000149,
+    "monotonicSceneClock": true,
+    "moduleCountsStable": true,
+    "modeRetained": true
+  },
+  {
+    "engine": "gsap",
+    "viewport": {
+      "width": 1792,
+      "height": 832
+    },
+    "video": "gsap-1792-intro-pulse-resize.webm",
+    "contact": "gsap-1792-intro-pulse-resize-contact.png",
+    "media": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "24.520000"
+      }
+    },
+    "pulseCompletedAtSceneMs": 10020.79999999702,
+    "monotonicSceneClock": true,
+    "moduleCountsStable": true,
+    "modeRetained": true
+  },
+  {
+    "engine": "gsap",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "video": "gsap-1920-intro-pulse-resize.webm",
+    "contact": "gsap-1920-intro-pulse-resize-contact.png",
+    "media": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "24.640000"
+      }
+    },
+    "pulseCompletedAtSceneMs": 10001.0,
+    "monotonicSceneClock": true,
+    "moduleCountsStable": true,
+    "modeRetained": true
+  },
+  {
+    "engine": "gsap",
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "video": "gsap-3840-intro-pulse-resize.webm",
+    "contact": "gsap-3840-intro-pulse-resize-contact.png",
+    "media": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "25.720000"
+      }
+    },
+    "pulseCompletedAtSceneMs": 10009.79999999702,
+    "monotonicSceneClock": true,
+    "moduleCountsStable": true,
+    "modeRetained": true
+  }
+]

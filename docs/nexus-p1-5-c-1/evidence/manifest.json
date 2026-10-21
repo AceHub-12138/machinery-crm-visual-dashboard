@@ -1,0 +1,881 @@
+{
+  "baseline": "b35b93c230fc6c084895a4119196779f505bf2fb",
+  "scope": "all delivered changed files except this manifest; runtime source and evidence hashes",
+  "files": [
+    {
+      "path": "docs/nexus-p1-5-c-1/HANDOFF.md",
+      "bytes": 10010,
+      "sha256": "5ae2229d19c56e8864fce4aaa90839af409338bf0f56d47ce29cd9782746e841"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/README.md",
+      "bytes": 6028,
+      "sha256": "81e4db7f575c6a0a7d207307182ec37cfa19ed5c425954a2bdc760f4d8357207"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-ambient-fixed.png",
+      "bytes": 1317169,
+      "sha256": "d35025bc84b2ae6116e678bbd388de5b57dbd8ab28701085f7024a2914e4ab41"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-ambient-original.png",
+      "bytes": 1317176,
+      "sha256": "0c4ef2e27e2a6b79d1d5cf6d6330796d462fe1b9b9d99ea72978002f03f2b059"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-completed-fixed.png",
+      "bytes": 1203261,
+      "sha256": "1acfa8ecaf53f74349b31efa2035d2c457c58a2b1ff2cd406e62dff8982da1ff"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-completed-original.png",
+      "bytes": 1203222,
+      "sha256": "158c7539854be61f20180ae0a499c5e226aed63d1f3702af40bb4f8a654ded06"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-intro-fixed.png",
+      "bytes": 1189944,
+      "sha256": "51468c06085494b6504036b82f3bd9b775136000300bb21edaeeedb2f845e9e1"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-intro-original.png",
+      "bytes": 1189944,
+      "sha256": "51468c06085494b6504036b82f3bd9b775136000300bb21edaeeedb2f845e9e1"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-pulse-fixed.png",
+      "bytes": 1323591,
+      "sha256": "0e9afdb141199afa97c8ff2276e859d39d6a105ef49cd7bc65c89b10cdb7a2d0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-pulse-original.png",
+      "bytes": 1323590,
+      "sha256": "b6f6f4bd794654990cffe64a117321c9d9a7310b7e41bcc84d5e9c719c645b29"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-resize-in-pulse-fixed.png",
+      "bytes": 1220749,
+      "sha256": "ea6e34e0eb752ea8a6cc7638d88bcacfaf5648dc67150f767811d6523d709749"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-resize-in-pulse-original.png",
+      "bytes": 1220757,
+      "sha256": "c14c6918139f79cc94f9983033ae01d7948b2bc2201a22b39abf78c91ec85680"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-states.json",
+      "bytes": 130780,
+      "sha256": "ddf1824217a22e03a12bf7b831c812658e2cc9fccfe7aadcc7901ec89af1272b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-ambient-fixed.png",
+      "bytes": 1317171,
+      "sha256": "927c3916304f3aa2e3edd3e8cf4b0dc506e900d3c56f4bb26b101048bab12bb8"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-ambient-original.png",
+      "bytes": 1317112,
+      "sha256": "5ccb48bc0527f4a57077d07bcdc350eebc690676522978e32d684031e3947669"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-completed-fixed.png",
+      "bytes": 1204091,
+      "sha256": "ea619fb1073835ed9b7c4d347a7ebca70a047f8882e8b9ce803f161ed5b490cf"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-completed-original.png",
+      "bytes": 1204117,
+      "sha256": "d79878162abb5dba908ac50d7a7ef2a5a6eed21b2dd446dd6751b798665caec0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-intro-fixed.png",
+      "bytes": 1195362,
+      "sha256": "8719b975ef1c67769a517a7c73eada28163e344cb50be3824e17ea8ecb02d994"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-intro-original.png",
+      "bytes": 1195362,
+      "sha256": "8719b975ef1c67769a517a7c73eada28163e344cb50be3824e17ea8ecb02d994"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-pulse-fixed.png",
+      "bytes": 1324641,
+      "sha256": "b2168898845d1724a8aafdd28a489214b396ae3404a8a2322eb1510249d34111"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-pulse-original.png",
+      "bytes": 1324641,
+      "sha256": "b7e5b8be4bd98976b9974f783745655311df0889bd3d4c1d6037a7465458e694"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-resize-in-pulse-fixed.png",
+      "bytes": 1221122,
+      "sha256": "283c0a63641276086cf7e153457fc5f0bc7d49de7f64ac84fb661aeba573b815"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-resize-in-pulse-original.png",
+      "bytes": 1221121,
+      "sha256": "e1f887ceb98952aeebed68b7a706ec7d0304e2d4143c5dc5849078aad6d41d44"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-states.json",
+      "bytes": 130812,
+      "sha256": "030f0e01b9b8074894c5ec34bb42d05b13eb01e2e55840f6584994cf3adffee6"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/pixels.json",
+      "bytes": 1869,
+      "sha256": "fa244e607834c21fcf724d6a47fcc52ee741b0f9bb692d3115f0cb72ff03afa6"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/report.json",
+      "bytes": 1077,
+      "sha256": "7b42b956a9273c2b55d894ca27861f324c54fbf019ac8e05280f9c4d6401f9c9"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-ambient-fixed.png",
+      "bytes": 1317181,
+      "sha256": "4d4884e0d5fdbc01649dd247d3bde61d30d6ebe94cf9b0e40fbde29d3c7019d6"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-ambient-original.png",
+      "bytes": 1317169,
+      "sha256": "d35025bc84b2ae6116e678bbd388de5b57dbd8ab28701085f7024a2914e4ab41"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-completed-fixed.png",
+      "bytes": 1203262,
+      "sha256": "06b1b4a36ffb331405e5fd18f7c5f97dc84a62fe70fc4337d6ad6bc46aeeb1fa"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-completed-original.png",
+      "bytes": 1203243,
+      "sha256": "ab2263286592ce711a3c32806ad317f37d56ea463a5ca405eafeac195855284e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-intro-fixed.png",
+      "bytes": 1189944,
+      "sha256": "51468c06085494b6504036b82f3bd9b775136000300bb21edaeeedb2f845e9e1"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-intro-original.png",
+      "bytes": 1189944,
+      "sha256": "51468c06085494b6504036b82f3bd9b775136000300bb21edaeeedb2f845e9e1"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-pulse-fixed.png",
+      "bytes": 1323591,
+      "sha256": "0e9afdb141199afa97c8ff2276e859d39d6a105ef49cd7bc65c89b10cdb7a2d0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-pulse-original.png",
+      "bytes": 1323591,
+      "sha256": "0e9afdb141199afa97c8ff2276e859d39d6a105ef49cd7bc65c89b10cdb7a2d0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-resize-in-pulse-fixed.png",
+      "bytes": 1220755,
+      "sha256": "122cc27c03e9da83ed0a2f71f90a5cc39c2e214e7161c3598e19b7ceeb74afd5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-resize-in-pulse-original.png",
+      "bytes": 1220755,
+      "sha256": "7f8d3f236c77eb45e3caf70bd7c22fa479368126ebb3b1eb8afe7a42b731baf6"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-states.json",
+      "bytes": 130780,
+      "sha256": "ddf1824217a22e03a12bf7b831c812658e2cc9fccfe7aadcc7901ec89af1272b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-ambient-fixed.png",
+      "bytes": 1317098,
+      "sha256": "1bc2220873343c492d0a20db9a59dae5cb3ce5e6fb9c25a859f30bddb2f8621c"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-ambient-original.png",
+      "bytes": 1317087,
+      "sha256": "e27f1b01228794ccc9f6e01b0f2923b20d05b7b652e0acdaa5b9af7115b2469b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-completed-fixed.png",
+      "bytes": 1204117,
+      "sha256": "d79878162abb5dba908ac50d7a7ef2a5a6eed21b2dd446dd6751b798665caec0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-completed-original.png",
+      "bytes": 1204091,
+      "sha256": "ea619fb1073835ed9b7c4d347a7ebca70a047f8882e8b9ce803f161ed5b490cf"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-intro-fixed.png",
+      "bytes": 1195362,
+      "sha256": "8719b975ef1c67769a517a7c73eada28163e344cb50be3824e17ea8ecb02d994"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-intro-original.png",
+      "bytes": 1195362,
+      "sha256": "8719b975ef1c67769a517a7c73eada28163e344cb50be3824e17ea8ecb02d994"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-pulse-fixed.png",
+      "bytes": 1324641,
+      "sha256": "b2168898845d1724a8aafdd28a489214b396ae3404a8a2322eb1510249d34111"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-pulse-original.png",
+      "bytes": 1324535,
+      "sha256": "5ab477379817ec9146155657eeeb371ac0f89802b64c3a2fbe42ad51ce89ed1f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-resize-in-pulse-fixed.png",
+      "bytes": 1221121,
+      "sha256": "25dcca468f7d41a672dc6e7f477ef162041c7e07b2526534e44aef1afd9149d7"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-resize-in-pulse-original.png",
+      "bytes": 1221119,
+      "sha256": "c31ae7c2b17b71bf2faee083d3b2797e23bacba84b816d8a0c17a9af0590cb75"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-states.json",
+      "bytes": 130812,
+      "sha256": "030f0e01b9b8074894c5ec34bb42d05b13eb01e2e55840f6584994cf3adffee6"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/pixels.json",
+      "bytes": 2091,
+      "sha256": "f4ff8a25accdfc69cb491f8af9ed10812177566cb873a2f714ee5d8390e5972e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/report.json",
+      "bytes": 1036,
+      "sha256": "321d9dcefd94fddbba7350217ec19146946ae38d7a53a68461656e159275c541"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/build.txt",
+      "bytes": 1027,
+      "sha256": "eaccc1a254393f708c8ed9d5cd3e8ef8f46b151bc9b2e8ace12f55037bf1809a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-INTRO-after.png",
+      "bytes": 1170270,
+      "sha256": "fd93cc376f6d2220fa6934688fb8685525fb2fc775e0995e55300f765a37b234"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-PULSE-after.png",
+      "bytes": 1170292,
+      "sha256": "0aeec7a0c60d0234104e907f7c2b1de4ca2034eeb62e007ee1108963bbde1d3e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-contact.png",
+      "bytes": 1598762,
+      "sha256": "a80884ac3815b87698369a73b1bf8340276b2368840e78e4e900fc7227693ac5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-intro-pulse-resize.webm",
+      "bytes": 2301182,
+      "sha256": "22bd7762df064a3d19055fff549514b42655472c9e880f532c9f2d1dbe5dcfff"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-INTRO-after.png",
+      "bytes": 1168953,
+      "sha256": "34589da804015acecb3f9c80c655707635239b197f9f77afc13dfd42058ae8c9"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-PULSE-after.png",
+      "bytes": 1173029,
+      "sha256": "34f14febe2ed3169e8b3720588c7f020e0b5ee034a1d39b58ee470f29a4764f5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-contact.png",
+      "bytes": 1623628,
+      "sha256": "9c9951b1911a85898575bc3409ca886df30375a0ca1da0f4c7c52f429be4b8fd"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-intro-pulse-resize.webm",
+      "bytes": 2345369,
+      "sha256": "731dd53d79f6acd05427340194478a7d228d38c2c22923338b6ad9de9952bebe"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/report.json",
+      "bytes": 201623,
+      "sha256": "72b553de235f75baef8cacf06f3497408447ed7a20c25fd4aeb9eb80c5351688"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/changed-files.txt",
+      "bytes": 11279,
+      "sha256": "38c9ebe0897eb97bbf0028195fb5dc316f411f8e65b1cce07441b1b550ca407b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/baseline-equivalence-css.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/baseline-equivalence.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/build.txt",
+      "bytes": 1029,
+      "sha256": "04880e9e5fb58429f29b47b826f7849b74c686f239dedfe834835ea4e9524601"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/current.json",
+      "bytes": 4275,
+      "sha256": "cefdeb5f188c1987951cba0742cb72146d095effaec9c9e44164a28db1d5d56a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/gsap-functional.json",
+      "bytes": 10586,
+      "sha256": "e35e8e3e0869f758e3eebda09c5fd0dd82d8a9967d84edf1da4924296d904530"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/gsap-functional.txt",
+      "bytes": 1446,
+      "sha256": "c7836a6209b0d1e882bd3e7ba3734e2f7db78e51c1f2ab5d09539a35ea127c8a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/gsap-regression.json",
+      "bytes": 67171,
+      "sha256": "e75bc77da60e11729f7755a8047d10d34f8756252d3611cc33001456b7d6f587"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/gsap-regression.txt",
+      "bytes": 5673,
+      "sha256": "8eb47260b17334969de6c301c879261d0ef41116525c6791d69dac2f3f73cd78"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/legacy-regression.json",
+      "bytes": 67174,
+      "sha256": "edf5a53f86d0e12215c2b6c27a2d76b669fd1670cda648b4be29b15ed5c0f411"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/legacy-regression.txt",
+      "bytes": 5673,
+      "sha256": "7c3cb443e7b72a6b8b0c9a3f3b76d52335c6ffd79200a8d4896a3040f1a79039"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/lint.txt",
+      "bytes": 559,
+      "sha256": "c26d5923492091e790147628f026c93dd9f5bc0a637172f7ccc29ab3354e9f46"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/native-and-probe.json",
+      "bytes": 6481,
+      "sha256": "1e899169e6459e8b506b95e9a8018dc54e536f2a11efa3a77af0c24bc728a9a3"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/native-and-probe.txt",
+      "bytes": 1048,
+      "sha256": "9e2b02d882ba31520bfd3ddd46783488017751e14581f1e4f150cf5355334dc4"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/permission-denied.json",
+      "bytes": 7312,
+      "sha256": "e277f2915bc41ae2e1ffbcd63364f31bacc48e870acfdb424e36a28954200a21"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/permission-denied.txt",
+      "bytes": 942,
+      "sha256": "0b68f76cce1325c1c28b4446d53154f10048ffec05100aa39b3353da05a164e7"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/quality-integration.json",
+      "bytes": 17907,
+      "sha256": "ae18c208da968b9bc6d9d791d41a57a6418a3a07b25a9767ee98605a0402fb94"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/quality-integration.txt",
+      "bytes": 1949,
+      "sha256": "3f6fb2851f27bd5287f8c6a76fa3a1ccca85c048092bd376453400c5ffa56dc5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/reference-unit.txt",
+      "bytes": 2921,
+      "sha256": "b7390a65339f9b23d4dc75b1be5d4bb7591461423e3ac851aa56a8a08fe6e775"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/runs.json",
+      "bytes": 3843,
+      "sha256": "e82e7020cdeed9692719d3b2bfd8b7525966038deaa549d57dc53a588e263d2c"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/runtime.json",
+      "bytes": 21202,
+      "sha256": "70a3aad37553d2970f86837b8ebbe4ef816d1306f1d646f860197d07691f0af8"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/runtime.txt",
+      "bytes": 2584,
+      "sha256": "2eb8617dc437dab7cbc08dadd115804f7f4207ccf2f7c52871fd2d44e4c07e85"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/safety-boundary.json",
+      "bytes": 31866,
+      "sha256": "9700b10c89a66b2acbee43b94370811be6f0ee99d2db539d6fe487a3b90f0ce5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/safety-boundary.txt",
+      "bytes": 4385,
+      "sha256": "3716d841ab1e9af33be25ca82b5fd7c1b85fac3f03925458f44417aee0f6945e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/typecheck.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/unit.txt",
+      "bytes": 3849,
+      "sha256": "7c64af040e36061107d95a0e1a9c78f095c475c885461162799a2b5a9d689a8b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/checks/visual.txt",
+      "bytes": 6212,
+      "sha256": "616ebe78f1b6054a7247f7ec717189d353f2d3f22f3e99dca3ac9f302773ac3f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/decoded.json",
+      "bytes": 4851,
+      "sha256": "07ef8a0fbbbd5b8862048d73a64488ec994c948ed081b4b14e0e48ba8954142e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1280-INTRO-after.png",
+      "bytes": 627743,
+      "sha256": "20c1ca3b61d1e1570d4ac3c2759b633e53086c5d377fc1efe0d5d785a9554baa"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1280-PULSE-after.png",
+      "bytes": 627828,
+      "sha256": "6859f010ee84531b9ee691965919dd69168dc5aaeb0e35078c09e447337bfe37"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1280-intro-pulse-resize-contact.png",
+      "bytes": 1513656,
+      "sha256": "155c1773c1beed18165ccc0ab58c3a1da8644859f0963e0c6ad8f1664ce40f86"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1280-intro-pulse-resize.webm",
+      "bytes": 2363068,
+      "sha256": "5fc37fe0aafc298e78d2ea8f44bf45dfdf7ebcd221ca50a25bdb695d528cba3a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1792-INTRO-after.png",
+      "bytes": 939063,
+      "sha256": "0dac7a295584221d97816d0608c3f4e3488862a3cedd6573de9537ee43d3933b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1792-PULSE-after.png",
+      "bytes": 939176,
+      "sha256": "9a16f854ca2eaecbffacf897698894276650863a2b4d0405c1ee1029f5cc3984"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1792-intro-pulse-resize-contact.png",
+      "bytes": 1488629,
+      "sha256": "b772c649d4288a0ea4a0f76257c1d0be47f6b8b11cbae424a1151e1f9470555b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1792-intro-pulse-resize.webm",
+      "bytes": 2332611,
+      "sha256": "5787aea76e75059a5cbed2208b5de077d955b3298074c6de18ccb92deef31988"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-INTRO-after.png",
+      "bytes": 1170877,
+      "sha256": "e9a4f107ba6d4864dbebaf5ac62ac1ce189482fb99467563f1e4536f4743e5eb"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-PULSE-after.png",
+      "bytes": 1169665,
+      "sha256": "5fcd6a5350ace35f04ebbff32fc23f447f946c6a0b1780f8e8cce513099277e0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-intro-pulse-resize-contact.png",
+      "bytes": 1527254,
+      "sha256": "9ced5cdbf6dff2449c1ab71a1dd7a3329ed9f27e6186d16ab44fb9b7d6440f82"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-intro-pulse-resize.webm",
+      "bytes": 2385814,
+      "sha256": "d8dcfba17686c9d50d47049fdd1dead8a40af2b14ac2c8252e93e5525bd976cf"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-INTRO-after.png",
+      "bytes": 3337461,
+      "sha256": "45f5145876033dee42e77082349a26c29cd7ccedba717207ae9b27dba36da20e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-PULSE-after.png",
+      "bytes": 3333016,
+      "sha256": "0822bb3de3f506563b57fb0454dc2e79090d2cd27fea6146aecdd26bdb4597d5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-intro-pulse-resize-contact.png",
+      "bytes": 1492650,
+      "sha256": "765224fa98858aa8658297ce2fc2647c91e0008e7da61edd9df927ce3204bb5b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-intro-pulse-resize.webm",
+      "bytes": 2631610,
+      "sha256": "61bd4c28f5fa5fc51f53a91f72acbb8e8e793fa83a893980c1469cdcbd957e21"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1280-INTRO-after.png",
+      "bytes": 627822,
+      "sha256": "61d77965b6eb17f93c97a76015c15cc228497dc2938ba19c296fea2f3a5f27bd"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1280-PULSE-after.png",
+      "bytes": 627818,
+      "sha256": "7da981c2342127f1e9be71ae535b4e11a5e8db96b13d9d0ac2473a3055f47ffc"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1280-intro-pulse-resize-contact.png",
+      "bytes": 1483188,
+      "sha256": "01378b9a628e48bfe69089f599d572dab89a3a78b3ddf7a25a7e13b2189b7248"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1280-intro-pulse-resize.webm",
+      "bytes": 2380579,
+      "sha256": "8d7da95b07d68f1c7de448936a9036fadb47db4fe473d2e7005ca2468954dc25"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1792-INTRO-after.png",
+      "bytes": 938656,
+      "sha256": "eb20a5a4e5a77e7f2ad3c8026a49cf2c8830eb97f1f4d2d4c4ecea8f123fbca7"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1792-PULSE-after.png",
+      "bytes": 938625,
+      "sha256": "6ddd01013c446ad250ebdce06fa34b22e111db172f17b3616e7b54e16fded485"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1792-intro-pulse-resize-contact.png",
+      "bytes": 1457395,
+      "sha256": "7034ba49ba7c6202b949e2ec7142b1564c3a40bd8b3929e4c8a8a5fcd6c5fe54"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1792-intro-pulse-resize.webm",
+      "bytes": 2394118,
+      "sha256": "630f546d1d233a2b620904d106bc8cf3ba38b187f4ebcee8d39a3655fcc56887"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-INTRO-after.png",
+      "bytes": 1170521,
+      "sha256": "c71a9788f7007bd816e4fa70c9546a8fe14e7654f55ae93d85bb377ed98defc9"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-PULSE-after.png",
+      "bytes": 1169606,
+      "sha256": "d153c7d452f92ddc6768f49b49e5a70a7105c569cc0b81cdec87e5005796967e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-intro-pulse-resize-contact.png",
+      "bytes": 1548205,
+      "sha256": "4b4bd4dbb4433ac010ba5016795eb5b918edce61daa03bcca9a93599f1a0c5ab"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-intro-pulse-resize.webm",
+      "bytes": 2497398,
+      "sha256": "2b3df73df797a5878deab17059a47539034d56ba606dffd2dcd862d27ce9cb0f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-INTRO-after.png",
+      "bytes": 3336977,
+      "sha256": "8ac0f72da9458ec2b9bcb119cad579ebfc63b289d5b79675ea10cb8b800876f5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-PULSE-after.png",
+      "bytes": 3339309,
+      "sha256": "7afa3adb47ad204e27217c169244ff91eafc39ea353dbcdc83c6681b3980be0d"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-intro-pulse-resize-contact.png",
+      "bytes": 1525355,
+      "sha256": "58e57abe32de3c1c1c6570c10992017a360582e9bbf954c2d85525b9d17d412e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-intro-pulse-resize.webm",
+      "bytes": 2624582,
+      "sha256": "17d3e28709372c3a538450e3dfc2378f90bb052dfd2d18d38ceaab57428a174e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/report.json",
+      "bytes": 2144858,
+      "sha256": "64c09a174042f19e4c439481054c79ad984d58a50a200907aa1e1dd7ee6afd19"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/baseline-equivalence-hidden-control.json",
+      "bytes": 618,
+      "sha256": "4871a441618002a798023aec947ee7fff603610d63993c07cac84bc2771e02eb"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/baseline-equivalence-hidden-control.txt",
+      "bytes": 470,
+      "sha256": "8d9843ad1855e9a9060f12c3fc606998cc620e9ea0c6f55e11b0e57b5bbc1315"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/baseline-equivalence-hidden-role.json",
+      "bytes": 621,
+      "sha256": "bd9a80d1a2ac74005ac7f53899837eff3ddeac186596588d8e18751865113649"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/baseline-equivalence-hidden-role.txt",
+      "bytes": 473,
+      "sha256": "c43d99eca620bbaed96e8f4ed04938c891dee2ad054faab1ba93c719f358fdce"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/partial-media/index.json",
+      "bytes": 311,
+      "sha256": "48a591d69a9bf726daed2a9abf2fb1b7511d38d32c87ae8982dcf89eaf47c5e7"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/partial-media/page@9428ea80f6e66c766b876595970ca37c.webm",
+      "bytes": 509651,
+      "sha256": "d10addfe46559f84783dcb8b71969ebb68dab6f9c395ce6657702a36951a12f1"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/runtime-before-closing-clock.json",
+      "bytes": 15770,
+      "sha256": "029327eeb1fbc238af35150b0e67929165c2b299d2c693db9c612e8f59d4fe5e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/runtime-before-closing-clock.txt",
+      "bytes": 6004,
+      "sha256": "7509123f8664867aca89e3a68c12b89b670b0864e31947cb8fc706673b5a8fe6"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/runtime-before-exit-fade-clock.json",
+      "bytes": 34178,
+      "sha256": "6fb1400e5229281b9883f1a2da79c2c61caa1f974ff2da1ca7474c02efa1830e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/runtime-before-exit-fade-clock.txt",
+      "bytes": 8177,
+      "sha256": "dc565d975e52b946412ac0447c0f902761fbe511f7db157f02e9391ec06a5766"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/runtime-before-media-wait-fix.json",
+      "bytes": 31890,
+      "sha256": "fb7e02971c9110ed1c414c24cadc02e151962f2555077cc8c67a58b809827c40"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/runtime-before-media-wait-fix.txt",
+      "bytes": 8334,
+      "sha256": "973cae521bad2415b799d4911a05a7b98e988acaac45d907fd00b20303287366"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/runtime-before-voice-control.json",
+      "bytes": 31580,
+      "sha256": "a27482b228db33984fb5d139b809ef1b51d849e2bc0cef45ec297451d355a930"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/runtime-before-voice-control.txt",
+      "bytes": 7453,
+      "sha256": "fbbdc11ed7e4e23be80e64bdc446f6ee6fad35ddb4e5e4ac50b9b9cdab6da34c"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/unit-probe-assumption.txt",
+      "bytes": 3268,
+      "sha256": "961934bdaf354604be6aeb4583611179f2059336641bb3e9d716afd960cf24d8"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/visual-before-controller-resize-delivery.json",
+      "bytes": 483770,
+      "sha256": "8d463ac9b6c0af56a23624290513aadcab0792fb328d76e09391297ec5542d91"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/visual-before-controller-resize-delivery.txt",
+      "bytes": 48630,
+      "sha256": "ea414a76d723499a5f3a75241c0f879b9fdbe55e17c74e9e04897092639d3004"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/product-inputs.json",
+      "bytes": 27233,
+      "sha256": "a0530e07b660c6c99cb7bf7d77d4d4c6e8e215cf7c9a40102742a88cd23b6531"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/review.diff",
+      "bytes": 72145,
+      "sha256": "93ad76a4ccc6ea0e5711d294cf06d50b959abca7ebc372ceb69210062228c029"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-1280-cues.json",
+      "bytes": 6281,
+      "sha256": "c8bcaf2ffcc38e49b0ca4f5c91fb5746c72b9215950cb06310036a70d261d066"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-1792-cues.json",
+      "bytes": 6307,
+      "sha256": "9eb1cb2a7ceddbff0f2f20340e5490eeae5f61129369d4339a40a62c5ee6e599"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-1920-cues.json",
+      "bytes": 6275,
+      "sha256": "cb8eb5ed92f93f2e246629393f12190ca144ef18ddbf74b29c594c3da03f82ae"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-3840-cues.json",
+      "bytes": 6281,
+      "sha256": "4085e45d06bc3e4ac1403c534a873280d0640747e90e24a3fa4f46a492134619"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-actual-voice.json",
+      "bytes": 6567,
+      "sha256": "8fe5030ddbf9661fccddccfc414cd6def8adbf1d9ebac92c6c4a8b5d6a45f63c"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-baseline.json",
+      "bytes": 682,
+      "sha256": "24dadc85b244328dfe6ca80dd3d6cf09a18fd82530415fda8037b0439e04087f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-lifecycle.json",
+      "bytes": 28227,
+      "sha256": "7a0a249e5d9f7ed8f2236a09b49b07714ccf95d8a489e0649efad7dce8b712e4"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-probe-arbitration.json",
+      "bytes": 33940,
+      "sha256": "14aabda1a4e700f7ef6cb97af72718f82d59137a70dec9944fdbb804bb1c6416"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-reduced-resume-30.json",
+      "bytes": 33931,
+      "sha256": "84a1448f89abfc18dc2669e367c63732825dc3127a436f8af65e7e8e218a3103"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-storm.json",
+      "bytes": 5405,
+      "sha256": "b9df8d6f9f241003b679cb9d78ea141d8337d40d0dbd4f23757fc50d337158f5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/gsap-versions-timeout.json",
+      "bytes": 2828,
+      "sha256": "6a957938505df661c61f55da27be71338fff57c8d9f2acbbb0e7eac44330433e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-1280-cues.json",
+      "bytes": 5361,
+      "sha256": "ce22ade9cd7483f5b511f817e680d09e76b5e6cdf1e0e9fd7d9b1a2e970fdbb3"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-1792-cues.json",
+      "bytes": 5387,
+      "sha256": "a9a5bc805ea3326bd99edfe033c4e01008ab2da663a2fbaee85b38fd19e4d101"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-1920-cues.json",
+      "bytes": 5355,
+      "sha256": "94a20718fe15133a7868b9d1310610cadeb50f71b8b8a291715d646efb2ffe81"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-3840-cues.json",
+      "bytes": 5361,
+      "sha256": "97169d2a58579dcf09c72a59361711fc7c17920fff78c74574800ff38bbf85b8"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-actual-voice.json",
+      "bytes": 5361,
+      "sha256": "f03cc057d9528caf35bfdf4fcd43e62b2d8253b083a205c49e4377d31ef70544"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-baseline.json",
+      "bytes": 487,
+      "sha256": "9dc45e971d7ee811f37f765ead97129335769756caa38505ac060169de9abe1c"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-lifecycle.json",
+      "bytes": 25452,
+      "sha256": "8512312c727afc98fbb24759737a037a541d18881b15aef371997b46b7d13187"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-probe-arbitration.json",
+      "bytes": 28378,
+      "sha256": "9bd09c8ecc7e4af0baf402c4b14959212f78450f202cc759cba42bccbc332de4"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-storm.json",
+      "bytes": 5191,
+      "sha256": "c30c4027c335a658f791d39064baeb16ca7a05f837458e230e21b3459734c5dc"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/runtime/legacy-versions-timeout.json",
+      "bytes": 2616,
+      "sha256": "4118d77020f34c05bca6f62783cbaa9da6ef66c9d044a77d712a251747cf76f5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/source-invariants.json",
+      "bytes": 812,
+      "sha256": "ece0ceb836703f78d01a533e1de9a9106699a8b7e24e2cbdf1536bea82c83e79"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/summary.json",
+      "bytes": 2708,
+      "sha256": "3776e731a5bf07d2c5110036c8033ad70bb75c10286ebde573f237a31e9009d8"
+    },
+    {
+      "path": "e2e/p1-5-c-1.config.ts",
+      "bytes": 495,
+      "sha256": "cd65e839b47aa0fd7966533f7285b62a793d1a3590c1e882ec73e840a28ec7cf"
+    },
+    {
+      "path": "e2e/p1-5-c-1.spec.ts",
+      "bytes": 14692,
+      "sha256": "22ceea3eaaf62f534f236cd5f193d6ee65f6d2ef5225d0adfe4d261d9af6426e"
+    },
+    {
+      "path": "scripts/p1-5-c-1/baseline-equivalence.mjs",
+      "bytes": 5676,
+      "sha256": "3f07e102878cb117192745289f3bc89e59d0a16e854f81c7b72c76b5e48f6523"
+    },
+    {
+      "path": "scripts/p1-5-c-1/capture.mjs",
+      "bytes": 9487,
+      "sha256": "ca766bd466d0f298c3724bb96cddaaca829fd19a64196673bb90cc7b08077316"
+    },
+    {
+      "path": "scripts/p1-5-c-1/source-invariants.py",
+      "bytes": 3020,
+      "sha256": "26b4bd3050ed9ff4307006f42f8c4747588cc8bebb09d693cee9cf9ed0558a67"
+    },
+    {
+      "path": "scripts/p1-5-c-1/validate.py",
+      "bytes": 3549,
+      "sha256": "a5840f0181ee6270361781e64a6a232160c3b92ca516150d58e4599572f0014f"
+    },
+    {
+      "path": "src/components/screen/motion/DeferredRecalibration.test.ts",
+      "bytes": 10474,
+      "sha256": "fc9ed536cf2745655d3fd13f9ba7ac775bc6879a9fe352ff294b3e7c93439a42"
+    },
+    {
+      "path": "src/components/screen/motion/DeferredRecalibration.ts",
+      "bytes": 6527,
+      "sha256": "ff9d4e17997572ba59735598848af29a5ee7227123856a51f3fd37328282e0bf"
+    },
+    {
+      "path": "src/components/screen/motion/MotionDirector.ts",
+      "bytes": 15000,
+      "sha256": "214a5b500bdec4cb30f549c30ab57dc1a9dc00c307f00a06e99a72124d8adc90"
+    },
+    {
+      "path": "src/components/screen/motion/MotionProvider.tsx",
+      "bytes": 8008,
+      "sha256": "514a5bf042042ee65e0093d1ae32c4d683ec6ddb63716f242f4e0b84d99e5fdd"
+    },
+    {
+      "path": "src/components/screen/motion/QualityPolicy.test.ts",
+      "bytes": 8511,
+      "sha256": "9470e4e4b68cf31e933923088f5e6ce79d3fae3069aa3d4ef4d915481a0270b3"
+    },
+    {
+      "path": "src/components/screen/motion/QualityPolicy.ts",
+      "bytes": 6516,
+      "sha256": "677c616f48bd3395fe191a448f93d8251270bda8ac4538415c30958790373dc1"
+    }
+  ]
+}

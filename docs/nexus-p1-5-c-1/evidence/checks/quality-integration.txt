@@ -1,0 +1,29 @@
+[WebServer] (node:61031) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:61032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 15 tests using 1 worker
+
+(node:61034) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/15] e2e/p1-5-c-lifecycle.spec.ts:3:1 › GSAP reduced-motion resume: immediate scheduling window versus real progress across 30 cycles
+[2/15] e2e/p1-5-c.spec.ts:8:76 › server permission resolves candidate
+[3/15] e2e/p1-5-c.spec.ts:8:76 › server permission resolves shadow
+[4/15] e2e/p1-5-c.spec.ts:8:76 › server permission resolves external
+[5/15] e2e/p1-5-c.spec.ts:8:76 › server permission resolves invalid
+[6/15] e2e/p1-5-c.spec.ts:8:76 › server permission resolves default
+[7/15] e2e/p1-5-c.spec.ts:16:82 › legacy candidate lifecycle and quality rollback
+[8/15] e2e/p1-5-c.spec.ts:16:82 › legacy shadow lifecycle and quality rollback
+[9/15] e2e/p1-5-c.spec.ts:16:82 › gsap candidate lifecycle and quality rollback
+[10/15] e2e/p1-5-c.spec.ts:16:82 › gsap shadow lifecycle and quality rollback
+[11/15] e2e/p1-5-c.spec.ts:41:1 › rapid engine and mode switches dispose old GSAP hosts/scenes
+[12/15] e2e/p1-5-c.spec.ts:56:39 › legacy Candidate respects actual voice overlay waking, speaking and exit
+[13/15] e2e/p1-5-c.spec.ts:56:39 › gsap Candidate respects actual voice overlay waking, speaking and exit
+[14/15] e2e/p1-5-c.spec.ts:76:39 › legacy frequent short voice takeovers do not starve a due full-load probe
+[15/15] e2e/p1-5-c.spec.ts:76:39 › gsap frequent short voice takeovers do not starve a due full-load probe
+  15 passed (1.6m)

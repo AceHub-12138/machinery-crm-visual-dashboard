@@ -1,0 +1,22 @@
+[WebServer] (node:61211) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:61212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 8 tests using 1 worker
+
+(node:61213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/8] e2e/gsap-poc.spec.ts:15:1 › GSAP interruption, restart, visibility, reduced motion, single RAF and client engine switching
+[2/8] e2e/gsap-poc.spec.ts:61:35 › stationary geometry and pixels compare at 1920
+[3/8] e2e/gsap-poc.spec.ts:61:35 › stationary geometry and pixels compare at 3840
+[4/8] e2e/gsap-poc.spec.ts:79:1 › GSAP twelve complete virtual resonance cycles and snapshot refreshes remain bounded
+[5/8] e2e/gsap-poc.spec.ts:94:76 › controlled visual legacy 1920: normal-level intro and pulse checkpoints
+[6/8] e2e/gsap-poc.spec.ts:94:76 › controlled visual gsap 1920: normal-level intro and pulse checkpoints
+[7/8] e2e/gsap-poc.spec.ts:94:76 › controlled visual legacy 3840: normal-level intro and pulse checkpoints
+[8/8] e2e/gsap-poc.spec.ts:94:76 › controlled visual gsap 3840: normal-level intro and pulse checkpoints
+  8 passed (1.6m)

@@ -1,0 +1,32 @@
+[WebServer] (node:59749) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:59750) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 18 tests using 1 worker
+
+(node:59751) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/18] e2e/p1-5-c-1.spec.ts:27:49 › legacy 1280: fit is immediate while INTRO/PULSE reach natural ends
+[2/18] e2e/p1-5-c-1.spec.ts:27:49 › legacy 1792: fit is immediate while INTRO/PULSE reach natural ends
+[3/18] e2e/p1-5-c-1.spec.ts:27:49 › legacy 1920: fit is immediate while INTRO/PULSE reach natural ends
+[4/18] e2e/p1-5-c-1.spec.ts:27:49 › legacy 3840: fit is immediate while INTRO/PULSE reach natural ends
+[5/18] e2e/p1-5-c-1.spec.ts:53:3 › legacy: resize storm reserves the first active budget without indefinite delay
+[6/18] e2e/p1-5-c-1.spec.ts:65:3 › legacy: waiting/measurement takeover, recovery, teardown and engine switch release resources
+[7/18] e2e/p1-5-c-1.spec.ts:95:3 › legacy: default Baseline ignores every recalibration trigger
+[8/18] e2e/p1-5-c-1.spec.ts:102:3 › legacy: new version during measurement wins and a stalled finite measurement falls back
+[9/18] e2e/p1-5-c-1.spec.ts:114:3 › legacy: real voice overlay takes priority while waiting and measuring
+[10/18] e2e/p1-5-c-1.spec.ts:27:49 › gsap 1280: fit is immediate while INTRO/PULSE reach natural ends
+[11/18] e2e/p1-5-c-1.spec.ts:27:49 › gsap 1792: fit is immediate while INTRO/PULSE reach natural ends
+[12/18] e2e/p1-5-c-1.spec.ts:27:49 › gsap 1920: fit is immediate while INTRO/PULSE reach natural ends
+[13/18] e2e/p1-5-c-1.spec.ts:27:49 › gsap 3840: fit is immediate while INTRO/PULSE reach natural ends
+[14/18] e2e/p1-5-c-1.spec.ts:53:3 › gsap: resize storm reserves the first active budget without indefinite delay
+[15/18] e2e/p1-5-c-1.spec.ts:65:3 › gsap: waiting/measurement takeover, recovery, teardown and engine switch release resources
+[16/18] e2e/p1-5-c-1.spec.ts:95:3 › gsap: default Baseline ignores every recalibration trigger
+[17/18] e2e/p1-5-c-1.spec.ts:102:3 › gsap: new version during measurement wins and a stalled finite measurement falls back
+[18/18] e2e/p1-5-c-1.spec.ts:114:3 › gsap: real voice overlay takes priority while waiting and measuring
+  18 passed (2.1m)

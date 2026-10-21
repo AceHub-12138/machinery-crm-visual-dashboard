@@ -1,0 +1,58 @@
+{
+  "baseline": "b35b93c230fc6c084895a4119196779f505bf2fb",
+  "originalBuild": "_Q7HstrffpTf90ptrXJma",
+  "fixedBuild": "jnd-N6QqrV0JPxo-ldtcQ",
+  "pairs": [
+    {
+      "engine": "legacy",
+      "label": "intro",
+      "match": true
+    },
+    {
+      "engine": "legacy",
+      "label": "ambient",
+      "match": true
+    },
+    {
+      "engine": "legacy",
+      "label": "pulse",
+      "match": true
+    },
+    {
+      "engine": "legacy",
+      "label": "resize-in-pulse",
+      "match": true
+    },
+    {
+      "engine": "legacy",
+      "label": "completed",
+      "match": true
+    },
+    {
+      "engine": "gsap",
+      "label": "intro",
+      "match": true
+    },
+    {
+      "engine": "gsap",
+      "label": "ambient",
+      "match": true
+    },
+    {
+      "engine": "gsap",
+      "label": "pulse",
+      "match": true
+    },
+    {
+      "engine": "gsap",
+      "label": "resize-in-pulse",
+      "match": true
+    },
+    {
+      "engine": "gsap",
+      "label": "completed",
+      "match": true
+    }
+  ],
+  "status": "passed"
+}

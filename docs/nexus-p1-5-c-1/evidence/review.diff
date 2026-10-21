@@ -1,0 +1,909 @@
+diff --git a/e2e/p1-5-c-1.config.ts b/e2e/p1-5-c-1.config.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..50a7bede2a53505bbc4d06121266cf7bfeaeb5ee
+--- /dev/null
++++ b/e2e/p1-5-c-1.config.ts
+@@ -0,0 +1,9 @@
++import { defineConfig } from '@playwright/test';
++import base from './nexus.config';
++import path from 'node:path';
++const label = process.env.C1_E2E_LABEL ?? 'runtime';
++export default defineConfig({ ...base, testMatch: 'p1-5-c-1.spec.ts', timeout: 120_000,
++  outputDir: path.resolve(`.review/p1-5-c-1/${label}-traces`),
++  reporter: [['line'], ['json', { outputFile: path.resolve(`docs/nexus-p1-5-c-1/evidence/checks/${label}.json`) }]],
++  use: { ...base.use, reducedMotion: 'no-preference' },
++});
+diff --git a/e2e/p1-5-c-1.spec.ts b/e2e/p1-5-c-1.spec.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..ac4ccf8ea67b39cfee9e64a31ccca8aebe3dfbb2
+--- /dev/null
++++ b/e2e/p1-5-c-1.spec.ts
+@@ -0,0 +1,160 @@
++import { test, expect, type Page } from '@playwright/test';
++import { mkdirSync, writeFileSync } from 'node:fs';
++import { installProbe } from '../scripts/p1-5-c/instrumentation.mjs';
++import { startVoiceHub, type VoiceHubServer } from '../services/voice-orchestrator/src/ws/ws-server';
++import { VOICE_TIMING } from '../src/lib/voice/session-machine';
++let hub: VoiceHubServer;
++test.beforeAll(async () => { hub = await startVoiceHub({ host: '127.0.0.1', port: 0, onMessage: (connection, raw) => { if (JSON.parse(raw).type === 'console.hello') connection.role = 'screen'; } }); });
++test.afterAll(async () => { await hub.close(); });
++const dir = 'docs/nexus-p1-5-c-1/evidence/runtime';
++type RecordEntry = { at: number; event: string; version: number; firstRequestedAt: number; activeMs: number };
++const debug = (page: Page) => page.locator('.nexus-motion-debug');
++const records = async (page: Page) => JSON.parse((await page.locator('[data-recalibration-log]').textContent())!) as RecordEntry[];
++async function open(page: Page, engine: string, mode = 'candidate', extra = '', layout = '16x9') {
++  await page.clock.install(); await page.clock.pauseAt(new Date());
++  await page.addInitScript(installProbe, null);
++  await page.goto(`/screen/sales?debug=1&motion=${engine}&qualityExperiment=${mode}&layout=${layout}&fit=1${extra}`);
++  await page.clock.runFor(1800); await expect(debug(page)).toHaveAttribute('data-quality-automation', mode);
++  await expect(debug(page)).toHaveAttribute('data-paused', 'false');
++}
++async function request(page: Page) { await page.evaluate(() => window.dispatchEvent(new Event('nexus-quality-recalibrate'))); }
++async function audit(page: Page) {
++  return page.evaluate(() => ({ timers: (window as unknown as { __p15cProbe: { timerAudit: () => unknown } }).__p15cProbe.timerAudit(),
++    ticker: JSON.parse(document.querySelector('[data-gsap-audit]')!.textContent!), state: { ...((document.querySelector('.nexus-motion-debug') as HTMLElement).dataset) } }));
++}
++function save(name: string, value: unknown) { mkdirSync(dir, { recursive: true }); writeFileSync(`${dir}/${name}.json`, JSON.stringify(value, null, 2)); }
++for (const engine of ['legacy', 'gsap']) {
++  for (const width of [1280, 1792, 1920, 3840]) test(`${engine} ${width}: fit is immediate while INTRO/PULSE reach natural ends`, async ({ page }) => {
++    const height = width === 1792 ? 832 : Math.round(width * 9 / 16), layout = width === 1792 ? 'led-1792x832' : '16x9';
++    await page.setViewportSize({ width, height }); await open(page, engine, 'candidate', '', layout);
++    const evidence = [];
++    for (const cue of ['INTRO', 'PULSE']) {
++      await page.getByRole('button', { name: cue === 'INTRO' ? '重启入场' : '触发共振', exact: true }).click();
++      await page.clock.runFor(350); const before = await audit(page);
++      const nextWidth = width - 96, nextHeight = Math.round(nextWidth * height / width);
++      await page.setViewportSize({ width: nextWidth, height: nextHeight });
++      // Deliver orientation and resize before another animation frame to check synchronous layout.
++      const immediate = await page.evaluate(() => {
++        window.dispatchEvent(new Event('resize')); screen.orientation.dispatchEvent(new Event('change'));
++        const s = document.querySelector('#screen-stage') as HTMLElement;
++        return { width: s.getBoundingClientRect().width, height: s.getBoundingClientRect().height, transform: s.style.transform,
++          state: document.querySelector('.nexus-motion-debug')?.getAttribute('data-state') };
++      });
++      expect(immediate.width).toBeCloseTo(Math.min(nextWidth, nextHeight * width / height), 0); expect(immediate.state).toBe(cue);
++      await expect(debug(page)).toHaveAttribute('data-paused', 'false');
++      await page.clock.runFor(cue === 'INTRO' ? 1300 : 9000); await expect(debug(page)).toHaveAttribute('data-state', cue);
++      await page.clock.runFor(2000); await expect(debug(page)).toHaveAttribute('data-recalibration', 'idle');
++      await expect(debug(page)).toHaveAttribute('data-quality-automation', 'candidate');
++      const log = await records(page); expect(log.at(-1)?.event).toBe('applied');
++      evidence.push({ cue, before, immediate, after: await audit(page), records: log });
++      await page.setViewportSize({ width, height }); await page.clock.runFor(1400);
++    }
++    save(`${engine}-${width}-cues`, evidence);
++  });
++  test(`${engine}: resize storm reserves the first active budget without indefinite delay`, async ({ page }) => {
++    await open(page, engine); await page.getByRole('button', { name: '重启入场', exact: true }).click(); await request(page);
++    for (let i = 0; i < 31; i++) {
++      await page.clock.runFor(1000); await request(page); await page.getByRole('button', { name: '重启入场', exact: true }).click();
++    }
++    await page.clock.runFor(4000); const log = await records(page);
++    const applied = log.filter(r => r.event === 'applied'); expect(applied.length).toBeGreaterThan(0);
++    expect(applied[0].activeMs).toBeGreaterThanOrEqual(30_000); expect(applied[0].activeMs).toBeLessThan(45_000);
++    const first = log.find(r => r.event === 'requested')!;
++    expect(log.filter(r => r.event === 'requested' && r.at <= applied[0].at).every(r => r.firstRequestedAt === first.firstRequestedAt)).toBe(true);
++    expect(log.filter(r => r.event.startsWith('fallback'))).toEqual([]); save(`${engine}-storm`, { log, after: await audit(page) });
++  });
++  test(`${engine}: waiting/measurement takeover, recovery, teardown and engine switch release resources`, async ({ page }) => {
++    await open(page, engine); const initial = await audit(page), phases = [];
++    for (const kind of ['voice', 'hidden', 'reduced']) for (const stage of ['waiting', 'measuring']) {
++      if (stage === 'waiting') await page.getByRole('button', { name: '重启入场', exact: true }).click();
++      await request(page); await expect(debug(page)).toHaveAttribute('data-recalibration', stage);
++      if (kind === 'voice') await page.evaluate(() => window.dispatchEvent(new CustomEvent('nexus-debug-voice', { detail: true })));
++      if (kind === 'hidden') await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: true }); document.dispatchEvent(new Event('visibilitychange')); });
++      if (kind === 'reduced') await page.emulateMedia({ reducedMotion: 'reduce' });
++      await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(60_000);
++      const paused = await audit(page); expect(paused.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 0 });
++      if (engine === 'gsap') expect(paused.ticker.activeListeners).toBe(0);
++      if (kind === 'voice') await page.evaluate(() => window.dispatchEvent(new CustomEvent('nexus-debug-voice', { detail: false })));
++      if (kind === 'hidden') await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')); });
++      if (kind === 'reduced') await page.emulateMedia({ reducedMotion: 'no-preference' });
++      // Media change dispatch is asynchronous; start the measured second after it arrives.
++      await expect(debug(page)).toHaveAttribute('data-recalibration', 'measuring');
++      await page.clock.runFor(1500); await expect(debug(page)).toHaveAttribute('data-recalibration', 'idle');
++      const resumed = await audit(page); expect(resumed.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 1 });
++      if (engine === 'gsap') expect(resumed.ticker).toMatchObject({ activeListeners: 1, liveScenes: 1, rootAnimations: 0 });
++      phases.push({ kind, stage, paused, resumed, log: await records(page) });
++    }
++    await request(page); await expect(debug(page)).toHaveAttribute('data-recalibration', 'measuring');
++    await page.getByRole('link', { name: engine === 'legacy' ? '切换 GSAP' : '切换 Legacy', exact: true }).click();
++    await page.clock.runFor(2000); const switched = await audit(page); expect(switched.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 1 });
++    await request(page); await page.getByRole('link', { name: '回到 Baseline', exact: true }).click();
++    await page.clock.runFor(1500); await expect(debug(page)).toHaveAttribute('data-quality-automation', 'baseline');
++    await page.emulateMedia({ reducedMotion: 'reduce' }); await expect(debug(page)).toHaveAttribute('data-paused', 'true');
++    expect((await audit(page)).timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 0 });
++    save(`${engine}-lifecycle`, { initial, phases, switched, baseline: await audit(page) });
++  });
++  test(`${engine}: default Baseline ignores every recalibration trigger`, async ({ page }) => {
++    await open(page, engine, 'baseline'); await page.getByRole('button', { name: '重启入场', exact: true }).click();
++    await page.evaluate(() => { for (let i = 0; i < 100; i++) window.dispatchEvent(new Event('resize')); screen.orientation.dispatchEvent(new Event('change')); window.dispatchEvent(new Event('nexus-quality-recalibrate')); });
++    await page.clock.runFor(1200); await expect(debug(page)).toHaveAttribute('data-state', 'INTRO'); expect(await records(page)).toEqual([]);
++    expect((await audit(page)).timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 1 });
++    save(`${engine}-baseline`, await audit(page));
++  });
++  test(`${engine}: new version during measurement wins and a stalled finite measurement falls back`, async ({ page }) => {
++    await open(page, engine); await request(page); await expect(debug(page)).toHaveAttribute('data-recalibration', 'measuring');
++    await page.clock.runFor(160); await request(page); await page.clock.runFor(1500);
++    const log = await records(page); expect(log.some(r => r.event === 'discarded-stale-version')).toBe(true);
++    expect(log.filter(r => r.event === 'applied').map(r => r.version)).toEqual([2]);
++    await request(page); await expect(debug(page)).toHaveAttribute('data-recalibration', 'measuring');
++    // Advance the finite deadline while delivering at most one RAF, as a throttled browser would.
++    await page.clock.fastForward(3100); await expect(debug(page)).toHaveAttribute('data-quality-automation', 'baseline');
++    expect((await records(page)).some(r => r.event === 'fallback-invalid-or-timed-out-measurement')).toBe(true);
++    await request(page); await page.clock.runFor(1000); expect((await audit(page)).timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 1 });
++    save(`${engine}-versions-timeout`, { log, finalLog: await records(page), after: await audit(page) });
++  });
++  test(`${engine}: real voice overlay takes priority while waiting and measuring`, async ({ page }) => {
++    await open(page, engine, 'candidate', `&voiceLive=1&lite=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
++    await expect.poll(() => hub.counts().screens).toBe(1); const evidence = [];
++    // Establish the voice-only footprint: JarvisCore owns its own visible overlay RAF.
++    hub.broadcast({ type: 'session.start', at: Date.now(), sessionId: 'c1-voice-control' });
++    hub.broadcast({ type: 'state.change', at: Date.now(), from: 'waking', to: 'listening', turn: 0 });
++    await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(4000);
++    const control = await audit(page);
++    await page.keyboard.press('Escape'); await page.clock.runFor(VOICE_TIMING.closingMs); await expect(page.locator('.overlay-root')).toHaveAttribute('data-phase', 'exit');
++    await page.clock.runFor(600); await expect(debug(page)).toHaveAttribute('data-paused', 'false'); await page.clock.runFor(1500);
++    for (const stage of ['waiting', 'measuring']) {
++      if (stage === 'waiting') await page.getByRole('button', { name: '重启入场', exact: true }).click();
++      await request(page); await expect(debug(page)).toHaveAttribute('data-recalibration', stage);
++      hub.broadcast({ type: 'session.start', at: Date.now(), sessionId: `c1-${stage}` });
++      hub.broadcast({ type: 'state.change', at: Date.now(), from: 'waking', to: 'listening', turn: 0 });
++      await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(4000);
++      const paused = await audit(page); expect(paused.timers).toMatchObject({ activeTimeouts: 0 });
++      expect(paused.timers).toMatchObject({ pendingApplicationRaf: (control.timers as { pendingApplicationRaf: number }).pendingApplicationRaf });
++      await expect(debug(page)).toHaveAttribute('data-recalibration', 'paused');
++      if (engine === 'gsap') expect(paused.ticker.activeListeners).toBe(0);
++      await page.keyboard.press('Escape'); await page.clock.runFor(VOICE_TIMING.closingMs); await expect(page.locator('.overlay-root')).toHaveAttribute('data-phase', 'exit');
++      await page.clock.runFor(600); await expect(debug(page)).toHaveAttribute('data-recalibration', 'measuring');
++      await page.clock.runFor(1500); await expect(debug(page)).toHaveAttribute('data-recalibration', 'idle');
++      evidence.push({ stage, paused, resumed: await audit(page), log: await records(page) });
++    }
++    save(`${engine}-actual-voice`, { control, evidence });
++  });
++  test(`${engine}: an active Candidate probe completes before runtime recalibration takes control`, async ({ page }) => {
++    await open(page, engine);
++    // Throttled delivery provides real policy samples; no debug quality or private state writes.
++    for (let i = 0; i < 30 && await debug(page).getAttribute('data-quality-state') !== 'probe'; i++) await page.clock.fastForward(1100);
++    await expect(debug(page)).toHaveAttribute('data-quality-state', 'probe'); await request(page);
++    await expect(debug(page)).toHaveAttribute('data-recalibration', 'waiting');
++    await expect(debug(page)).toHaveAttribute('data-paused', 'false'); const timeline = [];
++    for (let i = 0; i < 24; i++) {
++      await page.clock.runFor(250); const sample = await audit(page); timeline.push(sample);
++      expect(sample.state.qualityState === 'probe' && sample.state.recalibration === 'measuring').toBe(false);
++    }
++    const log = await records(page); expect(log.some(r => r.event === 'applied')).toBe(true);
++    const quality = JSON.parse((await page.locator('[data-quality-log]').textContent())!);
++    const passed = quality.find((d: { reason: string }) => d.reason === 'normal-load-probe-passed'); expect(passed).toBeDefined();
++    expect(log.find(r => r.event === 'started')!.at).toBeGreaterThanOrEqual(passed.evidence.atMs);
++    expect((await audit(page)).timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 1 });
++    save(`${engine}-probe-arbitration`, { timeline, log, quality });
++  });
++}
+diff --git a/scripts/p1-5-c-1/baseline-equivalence.mjs b/scripts/p1-5-c-1/baseline-equivalence.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..e33f705d793955932341c86c0f78f7f9fc7519c0
+--- /dev/null
++++ b/scripts/p1-5-c-1/baseline-equivalence.mjs
+@@ -0,0 +1,65 @@
++/** Paired unchanged Baseline pages, identical virtual clock/seed, both engines. */
++import { chromium } from '@playwright/test';
++import { spawn, execFileSync } from 'node:child_process';
++import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
++import path from 'node:path';
++import assert from 'node:assert/strict';
++import { installProbe } from '../p1-5-c/instrumentation.mjs';
++const original = '/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-safety';
++const base = 'b35b93c230fc6c084895a4119196779f505bf2fb';
++assert.equal(execFileSync('git', ['rev-parse', 'HEAD'], { cwd: original, encoding: 'utf8' }).trim(), base);
++assert.equal(execFileSync('git', ['status', '--porcelain'], { cwd: original, encoding: 'utf8' }).trim(), '');
++const normalized = process.env.C1_DISABLE_CSS === '1';
++const out = path.resolve(`docs/nexus-p1-5-c-1/evidence/baseline-equivalence${normalized ? '-css' : ''}`); mkdirSync(out, { recursive: true });
++const children = [], logs = [], report = { baseline: base, screenshotCssAnimations: normalized ? 'disabled' : 'allow', originalBuild: readFileSync(path.join(original, '.next/BUILD_ID'), 'utf8').trim(), fixedBuild: readFileSync('.next/BUILD_ID', 'utf8').trim(), pairs: [] };
++function serve(cwd, args) { const child = spawn(process.execPath, args, { cwd, env: { ...process.env, SCREEN_PLATFORM_URL: 'http://127.0.0.1:3199', SCREEN_PUBLIC_ID: 'fixture-only', NEXUS_QUALITY_PERMISSION: 'local-candidate', TZ: 'Asia/Shanghai' }, stdio: ['ignore', 'pipe', 'pipe'] }); children.push(child); for (const s of [child.stdout, child.stderr]) s.on('data', d => logs.push(String(d))); }
++async function ready(url) { for (let i = 0; i < 300; i++) { try { if ((await fetch(url)).ok) return; } catch {} await new Promise(r => setTimeout(r, 100)); } throw Error(`Not ready ${url}`); }
++function readState() {
++  const d = document.querySelector('.nexus-motion-debug'), s = document.querySelector('#screen-stage');
++  const timers = window.__p15cProbe.timerAudit();
++  return { scene: { ...s.dataset }, style: s.getAttribute('style'),
++    debug: Object.fromEntries(Object.entries(d.dataset).filter(([key]) => key !== 'recalibration')),
++    numbers: [...document.querySelectorAll('[data-motion-number]')].map(n => n.textContent),
++    active: { timeouts: timers.activeTimeouts, intervals: timers.activeIntervals, raf: timers.pendingApplicationRaf },
++    quality: document.querySelector('[data-quality-log]')?.textContent,
++    routes: [...document.querySelectorAll('.nexus-route-light,.nexus-route-traveler')].map(n => [...n.attributes].map(a => [a.name, a.value])) };
++}
++let browser;
++try {
++  serve(process.cwd(), ['e2e/nexus-fixture-server.mjs']); await ready('http://127.0.0.1:3199');
++  serve(original, ['scripts/p1-5-c/local-server.mjs', '--port', '3075']);
++  serve(process.cwd(), ['scripts/p1-5-c/local-server.mjs', '--port', '3076']);
++  await ready('http://127.0.0.1:3075/screen/sales'); await ready('http://127.0.0.1:3076/screen/sales');
++  browser = await chromium.launch({ headless: true });
++  for (const engine of ['legacy', 'gsap']) {
++    const contexts = [], pages = [];
++    for (const port of [3075, 3076]) {
++      const context = await browser.newContext({ viewport: { width: 1920, height: 1080 }, reducedMotion: 'no-preference', deviceScaleFactor: 1 }); contexts.push(context);
++      await context.addInitScript(installProbe, null); const page = await context.newPage(); pages.push(page);
++      await page.clock.install({ time: new Date('2026-10-21T00:00:00Z') }); await page.clock.pauseAt(new Date('2026-10-21T00:00:00Z'));
++      await page.goto(`http://127.0.0.1:${port}/screen/sales?debug=1&motion=${engine}&layout=16x9&fit=1`); await page.evaluate(() => document.fonts.ready);
++    }
++    const checkpoints = [];
++    for (const [label, ms] of [['intro', 1200], ['ambient', 2000], ['pulse', 3300], ['resize-in-pulse', 1000], ['completed', 7000]]) {
++      for (const page of pages) {
++        if (label === 'pulse') await page.getByRole('button', { name: '触发共振', exact: true }).evaluate(button => button.click());
++        if (label === 'resize-in-pulse') { await page.setViewportSize({ width: 1792, height: 1008 }); await page.evaluate(() => { for (let i = 0; i < 40; i++) window.dispatchEvent(new Event('resize')); screen.orientation.dispatchEvent(new Event('change')); }); }
++        await page.clock.runFor(ms);
++      }
++      const [before, after] = await Promise.all(pages.map(p => p.evaluate(readState)));
++      const match = JSON.stringify(before) === JSON.stringify(after); checkpoints.push({ label, match, before, after });
++      // Save differences for review even if a renderer introduces nondeterminism.
++      report.pairs.push({ engine, label, match });
++      for (let i = 0; i < pages.length; i++) {
++        const style = await pages[i].addStyleTag({ content: '.nexus-motion-debug{display:none!important}' });
++        await pages[i].screenshot({ path: path.join(out, `${engine}-${label}-${i ? 'fixed' : 'original'}.png`), animations: normalized ? 'disabled' : 'allow' });
++        await style.evaluate(node => node.remove());
++      }
++    }
++    writeFileSync(path.join(out, `${engine}-states.json`), JSON.stringify(checkpoints, null, 2));
++    for (const context of contexts) await context.close();
++  }
++  report.status = report.pairs.every(p => p.match) ? 'passed' : 'differences-recorded';
++  assert.equal(report.status, 'passed');
++} catch (error) { report.failure = error.stack; throw error; }
++finally { writeFileSync(path.join(out, 'report.json'), JSON.stringify(report, null, 2)); writeFileSync(path.join(out, 'servers.log'), logs.join('')); await browser?.close(); for (const child of children) child.kill('SIGTERM'); }
+diff --git a/scripts/p1-5-c-1/capture.mjs b/scripts/p1-5-c-1/capture.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..d660b9654c32ec3d3ba546ea7bb54dd1f6963b68
+--- /dev/null
++++ b/scripts/p1-5-c-1/capture.mjs
+@@ -0,0 +1,96 @@
++/** Continuous visual evidence; not a benchmark. Run against the unmodified baseline first. */
++import { chromium } from '@playwright/test';
++import { spawn } from 'node:child_process';
++import { mkdirSync, writeFileSync, renameSync, readFileSync, existsSync } from 'node:fs';
++import { createHash } from 'node:crypto';
++import path from 'node:path';
++import assert from 'node:assert/strict';
++import { installProbe } from '../p1-5-c/instrumentation.mjs';
++const phase = process.env.C1_PHASE ?? 'baseline';
++const out = path.resolve(`docs/nexus-p1-5-c-1/evidence/${phase}`);
++mkdirSync(out, { recursive: true });
++const children = [], serverLog = [], report = { phase, purpose: 'continuous visual evidence, not frame presentation/performance acceptance', scenarios: [], errors: [] };
++const prior = process.env.C1_RESUME === '1' && existsSync(path.join(out, 'report.json')) ? JSON.parse(readFileSync(path.join(out, 'report.json'), 'utf8')) : null;
++report.build = { id: readFileSync('.next/BUILD_ID', 'utf8').trim(), sourceInputs: ['MotionDirector.ts', 'MotionProvider.tsx', 'QualityPolicy.ts', 'calibrateRaf.ts', 'config.ts', 'DeferredRecalibration.ts']
++  .map(file => `src/components/screen/motion/${file}`).filter(file => existsSync(file)).map(file => ({ path: file, sha256: createHash('sha256').update(readFileSync(file)).digest('hex') })) };
++if (prior) {
++  assert.equal(prior.phase, phase); assert.deepEqual(prior.build, report.build, 'Cannot reuse evidence from different build inputs');
++  for (const scenario of prior.scenarios) assert.equal(createHash('sha256').update(readFileSync(path.join(out, scenario.video))).digest('hex'), scenario.videoSha256);
++  report.scenarios = prior.scenarios;
++}
++const delay = ms => new Promise(r => setTimeout(r, ms));
++function serve(args, env = {}) {
++  const child = spawn(process.execPath, args, { env: { ...process.env, ...env }, stdio: ['ignore', 'pipe', 'pipe'] });
++  children.push(child); for (const stream of [child.stdout, child.stderr]) stream.on('data', data => serverLog.push(String(data)));
++}
++async function ready(url) { for (let i = 0; i < 300; i++) { try { if ((await fetch(url)).ok) return; } catch {} await delay(100); } throw Error(`Not ready: ${url}`); }
++function snapshot() {
++  const debug = document.querySelector('.nexus-motion-debug'), stage = document.querySelector('#screen-stage');
++  return { at: performance.now(), ...debug?.dataset, stageState: stage?.dataset.motionState, transform: stage?.style.transform,
++    stageTime: Number(stage?.dataset.motionTime), pulse: Number(stage?.dataset.motionPulse), introMap: Number(stage?.style.getPropertyValue('--intro-map')),
++    introPanels: Number(stage?.style.getPropertyValue('--intro-panels')), introFeed: Number(stage?.style.getPropertyValue('--intro-feed')),
++    modules: { routes: document.querySelectorAll('.nexus-route-light').length, particles: document.querySelectorAll('.nexus-particles').length, mapPaths: document.querySelectorAll('.nexus-map-frame path').length, feed: document.querySelectorAll('.nexus-feed-item').length },
++    rect: stage && { width: stage.getBoundingClientRect().width, height: stage.getBoundingClientRect().height },
++    numbers: [...document.querySelectorAll('[data-motion-number]')].map(n => n.textContent),
++    resources: window.__p15cProbe.timerAudit(), audit: JSON.parse(document.querySelector('[data-gsap-audit]')?.textContent ?? 'null'),
++    recalibration: JSON.parse(document.querySelector('[data-recalibration-log]')?.textContent ?? '[]') };
++}
++let browser;
++try {
++  for (const port of [3199, 3074]) { let occupied = false; try { await fetch(`http://127.0.0.1:${port}`); occupied = true; } catch {} if (occupied) throw Error(`Occupied ${port}`); }
++  serve(['e2e/nexus-fixture-server.mjs']); await ready('http://127.0.0.1:3199');
++  serve(['scripts/p1-5-c/local-server.mjs', '--port', '3074'], { SCREEN_PLATFORM_URL: 'http://127.0.0.1:3199', SCREEN_PUBLIC_ID: 'fixture-only', NEXUS_QUALITY_PERMISSION: 'local-candidate' });
++  await ready('http://127.0.0.1:3074/screen/sales');
++  browser = await chromium.launch({ headless: false });
++  report.environment = { browser: browser.version(), gpu: await (await browser.newBrowserCDPSession()).send('SystemInfo.getInfo'), headless: false, dpr: 1 };
++  for (const engine of ['legacy', 'gsap']) for (const width of (process.env.C1_WIDTHS ?? '1920').split(',').map(Number)) {
++    if (report.scenarios.some(s => s.engine === engine && s.width === width)) continue;
++    await fetch('http://127.0.0.1:3199/control?reset=1');
++    const height = width === 1792 ? 832 : Math.round(width * 9 / 16), layout = width === 1792 ? 'led-1792x832' : '16x9';
++    const context = await browser.newContext({ viewport: { width, height }, reducedMotion: 'no-preference', deviceScaleFactor: 1,
++      recordVideo: { dir: path.join(out, 'raw-video'), size: { width: 1280, height: 720 } } });
++    await context.addInitScript(installProbe, null);
++    const page = await context.newPage(); page.on('pageerror', e => report.errors.push(e.message));
++    if (phase !== 'baseline') {
++      await page.goto(`http://127.0.0.1:3074/screen/sales?motion=${engine}&layout=${layout}&fit=1`);
++      await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(400);
++    }
++    await page.goto(`http://127.0.0.1:3074/screen/sales?debug=1&motion=${engine}&qualityExperiment=candidate&layout=${layout}&fit=1`);
++    await page.waitForFunction(() => document.querySelector('.nexus-motion-debug')?.dataset.paused === 'false');
++    await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(2600);
++    const scenario = { engine, width, height, layout, timeline: [] };
++    const record = async label => { const s = await page.evaluate(snapshot); scenario.timeline.push({ label, ...s }); report.partialScenario = scenario; return s; };
++    for (const cue of ['INTRO', 'PULSE']) {
++      await page.getByRole('button', { name: cue === 'INTRO' ? '重启入场' : '触发共振', exact: true }).click();
++      await page.waitForTimeout(350); const before = await record(`${cue}-before-resize`);
++      await page.setViewportSize({ width: width === 1920 ? 1792 : width - 96, height: Math.round((width === 1920 ? 1792 : width - 96) * height / width) });
++      // The browser controller can return before its native resize event is delivered.
++      // Deliver the same event before sampling the synchronous fit listener.
++      await page.evaluate(() => window.dispatchEvent(new Event('resize')));
++      const immediate = await record(`${cue}-immediate-resize`);
++      if (phase === 'fixed') { assert.equal(before.state, cue); assert.equal(immediate.state, cue); assert.equal(immediate.paused, 'false'); assert.equal(immediate.qualityAutomation, 'candidate'); assert.ok(Math.abs(immediate.rect.width - (width === 1920 ? 1792 : width - 96)) <= 2); }
++      for (let i = 0; i < (cue === 'INTRO' ? 14 : 55); i++) { await page.waitForTimeout(200); await record(`${cue}-${i}`); }
++      if (phase === 'fixed') {
++        const preserved = scenario.timeline.filter(s => s.label.startsWith(`${cue}-`) && !s.label.includes('before') && !s.label.includes('immediate') && s.at - before.at < (cue === 'INTRO' ? 1500 : 9000));
++        assert.ok(preserved.length); assert.ok(preserved.every(s => s.state === cue && s.paused === 'false'));
++        assert.equal(scenario.timeline.at(-1).qualityAutomation, 'candidate');
++        const samples = [before, immediate, ...scenario.timeline.filter(s => s.label.startsWith(`${cue}-`) && /^\d+$/.test(s.label.slice(cue.length + 1)))];
++        for (let i = 1; i < samples.length; i++) { assert.ok(samples[i].stageTime >= samples[i - 1].stageTime); assert.deepEqual(samples[i].modules, before.modules); }
++        if (cue === 'INTRO') for (const key of ['introMap', 'introPanels', 'introFeed']) for (let i = 1; i < samples.length; i++) assert.ok(samples[i][key] >= samples[i - 1][key]);
++      }
++      await page.screenshot({ path: path.join(out, `${engine}-${width}-${cue}-after.png`) });
++      await page.setViewportSize({ width, height }); await page.waitForTimeout(900);
++    }
++    await record('storm-before');
++    await page.evaluate(async () => { for (let i = 0; i < 40; i++) { window.dispatchEvent(new Event('resize')); await new Promise(r => setTimeout(r, 50)); } });
++    await record('storm-end'); await page.waitForTimeout(1000); await record('storm-settled');
++    const video = page.video(); await context.close();
++    renameSync(await video.path(), path.join(out, `${engine}-${width}-intro-pulse-resize.webm`));
++    scenario.videoSha256 = createHash('sha256').update(readFileSync(path.join(out, `${engine}-${width}-intro-pulse-resize.webm`))).digest('hex');
++    scenario.video = `${engine}-${width}-intro-pulse-resize.webm`; report.scenarios.push(scenario); delete report.partialScenario;
++    writeFileSync(path.join(out, 'report.json'), JSON.stringify(report, null, 2));
++    console.log(JSON.stringify({ phase, engine, width, scenes: scenario.timeline.filter(s => /before-resize|immediate-resize|storm/.test(s.label)).map(s => ({ label: s.label, at: s.at, state: s.state, paused: s.paused, rect: s.rect, mode: s.qualityAutomation })) }));
++  }
++  report.status = report.errors.length ? 'page-errors' : 'captured';
++} catch (error) { report.failure = error.stack; throw error; }
++finally { writeFileSync(path.join(out, 'report.json'), JSON.stringify(report, null, 2)); writeFileSync(path.join(out, 'servers.log'), serverLog.join('')); await browser?.close(); for (const child of children) child.kill('SIGTERM'); }
+diff --git a/scripts/p1-5-c-1/source-invariants.py b/scripts/p1-5-c-1/source-invariants.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..4b24221a13e5d55c9bdfa7ffbdf060f074001ec0
+--- /dev/null
++++ b/scripts/p1-5-c-1/source-invariants.py
+@@ -0,0 +1,51 @@
++"""Read-only scope and build-input attestation; no production connections."""
++import hashlib
++import json
++from pathlib import Path
++import re
++import subprocess
++
++baseline = 'b35b93c230fc6c084895a4119196779f505bf2fb'
++out = Path('docs/nexus-p1-5-c-1/evidence')
++allowed = {
++    'src/components/screen/motion/MotionDirector.ts',
++    'src/components/screen/motion/MotionProvider.tsx',
++    'src/components/screen/motion/QualityPolicy.ts',
++    'src/components/screen/motion/QualityPolicy.test.ts',
++    'src/components/screen/motion/DeferredRecalibration.ts',
++    'src/components/screen/motion/DeferredRecalibration.test.ts',
++}
++files = subprocess.check_output(['git', 'ls-files', '-z', 'src', 'public', 'package.json', 'pnpm-lock.yaml', 'next.config.ts', 'tsconfig.json']).decode().split('\0')
++files += [p for p in allowed if p not in files]
++inputs = []
++changes = []
++for name in sorted(set(filter(None, files))):
++    data = Path(name).read_bytes()
++    previous = subprocess.run(['git', 'show', f'{baseline}:{name}'], capture_output=True)
++    same = previous.returncode == 0 and data == previous.stdout
++    if not same:
++        changes.append(name)
++    inputs.append({'path': name, 'sha256': hashlib.sha256(data).hexdigest(), 'sameAsBaseline': same})
++assert set(changes) <= allowed, changes
++policy = 'src/components/screen/motion/QualityPolicy.ts'
++old = subprocess.check_output(['git', 'show', f'{baseline}:{policy}']).decode()
++new = Path(policy).read_text()
++parameters = lambda s: re.search(r'export const candidateParameters = Object.freeze\(\{[\s\S]*?\n\}\);', s).group(0)
++assert parameters(old) == parameters(new)
++for name in ['src/components/screen/motion/calibrateRaf.ts', 'src/components/screen/motion/config.ts',
++             'src/components/screen/motion/GsapTickerOwner.ts', 'src/components/screen/motion/useSceneMotion.ts',
++             'src/components/screen/ScreenStage.tsx', 'src/components/screen/motion/quality-permission.ts',
++             'src/server/local-quality-boundary.mjs']:
++    assert next(i for i in inputs if i['path'] == name)['sameAsBaseline'], name
++scheduler = Path('src/components/screen/motion/DeferredRecalibration.ts').read_text()
++assert 'requestAnimationFrame' not in scheduler and 'setInterval' not in scheduler
++assert scheduler.count('= setTimeout(') == 1
++assert 'queueMicrotask' in scheduler
++report = {'status': 'passed', 'baseline': baseline, 'branch': subprocess.check_output(['git', 'branch', '--show-current']).decode().strip(),
++          'buildId': Path('.next/BUILD_ID').read_text().strip(), 'candidateParametersUnchanged': True,
++          'startupSamplerUnchanged': True, 'layoutAndFitUnchanged': True, 'permissionBoundaryUnchanged': True,
++          'voiceAndBusinessAndArtInputsUnchanged': True, 'noNewPermanentRafOrPollingClock': True,
++          'changedInputs': changes, 'inputCount': len(inputs)}
++(out/'source-invariants.json').write_text(json.dumps(report, indent=2)+'\n')
++(out/'product-inputs.json').write_text(json.dumps(inputs, indent=2)+'\n')
++print(json.dumps(report, indent=2))
+diff --git a/scripts/p1-5-c-1/validate.py b/scripts/p1-5-c-1/validate.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..52c5c000c3928b9b78eac295a7a4524ddf5159e5
+--- /dev/null
++++ b/scripts/p1-5-c-1/validate.py
+@@ -0,0 +1,48 @@
++"""Sequential browser suites: isolate ports, RAF resources, and visual capture."""
++import json
++import os
++from pathlib import Path
++import subprocess
++import time
++
++out = Path('docs/nexus-p1-5-c-1/evidence/checks')
++out.mkdir(parents=True, exist_ok=True)
++jobs = [
++    ('runtime', ['pnpm', 'exec', 'playwright', 'test', '-c', 'e2e/p1-5-c-1.config.ts'], {}),
++    ('native-and-probe', ['pnpm', 'exec', 'playwright', 'test', '-c', 'e2e/p1-5-c-1.config.ts', '--grep', '1792|active Candidate probe'], {'C1_E2E_LABEL': 'native-and-probe'}),
++    ('legacy-regression', ['pnpm', 'exec', 'playwright', 'test', '-c', 'e2e/gsap-poc.config.ts'], {'GSAP_REGRESSION': '1', 'NEXUS_MOTION_ENGINE': 'legacy', 'GSAP_RESULT_NAME': 'c1-legacy-regression'}),
++    ('gsap-regression', ['pnpm', 'exec', 'playwright', 'test', '-c', 'e2e/gsap-poc.config.ts'], {'GSAP_REGRESSION': '1', 'NEXUS_MOTION_ENGINE': 'gsap', 'GSAP_RESULT_NAME': 'c1-gsap-regression'}),
++    ('quality-integration', ['pnpm', 'exec', 'playwright', 'test', '-c', 'e2e/p1-5-c.config.ts'], {'NEXUS_QUALITY_PERMISSION': 'local-candidate', 'P15C_E2E_LABEL': 'c1-integration'}),
++    ('safety-boundary', ['pnpm', 'exec', 'playwright', 'test', '-c', 'e2e/p1-5-c-safety.config.ts'], {'NEXUS_SAFETY_LABEL': 'c1-boundary'}),
++    ('permission-denied', ['pnpm', 'exec', 'playwright', 'test', '-c', 'e2e/p1-5-c.config.ts', '--grep', 'server permission'], {'NEXUS_QUALITY_PERMISSION': 'denied', 'P15C_E2E_LABEL': 'c1-denied'}),
++    ('gsap-functional', ['pnpm', 'exec', 'playwright', 'test', '-c', 'e2e/gsap-poc.config.ts'], {'GSAP_RESULT_NAME': 'c1-functional'}),
++    ('baseline-equivalence', ['node', 'scripts/p1-5-c-1/baseline-equivalence.mjs'], {}),
++    ('visual', ['node', 'scripts/p1-5-c-1/capture.mjs'], {'C1_PHASE': 'fixed', 'C1_WIDTHS': '1280,1792,1920,3840', 'C1_RESUME': os.environ.get('C1_RESUME', '1')}),
++]
++selected = set(filter(None, os.environ.get('C1_JOBS', '').split(',')))
++results = json.loads((out/'runs.json').read_text()) if (out/'runs.json').exists() else []
++for name, command, environment in jobs:
++    if selected and name not in selected:
++        continue
++    print('START', name, flush=True)
++    (out/'current.json').write_text(json.dumps({'current': name, 'startedEpoch': time.time(), 'completed': results}, indent=2))
++    started = time.monotonic()
++    with (out/f'{name}.txt').open('w') as stream:
++        result = subprocess.run(command, env={**os.environ, **environment}, stdout=stream, stderr=subprocess.STDOUT)
++    results.append({'name': name, 'exitCode': result.returncode, 'elapsedSeconds': time.monotonic()-started, 'command': command, 'environment': environment})
++    (out/'runs.json').write_text(json.dumps(results, indent=2))
++    print('DONE', name, result.returncode, flush=True)
++sources = {
++    'legacy-regression': '.review/gsap-poc/c1-legacy-regression.json',
++    'gsap-regression': '.review/gsap-poc/c1-gsap-regression.json',
++    'quality-integration': '.review/p1-5-c/c1-integration-results.json',
++    'safety-boundary': '.review/p1-5-c-safety/c1-boundary-results.json',
++    'permission-denied': '.review/p1-5-c/c1-denied-results.json',
++    'gsap-functional': '.review/gsap-poc/c1-functional.json',
++}
++for name, source in sources.items():
++    if any(r['name'] == name for r in results) and Path(source).exists():
++        (out/f'{name}.json').write_text(Path(source).read_text())
++(out/'current.json').write_text(json.dumps({'current': 'finished', 'completed': results}, indent=2))
++latest = {r['name']: r for r in results}
++raise SystemExit(any(r['exitCode'] for r in latest.values()))
+diff --git a/src/components/screen/motion/DeferredRecalibration.test.ts b/src/components/screen/motion/DeferredRecalibration.test.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..c0a932b17728107fa8014090a2356a3ccb68b4f5
+--- /dev/null
++++ b/src/components/screen/motion/DeferredRecalibration.test.ts
+@@ -0,0 +1,123 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
++import { DeferredRecalibration, type RecalibrationContext } from './DeferredRecalibration';
++import { MotionDirector } from './MotionDirector';
++const flush = () => Promise.resolve();
++beforeEach(() => vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] }));
++afterEach(() => vi.useRealTimers());
++function rig() {
++  let now = 0;
++  const context: RecalibrationContext = { active: true, phase: 'INTRO', probe: false, pauseReason: 'hidden' };
++  const completions: ((hz: number) => void)[] = [], cancel = vi.fn(), suspend = vi.fn(), resume = vi.fn(), apply = vi.fn(), fallback = vi.fn();
++  const measure = vi.fn((done: (hz: number) => void) => { completions.push(done); return cancel; });
++  const queue = new DeferredRecalibration({ now: () => now, context: () => context, measure, suspend, resume, apply, fallback });
++  const step = (ms: number) => { now += ms; queue.advance(); vi.advanceTimersByTime(ms); };
++  return { queue, context, completions, cancel, suspend, resume, apply, fallback, measure, step, setNow: (value: number) => { now = value; } };
++}
++describe('deferred runtime recalibration', () => {
++  it('coalesces requests without extending first time/budget and consumes only after the tick', async () => {
++    const r = rig(); r.queue.request(); r.step(1200); r.queue.request(); r.step(1200); r.queue.request();
++    expect(r.queue.snapshot).toMatchObject({ version: 3, firstRequestedAt: 0, activeMs: 2400 });
++    await flush(); expect(r.measure).not.toHaveBeenCalled();
++    r.context.phase = 'AMBIENT'; r.queue.advance(); expect(r.measure).not.toHaveBeenCalled();
++    await flush(); expect(r.measure).toHaveBeenCalledTimes(1); r.completions[0](100);
++    expect(r.apply).toHaveBeenCalledExactlyOnceWith(100); expect(r.queue.waiting).toBe(false); expect(vi.getTimerCount()).toBe(0);
++  });
++  it('reserves after 30 active seconds, with a finite deadline that repeated requests cannot reset', async () => {
++    const r = rig(); r.queue.request();
++    for (let i = 0; i < 29; i++) { r.step(1000); r.queue.request(); await flush(); }
++    expect(r.queue.reserved).toBe(false); r.step(1000); expect(r.queue.reserved).toBe(true);
++    for (let i = 0; i < 14; i++) { r.step(1000); r.queue.request(); await flush(); }
++    r.step(1000); expect(r.fallback).toHaveBeenCalledExactlyOnceWith('recalibration-active-deadline-exceeded');
++    expect(r.queue.waiting).toBe(false); expect(vi.getTimerCount()).toBe(0);
++  });
++  it('has a finite deadline even when Director RAF stops unexpectedly', () => {
++    const r = rig(); r.queue.request(); r.setNow(45_000); vi.advanceTimersByTime(45_000);
++    expect(r.fallback).toHaveBeenCalledExactlyOnceWith('recalibration-active-deadline-exceeded');
++  });
++  it.each(['hidden', 'voice', 'reduced-motion'])('pauses budget and cancels actual measurement on %s, ignoring late completions', async pauseReason => {
++    const r = rig(); r.queue.request(); r.step(12_000); r.context.active = false; r.context.pauseReason = pauseReason; r.queue.advance();
++    r.step(600_000); expect(r.queue.snapshot).toMatchObject({ state: 'paused', activeMs: 12_000 }); expect(vi.getTimerCount()).toBe(0);
++    r.context.active = true; r.context.phase = 'AMBIENT'; r.queue.advance(); await flush(); expect(r.queue.measuring).toBe(true);
++    r.context.active = false; r.queue.advance(); expect(r.cancel).toHaveBeenCalledTimes(1); expect(vi.getTimerCount()).toBe(0);
++    r.completions[0](120); expect(r.apply).not.toHaveBeenCalled();
++    r.step(600_000); r.context.active = true; r.queue.advance(); await flush(); r.completions[1](60);
++    expect(r.apply).toHaveBeenCalledExactlyOnceWith(60); expect(r.fallback).not.toHaveBeenCalled(); expect(vi.getTimerCount()).toBe(0);
++  });
++  it('discards an old version, measures the newest, and retains the original active budget', async () => {
++    const r = rig(); r.context.phase = 'AMBIENT'; r.queue.request(); await flush(); r.step(200); r.queue.request();
++    r.completions[0](100); expect(r.apply).not.toHaveBeenCalled(); expect(r.queue.snapshot).toMatchObject({ version: 2, firstRequestedAt: 0, activeMs: 200 });
++    await flush(); r.completions[1](60); expect(r.apply).toHaveBeenCalledExactlyOnceWith(60);
++    expect(r.queue.records.some(e => e.event === 'discarded-stale-version')).toBe(true); expect(vi.getTimerCount()).toBe(0);
++  });
++  it('waits for an existing probe and rechecks an environment change after queueing', async () => {
++    const r = rig(); r.context.phase = 'DEGRADED'; r.context.probe = true; r.queue.request(); await flush(); expect(r.measure).not.toHaveBeenCalled();
++    r.context.probe = false; r.queue.advance(); r.context.active = false; await flush(); expect(r.measure).not.toHaveBeenCalled();
++    r.context.active = true; r.queue.advance(); await flush(); expect(r.measure).toHaveBeenCalledTimes(1); r.queue.dispose(); expect(vi.getTimerCount()).toBe(0);
++  });
++  it('falls back on invalid/timeout results, unverified scene/clock and measurement exceptions', async () => {
++    for (const kind of ['NaN', 'scene', 'clock', 'exception', 'completion-state']) {
++      const r = rig(); r.context.phase = 'AMBIENT';
++      if (kind === 'exception') r.measure.mockImplementationOnce(() => { throw Error('broken'); });
++      r.queue.request();
++      if (kind === 'scene') { r.context.phase = 'unknown'; r.queue.advance(); }
++      if (kind === 'clock') { r.setNow(-1); r.queue.advance(); }
++      await flush();
++      if (kind === 'completion-state') { r.context.probe = true; r.completions[0](60); }
++      if (kind === 'NaN') r.completions[0](NaN);
++      expect(r.fallback).toHaveBeenCalledTimes(1); expect(r.queue.waiting).toBe(false); expect(vi.getTimerCount()).toBe(0);
++    }
++  });
++  it('cleans queued microtasks, deadline, measurement and stale results on dispose/engine switch', async () => {
++    const r = rig(); r.context.phase = 'AMBIENT'; r.queue.request(); r.queue.dispose(); await flush(); expect(r.measure).not.toHaveBeenCalled();
++    const s = rig(); s.context.phase = 'AMBIENT'; s.queue.request(); await flush(); s.queue.dispose(); s.completions[0](120); s.queue.request();
++    expect(s.cancel).toHaveBeenCalledTimes(1); expect(s.apply).not.toHaveBeenCalled(); expect(vi.getTimerCount()).toBe(0);
++  });
++});
++function directorRig(qualityMode: 'baseline' | 'candidate' | 'shadow' = 'candidate') {
++  let now = 0, id = 0;
++  const pending = new Map<number, (time: number) => void>(), completions: ((hz: number) => void)[] = [];
++  const d = new MotionDirector({ now: () => now, request: fn => { pending.set(++id, fn); return id; }, cancel: id => { pending.delete(id); }, wall: () => now, memory: () => null }, undefined, { qualityMode });
++  d.attachRecalibration(done => { completions.push(done); return () => {}; });
++  const step = (ms = 1000 / 60) => { now += ms; const jobs = [...pending.values()]; pending.clear(); jobs.forEach(fn => fn(now)); };
++  const run = (ms: number, delta = 1000 / 60) => { for (let t = 0; t < ms; t += delta) step(delta); };
++  d.start();
++  return { d, pending, completions, step, run };
++}
++describe('Director arbitration and evidence', () => {
++  it.each(['INTRO', 'PULSE'])('%s reaches its natural end before measuring, with no draw reentry', async cue => {
++    const r = directorRig(); r.run(3000); if (cue === 'INTRO') r.d.restartIntro(); else r.d.triggerPulse();
++    r.run(350); const time = r.d.frame.time; let insideDraw = false;
++    r.d.register('request-in-draw', () => { if (!insideDraw) { insideDraw = true; r.d.requestRecalibration(); expect(r.d.recalibration?.measuring).toBe(false); } });
++    r.step(); await flush(); expect(r.d.frame.state).toBe(cue); expect(r.d.paused).toBe(false);
++    r.run(cue === 'INTRO' ? 1500 : 9000); await flush(); expect(r.d.frame.state).toBe(cue);
++    r.run(1000); expect(r.completions.length).toBe(0); await flush(); expect(r.completions.length).toBe(1);
++    expect(r.d.frame.time - time).toBeGreaterThan(cue === 'INTRO' ? 1800 : 9600); expect(r.pending.size).toBe(0);
++    const due = r.d.pulseDueIn; r.completions[0](100); expect(r.d.pulseDueIn).toBe(due); expect(r.pending.size).toBe(1); r.d.dispose();
++  });
++  it('blocks new cues after the active reservation without ending the current cue', async () => {
++    const r = directorRig(); r.d.requestRecalibration();
++    for (let i = 0; i < 29; i++) { r.run(1000); await flush(); r.d.restartIntro(); }
++    r.run(1100); await flush(); expect(r.d.recalibration?.reserved).toBe(true); expect(r.d.frame.state).toBe('INTRO');
++    expect(r.d.restartIntro()).toBe(false); expect(r.d.triggerPulse()).toBe(false);
++    r.run(1400); await flush(); expect(r.completions.length).toBe(1); r.completions[0](60); expect(r.d.restartIntro()).toBe(true); r.d.dispose();
++  });
++  it('waits for an actual Candidate probe, then clears target evidence and prevents overlap', async () => {
++    const r = directorRig();
++    for (let i = 0; i < 400 && r.d.qualityDecision?.state !== 'probe'; i++) r.step(50);
++    expect(r.d.qualityDecision?.state).toBe('probe');
++    r.d.requestRecalibration(); await flush(); expect(r.completions.length).toBe(0);
++    r.run(1500, 50); await flush(); expect(r.d.qualityDecision?.state).toBe('low'); expect(r.completions.length).toBe(1);
++    r.completions[0](120); expect(r.d.qualityTargetHz).toBe(120); expect(r.d.qualityDecision).toMatchObject({ reason: 'reference-recalibrated', evidence: null, lowEvidenceMs: 0, probePasses: 0 });
++    r.run(500); expect(r.d.qualityDecision?.evidence).toBe(null); r.d.dispose();
++  });
++  it('Baseline ignores recalibration requests and remains identical frame for frame', async () => {
++    const a = directorRig('baseline'), b = directorRig('baseline');
++    for (let i = 0; i < 180; i++) { a.d.requestRecalibration(); a.step(); b.step(); expect(a.d.frame).toEqual(b.d.frame); }
++    await flush(); expect(a.completions.length).toBe(0); expect(a.d.recalibration?.records).toEqual([]); a.d.dispose(); b.d.dispose(); expect(vi.getTimerCount()).toBe(0);
++  });
++  it('records a rejected unsupported runtime reference as fallback, never as applied', async () => {
++    const r = directorRig(); r.run(3000); r.d.requestRecalibration(); await flush(); r.completions[0](30);
++    expect(r.d.qualityMode).toBe('baseline'); expect(r.d.recalibration?.records.some(e => e.event === 'applied')).toBe(false);
++    expect(r.d.records.at(-1)?.event).toBe('reference-below-supported-probe-floor'); expect(r.pending.size).toBe(1); expect(vi.getTimerCount()).toBe(0); r.d.dispose();
++  });
++});
+diff --git a/src/components/screen/motion/DeferredRecalibration.ts b/src/components/screen/motion/DeferredRecalibration.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..e649805e4a64f80d507ebcaf13f7acd90d748b1a
+--- /dev/null
++++ b/src/components/screen/motion/DeferredRecalibration.ts
+@@ -0,0 +1,115 @@
++/** Runtime-only scheduling. Startup calibration and quality thresholds are unchanged. */
++export const recalibrationBudget = Object.freeze({ reserveMs: 30_000, deadlineMs: 45_000 });
++export interface RecalibrationContext { active: boolean; phase: string; probe: boolean; pauseReason: string }
++export interface RecalibrationHost {
++  now: () => number;
++  context: () => RecalibrationContext;
++  measure: (done: (referenceHz: number) => void) => () => void;
++  suspend: () => void;
++  resume: () => void;
++  apply: (referenceHz: number) => void;
++  fallback: (reason: string) => void;
++}
++export interface RecalibrationRecord { at: number; event: string; version: number; firstRequestedAt: number; activeMs: number }
++export class DeferredRecalibration {
++  private version = 0;
++  private pending: { version: number; firstRequestedAt: number; activeMs: number } | null = null;
++  private measured: { version: number; token: number; cancel: (() => void) | null } | null = null;
++  private token = 0;
++  private last: number | null = null;
++  private wasActive = false;
++  private deadline: ReturnType<typeof setTimeout> | null = null;
++  private queued = false;
++  private disposed = false;
++  private pauseReason = '';
++  readonly records: RecalibrationRecord[] = [];
++  constructor(private host: RecalibrationHost) {}
++  get reserved() { return !!this.pending && this.pending.activeMs >= recalibrationBudget.reserveMs; }
++  get measuring() { return this.measured !== null; }
++  get waiting() { return this.pending !== null; }
++  get snapshot() { return { state: this.measuring ? 'measuring' : this.pending ? this.wasActive ? 'waiting' : 'paused' : 'idle', ...this.pending, reserved: this.reserved }; }
++  private record(event: string) {
++    const p = this.pending;
++    this.records.push({ at: this.host.now(), event, version: p?.version ?? this.version, firstRequestedAt: p?.firstRequestedAt ?? 0, activeMs: p?.activeMs ?? 0 });
++    if (this.records.length > 144) this.records.shift();
++  }
++  request() {
++    if (this.disposed) return;
++    if (this.pending && !this.account()) return;
++    const now = this.host.now();
++    if (!Number.isFinite(now)) { this.fail('unverifiable-clock'); return; }
++    if (this.pending) this.pending.version = ++this.version;
++    else { this.pending = { version: ++this.version, firstRequestedAt: now, activeMs: 0 }; this.last = now; this.wasActive = this.host.context().active; }
++    this.record('requested'); this.advance();
++  }
++  /** Call on existing Director ticks and environment events. Never consumes synchronously. */
++  advance() {
++    if (this.disposed || !this.pending || !this.account()) return;
++    const context = this.host.context();
++    if (!['BOOT', 'INTRO', 'PULSE', 'AMBIENT', 'DEGRADED'].includes(context.phase)) { this.fail('unverifiable-scene'); return; }
++    if (!context.active) {
++      this.clearDeadline();
++      if (this.measured) { this.cancelMeasure(); this.host.resume(); }
++      if (this.pauseReason !== context.pauseReason) { this.pauseReason = context.pauseReason; this.record(`paused-${context.pauseReason}`); }
++      return;
++    }
++    this.pauseReason = '';
++    if (this.deadline === null) {
++      // One finite deadline, paused with the environment; requests never extend it.
++      this.deadline = setTimeout(() => { this.deadline = null; if (this.pending && this.account()) this.advance(); }, Math.max(0, recalibrationBudget.deadlineMs - this.pending.activeMs));
++    }
++    if (!this.queued) {
++      this.queued = true;
++      queueMicrotask(() => { this.queued = false; this.consume(); });
++    }
++  }
++  private account() {
++    if (!this.pending) return false;
++    const now = this.host.now();
++    if (!Number.isFinite(now) || this.last !== null && now < this.last) { this.fail('unverifiable-clock'); return false; }
++    if (this.last !== null && this.wasActive) this.pending.activeMs += now - this.last;
++    this.last = now; this.wasActive = this.host.context().active;
++    if (this.pending.activeMs >= recalibrationBudget.deadlineMs) { this.fail('active-deadline-exceeded'); return false; }
++    return true;
++  }
++  private consume() {
++    if (this.disposed || !this.pending || !this.account()) return;
++    const context = this.host.context();
++    if (!context.active || this.measured || context.probe || !['AMBIENT', 'DEGRADED'].includes(context.phase)) return;
++    const attempt = { version: this.pending.version, token: ++this.token, cancel: null as (() => void) | null };
++    this.measured = attempt; this.record('started');
++    try {
++      this.host.suspend();
++      if (this.measured !== attempt) return;
++      attempt.cancel = this.host.measure(hz => this.complete(attempt.token, attempt.version, hz));
++      // Also handles synchronous completion or an environment takeover during setup.
++      if (this.measured !== attempt) attempt.cancel();
++    } catch { this.fail('measurement-exception'); }
++  }
++  private complete(token: number, version: number, hz: number) {
++    if (this.disposed || this.measured?.token !== token || !this.pending || !this.account()) return;
++    const context = this.host.context();
++    if (!context.active) { this.advance(); return; }
++    if (context.probe || !['AMBIENT', 'DEGRADED'].includes(context.phase)) { this.fail('unverifiable-completion-state'); return; }
++    this.cancelMeasure();
++    if (version !== this.pending.version) {
++      this.record('discarded-stale-version'); this.host.resume(); this.advance(); return;
++    }
++    if (!Number.isFinite(hz) || hz <= 0) { this.fail('invalid-or-timed-out-measurement'); return; }
++    const completed = this.pending;
++    try { this.host.apply(hz); } catch { this.fail('apply-exception'); return; }
++    // Director may reject a reference below its supported floor or a broken policy.
++    if (this.pending !== completed) return;
++    this.record('applied'); this.pending = null; this.clearDeadline(); this.last = null; this.wasActive = false;
++    this.host.resume();
++  }
++  private clearDeadline() { if (this.deadline !== null) clearTimeout(this.deadline); this.deadline = null; }
++  private cancelMeasure() { const attempt = this.measured; this.measured = null; this.token++; attempt?.cancel?.(); }
++  cancel(reason: string) {
++    if (this.pending) this.record(reason);
++    this.pending = null; this.last = null; this.wasActive = false; this.pauseReason = '';
++    this.clearDeadline(); this.cancelMeasure(); this.host.resume();
++  }
++  private fail(reason: string) { this.cancel(`fallback-${reason}`); this.host.fallback(`recalibration-${reason}`); }
++  dispose() { this.disposed = true; this.cancel('disposed'); }
++}
+diff --git a/src/components/screen/motion/MotionDirector.ts b/src/components/screen/motion/MotionDirector.ts
+index a3157f1729456a233db3f36a7788771489a79e5c..07f5260d63ab390f454c1eab3dfcc2924ec038e2 100644
+--- a/src/components/screen/motion/MotionDirector.ts
++++ b/src/components/screen/motion/MotionDirector.ts
+@@ -1,5 +1,6 @@
+ import { motionConfig } from './config';
+ import { candidateParameters, effectiveTargetHz, ProbeQualityPolicy, type QualityDecision, type QualityMode, type QualityPolicy } from './QualityPolicy';
++import { DeferredRecalibration } from './DeferredRecalibration';
+ export type SceneState = 'BOOT' | 'INTRO' | 'AMBIENT' | 'PULSE' | 'DEGRADED';
+ export type MotionLevel = 'normal' | 'low' | 'static';
+ export interface MotionFrame {
+@@ -21,7 +22,7 @@ export class MotionDirector {
+   private listeners = new Set<() => void>();
+   private introStart = 0;
+   get introTime() { return this.frame.time - this.introStart; }
+-  restartIntro() { if (!this.enabled() || this.probeReserved || this.mode === 'candidate' && this.qualityDecision?.state === 'probe') return false; this.stable(); this.introStart = this.frame.time; this.introEnd = this.frame.time + motionConfig.intro; this.frame.state = "INTRO"; this.draw(); this.notify(); return true; }
++  restartIntro() { if (!this.enabled() || this.recalibration?.reserved || this.probeReserved || this.mode === 'candidate' && this.qualityDecision?.state === 'probe') return false; this.stable(); this.introStart = this.frame.time; this.introEnd = this.frame.time + motionConfig.intro; this.frame.state = "INTRO"; this.draw(); this.notify(); return true; }
+   private introEnd = motionConfig.intro as number;
+   private nextPulse = motionConfig.pulseInterval as number;
+   private pulseStart = 0;
+@@ -36,6 +37,23 @@ export class MotionDirector {
+   private intervals: number[] = []; private windowStart: number | null = null;
+   private windowNormalLoad = true;
+   private engineCapHz: number | null;
++  private calibrationPaused = false;
++  recalibration: DeferredRecalibration | null = null;
++  /** Attached only after the existing startup calibration has completed. */
++  attachRecalibration(measure: (done: (referenceHz: number) => void) => () => void) {
++    this.recalibration?.dispose();
++    this.recalibration = new DeferredRecalibration({
++      now: () => this.host.clockNow?.() ?? this.host.now(),
++      context: () => ({ active: this.environmentActive(), phase: this.frame.state,
++        probe: this.qualityDecision?.state === 'probe',
++        pauseReason: !this.started ? 'stopped' : !this.frame.pageVisible ? 'hidden' : this.frame.voiceActive ? 'voice' : 'reduced-motion' }),
++      measure,
++      suspend: () => { this.calibrationPaused = true; this.stop(); this.notify(); },
++      resume: () => { if (!this.calibrationPaused) return; this.calibrationPaused = false; this.schedule(); this.notify(); },
++      apply: hz => this.setCalibration(hz), fallback: reason => this.fallback(reason),
++    });
++  }
++  requestRecalibration() { if (this.mode !== 'baseline') { this.recalibration?.request(); this.notify(); } }
+   qualityDecision: QualityDecision | null = null;
+   qualityChangedAt = -Infinity;
+   readonly qualityRecords: QualityDecision[] = [];
+@@ -74,6 +92,8 @@ export class MotionDirector {
+   private fallback(reason: string) {
+     this.mode = 'baseline'; this.policy = new ProbeQualityPolicy(); this.resetWindow();
+     this.lowTime = this.recoveryTime = 0; this.forcedLow = false; this.log(reason);
++    this.recalibration?.cancel('baseline-fallback');
++    this.notify();
+   }
+   selectedKey: string | null = null;
+   selectionAt = -Infinity;
+@@ -96,21 +116,23 @@ export class MotionDirector {
+     return () => { this.callbacks.delete(key); };
+   }
+   start() { if (this.started) return; this.started = true; this.frame.time = this.host.now(); this.frame.state = 'INTRO'; this.introEnd = motionConfig.intro; this.draw(); this.schedule(); }
+-  dispose() { this.started = false; this.stop(); this.callbacks.clear(); this.listeners.clear(); }
++  dispose() { this.started = false; this.recalibration?.dispose(); this.stop(); this.callbacks.clear(); this.listeners.clear(); }
+   private stop() { if (this.id !== null) this.host.cancel(this.id); this.id = null; this.last = null; this.sampleFrames = 0; this.sampleTime = 0; this.lowTime = 0; this.recoveryTime = 0; this.interruptQuality('clock-stopped'); }
+-  private enabled() { return this.started && this.frame.pageVisible && !this.frame.voiceActive && !this.reduced; }
++  private environmentActive() { return this.started && this.frame.pageVisible && !this.frame.voiceActive && !this.reduced; }
++  private enabled() { return this.environmentActive() && !this.calibrationPaused; }
+   private schedule() { if (this.enabled() && this.id === null) this.id = this.host.request(this.tick); }
+   private stable() { this.frame.state = this.frame.motionLevel === 'low' ? 'DEGRADED' : 'AMBIENT'; this.frame.pulse = 0; this.nextPulse = this.frame.time + this.pulseInterval; }
+   setEnvironment({ pageVisible, voiceActive, reduced }: { pageVisible?: boolean; voiceActive?: boolean; reduced?: boolean }) {
+     if ((pageVisible === undefined || pageVisible === this.frame.pageVisible) && (voiceActive === undefined || voiceActive === this.frame.voiceActive) && (reduced === undefined || reduced === this.reduced)) return;
++    this.recalibration?.advance();
+     if (pageVisible !== undefined) this.frame.pageVisible = pageVisible;
+     if (voiceActive !== undefined) this.frame.voiceActive = voiceActive;
+     if (reduced !== undefined) this.reduced = reduced;
+     this.frame.motionLevel = this.reduced ? 'static' : this.mode === 'candidate' ? this.qualityDecision?.state === 'low' ? 'low' : 'normal' : this.forcedLow ? 'low' : this.frame.motionLevel === 'static' ? 'normal' : this.frame.motionLevel;
+-    this.stop(); this.stable(); this.draw(); this.notify(); this.schedule();
++    this.stop(); this.stable(); this.draw(); this.recalibration?.advance(); this.notify(); this.schedule();
+   }
+   triggerPulse() {
+-    if (!this.enabled() || this.frame.motionLevel !== 'normal' || this.frame.state === 'PULSE') return false;
++    if (!this.enabled() || this.recalibration?.reserved || this.frame.motionLevel !== 'normal' || this.frame.state === 'PULSE') return false;
+     // A full-load probe must finish in an undisturbed stable window.
+     if (this.mode === 'candidate' && this.qualityDecision?.state === 'probe') return false;
+     this.frame.state = 'PULSE'; this.pulseStart = this.frame.time; this.frame.pulse = 0; this.notify(); return true;
+@@ -132,6 +154,7 @@ export class MotionDirector {
+     }
+     const delta = this.last === null ? 0 : Math.max(0, now - this.last); this.last = now;
+     this.frame.time += delta;
++    this.recalibration?.advance();
+     if (this.mode !== 'baseline') {
+       if (this.windowStart === null) this.windowStart = now;
+       else if (delta > 0) this.intervals.push(delta);
+@@ -142,6 +165,7 @@ export class MotionDirector {
+           this.recordDecision(this.policy.sample({ atMs: now, targetHz: this.qualityTargetHz,
+             updateHz: this.intervals.length * 1000 / (now - this.windowStart), intervalP95Ms: sorted[Math.ceil(sorted.length * .95) - 1],
+             window: { startMs: this.windowStart, endMs: now, updates: this.intervals.length }, normalLoad: this.windowNormalLoad,
++            probeAllowed: !this.recalibration?.reserved,
+             environment: { pageVisible: this.frame.pageVisible, voiceActive: this.frame.voiceActive, reduced: this.reduced, phase: this.frame.state, calibration: this.calibration } }));
+         } catch { this.fallback('policy-exception'); }
+         this.windowStart = now; this.intervals = []; this.windowNormalLoad = this.frame.motionLevel === 'normal';
+@@ -165,6 +189,8 @@ export class MotionDirector {
+     this.draw();
+     if (this.frame.time - this.notifyTime >= 250) { this.notifyTime = this.frame.time; this.notify(); }
+     this.schedule();
++    // The microtask rechecks all guards after draw/subscribers and the host tick have exited.
++    this.recalibration?.advance();
+   };
+   private draw() {
+     this.frame.significant = 0;
+diff --git a/src/components/screen/motion/MotionProvider.tsx b/src/components/screen/motion/MotionProvider.tsx
+index 292df73ec0198253e94df507d24f7edb8f92eafd..b90587356cd51eb4f6182525da5d4b825b75c877 100644
+--- a/src/components/screen/motion/MotionProvider.tsx
++++ b/src/components/screen/motion/MotionProvider.tsx
+@@ -33,7 +33,9 @@ export function MotionProvider({ children, dataTime, runtime, qualityMode = 'bas
+         calibrating = true;
+         director.setEnvironment({ pageVisible: false, reduced: media.matches, voiceActive });
+         cancelCalibration = calibrateRaf(reference => {
+-          calibrating = false; calibrated = true; director.setCalibration(reference); sync();
++          calibrating = false; calibrated = true; director.setCalibration(reference);
++          if (director.qualityMode !== 'baseline') director.attachRecalibration(calibrateRaf);
++          sync();
+         });
+       }
+       director.setEnvironment({ pageVisible: !document.hidden && !calibrating, reduced: media.matches, voiceActive });
+@@ -44,7 +46,12 @@ export function MotionProvider({ children, dataTime, runtime, qualityMode = 'bas
+     });
+     observer.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['data-phase'] });
+     const simulate = (e: Event) => { simulated = (e as CustomEvent<boolean>).detail; sync(); };
+-    const recalibrate = () => { if (qualityMode === 'baseline') return; cancelCalibration?.(); calibrating = false; calibrated = false; sync(); };
++    const recalibrate = () => {
++      if (director.qualityMode === 'baseline') return;
++      if (calibrated) { director.requestRecalibration(); return; }
++      // Preserve the existing first-start calibration path, including pre-start resize.
++      cancelCalibration?.(); calibrating = false; calibrated = false; sync();
++    };
+     window.addEventListener('resize', recalibrate);
+     window.addEventListener('nexus-quality-recalibrate', recalibrate);
+     screen.orientation?.addEventListener('change', recalibrate);
+@@ -61,7 +68,7 @@ function MotionDebug({ director, dataTime }: { director: MotionDirector; dataTim
+   const f = director.frame;
+   const runtime = useMotionRuntime();
+   if (!debug) return null;
+-  return <aside className="nexus-motion-debug" aria-label="动效调试" data-state={f.state} data-level={f.motionLevel} data-paused={director.paused} data-clock={f.time} data-pulse-due-in={director.pulseDueIn} data-quality-automation={director.qualityMode} data-quality-state={director.qualityDecision?.state ?? 'normal'} data-quality-target={director.qualityTargetHz}>
++  return <aside className="nexus-motion-debug" aria-label="动效调试" data-state={f.state} data-level={f.motionLevel} data-paused={director.paused} data-clock={f.time} data-pulse-due-in={director.pulseDueIn} data-quality-automation={director.qualityMode} data-quality-state={director.qualityDecision?.state ?? 'normal'} data-quality-target={director.qualityTargetHz} data-recalibration={director.recalibration?.snapshot.state ?? 'idle'}>
+     <p>状态 {f.state} · 共振 {(f.pulse * 100).toFixed(0)}%</p><p>FPS {f.fps.toFixed(1)} · 档位 {f.motionLevel} · 显著 {f.significant}/8</p>
+     <p>页面 {String(f.pageVisible)} · 小川 {String(f.voiceActive)}</p><p>数据时间 {dataTime}</p>
+     <p data-motion-engine>{runtime ? "GSAP" : "Legacy"}</p>
+@@ -74,6 +81,7 @@ function MotionDebug({ director, dataTime }: { director: MotionDirector; dataTim
+     <button onClick={() => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(director.records, null, 2)], { type: 'application/json' })); a.download = 'nexus-performance.json'; a.click(); URL.revokeObjectURL(a.href); }}>导出性能日志</button>
+     {director.qualityMode !== 'baseline' && <button onClick={() => window.dispatchEvent(new Event('nexus-quality-recalibrate'))}>重新校准刷新率</button>}
+     <output hidden data-quality-log>{JSON.stringify(director.qualityRecords)}</output>
++    <output hidden data-recalibration-log>{JSON.stringify(director.recalibration?.records ?? [])}</output>
+     <output hidden data-gsap-audit>{JSON.stringify(runtime?.audit() ?? null)}</output>
+     <output hidden data-performance-log>{JSON.stringify(director.records)}</output>
+   </aside>;
+diff --git a/src/components/screen/motion/QualityPolicy.test.ts b/src/components/screen/motion/QualityPolicy.test.ts
+index c4c812120e9430d6980da49c27d46dcf03caad7c..ec55f9e0de1639e9cdc5adccb1d4bc8bb0430fc0 100644
+--- a/src/components/screen/motion/QualityPolicy.test.ts
++++ b/src/components/screen/motion/QualityPolicy.test.ts
+@@ -82,6 +82,16 @@ describe('typed P1.5-B policy', () => {
+     const r=rig();r.low();r.due();r.step(20,50);for(let i=0;i<20;i++)r.step();
+     expect(r.step(60,16.7,{targetHz:100})).toMatchObject({state:'low',failureCount:1,reason:'reference-recalibrated'});
+   });
++  it('reserving recalibration only defers new probes; degradation and an active probe still run', () => {
++    const r=rig();
++    expect(r.step(20,50,{probeAllowed:false}).state).toBe('normal');
++    expect(r.step(20,50,{probeAllowed:false})).toMatchObject({state:'low',reason:'severe-low-frequency'});
++    for(let i=0;i<12;i++)r.step(60,16.7,{probeAllowed:false});
++    expect(r.step(60,16.7,{probeAllowed:false})).toMatchObject({state:'low',reason:'probe-deferred-for-recalibration',nextProbeAtMs:12000});
++    expect(r.step().state).toBe('probe');
++    r.step(60,16.7,{probeAllowed:false});r.step(60,16.7,{probeAllowed:false});
++    expect(r.step(60,16.7,{probeAllowed:false})).toMatchObject({state:'normal',reason:'normal-load-probe-passed'});
++  });
+ });
+ describe('server experimental permission', () => {
+   it.each([undefined, '', 'true', 'candidate', 'invalid'])('denies URL-only control with permission %s', permission => {
+diff --git a/src/components/screen/motion/QualityPolicy.ts b/src/components/screen/motion/QualityPolicy.ts
+index ab88b0e4d498ddefb25f8f74a8c4ba66afb9d3eb..863fbae9f29bc3287308d666f1fa33f157a3f9ee 100644
+--- a/src/components/screen/motion/QualityPolicy.ts
++++ b/src/components/screen/motion/QualityPolicy.ts
+@@ -12,6 +12,8 @@ export interface QualitySample {
+   environment: QualityEnvironment;
+   /** Shadow supplies the actual workload so low-quality evidence cannot pass a probe. */
+   normalLoad: boolean;
++  /** Scheduling availability only. Does not alter degradation/recovery thresholds. */
++  probeAllowed?: boolean;
+ }
+ export interface QualityDecision {
+   state: QualityState; previous: QualityState; reason: string;
+@@ -81,6 +83,7 @@ export class ProbeQualityPolicy implements QualityPolicy {
+         const decision = this.decision(previous, reason, s); this.clearEvidence(); return decision;
+       }
+     } else if (this.state === 'low' && this.nextProbe !== null && s.atMs >= this.nextProbe) {
++      if (s.probeAllowed === false) return this.decision(previous, 'probe-deferred-for-recalibration', s);
+       if (e.phase !== 'AMBIENT' && e.phase !== 'DEGRADED') return this.decision(previous, 'probe-deferred-until-ambient', s);
+       this.state = 'probe'; this.clearEvidence();
+       return this.decision(previous, 'scheduled-normal-load-probe', s);

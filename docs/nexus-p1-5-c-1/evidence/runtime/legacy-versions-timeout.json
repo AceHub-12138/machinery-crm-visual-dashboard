@@ -1,0 +1,134 @@
+{
+  "log": [
+    {
+      "at": 1801,
+      "event": "requested",
+      "version": 1,
+      "firstRequestedAt": 1801,
+      "activeMs": 0
+    },
+    {
+      "at": 1801,
+      "event": "started",
+      "version": 1,
+      "firstRequestedAt": 1801,
+      "activeMs": 0
+    },
+    {
+      "at": 1961,
+      "event": "requested",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 160
+    },
+    {
+      "at": 2288,
+      "event": "discarded-stale-version",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 487
+    },
+    {
+      "at": 2288,
+      "event": "started",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 487
+    },
+    {
+      "at": 2784,
+      "event": "applied",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 983
+    }
+  ],
+  "finalLog": [
+    {
+      "at": 1801,
+      "event": "requested",
+      "version": 1,
+      "firstRequestedAt": 1801,
+      "activeMs": 0
+    },
+    {
+      "at": 1801,
+      "event": "started",
+      "version": 1,
+      "firstRequestedAt": 1801,
+      "activeMs": 0
+    },
+    {
+      "at": 1961,
+      "event": "requested",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 160
+    },
+    {
+      "at": 2288,
+      "event": "discarded-stale-version",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 487
+    },
+    {
+      "at": 2288,
+      "event": "started",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 487
+    },
+    {
+      "at": 2784,
+      "event": "applied",
+      "version": 2,
+      "firstRequestedAt": 1801,
+      "activeMs": 983
+    },
+    {
+      "at": 3461,
+      "event": "requested",
+      "version": 3,
+      "firstRequestedAt": 3461,
+      "activeMs": 0
+    },
+    {
+      "at": 3461,
+      "event": "started",
+      "version": 3,
+      "firstRequestedAt": 3461,
+      "activeMs": 0
+    },
+    {
+      "at": 6561,
+      "event": "fallback-invalid-or-timed-out-measurement",
+      "version": 3,
+      "firstRequestedAt": 3461,
+      "activeMs": 3100
+    }
+  ],
+  "after": {
+    "timers": {
+      "activeTimeouts": 0,
+      "activeIntervals": 3,
+      "pendingApplicationRaf": 1,
+      "timeoutsScheduled": 7,
+      "timeoutsFired": 2,
+      "intervalsScheduled": 3,
+      "intervalCallbacks": 10
+    },
+    "ticker": null,
+    "state": {
+      "state": "AMBIENT",
+      "level": "normal",
+      "paused": "false",
+      "clock": "2913",
+      "pulseDueIn": "147088",
+      "qualityAutomation": "baseline",
+      "qualityState": "normal",
+      "qualityTarget": "62.5",
+      "recalibration": "idle"
+    }
+  }
+}

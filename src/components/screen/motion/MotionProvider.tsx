@@ -33,7 +33,9 @@ export function MotionProvider({ children, dataTime, runtime, qualityMode = 'bas
         calibrating = true;
         director.setEnvironment({ pageVisible: false, reduced: media.matches, voiceActive });
         cancelCalibration = calibrateRaf(reference => {
-          calibrating = false; calibrated = true; director.setCalibration(reference); sync();
+          calibrating = false; calibrated = true; director.setCalibration(reference);
+          if (director.qualityMode !== 'baseline') director.attachRecalibration(calibrateRaf);
+          sync();
         });
       }
       director.setEnvironment({ pageVisible: !document.hidden && !calibrating, reduced: media.matches, voiceActive });
@@ -44,7 +46,12 @@ export function MotionProvider({ children, dataTime, runtime, qualityMode = 'bas
     });
     observer.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['data-phase'] });
     const simulate = (e: Event) => { simulated = (e as CustomEvent<boolean>).detail; sync(); };
-    const recalibrate = () => { if (qualityMode === 'baseline') return; cancelCalibration?.(); calibrating = false; calibrated = false; sync(); };
+    const recalibrate = () => {
+      if (director.qualityMode === 'baseline') return;
+      if (calibrated) { director.requestRecalibration(); return; }
+      // Preserve the existing first-start calibration path, including pre-start resize.
+      cancelCalibration?.(); calibrating = false; calibrated = false; sync();
+    };
     window.addEventListener('resize', recalibrate);
     window.addEventListener('nexus-quality-recalibrate', recalibrate);
     screen.orientation?.addEventListener('change', recalibrate);
@@ -61,7 +68,7 @@ function MotionDebug({ director, dataTime }: { director: MotionDirector; dataTim
   const f = director.frame;
   const runtime = useMotionRuntime();
   if (!debug) return null;
-  return <aside className="nexus-motion-debug" aria-label="动效调试" data-state={f.state} data-level={f.motionLevel} data-paused={director.paused} data-clock={f.time} data-pulse-due-in={director.pulseDueIn} data-quality-automation={director.qualityMode} data-quality-state={director.qualityDecision?.state ?? 'normal'} data-quality-target={director.qualityTargetHz}>
+  return <aside className="nexus-motion-debug" aria-label="动效调试" data-state={f.state} data-level={f.motionLevel} data-paused={director.paused} data-clock={f.time} data-pulse-due-in={director.pulseDueIn} data-quality-automation={director.qualityMode} data-quality-state={director.qualityDecision?.state ?? 'normal'} data-quality-target={director.qualityTargetHz} data-recalibration={director.recalibration?.snapshot.state ?? 'idle'}>
     <p>状态 {f.state} · 共振 {(f.pulse * 100).toFixed(0)}%</p><p>FPS {f.fps.toFixed(1)} · 档位 {f.motionLevel} · 显著 {f.significant}/8</p>
     <p>页面 {String(f.pageVisible)} · 小川 {String(f.voiceActive)}</p><p>数据时间 {dataTime}</p>
     <p data-motion-engine>{runtime ? "GSAP" : "Legacy"}</p>
@@ -74,6 +81,7 @@ function MotionDebug({ director, dataTime }: { director: MotionDirector; dataTim
     <button onClick={() => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(director.records, null, 2)], { type: 'application/json' })); a.download = 'nexus-performance.json'; a.click(); URL.revokeObjectURL(a.href); }}>导出性能日志</button>
     {director.qualityMode !== 'baseline' && <button onClick={() => window.dispatchEvent(new Event('nexus-quality-recalibrate'))}>重新校准刷新率</button>}
     <output hidden data-quality-log>{JSON.stringify(director.qualityRecords)}</output>
+    <output hidden data-recalibration-log>{JSON.stringify(director.recalibration?.records ?? [])}</output>
     <output hidden data-gsap-audit>{JSON.stringify(runtime?.audit() ?? null)}</output>
     <output hidden data-performance-log>{JSON.stringify(director.records)}</output>
   </aside>;

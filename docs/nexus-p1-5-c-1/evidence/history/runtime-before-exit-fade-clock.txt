@@ -1,0 +1,115 @@
+[WebServer] (node:59104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:59106) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 18 tests using 1 worker
+
+(node:59107) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/18] e2e/p1-5-c-1.spec.ts:26:49 › legacy 1280: fit is immediate while INTRO/PULSE reach natural ends
+[2/18] e2e/p1-5-c-1.spec.ts:26:49 › legacy 1792: fit is immediate while INTRO/PULSE reach natural ends
+[3/18] e2e/p1-5-c-1.spec.ts:26:49 › legacy 1920: fit is immediate while INTRO/PULSE reach natural ends
+[4/18] e2e/p1-5-c-1.spec.ts:26:49 › legacy 3840: fit is immediate while INTRO/PULSE reach natural ends
+[5/18] e2e/p1-5-c-1.spec.ts:52:3 › legacy: resize storm reserves the first active budget without indefinite delay
+[6/18] e2e/p1-5-c-1.spec.ts:64:3 › legacy: waiting/measurement takeover, recovery, teardown and engine switch release resources
+[7/18] e2e/p1-5-c-1.spec.ts:94:3 › legacy: default Baseline ignores every recalibration trigger
+[8/18] e2e/p1-5-c-1.spec.ts:101:3 › legacy: new version during measurement wins and a stalled finite measurement falls back
+[9/18] e2e/p1-5-c-1.spec.ts:113:3 › legacy: real voice overlay takes priority while waiting and measuring
+  1) e2e/p1-5-c-1.spec.ts:113:3 › legacy: real voice overlay takes priority while waiting and measuring 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.nexus-motion-debug')
+    Expected: "false"
+    Received: "true"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.nexus-motion-debug') with timeout 5000ms
+      - waiting for locator('.nexus-motion-debug')
+        14 × locator resolved to <aside aria-label="动效调试" data-clock="1281" data-paused="true" data-level="normal" data-state="AMBIENT" data-recalibration="idle" class="nexus-motion-debug" data-pulse-due-in="150000" data-quality-target="62.5" data-quality-state="normal" data-quality-automation="candidate">…</aside>
+           - unexpected value "true"
+
+
+      119 |     await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(4000);
+      120 |     const control = await audit(page);
+    > 121 |     await page.keyboard.press('Escape'); await expect(debug(page)).toHaveAttribute('data-paused', 'false'); await page.clock.runFor(1500);
+          |                                                                    ^
+      122 |     for (const stage of ['waiting', 'measuring']) {
+      123 |       if (stage === 'waiting') await page.getByRole('button', { name: '重启入场', exact: true }).click();
+      124 |       await request(page); await expect(debug(page)).toHaveAttribute('data-recalibration', stage);
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:121:68
+
+    Error Context: .review/p1-5-c-1/traces/p1-5-c-1-legacy-real-voice-f0b73-while-waiting-and-measuring/error-context.md
+
+    Error Context: .review/p1-5-c-1/traces/p1-5-c-1-legacy-real-voice-f0b73-while-waiting-and-measuring/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-5-c-1/traces/p1-5-c-1-legacy-real-voice-f0b73-while-waiting-and-measuring/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-5-c-1/traces/p1-5-c-1-legacy-real-voice-f0b73-while-waiting-and-measuring/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:59186) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[10/18] e2e/p1-5-c-1.spec.ts:26:49 › gsap 1280: fit is immediate while INTRO/PULSE reach natural ends
+[11/18] e2e/p1-5-c-1.spec.ts:26:49 › gsap 1792: fit is immediate while INTRO/PULSE reach natural ends
+[12/18] e2e/p1-5-c-1.spec.ts:26:49 › gsap 1920: fit is immediate while INTRO/PULSE reach natural ends
+[13/18] e2e/p1-5-c-1.spec.ts:26:49 › gsap 3840: fit is immediate while INTRO/PULSE reach natural ends
+[14/18] e2e/p1-5-c-1.spec.ts:52:3 › gsap: resize storm reserves the first active budget without indefinite delay
+[15/18] e2e/p1-5-c-1.spec.ts:64:3 › gsap: waiting/measurement takeover, recovery, teardown and engine switch release resources
+[16/18] e2e/p1-5-c-1.spec.ts:94:3 › gsap: default Baseline ignores every recalibration trigger
+[17/18] e2e/p1-5-c-1.spec.ts:101:3 › gsap: new version during measurement wins and a stalled finite measurement falls back
+[18/18] e2e/p1-5-c-1.spec.ts:113:3 › gsap: real voice overlay takes priority while waiting and measuring
+  2) e2e/p1-5-c-1.spec.ts:113:3 › gsap: real voice overlay takes priority while waiting and measuring 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.nexus-motion-debug')
+    Expected: "false"
+    Received: "true"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.nexus-motion-debug') with timeout 5000ms
+      - waiting for locator('.nexus-motion-debug')
+        14 × locator resolved to <aside aria-label="动效调试" data-clock="1280" data-paused="true" data-level="normal" data-state="AMBIENT" data-quality-target="60" data-recalibration="idle" class="nexus-motion-debug" data-pulse-due-in="150000" data-quality-state="normal" data-quality-automation="candidate">…</aside>
+           - unexpected value "true"
+
+
+      119 |     await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(4000);
+      120 |     const control = await audit(page);
+    > 121 |     await page.keyboard.press('Escape'); await expect(page.locator('.overlay-root')).toHaveAttribute('data-phase', 'exit');
+          |                                                                    ^
+      122 |     await page.clock.runFor(600); await expect(debug(page)).toHaveAttribute('data-paused', 'false'); await page.clock.runFor(1500);
+      123 |     for (const stage of ['waiting', 'measuring']) {
+      124 |       if (stage === 'waiting') await page.getByRole('button', { name: '重启入场', exact: true }).click();
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:121:68
+
+    Error Context: .review/p1-5-c-1/traces/p1-5-c-1-gsap-real-voice-o-1ee31-while-waiting-and-measuring/error-context.md
+
+    Error Context: .review/p1-5-c-1/traces/p1-5-c-1-gsap-real-voice-o-1ee31-while-waiting-and-measuring/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-5-c-1/traces/p1-5-c-1-gsap-real-voice-o-1ee31-while-waiting-and-measuring/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-5-c-1/traces/p1-5-c-1-gsap-real-voice-o-1ee31-while-waiting-and-measuring/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2 failed
+    e2e/p1-5-c-1.spec.ts:113:3 › legacy: real voice overlay takes priority while waiting and measuring 
+    e2e/p1-5-c-1.spec.ts:113:3 › gsap: real voice overlay takes priority while waiting and measuring 
+  16 passed (2.0m)

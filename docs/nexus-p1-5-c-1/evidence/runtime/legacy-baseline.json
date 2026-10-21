@@ -1,0 +1,23 @@
+{
+  "timers": {
+    "activeTimeouts": 0,
+    "activeIntervals": 3,
+    "pendingApplicationRaf": 1,
+    "timeoutsScheduled": 1,
+    "timeoutsFired": 1,
+    "intervalsScheduled": 3,
+    "intervalCallbacks": 6
+  },
+  "ticker": null,
+  "state": {
+    "state": "INTRO",
+    "level": "normal",
+    "paused": "false",
+    "clock": "2977",
+    "pulseDueIn": "148800",
+    "qualityAutomation": "baseline",
+    "qualityState": "normal",
+    "qualityTarget": "60",
+    "recalibration": "idle"
+  }
+}

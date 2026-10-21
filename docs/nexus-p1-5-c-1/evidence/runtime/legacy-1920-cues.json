@@ -1,0 +1,242 @@
+[
+  {
+    "cue": "INTRO",
+    "before": {
+      "timers": {
+        "activeTimeouts": 0,
+        "activeIntervals": 3,
+        "pendingApplicationRaf": 1,
+        "timeoutsScheduled": 2,
+        "timeoutsFired": 1,
+        "intervalsScheduled": 3,
+        "intervalCallbacks": 4
+      },
+      "ticker": null,
+      "state": {
+        "state": "INTRO",
+        "level": "normal",
+        "paused": "false",
+        "clock": "1537",
+        "pulseDueIn": "149744",
+        "qualityAutomation": "candidate",
+        "qualityState": "normal",
+        "qualityTarget": "62.5",
+        "recalibration": "idle"
+      }
+    },
+    "immediate": {
+      "width": 1824,
+      "height": 1026,
+      "transform": "scale(0.95)",
+      "state": "INTRO"
+    },
+    "after": {
+      "timers": {
+        "activeTimeouts": 0,
+        "activeIntervals": 3,
+        "pendingApplicationRaf": 1,
+        "timeoutsScheduled": 4,
+        "timeoutsFired": 1,
+        "intervalsScheduled": 3,
+        "intervalCallbacks": 10
+      },
+      "ticker": null,
+      "state": {
+        "state": "AMBIENT",
+        "level": "normal",
+        "paused": "false",
+        "clock": "4353",
+        "pulseDueIn": "149136",
+        "qualityAutomation": "candidate",
+        "qualityState": "normal",
+        "qualityTarget": "62.5",
+        "recalibration": "idle"
+      }
+    },
+    "records": [
+      {
+        "at": 2151,
+        "event": "requested",
+        "version": 1,
+        "firstRequestedAt": 2151,
+        "activeMs": 0
+      },
+      {
+        "at": 2151,
+        "event": "requested",
+        "version": 2,
+        "firstRequestedAt": 2151,
+        "activeMs": 0
+      },
+      {
+        "at": 2151,
+        "event": "requested",
+        "version": 3,
+        "firstRequestedAt": 2151,
+        "activeMs": 0
+      },
+      {
+        "at": 4000,
+        "event": "started",
+        "version": 3,
+        "firstRequestedAt": 2151,
+        "activeMs": 1849
+      },
+      {
+        "at": 4496,
+        "event": "applied",
+        "version": 3,
+        "firstRequestedAt": 2151,
+        "activeMs": 2345
+      }
+    ]
+  },
+  {
+    "cue": "PULSE",
+    "before": {
+      "timers": {
+        "activeTimeouts": 0,
+        "activeIntervals": 3,
+        "pendingApplicationRaf": 1,
+        "timeoutsScheduled": 6,
+        "timeoutsFired": 1,
+        "intervalsScheduled": 3,
+        "intervalCallbacks": 14
+      },
+      "ticker": null,
+      "state": {
+        "state": "PULSE",
+        "level": "normal",
+        "paused": "false",
+        "clock": "5633",
+        "pulseDueIn": "147856",
+        "qualityAutomation": "candidate",
+        "qualityState": "normal",
+        "qualityTarget": "62.5",
+        "recalibration": "idle"
+      }
+    },
+    "immediate": {
+      "width": 1824,
+      "height": 1026,
+      "transform": "scale(0.95)",
+      "state": "PULSE"
+    },
+    "after": {
+      "timers": {
+        "activeTimeouts": 0,
+        "activeIntervals": 3,
+        "pendingApplicationRaf": 1,
+        "timeoutsScheduled": 8,
+        "timeoutsFired": 1,
+        "intervalsScheduled": 3,
+        "intervalCallbacks": 36
+      },
+      "ticker": null,
+      "state": {
+        "state": "AMBIENT",
+        "level": "normal",
+        "paused": "false",
+        "clock": "16129",
+        "pulseDueIn": "149184",
+        "qualityAutomation": "candidate",
+        "qualityState": "normal",
+        "qualityTarget": "62.5",
+        "recalibration": "idle"
+      }
+    },
+    "records": [
+      {
+        "at": 2151,
+        "event": "requested",
+        "version": 1,
+        "firstRequestedAt": 2151,
+        "activeMs": 0
+      },
+      {
+        "at": 2151,
+        "event": "requested",
+        "version": 2,
+        "firstRequestedAt": 2151,
+        "activeMs": 0
+      },
+      {
+        "at": 2151,
+        "event": "requested",
+        "version": 3,
+        "firstRequestedAt": 2151,
+        "activeMs": 0
+      },
+      {
+        "at": 4000,
+        "event": "started",
+        "version": 3,
+        "firstRequestedAt": 2151,
+        "activeMs": 1849
+      },
+      {
+        "at": 4496,
+        "event": "applied",
+        "version": 3,
+        "firstRequestedAt": 2151,
+        "activeMs": 2345
+      },
+      {
+        "at": 5568,
+        "event": "requested",
+        "version": 4,
+        "firstRequestedAt": 5568,
+        "activeMs": 0
+      },
+      {
+        "at": 5568,
+        "event": "started",
+        "version": 4,
+        "firstRequestedAt": 5568,
+        "activeMs": 0
+      },
+      {
+        "at": 6064,
+        "event": "applied",
+        "version": 4,
+        "firstRequestedAt": 5568,
+        "activeMs": 496
+      },
+      {
+        "at": 7201,
+        "event": "requested",
+        "version": 5,
+        "firstRequestedAt": 7201,
+        "activeMs": 0
+      },
+      {
+        "at": 7201,
+        "event": "requested",
+        "version": 6,
+        "firstRequestedAt": 7201,
+        "activeMs": 0
+      },
+      {
+        "at": 7201,
+        "event": "requested",
+        "version": 7,
+        "firstRequestedAt": 7201,
+        "activeMs": 0
+      },
+      {
+        "at": 16848,
+        "event": "started",
+        "version": 7,
+        "firstRequestedAt": 7201,
+        "activeMs": 9647
+      },
+      {
+        "at": 17344,
+        "event": "applied",
+        "version": 7,
+        "firstRequestedAt": 7201,
+        "activeMs": 10143
+      }
+    ]
+  }
+]

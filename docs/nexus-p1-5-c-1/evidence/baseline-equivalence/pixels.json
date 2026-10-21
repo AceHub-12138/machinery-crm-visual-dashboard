@@ -1,0 +1,117 @@
+[
+  {
+    "name": "gsap-ambient",
+    "samePixels": false,
+    "changedPixels": 546,
+    "fraction": 0.00026331018518518516,
+    "maximumChannelDifference": 17,
+    "bbox": [
+      964,
+      409,
+      1524,
+      512
+    ]
+  },
+  {
+    "name": "gsap-completed",
+    "samePixels": false,
+    "changedPixels": 1266,
+    "fraction": 0.0007008662840136055,
+    "maximumChannelDifference": 22,
+    "bbox": [
+      898,
+      234,
+      1537,
+      479
+    ]
+  },
+  {
+    "name": "gsap-intro",
+    "samePixels": true,
+    "changedPixels": 0,
+    "fraction": 0.0,
+    "maximumChannelDifference": 0,
+    "bbox": null
+  },
+  {
+    "name": "gsap-pulse",
+    "samePixels": true,
+    "changedPixels": 0,
+    "fraction": 0.0,
+    "maximumChannelDifference": 0,
+    "bbox": null
+  },
+  {
+    "name": "gsap-resize-in-pulse",
+    "samePixels": false,
+    "changedPixels": 52,
+    "fraction": 2.8787556689342404e-05,
+    "maximumChannelDifference": 14,
+    "bbox": [
+      1525,
+      234,
+      1538,
+      324
+    ]
+  },
+  {
+    "name": "legacy-ambient",
+    "samePixels": false,
+    "changedPixels": 84,
+    "fraction": 4.050925925925926e-05,
+    "maximumChannelDifference": 10,
+    "bbox": [
+      968,
+      471,
+      1007,
+      507
+    ]
+  },
+  {
+    "name": "legacy-completed",
+    "samePixels": false,
+    "changedPixels": 1077,
+    "fraction": 0.000596234587585034,
+    "maximumChannelDifference": 26,
+    "bbox": [
+      899,
+      327,
+      1535,
+      479
+    ]
+  },
+  {
+    "name": "legacy-intro",
+    "samePixels": true,
+    "changedPixels": 0,
+    "fraction": 0.0,
+    "maximumChannelDifference": 0,
+    "bbox": null
+  },
+  {
+    "name": "legacy-pulse",
+    "samePixels": false,
+    "changedPixels": 6488,
+    "fraction": 0.003128858024691358,
+    "maximumChannelDifference": 18,
+    "bbox": [
+      925,
+      225,
+      1652,
+      677
+    ]
+  },
+  {
+    "name": "legacy-resize-in-pulse",
+    "samePixels": false,
+    "changedPixels": 74,
+    "fraction": 4.0966907596371885e-05,
+    "maximumChannelDifference": 14,
+    "bbox": [
+      1525,
+      234,
+      1537,
+      342
+    ]
+  }
+]

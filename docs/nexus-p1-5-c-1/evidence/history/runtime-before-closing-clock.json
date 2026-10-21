@@ -1,0 +1,237 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "e2e/p1-5-c-1.config.ts",
+      "--grep",
+      "real voice"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "p1-5-c-1.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/docs/nexus-p1-5-c-1/evidence/checks/runtime.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "p1-5-c-1.spec.ts",
+      "file": "p1-5-c-1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "legacy: real voice overlay takes priority while waiting and measuring",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8293,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-root')\nExpected: \u001b[32m\"exit\"\u001b[39m\nReceived: \u001b[31m\"on\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-root') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-root')\u001b[22m\n\u001b[2m    14 × locator resolved to <div data-phase=\"on\" class=\"overlay-root\" data-has-card=\"false\" data-barge-paused=\"false\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"on\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-root')\nExpected: \u001b[32m\"exit\"\u001b[39m\nReceived: \u001b[31m\"on\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-root') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-root')\u001b[22m\n\u001b[2m    14 × locator resolved to <div data-phase=\"on\" class=\"overlay-root\" data-has-card=\"false\" data-barge-paused=\"false\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"on\"\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:121:86",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                      "column": 86,
+                      "line": 121
+                    },
+                    "snippet": "  119 |     await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(4000);\n  120 |     const control = await audit(page);\n> 121 |     await page.keyboard.press('Escape'); await expect(page.locator('.overlay-root')).toHaveAttribute('data-phase', 'exit');\n      |                                                                                      ^\n  122 |     await page.clock.runFor(600); await expect(debug(page)).toHaveAttribute('data-paused', 'false'); await page.clock.runFor(1500);\n  123 |     for (const stage of ['waiting', 'measuring']) {\n  124 |       if (stage === 'waiting') await page.getByRole('button', { name: '重启入场', exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                        "column": 86,
+                        "line": 121
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-root')\nExpected: \u001b[32m\"exit\"\u001b[39m\nReceived: \u001b[31m\"on\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-root') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-root')\u001b[22m\n\u001b[2m    14 × locator resolved to <div data-phase=\"on\" class=\"overlay-root\" data-has-card=\"false\" data-barge-paused=\"false\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"on\"\u001b[22m\n\n\n  119 |     await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(4000);\n  120 |     const control = await audit(page);\n> 121 |     await page.keyboard.press('Escape'); await expect(page.locator('.overlay-root')).toHaveAttribute('data-phase', 'exit');\n      |                                                                                      ^\n  122 |     await page.clock.runFor(600); await expect(debug(page)).toHaveAttribute('data-paused', 'false'); await page.clock.runFor(1500);\n  123 |     for (const stage of ['waiting', 'measuring']) {\n  124 |       if (stage === 'waiting') await page.getByRole('button', { name: '重启入场', exact: true }).click();\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:121:86"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:46:50.462Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-legacy-real-voice-f0b73-while-waiting-and-measuring/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-legacy-real-voice-f0b73-while-waiting-and-measuring/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-legacy-real-voice-f0b73-while-waiting-and-measuring/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                    "column": 86,
+                    "line": 121
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-1060ea459e03338a0563",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 113,
+          "column": 3
+        },
+        {
+          "title": "gsap: real voice overlay takes priority while waiting and measuring",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8332,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-root')\nExpected: \u001b[32m\"exit\"\u001b[39m\nReceived: \u001b[31m\"on\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-root') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-root')\u001b[22m\n\u001b[2m    14 × locator resolved to <div data-phase=\"on\" class=\"overlay-root\" data-has-card=\"false\" data-barge-paused=\"false\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"on\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-root')\nExpected: \u001b[32m\"exit\"\u001b[39m\nReceived: \u001b[31m\"on\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-root') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-root')\u001b[22m\n\u001b[2m    14 × locator resolved to <div data-phase=\"on\" class=\"overlay-root\" data-has-card=\"false\" data-barge-paused=\"false\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"on\"\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:121:86",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                      "column": 86,
+                      "line": 121
+                    },
+                    "snippet": "  119 |     await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(4000);\n  120 |     const control = await audit(page);\n> 121 |     await page.keyboard.press('Escape'); await expect(page.locator('.overlay-root')).toHaveAttribute('data-phase', 'exit');\n      |                                                                                      ^\n  122 |     await page.clock.runFor(600); await expect(debug(page)).toHaveAttribute('data-paused', 'false'); await page.clock.runFor(1500);\n  123 |     for (const stage of ['waiting', 'measuring']) {\n  124 |       if (stage === 'waiting') await page.getByRole('button', { name: '重启入场', exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                        "column": 86,
+                        "line": 121
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-root')\nExpected: \u001b[32m\"exit\"\u001b[39m\nReceived: \u001b[31m\"on\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.overlay-root') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-root')\u001b[22m\n\u001b[2m    14 × locator resolved to <div data-phase=\"on\" class=\"overlay-root\" data-has-card=\"false\" data-barge-paused=\"false\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"on\"\u001b[22m\n\n\n  119 |     await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(4000);\n  120 |     const control = await audit(page);\n> 121 |     await page.keyboard.press('Escape'); await expect(page.locator('.overlay-root')).toHaveAttribute('data-phase', 'exit');\n      |                                                                                      ^\n  122 |     await page.clock.runFor(600); await expect(debug(page)).toHaveAttribute('data-paused', 'false'); await page.clock.runFor(1500);\n  123 |     for (const stage of ['waiting', 'measuring']) {\n  124 |       if (stage === 'waiting') await page.getByRole('button', { name: '重启入场', exact: true }).click();\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:121:86"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:46:59.287Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-gsap-real-voice-o-1ee31-while-waiting-and-measuring/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-gsap-real-voice-o-1ee31-while-waiting-and-measuring/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-gsap-real-voice-o-1ee31-while-waiting-and-measuring/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                    "column": 86,
+                    "line": 121
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-0e6e7a1cf46d2941dc11",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 113,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T00:46:49.573Z",
+    "duration": 18340.329,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

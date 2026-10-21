@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "baseline": "b35b93c230fc6c084895a4119196779f505bf2fb",
+  "branch": "codex/nexus-p1-5-c-1-deferred-recalibration",
+  "buildId": "jnd-N6QqrV0JPxo-ldtcQ",
+  "candidateParametersUnchanged": true,
+  "startupSamplerUnchanged": true,
+  "layoutAndFitUnchanged": true,
+  "permissionBoundaryUnchanged": true,
+  "voiceAndBusinessAndArtInputsUnchanged": true,
+  "noNewPermanentRafOrPollingClock": true,
+  "changedInputs": [
+    "src/components/screen/motion/DeferredRecalibration.test.ts",
+    "src/components/screen/motion/DeferredRecalibration.ts",
+    "src/components/screen/motion/MotionDirector.ts",
+    "src/components/screen/motion/MotionProvider.tsx",
+    "src/components/screen/motion/QualityPolicy.test.ts",
+    "src/components/screen/motion/QualityPolicy.ts"
+  ],
+  "inputCount": 163
+}

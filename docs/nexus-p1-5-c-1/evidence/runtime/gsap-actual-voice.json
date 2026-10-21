@@ -1,0 +1,265 @@
+{
+  "control": {
+    "timers": {
+      "activeTimeouts": 0,
+      "activeIntervals": 4,
+      "pendingApplicationRaf": 1,
+      "timeoutsScheduled": 2,
+      "timeoutsFired": 1,
+      "intervalsScheduled": 4,
+      "intervalCallbacks": 90
+    },
+    "ticker": {
+      "liveScenes": 1,
+      "liveTimelines": 27,
+      "rootAnimations": 0,
+      "configuredCapHz": 60,
+      "activeListeners": 0,
+      "listenerUpdates": 78,
+      "firstAtMs": 512,
+      "lastAtMs": 1792
+    },
+    "state": {
+      "state": "AMBIENT",
+      "level": "normal",
+      "paused": "true",
+      "clock": "1280",
+      "pulseDueIn": "150000",
+      "qualityAutomation": "candidate",
+      "qualityState": "normal",
+      "qualityTarget": "60",
+      "recalibration": "idle"
+    }
+  },
+  "evidence": [
+    {
+      "stage": "waiting",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 4,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 5,
+          "timeoutsFired": 3,
+          "intervalsScheduled": 5,
+          "intervalCallbacks": 184
+        },
+        "ticker": {
+          "liveScenes": 1,
+          "liveTimelines": 27,
+          "rootAnimations": 0,
+          "configuredCapHz": 60,
+          "activeListeners": 0,
+          "listenerUpdates": 172,
+          "firstAtMs": 512,
+          "lastAtMs": 8688
+        },
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "true",
+          "clock": "2832",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "60",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 9,
+          "timeoutsFired": 5,
+          "intervalsScheduled": 5,
+          "intervalCallbacks": 190
+        },
+        "ticker": {
+          "liveScenes": 1,
+          "liveTimelines": 27,
+          "rootAnimations": 0,
+          "configuredCapHz": 60,
+          "activeListeners": 1,
+          "listenerUpdates": 235,
+          "firstAtMs": 512,
+          "lastAtMs": 15536
+        },
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "3840",
+          "pulseDueIn": "148992",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "60",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 8702,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 8702,
+          "activeMs": 0
+        },
+        {
+          "at": 8702,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 8702,
+          "activeMs": 0
+        },
+        {
+          "at": 14022,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 8702,
+          "activeMs": 0
+        },
+        {
+          "at": 14512,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 8702,
+          "activeMs": 490
+        }
+      ]
+    },
+    {
+      "stage": "measuring",
+      "paused": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 4,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 11,
+          "timeoutsFired": 5,
+          "intervalsScheduled": 6,
+          "intervalCallbacks": 278
+        },
+        "ticker": {
+          "liveScenes": 1,
+          "liveTimelines": 27,
+          "rootAnimations": 0,
+          "configuredCapHz": 60,
+          "activeListeners": 0,
+          "listenerUpdates": 239,
+          "firstAtMs": 512,
+          "lastAtMs": 15600
+        },
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "true",
+          "clock": "3904",
+          "pulseDueIn": "150000",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "60",
+          "recalibration": "paused"
+        }
+      },
+      "resumed": {
+        "timers": {
+          "activeTimeouts": 0,
+          "activeIntervals": 3,
+          "pendingApplicationRaf": 1,
+          "timeoutsScheduled": 15,
+          "timeoutsFired": 7,
+          "intervalsScheduled": 6,
+          "intervalCallbacks": 284
+        },
+        "ticker": {
+          "liveScenes": 1,
+          "liveTimelines": 27,
+          "rootAnimations": 0,
+          "configuredCapHz": 60,
+          "activeListeners": 1,
+          "listenerUpdates": 299,
+          "firstAtMs": 512,
+          "lastAtMs": 22384
+        },
+        "state": {
+          "state": "AMBIENT",
+          "level": "normal",
+          "paused": "false",
+          "clock": "4864",
+          "pulseDueIn": "149040",
+          "qualityAutomation": "candidate",
+          "qualityState": "normal",
+          "qualityTarget": "60",
+          "recalibration": "idle"
+        }
+      },
+      "log": [
+        {
+          "at": 8702,
+          "event": "requested",
+          "version": 1,
+          "firstRequestedAt": 8702,
+          "activeMs": 0
+        },
+        {
+          "at": 8702,
+          "event": "paused-voice",
+          "version": 1,
+          "firstRequestedAt": 8702,
+          "activeMs": 0
+        },
+        {
+          "at": 14022,
+          "event": "started",
+          "version": 1,
+          "firstRequestedAt": 8702,
+          "activeMs": 0
+        },
+        {
+          "at": 14512,
+          "event": "applied",
+          "version": 1,
+          "firstRequestedAt": 8702,
+          "activeMs": 490
+        },
+        {
+          "at": 15602,
+          "event": "requested",
+          "version": 2,
+          "firstRequestedAt": 15602,
+          "activeMs": 0
+        },
+        {
+          "at": 15602,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 15602,
+          "activeMs": 0
+        },
+        {
+          "at": 15602,
+          "event": "paused-voice",
+          "version": 2,
+          "firstRequestedAt": 15602,
+          "activeMs": 0
+        },
+        {
+          "at": 20922,
+          "event": "started",
+          "version": 2,
+          "firstRequestedAt": 15602,
+          "activeMs": 0
+        },
+        {
+          "at": 21408,
+          "event": "applied",
+          "version": 2,
+          "firstRequestedAt": 15602,
+          "activeMs": 486
+        }
+      ]
+    }
+  ]
+}

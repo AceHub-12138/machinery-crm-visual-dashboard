@@ -12,6 +12,8 @@ export interface QualitySample {
   environment: QualityEnvironment;
   /** Shadow supplies the actual workload so low-quality evidence cannot pass a probe. */
   normalLoad: boolean;
+  /** Scheduling availability only. Does not alter degradation/recovery thresholds. */
+  probeAllowed?: boolean;
 }
 export interface QualityDecision {
   state: QualityState; previous: QualityState; reason: string;
@@ -81,6 +83,7 @@ export class ProbeQualityPolicy implements QualityPolicy {
         const decision = this.decision(previous, reason, s); this.clearEvidence(); return decision;
       }
     } else if (this.state === 'low' && this.nextProbe !== null && s.atMs >= this.nextProbe) {
+      if (s.probeAllowed === false) return this.decision(previous, 'probe-deferred-for-recalibration', s);
       if (e.phase !== 'AMBIENT' && e.phase !== 'DEGRADED') return this.decision(previous, 'probe-deferred-until-ambient', s);
       this.state = 'probe'; this.clearEvidence();
       return this.decision(previous, 'scheduled-normal-load-probe', s);

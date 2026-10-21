@@ -1,0 +1,18 @@
+{
+  "baseline": "b35b93c230fc6c084895a4119196779f505bf2fb",
+  "originalBuild": "_Q7HstrffpTf90ptrXJma",
+  "fixedBuild": "jnd-N6QqrV0JPxo-ldtcQ",
+  "pairs": [
+    {
+      "engine": "legacy",
+      "label": "intro",
+      "match": true
+    },
+    {
+      "engine": "legacy",
+      "label": "ambient",
+      "match": true
+    }
+  ],
+  "failure": "locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '触发共振', exact: true })\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/scripts/p1-5-c-1/baseline-equivalence.mjs:44:94"
+}

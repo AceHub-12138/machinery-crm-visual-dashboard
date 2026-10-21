@@ -1,0 +1,77 @@
+[WebServer] (node:60632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:60633) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 63 tests using 1 worker
+
+(node:60635) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/63] e2e/nexus-motion.spec.ts:8:1 › SSR first paint declares normal money size before measurement
+[2/63] e2e/nexus-motion.spec.ts:15:1 › intro, real-key carousel linkage, one loop, reduced-motion and teardown
+[3/63] e2e/nexus-motion.spec.ts:38:1 › pulse storyboard: map 0–1.5s, routes near→far 1.5–3s, full hold ≥3.4s with ≤5 ripples, smooth 6.5–10s return, text fixed, cancellation and voice priority
+[4/63] e2e/nexus-motion.spec.ts:93:1 › manual degradation disables particles and pulse and permits one flight
+[5/63] e2e/nexus-motion.spec.ts:102:1 › unchanged snapshots leave numbers static and debug is absent in production playback
+[6/63] e2e/nexus-motion.spec.ts:109:1 › carousel visits all five keys across the minute snapshot refresh
+[7/63] e2e/nexus-motion.spec.ts:119:1 › actual numeric snapshot change has one bounded tween and correct final measurement
+[8/63] e2e/nexus.spec.ts:55:1 › native mock and fixture, route linkage, and stale/unavailable transitions
+[9/63] e2e/nexus.spec.ts:78:1 › backup 16x9 and 4x3 profiles retain full inset and readable data
+[10/63] e2e/nexus.spec.ts:91:1 › negative/null/no-target and overrun-large-money fixtures are readable
+[11/63] e2e/nexus.spec.ts:105:1 › 60-second refresh retains the whole last successful snapshot offline
+[12/63] e2e/nexus.spec.ts:120:1 › A5–A7 sanitized visual fields replay: full regions, grey target and city collision rules
+[13/63] e2e/nexus.spec.ts:172:1 › map frame stays in its column, 24px from panels, and below all headings
+[14/63] e2e/nexus.spec.ts:212:1 › P2 A native fixture screenshot and side-by-side design comparison
+[15/63] e2e/p1-3.spec.ts:75:3 › main 1280 no-preference normal
+[16/63] e2e/p1-3.spec.ts:92:39 › shipments 1280 no-preference normal normal
+[17/63] e2e/p1-3.spec.ts:92:39 › shipments 1280 no-preference normal outage
+[18/63] e2e/p1-3.spec.ts:75:3 › main 1280 no-preference long
+[19/63] e2e/p1-3.spec.ts:92:39 › shipments 1280 no-preference long normal
+[20/63] e2e/p1-3.spec.ts:92:39 › shipments 1280 no-preference long outage
+[21/63] e2e/p1-3.spec.ts:75:3 › main 1280 reduce normal
+[22/63] e2e/p1-3.spec.ts:92:39 › shipments 1280 reduce normal normal
+[23/63] e2e/p1-3.spec.ts:92:39 › shipments 1280 reduce normal outage
+[24/63] e2e/p1-3.spec.ts:75:3 › main 1280 reduce long
+[25/63] e2e/p1-3.spec.ts:92:39 › shipments 1280 reduce long normal
+[26/63] e2e/p1-3.spec.ts:92:39 › shipments 1280 reduce long outage
+[27/63] e2e/p1-3.spec.ts:75:3 › main 1792 no-preference normal
+[28/63] e2e/p1-3.spec.ts:92:39 › shipments 1792 no-preference normal normal
+[29/63] e2e/p1-3.spec.ts:92:39 › shipments 1792 no-preference normal outage
+[30/63] e2e/p1-3.spec.ts:75:3 › main 1792 no-preference long
+[31/63] e2e/p1-3.spec.ts:92:39 › shipments 1792 no-preference long normal
+[32/63] e2e/p1-3.spec.ts:92:39 › shipments 1792 no-preference long outage
+[33/63] e2e/p1-3.spec.ts:75:3 › main 1792 reduce normal
+[34/63] e2e/p1-3.spec.ts:92:39 › shipments 1792 reduce normal normal
+[35/63] e2e/p1-3.spec.ts:92:39 › shipments 1792 reduce normal outage
+[36/63] e2e/p1-3.spec.ts:75:3 › main 1792 reduce long
+[37/63] e2e/p1-3.spec.ts:92:39 › shipments 1792 reduce long normal
+[38/63] e2e/p1-3.spec.ts:92:39 › shipments 1792 reduce long outage
+[39/63] e2e/p1-3.spec.ts:75:3 › main 1920 no-preference normal
+[40/63] e2e/p1-3.spec.ts:92:39 › shipments 1920 no-preference normal normal
+[41/63] e2e/p1-3.spec.ts:92:39 › shipments 1920 no-preference normal outage
+[42/63] e2e/p1-3.spec.ts:75:3 › main 1920 no-preference long
+[43/63] e2e/p1-3.spec.ts:92:39 › shipments 1920 no-preference long normal
+[44/63] e2e/p1-3.spec.ts:92:39 › shipments 1920 no-preference long outage
+[45/63] e2e/p1-3.spec.ts:75:3 › main 1920 reduce normal
+[46/63] e2e/p1-3.spec.ts:92:39 › shipments 1920 reduce normal normal
+[47/63] e2e/p1-3.spec.ts:92:39 › shipments 1920 reduce normal outage
+[48/63] e2e/p1-3.spec.ts:75:3 › main 1920 reduce long
+[49/63] e2e/p1-3.spec.ts:92:39 › shipments 1920 reduce long normal
+[50/63] e2e/p1-3.spec.ts:92:39 › shipments 1920 reduce long outage
+[51/63] e2e/p1-3.spec.ts:75:3 › main 3840 no-preference normal
+[52/63] e2e/p1-3.spec.ts:92:39 › shipments 3840 no-preference normal normal
+[53/63] e2e/p1-3.spec.ts:92:39 › shipments 3840 no-preference normal outage
+[54/63] e2e/p1-3.spec.ts:75:3 › main 3840 no-preference long
+[55/63] e2e/p1-3.spec.ts:92:39 › shipments 3840 no-preference long normal
+[56/63] e2e/p1-3.spec.ts:92:39 › shipments 3840 no-preference long outage
+[57/63] e2e/p1-3.spec.ts:75:3 › main 3840 reduce normal
+[58/63] e2e/p1-3.spec.ts:92:39 › shipments 3840 reduce normal normal
+[59/63] e2e/p1-3.spec.ts:92:39 › shipments 3840 reduce normal outage
+[60/63] e2e/p1-3.spec.ts:75:3 › main 3840 reduce long
+[61/63] e2e/p1-3.spec.ts:92:39 › shipments 3840 reduce long normal
+[62/63] e2e/p1-3.spec.ts:92:39 › shipments 3840 reduce long outage
+[63/63] e2e/p1-3.spec.ts:132:1 › demo badge requires explicit demo mode even when payload requests a notice
+  63 passed (5.5m)

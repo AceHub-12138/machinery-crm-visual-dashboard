@@ -1,0 +1,701 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "e2e/p1-5-c-1.config.ts"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "p1-5-c-1.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/docs/nexus-p1-5-c-1/evidence/checks/runtime.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "p1-5-c-1.spec.ts",
+      "file": "p1-5-c-1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "legacy 1280: fit is immediate while INTRO/PULSE reach natural ends",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6774,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:38:30.367Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-03ebd24e1e19f1dc277a",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 22,
+          "column": 49
+        },
+        {
+          "title": "legacy 1792: fit is immediate while INTRO/PULSE reach natural ends",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6668,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:38:37.251Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-c1febe55a7392ec4979c",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 22,
+          "column": 49
+        },
+        {
+          "title": "legacy 1920: fit is immediate while INTRO/PULSE reach natural ends",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6678,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:38:43.926Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-0e664f43026cc5281715",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 22,
+          "column": 49
+        },
+        {
+          "title": "legacy 3840: fit is immediate while INTRO/PULSE reach natural ends",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6720,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:38:50.613Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-9e3869f921e6a5bf792f",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 22,
+          "column": 49
+        },
+        {
+          "title": "legacy: resize storm reserves the first active budget without indefinite delay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13460,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:38:57.341Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-20e91d02e3163d9a8ce5",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 48,
+          "column": 3
+        },
+        {
+          "title": "legacy: waiting/measurement takeover, recovery, teardown and engine switch release resources",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11205,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nexus-motion-debug')\nExpected: \u001b[32m\"idle\"\u001b[39m\nReceived: \u001b[31m\"measuring\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.nexus-motion-debug') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nexus-motion-debug')\u001b[22m\n\u001b[2m    14 × locator resolved to <aside aria-label=\"动效调试\" data-clock=\"5233\" data-paused=\"true\" data-level=\"normal\" data-state=\"AMBIENT\" class=\"nexus-motion-debug\" data-pulse-due-in=\"150000\" data-quality-target=\"62.5\" data-quality-state=\"normal\" data-recalibration=\"measuring\" data-quality-automation=\"candidate\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"measuring\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nexus-motion-debug')\nExpected: \u001b[32m\"idle\"\u001b[39m\nReceived: \u001b[31m\"measuring\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.nexus-motion-debug') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nexus-motion-debug')\u001b[22m\n\u001b[2m    14 × locator resolved to <aside aria-label=\"动效调试\" data-clock=\"5233\" data-paused=\"true\" data-level=\"normal\" data-state=\"AMBIENT\" class=\"nexus-motion-debug\" data-pulse-due-in=\"150000\" data-quality-target=\"62.5\" data-quality-state=\"normal\" data-recalibration=\"measuring\" data-quality-automation=\"candidate\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"measuring\"\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:74:64",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                      "column": 64,
+                      "line": 74
+                    },
+                    "snippet": "  72 |       if (kind === 'hidden') await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')); });\n  73 |       if (kind === 'reduced') await page.emulateMedia({ reducedMotion: 'no-preference' });\n> 74 |       await page.clock.runFor(1500); await expect(debug(page)).toHaveAttribute('data-recalibration', 'idle');\n     |                                                                ^\n  75 |       const resumed = await audit(page); expect(resumed.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 1 });\n  76 |       if (engine === 'gsap') expect(resumed.ticker).toMatchObject({ activeListeners: 1, liveScenes: 1, rootAnimations: 0 });\n  77 |       phases.push({ kind, stage, paused, resumed, log: await records(page) });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                        "column": 64,
+                        "line": 74
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nexus-motion-debug')\nExpected: \u001b[32m\"idle\"\u001b[39m\nReceived: \u001b[31m\"measuring\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.nexus-motion-debug') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nexus-motion-debug')\u001b[22m\n\u001b[2m    14 × locator resolved to <aside aria-label=\"动效调试\" data-clock=\"5233\" data-paused=\"true\" data-level=\"normal\" data-state=\"AMBIENT\" class=\"nexus-motion-debug\" data-pulse-due-in=\"150000\" data-quality-target=\"62.5\" data-quality-state=\"normal\" data-recalibration=\"measuring\" data-quality-automation=\"candidate\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"measuring\"\u001b[22m\n\n\n  72 |       if (kind === 'hidden') await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')); });\n  73 |       if (kind === 'reduced') await page.emulateMedia({ reducedMotion: 'no-preference' });\n> 74 |       await page.clock.runFor(1500); await expect(debug(page)).toHaveAttribute('data-recalibration', 'idle');\n     |                                                                ^\n  75 |       const resumed = await audit(page); expect(resumed.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 1 });\n  76 |       if (engine === 'gsap') expect(resumed.ticker).toMatchObject({ activeListeners: 1, liveScenes: 1, rootAnimations: 0 });\n  77 |       phases.push({ kind, stage, paused, resumed, log: await records(page) });\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:74:64"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:39:10.807Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-legacy-waiting-me-995b2-ne-switch-release-resources/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-legacy-waiting-me-995b2-ne-switch-release-resources/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                    "column": 64,
+                    "line": 74
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-cad5860a8263d840c9a5",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 60,
+          "column": 3
+        },
+        {
+          "title": "legacy: default Baseline ignores every recalibration trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1391,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:39:22.840Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-9da69f99331e0d448051",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 88,
+          "column": 3
+        },
+        {
+          "title": "legacy: new version during measurement wins and a stalled finite measurement falls back",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1570,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:39:24.341Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-c6758200095996b93de2",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 95,
+          "column": 3
+        },
+        {
+          "title": "gsap 1280: fit is immediate while INTRO/PULSE reach natural ends",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6725,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:39:25.918Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-7aedf608f5fb3d9be93b",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 22,
+          "column": 49
+        },
+        {
+          "title": "gsap 1792: fit is immediate while INTRO/PULSE reach natural ends",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6673,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:39:32.648Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-71e2d07c88784352093c",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 22,
+          "column": 49
+        },
+        {
+          "title": "gsap 1920: fit is immediate while INTRO/PULSE reach natural ends",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6742,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:39:39.328Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-9624ed50acd7b85aa0ad",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 22,
+          "column": 49
+        },
+        {
+          "title": "gsap 3840: fit is immediate while INTRO/PULSE reach natural ends",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6933,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:39:46.077Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-5f33b2508e3500e92084",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 22,
+          "column": 49
+        },
+        {
+          "title": "gsap: resize storm reserves the first active budget without indefinite delay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13483,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:39:53.019Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-b131ad2b6321b4642d7e",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 48,
+          "column": 3
+        },
+        {
+          "title": "gsap: waiting/measurement takeover, recovery, teardown and engine switch release resources",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12282,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nexus-motion-debug')\nExpected: \u001b[32m\"idle\"\u001b[39m\nReceived: \u001b[31m\"measuring\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.nexus-motion-debug') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nexus-motion-debug')\u001b[22m\n\u001b[2m    14 × locator resolved to <aside aria-label=\"动效调试\" data-clock=\"6224\" data-paused=\"true\" data-level=\"normal\" data-state=\"AMBIENT\" data-quality-target=\"60\" class=\"nexus-motion-debug\" data-pulse-due-in=\"150000\" data-quality-state=\"normal\" data-recalibration=\"measuring\" data-quality-automation=\"candidate\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"measuring\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nexus-motion-debug')\nExpected: \u001b[32m\"idle\"\u001b[39m\nReceived: \u001b[31m\"measuring\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.nexus-motion-debug') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nexus-motion-debug')\u001b[22m\n\u001b[2m    14 × locator resolved to <aside aria-label=\"动效调试\" data-clock=\"6224\" data-paused=\"true\" data-level=\"normal\" data-state=\"AMBIENT\" data-quality-target=\"60\" class=\"nexus-motion-debug\" data-pulse-due-in=\"150000\" data-quality-state=\"normal\" data-recalibration=\"measuring\" data-quality-automation=\"candidate\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"measuring\"\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:74:64",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                      "column": 64,
+                      "line": 74
+                    },
+                    "snippet": "  72 |       await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(60_000);\n  73 |       const paused = await audit(page); expect(paused.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 0 });\n> 74 |       if (engine === 'gsap') expect(paused.ticker.activeListeners).toBe(0);\n     |                                                                ^\n  75 |       if (kind === 'voice') await page.evaluate(() => window.dispatchEvent(new CustomEvent('nexus-debug-voice', { detail: false })));\n  76 |       if (kind === 'hidden') await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')); });\n  77 |       if (kind === 'reduced') await page.emulateMedia({ reducedMotion: 'no-preference' });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                        "column": 64,
+                        "line": 74
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.nexus-motion-debug')\nExpected: \u001b[32m\"idle\"\u001b[39m\nReceived: \u001b[31m\"measuring\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.nexus-motion-debug') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.nexus-motion-debug')\u001b[22m\n\u001b[2m    14 × locator resolved to <aside aria-label=\"动效调试\" data-clock=\"6224\" data-paused=\"true\" data-level=\"normal\" data-state=\"AMBIENT\" data-quality-target=\"60\" class=\"nexus-motion-debug\" data-pulse-due-in=\"150000\" data-quality-state=\"normal\" data-recalibration=\"measuring\" data-quality-automation=\"candidate\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"measuring\"\u001b[22m\n\n\n  72 |       await expect(debug(page)).toHaveAttribute('data-paused', 'true'); await page.clock.runFor(60_000);\n  73 |       const paused = await audit(page); expect(paused.timers).toMatchObject({ activeTimeouts: 0, pendingApplicationRaf: 0 });\n> 74 |       if (engine === 'gsap') expect(paused.ticker.activeListeners).toBe(0);\n     |                                                                ^\n  75 |       if (kind === 'voice') await page.evaluate(() => window.dispatchEvent(new CustomEvent('nexus-debug-voice', { detail: false })));\n  76 |       if (kind === 'hidden') await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')); });\n  77 |       if (kind === 'reduced') await page.emulateMedia({ reducedMotion: 'no-preference' });\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts:74:64"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:40:06.508Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-gsap-waiting-meas-8762f-ne-switch-release-resources/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/.review/p1-5-c-1/traces/p1-5-c-1-gsap-waiting-meas-8762f-ne-switch-release-resources/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-5-c-1/e2e/p1-5-c-1.spec.ts",
+                    "column": 64,
+                    "line": 74
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-72f064c7a5ae772c2da5",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 60,
+          "column": 3
+        },
+        {
+          "title": "gsap: default Baseline ignores every recalibration trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1395,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:40:19.727Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-1ba86150cfc3da5290bd",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 88,
+          "column": 3
+        },
+        {
+          "title": "gsap: new version during measurement wins and a stalled finite measurement falls back",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1585,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T00:40:21.238Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d514dffc4f851e537204-020c869784381460e98d",
+          "file": "p1-5-c-1.spec.ts",
+          "line": 95,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T00:38:29.509Z",
+    "duration": 113353.733,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
