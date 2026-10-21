@@ -1,5 +1,6 @@
 "use client";
 
+import type { XiaochuanTimeline } from "./motion/XiaochuanTimeline";
 import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { CardTitle } from "./CardTitle";
 import { audienceSummary } from "@/lib/display-copy";
@@ -36,6 +37,8 @@ import { CARD_TIERS, renderCardTemplate } from "./cards/registry";
 /* memo:编排推进全走 ref 直写 DOM,重渲染只会浪费(几何/配置不变时不进) */
 export const AnswerCard = memo(function AnswerCard({
   card,
+  motion = null,
+  liveAudio = false,
   audioNotice = null,
   launchAt,
   geometry,
@@ -47,6 +50,8 @@ export const AnswerCard = memo(function AnswerCard({
   playbackFinished = false,
 }: {
   card: AnswerCardData;
+  motion?: XiaochuanTimeline | null;
+  liveAudio?: boolean;
   audioNotice?: string | null;
   /** 发射起点(performance.now 域,由 OverlayStage 在派发 ANSWER 时写下) */
   launchAt: number;
@@ -163,23 +168,35 @@ export const AnswerCard = memo(function AnswerCard({
       /* §5 退场第一步:折叠吸回核心(200ms)——发射编排的逆过程;
          完成后停帧,覆盖层淡出接管余下的退场 */
       if (foldAt != null && !reduced) {
-        const fp = foldProgress(now - foldAt);
+        const fp = motion ? motion.visual.fold : foldProgress(now - foldAt);
         const inv = 1 - easeInOutCubic(fp);
-        line.style.transform = `scaleX(${inv})`;
-        body.style.transform = `scaleY(${0.012 + 0.988 * inv})`;
-        body.style.opacity = String(fp < 0.7 ? 1 : Math.max(0, 1 - (fp - 0.7) / 0.3));
+        const base = motion ? motion.visual.foldFrom : 1;
+        line.style.transform = `scaleX(${easeOutCubic(base / .4) * inv})`;
+        body.style.transform = `scaleY(${0.012 + 0.988 * easeInOutCubic((base - .4) / .6) * inv})`;
+        body.style.opacity = String((motion && base < .4 ? 0 : 1) * (fp < 0.7 ? 1 : Math.max(0, 1 - (fp - 0.7) / 0.3)));
         const per = metrics.current.perimeter;
-        if (per > 0) frameRect.style.strokeDashoffset = String(per * (1 - inv));
+        if (per > 0) frameRect.style.strokeDashoffset = String(per * (1 - easeInOutCubic(base) * inv));
         corners.classList.remove("is-on");
         if (fp >= 1) return;
-        raf = requestAnimationFrame(paint);
+        if (!motion) raf = requestAnimationFrame(paint);
         return;
       }
 
       const elapsed = reduced ? config.unfoldStartMs + config.unfoldMs + card.spoken.length / config.typeCps * 1000 : now - launchAt;
-      const ph = launchPhase(elapsed, config);
+      const ph = motion ? { ...launchPhase(elapsed, config), unfold: motion.visual.unfold, typingMs: motion.visual.typingMs } : launchPhase(elapsed, config);
       const u = ph.unfold;
 
+      if (motion) {
+        const root = body.parentElement!;
+        root.style.opacity = String(motion.visual.presence);
+        for (const [selector, progress] of [
+          [".overlay-card-header", motion.visual.header], [".overlay-card-data", motion.visual.metricsContent],
+          [".overlay-spoken-section", motion.visual.spoken], [".overlay-followups", motion.visual.followups],
+        ] as const) {
+          const layer = body.querySelector<HTMLElement>(selector);
+          if (layer) { layer.style.opacity = String(progress); layer.style.transform = `translateY(${(1-progress)*8}px)`; }
+        }
+      }
       /* ③ 细线先横向生长(占展开前 40%),随后卡体纵向展开 */
       if (u <= 0) {
         line.style.transform = "scaleX(0)";
@@ -211,7 +228,7 @@ export const AnswerCard = memo(function AnswerCard({
       /* ④⑤ 打字机 + 高亮(8a 近似:金额/文案一体逐字;8b 起全模板通用) */
       {
         const active = sentenceRef?.current;
-        const typed = reduced ? card.spoken.length : Math.max(typedChars(card.spoken, ph.typingMs, config.typeCps), active?.end ?? 0);
+        const typed = reduced || (motion && liveAudio) ? card.spoken.length : Math.max(typedChars(card.spoken, ph.typingMs, config.typeCps), active?.end ?? 0);
         progressRef.current = typed;
         body.dataset.spokenComplete = String(typed >= card.spoken.length);
         const highlight = active ? `${active.start}:${active.end}` : "";
@@ -237,16 +254,19 @@ export const AnswerCard = memo(function AnswerCard({
         if (typed >= card.spoken.length && u >= 1) return; // 编排完成,停帧
       }
 
-      raf = requestAnimationFrame(paint);
+      if (!motion) raf = requestAnimationFrame(paint);
     };
 
-    if (reduced) paint(performance.now());
+    const unsubscribe = motion?.subscribe(() => paint(performance.now()));
+    if (motion) { /* shared GSAP host owns updates */ }
+    else if (reduced) paint(performance.now());
     else raf = requestAnimationFrame(paint);
     return () => {
       disposed = true;
+      unsubscribe?.();
       cancelAnimationFrame(raf);
     };
-  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion, reduced, activeSpokenPage]);
+  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion, reduced, activeSpokenPage, motion, liveAudio, audioNotice]);
 
   const anchor = geometry.cardAnchor;
 
@@ -254,6 +274,7 @@ export const AnswerCard = memo(function AnswerCard({
     <div
       className={`overlay-card${card.kind === "brief" ? " is-brief" : ""}`}
       data-card-kind={card.kind}
+      data-launch-at={launchAt}
       data-tier={CARD_TIERS[card.kind]}
       style={{ top: anchor.y, width: anchor.width / geometry.scale, transform: `translateX(-50%) scale(${geometry.scale})` }}
       role="region"

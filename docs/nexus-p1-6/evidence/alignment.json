@@ -1,0 +1,10 @@
+{
+  "startsSeconds": [
+    3.559,
+    3.307
+  ],
+  "reference": "first ANSWER launchAt",
+  "precision": "approximate video alignment; source-clock comparison is in comparison-summary.json",
+  "left": "Legacy",
+  "right": "GSAP"
+}

@@ -1,0 +1,12 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 lint /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6
+> eslint
+
+
+/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e/screen-data-reconcile.spec.ts
+  6:10  warning  'fromPublicSalesScreenPayload' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/src/lib/screen-map-routes.ts
+  73:34  warning  '_distance' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)

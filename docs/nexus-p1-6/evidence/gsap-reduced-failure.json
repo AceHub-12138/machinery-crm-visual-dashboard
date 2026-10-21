@@ -1,0 +1,152 @@
+{
+  "audit": {
+    "liveControllers": 1,
+    "liveTimelines": 0,
+    "tracks": [],
+    "subscribers": 2,
+    "pendingJob": false,
+    "rootAnimations": 0,
+    "hidden": false,
+    "canvasSample": {
+      "at": 8549.3,
+      "pulse": 1,
+      "stream": 1,
+      "unfold": 1,
+      "fold": 1
+    },
+    "visual": {
+      "pulse": 1,
+      "stream": 1,
+      "unfold": 1,
+      "fold": 1,
+      "foldFrom": 1,
+      "header": 1,
+      "metricsContent": 1,
+      "spoken": 1,
+      "followups": 1,
+      "opacity": 0,
+      "caption": 1,
+      "presence": 1,
+      "formation": 1,
+      "collapse": 1,
+      "coreX": 960,
+      "coreY": 470,
+      "typingMs": 0
+    },
+    "configuredCapHz": 60,
+    "activeListeners": 0,
+    "listenerUpdates": 1,
+    "firstAtMs": 167.39999999850988,
+    "lastAtMs": 167.39999999850988
+  },
+  "reports": [
+    {
+      "type": "playback.metrics",
+      "at": 1792562120202,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792562120213,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "sentenceIndex": 0,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792562120228,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "sentenceIndex": 1,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.failed",
+      "at": 1792562120228,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562122242,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792562122247,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "sentenceIndex": 0,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792562122260,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "sentenceIndex": 1,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.failed",
+      "at": 1792562122260,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562124424,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792562124430,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "sentenceIndex": 0,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792562124442,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "sentenceIndex": 1,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.failed",
+      "at": 1792562124442,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562126636,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792562126644,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "sentenceIndex": 0,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.skipped",
+      "at": 1792562126660,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "sentenceIndex": 1,
+      "reason": "audio_unavailable"
+    },
+    {
+      "type": "playback.failed",
+      "at": 1792562126660,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "reason": "audio_unavailable"
+    }
+  ]
+}

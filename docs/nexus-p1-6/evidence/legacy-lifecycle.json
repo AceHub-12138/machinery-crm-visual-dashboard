@@ -1,0 +1,77 @@
+{
+  "hidden": null,
+  "restored": null,
+  "unmounted": null,
+  "navigated": null,
+  "final": null,
+  "reports": [
+    {
+      "type": "playback.metrics",
+      "at": 1792562174868,
+      "turnId": "00000000-0000-4000-8000-000000000001",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562175622,
+      "turnId": "00000000-0000-4000-8000-000000000002",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562176339,
+      "turnId": "00000000-0000-4000-8000-000000000003",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562177072,
+      "turnId": "00000000-0000-4000-8000-000000000004",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562177790,
+      "turnId": "00000000-0000-4000-8000-000000000005",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562178522,
+      "turnId": "00000000-0000-4000-8000-000000000006",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562179242,
+      "turnId": "00000000-0000-4000-8000-000000000007",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.started",
+      "at": 1792562179443,
+      "turnId": "00000000-0000-4000-8000-000000000007"
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562181568,
+      "turnId": "00000000-0000-4000-8000-000000000008",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    },
+    {
+      "type": "playback.metrics",
+      "at": 1792562182005,
+      "turnId": "00000000-0000-4000-8000-000000000009",
+      "playbackContextRate": 24000,
+      "playbackUnderruns": 0
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "uniquePocCases": 16,
+  "cases": {
+    "legacy full interaction film": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "legacy 1280 geometry and performance": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "legacy 1792 geometry and performance": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "legacy 1920 geometry and performance": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "legacy 3840 geometry and performance": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "legacy audio failure reduced motion and repeated wake exit": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "legacy hidden restore early interruption navigation and reentry": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-recheck-results.json"
+    },
+    "gsap full interaction film": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-recheck-results.json"
+    },
+    "gsap 1280 geometry and performance": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "gsap 1792 geometry and performance": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "gsap 1920 geometry and performance": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "gsap 3840 geometry and performance": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "gsap audio failure reduced motion and repeated wake exit": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "gsap hidden restore early interruption navigation and reentry": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-recheck-results.json"
+    },
+    "main GSAP and overlay share the existing ticker owner without altering its cap": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-final-results.json"
+    },
+    "gsap P1.3 normal and long templates retain layout and spoken pagination": {
+      "status": "expected",
+      "lastResult": "passed",
+      "source": "browser-p13-results.json"
+    }
+  },
+  "unitTests": 709,
+  "headedPerformanceCases": 8,
+  "legacyRegressionCases": 11,
+  "note": "Raw final run has one late assertion failure after a 200ms retiring card was already removed. The assertion was moved before screenshot encoding; the film and both lifecycle cases passed on recheck. No raw results are overwritten."
+}

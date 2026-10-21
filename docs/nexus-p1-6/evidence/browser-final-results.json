@@ -1,0 +1,632 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "e2e/p1-6.config.ts"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e/p1-6.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/.review/p1-6/playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "p1-6.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/docs/nexus-p1-6/evidence/browser-final-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "p1-6.spec.ts",
+      "file": "p1-6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "legacy full interaction film",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19080,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:52:55.126Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-d44bf3c8483bd4b455d7",
+          "file": "p1-6.spec.ts",
+          "line": 82,
+          "column": 3
+        },
+        {
+          "title": "legacy 1280 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9885,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:53:14.328Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-feb38984cc92d2027134",
+          "file": "p1-6.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "legacy 1792 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9998,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:53:24.219Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-4c6da9c4e7230a32900f",
+          "file": "p1-6.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "legacy 1920 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10316,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:53:34.222Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-79aa2d9ec4c7ea8610ef",
+          "file": "p1-6.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "legacy 3840 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11394,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:53:44.543Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-c30521a8298b6d048f6b",
+          "file": "p1-6.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "legacy audio failure reduced motion and repeated wake exit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9633,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:53:55.943Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-286ae12361944a41752c",
+          "file": "p1-6.spec.ts",
+          "line": 117,
+          "column": 3
+        },
+        {
+          "title": "legacy hidden restore early interruption navigation and reentry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9773,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:54:05.581Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-b0fa887b013cf62a0713",
+          "file": "p1-6.spec.ts",
+          "line": 123,
+          "column": 3
+        },
+        {
+          "title": "gsap full interaction film",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 21829,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-spoken')\nExpected: \u001b[32m\"本期新增客户十二家。客户总数为一百二十家。\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card-spoken') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-spoken')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-spoken')\nExpected: \u001b[32m\"本期新增客户十二家。客户总数为一百二十家。\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card-spoken') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-spoken')\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e/p1-6.spec.ts:95:169",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e/p1-6.spec.ts",
+                      "column": 169,
+                      "line": 95
+                    },
+                    "snippet": "  93 |     expect((await data(page)).stopped).toBeGreaterThan(stops);await page.waitForTimeout(300);const third=await answer(page);\n  94 |     await expect.poll(()=>reports.some(r=>r.type===\"playback.drained\"&&r.turnId===third)).toBe(true);await save(page,`${engine}-followup`);\n> 95 |     state(\"followup\",\"closing\");await page.waitForTimeout(100);await save(page,`${engine}-exit`);if(engine===\"gsap\"){await expect(page.locator(\".overlay-card-spoken\")).toHaveText(card.spoken);await page.waitForTimeout(500);expect(Number(await page.locator(\".overlay-root\").evaluate(el=>getComputedStyle(el).opacity))).toBeLessThan(.99);await save(page,`${engine}-return-crossfade`);}await expect(page.locator(\".overlay-root\")).toHaveCount(0);await page.waitForTimeout(300);await save(page,`${engine}-returned`);\n     |                                                                                                                                                                         ^\n  96 |     const metrics=await data(page);expect(metrics.peak).toBeGreaterThan(.01);expect(errors).toEqual([]);\n  97 |     if(engine===\"gsap\"){const a=await audit(page);expect(a.liveTimelines).toBe(0);expect(a.pendingJob).toBe(false);}\n  98 |     const captured=await page.evaluate(async()=>{const w=window as any;const c=w.captures[0];if(!c)return null;await new Promise<void>(resolve=>{c.recorder.onstop=()=>resolve();c.recorder.stop();});const blob=new Blob(c.chunks,{type:\"audio/webm\"});const bytes=new Uint8Array(await blob.arrayBuffer());let binary=\"\";for(const x of bytes)binary+=String.fromCharCode(x);return{base64:btoa(binary),start:c.start,timeOrigin:performance.timeOrigin};});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e/p1-6.spec.ts",
+                        "column": 169,
+                        "line": 95
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.overlay-card-spoken')\nExpected: \u001b[32m\"本期新增客户十二家。客户总数为一百二十家。\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card-spoken') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card-spoken')\u001b[22m\n\n\n  93 |     expect((await data(page)).stopped).toBeGreaterThan(stops);await page.waitForTimeout(300);const third=await answer(page);\n  94 |     await expect.poll(()=>reports.some(r=>r.type===\"playback.drained\"&&r.turnId===third)).toBe(true);await save(page,`${engine}-followup`);\n> 95 |     state(\"followup\",\"closing\");await page.waitForTimeout(100);await save(page,`${engine}-exit`);if(engine===\"gsap\"){await expect(page.locator(\".overlay-card-spoken\")).toHaveText(card.spoken);await page.waitForTimeout(500);expect(Number(await page.locator(\".overlay-root\").evaluate(el=>getComputedStyle(el).opacity))).toBeLessThan(.99);await save(page,`${engine}-return-crossfade`);}await expect(page.locator(\".overlay-root\")).toHaveCount(0);await page.waitForTimeout(300);await save(page,`${engine}-returned`);\n     |                                                                                                                                                                         ^\n  96 |     const metrics=await data(page);expect(metrics.peak).toBeGreaterThan(.01);expect(errors).toEqual([]);\n  97 |     if(engine===\"gsap\"){const a=await audit(page);expect(a.liveTimelines).toBe(0);expect(a.pendingJob).toBe(false);}\n  98 |     const captured=await page.evaluate(async()=>{const w=window as any;const c=w.captures[0];if(!c)return null;await new Promise<void>(resolve=>{c.recorder.onstop=()=>resolve();c.recorder.stop();});const blob=new Blob(c.chunks,{type:\"audio/webm\"});const bytes=new Uint8Array(await blob.arrayBuffer());let binary=\"\";for(const x of bytes)binary+=String.fromCharCode(x);return{base64:btoa(binary),start:c.start,timeOrigin:performance.timeOrigin};});\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e/p1-6.spec.ts:95:169"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:54:15.360Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/.review/p1-6/playwright/p1-6-gsap-full-interaction-film/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/.review/p1-6/playwright/p1-6-gsap-full-interaction-film/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6/e2e/p1-6.spec.ts",
+                    "column": 169,
+                    "line": 95
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-8f91d1e073d3fc130602",
+          "file": "p1-6.spec.ts",
+          "line": 82,
+          "column": 3
+        },
+        {
+          "title": "gsap 1280 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10139,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:54:37.474Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-39706b4b650e87bee684",
+          "file": "p1-6.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "gsap 1792 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10065,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:54:47.726Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-605ac1a2fba20d4d282b",
+          "file": "p1-6.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "gsap 1920 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10294,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:54:57.797Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-137add104feca86edde3",
+          "file": "p1-6.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "gsap 3840 geometry and performance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10962,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:55:08.096Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-e741ef2020ec8d03f003",
+          "file": "p1-6.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "gsap audio failure reduced motion and repeated wake exit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9598,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:55:19.063Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-7aa89f674a74a9db75fb",
+          "file": "p1-6.spec.ts",
+          "line": 117,
+          "column": 3
+        },
+        {
+          "title": "gsap hidden restore early interruption navigation and reentry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9924,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:55:28.499Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-ae1ebba19484a3600c71",
+          "file": "p1-6.spec.ts",
+          "line": 123,
+          "column": 3
+        },
+        {
+          "title": "main GSAP and overlay share the existing ticker owner without altering its cap",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2923,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T05:55:38.428Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e9d64d2fa2af72a8352b-a58815590636c9296878",
+          "file": "p1-6.spec.ts",
+          "line": 145,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T05:52:54.214Z",
+    "duration": 167338.535,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

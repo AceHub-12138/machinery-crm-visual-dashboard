@@ -1,0 +1,4 @@
+{
+  "audio": "Actual browser gain output captured by MediaStreamDestination/MediaRecorder; audio offset uses wall clock plus performance.timeOrigin; not a physical speaker recording.",
+  "comparison": "Same fixture and question, same scripted order. Individual recordings include rendering and event-loop timing differences; use answer-relative phase comparison for precise timings."
+}

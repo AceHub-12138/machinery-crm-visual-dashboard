@@ -1,0 +1,87 @@
+{
+  "active": {
+    "liveControllers": 1,
+    "liveTimelines": 4,
+    "tracks": [
+      "wake",
+      "answer",
+      "caption",
+      "geometry"
+    ],
+    "subscribers": 3,
+    "pendingJob": true,
+    "rootAnimations": 0,
+    "hidden": false,
+    "canvasSample": {
+      "at": 1050.8,
+      "pulse": 0.074167,
+      "stream": 0,
+      "unfold": 0,
+      "fold": 0
+    },
+    "visual": {
+      "pulse": 0.213333,
+      "stream": 0,
+      "unfold": 0,
+      "fold": 0,
+      "foldFrom": 1,
+      "header": 0,
+      "metricsContent": 0,
+      "spoken": 0,
+      "followups": 0,
+      "opacity": 0.987577,
+      "caption": 0.213882,
+      "presence": 1,
+      "formation": 0.811758,
+      "collapse": 0,
+      "coreX": 960,
+      "coreY": 470,
+      "typingMs": 0
+    },
+    "configuredCapHz": 60,
+    "activeListeners": 1,
+    "listenerUpdates": 85,
+    "firstAtMs": 152,
+    "lastAtMs": 1056.5
+  },
+  "closed": {
+    "liveControllers": 1,
+    "liveTimelines": 0,
+    "tracks": [],
+    "subscribers": 2,
+    "pendingJob": false,
+    "rootAnimations": 0,
+    "hidden": false,
+    "canvasSample": {
+      "at": 2400.7,
+      "pulse": 0.264167,
+      "stream": 0,
+      "unfold": 0,
+      "fold": 1
+    },
+    "visual": {
+      "pulse": 0.264167,
+      "stream": 0,
+      "unfold": 0,
+      "fold": 1,
+      "foldFrom": 0,
+      "header": 0,
+      "metricsContent": 0,
+      "spoken": 0,
+      "followups": 0,
+      "opacity": 0,
+      "caption": 1,
+      "presence": 1,
+      "formation": 0.818358,
+      "collapse": 1,
+      "coreX": 960,
+      "coreY": 470,
+      "typingMs": 0
+    },
+    "configuredCapHz": 60,
+    "activeListeners": 1,
+    "listenerUpdates": 198,
+    "firstAtMs": 152,
+    "lastAtMs": 2868.3000000044703
+  }
+}

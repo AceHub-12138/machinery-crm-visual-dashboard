@@ -1,0 +1,1178 @@
+{
+  "performance": [
+    {
+      "name": "gsap-1280-performance.json",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 452,
+        "mean": 16.89,
+        "p95": 16.7,
+        "max": 116.7
+      },
+      "canvasCallbackMs": {
+        "n": 411,
+        "mean": 2.2,
+        "p95": 8.8,
+        "max": 10.8
+      },
+      "allCallbackMs": {
+        "n": 648,
+        "mean": 1.42,
+        "p95": 2.7,
+        "max": 10.8
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 0.98,
+        "TaskDuration": 3.92,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.02
+      },
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 9102.9,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 640,
+          "coreY": 313.333333,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 278,
+        "firstAtMs": 170.39999999850988,
+        "lastAtMs": 9186.5
+      },
+      "peak": 0.18594745318942357
+    },
+    {
+      "name": "gsap-1792-performance.json",
+      "viewport": {
+        "width": 1792,
+        "height": 832
+      },
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 452,
+        "mean": 16.74,
+        "p95": 16.7,
+        "max": 33.4
+      },
+      "canvasCallbackMs": {
+        "n": 413,
+        "mean": 2.08,
+        "p95": 8.8,
+        "max": 10.7
+      },
+      "allCallbackMs": {
+        "n": 649,
+        "mean": 1.34,
+        "p95": 2.6,
+        "max": 10.7
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 0.94,
+        "TaskDuration": 5.05,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 9014.7,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 896,
+          "coreY": 362.074074,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 280,
+        "firstAtMs": 166.20000000298023,
+        "lastAtMs": 9098.39999999851
+      },
+      "peak": 0.18580945387884032
+    },
+    {
+      "name": "gsap-1920-performance.json",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 462,
+        "mean": 16.81,
+        "p95": 16.8,
+        "max": 33.4
+      },
+      "canvasCallbackMs": {
+        "n": 423,
+        "mean": 2.17,
+        "p95": 3.2,
+        "max": 13.6
+      },
+      "allCallbackMs": {
+        "n": 660,
+        "mean": 1.41,
+        "p95": 2.6,
+        "max": 13.6
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 1,
+        "TaskDuration": 6.45,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 9266.4,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 960,
+          "coreY": 470,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 281,
+        "firstAtMs": 167.5,
+        "lastAtMs": 9350.89999999851
+      },
+      "peak": 0.18605285763046392
+    },
+    {
+      "name": "gsap-3840-performance.json",
+      "viewport": {
+        "width": 3840,
+        "height": 2160
+      },
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 208,
+        "mean": 42.31,
+        "p95": 50.1,
+        "max": 66.7
+      },
+      "canvasCallbackMs": {
+        "n": 169,
+        "mean": 1.7,
+        "p95": 2.3,
+        "max": 3.2
+      },
+      "allCallbackMs": {
+        "n": 307,
+        "mean": 0.96,
+        "p95": 2.2,
+        "max": 3.2
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 0.36,
+        "TaskDuration": 7.59,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 10397.7,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 1920,
+          "coreY": 940,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 136,
+        "firstAtMs": 165.60000000149012,
+        "lastAtMs": 10498.80000000447
+      },
+      "peak": 0.18305854788261305
+    },
+    {
+      "name": "headed-gsap-1280-performance.json",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "gpu": {
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 740,
+        "mean": 10.08,
+        "p95": 10.9,
+        "max": 29.3
+      },
+      "canvasCallbackMs": {
+        "n": 678,
+        "mean": 1.4,
+        "p95": 2.7,
+        "max": 3.9
+      },
+      "allCallbackMs": {
+        "n": 1069,
+        "mean": 0.91,
+        "p95": 2.6,
+        "max": 3.9
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 1.06,
+        "TaskDuration": 2.28,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 8941.5,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 640,
+          "coreY": 313.333333,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 276,
+        "firstAtMs": 181.70000000298023,
+        "lastAtMs": 9041.80000000447
+      },
+      "peak": 0.18598468656785208
+    },
+    {
+      "name": "headed-gsap-1792-performance.json",
+      "viewport": {
+        "width": 1792,
+        "height": 832
+      },
+      "gpu": {
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 741,
+        "mean": 10.11,
+        "p95": 11,
+        "max": 30.9
+      },
+      "canvasCallbackMs": {
+        "n": 678,
+        "mean": 1.43,
+        "p95": 2.6,
+        "max": 3.8
+      },
+      "allCallbackMs": {
+        "n": 1066,
+        "mean": 0.93,
+        "p95": 2.6,
+        "max": 3.8
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 1.08,
+        "TaskDuration": 2.3,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 8996.1,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 896,
+          "coreY": 362.074074,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 254,
+        "firstAtMs": 197.5,
+        "lastAtMs": 9087.20000000298
+      },
+      "peak": 0.18581611943377702
+    },
+    {
+      "name": "headed-gsap-1920-performance.json",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "gpu": {
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 746,
+        "mean": 10.11,
+        "p95": 11,
+        "max": 30.1
+      },
+      "canvasCallbackMs": {
+        "n": 683,
+        "mean": 1.43,
+        "p95": 2.8,
+        "max": 3.7
+      },
+      "allCallbackMs": {
+        "n": 1068,
+        "mean": 0.93,
+        "p95": 2.6,
+        "max": 3.7
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 1.09,
+        "TaskDuration": 2.34,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 9048,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 960,
+          "coreY": 470,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 275,
+        "firstAtMs": 198.39999999850988,
+        "lastAtMs": 9129
+      },
+      "peak": 0.18605285763046392
+    },
+    {
+      "name": "headed-gsap-3840-performance.json",
+      "viewport": {
+        "width": 3840,
+        "height": 2160
+      },
+      "gpu": {
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 775,
+        "mean": 10.09,
+        "p95": 10.9,
+        "max": 30
+      },
+      "canvasCallbackMs": {
+        "n": 711,
+        "mean": 1.43,
+        "p95": 2.8,
+        "max": 3.8
+      },
+      "allCallbackMs": {
+        "n": 1105,
+        "mean": 0.94,
+        "p95": 2.7,
+        "max": 3.8
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 1.14,
+        "TaskDuration": 2.46,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 9343.9,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 1920,
+          "coreY": 940,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 284,
+        "firstAtMs": 214.29999999701977,
+        "lastAtMs": 9443.89999999851
+      },
+      "peak": 0.18598468656785208
+    },
+    {
+      "name": "headed-legacy-1280-performance.json",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "gpu": {
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 652,
+        "mean": 11.83,
+        "p95": 11,
+        "max": 320.7
+      },
+      "canvasCallbackMs": {
+        "n": 589,
+        "mean": 1.34,
+        "p95": 2.7,
+        "max": 4
+      },
+      "allCallbackMs": {
+        "n": 939,
+        "mean": 0.85,
+        "p95": 2.5,
+        "max": 4
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 0.88,
+        "TaskDuration": 2.26,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": null,
+      "peak": 0.18499163947858774
+    },
+    {
+      "name": "headed-legacy-1792-performance.json",
+      "viewport": {
+        "width": 1792,
+        "height": 832
+      },
+      "gpu": {
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 733,
+        "mean": 10.26,
+        "p95": 11,
+        "max": 120.1
+      },
+      "canvasCallbackMs": {
+        "n": 670,
+        "mean": 1.41,
+        "p95": 2.7,
+        "max": 4.1
+      },
+      "allCallbackMs": {
+        "n": 1131,
+        "mean": 0.85,
+        "p95": 2.6,
+        "max": 4.1
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 1.04,
+        "TaskDuration": 2.27,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": null,
+      "peak": 0.18581611943377702
+    },
+    {
+      "name": "headed-legacy-1920-performance.json",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "gpu": {
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 738,
+        "mean": 10.26,
+        "p95": 10.9,
+        "max": 119.7
+      },
+      "canvasCallbackMs": {
+        "n": 674,
+        "mean": 1.4,
+        "p95": 2.8,
+        "max": 3.9
+      },
+      "allCallbackMs": {
+        "n": 1133,
+        "mean": 0.85,
+        "p95": 2.7,
+        "max": 3.9
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 1.04,
+        "TaskDuration": 2.29,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": null,
+      "peak": 0.18581611943377702
+    },
+    {
+      "name": "headed-legacy-3840-performance.json",
+      "viewport": {
+        "width": 3840,
+        "height": 2160
+      },
+      "gpu": {
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 768,
+        "mean": 10.1,
+        "p95": 10.9,
+        "max": 29.6
+      },
+      "canvasCallbackMs": {
+        "n": 708,
+        "mean": 1.45,
+        "p95": 2.7,
+        "max": 4.6
+      },
+      "allCallbackMs": {
+        "n": 1180,
+        "mean": 0.88,
+        "p95": 2.6,
+        "max": 4.6
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 1.13,
+        "TaskDuration": 2.44,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": null,
+      "peak": 0.18581611943377702
+    },
+    {
+      "name": "legacy-1280-performance.json",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 448,
+        "mean": 16.67,
+        "p95": 16.7,
+        "max": 16.8
+      },
+      "canvasCallbackMs": {
+        "n": 408,
+        "mean": 2.15,
+        "p95": 8.7,
+        "max": 10.8
+      },
+      "allCallbackMs": {
+        "n": 701,
+        "mean": 1.27,
+        "p95": 2.6,
+        "max": 10.8
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 0.94,
+        "TaskDuration": 3.83,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": null,
+      "peak": 0.18605285763046392
+    },
+    {
+      "name": "legacy-1792-performance.json",
+      "viewport": {
+        "width": 1792,
+        "height": 832
+      },
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 451,
+        "mean": 16.74,
+        "p95": 16.7,
+        "max": 33.3
+      },
+      "canvasCallbackMs": {
+        "n": 411,
+        "mean": 2.13,
+        "p95": 9.1,
+        "max": 11.4
+      },
+      "allCallbackMs": {
+        "n": 704,
+        "mean": 1.26,
+        "p95": 2.5,
+        "max": 11.4
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 0.94,
+        "TaskDuration": 5.01,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": null,
+      "peak": 0.18594745318942357
+    },
+    {
+      "name": "legacy-1920-performance.json",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 469,
+        "mean": 16.7,
+        "p95": 16.7,
+        "max": 33.3
+      },
+      "canvasCallbackMs": {
+        "n": 429,
+        "mean": 2.1,
+        "p95": 9.4,
+        "max": 13.2
+      },
+      "allCallbackMs": {
+        "n": 727,
+        "mean": 1.25,
+        "p95": 2.4,
+        "max": 13.2
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 0.98,
+        "TaskDuration": 6.5,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": null,
+      "peak": 0.18605285763046392
+    },
+    {
+      "name": "legacy-3840-performance.json",
+      "viewport": {
+        "width": 3840,
+        "height": 2160
+      },
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "dpr": 1
+      },
+      "frameMs": {
+        "n": 213,
+        "mean": 41.08,
+        "p95": 50.1,
+        "max": 83.3
+      },
+      "canvasCallbackMs": {
+        "n": 174,
+        "mean": 1.61,
+        "p95": 2.5,
+        "max": 3.2
+      },
+      "allCallbackMs": {
+        "n": 328,
+        "mean": 0.88,
+        "p95": 2.2,
+        "max": 3.2
+      },
+      "deltaSeconds": {
+        "ScriptDuration": 0.35,
+        "TaskDuration": 7.55,
+        "LayoutDuration": 0.01,
+        "RecalcStyleDuration": 0.01
+      },
+      "audit": null,
+      "peak": 0.1849364047297956
+    }
+  ],
+  "films": [
+    {
+      "engine": "legacy",
+      "turns": [
+        {
+          "at": 3513,
+          "lineStartMs": 425.7,
+          "bodyStartMs": 525.7,
+          "bodyFullMs": 659.1,
+          "borderFullMs": 675.8,
+          "pulseFullMs": null,
+          "streamStartMs": null,
+          "streamFullMs": null,
+          "contentFullMs": null,
+          "firstAudioScheduledMs": 48.6,
+          "firstAudioOnsetMs": 198.6,
+          "highlightFirstErrorMs": 27.1,
+          "highlightSecondErrorMs": 20.7,
+          "canvasDomProgressEquivalentSkewMs": null
+        },
+        {
+          "at": 8989.69999999553,
+          "lineStartMs": 432.2,
+          "bodyStartMs": 532.2,
+          "bodyFullMs": 665.5,
+          "borderFullMs": 682.2,
+          "pulseFullMs": null,
+          "streamStartMs": null,
+          "streamFullMs": null,
+          "contentFullMs": null,
+          "firstAudioScheduledMs": 39.6,
+          "firstAudioOnsetMs": 189.6,
+          "highlightFirstErrorMs": 25.9,
+          "highlightSecondErrorMs": null,
+          "canvasDomProgressEquivalentSkewMs": null
+        },
+        {
+          "at": 11405.5,
+          "lineStartMs": 432.9,
+          "bodyStartMs": 532.9,
+          "bodyFullMs": 666.2,
+          "borderFullMs": 682.9,
+          "pulseFullMs": null,
+          "streamStartMs": null,
+          "streamFullMs": null,
+          "contentFullMs": null,
+          "firstAudioScheduledMs": 35.8,
+          "firstAudioOnsetMs": 185.8,
+          "highlightFirstErrorMs": 30.5,
+          "highlightSecondErrorMs": 24,
+          "canvasDomProgressEquivalentSkewMs": null
+        }
+      ],
+      "audit": null,
+      "reports": [
+        {
+          "type": "playback.metrics",
+          "at": 1792561978804,
+          "turnId": "00000000-0000-4000-8000-000000000001",
+          "playbackContextRate": 24000,
+          "playbackUnderruns": 0
+        },
+        {
+          "type": "playback.started",
+          "at": 1792561979016,
+          "turnId": "00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "type": "playback.drained",
+          "at": 1792561983129,
+          "turnId": "00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "type": "playback.metrics",
+          "at": 1792561984281,
+          "turnId": "00000000-0000-4000-8000-000000000002",
+          "playbackContextRate": 24000,
+          "playbackUnderruns": 0
+        },
+        {
+          "type": "playback.started",
+          "at": 1792561984479,
+          "turnId": "00000000-0000-4000-8000-000000000002"
+        },
+        {
+          "type": "playback.metrics",
+          "at": 1792561986697,
+          "turnId": "00000000-0000-4000-8000-000000000003",
+          "playbackContextRate": 24000,
+          "playbackUnderruns": 0
+        },
+        {
+          "type": "playback.started",
+          "at": 1792561986896,
+          "turnId": "00000000-0000-4000-8000-000000000003"
+        },
+        {
+          "type": "playback.drained",
+          "at": 1792561990995,
+          "turnId": "00000000-0000-4000-8000-000000000003"
+        }
+      ],
+      "pcmSeconds": [
+        2.023,
+        2.0832083333333333
+      ],
+      "errors": []
+    },
+    {
+      "engine": "gsap",
+      "turns": [
+        {
+          "at": 3268.5,
+          "lineStartMs": 423.8,
+          "bodyStartMs": 523.9,
+          "bodyFullMs": 657.2,
+          "borderFullMs": 673.9,
+          "pulseFullMs": 123.9,
+          "streamStartMs": 107.2,
+          "streamFullMs": 473.8,
+          "contentFullMs": 923.9,
+          "firstAudioScheduledMs": 47.6,
+          "firstAudioOnsetMs": 197.6,
+          "highlightFirstErrorMs": 9.6,
+          "highlightSecondErrorMs": 19.8,
+          "canvasDomProgressEquivalentSkewMs": {
+            "n": 255,
+            "mean": 2.16,
+            "p95": 17,
+            "max": 17.7
+          }
+        },
+        {
+          "at": 8691.70000000298,
+          "lineStartMs": 417.1,
+          "bodyStartMs": 517.1,
+          "bodyFullMs": 667.1,
+          "borderFullMs": 667.1,
+          "pulseFullMs": 150.4,
+          "streamStartMs": 117.1,
+          "streamFullMs": 467.1,
+          "contentFullMs": 917,
+          "firstAudioScheduledMs": 20.5,
+          "firstAudioOnsetMs": 170.5,
+          "highlightFirstErrorMs": 13.3,
+          "highlightSecondErrorMs": null,
+          "canvasDomProgressEquivalentSkewMs": {
+            "n": 87,
+            "mean": 6.32,
+            "p95": 17,
+            "max": 17.3
+          }
+        },
+        {
+          "at": 11208.5,
+          "lineStartMs": 416.9,
+          "bodyStartMs": 516.9,
+          "bodyFullMs": 666.9,
+          "borderFullMs": 666.9,
+          "pulseFullMs": 150.2,
+          "streamStartMs": 116.9,
+          "streamFullMs": 466.9,
+          "contentFullMs": 916.8,
+          "firstAudioScheduledMs": 36.6,
+          "firstAudioOnsetMs": 186.6,
+          "highlightFirstErrorMs": 30.3,
+          "highlightSecondErrorMs": 7.2,
+          "canvasDomProgressEquivalentSkewMs": {
+            "n": 257,
+            "mean": 2.14,
+            "p95": 16.7,
+            "max": 19.1
+          }
+        }
+      ],
+      "audit": {
+        "liveControllers": 1,
+        "liveTimelines": 0,
+        "tracks": [],
+        "subscribers": 2,
+        "pendingJob": false,
+        "rootAnimations": 0,
+        "hidden": false,
+        "canvasSample": {
+          "at": 17591.8,
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1
+        },
+        "visual": {
+          "pulse": 1,
+          "stream": 1,
+          "unfold": 1,
+          "fold": 1,
+          "foldFrom": 1,
+          "header": 1,
+          "metricsContent": 1,
+          "spoken": 1,
+          "followups": 1,
+          "opacity": 0,
+          "caption": 1,
+          "presence": 1,
+          "formation": 1,
+          "collapse": 1,
+          "coreX": 960,
+          "coreY": 470,
+          "typingMs": 0
+        },
+        "configuredCapHz": 60,
+        "activeListeners": 0,
+        "listenerUpdates": 538,
+        "firstAtMs": 177.39999999850988,
+        "lastAtMs": 17692.89999999851
+      },
+      "reports": [
+        {
+          "type": "playback.metrics",
+          "at": 1792562187162,
+          "turnId": "00000000-0000-4000-8000-000000000001",
+          "playbackContextRate": 24000,
+          "playbackUnderruns": 0
+        },
+        {
+          "type": "playback.started",
+          "at": 1792562187366,
+          "turnId": "00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "type": "playback.drained",
+          "at": 1792562191484,
+          "turnId": "00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "type": "playback.metrics",
+          "at": 1792562192585,
+          "turnId": "00000000-0000-4000-8000-000000000002",
+          "playbackContextRate": 24000,
+          "playbackUnderruns": 0
+        },
+        {
+          "type": "playback.started",
+          "at": 1792562192768,
+          "turnId": "00000000-0000-4000-8000-000000000002"
+        },
+        {
+          "type": "playback.metrics",
+          "at": 1792562195102,
+          "turnId": "00000000-0000-4000-8000-000000000003",
+          "playbackContextRate": 24000,
+          "playbackUnderruns": 0
+        },
+        {
+          "type": "playback.started",
+          "at": 1792562195303,
+          "turnId": "00000000-0000-4000-8000-000000000003"
+        },
+        {
+          "type": "playback.drained",
+          "at": 1792562199400,
+          "turnId": "00000000-0000-4000-8000-000000000003"
+        }
+      ],
+      "pcmSeconds": [
+        2.023,
+        2.0832083333333333
+      ],
+      "errors": []
+    }
+  ]
+}

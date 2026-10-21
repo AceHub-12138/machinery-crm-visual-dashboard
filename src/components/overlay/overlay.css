@@ -299,3 +299,8 @@
   gap: 12px;
   grid-template-rows: 120px 302px 170px 44px;
 }
+
+/* P1.6 opt-in: these properties have exactly one visual writer. */
+.overlay-root[data-motion="gsap"] { transition: none; }
+.overlay-root[data-motion="gsap"] .overlay-caption-appear { animation: none; }
+.overlay-root[data-motion="gsap"][data-barge-paused="true"] .overlay-card { transition: none; }

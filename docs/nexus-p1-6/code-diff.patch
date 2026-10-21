@@ -1,0 +1,737 @@
+diff --git a/e2e/p1-6.config.ts b/e2e/p1-6.config.ts
+new file mode 100644
+index 0000000..5a2d958
+--- /dev/null
++++ b/e2e/p1-6.config.ts
+@@ -0,0 +1,7 @@
++import { defineConfig } from "@playwright/test";
++export default defineConfig({ testDir: ".", testMatch: "p1-6.spec.ts", timeout: 90000, workers: 1, fullyParallel:false,
++  outputDir: process.cwd()+"/.review/p1-6/playwright", reporter: [["list"], ["json", { outputFile: process.cwd()+"/docs/nexus-p1-6/evidence/"+(process.env.P16_REPORT??"browser-results")+".json" }]],
++  use: { browserName:"chromium", baseURL: "http://127.0.0.1:3066", viewport:{width:1920,height:1080},deviceScaleFactor:1, reducedMotion: "no-preference", launchOptions: { args: ["--autoplay-policy=no-user-gesture-required"] } },
++  webServer: [{cwd:process.cwd(),command:"node e2e/nexus-fixture-server.mjs",url:"http://127.0.0.1:3199",reuseExistingServer:false}, { cwd:process.cwd(), command: "node scripts/p1-5-c/local-server.mjs --port 3066", url: "http://127.0.0.1:3066/screen/sales", reuseExistingServer: false,
++    env: { TZ: "Asia/Shanghai", XIAOCHUAN_POC_REVIEW:"1", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only" }, timeout: 60000 }],
++});
+diff --git a/e2e/p1-6.spec.ts b/e2e/p1-6.spec.ts
+new file mode 100644
+index 0000000..e54b6a0
+--- /dev/null
++++ b/e2e/p1-6.spec.ts
+@@ -0,0 +1,172 @@
++/* eslint-disable @typescript-eslint/no-explicit-any -- browser-only diagnostic instrumentation */
++import { test, expect, type Page, type BrowserContext } from "@playwright/test";
++import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
++import path from "node:path";
++import { startVoiceHub, type VoiceHubServer } from "../services/voice-orchestrator/src/ws/ws-server";
++import { CARD_INTENTS, task12Card } from "./task12-fixtures";
++import { displaySpoken } from "../src/lib/voice/card-presentation";
++import { auditText } from "./layout-audit";
++import type { AnswerCardData } from "../src/lib/voice/session-machine";
++const out = path.resolve("docs/nexus-p1-6");
++mkdirSync(`${out}/evidence`, {recursive:true}); mkdirSync(`${out}/media`, {recursive:true});
++const pcm = [0,1].map(i=>readFileSync(`${out}/audio/${i}.pcm`));
++const card: AnswerCardData = {kind:"customer-kpi",title:"本期客户概览 · 脱敏演示",newCustomers:12,totalCustomers:120,spoken:"本期新增客户十二家。客户总数为一百二十家。"};
++const speech = (id:string) => ({turnId:id,sentences:[{index:0,displayStart:0,displayEnd:10},{index:1,displayStart:10,displayEnd:21}]});
++let hub:VoiceHubServer, fail=false, autoFollowup=true, turn=0;
++const reports:Array<Record<string,unknown>>=[];
++function emit(event:object) { hub.broadcast({at:Date.now(),...event}); }
++function state(from:string,to:string) { emit({type:"state.change",from,to,turn}); }
++test.beforeAll(async()=>{
++  hub=await startVoiceHub({host:"127.0.0.1",port:0,
++    onHttpRequest:(req,res)=>{
++      res.setHeader("access-control-allow-origin",String(req.headers.origin??"*"));
++      res.setHeader("access-control-expose-headers","x-sample-rate,x-channels,x-sample-format");
++      if(req.method==="OPTIONS"){res.writeHead(204,{"access-control-allow-methods":"GET","access-control-allow-headers":"Authorization"});res.end();return;}
++      const match=/\/voice\/audio\/[^/]+\/(\d+)$/.exec(req.url??"");
++      if(!match||fail){res.writeHead(503);res.end();return;}
++      const bytes=pcm[Number(match[1])];
++      res.writeHead(200,{"content-type":"audio/pcm","x-sample-rate":"24000","x-channels":"1","x-sample-format":"s16le"});res.end(bytes);
++    },
++    onMessage:(conn,raw)=>{const event=JSON.parse(raw);if(event.type==="console.hello") conn.role="screen";
++      if(event.type.startsWith("playback.")) reports.push(event);
++      if(event.type==="playback.drained"&&autoFollowup) state("answering","followup");
++    },
++  });
++});
++test.afterAll(async()=>{await hub?.close();});
++test.beforeEach(()=>{reports.length=0; fail=false;autoFollowup=true;turn=0;});
++async function instrument(context:BrowserContext) {
++  await context.addInitScript(()=>{
++    const w=window as any; // diagnostic harness only
++    const metrics:any={frames:[],canvasMs:[],callbackMs:[],scheduled:[],stopped:0,peak:0,events:[],samples:[],pending:0,sourceCounts:[],recorderAt:null};
++    w.p16=metrics;
++    const pending=new Set<number>();const raf=window.requestAnimationFrame.bind(window),cancel=window.cancelAnimationFrame.bind(window);
++    let draws=0,last=0;
++    const draw=CanvasRenderingContext2D.prototype.drawImage;
++    CanvasRenderingContext2D.prototype.drawImage=function(...args:any[]){draws++;return (draw as any).apply(this,args);};
++    window.requestAnimationFrame=fn=>{let id=0;id=raf(now=>{pending.delete(id);const start=performance.now(),before=draws;fn(now);const ms=performance.now()-start;metrics.callbackMs.push(ms);if(draws>before)metrics.canvasMs.push(ms);metrics.pending=pending.size;});pending.add(id);return id;};
++    window.cancelAnimationFrame=id=>{pending.delete(id);cancel(id);};
++    const observe=(now:number)=>{
++      if(last)metrics.frames.push(now-last);last=now;
++      const root=document.querySelector<HTMLElement>(".overlay-root"),body=document.querySelector<HTMLElement>(".overlay-card-body"),line=document.querySelector<HTMLElement>(".overlay-card-line");
++      if(root&&metrics.samples.length<10000){const m=w.__xiaochuanMotionAudit?.();metrics.samples.push({at:now,state:root.dataset.state,phase:root.dataset.phase,opacity:getComputedStyle(root).opacity,launchAt:document.querySelector<HTMLElement>(".overlay-card")?.dataset.launchAt,body:body?.style.transform,bodyOpacity:body?.style.opacity,line:line?.style.transform,dash:document.querySelector<SVGElement>(".overlay-card-frame-rect")?.style.strokeDashoffset,visual:m?.visual,canvas:m?.canvasSample,highlight:document.querySelector(".overlay-sentence-active")?.textContent??null});}
++      raf(observe);
++    };raf(observe); // observer is outside the product pending-RAF count
++    const Native=window.AudioContext;
++    w.captures=[];
++    window.AudioContext=class extends Native {
++      constructor(options?:AudioContextOptions){super(options);
++        const dest=this.createMediaStreamDestination(),chunks:BlobPart[]=[];const recorder=new MediaRecorder(dest.stream,{mimeType:"audio/webm;codecs=opus"});
++        const capture={context:this,dest,recorder,chunks,start:performance.now()};w.captures.push(capture);recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
++        recorder.start();metrics.recorderAt=capture.start;
++      }
++    };
++    const connect=AudioNode.prototype.connect;
++    AudioNode.prototype.connect=function(...args:any[]){const capture=w.captures.find((c:any)=>c.context===this.context);if(capture&&args[0]===this.context.destination)(connect as any).call(this,capture.dest);return (connect as any).apply(this,args);};
++    const source=AudioContext.prototype.createBufferSource;
++    AudioContext.prototype.createBufferSource=function(){const node=source.call(this),start=node.start.bind(node),stop=node.stop.bind(node);node.start=(when=0)=>{metrics.scheduled.push({at:performance.now(),contextTime:this.currentTime,when,duration:node.buffer?.duration});start(when);};node.stop=(when=0)=>{metrics.stopped++;stop(when);};return node;};
++    const sample=AnalyserNode.prototype.getFloatTimeDomainData;
++    AnalyserNode.prototype.getFloatTimeDomainData=function(data){sample.call(this,data);let sum=0;for(const x of data)sum+=x*x;metrics.peak=Math.max(metrics.peak,Math.sqrt(sum/data.length));};
++  });
++}
++async function open(page:Page,engine:string,route="/screen/sales") {
++  await page.goto(`${route}${route.includes("?")?"&":"?"}voiceLive=1&xiaochuanMotion=${engine}&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
++  await expect.poll(()=>hub.counts().screens).toBeGreaterThan(0);
++  await page.evaluate(()=>document.fonts.ready); await page.mouse.click(40,100); await page.waitForTimeout(500);
++}
++async function wake(page:Page){emit({type:"session.start",sessionId:"p16-fixture"});await expect(page.locator(".overlay-root")).toHaveCount(1);}
++async function listen(page:Page){state("waking","listening");await expect(page.locator(".overlay-root")).toHaveAttribute("data-state","listening");emit({type:"asr.partial",text:"本期新增客户有多少家",final:false});}
++async function answer(page:Page,answerCard:AnswerCardData=card,withSpeech=true){state("listening","thinking");await expect(page.locator(".overlay-root")).toHaveAttribute("data-state","thinking");await page.waitForTimeout(300);turn++;const id=`00000000-0000-4000-8000-${String(turn).padStart(12,"0")}`;emit({type:"answer.delta",seq:0,text:answerCard.spoken,full:true,card:answerCard,...(withSpeech?{speech:speech(id)}:{})});state("thinking","answering");await expect(page.locator(".overlay-root")).toHaveAttribute("data-state","answering");return id;}
++async function close(page:Page){state("answering","closing");await expect(page.locator(".overlay-root")).toHaveCount(0,{timeout:4000});}
++async function audit(page:Page){return page.evaluate(()=>(window as any).__xiaochuanMotionAudit?.()??null);}
++async function save(page:Page,name:string){await page.screenshot({path:`${out}/media/${name}.png`});}
++async function data(page:Page){return page.evaluate(()=>(window as any).p16);}
++for(const engine of ["legacy","gsap"]) {
++  test(`${engine} full interaction film`,async({browser})=>{
++    const videoStart=Date.now();const context=await browser.newContext({viewport:{width:1920,height:1080},deviceScaleFactor:1,recordVideo:{dir:path.resolve(".review/p1-6/video"),size:{width:1920,height:1080}},reducedMotion:"no-preference"});
++    await instrument(context);const page=await context.newPage();const errors:string[]=[];page.on("pageerror",e=>errors.push(e.message));
++    await open(page,engine);await wake(page);await page.waitForTimeout(450);await save(page,`${engine}-wake`);
++    await page.waitForTimeout(500);await listen(page);await page.waitForTimeout(500);state("listening","thinking");await page.waitForTimeout(400);await save(page,`${engine}-thinking`);
++    const first=await answer(page);await page.waitForTimeout(720);await save(page,`${engine}-answer`);
++    await expect(page.locator(".overlay-sentence-active")).toHaveCount(1);await save(page,`${engine}-speaking`);
++    await expect.poll(()=>reports.some(r=>r.type==="playback.drained"&&r.turnId===first)).toBe(true);
++    await expect(page.locator(".overlay-root")).toHaveAttribute("data-state","followup");
++    const second=await answer(page);await expect.poll(()=>reports.some(r=>r.type==="playback.started"&&r.turnId===second)).toBe(true);await page.waitForTimeout(1000);
++    const stops=(await data(page)).stopped;state("answering","listening");await expect(page.locator(".overlay-root")).toHaveAttribute("data-state","listening");await page.waitForTimeout(100);await save(page,`${engine}-interrupt`);
++    expect((await data(page)).stopped).toBeGreaterThan(stops);await page.waitForTimeout(300);const third=await answer(page);
++    await expect.poll(()=>reports.some(r=>r.type==="playback.drained"&&r.turnId===third)).toBe(true);await save(page,`${engine}-followup`);
++    state("followup","closing");await page.waitForTimeout(40);if(engine==="gsap")await expect(page.locator(".overlay-card-spoken")).toHaveText(card.spoken,{timeout:100});await save(page,`${engine}-exit`);if(engine==="gsap"){await page.waitForTimeout(500);expect(Number(await page.locator(".overlay-root").evaluate(el=>getComputedStyle(el).opacity))).toBeLessThan(.99);await save(page,`${engine}-return-crossfade`);}await expect(page.locator(".overlay-root")).toHaveCount(0);await page.waitForTimeout(300);await save(page,`${engine}-returned`);
++    const metrics=await data(page);expect(metrics.peak).toBeGreaterThan(.01);expect(errors).toEqual([]);
++    if(engine==="gsap"){const a=await audit(page);expect(a.liveTimelines).toBe(0);expect(a.pendingJob).toBe(false);}
++    const captured=await page.evaluate(async()=>{const w=window as any;const c=w.captures[0];if(!c)return null;await new Promise<void>(resolve=>{c.recorder.onstop=()=>resolve();c.recorder.stop();});const blob=new Blob(c.chunks,{type:"audio/webm"});const bytes=new Uint8Array(await blob.arrayBuffer());let binary="";for(const x of bytes)binary+=String.fromCharCode(x);return{base64:btoa(binary),start:c.start,timeOrigin:performance.timeOrigin};});
++    if(captured)writeFileSync(`${out}/media/${engine}-browser-audio.webm`,Buffer.from(captured.base64,"base64"));
++    writeFileSync(`${out}/evidence/${engine}-film.json`,JSON.stringify({videoStart,audio:captured?{start:captured.start,timeOrigin:captured.timeOrigin}:null,fixture:card,pcmSeconds:pcm.map(b=>b.length/48000),reports:[...reports],errors,audit:await audit(page),metrics},null,2));
++    const video=page.video()!;await context.close();await video.saveAs(`${out}/media/${engine}-interaction.webm`);
++  });
++  for(const viewport of [{width:1280,height:720},{width:1792,height:832},{width:1920,height:1080},{width:3840,height:2160}]) {
++    test(`${engine} ${viewport.width} geometry and performance`,async({browser})=>{
++      const context=await browser.newContext({viewport,deviceScaleFactor:1,reducedMotion:"no-preference"});await instrument(context);const page=await context.newPage();await open(page,engine);
++      const cdp=await context.newCDPSession(page);await cdp.send("Performance.enable");const before=await cdp.send("Performance.getMetrics");
++      await wake(page);await page.waitForTimeout(950);await listen(page);const id=await answer(page);
++      await expect.poll(()=>reports.some(r=>r.type==="playback.drained"&&r.turnId===id)).toBe(true);await page.waitForTimeout(500);
++      const box=await page.locator(".overlay-card").boundingBox();expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.y+box!.height).toBeLessThanOrEqual(viewport.height);
++      await expect(page.locator(".overlay-card-spoken")).toHaveText(card.spoken);await expect(page.locator(".overlay-card-data")).toHaveCSS("opacity","1");await expect(page.locator(".overlay-card-data")).toContainText("120");await save(page,`${process.env.P16_PERF_TAG??""}${engine}-${viewport.width}`);
++      const after=await cdp.send("Performance.getMetrics");const metrics=await data(page);
++      const gpu=await page.evaluate(()=>{const canvas=document.createElement("canvas"),gl=canvas.getContext("webgl");const ext=gl?.getExtension("WEBGL_debug_renderer_info");return{renderer:ext?gl!.getParameter(ext.UNMASKED_RENDERER_WEBGL):null,dpr:devicePixelRatio};});
++      await close(page);await page.waitForTimeout(500);const a=await audit(page);if(a){expect(a.liveTimelines).toBe(0);expect(a.pendingJob).toBe(false);}
++      writeFileSync(`${out}/evidence/${process.env.P16_PERF_TAG??""}${engine}-${viewport.width}-performance.json`,JSON.stringify({viewport,gpu,before,after,metrics,audit:a,reports:[...reports]},null,2));await context.close();
++    });
++  }
++  test(`${engine} audio failure reduced motion and repeated wake exit`,async({browser})=>{
++    const context=await browser.newContext({reducedMotion:"reduce"});await instrument(context);const page=await context.newPage();await open(page,engine);fail=true;
++    for(let i=0;i<4;i++){await wake(page);await listen(page);await answer(page);await expect(page.locator(".overlay-card-spoken")).toHaveText(card.spoken);await expect(page.locator(".overlay-audio-notice")).toContainText("查看卡片");await close(page);}
++    expect(reports.some(r=>r.type==="playback.drained")).toBe(false);expect(reports.some(r=>r.type==="playback.failed")).toBe(true);
++    const a=await audit(page);if(a){expect(a.liveTimelines).toBe(0);expect(a.pendingJob).toBe(false);}writeFileSync(`${out}/evidence/${engine}-reduced-failure.json`,JSON.stringify({audit:a,reports},null,2));await context.close();
++  });
++  test(`${engine} hidden restore early interruption navigation and reentry`,async({browser})=>{
++    const context=await browser.newContext({reducedMotion:"no-preference"});await instrument(context);const page=await context.newPage();await open(page,engine,"/poc/xiaochuan");autoFollowup=false;
++    await wake(page);await listen(page);await answer(page);await page.waitForTimeout(100);state("answering","listening");await page.waitForTimeout(250);await expect(page.locator(".overlay-card")).toHaveCount(0);
++    for(let i=0;i<5;i++){await answer(page);await page.waitForTimeout(150);state("answering","listening");await page.waitForTimeout(220);}
++    await answer(page);await page.evaluate(()=>{Object.defineProperty(document,"hidden",{configurable:true,get:()=>true});document.dispatchEvent(new Event("visibilitychange"));});await page.waitForTimeout(1300);
++    const hidden=await audit(page);if(hidden)expect(hidden.pendingJob).toBe(false);
++    await page.evaluate(()=>{Object.defineProperty(document,"hidden",{configurable:true,get:()=>false});document.dispatchEvent(new Event("visibilitychange"));});await page.waitForTimeout(100);await expect(page.locator(".overlay-card-body")).toHaveCSS("transform","matrix(1, 0, 0, 1, 0, 0)");
++    const restored=await audit(page);
++    await page.getByRole("button",{name:"卸载小川",exact:true}).click();
++    await expect.poll(()=>hub.counts().screens).toBe(0);
++    const canvasCount=(await data(page)).canvasMs.length;await page.waitForTimeout(150);expect((await data(page)).canvasMs.length).toBe(canvasCount);
++    const unmounted=await audit(page);if(unmounted){expect(unmounted.liveControllers).toBe(0);expect(unmounted.liveTimelines).toBe(0);expect(unmounted.subscribers).toBe(0);expect(unmounted.pendingJob).toBe(false);}
++    await page.getByRole("button",{name:"重新挂载小川",exact:true}).click();await expect.poll(()=>hub.counts().screens).toBe(1);
++    await wake(page);await listen(page);await answer(page);
++    await page.getByRole("link",{name:"离开原型"}).click();await expect(page).toHaveURL(/voice-console/);
++    await expect.poll(()=>hub.counts().screens).toBe(0);
++    const navigated=await audit(page);if(navigated){expect(navigated.liveControllers).toBe(0);expect(navigated.liveTimelines).toBe(0);expect(navigated.pendingJob).toBe(false);}
++    await page.goBack();await expect(page).toHaveURL(/poc\/xiaochuan/);if(await page.getByRole("button",{name:"重新挂载小川",exact:true}).count())await page.getByRole("button",{name:"重新挂载小川",exact:true}).click();await expect.poll(()=>hub.counts().screens).toBe(1);
++    await wake(page);await listen(page);await answer(page);await close(page);
++    const a=await audit(page);if(a){expect(a.liveControllers).toBe(1);expect(a.liveTimelines).toBe(0);expect(a.pendingJob).toBe(false);}
++    writeFileSync(`${out}/evidence/${engine}-lifecycle.json`,JSON.stringify({hidden,restored,unmounted,navigated,final:a,reports},null,2));await context.close();
++  });
++}
++test("main GSAP and overlay share the existing ticker owner without altering its cap",async({browser})=>{
++  const context=await browser.newContext({reducedMotion:"no-preference"});await instrument(context);const page=await context.newPage();
++  await open(page,"gsap","/screen/sales?motion=gsap");
++  await wake(page);await listen(page);await answer(page);const active=await audit(page);expect(active.configuredCapHz).toBe(60);expect(active.activeListeners).toBeLessThanOrEqual(2);
++  await close(page);const closed=await audit(page);expect(closed.liveTimelines).toBe(0);expect(closed.pendingJob).toBe(false);expect(closed.activeListeners).toBeLessThanOrEqual(1);
++  writeFileSync(`${out}/evidence/shared-owner.json`,JSON.stringify({active,closed},null,2));await context.close();
++});
++
++test("gsap P1.3 normal and long templates retain layout and spoken pagination",async({browser})=>{
++  const context=await browser.newContext({viewport:{width:1792,height:832},deviceScaleFactor:1,reducedMotion:"no-preference"});await instrument(context);const page=await context.newPage();await open(page,"gsap");
++  emit({type:"session.start",sessionId:"p16-layout",screenId:"11111111-1111-4111-8111-111111111111"});await expect(page.locator(".overlay-root")).toHaveCount(1);await listen(page);
++  const measured=[];
++  for(const variant of ["normal","long"] as const)for(const intent of CARD_INTENTS){
++    const fixture=task12Card(intent,variant);await answer(page,fixture,false);await page.waitForTimeout(950);
++    await expect(page.locator(".overlay-card-header")).toHaveCSS("opacity","1");await expect(page.locator(".overlay-card-body")).toHaveAttribute("data-spoken-complete","true");await expect(page.locator(".overlay-card-spoken")).toHaveAttribute("data-measured","true");
++    const bounds=await page.locator(".overlay-card").boundingBox();expect(bounds!.x).toBeGreaterThanOrEqual(0);expect(bounds!.y+bounds!.height).toBeLessThanOrEqual(832);
++    expect(await auditText(page,".overlay-root")).toEqual([]);
++    const pages=Number(await page.locator(".overlay-spoken-section").getAttribute("data-pages")),parts=new Map<number,string>();
++    for(let i=0;i<pages;i++){parts.set(Number(await page.locator(".overlay-spoken-section").getAttribute("data-page")),await page.locator(".overlay-card-spoken").innerText());if(pages>1)await page.getByRole("button",{name:"下一页播报"}).click();}
++    expect([...parts].sort((a,b)=>a[0]-b[0]).map(([,text])=>text).join("")).toBe(displaySpoken(fixture.spoken));
++    measured.push({variant,intent,kind:fixture.kind,pages,bounds});
++  }
++  await close(page);writeFileSync(`${out}/evidence/gsap-p13-layout.json`,JSON.stringify(measured,null,2));await context.close();
++});
+diff --git a/playwright.config.ts b/playwright.config.ts
+index 131d88d..4e4babd 100644
+--- a/playwright.config.ts
++++ b/playwright.config.ts
+@@ -9 +9 @@ export default defineConfig({
+-  testIgnore: ["**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
++  testIgnore: ["**/p1-6.spec.ts", "**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
+diff --git a/scripts/p1-6-analyze.mjs b/scripts/p1-6-analyze.mjs
+new file mode 100644
+index 0000000..14f73a2
+--- /dev/null
++++ b/scripts/p1-6-analyze.mjs
+@@ -0,0 +1,31 @@
++import { readFileSync,writeFileSync,readdirSync } from 'node:fs';
++const root='docs/nexus-p1-6',dir=`${root}/evidence`;
++const read=name=>JSON.parse(readFileSync(`${dir}/${name}`));
++const round=n=>Math.round(n*100)/100;
++const summary=values=>{const x=[...values].sort((a,b)=>a-b);return {n:x.length,mean:round(x.reduce((a,b)=>a+b,0)/x.length),p95:round(x[Math.floor((x.length-1)*.95)]),max:round(x.at(-1))};};
++const performance=readdirSync(dir).filter(n=>n.endsWith('-performance.json')).map(name=>{
++  const d=read(name),before=Object.fromEntries(d.before.metrics.map(x=>[x.name,x.value])),after=Object.fromEntries(d.after.metrics.map(x=>[x.name,x.value]));
++  return {name,viewport:d.viewport,gpu:d.gpu,frameMs:summary(d.metrics.frames),canvasCallbackMs:summary(d.metrics.canvasMs),allCallbackMs:summary(d.metrics.callbackMs),deltaSeconds:Object.fromEntries(['ScriptDuration','TaskDuration','LayoutDuration','RecalcStyleDuration'].map(k=>[k,round(after[k]-before[k])])),audit:d.audit,peak:d.metrics.peak};
++});
++const films=['legacy','gsap'].map(engine=>{
++  const d=read(`${engine}-film.json`),m=d.metrics;
++  const launches=[...new Set(m.samples.filter(s=>Number(s.launchAt)>0 && s.state==='answering').map(s=>Number(s.launchAt)))];
++  const turns=launches.map(at=>{
++    const samples=m.samples.filter(s=>Number(s.launchAt)===at&&s.state==='answering');
++    const find=fn=>{const x=samples.find(fn);return x?round(x.at-at):null;};
++    const scales=s=>Number(/scaleX\(([^)]+)/.exec(s.line??'')?.[1]??0);
++    const body=s=>Number(/scaleY\(([^)]+)/.exec(s.body??'')?.[1]??0);
++    const schedule=m.scheduled.find(s=>s.at>=at);
++    const onset=schedule?schedule.at+(schedule.when-schedule.contextTime)*1000:null;
++    const first=samples.find(s=>s.highlight?.startsWith('本期'));
++    const second=samples.find(s=>s.highlight?.startsWith('客户'));
++    const canvasDrift=samples.filter(s=>s.canvas?.at>=at&&s.visual).map(s=>Math.max(Math.abs(s.canvas.stream-s.visual.stream)*350,Math.abs(s.canvas.unfold-s.visual.unfold)*250));
++    return {at,lineStartMs:find(s=>scales(s)>.001),bodyStartMs:find(s=>Number(s.bodyOpacity)>.001),bodyFullMs:find(s=>body(s)>=.999),borderFullMs:find(s=>s.dash==='0'),pulseFullMs:find(s=>s.visual?.pulse>=1),streamStartMs:find(s=>s.visual?.stream>0),streamFullMs:find(s=>s.visual?.stream>=1),contentFullMs:find(s=>s.visual?.followups>=1),firstAudioScheduledMs:schedule?round(schedule.at-at):null,firstAudioOnsetMs:onset?round(onset-at):null,highlightFirstErrorMs:first&&onset?round(first.at-onset):null,highlightSecondErrorMs:second&&onset?round(second.at-onset-d.pcmSeconds[0]*1000):null,canvasDomProgressEquivalentSkewMs:canvasDrift.length?summary(canvasDrift):null};
++  });
++  return {engine,turns,audit:d.audit,reports:d.reports,pcmSeconds:d.pcmSeconds,errors:d.errors};
++});
++writeFileSync(`${dir}/comparison-summary.json`,JSON.stringify({performance,films},null,2));
++const phases=[['Core pulse',0,120],['120-particle stream',100,450],['Horizontal line',400,500],['Card unfold',500,650],['SVG frame',400,650],['GSAP header',550,710],['GSAP metrics',600,800],['GSAP spoken',650,830],['GSAP followups',720,900]];
++const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580"><rect width="1200" height="580" fill="#0a0806"/><g fill="#ffe8c7" font-family="sans-serif"><text x="30" y="40" font-size="25">XIAOCHUAN · ANSWER-relative timeline (ms)</text>${Array.from({length:11},(_,i)=>`<text x="${260+i*85}" y="80" font-size="14">${i*100}</text><path d="M${270+i*85} 90v410" stroke="#47311c"/>`).join('')}${phases.map(([label,a,b],i)=>`<text x="30" y="${124+i*42}" font-size="17">${label}</text><rect x="${270+a*.85}" y="${104+i*42}" width="${(b-a)*.85}" height="26" rx="5" fill="${i<4?'#c97f3d':'#ffb65c'}"/>`).join('')}<text x="30" y="550" font-size="16">Legacy and GSAP share the first four landmarks. Audio follows actual PCM events and is never gated by this timeline.</text></g></svg>`;
++writeFileSync(`${root}/media/timeline.svg`,svg);
++console.log(JSON.stringify({performance:performance.map(({name,frameMs,canvasCallbackMs,deltaSeconds})=>({name,frameMs,canvasCallbackMs,deltaSeconds})),films:films.map(({engine,turns})=>({engine,turns}))},null,2));
+diff --git a/scripts/p1-6-media.mjs b/scripts/p1-6-media.mjs
+new file mode 100644
+index 0000000..eb846be
+--- /dev/null
++++ b/scripts/p1-6-media.mjs
+@@ -0,0 +1,16 @@
++/** Build reviewable comparisons from browser evidence; ffmpeg must be available. */
++import { readFileSync,writeFileSync } from 'node:fs';
++import { execFileSync } from 'node:child_process';
++const root='docs/nexus-p1-6',media=`${root}/media`;
++const run=(args)=>execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y',...args],{stdio:'inherit'});
++for(const engine of ['legacy','gsap']) {
++  const evidence=JSON.parse(readFileSync(`${root}/evidence/${engine}-film.json`));
++  const offset=(evidence.audio.timeOrigin+evidence.audio.start-evidence.videoStart)/1000;
++  run(['-i',`${media}/${engine}-interaction.webm`,'-itsoffset',String(offset),'-i',`${media}/${engine}-browser-audio.webm`,'-map','0:v:0','-map','1:a:0','-c:v','libx264','-preset','fast','-crf','22','-pix_fmt','yuv420p','-af','apad','-c:a','aac','-b:a','128k','-shortest','-movflags','+faststart',`${media}/${engine}-interaction.mp4`]);
++}
++run(['-i',`${media}/legacy-interaction.mp4`,'-i',`${media}/gsap-interaction.mp4`,'-filter_complex','[0:v]scale=960:540[l];[1:v]scale=960:540[r];[l][r]hstack=inputs=2[v]','-map','[v]','-an','-c:v','libx264','-crf','22','-pix_fmt','yuv420p','-shortest',`${media}/side-by-side.mp4`]);
++writeFileSync(`${root}/evidence/media-notes.json`,JSON.stringify({audio:'Actual browser gain output captured by MediaStreamDestination/MediaRecorder; audio offset uses wall clock plus performance.timeOrigin; not a physical speaker recording.',comparison:'Same fixture and question, same scripted order. Individual recordings include rendering and event-loop timing differences; use answer-relative phase comparison for precise timings.'},null,2));
++
++const starts=['legacy','gsap'].map(engine=>{const d=JSON.parse(readFileSync(`${root}/evidence/${engine}-film.json`));const at=Number(d.metrics.samples.find(s=>s.state==='answering'&&Number(s.launchAt)>0).launchAt);return(d.audio.timeOrigin+at-d.videoStart)/1000;});
++run(['-ss',String(starts[0]),'-i',`${media}/legacy-interaction.mp4`,'-ss',String(starts[1]),'-i',`${media}/gsap-interaction.mp4`,'-filter_complex','[0:v]scale=960:540[l];[1:v]scale=960:540[r];[l][r]hstack=inputs=2[v]','-map','[v]','-an','-c:v','libx264','-crf','22','-pix_fmt','yuv420p','-shortest',`${media}/answer-aligned.mp4`]);
++writeFileSync(`${root}/evidence/alignment.json`,JSON.stringify({startsSeconds:starts,reference:'first ANSWER launchAt',precision:'approximate video alignment; source-clock comparison is in comparison-summary.json',left:'Legacy',right:'GSAP'},null,2));
+diff --git a/src/app/poc/xiaochuan/page.tsx b/src/app/poc/xiaochuan/page.tsx
+new file mode 100644
+index 0000000..3da56aa
+--- /dev/null
++++ b/src/app/poc/xiaochuan/page.tsx
+@@ -0,0 +1,12 @@
++import { notFound } from "next/navigation";
++import { fromPublicSalesScreenPayload } from "@/lib/public-screen-payload";
++import { validatePublicPayload } from "@/lib/voice/public-payload";
++import seed from "../../../../services/voice-orchestrator/fixtures/public-sales-screen.json";
++import { XiaochuanReview } from "./review";
++export const dynamic = "force-dynamic";
++/** Local review harness: fixed synthetic fixture and no production fetch. */
++export default function XiaochuanReviewPage() {
++  if (process.env.XIAOCHUAN_POC_REVIEW !== "1") notFound();
++  const fixture = validatePublicPayload(seed)!;
++  return <XiaochuanReview payload={fromPublicSalesScreenPayload(fixture)}/>;
++}
+diff --git a/src/app/poc/xiaochuan/review.tsx b/src/app/poc/xiaochuan/review.tsx
+new file mode 100644
+index 0000000..6f04048
+--- /dev/null
++++ b/src/app/poc/xiaochuan/review.tsx
+@@ -0,0 +1,16 @@
++"use client";
++import { useState } from "react";
++import Link from "next/link";
++import { OverlayStage } from "@/components/overlay/OverlayStage";
++import type { PublicScreenPayload } from "@/lib/public-screen-payload";
++export function XiaochuanReview({payload}:{payload:PublicScreenPayload}) {
++  const [mounted,setMounted]=useState(true);
++  const hub=typeof window!=="undefined" ? new URLSearchParams(window.location.search).get("hub")??undefined : undefined;
++  return <main style={{background:"#0a0806",minHeight:"100vh",color:"#ffe8c7"}}>
++    <nav style={{position:"fixed",zIndex:100,top:8,left:8}}>
++      <button onClick={()=>setMounted(v=>!v)}>{mounted?"卸载小川":"重新挂载小川"}</button>{" "}
++      <Link href="/voice-console">离开原型</Link>
++    </nav>
++    {mounted ? <OverlayStage payload={payload} driver="live" hubUrl={hub}/> : null}
++  </main>;
++}
+diff --git a/src/components/overlay/AnswerCard.tsx b/src/components/overlay/AnswerCard.tsx
+index 8c45617..5d2f183 100644
+--- a/src/components/overlay/AnswerCard.tsx
++++ b/src/components/overlay/AnswerCard.tsx
+@@ -2,0 +3 @@
++import type { XiaochuanTimeline } from "./motion/XiaochuanTimeline";
+@@ -38,0 +40,2 @@ export const AnswerCard = memo(function AnswerCard({
++  motion = null,
++  liveAudio = false,
+@@ -49,0 +53,2 @@ export const AnswerCard = memo(function AnswerCard({
++  motion?: XiaochuanTimeline | null;
++  liveAudio?: boolean;
+@@ -166 +171 @@ export const AnswerCard = memo(function AnswerCard({
+-        const fp = foldProgress(now - foldAt);
++        const fp = motion ? motion.visual.fold : foldProgress(now - foldAt);
+@@ -168,3 +173,4 @@ export const AnswerCard = memo(function AnswerCard({
+-        line.style.transform = `scaleX(${inv})`;
+-        body.style.transform = `scaleY(${0.012 + 0.988 * inv})`;
+-        body.style.opacity = String(fp < 0.7 ? 1 : Math.max(0, 1 - (fp - 0.7) / 0.3));
++        const base = motion ? motion.visual.foldFrom : 1;
++        line.style.transform = `scaleX(${easeOutCubic(base / .4) * inv})`;
++        body.style.transform = `scaleY(${0.012 + 0.988 * easeInOutCubic((base - .4) / .6) * inv})`;
++        body.style.opacity = String((motion && base < .4 ? 0 : 1) * (fp < 0.7 ? 1 : Math.max(0, 1 - (fp - 0.7) / 0.3)));
+@@ -172 +178 @@ export const AnswerCard = memo(function AnswerCard({
+-        if (per > 0) frameRect.style.strokeDashoffset = String(per * (1 - inv));
++        if (per > 0) frameRect.style.strokeDashoffset = String(per * (1 - easeInOutCubic(base) * inv));
+@@ -175 +181 @@ export const AnswerCard = memo(function AnswerCard({
+-        raf = requestAnimationFrame(paint);
++        if (!motion) raf = requestAnimationFrame(paint);
+@@ -180 +186 @@ export const AnswerCard = memo(function AnswerCard({
+-      const ph = launchPhase(elapsed, config);
++      const ph = motion ? { ...launchPhase(elapsed, config), unfold: motion.visual.unfold, typingMs: motion.visual.typingMs } : launchPhase(elapsed, config);
+@@ -182,0 +189,11 @@ export const AnswerCard = memo(function AnswerCard({
++      if (motion) {
++        const root = body.parentElement!;
++        root.style.opacity = String(motion.visual.presence);
++        for (const [selector, progress] of [
++          [".overlay-card-header", motion.visual.header], [".overlay-card-data", motion.visual.metricsContent],
++          [".overlay-spoken-section", motion.visual.spoken], [".overlay-followups", motion.visual.followups],
++        ] as const) {
++          const layer = body.querySelector<HTMLElement>(selector);
++          if (layer) { layer.style.opacity = String(progress); layer.style.transform = `translateY(${(1-progress)*8}px)`; }
++        }
++      }
+@@ -214 +231 @@ export const AnswerCard = memo(function AnswerCard({
+-        const typed = reduced ? card.spoken.length : Math.max(typedChars(card.spoken, ph.typingMs, config.typeCps), active?.end ?? 0);
++        const typed = reduced || (motion && liveAudio) ? card.spoken.length : Math.max(typedChars(card.spoken, ph.typingMs, config.typeCps), active?.end ?? 0);
+@@ -240 +257 @@ export const AnswerCard = memo(function AnswerCard({
+-      raf = requestAnimationFrame(paint);
++      if (!motion) raf = requestAnimationFrame(paint);
+@@ -243 +260,3 @@ export const AnswerCard = memo(function AnswerCard({
+-    if (reduced) paint(performance.now());
++    const unsubscribe = motion?.subscribe(() => paint(performance.now()));
++    if (motion) { /* shared GSAP host owns updates */ }
++    else if (reduced) paint(performance.now());
+@@ -246,0 +266 @@ export const AnswerCard = memo(function AnswerCard({
++      unsubscribe?.();
+@@ -249 +269 @@ export const AnswerCard = memo(function AnswerCard({
+-  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion, reduced, activeSpokenPage]);
++  }, [card, launchAt, config, barWidth, foldAt, sentenceRef, sentenceVersion, reduced, activeSpokenPage, motion, liveAudio, audioNotice]);
+@@ -256,0 +277 @@ export const AnswerCard = memo(function AnswerCard({
++      data-launch-at={launchAt}
+diff --git a/src/components/overlay/JarvisCore.tsx b/src/components/overlay/JarvisCore.tsx
+index 62feb7c..653a746 100644
+--- a/src/components/overlay/JarvisCore.tsx
++++ b/src/components/overlay/JarvisCore.tsx
+@@ -2,0 +3 @@
++import type { XiaochuanTimeline } from "./motion/XiaochuanTimeline";
+@@ -81,0 +83 @@ export const JarvisCore = memo(function JarvisCore({
++  motion: choreography = null,
+@@ -86,0 +89 @@ export const JarvisCore = memo(function JarvisCore({
++  motion?: XiaochuanTimeline | null;
+@@ -313,0 +317,9 @@ export const JarvisCore = memo(function JarvisCore({
++      if (choreography) {
++        const visual = choreography.visual;
++        Object.assign(choreography.canvasSample, { at: now, pulse: visual.pulse, stream: visual.stream, unfold: visual.unfold, fold: visual.fold });
++        target.pulse = frame.name === "answering" ? visual.pulse : 0;
++        target.stream = frame.name === "answering" ? visual.stream : 0;
++        if (frame.name === "waking") { target.formation = visual.formation; target.ambientSpread = visual.formation; }
++        if (frame.name === "closing") target.collapse = visual.collapse;
++        if (frame.name === "answering") target.brightness = .85 + .15 * clamp01(frame.amplitude(now));
++      }
+@@ -628,2 +640,2 @@ export const JarvisCore = memo(function JarvisCore({
+-      if (frame.foldAt != null) {
+-        const fp = foldProgress(now - frame.foldAt);
++      if (frame.foldAt != null || (choreography && choreography.visual.fold > 0 && choreography.visual.fold < 1)) {
++        const fp = choreography ? choreography.visual.fold : foldProgress(now - frame.foldAt!);
+@@ -711 +723 @@ export const JarvisCore = memo(function JarvisCore({
+-  }, [frameRef, quality, reduced, staticState]);
++  }, [frameRef, quality, reduced, staticState, choreography]);
+diff --git a/src/components/overlay/OverlayStage.tsx b/src/components/overlay/OverlayStage.tsx
+index d7dd286..2a8aa4c 100644
+--- a/src/components/overlay/OverlayStage.tsx
++++ b/src/components/overlay/OverlayStage.tsx
+@@ -3 +3 @@
+-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
++import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
+@@ -9,0 +10,2 @@ import "./overlay.css";
++import { amplitudeSource } from "./motion/amplitude-source";
++import { useXiaochuanMotion } from "./motion/useXiaochuanMotion";
+@@ -87,0 +90,5 @@ export function OverlayStage({
++  const motion = useXiaochuanMotion(reduced);
++  const rootRef = useRef<HTMLDivElement>(null);
++  const motionRef = useRef(motion);
++  useEffect(() => { motionRef.current = motion; }, [motion]);
++  const [retiring, setRetiring] = useState<{ card: AnswerCardData; launchAt: number; foldAt: number | null } | null>(null);
+@@ -93,0 +101 @@ export function OverlayStage({
++  const answerLaunchRef = useRef(0);
+@@ -143,0 +152,4 @@ export function OverlayStage({
++    if (motionRef.current && mirrorRef.current.card && !next.card) {
++      setRetiring({ card: mirrorRef.current.card, launchAt: answerLaunchRef.current, foldAt: event.at });
++      motionRef.current.fold(event.at);
++    } else if (next.card) setRetiring(null);
+@@ -161 +173,5 @@ export function OverlayStage({
+-      if (reduced) frameRef.current.geometry = g;
++      if (motion) {
++        motion.geometry(g.core.x, g.core.y, start);
++        const update = () => { frameRef.current.geometry = { ...g, core: { x: motion.visual.coreX, y: motion.visual.coreY } }; };
++        update();
++      } else if (reduced) frameRef.current.geometry = g;
+@@ -164,0 +181,3 @@ export function OverlayStage({
++    const unsubscribe = motion?.subscribe(() => {
++      frameRef.current.geometry = { ...frameRef.current.geometry, core: { x: motion.visual.coreX, y: motion.visual.coreY } };
++    });
+@@ -167,2 +186,2 @@ export function OverlayStage({
+-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", apply); };
+-  }, [session.name, session.card?.kind, reduced]);
++    return () => { unsubscribe?.(); cancelAnimationFrame(raf); window.removeEventListener("resize", apply); };
++  }, [session.name, session.card?.kind, reduced, motion]);
+@@ -175 +194,2 @@ export function OverlayStage({
+-      ? () => playerRef.current?.getAmplitude() ?? 0
++      ? () => motion && amplitudeSource(session.name, bargePaused, fixedIdRef.current !== null) === "input"
++        ? micRef.current?.getAmplitude() ?? 0 : playerRef.current?.getAmplitude() ?? 0
+@@ -179 +199,32 @@ export function OverlayStage({
+-  }, [session.name, session.since, driver, bargePaused]);
++  }, [session.name, session.since, driver, bargePaused, motion]);
++
++  useLayoutEffect(() => {
++    if (!motion) return;
++    if (session.name === "waking") motion.takeover(session.since);
++    if (session.name === "answering") motion.answer(launchAt, driver === "demo" ? (session.spoken?.length ?? 0) / LAUNCH.typeCps * 1000 : 0);
++    if (session.name === "closing") motion.close(session.since);
++    motion.caption(performance.now());
++  }, [motion, session.name, session.since, session.spoken, launchAt, driver]);
++  useLayoutEffect(() => {
++    if (motion && phase === "exit") motion.exit(performance.now());
++  }, [motion, phase]);
++  useLayoutEffect(() => {
++    if (!motion) return;
++    motion.presence(bargePaused, performance.now());
++  }, [motion, bargePaused]);
++  useLayoutEffect(() => {
++    if (!motion) return;
++    return motion.subscribe(() => {
++      const root = rootRef.current;
++      if (!root) return;
++      root.style.opacity = String(motion.visual.opacity);
++      const caption = root.querySelector<HTMLElement>(".overlay-caption-block");
++      if (caption) caption.style.opacity = String(motion.visual.caption);
++    });
++  }, [motion, phase]);
++  // Visual snapshot retirement never delays reducer/audio transitions.
++  useEffect(() => {
++    if (!retiring) return;
++    const timer = window.setTimeout(() => setRetiring(null), reduced ? 0 : Math.max(0, VOICE_TIMING.foldMs - (performance.now() - retiring.foldAt!)));
++    return () => window.clearTimeout(timer);
++  }, [retiring, reduced]);
+@@ -219,0 +271 @@ export function OverlayStage({
++      answerLaunchRef.current = now;
+@@ -553,0 +606,2 @@ export function OverlayStage({
++  const shownCard = session.card ?? (motion ? retiring?.card : null);
++  const shownLaunchAt = session.card ? launchAt : retiring?.launchAt ?? launchAt;
+@@ -557,2 +611,2 @@ export function OverlayStage({
+-    <div className="overlay-root" data-phase={phase} data-has-card={session.card !== null} data-barge-paused={bargePaused}>
+-      <JarvisCore reduced={reduced} stateKey={session.name} frameRef={frameRef} quality={lite ? "lite" : "high"} />
++    <div ref={rootRef} className="overlay-root" data-motion={motion ? "gsap" : "legacy"} data-state={session.name} data-phase={phase} data-has-card={session.card !== null} data-barge-paused={bargePaused}>
++      <JarvisCore motion={motion} reduced={reduced} stateKey={session.name} frameRef={frameRef} quality={lite ? "lite" : "high"} />
+@@ -575 +629 @@ export function OverlayStage({
+-      {session.card ? (
++      {shownCard ? (
+@@ -577,2 +631,4 @@ export function OverlayStage({
+-          key={launchAt}
+-          card={session.card}
++          motion={motion}
++          liveAudio={live}
++          key={shownLaunchAt}
++          card={shownCard}
+@@ -580 +636 @@ export function OverlayStage({
+-          launchAt={launchAt}
++          launchAt={shownLaunchAt}
+@@ -582 +638 @@ export function OverlayStage({
+-          foldAt={session.name === "closing" ? session.since : null}
++          foldAt={session.name === "closing" ? session.since : session.card ? null : retiring?.foldAt ?? null}
+diff --git a/src/components/overlay/motion/XiaochuanTimeline.test.ts b/src/components/overlay/motion/XiaochuanTimeline.test.ts
+new file mode 100644
+index 0000000..a9b2bf4
+--- /dev/null
++++ b/src/components/overlay/motion/XiaochuanTimeline.test.ts
+@@ -0,0 +1,43 @@
++import { afterEach, describe, expect, it } from "vitest";
++import { XiaochuanTimeline } from "./XiaochuanTimeline";
++import type { MotionHost } from "@/components/screen/motion/MotionDirector";
++function setup(reduced = false) {
++  let now = 0, id = 0;
++  const jobs = new Map<number, (time: number) => void>();
++  const host = { request: (fn: (time: number) => void) => { jobs.set(++id, fn); return id; }, cancel: (key: number) => { jobs.delete(key); }, clockNow: () => now, now: () => now, wall: () => now, memory: () => null } satisfies MotionHost;
++  const motion = new XiaochuanTimeline(host, reduced); controllers.push(motion);
++  return { motion, jobs, step: (time: number) => { now = time; const pending = [...jobs.values()]; jobs.clear(); pending.forEach(fn => fn(now)); } };
++}
++const controllers: XiaochuanTimeline[] = [];
++afterEach(() => { controllers.splice(0).forEach(c => c.dispose()); expect(XiaochuanTimeline.liveTimelines).toBe(0); expect(XiaochuanTimeline.liveControllers).toBe(0); });
++describe("visual timeline isolation", () => {
++  it("keeps the existing pulse/stream/unfold landmarks on one absolute clock", () => {
++    const {motion, step, jobs} = setup(); motion.answer(0);
++    step(120); expect(motion.visual.pulse).toBe(1); expect(motion.visual.stream).toBeCloseTo(20/350,5); expect(motion.visual.unfold).toBe(0);
++    step(450); expect(motion.visual.stream).toBe(1); expect(motion.visual.unfold).toBeCloseTo(.2);
++    step(650); expect(motion.visual.unfold).toBe(1);
++    step(900); expect(motion.visual.followups).toBe(1); expect(motion.visual.metricsContent).toBe(1); expect(() => JSON.stringify(motion.audit())).not.toThrow(); expect(jobs.size).toBe(0); expect(motion.audit().tracks).toEqual([]);
++  });
++  it("folds the actual partial pose and replaces an old turn without listeners growing", () => {
++    const {motion, step, jobs} = setup(); motion.answer(0); step(530);
++    const pose = motion.visual.unfold; motion.fold(530); expect(motion.visual.foldFrom).toBeCloseTo(pose);
++    step(630); expect(motion.visual.fold).toBeCloseTo(.5);
++    motion.answer(630); expect(motion.visual.fold).toBe(0); expect(motion.visual.unfold).toBe(0);
++    step(1530); expect(jobs.size).toBe(0); expect(motion.audit().tracks).toEqual([]);
++  });
++  it("releases the host job while hidden and catches up instead of replaying", () => {
++    const {motion, step, jobs} = setup(); motion.answer(0); step(120); motion.visibility(true);
++    expect(jobs.size).toBe(0); step(2000); motion.visibility(false);
++    expect(motion.visual.unfold).toBe(1); expect(jobs.size).toBe(0); expect(motion.audit().tracks).toEqual([]);
++  });
++  it("finishes reduced-motion tracks without an animation job", () => {
++    const {motion, jobs} = setup(true); motion.takeover(0); motion.answer(0); motion.close(0); motion.exit(0);
++    expect(motion.visual.fold).toBe(1); expect(motion.visual.opacity).toBe(0); expect(jobs.size).toBe(0);
++  });
++  it("repeated wake/exit and dispose release all tracks and subscriptions", () => {
++    const {motion, step, jobs} = setup(); let updates=0; motion.subscribe(() => updates++);
++    for(let i=0;i<30;i++) { const at=i*3000; step(at); motion.takeover(at); motion.caption(at); motion.geometry(900,225,at); step(at+900); motion.close(at+900); step(at+1700); motion.exit(at+1700); step(at+2200); }
++    expect(jobs.size).toBe(0); motion.takeover(90000); expect(motion.visual.formation).toBe(0);
++    motion.dispose(); const previous=updates; step(100000); expect(updates).toBe(previous); expect(jobs.size).toBe(0); expect(motion.audit().subscribers).toBe(0);
++  });
++});
+diff --git a/src/components/overlay/motion/XiaochuanTimeline.ts b/src/components/overlay/motion/XiaochuanTimeline.ts
+new file mode 100644
+index 0000000..ebec6c0
+--- /dev/null
++++ b/src/components/overlay/motion/XiaochuanTimeline.ts
+@@ -0,0 +1,126 @@
++import { gsap } from "gsap";
++import { createGsapHost, settleGsapIdle, tickerAudit } from "@/components/screen/motion/GsapTickerOwner";
++import type { MotionHost } from "@/components/screen/motion/MotionDirector";
++import { LAUNCH } from "@/lib/voice/params";
++
++export type XiaochuanVisual = {
++  pulse: number; stream: number; unfold: number; fold: number; foldFrom: number;
++  header: number; metricsContent: number; spoken: number; followups: number;
++  opacity: number; caption: number; presence: number;
++  formation: number; collapse: number;
++  coreX: number; coreY: number; typingMs: number;
++};
++type Track = { timeline: gsap.core.Timeline; start: number; duration: number };
++/** Visual interpolation only: no reducer, hub, audio scheduling or global ticker mutation. */
++export class XiaochuanTimeline {
++  static liveControllers = 0;
++  static liveTimelines = 0;
++  readonly visual: XiaochuanVisual = {
++    pulse: 0, stream: 0, unfold: 0, fold: 0, foldFrom: 1,
++    header: 0, metricsContent: 0, spoken: 0, followups: 0,
++    opacity: 0, caption: 0, presence: 1, formation: 0, collapse: 0,
++    coreX: 960, coreY: 470, typingMs: 0,
++  };
++  readonly canvasSample = { at: 0, pulse: 0, stream: 0, unfold: 0, fold: 0 };
++  private tracks = new Map<string, Track>();
++  private subscribers = new Set<() => void>();
++  private job: number | null = null;
++  private disposed = false;
++  private hidden = false;
++  constructor(private host: MotionHost = createGsapHost(), public reduced = false) { XiaochuanTimeline.liveControllers++; }
++  private now() { return this.host.clockNow?.() ?? performance.now(); }
++  subscribe(fn: () => void) { this.subscribers.add(fn); fn(); return () => { this.subscribers.delete(fn); }; }
++  private emit() { this.subscribers.forEach(fn => fn()); }
++  private cancelJob() { if (this.job !== null) this.host.cancel(this.job); this.job = null; }
++  private kill(key: string) {
++    const old = this.tracks.get(key);
++    if (old) { old.timeline.kill(); this.tracks.delete(key); XiaochuanTimeline.liveTimelines--; }
++  }
++  private start(key: string, at: number, build: (tl: gsap.core.Timeline) => void) {
++    if (this.disposed) return;
++    // Sample the interrupted track before replacing it, preserving its current pose.
++    this.sample(this.now());
++    this.kill(key);
++    const timeline = gsap.timeline({ paused: true }); build(timeline);
++    const duration = timeline.duration() * 1000;
++    this.tracks.set(key, { timeline, start: at, duration }); XiaochuanTimeline.liveTimelines++;
++    this.sample(this.now()); this.schedule();
++  }
++  /** One shared answer clock, existing 120 / 100–450 / 400–650 ms choreography. */
++  answer(at: number, typingMs = 0) {
++    this.kill("fold"); this.kill("answer");
++    Object.assign(this.visual, { pulse: 0, stream: 0, unfold: 0, fold: 0, header: 0, metricsContent: 0, spoken: 0, followups: 0, presence: 1, typingMs: 0 });
++    this.start("answer", at, tl => {
++      tl.addLabel("pulse", 0).to(this.visual, { pulse: 1, duration: LAUNCH.pulseMs / 1000, ease: "none" }, "pulse")
++        .addLabel("stream", .1).to(this.visual, { stream: 1, duration: .35, ease: "none" }, "stream")
++        .addLabel("unfold", .4).to(this.visual, { unfold: 1, duration: .25, ease: "none" }, "unfold")
++        .addLabel("content", .65)
++        .to(this.visual, { header: 1, duration: .16, ease: "power2.out" }, .55)
++        .to(this.visual, { metricsContent: 1, duration: .20, ease: "power2.out" }, .60)
++        .to(this.visual, { spoken: 1, duration: .18, ease: "power2.out" }, "content")
++        .to(this.visual, { followups: 1, duration: .18, ease: "power2.out" }, .72);
++      if (typingMs > 0) tl.to(this.visual, { typingMs, duration: typingMs / 1000, ease: "none" }, "content");
++    });
++  }
++  fold(at: number) {
++    this.sample(this.now()); this.kill("answer");
++    if (this.tracks.has("fold") || this.visual.fold >= 1) return;
++    this.visual.foldFrom = this.visual.unfold;
++    this.start("fold", at, tl => { tl.to(this.visual, { fold: 1, duration: .2, ease: "none" }); });
++  }
++  takeover(at: number) {
++    this.kill("exit"); this.visual.collapse = 0; this.visual.formation = 0;
++    this.start("wake", at, tl => {
++      tl.to(this.visual, { opacity: 1, duration: .5, ease: "power2.out" }, 0)
++        .to(this.visual, { formation: 1, duration: .9, ease: "power2.out" }, 0);
++    });
++  }
++  close(at: number) {
++    this.kill("wake"); this.fold(at);
++    this.start("collapse", at, tl => { tl.to(this.visual, { collapse: 1, duration: .6, ease: "power2.in" }, 0)
++      .to(this.visual, { opacity: 0, duration: .9, ease: "power2.out" }, .4); });
++  }
++  exit(at: number) {
++    this.sample(this.now()); this.kill("collapse");
++    this.start("exit", at, tl => { tl.to(this.visual, { opacity: 0, duration: .5, ease: "power2.out" }); });
++  }
++  caption(at: number) {
++    this.kill("caption"); this.visual.caption = 0;
++    this.start("caption", at, tl => { tl.to(this.visual, { caption: 1, duration: .24, ease: "power2.out" }); });
++  }
++  presence(paused: boolean, at: number) {
++    this.start("presence", at, tl => { tl.to(this.visual, { presence: paused ? .45 : 1, duration: .14, ease: "power2.out" }); });
++  }
++  geometry(x: number, y: number, at: number) {
++    this.start("geometry", at, tl => { tl.to(this.visual, { coreX: x, coreY: y, duration: .6, ease: "power2.inOut" }); });
++  }
++  setReduced(value: boolean) { this.reduced = value; this.sample(this.now()); this.schedule(); }
++  visibility(hidden: boolean) {
++    this.hidden = hidden;
++    if (hidden) this.cancelJob();
++    else { this.sample(this.now()); this.schedule(); }
++  }
++  private sample(now: number) {
++    for (const [key, track] of this.tracks) {
++      const elapsed = this.reduced ? track.duration : Math.max(0, now - track.start);
++      track.timeline.totalTime(Math.min(elapsed, track.duration) / 1000, true);
++      if (elapsed >= track.duration) this.kill(key);
++    }
++    this.emit();
++  }
++  private schedule() {
++    if (this.disposed || this.hidden || this.job !== null || !this.tracks.size) { settleGsapIdle(); return; }
++    this.job = this.host.request(now => { this.job = null; this.sample(now); this.schedule(); });
++  }
++  dispose() {
++    if (this.disposed) return;
++    this.disposed = true; this.cancelJob();
++    for (const key of this.tracks.keys()) this.kill(key);
++    this.subscribers.clear(); XiaochuanTimeline.liveControllers--; settleGsapIdle();
++  }
++  audit() {
++    return { liveControllers: XiaochuanTimeline.liveControllers, liveTimelines: XiaochuanTimeline.liveTimelines,
++      tracks: [...this.tracks.keys()], subscribers: this.subscribers.size, pendingJob: this.job !== null,
++      rootAnimations: gsap.globalTimeline.getChildren(false).filter(t => !t.paused()).length, hidden: this.hidden, canvasSample: { ...this.canvasSample }, visual: Object.fromEntries(Object.entries(this.visual).filter(([, value]) => typeof value === "number")), ...tickerAudit() };
++  }
++}
+diff --git a/src/components/overlay/motion/amplitude-source.test.ts b/src/components/overlay/motion/amplitude-source.test.ts
+new file mode 100644
+index 0000000..e7762e4
+--- /dev/null
++++ b/src/components/overlay/motion/amplitude-source.test.ts
+@@ -0,0 +1,10 @@
++import { expect, it } from "vitest";
++import { amplitudeSource } from "./amplitude-source";
++it("routes mic listening separately from TTS output and fixed prompts", () => {
++  expect(amplitudeSource("listening", false, false)).toBe("input");
++  expect(amplitudeSource("followup", false, false)).toBe("input");
++  expect(amplitudeSource("answering", false, false)).toBe("output");
++  expect(amplitudeSource("followup", false, true)).toBe("output");
++  expect(amplitudeSource("answering", true, false)).toBe("input");
++  expect(amplitudeSource("followup", true, true)).toBe("input");
++});
+diff --git a/src/components/overlay/motion/amplitude-source.ts b/src/components/overlay/motion/amplitude-source.ts
+new file mode 100644
+index 0000000..1954fe2
+--- /dev/null
++++ b/src/components/overlay/motion/amplitude-source.ts
+@@ -0,0 +1,5 @@
++import type { VoiceStateName } from "@/lib/voice/session-machine";
++/** Listening input and audible output never share an analyser. Fixed prompts are output too. */
++export function amplitudeSource(state: VoiceStateName, bargePaused: boolean, fixedPrompt: boolean): "input" | "output" {
++  return bargePaused || (!fixedPrompt && (state === "listening" || state === "followup")) ? "input" : "output";
++}
+diff --git a/src/components/overlay/motion/useXiaochuanMotion.ts b/src/components/overlay/motion/useXiaochuanMotion.ts
+new file mode 100644
+index 0000000..6fe8fe9
+--- /dev/null
++++ b/src/components/overlay/motion/useXiaochuanMotion.ts
+@@ -0,0 +1,23 @@
++"use client";
++import { useEffect, useState } from "react";
++import type { XiaochuanTimeline } from "./XiaochuanTimeline";
++/** Explicit local PoC switch. Legacy does not load the GSAP overlay module. */
++export function useXiaochuanMotion(reduced: boolean) {
++  const [motion, setMotion] = useState<XiaochuanTimeline | null>(null);
++  useEffect(() => {
++    if (new URLSearchParams(window.location.search).get("xiaochuanMotion") !== "gsap") return;
++    let cancelled = false;
++    let instance: XiaochuanTimeline | null = null;
++    const visibility = () => instance?.visibility(document.hidden);
++    void import("./XiaochuanTimeline").then(({ XiaochuanTimeline }) => {
++      if (cancelled) return;
++      instance = new XiaochuanTimeline(); instance.visibility(document.hidden);
++      document.addEventListener("visibilitychange", visibility); setMotion(instance);
++      // Read-only diagnostics are exposed only with the explicit PoC switch.
++      Object.assign(window, { __xiaochuanMotionAudit: () => instance!.audit() });
++    }).catch(() => { /* module load failure keeps the complete Legacy path */ });
++    return () => { cancelled = true; document.removeEventListener("visibilitychange", visibility); instance?.dispose(); };
++  }, []);
++  useEffect(() => { motion?.setReduced(reduced); }, [motion, reduced]);
++  return motion;
++}
+diff --git a/src/components/overlay/overlay.css b/src/components/overlay/overlay.css
+index 5f39712..9d1e052 100644
+--- a/src/components/overlay/overlay.css
++++ b/src/components/overlay/overlay.css
+@@ -301,0 +302,5 @@
++
++/* P1.6 opt-in: these properties have exactly one visual writer. */
++.overlay-root[data-motion="gsap"] { transition: none; }
++.overlay-root[data-motion="gsap"] .overlay-caption-appear { animation: none; }
++.overlay-root[data-motion="gsap"][data-barge-paused="true"] .overlay-card { transition: none; }

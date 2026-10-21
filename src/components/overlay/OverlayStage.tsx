@@ -1,12 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
 import { isUnsupportedCard } from "@/lib/voice/card-presentation";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { LevelMeter } from "@/components/overlay/LevelMeter";
 import { JarvisCore } from "@/components/overlay/JarvisCore";
 import { AnswerCard } from "@/components/overlay/AnswerCard";
 import "./overlay.css";
+import { amplitudeSource } from "./motion/amplitude-source";
+import { useXiaochuanMotion } from "./motion/useXiaochuanMotion";
 import {
   DEMO_LINES,
   DEMO_TIMING,
@@ -85,12 +87,18 @@ export function OverlayStage({
   hubUrl?: string;
 }) {
   const reduced = useReducedMotion();
+  const motion = useXiaochuanMotion(reduced);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const motionRef = useRef(motion);
+  useEffect(() => { motionRef.current = motion; }, [motion]);
+  const [retiring, setRetiring] = useState<{ card: AnswerCardData; launchAt: number; foldAt: number | null } | null>(null);
   const payloadRef = useRef(payload);
   useEffect(() => { payloadRef.current = payload; }, [payload]);
   const [session, dispatch] = useReducer(sessionReducer, undefined, () => initSessionState());
   const [phase, setPhase] = useState<Phase>("off");
   const [geometry, setGeometry] = useState<OverlayGeometry>(() => overlayGeometry(1920, 1080));
   const [launchAt, setLaunchAt] = useState(0);
+  const answerLaunchRef = useRef(0);
   const [promptCaption, setPromptCaption] = useState<string | null>(null);
   const [debug] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).get("debug") === "1");
   const [audioNotice, setAudioNotice] = useState<string | null>(null);
@@ -141,6 +149,10 @@ export function OverlayStage({
     if (["closing", "ambient", "error-fallback"].includes(next.name) && next.name !== mirrorRef.current.name && fixedIdRef.current) {
       playerRef.current?.stop(); fixedIdRef.current = null;
     }
+    if (motionRef.current && mirrorRef.current.card && !next.card) {
+      setRetiring({ card: mirrorRef.current.card, launchAt: answerLaunchRef.current, foldAt: event.at });
+      motionRef.current.fold(event.at);
+    } else if (next.card) setRetiring(null);
     mirrorRef.current = next;
     dispatch(event);
   }, []);
@@ -158,25 +170,64 @@ export function OverlayStage({
         frameRef.current.geometry = { ...g, core: { x: lerp(from.x, g.core.x, easeInOutCubic(p)), y: lerp(from.y, g.core.y, easeInOutCubic(p)) } };
         if (p < 1) raf = requestAnimationFrame(paint);
       };
-      if (reduced) frameRef.current.geometry = g;
+      if (motion) {
+        motion.geometry(g.core.x, g.core.y, start);
+        const update = () => { frameRef.current.geometry = { ...g, core: { x: motion.visual.coreX, y: motion.visual.coreY } }; };
+        update();
+      } else if (reduced) frameRef.current.geometry = g;
       else raf = requestAnimationFrame(paint);
       setGeometry(g);
     };
+    const unsubscribe = motion?.subscribe(() => {
+      frameRef.current.geometry = { ...frameRef.current.geometry, core: { x: motion.visual.coreX, y: motion.visual.coreY } };
+    });
     apply();
     window.addEventListener("resize", apply);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", apply); };
-  }, [session.name, session.card?.kind, reduced]);
+    return () => { unsubscribe?.(); cancelAnimationFrame(raf); window.removeEventListener("resize", apply); };
+  }, [session.name, session.card?.kind, reduced, motion]);
 
   /* ---- 状态机 → 画布快照(名字/相位/振幅源/折叠起点) ---- */
   useEffect(() => {
     frameRef.current.name = bargePaused ? "listening" : session.name;
     frameRef.current.since = session.since;
     frameRef.current.amplitude = driver === "live"
-      ? () => playerRef.current?.getAmplitude() ?? 0
+      ? () => motion && amplitudeSource(session.name, bargePaused, fixedIdRef.current !== null) === "input"
+        ? micRef.current?.getAmplitude() ?? 0 : playerRef.current?.getAmplitude() ?? 0
       : (now: number) => demoAmplitude(session.name, session.since, now);
     frameRef.current.foldAt = session.name === "closing" ? session.since : null;
     if (session.name !== "answering") frameRef.current.launchAt = null;
-  }, [session.name, session.since, driver, bargePaused]);
+  }, [session.name, session.since, driver, bargePaused, motion]);
+
+  useLayoutEffect(() => {
+    if (!motion) return;
+    if (session.name === "waking") motion.takeover(session.since);
+    if (session.name === "answering") motion.answer(launchAt, driver === "demo" ? (session.spoken?.length ?? 0) / LAUNCH.typeCps * 1000 : 0);
+    if (session.name === "closing") motion.close(session.since);
+    motion.caption(performance.now());
+  }, [motion, session.name, session.since, session.spoken, launchAt, driver]);
+  useLayoutEffect(() => {
+    if (motion && phase === "exit") motion.exit(performance.now());
+  }, [motion, phase]);
+  useLayoutEffect(() => {
+    if (!motion) return;
+    motion.presence(bargePaused, performance.now());
+  }, [motion, bargePaused]);
+  useLayoutEffect(() => {
+    if (!motion) return;
+    return motion.subscribe(() => {
+      const root = rootRef.current;
+      if (!root) return;
+      root.style.opacity = String(motion.visual.opacity);
+      const caption = root.querySelector<HTMLElement>(".overlay-caption-block");
+      if (caption) caption.style.opacity = String(motion.visual.caption);
+    });
+  }, [motion, phase]);
+  // Visual snapshot retirement never delays reducer/audio transitions.
+  useEffect(() => {
+    if (!retiring) return;
+    const timer = window.setTimeout(() => setRetiring(null), reduced ? 0 : Math.max(0, VOICE_TIMING.foldMs - (performance.now() - retiring.foldAt!)));
+    return () => window.clearTimeout(timer);
+  }, [retiring, reduced]);
 
   // Audio diagnostics must remain live when the particle renderer is static.
   useEffect(() => {
@@ -217,6 +268,7 @@ export function OverlayStage({
         (live ? buildTargetProgressCard(payloadRef.current.salesTargets.targets, payloadRef.current.salesTargets.period.label) : demoAnswerForCycle(payloadRef.current, mirrorRef.current.cycles).card);
       const now = performance.now();
       frameRef.current.launchAt = now;
+      answerLaunchRef.current = now;
       setLaunchAt(now);
       dispatchTracked({ type: "ANSWER", at: now, card: resolved });
       if (live) {
@@ -551,11 +603,13 @@ export function OverlayStage({
   const statusNow = session.reason ? STATUS[session.reason] : unsupported ? {en:"Unsupported",zh:"暂不支持"} : STATUS[session.name];
   const nextStep = session.reason === "no-data" ? "当前暂无可展示的数据，请稍后重试" : session.reason === "offline" ? "网络连接中断，请检查网络后重试" : null;
 
+  const shownCard = session.card ?? (motion ? retiring?.card : null);
+  const shownLaunchAt = session.card ? launchAt : retiring?.launchAt ?? launchAt;
   if (phase === "off") return null;
 
   return (
-    <div className="overlay-root" data-phase={phase} data-has-card={session.card !== null} data-barge-paused={bargePaused}>
-      <JarvisCore reduced={reduced} stateKey={session.name} frameRef={frameRef} quality={lite ? "lite" : "high"} />
+    <div ref={rootRef} className="overlay-root" data-motion={motion ? "gsap" : "legacy"} data-state={session.name} data-phase={phase} data-has-card={session.card !== null} data-barge-paused={bargePaused}>
+      <JarvisCore motion={motion} reduced={reduced} stateKey={session.name} frameRef={frameRef} quality={lite ? "lite" : "high"} />
 
       <div key={session.name} className="overlay-caption-block overlay-caption-appear">
         {statusNow ? (
@@ -572,14 +626,16 @@ export function OverlayStage({
         ) : null}
       </div>
 
-      {session.card ? (
+      {shownCard ? (
         <AnswerCard
-          key={launchAt}
-          card={session.card}
+          motion={motion}
+          liveAudio={live}
+          key={shownLaunchAt}
+          card={shownCard}
           audioNotice={audioNotice}
-          launchAt={launchAt}
+          launchAt={shownLaunchAt}
           geometry={geometry}
-          foldAt={session.name === "closing" ? session.since : null}
+          foldAt={session.name === "closing" ? session.since : session.card ? null : retiring?.foldAt ?? null}
           sentenceRef={live ? sentenceRef : undefined}
           sentenceVersion={sentenceVersion}
           playbackPaused={bargePaused}

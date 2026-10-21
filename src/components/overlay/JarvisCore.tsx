@@ -1,5 +1,6 @@
 "use client";
 
+import type { XiaochuanTimeline } from "./motion/XiaochuanTimeline";
 import { memo, useEffect, useRef } from "react";
 import {
   approach,
@@ -79,11 +80,13 @@ type Spark = {
 /* memo:回放器每 130ms 的 PARTIAL 自环不应触发画布组件重渲染 */
 export const JarvisCore = memo(function JarvisCore({
   frameRef,
+  motion: choreography = null,
   reduced = false,
   stateKey,
   quality = "high",
 }: {
   frameRef: React.RefObject<VoiceFrame>;
+  motion?: XiaochuanTimeline | null;
   reduced?: boolean;
   stateKey?: string;
   /** lite=强制降级档(&lite=1,软件渲染环境预览演示用) */
@@ -311,6 +314,15 @@ export const JarvisCore = memo(function JarvisCore({
         launchElapsedMs: frame.launchAt == null ? null : now - frame.launchAt,
       });
 
+      if (choreography) {
+        const visual = choreography.visual;
+        Object.assign(choreography.canvasSample, { at: now, pulse: visual.pulse, stream: visual.stream, unfold: visual.unfold, fold: visual.fold });
+        target.pulse = frame.name === "answering" ? visual.pulse : 0;
+        target.stream = frame.name === "answering" ? visual.stream : 0;
+        if (frame.name === "waking") { target.formation = visual.formation; target.ambientSpread = visual.formation; }
+        if (frame.name === "closing") target.collapse = visual.collapse;
+        if (frame.name === "answering") target.brightness = .85 + .15 * clamp01(frame.amplitude(now));
+      }
       /* A1:标量滑行(τ 按感知调);发射时序与倒计时数值保持精确不平滑 */
       const dtMs = dt * 1000;
       if (reduced) Object.assign(smooth, target, { formation: 1, brightness: 1 });
@@ -625,8 +637,8 @@ export const JarvisCore = memo(function JarvisCore({
       }
 
       /* §5 退场:卡片折叠吸回时,一束粒子沿弧线从锚点倒流回核心 */
-      if (frame.foldAt != null) {
-        const fp = foldProgress(now - frame.foldAt);
+      if (frame.foldAt != null || (choreography && choreography.visual.fold > 0 && choreography.visual.fold < 1)) {
+        const fp = choreography ? choreography.visual.fold : foldProgress(now - frame.foldAt!);
         if (fp > 0 && fp < 1) {
           const anchor = { x: g.cardAnchor.x, y: g.cardAnchor.y };
           const edge = { x: cx, y: cy + radius * 0.9 };
@@ -708,7 +720,7 @@ export const JarvisCore = memo(function JarvisCore({
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
-  }, [frameRef, quality, reduced, staticState]);
+  }, [frameRef, quality, reduced, staticState, choreography]);
 
   return <canvas ref={canvasRef} className="overlay-canvas" aria-hidden="true" />;
 });

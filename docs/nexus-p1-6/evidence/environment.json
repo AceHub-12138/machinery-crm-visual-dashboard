@@ -1,0 +1,12 @@
+{
+  "browser": "153.0.8010.12",
+  "node": "v24.21.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "gsap": "3.15.0",
+  "deviceScaleFactor": 1,
+  "particleQuality": "high, existing automatic Canvas sampling unchanged",
+  "mainMotion": "Legacy except explicit shared-owner case",
+  "seed": "JarvisCore existing fixed seeded particle setup",
+  "reducedMotion": "no-preference except dedicated reduced-motion cases"
+}
