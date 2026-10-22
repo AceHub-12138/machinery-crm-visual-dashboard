@@ -1,0 +1,98 @@
+[WebServer] (node:35991) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:35992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:35993) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:36008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:36009) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:36015) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/p1-6-2.spec.ts:87:3 › legacy passive screen with metadata but no local PCM retains safe accessibility (5.7s)
+(node:36028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/p1-6-2.spec.ts:87:3 › gsap passive screen with metadata but no local PCM retains safe accessibility (5.7s)
+
+
+  1) e2e/p1-6-2.spec.ts:87:3 › legacy passive screen with metadata but no local PCM retains safe accessibility
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.overlay-card [aria-live]')
+    Expected: "本期新增客户十二家。"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.overlay-card [aria-live]') with timeout 5000ms
+      - waiting for locator('.overlay-card [aria-live]')
+        14 × locator resolved to <p class="sr-only" aria-live="polite" aria-atomic="true"></p>
+           - unexpected value ""
+
+
+      87 |   test(`${mode} passive screen with metadata but no local PCM retains safe accessibility`, async ({ page }) => {
+      88 |     await open(page, mode, false, false); await answer(page, card, true);
+    > 89 |     await expect(page.locator(".overlay-card [aria-live]")).toHaveText(first);
+         |                                                             ^
+      90 |     await expect(page.locator(".overlay-card [aria-live]")).toHaveText(second);
+      91 |     expect(await notices(page)).toEqual([first, second]);
+      92 |     expect(reports.includes("playback.started")).toBe(false);
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts:89:61
+
+    Error Context: .review/p1-6-2/red-passive/p1-6-2-legacy-passive-scre-05630--retains-safe-accessibility/error-context.md
+
+    Error Context: .review/p1-6-2/red-passive/p1-6-2-legacy-passive-scre-05630--retains-safe-accessibility/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-2/red-passive/p1-6-2-legacy-passive-scre-05630--retains-safe-accessibility/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-2/red-passive/p1-6-2-legacy-passive-scre-05630--retains-safe-accessibility/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/p1-6-2.spec.ts:87:3 › gsap passive screen with metadata but no local PCM retains safe accessibility
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.overlay-card [aria-live]')
+    Expected: "本期新增客户十二家。"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.overlay-card [aria-live]') with timeout 5000ms
+      - waiting for locator('.overlay-card [aria-live]')
+        14 × locator resolved to <p class="sr-only" aria-live="polite" aria-atomic="true"></p>
+           - unexpected value ""
+
+
+      87 |   test(`${mode} passive screen with metadata but no local PCM retains safe accessibility`, async ({ page }) => {
+      88 |     await open(page, mode, false, false); await answer(page, card, true);
+    > 89 |     await expect(page.locator(".overlay-card [aria-live]")).toHaveText(first);
+         |                                                             ^
+      90 |     await expect(page.locator(".overlay-card [aria-live]")).toHaveText(second);
+      91 |     expect(await notices(page)).toEqual([first, second]);
+      92 |     expect(reports.includes("playback.started")).toBe(false);
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts:89:61
+
+    Error Context: .review/p1-6-2/red-passive/p1-6-2-gsap-passive-screen-e4020--retains-safe-accessibility/error-context.md
+
+    Error Context: .review/p1-6-2/red-passive/p1-6-2-gsap-passive-screen-e4020--retains-safe-accessibility/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-2/red-passive/p1-6-2-gsap-passive-screen-e4020--retains-safe-accessibility/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-2/red-passive/p1-6-2-gsap-passive-screen-e4020--retains-safe-accessibility/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    e2e/p1-6-2.spec.ts:87:3 › legacy passive screen with metadata but no local PCM retains safe accessibility
+    e2e/p1-6-2.spec.ts:87:3 › gsap passive screen with metadata but no local PCM retains safe accessibility

@@ -15,7 +15,11 @@ test.beforeAll(async () => {
   hub = await startVoiceHub({host:"127.0.0.1",port:0,onMessage:(conn,raw)=>{const ev=JSON.parse(raw); if(ev.type==="console.hello")conn.role="screen";}});
   await mkdir(output,{recursive:true});
 });
-test.afterAll(async()=>{await hub?.close(); await writeFile(join(output,"voice-cards-calibration.json"),JSON.stringify(evidence,null,2)+"\n");});
+test.afterAll(async()=>{
+  await hub?.close(); const bytes=JSON.stringify(evidence,null,2)+"\n";
+  await writeFile(join(output,"voice-cards-calibration.json"),bytes);
+  if(process.env.P162_CARD_EVIDENCE_DIR){await mkdir(process.env.P162_CARD_EVIDENCE_DIR,{recursive:true});await writeFile(join(process.env.P162_CARD_EVIDENCE_DIR,`worker-${process.pid}.json`),bytes);}
+});
 async function open(page: Page) {
   await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
   await expect.poll(()=>hub.counts().screens).toBe(1);
@@ -128,6 +132,10 @@ test("demo automatically completes launch, answer and withdrawal for seven cards
   }
 });
 
+type OriginalCpuCallback = { timestamp: number; start: number; ms: number };
+type OriginalCpuWindow = { start: number; end: number; frames: Array<[number, number]>; callbacks: OriginalCpuCallback[] };
+declare global { interface Window { p162OriginalCpu: { depth: number; callbacks: OriginalCpuCallback[]; windows: OriginalCpuWindow[]; start: number; offset: number } } }
+
 test("overlay RAF callback CPU increment stays within 8ms at both resolutions",async({page})=>{
   await page.emulateMedia({reducedMotion:"no-preference"});
   test.setTimeout(60000);
@@ -136,15 +144,18 @@ test("overlay RAF callback CPU increment stays within 8ms at both resolutions",a
     await page.addInitScript(()=>{
       const native=window.requestAnimationFrame.bind(window);
       const frames=new Map<number,number>();
-      Object.assign(window,{task12Frames:frames});
-      window.requestAnimationFrame=(callback)=>native(now=>{const start=performance.now(); try{callback(now);} finally {frames.set(now,(frames.get(now)??0)+performance.now()-start);}});
+      const probe = { depth: (window.p162OriginalCpu?.depth ?? 0) + 1, callbacks: [] as OriginalCpuCallback[], windows: [] as OriginalCpuWindow[], start: 0, offset: 0 };
+      Object.assign(window,{task12Frames:frames,p162OriginalCpu:probe});
+      window.requestAnimationFrame=(callback)=>native(now=>{const start=performance.now(); try{callback(now);} finally {frames.set(now,(frames.get(now)??0)+performance.now()-start);probe.callbacks.push({timestamp:now,start,ms:performance.now()-start});}});
     });
     await page.goto(`/screen/sales?voiceLive=1&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
     await expect.poll(()=>hub.counts().screens).toBe(1);
     const sample=async()=>{
-      await page.evaluate(()=>((window as unknown as {task12Frames:Map<number,number>}).task12Frames).clear());
+      await page.evaluate(()=>{ ((window as unknown as {task12Frames:Map<number,number>}).task12Frames).clear();
+        window.p162OriginalCpu.start=performance.now();window.p162OriginalCpu.offset=window.p162OriginalCpu.callbacks.length; });
       await page.waitForTimeout(2500);
-      return page.evaluate(()=>[...(window as unknown as {task12Frames:Map<number,number>}).task12Frames.values()]);
+      return page.evaluate(()=>{ const frames=(window as unknown as {task12Frames:Map<number,number>}).task12Frames,p=window.p162OriginalCpu;
+        p.windows.push({ start:p.start,end:performance.now(),frames:[...frames.entries()],callbacks:p.callbacks.slice(p.offset) }); return [...frames.values()]; });
     };
     const baseline=await sample();
     await page.mouse.click(40,40);
@@ -154,7 +165,8 @@ test("overlay RAF callback CPU increment stays within 8ms at both resolutions",a
     const active=await sample();
     const p95=(values:number[])=>values.sort((a,b)=>a-b)[Math.floor(values.length*.95)]??0;
     const record={viewport,metric:"summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",baselineFrames:baseline.length,overlayFrames:active.length,baselineP95:p95(baseline),overlayP95:p95(active),incrementP95:Math.max(0,p95(active)-p95(baseline))};
-    evidence.push({performance:record}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);
+    const raw = await page.evaluate(()=>({depth:window.p162OriginalCpu.depth,windows:window.p162OriginalCpu.windows,launchAt:Number(document.querySelector<HTMLElement>(".overlay-card")?.dataset.launchAt),profile:(window as Window & {__p162Profile?:unknown}).__p162Profile??null}));
+    evidence.push({performance:record,raw}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);
   }
 });
 

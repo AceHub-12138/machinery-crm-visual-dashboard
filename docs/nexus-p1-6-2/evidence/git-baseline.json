@@ -1,0 +1,25 @@
+{
+  "sourcePath": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-1",
+  "sourceBranch": "codex/nexus-p1-6-1-gsap-hardening",
+  "sourceHead": "5ac9cff6398839d776ee5f92ac4fc34da92c9b3b",
+  "sourceStatus": "",
+  "constructionBranch": "codex/nexus-p1-6-2-gsap-compatibility",
+  "base": "5ac9cff6398839d776ee5f92ac4fc34da92c9b3b",
+  "unpushedRelativeToLocalRemoteRefs": [
+    "5ac9cff6398839d776ee5f92ac4fc34da92c9b3b fix(nexus): guard Xiaochuan GSAP permission and audit lifecycle",
+    "1c09242cfb7c8a51fd34d687e67c24f475135372 feat(nexus): add opt-in Xiaochuan GSAP interaction PoC",
+    "cf1a835fbbc4e3f62311987e23677ea3fb862125 fix(nexus): defer runtime refresh recalibration until stable",
+    "b35b93c230fc6c084895a4119196779f505bf2fb fix(nexus): attest loopback experiment request boundary",
+    "b3d5c1133e5809e272529d5b2c6cff8595f1d3d6 feat(nexus): integrate guarded typed animation quality policy",
+    "2584284e3e7b994d0510d9d53b2a302e3aa740bc test(nexus): validate P1.5-B quality strategy",
+    "957ff26b3202510316213dec93f8a0d98c0758b4 test(nexus): calibrate P1.5-A performance diagnostics",
+    "df69d71f5b0cafcdab70a18f8e11be9f92cd163d docs(nexus): \u5b8c\u6210P1.4\u52a8\u6548\u67b6\u6784\u5ba1\u8ba1\u4e0e4K\u8bca\u65ad",
+    "1f9e9cd6d78e12f85eee47d087c87191f90a0460 feat(screen): add isolated GSAP motion PoC and comparison report",
+    "10a5e0b283b6ecae664cc64d44f7a9e88fb061f1 fix(screen): close P1.3 visual blockers and add layout acceptance"
+  ],
+  "remote": "https://github.com/AceHub-12138/machinery-crm-visual-dashboard.git",
+  "fetch": false,
+  "push": false,
+  "merge": false,
+  "deploy": false
+}

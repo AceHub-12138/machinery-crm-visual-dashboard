@@ -1,0 +1,430 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "e2e/p1-6-2.config.ts",
+      "e2e/p1-6-2.spec.ts"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/special",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "p1-6.spec.ts",
+          "p1-6-1.spec.ts",
+          "p1-6-2.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/docs/nexus-p1-6-2/evidence/special.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "p1-6-2.spec.ts",
+      "file": "p1-6-2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "legacy visible full text and complete-sentence compatibility notifications stay independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2105,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:13.562Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-dc896b7b0efb5cf48d78",
+          "file": "p1-6-2.spec.ts",
+          "line": 53,
+          "column": 3
+        },
+        {
+          "title": "legacy PCM completion owns notifications with reduced=false",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4975,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:15.784Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-195fd657f02e539cc8d4",
+          "file": "p1-6-2.spec.ts",
+          "line": 61,
+          "column": 40
+        },
+        {
+          "title": "legacy PCM completion owns notifications with reduced=true",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4829,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:20.766Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-3176e994f718a1a2a088",
+          "file": "p1-6-2.spec.ts",
+          "line": 61,
+          "column": 40
+        },
+        {
+          "title": "legacy interruption, replacement and folding never republish the old answer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4639,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:25.604Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-22da48cabc98d92af19b",
+          "file": "p1-6-2.spec.ts",
+          "line": 71,
+          "column": 3
+        },
+        {
+          "title": "legacy unavailable audio keeps safe complete notifications and reduced text access",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1968,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:30.249Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-177d0c73d360a9f11a77",
+          "file": "p1-6-2.spec.ts",
+          "line": 81,
+          "column": 3
+        },
+        {
+          "title": "gsap visible full text and complete-sentence compatibility notifications stay independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1935,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:32.225Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-ee9a79876e66edb24acc",
+          "file": "p1-6-2.spec.ts",
+          "line": 53,
+          "column": 3
+        },
+        {
+          "title": "gsap PCM completion owns notifications with reduced=false",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4966,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:34.166Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-08b8ed285a83e489a520",
+          "file": "p1-6-2.spec.ts",
+          "line": 61,
+          "column": 40
+        },
+        {
+          "title": "gsap PCM completion owns notifications with reduced=true",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4833,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:39.138Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-9f59d07edec092163bbb",
+          "file": "p1-6-2.spec.ts",
+          "line": 61,
+          "column": 40
+        },
+        {
+          "title": "gsap interruption, replacement and folding never republish the old answer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4617,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:43.976Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-adb228b101c13315c4f6",
+          "file": "p1-6-2.spec.ts",
+          "line": 71,
+          "column": 3
+        },
+        {
+          "title": "gsap unavailable audio keeps safe complete notifications and reduced text access",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1945,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:45:48.600Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17ef04665061914c2333-49274995cc62825a1013",
+          "file": "p1-6-2.spec.ts",
+          "line": 81,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T08:45:11.280Z",
+    "duration": 39351.344000000005,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

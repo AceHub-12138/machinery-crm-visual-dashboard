@@ -1,0 +1,1481 @@
+{
+  "baseline": "5ac9cff6398839d776ee5f92ac4fc34da92c9b3b",
+  "scope": "This repository baseline history + this task worktree local evidence; other worktrees are not altered.",
+  "thresholdBytes": 1000000,
+  "tracked": [
+    {
+      "path": "docs/nexus-p1-4/evidence/trace-summaries.json",
+      "bytes": 1108324,
+      "gitBlob": "bbd9740b9893abbb78604fff31be9c4ddc0e0d02",
+      "category": ".json",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-ambient-fixed.png",
+      "bytes": 1317169,
+      "gitBlob": "c76f4a0568e83b518044417e4669ffab5b787d2d",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-ambient-original.png",
+      "bytes": 1317176,
+      "gitBlob": "fb5d9fc55116165e11732d8f145e5a19aa3ef33f",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-completed-fixed.png",
+      "bytes": 1203261,
+      "gitBlob": "ae26d1a0fee97d7d369b19719a896afea22ce695",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-completed-original.png",
+      "bytes": 1203222,
+      "gitBlob": "220ebf2684345101f1bce26b480a4b477a7d4bf0",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-intro-fixed.png",
+      "bytes": 1189944,
+      "gitBlob": "897921af11db2ef899ca8e89126efd0f25b0a839",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-intro-original.png",
+      "bytes": 1189944,
+      "gitBlob": "897921af11db2ef899ca8e89126efd0f25b0a839",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-pulse-fixed.png",
+      "bytes": 1323591,
+      "gitBlob": "45997f4faa1b58859d3ce5dd4fa1ecebab5ac5df",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-pulse-original.png",
+      "bytes": 1323590,
+      "gitBlob": "dfdd08526604ce4e996571b3d4a69158b671b5ab",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-resize-in-pulse-fixed.png",
+      "bytes": 1220749,
+      "gitBlob": "d13b64aafc0afdca5b71b6138a52e421fb5287c5",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-resize-in-pulse-original.png",
+      "bytes": 1220757,
+      "gitBlob": "b973bb52e4bc0920bd45c484fbfe6db3146a7398",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-ambient-fixed.png",
+      "bytes": 1317171,
+      "gitBlob": "a2dcb3dc129ca8bb3c3ce797540141df1e8205b8",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-ambient-original.png",
+      "bytes": 1317112,
+      "gitBlob": "5f2e8634812cd0e83f0c18426007394ac362b7c4",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-completed-fixed.png",
+      "bytes": 1204091,
+      "gitBlob": "6a64617d91d3923784581d91e8794c9b413432af",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-completed-original.png",
+      "bytes": 1204117,
+      "gitBlob": "bee14480abda4186d064a329a96a62064b5bfa0e",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-intro-fixed.png",
+      "bytes": 1195362,
+      "gitBlob": "335723af681258fef4cf61798da413cdb8cbaac7",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-intro-original.png",
+      "bytes": 1195362,
+      "gitBlob": "335723af681258fef4cf61798da413cdb8cbaac7",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-pulse-fixed.png",
+      "bytes": 1324641,
+      "gitBlob": "97f7d1a6efc7fd1767017fc73aa74baaa2f77d89",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-pulse-original.png",
+      "bytes": 1324641,
+      "gitBlob": "4268d97a8d3db844fc52e4727aac54e1a9e3cefd",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-resize-in-pulse-fixed.png",
+      "bytes": 1221122,
+      "gitBlob": "241684eb88543c49f3798e7fb665a5109f2a09ca",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-resize-in-pulse-original.png",
+      "bytes": 1221121,
+      "gitBlob": "7f528b273a8afa15a27a67e640dbfa1cfe75bd10",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-ambient-fixed.png",
+      "bytes": 1317181,
+      "gitBlob": "7dbf03df1ece6643dcb2f72dd23774f3a1564c95",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-ambient-original.png",
+      "bytes": 1317169,
+      "gitBlob": "c76f4a0568e83b518044417e4669ffab5b787d2d",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-completed-fixed.png",
+      "bytes": 1203262,
+      "gitBlob": "5f742ef6f5f7faa3a5c617ce85d2046363910600",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-completed-original.png",
+      "bytes": 1203243,
+      "gitBlob": "ce9b0bb10f50aba199baa3c80966bb94a32afdab",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-intro-fixed.png",
+      "bytes": 1189944,
+      "gitBlob": "897921af11db2ef899ca8e89126efd0f25b0a839",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-intro-original.png",
+      "bytes": 1189944,
+      "gitBlob": "897921af11db2ef899ca8e89126efd0f25b0a839",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-pulse-fixed.png",
+      "bytes": 1323591,
+      "gitBlob": "45997f4faa1b58859d3ce5dd4fa1ecebab5ac5df",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-pulse-original.png",
+      "bytes": 1323591,
+      "gitBlob": "45997f4faa1b58859d3ce5dd4fa1ecebab5ac5df",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-resize-in-pulse-fixed.png",
+      "bytes": 1220755,
+      "gitBlob": "72c58ccf5ec63956e15b5279055e15181f30a295",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-resize-in-pulse-original.png",
+      "bytes": 1220755,
+      "gitBlob": "f7189e34bea9cf74e9e36e3696e67a791ca2f79c",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-ambient-fixed.png",
+      "bytes": 1317098,
+      "gitBlob": "f2c60effcc28f36953263d70e85a8fbcb01074bf",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-ambient-original.png",
+      "bytes": 1317087,
+      "gitBlob": "fbc9d9f875cdb8d11971a6a40e7b26c24bf81865",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-completed-fixed.png",
+      "bytes": 1204117,
+      "gitBlob": "bee14480abda4186d064a329a96a62064b5bfa0e",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-completed-original.png",
+      "bytes": 1204091,
+      "gitBlob": "6a64617d91d3923784581d91e8794c9b413432af",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-intro-fixed.png",
+      "bytes": 1195362,
+      "gitBlob": "335723af681258fef4cf61798da413cdb8cbaac7",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-intro-original.png",
+      "bytes": 1195362,
+      "gitBlob": "335723af681258fef4cf61798da413cdb8cbaac7",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-pulse-fixed.png",
+      "bytes": 1324641,
+      "gitBlob": "97f7d1a6efc7fd1767017fc73aa74baaa2f77d89",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-pulse-original.png",
+      "bytes": 1324535,
+      "gitBlob": "5c3b522c967a8ebcacd8a6285cb59702a099a126",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-resize-in-pulse-fixed.png",
+      "bytes": 1221121,
+      "gitBlob": "dc8a129d5d75b1b52deede9c5361cfe9484e10e2",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-resize-in-pulse-original.png",
+      "bytes": 1221119,
+      "gitBlob": "4542baf6b92bd46a3c17177eb85786b7dfe19c2f",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-INTRO-after.png",
+      "bytes": 1170270,
+      "gitBlob": "5ad2c81b299c9b6ceb6b1f665b322aedb896056b",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-PULSE-after.png",
+      "bytes": 1170292,
+      "gitBlob": "e5d02624843cfeef104949d5215bfbc4d15be86a",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-contact.png",
+      "bytes": 1598762,
+      "gitBlob": "d282c9b72092bc1660d20a4044920452a8884680",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-intro-pulse-resize.webm",
+      "bytes": 2301182,
+      "gitBlob": "6e3d60e865e2bcf64d51ec67b82bfc32ac02fb33",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-INTRO-after.png",
+      "bytes": 1168953,
+      "gitBlob": "af2b310aa12f9abdb27c5872c270c8b1edfb1477",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-PULSE-after.png",
+      "bytes": 1173029,
+      "gitBlob": "6c33c869308f5653f3b7bf2f808fa352e9b813dd",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-contact.png",
+      "bytes": 1623628,
+      "gitBlob": "2e7d840d4cd44f60ad9cb3d885eabfd1e6b3889a",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-intro-pulse-resize.webm",
+      "bytes": 2345369,
+      "gitBlob": "bc65906255cc35e1c7ac5aa4f5cd126c08e4c175",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1280-intro-pulse-resize-contact.png",
+      "bytes": 1513656,
+      "gitBlob": "5b0cb72b3ed1f2bb39df33d6a5567b67394279c2",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1280-intro-pulse-resize.webm",
+      "bytes": 2363068,
+      "gitBlob": "d296bc80099c63e92862fd3110897aaaca5b7779",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1792-intro-pulse-resize-contact.png",
+      "bytes": 1488629,
+      "gitBlob": "c0a2518e676cb44f8db8c800b91da4ca867ee8d6",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1792-intro-pulse-resize.webm",
+      "bytes": 2332611,
+      "gitBlob": "697c203d32096a826e92ed0287e2394d6aa8f2d0",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-INTRO-after.png",
+      "bytes": 1170877,
+      "gitBlob": "b9c19e0a308cae2f98ef77a007dfbb51361d00b9",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-PULSE-after.png",
+      "bytes": 1169665,
+      "gitBlob": "986e5cc05afa9ce696ef3cb1da31d947411ddfb0",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-intro-pulse-resize-contact.png",
+      "bytes": 1527254,
+      "gitBlob": "9be909cc7eba808a4806bd0c77c362888013b57b",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-intro-pulse-resize.webm",
+      "bytes": 2385814,
+      "gitBlob": "c39fbbe422a3bba20d58659670e5ff437c5d3ab8",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-INTRO-after.png",
+      "bytes": 3337461,
+      "gitBlob": "058cca7778f58156eefc7b789029cf87840802b0",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-PULSE-after.png",
+      "bytes": 3333016,
+      "gitBlob": "5dc46ce473337b73ab9bac3f4f22e531ed629509",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-intro-pulse-resize-contact.png",
+      "bytes": 1492650,
+      "gitBlob": "2fe2e2acfc9ea64815940be21ce3550fae7b0693",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-intro-pulse-resize.webm",
+      "bytes": 2631610,
+      "gitBlob": "5ae302a9009273e0713b06bb4f4658075eb49793",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1280-intro-pulse-resize-contact.png",
+      "bytes": 1483188,
+      "gitBlob": "7bd0a42ccd292702861984c6e4de41702e06c32c",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1280-intro-pulse-resize.webm",
+      "bytes": 2380579,
+      "gitBlob": "07ed8a76655927aa539a9035115154427ef494c9",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1792-intro-pulse-resize-contact.png",
+      "bytes": 1457395,
+      "gitBlob": "aba8e8e29ae4dc72ed52a5da70b2ee303e85435b",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1792-intro-pulse-resize.webm",
+      "bytes": 2394118,
+      "gitBlob": "c7f1ee9f8858a888523b81a96a7c7f5b056b952f",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-INTRO-after.png",
+      "bytes": 1170521,
+      "gitBlob": "b8fed18130ba56d40740a50654309dac5d0a4416",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-PULSE-after.png",
+      "bytes": 1169606,
+      "gitBlob": "a19179f8a2ea99b64bd6b4e091f66cb5eef9fc40",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-intro-pulse-resize-contact.png",
+      "bytes": 1548205,
+      "gitBlob": "c61c3360f289466e8ace241a3aec4884daeb306f",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-intro-pulse-resize.webm",
+      "bytes": 2497398,
+      "gitBlob": "1915ad8a964e4a174570c0f5aa0684081e0f91df",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-INTRO-after.png",
+      "bytes": 3336977,
+      "gitBlob": "a0c9c69ae0f13af9f64044efe6ecaaceea0fe039",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-PULSE-after.png",
+      "bytes": 3339309,
+      "gitBlob": "1ca4234aab38132e4e4b32dc41a20d8b424033b4",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-intro-pulse-resize-contact.png",
+      "bytes": 1525355,
+      "gitBlob": "e34369fe5a22d200001a8bcab05b83b56755ba9a",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-intro-pulse-resize.webm",
+      "bytes": 2624582,
+      "gitBlob": "16866fbd2f55eff19d8652195855779890149e48",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/report.json",
+      "bytes": 2144858,
+      "gitBlob": "b1b9f0bcd56593f3e4ce49487cbba0cd08e0dd9f",
+      "category": ".json",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/partial-media/page@9428ea80f6e66c766b876595970ca37c.webm",
+      "bytes": 509651,
+      "gitBlob": "097122b0a0314348c39f4be056c8978ac7601465",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-1920-failed-low.png",
+      "bytes": 1302886,
+      "gitBlob": "fd968e7e037e8c4ea2de74572457e09ffc02702d",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-1920-normal.png",
+      "bytes": 1311600,
+      "gitBlob": "c1d143e25a2b4684b82db776af885dca8943623e",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-1920-probe.png",
+      "bytes": 1301451,
+      "gitBlob": "2e5588542093e9dfd11ee024bec2e391b56f3f0a",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-1920-recovered-normal.png",
+      "bytes": 1303232,
+      "gitBlob": "03ecf4c62992b1ea1a2c93db1fbe1fc713b9a447",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-3840-recover-probe.png",
+      "bytes": 3432101,
+      "gitBlob": "8ac259223073bbfcc70329d2a2af0262f06152e2",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-3840-reduced-motion.png",
+      "bytes": 3449161,
+      "gitBlob": "9943ce00971ac8681274996ed9ced2bc05dd1e47",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-probe-cycle.webm",
+      "bytes": 4769963,
+      "gitBlob": "a20fa2b4f2fd626ce1c3e7f8bbc720ba1f0e36e1",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-1920-failed-low.png",
+      "bytes": 1303162,
+      "gitBlob": "dfa49810b55585b36c9515b20d480f1f268ebd79",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-1920-normal.png",
+      "bytes": 1311643,
+      "gitBlob": "61062ab4c5b5b90c308559d158bbfb97d98959de",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-1920-probe.png",
+      "bytes": 1302517,
+      "gitBlob": "31944d313e4814d4c4f5673cd2c02419ada637fd",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-1920-recovered-normal.png",
+      "bytes": 1303497,
+      "gitBlob": "ec267356778d814993fcf5ecf950883c18cb553a",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-3840-recover-probe.png",
+      "bytes": 3418783,
+      "gitBlob": "add46da118491a4677c933d14f49b10bb54a7648",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-probe-cycle.webm",
+      "bytes": 4856828,
+      "gitBlob": "0d455a794c5f876b545bf375177bcbf8ff5c40e0",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/code-diff.patch",
+      "bytes": 40735,
+      "gitBlob": "814a7ce8e698baf52c4b1a9672e64eb345bc56df",
+      "category": ".patch",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/evidence/gsap-failures/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip",
+      "bytes": 2500693,
+      "gitBlob": "db77a523702396b05eef395f2dd362049b4e467c",
+      "category": ".zip",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/evidence/gsap-failures/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip",
+      "bytes": 7791934,
+      "gitBlob": "2368adeedde14725ee174f3ff9dc35d925cdf3c5",
+      "category": ".zip",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/evidence/gsap-film.json",
+      "bytes": 1012313,
+      "gitBlob": "8daf9c7e539b79e1e4bb2a7d2bfaf547ee923a4d",
+      "category": ".json",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-3840.png",
+      "bytes": 1564064,
+      "gitBlob": "19f5de95968430302ee14b1e01547763711ed70a",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-browser-audio.webm",
+      "bytes": 176141,
+      "gitBlob": "1fc36eb5d4201f3fe5e9e2fcf103646499278eba",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-interaction.webm",
+      "bytes": 2766574,
+      "gitBlob": "9977d02fc9db3097bf1645de8a017e7f1c0a7c17",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-return-crossfade.png",
+      "bytes": 1142522,
+      "gitBlob": "81929a27fe7603b884eefebae4a65d0d0f6da1d5",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-returned.png",
+      "bytes": 1122194,
+      "gitBlob": "63e855d4a1f51495f60b1198bdd40505374191ed",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/legacy-3840.png",
+      "bytes": 1572457,
+      "gitBlob": "5f22eff7eb645264dff64ff5d30f55fd16678bbc",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/legacy-browser-audio.webm",
+      "bytes": 176121,
+      "gitBlob": "552aa90e3127ca60e15bb1a14f3d14bafba8082d",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/legacy-interaction.webm",
+      "bytes": 2790158,
+      "gitBlob": "1ffd623f6d8a4908001e6c3916d75100b373bf03",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/legacy-returned.png",
+      "bytes": 1121150,
+      "gitBlob": "583aa5e7372597f924d516a53ca133c92cf1f9d8",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/audio/0.pcm",
+      "bytes": 97104,
+      "gitBlob": "306f5e07174c3aae814a424aa1fbcbc984e4cc31",
+      "category": ".pcm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/audio/1.pcm",
+      "bytes": 99994,
+      "gitBlob": "a491eeb95c1706c0604dc1008b892c1a51fe2120",
+      "category": ".pcm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/code-diff.patch",
+      "bytes": 57558,
+      "gitBlob": "a79e110c562a6fa78148d89c27afd5a77db6d8de",
+      "category": ".patch",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/answer-aligned.mp4",
+      "bytes": 2224999,
+      "gitBlob": "ba01df6a8613f5fe830a687c20621e8e6c03e910",
+      "category": ".mp4",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-3840.png",
+      "bytes": 1527822,
+      "gitBlob": "63c872696f4cdcd7b106ca85399a56ca5cd9f2a5",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-browser-audio.webm",
+      "bytes": 175600,
+      "gitBlob": "0e91dfc427853e1b83267c331ceaca8164042435",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-interaction.mp4",
+      "bytes": 4364875,
+      "gitBlob": "551db5e56c792c7d18f48181dd9fda4770636546",
+      "category": ".mp4",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-interaction.webm",
+      "bytes": 2438214,
+      "gitBlob": "ff8be54b5f5f3a073dc78bb80fd6bba38505c529",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-return-crossfade.png",
+      "bytes": 1119020,
+      "gitBlob": "409bdaf23d42878de22d8fbfbcc1b7addc4f3d2d",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-returned.png",
+      "bytes": 1105332,
+      "gitBlob": "285891edb29b67a317c1a47dd5ddea3d54736428",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/headed-gsap-3840.png",
+      "bytes": 1454620,
+      "gitBlob": "be0918ad8f7e14649270b7576f633647465e385a",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/headed-legacy-3840.png",
+      "bytes": 1460248,
+      "gitBlob": "735ecdb556384fbb982afd7c0546fa5b4c333b70",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-3840.png",
+      "bytes": 1516399,
+      "gitBlob": "aa3dbd42df6258989155b382e67cba92a8723e83",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-browser-audio.webm",
+      "bytes": 173711,
+      "gitBlob": "1b5fe6f34fb8569b627922e91927f311a7fb5c5f",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-interaction.mp4",
+      "bytes": 4434791,
+      "gitBlob": "2462d16c7ebb4dc3f39b428531ca941aba4dfcd3",
+      "category": ".mp4",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-interaction.webm",
+      "bytes": 2414423,
+      "gitBlob": "e6fc5f901ba96252f0f3d2ee02f004031d810541",
+      "category": ".webm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-returned.png",
+      "bytes": 1105360,
+      "gitBlob": "1c35234d4a76bbf58a5fdc37208af29946ebb96c",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/nexus-p1-6/media/side-by-side.mp4",
+      "bytes": 2769122,
+      "gitBlob": "a294ee4eebbcbcb6550f15f7095551097f128584",
+      "category": ".mp4",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "docs/screen-data-repair-evidence/screen-negative-1920.png",
+      "bytes": 1201564,
+      "gitBlob": "bb9a6cf3a071a450d6bfa231dbe14e72f32b9d09",
+      "category": ".png",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "public/voice/kws/sherpa-onnx-wasm-kws-main.data",
+      "bytes": 13084730,
+      "gitBlob": "e0807508965f116dc66b91f562a200c349f2d923",
+      "category": ".data",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "public/voice/kws/sherpa-onnx-wasm-kws-main.wasm",
+      "bytes": 12750493,
+      "gitBlob": "e8e79568cc6f18057d3e5310a565f566962a0d84",
+      "category": ".wasm",
+      "alreadyInBaselineHistory": true
+    },
+    {
+      "path": "src/data/ne-admin1-neighbors-raw.json",
+      "bytes": 7746312,
+      "gitBlob": "4338115e24db49ebc02b7449c85ce28515b2fb72",
+      "category": ".json",
+      "alreadyInBaselineHistory": true
+    }
+  ],
+  "local": [
+    {
+      "path": ".review/p1-6-2/profile-instrumentation-pre-cache.patch",
+      "bytes": 7069,
+      "category": ".patch",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/profile-instrumentation-scopes.patch",
+      "bytes": 8687,
+      "category": ".patch",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/profile-instrumentation.patch",
+      "bytes": 8687,
+      "category": ".patch",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/original-control-r3/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip",
+      "bytes": 7913527,
+      "category": ".zip",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/original-control-r2/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip",
+      "bytes": 7761905,
+      "category": ".zip",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/red-existing/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip",
+      "bytes": 7793858,
+      "category": ".zip",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/red-existing/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip",
+      "bytes": 1587769,
+      "category": ".zip",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/p13-legacy/after/main-1792-no-preference-normal.png",
+      "bytes": 1116344,
+      "category": ".png",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/red-passive/p1-6-2-gsap-passive-screen-e4020--retains-safe-accessibility/trace.zip",
+      "bytes": 2569182,
+      "category": ".zip",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/red-passive/p1-6-2-legacy-passive-scre-05630--retains-safe-accessibility/trace.zip",
+      "bytes": 2928856,
+      "category": ".zip",
+      "tracked": false
+    },
+    {
+      "path": ".review/p1-6-2/original-control-r1/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip",
+      "bytes": 7869034,
+      "category": ".zip",
+      "tracked": false
+    }
+  ],
+  "summary": {
+    "trackedFiles": 123,
+    "trackedBytes": 233522144,
+    "localFiles": 11,
+    "localBytes": 39564918
+  },
+  "unpublishedReachableLargeBlobs": [
+    {
+      "path": "docs/nexus-p1-4/evidence/trace-summaries.json",
+      "bytes": 1108324,
+      "gitBlob": "bbd9740b9893abbb78604fff31be9c4ddc0e0d02"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-ambient-fixed.png",
+      "bytes": 1317169,
+      "gitBlob": "c76f4a0568e83b518044417e4669ffab5b787d2d"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-ambient-original.png",
+      "bytes": 1317176,
+      "gitBlob": "fb5d9fc55116165e11732d8f145e5a19aa3ef33f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-completed-fixed.png",
+      "bytes": 1203261,
+      "gitBlob": "ae26d1a0fee97d7d369b19719a896afea22ce695"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-completed-original.png",
+      "bytes": 1203222,
+      "gitBlob": "220ebf2684345101f1bce26b480a4b477a7d4bf0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-intro-fixed.png",
+      "bytes": 1189944,
+      "gitBlob": "897921af11db2ef899ca8e89126efd0f25b0a839"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-pulse-fixed.png",
+      "bytes": 1323591,
+      "gitBlob": "45997f4faa1b58859d3ce5dd4fa1ecebab5ac5df"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-pulse-original.png",
+      "bytes": 1323590,
+      "gitBlob": "dfdd08526604ce4e996571b3d4a69158b671b5ab"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-resize-in-pulse-fixed.png",
+      "bytes": 1220749,
+      "gitBlob": "d13b64aafc0afdca5b71b6138a52e421fb5287c5"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/gsap-resize-in-pulse-original.png",
+      "bytes": 1220757,
+      "gitBlob": "b973bb52e4bc0920bd45c484fbfe6db3146a7398"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-ambient-fixed.png",
+      "bytes": 1317171,
+      "gitBlob": "a2dcb3dc129ca8bb3c3ce797540141df1e8205b8"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-ambient-original.png",
+      "bytes": 1317112,
+      "gitBlob": "5f2e8634812cd0e83f0c18426007394ac362b7c4"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-completed-fixed.png",
+      "bytes": 1204091,
+      "gitBlob": "6a64617d91d3923784581d91e8794c9b413432af"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-completed-original.png",
+      "bytes": 1204117,
+      "gitBlob": "bee14480abda4186d064a329a96a62064b5bfa0e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-intro-fixed.png",
+      "bytes": 1195362,
+      "gitBlob": "335723af681258fef4cf61798da413cdb8cbaac7"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-pulse-fixed.png",
+      "bytes": 1324641,
+      "gitBlob": "97f7d1a6efc7fd1767017fc73aa74baaa2f77d89"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-pulse-original.png",
+      "bytes": 1324641,
+      "gitBlob": "4268d97a8d3db844fc52e4727aac54e1a9e3cefd"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-resize-in-pulse-fixed.png",
+      "bytes": 1221122,
+      "gitBlob": "241684eb88543c49f3798e7fb665a5109f2a09ca"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence-css/legacy-resize-in-pulse-original.png",
+      "bytes": 1221121,
+      "gitBlob": "7f528b273a8afa15a27a67e640dbfa1cfe75bd10"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-ambient-fixed.png",
+      "bytes": 1317181,
+      "gitBlob": "7dbf03df1ece6643dcb2f72dd23774f3a1564c95"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-completed-fixed.png",
+      "bytes": 1203262,
+      "gitBlob": "5f742ef6f5f7faa3a5c617ce85d2046363910600"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-completed-original.png",
+      "bytes": 1203243,
+      "gitBlob": "ce9b0bb10f50aba199baa3c80966bb94a32afdab"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-resize-in-pulse-fixed.png",
+      "bytes": 1220755,
+      "gitBlob": "72c58ccf5ec63956e15b5279055e15181f30a295"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/gsap-resize-in-pulse-original.png",
+      "bytes": 1220755,
+      "gitBlob": "f7189e34bea9cf74e9e36e3696e67a791ca2f79c"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-ambient-fixed.png",
+      "bytes": 1317098,
+      "gitBlob": "f2c60effcc28f36953263d70e85a8fbcb01074bf"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-ambient-original.png",
+      "bytes": 1317087,
+      "gitBlob": "fbc9d9f875cdb8d11971a6a40e7b26c24bf81865"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-pulse-original.png",
+      "bytes": 1324535,
+      "gitBlob": "5c3b522c967a8ebcacd8a6285cb59702a099a126"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-resize-in-pulse-fixed.png",
+      "bytes": 1221121,
+      "gitBlob": "dc8a129d5d75b1b52deede9c5361cfe9484e10e2"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline-equivalence/legacy-resize-in-pulse-original.png",
+      "bytes": 1221119,
+      "gitBlob": "4542baf6b92bd46a3c17177eb85786b7dfe19c2f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-INTRO-after.png",
+      "bytes": 1170270,
+      "gitBlob": "5ad2c81b299c9b6ceb6b1f665b322aedb896056b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-PULSE-after.png",
+      "bytes": 1170292,
+      "gitBlob": "e5d02624843cfeef104949d5215bfbc4d15be86a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-contact.png",
+      "bytes": 1598762,
+      "gitBlob": "d282c9b72092bc1660d20a4044920452a8884680"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/gsap-intro-pulse-resize.webm",
+      "bytes": 2301182,
+      "gitBlob": "6e3d60e865e2bcf64d51ec67b82bfc32ac02fb33"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-INTRO-after.png",
+      "bytes": 1168953,
+      "gitBlob": "af2b310aa12f9abdb27c5872c270c8b1edfb1477"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-PULSE-after.png",
+      "bytes": 1173029,
+      "gitBlob": "6c33c869308f5653f3b7bf2f808fa352e9b813dd"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-contact.png",
+      "bytes": 1623628,
+      "gitBlob": "2e7d840d4cd44f60ad9cb3d885eabfd1e6b3889a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/baseline/legacy-intro-pulse-resize.webm",
+      "bytes": 2345369,
+      "gitBlob": "bc65906255cc35e1c7ac5aa4f5cd126c08e4c175"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1280-intro-pulse-resize-contact.png",
+      "bytes": 1513656,
+      "gitBlob": "5b0cb72b3ed1f2bb39df33d6a5567b67394279c2"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1280-intro-pulse-resize.webm",
+      "bytes": 2363068,
+      "gitBlob": "d296bc80099c63e92862fd3110897aaaca5b7779"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1792-intro-pulse-resize-contact.png",
+      "bytes": 1488629,
+      "gitBlob": "c0a2518e676cb44f8db8c800b91da4ca867ee8d6"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1792-intro-pulse-resize.webm",
+      "bytes": 2332611,
+      "gitBlob": "697c203d32096a826e92ed0287e2394d6aa8f2d0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-INTRO-after.png",
+      "bytes": 1170877,
+      "gitBlob": "b9c19e0a308cae2f98ef77a007dfbb51361d00b9"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-PULSE-after.png",
+      "bytes": 1169665,
+      "gitBlob": "986e5cc05afa9ce696ef3cb1da31d947411ddfb0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-intro-pulse-resize-contact.png",
+      "bytes": 1527254,
+      "gitBlob": "9be909cc7eba808a4806bd0c77c362888013b57b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-1920-intro-pulse-resize.webm",
+      "bytes": 2385814,
+      "gitBlob": "c39fbbe422a3bba20d58659670e5ff437c5d3ab8"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-INTRO-after.png",
+      "bytes": 3337461,
+      "gitBlob": "058cca7778f58156eefc7b789029cf87840802b0"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-PULSE-after.png",
+      "bytes": 3333016,
+      "gitBlob": "5dc46ce473337b73ab9bac3f4f22e531ed629509"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-intro-pulse-resize-contact.png",
+      "bytes": 1492650,
+      "gitBlob": "2fe2e2acfc9ea64815940be21ce3550fae7b0693"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/gsap-3840-intro-pulse-resize.webm",
+      "bytes": 2631610,
+      "gitBlob": "5ae302a9009273e0713b06bb4f4658075eb49793"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1280-intro-pulse-resize-contact.png",
+      "bytes": 1483188,
+      "gitBlob": "7bd0a42ccd292702861984c6e4de41702e06c32c"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1280-intro-pulse-resize.webm",
+      "bytes": 2380579,
+      "gitBlob": "07ed8a76655927aa539a9035115154427ef494c9"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1792-intro-pulse-resize-contact.png",
+      "bytes": 1457395,
+      "gitBlob": "aba8e8e29ae4dc72ed52a5da70b2ee303e85435b"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1792-intro-pulse-resize.webm",
+      "bytes": 2394118,
+      "gitBlob": "c7f1ee9f8858a888523b81a96a7c7f5b056b952f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-INTRO-after.png",
+      "bytes": 1170521,
+      "gitBlob": "b8fed18130ba56d40740a50654309dac5d0a4416"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-PULSE-after.png",
+      "bytes": 1169606,
+      "gitBlob": "a19179f8a2ea99b64bd6b4e091f66cb5eef9fc40"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-intro-pulse-resize-contact.png",
+      "bytes": 1548205,
+      "gitBlob": "c61c3360f289466e8ace241a3aec4884daeb306f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-1920-intro-pulse-resize.webm",
+      "bytes": 2497398,
+      "gitBlob": "1915ad8a964e4a174570c0f5aa0684081e0f91df"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-INTRO-after.png",
+      "bytes": 3336977,
+      "gitBlob": "a0c9c69ae0f13af9f64044efe6ecaaceea0fe039"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-PULSE-after.png",
+      "bytes": 3339309,
+      "gitBlob": "1ca4234aab38132e4e4b32dc41a20d8b424033b4"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-intro-pulse-resize-contact.png",
+      "bytes": 1525355,
+      "gitBlob": "e34369fe5a22d200001a8bcab05b83b56755ba9a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/legacy-3840-intro-pulse-resize.webm",
+      "bytes": 2624582,
+      "gitBlob": "16866fbd2f55eff19d8652195855779890149e48"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/fixed/report.json",
+      "bytes": 2144858,
+      "gitBlob": "b1b9f0bcd56593f3e4ce49487cbba0cd08e0dd9f"
+    },
+    {
+      "path": "docs/nexus-p1-5-c-1/evidence/history/partial-media/page@9428ea80f6e66c766b876595970ca37c.webm",
+      "bytes": 509651,
+      "gitBlob": "097122b0a0314348c39f4be056c8978ac7601465"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-1920-failed-low.png",
+      "bytes": 1302886,
+      "gitBlob": "fd968e7e037e8c4ea2de74572457e09ffc02702d"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-1920-normal.png",
+      "bytes": 1311600,
+      "gitBlob": "c1d143e25a2b4684b82db776af885dca8943623e"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-1920-probe.png",
+      "bytes": 1301451,
+      "gitBlob": "2e5588542093e9dfd11ee024bec2e391b56f3f0a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-1920-recovered-normal.png",
+      "bytes": 1303232,
+      "gitBlob": "03ecf4c62992b1ea1a2c93db1fbe1fc713b9a447"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-3840-recover-probe.png",
+      "bytes": 3432101,
+      "gitBlob": "8ac259223073bbfcc70329d2a2af0262f06152e2"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-3840-reduced-motion.png",
+      "bytes": 3449161,
+      "gitBlob": "9943ce00971ac8681274996ed9ced2bc05dd1e47"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/gsap-probe-cycle.webm",
+      "bytes": 4769963,
+      "gitBlob": "a20fa2b4f2fd626ce1c3e7f8bbc720ba1f0e36e1"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-1920-failed-low.png",
+      "bytes": 1303162,
+      "gitBlob": "dfa49810b55585b36c9515b20d480f1f268ebd79"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-1920-normal.png",
+      "bytes": 1311643,
+      "gitBlob": "61062ab4c5b5b90c308559d158bbfb97d98959de"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-1920-probe.png",
+      "bytes": 1302517,
+      "gitBlob": "31944d313e4814d4c4f5673cd2c02419ada637fd"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-1920-recovered-normal.png",
+      "bytes": 1303497,
+      "gitBlob": "ec267356778d814993fcf5ecf950883c18cb553a"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-3840-recover-probe.png",
+      "bytes": 3418783,
+      "gitBlob": "add46da118491a4677c933d14f49b10bb54a7648"
+    },
+    {
+      "path": "docs/nexus-p1-5-c/media/legacy-probe-cycle.webm",
+      "bytes": 4856828,
+      "gitBlob": "0d455a794c5f876b545bf375177bcbf8ff5c40e0"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/code-diff.patch",
+      "bytes": 40735,
+      "gitBlob": "814a7ce8e698baf52c4b1a9672e64eb345bc56df"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/evidence/gsap-failures/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip",
+      "bytes": 2500693,
+      "gitBlob": "db77a523702396b05eef395f2dd362049b4e467c"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/evidence/gsap-failures/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip",
+      "bytes": 7791934,
+      "gitBlob": "2368adeedde14725ee174f3ff9dc35d925cdf3c5"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/evidence/gsap-film.json",
+      "bytes": 1012313,
+      "gitBlob": "8daf9c7e539b79e1e4bb2a7d2bfaf547ee923a4d"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-3840.png",
+      "bytes": 1564064,
+      "gitBlob": "19f5de95968430302ee14b1e01547763711ed70a"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-browser-audio.webm",
+      "bytes": 176141,
+      "gitBlob": "1fc36eb5d4201f3fe5e9e2fcf103646499278eba"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-interaction.webm",
+      "bytes": 2766574,
+      "gitBlob": "9977d02fc9db3097bf1645de8a017e7f1c0a7c17"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-return-crossfade.png",
+      "bytes": 1142522,
+      "gitBlob": "81929a27fe7603b884eefebae4a65d0d0f6da1d5"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/gsap-returned.png",
+      "bytes": 1122194,
+      "gitBlob": "63e855d4a1f51495f60b1198bdd40505374191ed"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/legacy-3840.png",
+      "bytes": 1572457,
+      "gitBlob": "5f22eff7eb645264dff64ff5d30f55fd16678bbc"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/legacy-browser-audio.webm",
+      "bytes": 176121,
+      "gitBlob": "552aa90e3127ca60e15bb1a14f3d14bafba8082d"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/legacy-interaction.webm",
+      "bytes": 2790158,
+      "gitBlob": "1ffd623f6d8a4908001e6c3916d75100b373bf03"
+    },
+    {
+      "path": "docs/nexus-p1-6-1/p16/media/legacy-returned.png",
+      "bytes": 1121150,
+      "gitBlob": "583aa5e7372597f924d516a53ca133c92cf1f9d8"
+    },
+    {
+      "path": "docs/nexus-p1-6/audio/0.pcm",
+      "bytes": 97104,
+      "gitBlob": "306f5e07174c3aae814a424aa1fbcbc984e4cc31"
+    },
+    {
+      "path": "docs/nexus-p1-6/audio/1.pcm",
+      "bytes": 99994,
+      "gitBlob": "a491eeb95c1706c0604dc1008b892c1a51fe2120"
+    },
+    {
+      "path": "docs/nexus-p1-6/code-diff.patch",
+      "bytes": 57558,
+      "gitBlob": "a79e110c562a6fa78148d89c27afd5a77db6d8de"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/answer-aligned.mp4",
+      "bytes": 2224999,
+      "gitBlob": "ba01df6a8613f5fe830a687c20621e8e6c03e910"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-3840.png",
+      "bytes": 1527822,
+      "gitBlob": "63c872696f4cdcd7b106ca85399a56ca5cd9f2a5"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-browser-audio.webm",
+      "bytes": 175600,
+      "gitBlob": "0e91dfc427853e1b83267c331ceaca8164042435"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-interaction.mp4",
+      "bytes": 4364875,
+      "gitBlob": "551db5e56c792c7d18f48181dd9fda4770636546"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-interaction.webm",
+      "bytes": 2438214,
+      "gitBlob": "ff8be54b5f5f3a073dc78bb80fd6bba38505c529"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-return-crossfade.png",
+      "bytes": 1119020,
+      "gitBlob": "409bdaf23d42878de22d8fbfbcc1b7addc4f3d2d"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/gsap-returned.png",
+      "bytes": 1105332,
+      "gitBlob": "285891edb29b67a317c1a47dd5ddea3d54736428"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/headed-gsap-3840.png",
+      "bytes": 1454620,
+      "gitBlob": "be0918ad8f7e14649270b7576f633647465e385a"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/headed-legacy-3840.png",
+      "bytes": 1460248,
+      "gitBlob": "735ecdb556384fbb982afd7c0546fa5b4c333b70"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-3840.png",
+      "bytes": 1516399,
+      "gitBlob": "aa3dbd42df6258989155b382e67cba92a8723e83"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-browser-audio.webm",
+      "bytes": 173711,
+      "gitBlob": "1b5fe6f34fb8569b627922e91927f311a7fb5c5f"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-interaction.mp4",
+      "bytes": 4434791,
+      "gitBlob": "2462d16c7ebb4dc3f39b428531ca941aba4dfcd3"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-interaction.webm",
+      "bytes": 2414423,
+      "gitBlob": "e6fc5f901ba96252f0f3d2ee02f004031d810541"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/legacy-returned.png",
+      "bytes": 1105360,
+      "gitBlob": "1c35234d4a76bbf58a5fdc37208af29946ebb96c"
+    },
+    {
+      "path": "docs/nexus-p1-6/media/side-by-side.mp4",
+      "bytes": 2769122,
+      "gitBlob": "a294ee4eebbcbcb6550f15f7095551097f128584"
+    }
+  ],
+  "unpublishedReachableLargeBytes": 183885927,
+  "publicPushApproved": false
+}

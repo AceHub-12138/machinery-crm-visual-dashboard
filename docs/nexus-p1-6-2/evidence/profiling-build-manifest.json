@@ -1,0 +1,45 @@
+{
+  "scope": "Local diagnostic build and instrumentation; never part of product or performance acceptance",
+  "files": [
+    {
+      "path": ".review/p1-6-2/profile-build-native-final.txt",
+      "bytes": 1061,
+      "sha256": "cf0ce41d720479de2c04c4ebc0dfc3e5245814a5ed4f8df1516e9a096d225993"
+    },
+    {
+      "path": ".review/p1-6-2/profile-build-native.txt",
+      "bytes": 1047,
+      "sha256": "f90e6d5fc9da3895371e192614b7f043215f834932f354249cd292ca63a7124b"
+    },
+    {
+      "path": ".review/p1-6-2/profile-build.json",
+      "bytes": 317,
+      "sha256": "bb92e0c70d777b2527e707245d11b4a612dc32c8528024a939ced03033a42dc1"
+    },
+    {
+      "path": ".review/p1-6-2/profile-build.txt",
+      "bytes": 1061,
+      "sha256": "6b0a05fbf06b48c83616d532dca3e2b81b40b0a856882a0b0d55b45bd816caa1"
+    },
+    {
+      "path": ".review/p1-6-2/profile-install.txt",
+      "bytes": 1825,
+      "sha256": "3c7b5df0e416c470d6a7d9bf16df7e9098811be4c8d8fbd0a4d8f7f180ff5e7d"
+    },
+    {
+      "path": ".review/p1-6-2/profile-instrumentation-pre-cache.patch",
+      "bytes": 7069,
+      "sha256": "4757ddd5aad01fe106bd588c4aa3797b896a121e4ba6721ae14905c57c5dd1a6"
+    },
+    {
+      "path": ".review/p1-6-2/profile-instrumentation-scopes.patch",
+      "bytes": 8687,
+      "sha256": "684adfb465d41e66ff92db3a7245618107263f2991a12ccbdd536564acc8687e"
+    },
+    {
+      "path": ".review/p1-6-2/profile-instrumentation.patch",
+      "bytes": 8687,
+      "sha256": "684adfb465d41e66ff92db3a7245618107263f2991a12ccbdd536564acc8687e"
+    }
+  ]
+}

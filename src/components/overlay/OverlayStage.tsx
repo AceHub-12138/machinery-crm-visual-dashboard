@@ -8,6 +8,7 @@ import { JarvisCore } from "@/components/overlay/JarvisCore";
 import { AnswerCard } from "@/components/overlay/AnswerCard";
 import "./overlay.css";
 import { amplitudeSource } from "./motion/amplitude-source";
+import { PlaybackSentenceEvidence } from "./sentence-announcements";
 import { useXiaochuanMotion } from "./motion/useXiaochuanMotion";
 import type { XiaochuanMotionMode } from "./motion/permission";
 import {
@@ -114,6 +115,7 @@ export function OverlayStage({
   const [sentenceVersion, setSentenceVersion] = useState(0);
   const playerRef = useRef<PcmPlayer | null>(null);
   const speechRef = useRef<Speech | null>(null);
+  const announcementEvidenceRef = useRef(new PlaybackSentenceEvidence(false));
   const sentenceRef = useRef<{ start: number; end: number } | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
   const tokenRef = useRef<string | null>(null);
@@ -149,6 +151,7 @@ export function OverlayStage({
     const next = sessionReducer(mirrorRef.current, event);
     if (["thinking", "closing", "ambient", "error-fallback"].includes(next.name)) { setBargePaused(false); frameRef.current.listenClock = null; setPromptCaption(null); }
     if (next.name !== "answering" && mirrorRef.current.name === "answering") {
+      if (next.name !== "followup" || announcementEvidenceRef.current.status !== "drained") announcementEvidenceRef.current.cancel();
       playerRef.current?.stop(); playingIdRef.current = null; sentenceRef.current = null;
     }
     if (["closing", "ambient", "error-fallback"].includes(next.name) && next.name !== mirrorRef.current.name && fixedIdRef.current) {
@@ -275,6 +278,7 @@ export function OverlayStage({
       frameRef.current.launchAt = now;
       answerLaunchRef.current = now;
       setLaunchAt(now);
+      announcementEvidenceRef.current = new PlaybackSentenceEvidence(live && ownsSessionRef.current && !!speechRef.current);
       dispatchTracked({ type: "ANSWER", at: now, card: resolved });
       if (live) {
         sentenceRef.current = null;
@@ -296,12 +300,14 @@ export function OverlayStage({
           },
           onSentenceStart: (index) => {
             if (!isCurrent()) return;
+            announcementEvidenceRef.current.start(index);
             const sentence = speech.sentences[index];
             sentenceRef.current = { start: sentence.displayStart, end: sentence.displayEnd }; setSentenceVersion(v => v + 1);
             if (!reportedStart) { reportedStart = true; reportPlayback("playback.started", speech.turnId); }
           },
           onSentenceSkipped: (sentenceIndex, reason) => {
             if (!isCurrent()) return;
+            announcementEvidenceRef.current.skip(sentenceIndex);
             setAudioNotice("部分语音播报中断，请查看卡片。");
             if (socketRef.current?.readyState === WebSocket.OPEN) {
               socketRef.current.send(JSON.stringify({ type: "playback.skipped", at: Date.now(), turnId: speech.turnId, sentenceIndex, reason }));
@@ -309,6 +315,7 @@ export function OverlayStage({
           },
           onDrained: () => {
             if (!isCurrent()) return;
+            announcementEvidenceRef.current.drain();
             sentenceRef.current = null; setSentenceVersion(v => v + 1);
             reportPlayback("playback.drained", speech.turnId);
             playingIdRef.current = null;
@@ -316,6 +323,7 @@ export function OverlayStage({
           },
           onError: (reason) => {
             if (!isCurrent()) return;
+            announcementEvidenceRef.current.fail();
             sentenceRef.current = null; setSentenceVersion(v => v + 1);
             setAudioNotice(reason === "autoplay_blocked" ? "请点击屏幕启用声音；本次回答请查看卡片，随后重新唤醒。" : "语音播报中断，请查看卡片。");
             reportPlayback("playback.failed", speech.turnId, reason);
@@ -444,7 +452,7 @@ export function OverlayStage({
       if (event.type === "barge.result") {
         if (event.sessionId !== sessionIdRef.current) return;
         if (!micRef.current?.bargeResult(event.attemptId, event.accepted, event.reason === "rate_limited" ? "rate_limited" : undefined)) return;
-        if (event.accepted || event.reason === "rate_limited") { getPlayer().stop(); fixedIdRef.current = null; playingIdRef.current = null; setBargePaused(false); }
+        if (event.accepted || event.reason === "rate_limited") { announcementEvidenceRef.current.cancel(); getPlayer().stop(); fixedIdRef.current = null; playingIdRef.current = null; setBargePaused(false); }
         return;
       }
       if (event.type === "state.change" && ["thinking", "closing", "error-fallback"].includes(event.to)) { micRef.current?.setListen(null); frameRef.current.listenClock = null; }
@@ -545,7 +553,7 @@ export function OverlayStage({
       void micRef.current?.close(); micRef.current = null;
       window.clearTimeout(retryTimer);
       socket?.close(); socketRef.current = null;
-      playingIdRef.current = null; sentenceRef.current = null; speechRef.current = null;
+      announcementEvidenceRef.current.cancel(); playingIdRef.current = null; sentenceRef.current = null; speechRef.current = null;
       void playerRef.current?.close(); playerRef.current = null;
     };
   }, [live, hubUrl, fireAnswer, wake, dispatchTracked, getPlayer, reportPlayback]);
@@ -643,6 +651,7 @@ export function OverlayStage({
           foldAt={session.name === "closing" ? session.since : session.card ? null : retiring?.foldAt ?? null}
           sentenceRef={live ? sentenceRef : undefined}
           sentenceVersion={sentenceVersion}
+          announcementEvidenceRef={announcementEvidenceRef}
           playbackPaused={bargePaused}
           playbackFinished={session.name !== "answering"}
         />

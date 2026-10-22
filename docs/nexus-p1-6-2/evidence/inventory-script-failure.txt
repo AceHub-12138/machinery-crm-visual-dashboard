@@ -1,0 +1,1 @@
+Final inventory initially failed on an empty rev-list result after shared remote references changed. git cat-file received an empty input line and returned missing. Fixed empty-input handling, retained initial inventory separately, and reran. No test result or product source changed.

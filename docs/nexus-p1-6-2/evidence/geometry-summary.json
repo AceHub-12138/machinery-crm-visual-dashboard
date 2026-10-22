@@ -1,0 +1,1884 @@
+{
+  "viewports": [
+    1280,
+    1792,
+    1920,
+    3840
+  ],
+  "modes": {
+    "gsap": {
+      "records": 116,
+      "violations": 0,
+      "textFailures": 0,
+      "files": [
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-normal-1.json",
+          "sha256": "2da4e180ba7e682f369e182d9eb346e5b1f9a4e771e35b6f99035eec2ce33315"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-normal-1.png",
+          "sha256": "ef1db819437e6a32864d3697e971217c76fc5a617671f91cd70e764420e09860"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-normal-2.json",
+          "sha256": "4a77bd5ddb125894dbbf3e26de7186cd4430d13bf083a5818ccba51c3ebdcda8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-normal-2.png",
+          "sha256": "6db6112de2a5fc44053c8f05c290f73663bcaed6ca011e7cc6d5e83cedcf4e51"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-normal-3.json",
+          "sha256": "37a6a199ceb03e422ceb6fcb3be1d928bef4d4b66a8ee4dcf48424bd6a115e43"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-normal-3.png",
+          "sha256": "aabcfb0fa9978983596a527bbf95169f20a48a7b16e41c5d506cb032cee1a3fc"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-outage-1.json",
+          "sha256": "5e867588d2a0134dbf4392a5e6c4dfade863c0ec55871dd8d499300318a75462"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-outage-1.png",
+          "sha256": "ee50aa84bd190384958d2e0957a99b63d56b795634052b76b59ef5961c394cfd"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-outage-2.json",
+          "sha256": "0a907de57c8ac05b162b8b2c93767963aa33f08508fb3f63f40863db5c96c664"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-outage-2.png",
+          "sha256": "d42fdd1109a028f431cfa78daa8c6e6f69cb1753286b6cfb8ffab5c20ef8e8fa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-outage-3.json",
+          "sha256": "9628ee016e6eb31096a6a7f598a9bea1604d86eb08b1a49948708511aa691b4e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-long-outage-3.png",
+          "sha256": "05a2e350f05e08fb13c45fb977b03b2b4fe7ba8440ef37b91c9f2f5280399bed"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-normal-1.json",
+          "sha256": "2da4e180ba7e682f369e182d9eb346e5b1f9a4e771e35b6f99035eec2ce33315"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-normal-1.png",
+          "sha256": "8e7c9cacbe28afb0c8c254e5da84a07cb9020a5405d5a8cbd193748a65362b99"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-normal-2.json",
+          "sha256": "4a77bd5ddb125894dbbf3e26de7186cd4430d13bf083a5818ccba51c3ebdcda8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-normal-2.png",
+          "sha256": "7b93f67f06503fa25c30110057f17bbbaae5217d81e868410f644014b6f067b3"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-normal-3.json",
+          "sha256": "37a6a199ceb03e422ceb6fcb3be1d928bef4d4b66a8ee4dcf48424bd6a115e43"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-normal-3.png",
+          "sha256": "bc2a030aa0486050b1833ed5f2781101d0edc12f8fb27e3579282e6436ca5b73"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-outage-1.json",
+          "sha256": "5e867588d2a0134dbf4392a5e6c4dfade863c0ec55871dd8d499300318a75462"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-outage-1.png",
+          "sha256": "2de0deda34ecbe6029584e36d8d43bbe8436dedda51ea234d2647347adbcc185"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-outage-2.json",
+          "sha256": "0a907de57c8ac05b162b8b2c93767963aa33f08508fb3f63f40863db5c96c664"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-outage-2.png",
+          "sha256": "f49a324b224e815cbd9561e26418ba3d00eaf3f91d5dd2bfe5cb3b1ea216928a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-outage-3.json",
+          "sha256": "9628ee016e6eb31096a6a7f598a9bea1604d86eb08b1a49948708511aa691b4e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-no-preference-normal-outage-3.png",
+          "sha256": "070181b32d1c70be445c23bcbfd67f2cf2397edac322ec7300a90c6061fd05e4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-normal-1.json",
+          "sha256": "2da4e180ba7e682f369e182d9eb346e5b1f9a4e771e35b6f99035eec2ce33315"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-normal-1.png",
+          "sha256": "30a17bb07d0da2b07085cb95365782bc3023f9b0ac9e1e2416a7d3cf665d07a3"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-normal-2.json",
+          "sha256": "4a77bd5ddb125894dbbf3e26de7186cd4430d13bf083a5818ccba51c3ebdcda8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-normal-2.png",
+          "sha256": "4dcf5040f76acfddf5192d9ad6d29f7ef8732f32aef6437febc94619c9c51afe"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-normal-3.json",
+          "sha256": "37a6a199ceb03e422ceb6fcb3be1d928bef4d4b66a8ee4dcf48424bd6a115e43"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-normal-3.png",
+          "sha256": "a4600809b6b998599d7cf238019ada1102347fe502787397b9509ee3c726dbbc"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-outage-1.json",
+          "sha256": "5e867588d2a0134dbf4392a5e6c4dfade863c0ec55871dd8d499300318a75462"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-outage-1.png",
+          "sha256": "7bc8d0e69c8a6385157cddb9878b905b353801748238e3fb53ef5f2cc4a49c33"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-outage-2.json",
+          "sha256": "0a907de57c8ac05b162b8b2c93767963aa33f08508fb3f63f40863db5c96c664"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-outage-2.png",
+          "sha256": "28e76f79b3f468b10011530d89e11ca929d61350d1f9973b27cc09dc36e8f9c7"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-outage-3.json",
+          "sha256": "9628ee016e6eb31096a6a7f598a9bea1604d86eb08b1a49948708511aa691b4e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-long-outage-3.png",
+          "sha256": "f597005ed4cd278f6929414de79db50f772a33d582983fec5da5a57eb575ae07"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-normal-1.json",
+          "sha256": "2da4e180ba7e682f369e182d9eb346e5b1f9a4e771e35b6f99035eec2ce33315"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-normal-1.png",
+          "sha256": "a040ec2d3e85c7e7da959185f7d11c5801ee5640b7578d772437148b5435996c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-normal-2.json",
+          "sha256": "4a77bd5ddb125894dbbf3e26de7186cd4430d13bf083a5818ccba51c3ebdcda8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-normal-2.png",
+          "sha256": "0b6f8ea3bfc2b044051dfe4b41678862f4132324cd86776328e2c065fb2db29b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-normal-3.json",
+          "sha256": "37a6a199ceb03e422ceb6fcb3be1d928bef4d4b66a8ee4dcf48424bd6a115e43"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-normal-3.png",
+          "sha256": "49c197dc87a4d2797a663207d23641cb671d27b73dc10599e1512eee0d072584"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-outage-1.json",
+          "sha256": "5e867588d2a0134dbf4392a5e6c4dfade863c0ec55871dd8d499300318a75462"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-outage-1.png",
+          "sha256": "db0683639a8de9c45ad4d415013650fe1d6e48ca825997f1357e09160ec9badf"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-outage-2.json",
+          "sha256": "0a907de57c8ac05b162b8b2c93767963aa33f08508fb3f63f40863db5c96c664"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-outage-2.png",
+          "sha256": "d425c0443b95f6ff5de93fd322100fe564d9efb78d38d9e4677e60b49b14397f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-outage-3.json",
+          "sha256": "9628ee016e6eb31096a6a7f598a9bea1604d86eb08b1a49948708511aa691b4e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1280-reduce-normal-outage-3.png",
+          "sha256": "de7a877f1c85b424eca45daf01c1e795cbaaaab711cb94f378cc1d1749deb7a3"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-normal-1.json",
+          "sha256": "b66e00282a38ca8647b2ca6696357afc2437989fa39a2a20b46335b1907f358d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-normal-1.png",
+          "sha256": "e326bbec78cffe17d5261e777b80a2bb19709f612d3da8b4d29ef7c2e78be820"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-normal-2.json",
+          "sha256": "373186de69845d83a49e277333879acc4542d763a3aaa95a604b814bc8f88a66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-normal-2.png",
+          "sha256": "936c3168e0a79aaef7aa5899a4f5eb7c7fe4bf95fa405d086f069a1d94768730"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-normal-3.json",
+          "sha256": "fd21d2919166b21933305dd849ab8038e5ffeb56987751d0b5ae9cf3ef31d4be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-normal-3.png",
+          "sha256": "c6332968b5a36d69c668820b3c64e9c919f3fcfc02e5143b6f338f4099e8e59d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-outage-1.json",
+          "sha256": "414c7263339be3fbe6590446488f3107b517b9b2758804e3357d8bccc817dbaa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-outage-1.png",
+          "sha256": "bc7d4b95f73f7a1ecf6a16285f38d7b954fad02ab7d8b05b54dca8b41edf1d6d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-outage-2.json",
+          "sha256": "c9641e0a5482c0acefe904f3a3dc2939197bbbde6b15742e37d9dbe5ea04151d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-outage-2.png",
+          "sha256": "228cffcca1e2c6a47ce9f36cbaf0b486c55a7bbde83e03230dbe632cc52849cf"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-outage-3.json",
+          "sha256": "c9f5f1083acd9631adde89dd80c48845ae4b9f971f23ef9b520482c5b8df176e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-long-outage-3.png",
+          "sha256": "f09cf98a5441a6fe7177775632b12c74f5b3c7c0d6d20334a99aa3fbf375965c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-normal-1.json",
+          "sha256": "b66e00282a38ca8647b2ca6696357afc2437989fa39a2a20b46335b1907f358d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-normal-1.png",
+          "sha256": "a0a8f31362f7a773a344d864ad875b02a34e553cbb3b53017dffcfff7d8ed264"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-normal-2.json",
+          "sha256": "373186de69845d83a49e277333879acc4542d763a3aaa95a604b814bc8f88a66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-normal-2.png",
+          "sha256": "04141a9e349a3c484362db40e0aa60abd73339ff8e655fa3666215e972bbf112"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-normal-3.json",
+          "sha256": "fd21d2919166b21933305dd849ab8038e5ffeb56987751d0b5ae9cf3ef31d4be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-normal-3.png",
+          "sha256": "336eed42636c68150b456fafa516d9c96ffa0a7b98fe57ff3b2229a4c2bab1cc"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-outage-1.json",
+          "sha256": "414c7263339be3fbe6590446488f3107b517b9b2758804e3357d8bccc817dbaa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-outage-1.png",
+          "sha256": "796bcdbc9c1d6826e817db94587b07d4fd41e0d8ffe01499b82ae26431c29afd"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-outage-2.json",
+          "sha256": "c9641e0a5482c0acefe904f3a3dc2939197bbbde6b15742e37d9dbe5ea04151d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-outage-2.png",
+          "sha256": "477bdca29d589a0d5d4ceb9253fd464ddc1ba74bdf5df78cb2339f6318948a6c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-outage-3.json",
+          "sha256": "c9f5f1083acd9631adde89dd80c48845ae4b9f971f23ef9b520482c5b8df176e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-no-preference-normal-outage-3.png",
+          "sha256": "b7b791ebfbe83429c76c2b59a245fe462fe2339fdbfdf3577d7096ad86169a0a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-normal-1.json",
+          "sha256": "b66e00282a38ca8647b2ca6696357afc2437989fa39a2a20b46335b1907f358d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-normal-1.png",
+          "sha256": "2dacd5c18c80c6db35b9ee2354046fc65c1ec2c7cfeedf4cb900f37ec74565d6"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-normal-2.json",
+          "sha256": "373186de69845d83a49e277333879acc4542d763a3aaa95a604b814bc8f88a66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-normal-2.png",
+          "sha256": "79179dc8cbeeaba65f2d0c9f3e41c923ae06f7f8f404299fd92a21c4eeb8d804"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-normal-3.json",
+          "sha256": "fd21d2919166b21933305dd849ab8038e5ffeb56987751d0b5ae9cf3ef31d4be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-normal-3.png",
+          "sha256": "062894678b418af110c3d6085db4c2c4282209e052abeae8d893bff4788a528d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-outage-1.json",
+          "sha256": "414c7263339be3fbe6590446488f3107b517b9b2758804e3357d8bccc817dbaa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-outage-1.png",
+          "sha256": "706f7e50fdf3b5c47519734eb2b6fe75f479c37953762475615b2c4e6b0c396b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-outage-2.json",
+          "sha256": "c9641e0a5482c0acefe904f3a3dc2939197bbbde6b15742e37d9dbe5ea04151d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-outage-2.png",
+          "sha256": "888d2092c485ad6930313598f6becf495ac1df9d39c3f4d398e11282c87f7674"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-outage-3.json",
+          "sha256": "c9f5f1083acd9631adde89dd80c48845ae4b9f971f23ef9b520482c5b8df176e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-long-outage-3.png",
+          "sha256": "a2c72f898ded206c7211428d6d9282d4fb392951390fb538b4c06f37593dd432"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-normal-1.json",
+          "sha256": "b66e00282a38ca8647b2ca6696357afc2437989fa39a2a20b46335b1907f358d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-normal-1.png",
+          "sha256": "469fda4ef53a13822ce823ddaddda2023bf4aa996438b793281b80f4d993eb40"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-normal-2.json",
+          "sha256": "373186de69845d83a49e277333879acc4542d763a3aaa95a604b814bc8f88a66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-normal-2.png",
+          "sha256": "9c04781caa281472aaeb40090a1fa42934690d22af5b208d806173220902f35c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-normal-3.json",
+          "sha256": "fd21d2919166b21933305dd849ab8038e5ffeb56987751d0b5ae9cf3ef31d4be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-normal-3.png",
+          "sha256": "049a096b23e9e6716d95b00000f1a4ef2c3c3169008b305f146244b9c5ccc428"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-outage-1.json",
+          "sha256": "414c7263339be3fbe6590446488f3107b517b9b2758804e3357d8bccc817dbaa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-outage-1.png",
+          "sha256": "b27e14006136f08aae2f755df5dd037d1a409c915fdc4009a8c741a1fa858cf6"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-outage-2.json",
+          "sha256": "c9641e0a5482c0acefe904f3a3dc2939197bbbde6b15742e37d9dbe5ea04151d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-outage-2.png",
+          "sha256": "36b00beeb9062b595a470ee9c534ed0b04e291f0ff05535f4d54a1d8241a2154"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-outage-3.json",
+          "sha256": "c9f5f1083acd9631adde89dd80c48845ae4b9f971f23ef9b520482c5b8df176e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1792-reduce-normal-outage-3.png",
+          "sha256": "5677c92691b7cce3395777d9f53d09fbdbb571384ce059cf2d7a11a5ae0298e5"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-normal-1.json",
+          "sha256": "5ba78e69e6261df9a145ba4889bbe84831b7cbd6aa12f3b077cb4fea4ac078b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-normal-1.png",
+          "sha256": "807cc4080b9ff09406c529687f9c3c441388242b495539ff91c7e38616f4fde4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-normal-2.json",
+          "sha256": "6bb803c3021d85cf7b8569322a700f5d6a66276982a37f5b14d0f9a5c5d18253"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-normal-2.png",
+          "sha256": "8f2c8debde4d768e7a327e44bc51f73f194037ef66f9c2296c8c36e0dca5128b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-normal-3.json",
+          "sha256": "5da37754d9ff8cc56fd626346f9d6504476cf65a21198aebbbfe1c618add5446"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-normal-3.png",
+          "sha256": "70c077a2a3ef622b31a99f1d844303bef04ef89550a7e004cd0d802bd36cfd0e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-outage-1.json",
+          "sha256": "541b62743b3d37283ab01e92332679c37a25cdb6b03a72cdd12ee8013adaf72b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-outage-1.png",
+          "sha256": "f8ec465dc792e5c2448678482da3dd5346656413de69ef6d0f4d83d9727ba251"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-outage-2.json",
+          "sha256": "495c842ca44b056153cc2e55ca9b68f6050dab3ab536e5da9e2214d09b9b1b11"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-outage-2.png",
+          "sha256": "98c733f4aadbacdcec96c63f16f8370066f81d9481631815b618421c4e7c8f86"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-outage-3.json",
+          "sha256": "a260894d8d5e4175500a2f763c35f70ca5031827db68bc93d500b74b1906f233"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-long-outage-3.png",
+          "sha256": "9e42db2846933816551a85e79ab046a20ef13af61bdbfb35dda7cb86107dbe01"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-normal-1.json",
+          "sha256": "5ba78e69e6261df9a145ba4889bbe84831b7cbd6aa12f3b077cb4fea4ac078b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-normal-1.png",
+          "sha256": "4f32cc73fd9e35f9dd8a44b64bf2929c03b9a32a4cd12864b03d87e4eaa0d39c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-normal-2.json",
+          "sha256": "6bb803c3021d85cf7b8569322a700f5d6a66276982a37f5b14d0f9a5c5d18253"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-normal-2.png",
+          "sha256": "d152a591ab94af7105defd5c168ff31dc4a35ae89162e58f04b1fbb7b32809f2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-normal-3.json",
+          "sha256": "5da37754d9ff8cc56fd626346f9d6504476cf65a21198aebbbfe1c618add5446"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-normal-3.png",
+          "sha256": "e923f24ee4a550d0ed9deb930d3e4e7b304bcedf755cae03f2568bce39abbbfc"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-outage-1.json",
+          "sha256": "541b62743b3d37283ab01e92332679c37a25cdb6b03a72cdd12ee8013adaf72b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-outage-1.png",
+          "sha256": "1bd6e6980c2dc0e671d9b6e365b7a5e2f9e007f45f27e9080afad11ae02c0036"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-outage-2.json",
+          "sha256": "495c842ca44b056153cc2e55ca9b68f6050dab3ab536e5da9e2214d09b9b1b11"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-outage-2.png",
+          "sha256": "be3de7c4fd43037636f7a0411ca1615acdbe44258af9c9bc363c3e9f849ba686"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-outage-3.json",
+          "sha256": "a260894d8d5e4175500a2f763c35f70ca5031827db68bc93d500b74b1906f233"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-no-preference-normal-outage-3.png",
+          "sha256": "3cfe9c59496e4dddd7dd7993ca59ef3aa8957723e53f44cf98500e4036c98b7a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-normal-1.json",
+          "sha256": "5ba78e69e6261df9a145ba4889bbe84831b7cbd6aa12f3b077cb4fea4ac078b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-normal-1.png",
+          "sha256": "f4433b90134fe561783cfd8e66eae9cbc559f28b7ea574e5504ac2eacb9416c1"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-normal-2.json",
+          "sha256": "6bb803c3021d85cf7b8569322a700f5d6a66276982a37f5b14d0f9a5c5d18253"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-normal-2.png",
+          "sha256": "fd15940eaf5ee933ca4fa5ecc84c7c004174deabcac6ea03a874dbcd2a66da6c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-normal-3.json",
+          "sha256": "5da37754d9ff8cc56fd626346f9d6504476cf65a21198aebbbfe1c618add5446"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-normal-3.png",
+          "sha256": "a7e191a48d2eeab416580eaeea3593c95f19948b65306864db2221142d56133e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-outage-1.json",
+          "sha256": "541b62743b3d37283ab01e92332679c37a25cdb6b03a72cdd12ee8013adaf72b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-outage-1.png",
+          "sha256": "8fd5339b797f48443a39610c46d3db8a5f053882acb3e6f348aa34dd705f72f8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-outage-2.json",
+          "sha256": "495c842ca44b056153cc2e55ca9b68f6050dab3ab536e5da9e2214d09b9b1b11"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-outage-2.png",
+          "sha256": "6eef69e8defb5d0ccc2eb4249cd39b63278ce1b8d7c439cdc02afc773401086c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-outage-3.json",
+          "sha256": "a260894d8d5e4175500a2f763c35f70ca5031827db68bc93d500b74b1906f233"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-long-outage-3.png",
+          "sha256": "c06a1fe2ea01df216176943e73bc6efaa820e65654bbae6328a3446093e35a10"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-normal-1.json",
+          "sha256": "5ba78e69e6261df9a145ba4889bbe84831b7cbd6aa12f3b077cb4fea4ac078b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-normal-1.png",
+          "sha256": "d6e281ee06e9703676353d6d283d3300f1dfea6ce427766bd36270af38e0c57a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-normal-2.json",
+          "sha256": "6bb803c3021d85cf7b8569322a700f5d6a66276982a37f5b14d0f9a5c5d18253"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-normal-2.png",
+          "sha256": "1001b3ce399dee5984dc7e765b4ff7c5e775e4bcb7a0ee1881a41ece3123cfa9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-normal-3.json",
+          "sha256": "5da37754d9ff8cc56fd626346f9d6504476cf65a21198aebbbfe1c618add5446"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-normal-3.png",
+          "sha256": "98173fd353817db6b2369dad79b990d2a34130850c4293834e7a6e4f98035d17"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-outage-1.json",
+          "sha256": "541b62743b3d37283ab01e92332679c37a25cdb6b03a72cdd12ee8013adaf72b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-outage-1.png",
+          "sha256": "4a1a6ad8dcb9768c2da12593e6bb9401d22d19fb5ee51937483e25fd06190679"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-outage-2.json",
+          "sha256": "495c842ca44b056153cc2e55ca9b68f6050dab3ab536e5da9e2214d09b9b1b11"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-outage-2.png",
+          "sha256": "91b311d5ab2ac507b20674aba2fa4ab819a61ee9efc92bf8271cc4078828c27c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-outage-3.json",
+          "sha256": "a260894d8d5e4175500a2f763c35f70ca5031827db68bc93d500b74b1906f233"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-1920-reduce-normal-outage-3.png",
+          "sha256": "1c8dc26553f4158bac7221bcf185a5309a95716d514582c36870c62f1d0d354f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-normal-1.json",
+          "sha256": "899926b6e8ba89eaf21d344cfde648838be57a1e4bc10c58f8768ea4bca605ec"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-normal-1.png",
+          "sha256": "8631a2f94c09d9791c1daf9dc185e78142cc9b58bdf91b53fc082ae353a1871e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-normal-2.json",
+          "sha256": "43eb1aa6e59b6075d716e6fb4e06898e24380db451b640206d4995240186afde"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-normal-2.png",
+          "sha256": "e976e9d122805f4d32eb4237719fbfc8819055fc9c98541f5f6d5925e9439047"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-normal-3.json",
+          "sha256": "86591856fd3ab38d959398dc010d4882dd15b88ae26ee3010f33ebc34e447db2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-normal-3.png",
+          "sha256": "e64af5838f0bd129b4c33485f139678a81c6b8a0c9285c07e31bc0176d1f1404"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-outage-1.json",
+          "sha256": "ff245ef1827a326b5ec7a3c5edc5ce40d3511451ea9ba7b3f6314cd9e82065b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-outage-1.png",
+          "sha256": "e3f49a94473bd28b02e7707251be6e1800f57d99ac7b41842cac1178b6953e92"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-outage-2.json",
+          "sha256": "181a079b45c3f284b379cdb0b4f1c5320051ed55f8be5f4890d63e06daffc166"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-outage-2.png",
+          "sha256": "6931ac24e926b8273f4f0e235cad770dfc0612366c8add01d39a1546edde7f83"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-outage-3.json",
+          "sha256": "039e0b37eddf3946b6d8079fe92af17b46a1a024c4e16593a75d062cf41eb762"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-long-outage-3.png",
+          "sha256": "705db6560140d3f1d9189a4492fff3e590898653adc147a74e16df64f4395cea"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-normal-1.json",
+          "sha256": "899926b6e8ba89eaf21d344cfde648838be57a1e4bc10c58f8768ea4bca605ec"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-normal-1.png",
+          "sha256": "76b37804065a3aa3f5f1de985c266688e5af1759c9bb54350f4d7fc8219d9104"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-normal-2.json",
+          "sha256": "43eb1aa6e59b6075d716e6fb4e06898e24380db451b640206d4995240186afde"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-normal-2.png",
+          "sha256": "a116b9cf1a50df18ed609576d1fac55fc0db7d64ca832c786389c1fc09a18cc8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-normal-3.json",
+          "sha256": "86591856fd3ab38d959398dc010d4882dd15b88ae26ee3010f33ebc34e447db2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-normal-3.png",
+          "sha256": "e9f71de3c090d80d8f71bfc29cfc7c7816f24ee91aa76e50173cd30c62bff1be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-outage-1.json",
+          "sha256": "ff245ef1827a326b5ec7a3c5edc5ce40d3511451ea9ba7b3f6314cd9e82065b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-outage-1.png",
+          "sha256": "dbfa399d015d727823822030f5139936dc09661d4011fc0c791f821daab47354"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-outage-2.json",
+          "sha256": "181a079b45c3f284b379cdb0b4f1c5320051ed55f8be5f4890d63e06daffc166"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-outage-2.png",
+          "sha256": "b1b624bb976c7d0f1b8739c973242f44cba0c5f11246455e1eae1675fd787e8f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-outage-3.json",
+          "sha256": "039e0b37eddf3946b6d8079fe92af17b46a1a024c4e16593a75d062cf41eb762"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-no-preference-normal-outage-3.png",
+          "sha256": "96a8ceb60c1ac6ef20cfb9e16c697d587ae8bd97324a3ab19d00a0d4a52c2a00"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-normal-1.json",
+          "sha256": "899926b6e8ba89eaf21d344cfde648838be57a1e4bc10c58f8768ea4bca605ec"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-normal-1.png",
+          "sha256": "0049b3526bdef37fcf840f8e8b6a8026124b0ebaee63d26b7ff9d76da729d9a4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-normal-2.json",
+          "sha256": "43eb1aa6e59b6075d716e6fb4e06898e24380db451b640206d4995240186afde"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-normal-2.png",
+          "sha256": "815b9baffe11491e15e7eb3cd942ec286dc2ccf0623a8e06c11aad6fc90014f0"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-normal-3.json",
+          "sha256": "86591856fd3ab38d959398dc010d4882dd15b88ae26ee3010f33ebc34e447db2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-normal-3.png",
+          "sha256": "6d39c606e1eee173112c3652ab2f477d4f641ce45e76216b186b99622dd1f68c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-outage-1.json",
+          "sha256": "ff245ef1827a326b5ec7a3c5edc5ce40d3511451ea9ba7b3f6314cd9e82065b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-outage-1.png",
+          "sha256": "b731bdb2c294673bed28ccc1d1860cbbbd7408e49decdd9c08b1263e86b73217"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-outage-2.json",
+          "sha256": "181a079b45c3f284b379cdb0b4f1c5320051ed55f8be5f4890d63e06daffc166"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-outage-2.png",
+          "sha256": "8a08afc750ad365aeee5edcc3ca6f1f6b72024adac44711006ef74050d682ef4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-outage-3.json",
+          "sha256": "039e0b37eddf3946b6d8079fe92af17b46a1a024c4e16593a75d062cf41eb762"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-long-outage-3.png",
+          "sha256": "6c306e747cd512b8124e2c35d2de24ff6b8def401d82c98b910b00ff0e7bad0d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-normal-1.json",
+          "sha256": "899926b6e8ba89eaf21d344cfde648838be57a1e4bc10c58f8768ea4bca605ec"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-normal-1.png",
+          "sha256": "54502ac7aef3e0cc3d03c336af341d73d4c1ecb32a2fa66d716c556e2be39c7d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-normal-2.json",
+          "sha256": "43eb1aa6e59b6075d716e6fb4e06898e24380db451b640206d4995240186afde"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-normal-2.png",
+          "sha256": "e50b1b8b5207bf2e76a605b6f14969a90f7186aaf20e3f85f7496c2f01fc19d8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-normal-3.json",
+          "sha256": "86591856fd3ab38d959398dc010d4882dd15b88ae26ee3010f33ebc34e447db2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-normal-3.png",
+          "sha256": "72aa2418a88bd7089df9d3d62a50208a0948993b13b4a279279cd9dceae54bfb"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-outage-1.json",
+          "sha256": "ff245ef1827a326b5ec7a3c5edc5ce40d3511451ea9ba7b3f6314cd9e82065b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-outage-1.png",
+          "sha256": "c2de01faf2de5d99c3da75dcf84307b17bd0e98751f28cfd948efdb6beea5e28"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-outage-2.json",
+          "sha256": "181a079b45c3f284b379cdb0b4f1c5320051ed55f8be5f4890d63e06daffc166"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-outage-2.png",
+          "sha256": "7377d5b485c2154370c91905784ee68b1b8f9103272b73a3eae5b406c89ce5be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-outage-3.json",
+          "sha256": "039e0b37eddf3946b6d8079fe92af17b46a1a024c4e16593a75d062cf41eb762"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/card-3840-reduce-normal-outage-3.png",
+          "sha256": "b25dc6538312e06d993802626929792b5a1cb75f3bd91242e2e9e438927d8f5e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/demo--demo-1.json",
+          "sha256": "57cc41886c0e695ea0baaf771db7243cb384990670bcd634bdc662b27cf64ccc"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/demo--demo-1.png",
+          "sha256": "01fb2e853da1a05260d5d617cd70136da96043b4081934313060a3632377b50f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/demo--source-mock.json",
+          "sha256": "a27291c93aea0a8139da6e643b1c306ddc1b75adec4753f25052b79539a5de40"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/demo--source-mock.png",
+          "sha256": "ec69b05f90a628d7b32755f2631bd0515b1fbc0f2255715e00547eb3bf5c2959"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/demo--source-public-demo-0.json",
+          "sha256": "80de12a89228c9b5449ce435f0234ac6a03b629288fb090a5fdc8dd23c1caf7f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/demo--source-public-demo-0.png",
+          "sha256": "7889143571dd2fe5544d98b86fde7acc5b0e646ddcafbc8fa6393110f383d30d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/demo-default.json",
+          "sha256": "80de12a89228c9b5449ce435f0234ac6a03b629288fb090a5fdc8dd23c1caf7f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/demo-default.png",
+          "sha256": "414f8d654c94a0739695589b217d190fd20a91233c7b359b9bbb0bb3e05b2ade"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1280-no-preference-long.json",
+          "sha256": "58d77468c3843f4502f95a5818475c3825ba0e9d25d4d1ee267ebd833a45e544"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1280-no-preference-long.png",
+          "sha256": "5756dca12e3819e9f67d934bef68036ed1c263c9921949cd4eee4d2a688e48cb"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1280-no-preference-normal.json",
+          "sha256": "58d77468c3843f4502f95a5818475c3825ba0e9d25d4d1ee267ebd833a45e544"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1280-no-preference-normal.png",
+          "sha256": "49ab8240bf935e8be5459adebad171e89232ad918bb862c1d7181eea1b9c5c57"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1280-reduce-long.json",
+          "sha256": "58d77468c3843f4502f95a5818475c3825ba0e9d25d4d1ee267ebd833a45e544"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1280-reduce-long.png",
+          "sha256": "8cdd61bd97a4961a21e73dff413f825ad5e336837e5ef994f0315ab95e9a4549"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1280-reduce-normal.json",
+          "sha256": "58d77468c3843f4502f95a5818475c3825ba0e9d25d4d1ee267ebd833a45e544"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1280-reduce-normal.png",
+          "sha256": "79d68fd3bc6210299cd56dc38aa88a355cce320ca9a1c876cf8df0aa85920e77"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1792-no-preference-long.json",
+          "sha256": "423324633cfec75c3908ead12f58c3209cefe023018585faa986be910870acb9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1792-no-preference-long.png",
+          "sha256": "437ff604ad748801270a83b4df75c67ad63f3b2a5b69f11312ed18767d072fe0"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1792-no-preference-normal.json",
+          "sha256": "423324633cfec75c3908ead12f58c3209cefe023018585faa986be910870acb9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1792-no-preference-normal.png",
+          "sha256": "c444fa802dc9c97fb75b0fb6408de244a109050c4060b4381d87bde7632df7c3"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1792-reduce-long.json",
+          "sha256": "423324633cfec75c3908ead12f58c3209cefe023018585faa986be910870acb9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1792-reduce-long.png",
+          "sha256": "dee5ea43f0ea96de59e904d98c4bf20cee976eaf8a2d85c5987171ad10e08845"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1792-reduce-normal.json",
+          "sha256": "423324633cfec75c3908ead12f58c3209cefe023018585faa986be910870acb9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1792-reduce-normal.png",
+          "sha256": "a1801c4b4ee1ff1ac9a56cb73b68b3d14e116f0dc50fa126563b844ab6aec22a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1920-no-preference-long.json",
+          "sha256": "cdc06497b12c154904c737c82c6d703f7da92dd8fa1ec5140ef94f56aa3d466c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1920-no-preference-long.png",
+          "sha256": "7801958f1cce3f0cca0a514071c385532d907354620aa9484f9fb01111dd3cff"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1920-no-preference-normal.json",
+          "sha256": "cdc06497b12c154904c737c82c6d703f7da92dd8fa1ec5140ef94f56aa3d466c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1920-no-preference-normal.png",
+          "sha256": "3b4a4de12a2c69e1376d51545a9665022baf0002cac4bb86efbff0980b6949d1"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1920-reduce-long.json",
+          "sha256": "cdc06497b12c154904c737c82c6d703f7da92dd8fa1ec5140ef94f56aa3d466c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1920-reduce-long.png",
+          "sha256": "ae9852ab125d9bdfef952d2e3f19a279f5909641f696becddcd2748d2192a87c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1920-reduce-normal.json",
+          "sha256": "cdc06497b12c154904c737c82c6d703f7da92dd8fa1ec5140ef94f56aa3d466c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-1920-reduce-normal.png",
+          "sha256": "ccf2e08f72f82e3caaece2ef58c3e2e5d41d172e8222a096198eed513f446e7d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-3840-no-preference-long.json",
+          "sha256": "0eaade1eca90d25d2fc62383a5761f72a5c969c4d4c04a3ec0051fa409315615"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-3840-no-preference-long.png",
+          "sha256": "776996b909f963035958574299337dccbbcda6670e7edaf90a03631af8763ff8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-3840-no-preference-normal.json",
+          "sha256": "0eaade1eca90d25d2fc62383a5761f72a5c969c4d4c04a3ec0051fa409315615"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-3840-no-preference-normal.png",
+          "sha256": "628e2f8882e5e339202f146e7b40e5f767399ff082a43cf7ffd23c154ba261ab"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-3840-reduce-long.json",
+          "sha256": "0eaade1eca90d25d2fc62383a5761f72a5c969c4d4c04a3ec0051fa409315615"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-3840-reduce-long.png",
+          "sha256": "5d81b3f52ef7d5f1c0e6b85cea65902f3966a0d758be0515ce6a8c1fafc159fc"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-3840-reduce-normal.json",
+          "sha256": "0eaade1eca90d25d2fc62383a5761f72a5c969c4d4c04a3ec0051fa409315615"
+        },
+        {
+          "path": ".review/p1-6-2/p13-gsap/after/main-3840-reduce-normal.png",
+          "sha256": "b0aafdf9cec40fd1174f2d9ccbb71a72e92754b54438d22fc1c6d4bfbe5063a1"
+        }
+      ]
+    },
+    "legacy": {
+      "records": 116,
+      "violations": 0,
+      "textFailures": 0,
+      "files": [
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-normal-1.json",
+          "sha256": "2da4e180ba7e682f369e182d9eb346e5b1f9a4e771e35b6f99035eec2ce33315"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-normal-1.png",
+          "sha256": "d8eb910ea29b2488fe989ef344d5cc388036969064ae24dd9ae5a837c65f5305"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-normal-2.json",
+          "sha256": "4a77bd5ddb125894dbbf3e26de7186cd4430d13bf083a5818ccba51c3ebdcda8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-normal-2.png",
+          "sha256": "5bc4704307279917489be9f60bb1f4962903b2294d4bce83329a70427c5fe870"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-normal-3.json",
+          "sha256": "37a6a199ceb03e422ceb6fcb3be1d928bef4d4b66a8ee4dcf48424bd6a115e43"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-normal-3.png",
+          "sha256": "107ec814b18720052bd74e7cf19c8bc35df41001eee66b455c8c0d0e085428ae"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-outage-1.json",
+          "sha256": "5e867588d2a0134dbf4392a5e6c4dfade863c0ec55871dd8d499300318a75462"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-outage-1.png",
+          "sha256": "8195b944c690de4d6a7b5fcb7f7fa9a1aa8f518fcb289f0c3e5c1a34a069e7ca"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-outage-2.json",
+          "sha256": "0a907de57c8ac05b162b8b2c93767963aa33f08508fb3f63f40863db5c96c664"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-outage-2.png",
+          "sha256": "53be95704dfff41e5df58f102e62e8b54f11c5ece71b5e4512e91516352f1ea5"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-outage-3.json",
+          "sha256": "9628ee016e6eb31096a6a7f598a9bea1604d86eb08b1a49948708511aa691b4e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-long-outage-3.png",
+          "sha256": "32d876baef278ce6ab8e9fa16c89d0c411fdd6cc65d25268c226fca1ee3c09ab"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-normal-1.json",
+          "sha256": "2da4e180ba7e682f369e182d9eb346e5b1f9a4e771e35b6f99035eec2ce33315"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-normal-1.png",
+          "sha256": "b660b29b6866d9c2c0fae215b62052d12f1a2cd8e5b8605b2519a7a52699421d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-normal-2.json",
+          "sha256": "4a77bd5ddb125894dbbf3e26de7186cd4430d13bf083a5818ccba51c3ebdcda8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-normal-2.png",
+          "sha256": "527f4347795612b318be9762fe62e720b9dd9dbadabac5155ad7ce7381e3a23e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-normal-3.json",
+          "sha256": "37a6a199ceb03e422ceb6fcb3be1d928bef4d4b66a8ee4dcf48424bd6a115e43"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-normal-3.png",
+          "sha256": "085227fcb44a48252a92d4fdf8215cc296f6a1c62b80a3be9c8b2a51525a0958"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-outage-1.json",
+          "sha256": "5e867588d2a0134dbf4392a5e6c4dfade863c0ec55871dd8d499300318a75462"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-outage-1.png",
+          "sha256": "7f266c91ad2499d0703aba527667cb8e21bbca52205ad7405fb9e5b62b72cb09"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-outage-2.json",
+          "sha256": "0a907de57c8ac05b162b8b2c93767963aa33f08508fb3f63f40863db5c96c664"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-outage-2.png",
+          "sha256": "2d904e837cbcdaf34cb32efc59420a27d1d8e3e8bd52138d3267b90e1faa821d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-outage-3.json",
+          "sha256": "9628ee016e6eb31096a6a7f598a9bea1604d86eb08b1a49948708511aa691b4e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-no-preference-normal-outage-3.png",
+          "sha256": "e7d7343e47cb810e7019ed6031876e9c50c5841f126d3849db95104261453dd0"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-normal-1.json",
+          "sha256": "2da4e180ba7e682f369e182d9eb346e5b1f9a4e771e35b6f99035eec2ce33315"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-normal-1.png",
+          "sha256": "7c34eb4fad1568fe18292909de5d9e201685f1385d9491b768f9eb383fb6d2b0"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-normal-2.json",
+          "sha256": "4a77bd5ddb125894dbbf3e26de7186cd4430d13bf083a5818ccba51c3ebdcda8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-normal-2.png",
+          "sha256": "37cb525db3666680abea2ce1437ee3f404884043c75441c741eff3d775f43f07"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-normal-3.json",
+          "sha256": "37a6a199ceb03e422ceb6fcb3be1d928bef4d4b66a8ee4dcf48424bd6a115e43"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-normal-3.png",
+          "sha256": "437afd743773525b3967ec832da05d40e4b1934bdc778ceb145350b23ea05657"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-outage-1.json",
+          "sha256": "5e867588d2a0134dbf4392a5e6c4dfade863c0ec55871dd8d499300318a75462"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-outage-1.png",
+          "sha256": "c24d59507f9a79a7ca88263a6ae921cd3c7c97e46813b5d03a3edeab1ccd7d7f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-outage-2.json",
+          "sha256": "0a907de57c8ac05b162b8b2c93767963aa33f08508fb3f63f40863db5c96c664"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-outage-2.png",
+          "sha256": "287fe780f49ada53203cc7685aca1e39d39d39fb72a498b1552f6cd05261e023"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-outage-3.json",
+          "sha256": "9628ee016e6eb31096a6a7f598a9bea1604d86eb08b1a49948708511aa691b4e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-long-outage-3.png",
+          "sha256": "665c87d93037e5086d4d6e7aaa48e44f00a663bf02d83bf75b834bdaed9f6d0d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-normal-1.json",
+          "sha256": "2da4e180ba7e682f369e182d9eb346e5b1f9a4e771e35b6f99035eec2ce33315"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-normal-1.png",
+          "sha256": "10006c2e34029542c82832b94b0aa9e06dc9a04acd624e239aa36c42160cca94"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-normal-2.json",
+          "sha256": "4a77bd5ddb125894dbbf3e26de7186cd4430d13bf083a5818ccba51c3ebdcda8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-normal-2.png",
+          "sha256": "ac4b333deb6adb98e46a0192812f7fdbde82babc31079dc737c0664098a5c781"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-normal-3.json",
+          "sha256": "37a6a199ceb03e422ceb6fcb3be1d928bef4d4b66a8ee4dcf48424bd6a115e43"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-normal-3.png",
+          "sha256": "0daec15329dbf8e1dd3edb13229e171b70dfd8f7b798abf880cb019c2357e44c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-outage-1.json",
+          "sha256": "5e867588d2a0134dbf4392a5e6c4dfade863c0ec55871dd8d499300318a75462"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-outage-1.png",
+          "sha256": "09467d6c4c519c569143475b36601baa127e35eda7d81f942a84bbc172118169"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-outage-2.json",
+          "sha256": "0a907de57c8ac05b162b8b2c93767963aa33f08508fb3f63f40863db5c96c664"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-outage-2.png",
+          "sha256": "f8c514b25ecd941f66acb9e6b39f98f10fe1f51ea693b143cec04c7c7910c90a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-outage-3.json",
+          "sha256": "9628ee016e6eb31096a6a7f598a9bea1604d86eb08b1a49948708511aa691b4e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1280-reduce-normal-outage-3.png",
+          "sha256": "2889530ecb88246931d5897a878ebf55f3694bcea59fe7f3f0c29c84ab0517b0"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-normal-1.json",
+          "sha256": "b66e00282a38ca8647b2ca6696357afc2437989fa39a2a20b46335b1907f358d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-normal-1.png",
+          "sha256": "87930a294c6fb1b86255696d5064a8625662eb2fa6589c4a17f89bf637f16f7e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-normal-2.json",
+          "sha256": "373186de69845d83a49e277333879acc4542d763a3aaa95a604b814bc8f88a66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-normal-2.png",
+          "sha256": "d37159b11e57d4491da1ec6b20483fd262aa57dd198de44bf46b783ebe76492f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-normal-3.json",
+          "sha256": "fd21d2919166b21933305dd849ab8038e5ffeb56987751d0b5ae9cf3ef31d4be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-normal-3.png",
+          "sha256": "8b7ad1af174339b6e1494822d378ab30f613de24a4d370df5a34c1b41199fc90"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-outage-1.json",
+          "sha256": "414c7263339be3fbe6590446488f3107b517b9b2758804e3357d8bccc817dbaa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-outage-1.png",
+          "sha256": "8642ea997bf3a565853063b876134bb67d7b41131d6d90b2ce424c0cbe4a1f72"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-outage-2.json",
+          "sha256": "c9641e0a5482c0acefe904f3a3dc2939197bbbde6b15742e37d9dbe5ea04151d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-outage-2.png",
+          "sha256": "6c3992abe8290e88639f47d01d34031187e231bc34705e023a84b95b8eb13204"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-outage-3.json",
+          "sha256": "c9f5f1083acd9631adde89dd80c48845ae4b9f971f23ef9b520482c5b8df176e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-long-outage-3.png",
+          "sha256": "8ae5ce7726413b974532f9f00f5bc2b7daee371d22c91be320c212066c000248"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-normal-1.json",
+          "sha256": "b66e00282a38ca8647b2ca6696357afc2437989fa39a2a20b46335b1907f358d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-normal-1.png",
+          "sha256": "59a5fa25f5bf975a15e88934252b7379b4253e4d77111a6e787cd7956455966e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-normal-2.json",
+          "sha256": "373186de69845d83a49e277333879acc4542d763a3aaa95a604b814bc8f88a66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-normal-2.png",
+          "sha256": "40dfd5533b8ec9fa3aa0de87bd9649c698631215616dec439386dac343282868"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-normal-3.json",
+          "sha256": "fd21d2919166b21933305dd849ab8038e5ffeb56987751d0b5ae9cf3ef31d4be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-normal-3.png",
+          "sha256": "ad5041ddee032c6174039977cb11814db47e9652397a30a4264b1ccb02037781"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-outage-1.json",
+          "sha256": "414c7263339be3fbe6590446488f3107b517b9b2758804e3357d8bccc817dbaa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-outage-1.png",
+          "sha256": "d4a5f46a14c046c619c49518788bb394602c291b35b67bd893c0548b085c5a56"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-outage-2.json",
+          "sha256": "c9641e0a5482c0acefe904f3a3dc2939197bbbde6b15742e37d9dbe5ea04151d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-outage-2.png",
+          "sha256": "fdcc54eefcf082ef4f0f975586aab3bf088714a838b53595415a260a451859f4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-outage-3.json",
+          "sha256": "c9f5f1083acd9631adde89dd80c48845ae4b9f971f23ef9b520482c5b8df176e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-no-preference-normal-outage-3.png",
+          "sha256": "ead65d7822e5fe5d01e5815432aeb2cef6d85328cac45f76b182a423e30a434a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-normal-1.json",
+          "sha256": "b66e00282a38ca8647b2ca6696357afc2437989fa39a2a20b46335b1907f358d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-normal-1.png",
+          "sha256": "436a938e60d655554a7193607207e6bc04996d2e9394d90083985fda1022a276"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-normal-2.json",
+          "sha256": "373186de69845d83a49e277333879acc4542d763a3aaa95a604b814bc8f88a66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-normal-2.png",
+          "sha256": "3a7887faac1fbb1abb6c40f1af142260a2162f1f84cffba9953833d3f124cd5a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-normal-3.json",
+          "sha256": "fd21d2919166b21933305dd849ab8038e5ffeb56987751d0b5ae9cf3ef31d4be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-normal-3.png",
+          "sha256": "95fc21fb1e0423e86ce0e874a77ac431abf9f8b67c2e715d71898d87e95b5117"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-outage-1.json",
+          "sha256": "414c7263339be3fbe6590446488f3107b517b9b2758804e3357d8bccc817dbaa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-outage-1.png",
+          "sha256": "c25b94fb8f7819572fff3ac1437235dd7b6c7804e080d98e0fa98be288385488"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-outage-2.json",
+          "sha256": "c9641e0a5482c0acefe904f3a3dc2939197bbbde6b15742e37d9dbe5ea04151d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-outage-2.png",
+          "sha256": "c50faadf015299d8f9bc54e97464041fce609969f4d7498ef223fc7ce630e479"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-outage-3.json",
+          "sha256": "c9f5f1083acd9631adde89dd80c48845ae4b9f971f23ef9b520482c5b8df176e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-long-outage-3.png",
+          "sha256": "17f046f647cb31d79db1b0637a36920791cc64d2d442ab03f58bccf1561ed12c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-normal-1.json",
+          "sha256": "b66e00282a38ca8647b2ca6696357afc2437989fa39a2a20b46335b1907f358d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-normal-1.png",
+          "sha256": "22bb3d4689529674d3c3e1c51baea385a1932e3568c20a823d5baaf494f84e7e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-normal-2.json",
+          "sha256": "373186de69845d83a49e277333879acc4542d763a3aaa95a604b814bc8f88a66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-normal-2.png",
+          "sha256": "a284fc4dc57f00bdcce9cb8916fd59267d6ec65b5a62f7f3bcdf92d3cb17bbae"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-normal-3.json",
+          "sha256": "fd21d2919166b21933305dd849ab8038e5ffeb56987751d0b5ae9cf3ef31d4be"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-normal-3.png",
+          "sha256": "99d9ae38aaacfff97fa2a0e4e4c352a56ac73da5357681cfcf43612e9d086126"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-outage-1.json",
+          "sha256": "414c7263339be3fbe6590446488f3107b517b9b2758804e3357d8bccc817dbaa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-outage-1.png",
+          "sha256": "9fe1d675e2f72be6f416309aff2aba6adc2cbaab3b8e73992bdedcbeedda2e1a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-outage-2.json",
+          "sha256": "c9641e0a5482c0acefe904f3a3dc2939197bbbde6b15742e37d9dbe5ea04151d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-outage-2.png",
+          "sha256": "3e1117966909276cbff859a08ca7fdc82f756106dc855d6c466864a442ad0534"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-outage-3.json",
+          "sha256": "c9f5f1083acd9631adde89dd80c48845ae4b9f971f23ef9b520482c5b8df176e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1792-reduce-normal-outage-3.png",
+          "sha256": "9e6be4adafff5fa7732cc91550e4d69dcbc2ec9fab9736dd514b30ea41749705"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-normal-1.json",
+          "sha256": "5ba78e69e6261df9a145ba4889bbe84831b7cbd6aa12f3b077cb4fea4ac078b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-normal-1.png",
+          "sha256": "a4984e4d434897b804be3bffe702faa98fe9dd1dc414d6d9ea105ce60c04052e"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-normal-2.json",
+          "sha256": "6bb803c3021d85cf7b8569322a700f5d6a66276982a37f5b14d0f9a5c5d18253"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-normal-2.png",
+          "sha256": "10db54cda72fef06c0a8107112d658cc7b11407c211df6672c60ff8c7eb3e2fd"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-normal-3.json",
+          "sha256": "5da37754d9ff8cc56fd626346f9d6504476cf65a21198aebbbfe1c618add5446"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-normal-3.png",
+          "sha256": "8d5f9544bd0c9966ef511e28e636e6f4a503e55d9cfcd59d655bc3d171b382a5"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-outage-1.json",
+          "sha256": "541b62743b3d37283ab01e92332679c37a25cdb6b03a72cdd12ee8013adaf72b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-outage-1.png",
+          "sha256": "0e9b093be24cb236cf2a252efa324a1ffe809c866330f09e3c5ec96ccbb48201"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-outage-2.json",
+          "sha256": "495c842ca44b056153cc2e55ca9b68f6050dab3ab536e5da9e2214d09b9b1b11"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-outage-2.png",
+          "sha256": "7300bef2b6d90cd6f7b050e87ac554f60b6f815e2be63e395f7d2b9583446438"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-outage-3.json",
+          "sha256": "a260894d8d5e4175500a2f763c35f70ca5031827db68bc93d500b74b1906f233"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-long-outage-3.png",
+          "sha256": "6a7760a069167e852e6aa9262add7ae62ba7ce16c20d7b3c6c72d5512bef11e0"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-normal-1.json",
+          "sha256": "5ba78e69e6261df9a145ba4889bbe84831b7cbd6aa12f3b077cb4fea4ac078b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-normal-1.png",
+          "sha256": "55f7256e7e21d700b75af2d60fbfeaf8faa55fcd43593178d78ad18709e0939c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-normal-2.json",
+          "sha256": "6bb803c3021d85cf7b8569322a700f5d6a66276982a37f5b14d0f9a5c5d18253"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-normal-2.png",
+          "sha256": "5b2af6a2a41f14ed97ea2ed36c1b93d92e02d6f4f0f7409c5d75eb8a26e5a451"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-normal-3.json",
+          "sha256": "5da37754d9ff8cc56fd626346f9d6504476cf65a21198aebbbfe1c618add5446"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-normal-3.png",
+          "sha256": "25b60516b2c8ffc765963466f77feb7589b7d54296a6dbb53be9335854dba196"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-outage-1.json",
+          "sha256": "541b62743b3d37283ab01e92332679c37a25cdb6b03a72cdd12ee8013adaf72b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-outage-1.png",
+          "sha256": "6faa6714e2e17c42cc0bfc5fee06f2cbb0641ed2fe4e54082dd7c4cb457126c9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-outage-2.json",
+          "sha256": "495c842ca44b056153cc2e55ca9b68f6050dab3ab536e5da9e2214d09b9b1b11"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-outage-2.png",
+          "sha256": "9e54f4d5373e2b917fc1d46fd168e5ab4dc7a3197c41692ed32e3d3c6d156b88"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-outage-3.json",
+          "sha256": "a260894d8d5e4175500a2f763c35f70ca5031827db68bc93d500b74b1906f233"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-no-preference-normal-outage-3.png",
+          "sha256": "47ba3a69106b21f8e46f1ec39969de411401d4b872825c34b117a4150c174573"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-normal-1.json",
+          "sha256": "5ba78e69e6261df9a145ba4889bbe84831b7cbd6aa12f3b077cb4fea4ac078b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-normal-1.png",
+          "sha256": "23ec61d150b02d8038e9f4b67c2f81aac9ec54b5cfb877497fb1c0a390d7b47c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-normal-2.json",
+          "sha256": "6bb803c3021d85cf7b8569322a700f5d6a66276982a37f5b14d0f9a5c5d18253"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-normal-2.png",
+          "sha256": "36ebe8180b7af4788c2d22d0e5d2daffcabbfd60cf916c9cddca037fa45b48e4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-normal-3.json",
+          "sha256": "5da37754d9ff8cc56fd626346f9d6504476cf65a21198aebbbfe1c618add5446"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-normal-3.png",
+          "sha256": "f9caf684c715284a4ceb774e74f50bcffbc50472960d71cd87467204bc4a552a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-outage-1.json",
+          "sha256": "541b62743b3d37283ab01e92332679c37a25cdb6b03a72cdd12ee8013adaf72b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-outage-1.png",
+          "sha256": "0ab9eb01659cc6da3133fbe960127efef803e8df8b688a60cc8ca470d4dd8fa4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-outage-2.json",
+          "sha256": "495c842ca44b056153cc2e55ca9b68f6050dab3ab536e5da9e2214d09b9b1b11"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-outage-2.png",
+          "sha256": "61e68db84bc38cb4fad4020e19c3f1bc931453ee0c25bba6bc18b3f50fe37815"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-outage-3.json",
+          "sha256": "a260894d8d5e4175500a2f763c35f70ca5031827db68bc93d500b74b1906f233"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-long-outage-3.png",
+          "sha256": "a052b9bc6f1d5a22ea1961fb5b5fe05a5f8c1b6d33c34842c91da4e984cafaee"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-normal-1.json",
+          "sha256": "5ba78e69e6261df9a145ba4889bbe84831b7cbd6aa12f3b077cb4fea4ac078b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-normal-1.png",
+          "sha256": "e02ecaddfe18ec38a10e05d4daae5591a621fa2f3196d4990d95ca1429322431"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-normal-2.json",
+          "sha256": "6bb803c3021d85cf7b8569322a700f5d6a66276982a37f5b14d0f9a5c5d18253"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-normal-2.png",
+          "sha256": "d80234413a6b8c276bbe585846947de30513bc2cf42f5f59ffefb741ca8f8018"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-normal-3.json",
+          "sha256": "5da37754d9ff8cc56fd626346f9d6504476cf65a21198aebbbfe1c618add5446"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-normal-3.png",
+          "sha256": "a0ab397b140124e38f659acf05f16429d1f8643a7fc3d5017781911dd60d6aa1"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-outage-1.json",
+          "sha256": "541b62743b3d37283ab01e92332679c37a25cdb6b03a72cdd12ee8013adaf72b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-outage-1.png",
+          "sha256": "097d59c8215d7abdfc249d7be875c32bfd00451c10b5d7b8a3251d4bb42e7892"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-outage-2.json",
+          "sha256": "495c842ca44b056153cc2e55ca9b68f6050dab3ab536e5da9e2214d09b9b1b11"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-outage-2.png",
+          "sha256": "8377cdcb1dbe0709dd1edbedd8ee9692894ea2ad8ab904d9e40847d99f59fd00"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-outage-3.json",
+          "sha256": "a260894d8d5e4175500a2f763c35f70ca5031827db68bc93d500b74b1906f233"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-1920-reduce-normal-outage-3.png",
+          "sha256": "c695937dee3d506fb07e745442ce65540df844b67eebba1f1816464f7445b070"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-normal-1.json",
+          "sha256": "899926b6e8ba89eaf21d344cfde648838be57a1e4bc10c58f8768ea4bca605ec"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-normal-1.png",
+          "sha256": "3226178fe4f3ec287da2e53e48b9a550e2986524af7b3d5a865991d4b46952a4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-normal-2.json",
+          "sha256": "43eb1aa6e59b6075d716e6fb4e06898e24380db451b640206d4995240186afde"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-normal-2.png",
+          "sha256": "e6e1ce6a334ec1c3cb4a2715c8e1a9d657407b00a096b48f8eae82fbd69c912b"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-normal-3.json",
+          "sha256": "86591856fd3ab38d959398dc010d4882dd15b88ae26ee3010f33ebc34e447db2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-normal-3.png",
+          "sha256": "aea61d7c389efbb3bd0d517b3316a204f04fa42313056d384f62daf090708122"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-outage-1.json",
+          "sha256": "ff245ef1827a326b5ec7a3c5edc5ce40d3511451ea9ba7b3f6314cd9e82065b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-outage-1.png",
+          "sha256": "f38b351ba89e5b40c3697029f40f5acb56556196a2c5d7e042ab864e1e987357"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-outage-2.json",
+          "sha256": "181a079b45c3f284b379cdb0b4f1c5320051ed55f8be5f4890d63e06daffc166"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-outage-2.png",
+          "sha256": "a923bd6b759d3dd4d6e0fd788249ddd454dab61c3babb6a9a7efb3e575146848"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-outage-3.json",
+          "sha256": "039e0b37eddf3946b6d8079fe92af17b46a1a024c4e16593a75d062cf41eb762"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-long-outage-3.png",
+          "sha256": "499224beac5390183ee3b7639ebf3e1c9aca7c23bb3664fd3348bf5edfa3186a"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-normal-1.json",
+          "sha256": "899926b6e8ba89eaf21d344cfde648838be57a1e4bc10c58f8768ea4bca605ec"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-normal-1.png",
+          "sha256": "1477bca8c46d23bb28b46e0391e71a94e892c35479f0c5c1de86d4ed9c6a9f7f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-normal-2.json",
+          "sha256": "43eb1aa6e59b6075d716e6fb4e06898e24380db451b640206d4995240186afde"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-normal-2.png",
+          "sha256": "6141ca73b0456ea77cee87cc7998b47b6139988aaa5bbf4374c8ffc73a8701d6"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-normal-3.json",
+          "sha256": "86591856fd3ab38d959398dc010d4882dd15b88ae26ee3010f33ebc34e447db2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-normal-3.png",
+          "sha256": "eae8b7a5b9ecf15017389ae1790a96340654e703c80d09ad3690dc6f71e2c65d"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-outage-1.json",
+          "sha256": "ff245ef1827a326b5ec7a3c5edc5ce40d3511451ea9ba7b3f6314cd9e82065b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-outage-1.png",
+          "sha256": "a329e862564a4accf3acdec7f7c9a651d773bf41c359bdafa992c8d3a43899fe"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-outage-2.json",
+          "sha256": "181a079b45c3f284b379cdb0b4f1c5320051ed55f8be5f4890d63e06daffc166"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-outage-2.png",
+          "sha256": "61623679b3ae61558a1f06bdb39281e1fd67de94a4b84b1ec90616e0a9070ac0"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-outage-3.json",
+          "sha256": "039e0b37eddf3946b6d8079fe92af17b46a1a024c4e16593a75d062cf41eb762"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-no-preference-normal-outage-3.png",
+          "sha256": "db5a6c01a5e9b874d872168ecf77fb37c7cc8d3701aa19eb08730ae24959b469"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-normal-1.json",
+          "sha256": "899926b6e8ba89eaf21d344cfde648838be57a1e4bc10c58f8768ea4bca605ec"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-normal-1.png",
+          "sha256": "926fe397a66316ee634542ff10dd47298b39bed1d5449dbcb6fccddc44de3713"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-normal-2.json",
+          "sha256": "43eb1aa6e59b6075d716e6fb4e06898e24380db451b640206d4995240186afde"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-normal-2.png",
+          "sha256": "310cafa6805ca41599a29e68c02c8f46bfa09e0fe9d5b2a270ffd1c75c115d66"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-normal-3.json",
+          "sha256": "86591856fd3ab38d959398dc010d4882dd15b88ae26ee3010f33ebc34e447db2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-normal-3.png",
+          "sha256": "3e573fa6c7f4c108b09ee771d9238d7e94b0bc2f8f43f633e429ef36876200d8"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-outage-1.json",
+          "sha256": "ff245ef1827a326b5ec7a3c5edc5ce40d3511451ea9ba7b3f6314cd9e82065b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-outage-1.png",
+          "sha256": "087cf7dfd369c7739cc4d8f35240e6e2535c23ad5777c2c081fe4e6edc72c447"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-outage-2.json",
+          "sha256": "181a079b45c3f284b379cdb0b4f1c5320051ed55f8be5f4890d63e06daffc166"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-outage-2.png",
+          "sha256": "0a163ef95e65bf77bed4be06a7c4fb7f1639fa8a439ea78632ff7cfefb51a215"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-outage-3.json",
+          "sha256": "039e0b37eddf3946b6d8079fe92af17b46a1a024c4e16593a75d062cf41eb762"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-long-outage-3.png",
+          "sha256": "44b8e339d348c7a247dfba440f963b671a13d614314c39685d11fed4bb922329"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-normal-1.json",
+          "sha256": "899926b6e8ba89eaf21d344cfde648838be57a1e4bc10c58f8768ea4bca605ec"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-normal-1.png",
+          "sha256": "89b3edfe19d1f7bd661189cd06d35fcb3918c64bedd12bd4f7945ada23378273"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-normal-2.json",
+          "sha256": "43eb1aa6e59b6075d716e6fb4e06898e24380db451b640206d4995240186afde"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-normal-2.png",
+          "sha256": "712260a27581c23acb5a4cd1aca30c56dad4f46ffb175e4efff9a14b3dcb727c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-normal-3.json",
+          "sha256": "86591856fd3ab38d959398dc010d4882dd15b88ae26ee3010f33ebc34e447db2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-normal-3.png",
+          "sha256": "a275d908537e5640ae5a689d0ba10b222a8c2f5aaaf4e4f415d6348da89edce4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-outage-1.json",
+          "sha256": "ff245ef1827a326b5ec7a3c5edc5ce40d3511451ea9ba7b3f6314cd9e82065b4"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-outage-1.png",
+          "sha256": "5c85bb9206a22e2ae8d0b686b97dfb1b7320974a66b96a2efe6497c4131c5118"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-outage-2.json",
+          "sha256": "181a079b45c3f284b379cdb0b4f1c5320051ed55f8be5f4890d63e06daffc166"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-outage-2.png",
+          "sha256": "7e37500a3c81dd15c26dec516ca7a0d69733e699fea5c9eadf2c5878b03e9d94"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-outage-3.json",
+          "sha256": "039e0b37eddf3946b6d8079fe92af17b46a1a024c4e16593a75d062cf41eb762"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/card-3840-reduce-normal-outage-3.png",
+          "sha256": "23d83973f45263c859ff35cffbff5ff69a421090a0d8cf5706f8e6114525a620"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/demo--demo-1.json",
+          "sha256": "57cc41886c0e695ea0baaf771db7243cb384990670bcd634bdc662b27cf64ccc"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/demo--demo-1.png",
+          "sha256": "57b7a4d72d5c50d61925a32cbba5a837a2197571e7714e756202db270049ad44"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/demo--source-mock.json",
+          "sha256": "a27291c93aea0a8139da6e643b1c306ddc1b75adec4753f25052b79539a5de40"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/demo--source-mock.png",
+          "sha256": "df875c75c0b38b0036f8ec8251861e3cdfd87ea6ce3ad30108008673068562da"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/demo--source-public-demo-0.json",
+          "sha256": "80de12a89228c9b5449ce435f0234ac6a03b629288fb090a5fdc8dd23c1caf7f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/demo--source-public-demo-0.png",
+          "sha256": "81496b36174432c71f6063e212df7abcbf32cf91d869b118bc125e6723ebd7fe"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/demo-default.json",
+          "sha256": "80de12a89228c9b5449ce435f0234ac6a03b629288fb090a5fdc8dd23c1caf7f"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/demo-default.png",
+          "sha256": "893b28b0d1867866f4ca822c6033a16e8de4bf5ba62f0eb29f2ee241c4614844"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1280-no-preference-long.json",
+          "sha256": "58d77468c3843f4502f95a5818475c3825ba0e9d25d4d1ee267ebd833a45e544"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1280-no-preference-long.png",
+          "sha256": "9ee92dad27b97eaceac68bc9a83e45daabfe6c136b3d34354ba32d7148928937"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1280-no-preference-normal.json",
+          "sha256": "58d77468c3843f4502f95a5818475c3825ba0e9d25d4d1ee267ebd833a45e544"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1280-no-preference-normal.png",
+          "sha256": "df458880c695e3b3ed3d46fdf0972e758ad43f69c3ad14a98d45a2e7099f3592"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1280-reduce-long.json",
+          "sha256": "58d77468c3843f4502f95a5818475c3825ba0e9d25d4d1ee267ebd833a45e544"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1280-reduce-long.png",
+          "sha256": "b8801b77b8207eee50e0df06b04f052dbe80ebd63e25bec4d818d9d5132308b9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1280-reduce-normal.json",
+          "sha256": "58d77468c3843f4502f95a5818475c3825ba0e9d25d4d1ee267ebd833a45e544"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1280-reduce-normal.png",
+          "sha256": "4fb0e24959fefa4f79e1a4df59675f0a9333353b512789376cd4777ae2d98e86"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1792-no-preference-long.json",
+          "sha256": "423324633cfec75c3908ead12f58c3209cefe023018585faa986be910870acb9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1792-no-preference-long.png",
+          "sha256": "fd58edd9ef32802f01b78c3df4b61b1e1c5360ecb32559c3639137fdd2368b37"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1792-no-preference-normal.json",
+          "sha256": "423324633cfec75c3908ead12f58c3209cefe023018585faa986be910870acb9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1792-no-preference-normal.png",
+          "sha256": "ca685c83bffc90071bf7bf6a3691a5baf346758b8284231e2407ca8a971143f1"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1792-reduce-long.json",
+          "sha256": "423324633cfec75c3908ead12f58c3209cefe023018585faa986be910870acb9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1792-reduce-long.png",
+          "sha256": "2a3209bc245b2c52ea575ea2b7352dda917bb45e4880e620409a4734346d91fa"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1792-reduce-normal.json",
+          "sha256": "423324633cfec75c3908ead12f58c3209cefe023018585faa986be910870acb9"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1792-reduce-normal.png",
+          "sha256": "868a084e57ef6a99493fdcce9cb9fd879aca8eca6599e38a84c32434954fef31"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1920-no-preference-long.json",
+          "sha256": "cdc06497b12c154904c737c82c6d703f7da92dd8fa1ec5140ef94f56aa3d466c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1920-no-preference-long.png",
+          "sha256": "79a64fc01ef215b251049e99cf7d1e1e63e3ea427655d9133d73ddec969acb15"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1920-no-preference-normal.json",
+          "sha256": "cdc06497b12c154904c737c82c6d703f7da92dd8fa1ec5140ef94f56aa3d466c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1920-no-preference-normal.png",
+          "sha256": "6f6975ede2fd59cc3ca336271f53bf1d12dda750c2806735bb43395525d075af"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1920-reduce-long.json",
+          "sha256": "cdc06497b12c154904c737c82c6d703f7da92dd8fa1ec5140ef94f56aa3d466c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1920-reduce-long.png",
+          "sha256": "4440b53732f16c82e744497298d6f2c287708f782a8f817332b0f9df302c5828"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1920-reduce-normal.json",
+          "sha256": "cdc06497b12c154904c737c82c6d703f7da92dd8fa1ec5140ef94f56aa3d466c"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-1920-reduce-normal.png",
+          "sha256": "bd5ac279994798eb4571f0e21bfb7076aef9f42dea6d1250a33489776bc5f5ef"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-3840-no-preference-long.json",
+          "sha256": "0eaade1eca90d25d2fc62383a5761f72a5c969c4d4c04a3ec0051fa409315615"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-3840-no-preference-long.png",
+          "sha256": "211d13dd2feb34155d55a6e6fd34e3c8ed908f52816e68999195880bd35a16a2"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-3840-no-preference-normal.json",
+          "sha256": "0eaade1eca90d25d2fc62383a5761f72a5c969c4d4c04a3ec0051fa409315615"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-3840-no-preference-normal.png",
+          "sha256": "d0f6217ff21663ee0f10416abb03ba3f022a0c0fd0f866434cbc369812748948"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-3840-reduce-long.json",
+          "sha256": "0eaade1eca90d25d2fc62383a5761f72a5c969c4d4c04a3ec0051fa409315615"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-3840-reduce-long.png",
+          "sha256": "d57a20a891b432ba0f0df68c46fba2de5811d290276bf498ed31f017d904aeea"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-3840-reduce-normal.json",
+          "sha256": "0eaade1eca90d25d2fc62383a5761f72a5c969c4d4c04a3ec0051fa409315615"
+        },
+        {
+          "path": ".review/p1-6-2/p13-legacy/after/main-3840-reduce-normal.png",
+          "sha256": "1cb29c40fcbd02fc41e48785d0780ea194725e3d27d4e686afcdc51ff0ad56b9"
+        }
+      ]
+    }
+  },
+  "rectTolerancePx": 0.5,
+  "rectDifferencesBeyondTolerance": [],
+  "onlyInGsap": [],
+  "onlyInLegacy": []
+}

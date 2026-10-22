@@ -1,0 +1,79 @@
+{
+  "build": {
+    "createdAt": "2026-10-22T00:15:48.522550+00:00",
+    "buildId": "MeX7Jq5OSQjb09zYkxmTL",
+    "base": "5ac9cff6398839d776ee5f92ac4fc34da92c9b3b",
+    "branch": "codex/nexus-p1-6-2-gsap-compatibility",
+    "productFiles": {
+      "src/components/overlay/AnswerCard.tsx": "44742c1e49b41d63b9d4ba080190646fb7519d20d7271a122e893fba5c8d1b00",
+      "src/components/overlay/OverlayStage.tsx": "cac24e215c5bf6d252fdfd28a970ef94336907b718d2f64968f41c568eb4cee8",
+      "src/components/overlay/sentence-announcements.ts": "1512d5caca627fc257829cefe4fc1195d5f305932e32bb854fa33a5ca231f1e3"
+    },
+    "testSequence": [
+      "GSAP complete 144",
+      "Legacy complete 144",
+      "P1.6 + P1.6.1 + P1.6.2 complete 35"
+    ],
+    "noProductEditsAfterThisSnapshot": true
+  },
+  "reports": {
+    "gsap-regression": {
+      "stats": {
+        "startTime": "2026-10-22T00:15:18.790Z",
+        "duration": 648042.4600000001,
+        "expected": 143,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "nonExpected": [
+        {
+          "title": "overlay RAF callback CPU increment stays within 8ms at both resolutions",
+          "file": "voice-cards.spec.ts",
+          "status": "unexpected",
+          "attempts": [
+            "failed"
+          ]
+        }
+      ],
+      "sha256": "80d611d291c5a2cb49d4f248b4c6194c19735ce59a8449fcd165d9f4865e08ef"
+    },
+    "legacy-regression": {
+      "stats": {
+        "startTime": "2026-10-22T00:26:15.038Z",
+        "duration": 652184.2239999999,
+        "expected": 144,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "nonExpected": [],
+      "sha256": "01c1729db6a1e02de8c6825b3af85b176af237af41fa5988fe1401c01e4238da"
+    },
+    "special": {
+      "stats": {
+        "startTime": "2026-10-22T01:05:17.391Z",
+        "duration": 255318.485,
+        "expected": 35,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "nonExpected": [],
+      "sha256": "959765aee5050ee511e36acc97406b5e98206a1d144f1fde37847dd1288dff9a"
+    },
+    "legacy-prefinal": {
+      "stats": {
+        "startTime": "2026-10-22T00:02:06.027Z",
+        "duration": 650792.703,
+        "expected": 144,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "nonExpected": [],
+      "sha256": "b5d74798996db5b441af1cf90ba2beb75c9ac4d7ef35957650cf67bf68e99096"
+    }
+  },
+  "protectedSourceFilesUnchanged": 85
+}

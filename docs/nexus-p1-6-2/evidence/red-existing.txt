@@ -1,0 +1,83 @@
+[WebServer] (node:24845) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24846) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:24848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions (11.6s)
+(node:25317) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence (5.6s)
+
+
+  1) e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 8
+    Received:    9.5
+
+      155 |     const p95=(values:number[])=>values.sort((a,b)=>a-b)[Math.floor(values.length*.95)]??0;
+      156 |     const record={viewport,metric:"summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",baselineFrames:baseline.length,overlayFrames:active.length,baselineP95:p95(baseline),overlayP95:p95(active),incrementP95:Math.max(0,p95(active)-p95(baseline))};
+    > 157 |     evidence.push({performance:record}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);
+          |                                                                                                                ^
+      158 |   }
+      159 | });
+      160 |
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/voice-cards.spec.ts:157:112
+
+    Error Context: .review/p1-6-2/red-existing/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md
+
+    Error Context: .review/p1-6-2/red-existing/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-2/red-existing/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-2/red-existing/voice-cards-overlay-RAF-ca-057cb-hin-8ms-at-both-resolutions/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence ──
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.overlay-card [aria-live]')
+    Expected: "第一句完整。"
+    Received: "第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.overlay-card [aria-live]') with timeout 5000ms
+      - waiting for locator('.overlay-card [aria-live]')
+        14 × locator resolved to <p class="sr-only" aria-live="polite" aria-atomic="true">第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。</p>
+           - unexpected value "第一句完整。第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。"
+
+
+      199 |   hub.broadcast({type:"answer.delta",at:Date.now(),seq:0,text:card.spoken,full:true,card});
+      200 |   hub.broadcast({type:"state.change",at:Date.now(),from:"thinking",to:"answering",turn:0});
+    > 201 |   await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第一句完整。");
+          |                                                           ^
+      202 |   await expect(page.locator(".overlay-card [aria-live]")).toHaveText("第二句话包含更多的内容，需要等待完整出现后才能播报给读屏用户。");
+      203 | });
+      204 |
+        at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/voice-cards.spec.ts:201:59
+
+    Error Context: .review/p1-6-2/red-existing/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/error-context.md
+
+    Error Context: .review/p1-6-2/red-existing/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .review/p1-6-2/red-existing/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .review/p1-6-2/red-existing/voice-cards-normal-motion--4c916-nnounces-a-partial-sentence/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    e2e/voice-cards.spec.ts:131:1 › overlay RAF callback CPU increment stays within 8ms at both resolutions
+    e2e/voice-cards.spec.ts:195:1 › normal motion live region never announces a partial sentence ───

@@ -1,0 +1,21 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 prebuild /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2
+> node scripts/prepare-voice-assets.mjs
+
+
+> dachuan-crm-visual-dashboard@0.1.0 build /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2
+> next build
+
+▲ Next.js 16.3.6 (Turbopack)
+✓ Running next.config.ts took 26ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 964ms
+  Running TypeScript ...
+e2e/p1-6-2.spec.ts(34,15): error TS2352: Conversion of type 'Window & typeof globalThis' to type 'NoticesWindow' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'notices' is missing in type 'Window & typeof globalThis' but required in type '{ notices: { text: string; at: number; }[]; }'.
+e2e/p1-6-2.spec.ts(51,66): error TS2352: Conversion of type 'Window & typeof globalThis' to type 'NoticesWindow' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'notices' is missing in type 'Window & typeof globalThis' but required in type '{ notices: { text: string; at: number; }[]; }'.
+Failed to type check.
+
+ ELIFECYCLE  Command failed with exit code 1.

@@ -1,0 +1,849 @@
+diff --git a/e2e/p1-6-2-performance.config.ts b/e2e/p1-6-2-performance.config.ts
+new file mode 100644
+index 0000000..633e320
+--- /dev/null
++++ b/e2e/p1-6-2-performance.config.ts
+@@ -0,0 +1,13 @@
++import { defineConfig } from "@playwright/test";
++import path from "node:path";
++const root = process.env.P162_PERF_ROOT ?? path.resolve(".review/p1-6-2/performance");
++const label = process.env.P162_PERF_LABEL ?? "control";
++export default defineConfig({ testDir: ".", testMatch: "p1-6-2-performance.spec.ts", workers: 1, fullyParallel: false, timeout: 60000,
++  outputDir: path.join(root, label, "playwright"), reporter: [["list"], ["json", { outputFile: path.join(root, label, "results.json") }]],
++  use: { browserName: "chromium", baseURL: "http://127.0.0.1:3072", viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1, reducedMotion: "no-preference", timezoneId: "Asia/Shanghai" },
++  webServer: [
++    { cwd: process.cwd(), command: "node e2e/nexus-fixture-server.mjs", url: "http://127.0.0.1:3199", reuseExistingServer: false },
++    { cwd: process.cwd(), command: "node scripts/p1-5-c/local-server.mjs --port 3072", url: "http://127.0.0.1:3072/screen/sales", reuseExistingServer: false,
++      env: { XIAOCHUAN_MOTION_PERMISSION: "local-gsap", TZ: "Asia/Shanghai", SCREEN_PLATFORM_URL: "http://127.0.0.1:3199", SCREEN_PUBLIC_ID: "fixture-only" }, timeout: 60000 },
++  ],
++});
+diff --git a/e2e/p1-6-2-performance.spec.ts b/e2e/p1-6-2-performance.spec.ts
+new file mode 100644
+index 0000000..4986308
+--- /dev/null
++++ b/e2e/p1-6-2-performance.spec.ts
+@@ -0,0 +1,70 @@
++/* eslint-disable @typescript-eslint/no-explicit-any -- isolated timing probe, not application APIs */
++import { test, expect } from "@playwright/test";
++import { mkdirSync, writeFileSync } from "node:fs";
++import path from "node:path";
++import { startVoiceHub, type VoiceHubServer } from "../services/voice-orchestrator/src/ws/ws-server";
++import { task12Card } from "./task12-fixtures";
++import { PARTICLE_BUDGET, DPR_CAP, RESOLUTION_SCALE } from "../src/lib/voice/params";
++let hub: VoiceHubServer;
++test.beforeAll(async () => { hub = await startVoiceHub({ host: "127.0.0.1", port: 0, onMessage: (conn, raw) => { if (JSON.parse(raw).type === "console.hello") conn.role = "screen"; } }); });
++test.afterAll(async () => { await hub.close(); });
++const root = process.env.P162_PERF_ROOT ?? path.resolve(".review/p1-6-2/performance"), label = process.env.P162_PERF_LABEL ?? "control";
++for (const round of [1, 2, 3].filter(value => !process.env.P162_ROUND || value === Number(process.env.P162_ROUND))) for (const width of [1920, 1280]) for (const mode of (round % 2 ? ["legacy", "gsap"] : ["gsap", "legacy"])) {
++  test(`${round} ${width} ${mode} matched phase`, async ({ browser }) => {
++    const context = await browser.newContext({ viewport: { width, height: width * 9 / 16 }, deviceScaleFactor: 1, reducedMotion: "no-preference" });
++    await context.addInitScript(() => {
++      let seed = 713; Math.random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
++      const native = requestAnimationFrame.bind(window);
++      const probe: any = { callbacks: [], frames: [], visualCompleteAt: null, registrations: [] };
++      Object.assign(window, { __p162Raf: probe });
++      window.requestAnimationFrame = callback => {
++        const at = performance.now();
++        const id = native(timestamp => {
++          const start = performance.now();
++          try { callback(timestamp); } finally { probe.callbacks.push({ timestamp, start, ms: performance.now() - start, queueMs: start - timestamp }); }
++        });
++        probe.registrations.push(performance.now() - at); return id;
++      };
++      let last = 0;
++      const observe = (now: number) => { if (last) probe.frames.push({ at: now, ms: now - last }); last = now;
++        if (!probe.visualCompleteAt && document.querySelector('.overlay-card-body[data-spoken-complete="true"]')) probe.visualCompleteAt = performance.now();
++        native(observe);
++      }; native(observe);
++    });
++    const page = await context.newPage();
++    await page.goto(`/screen/sales?voiceLive=1&xiaochuanMotion=${mode}&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
++    await expect.poll(() => hub.counts().screens).toBe(1); await page.waitForTimeout(1000);
++    const cdp = await context.newCDPSession(page); await cdp.send("Performance.enable");
++    const metrics = async () => Object.fromEntries((await cdp.send("Performance.getMetrics")).metrics.map(item => [item.name, item.value]));
++    const windows: any[] = [];
++    const sample = async (name: string, duration: number) => {
++      const before = await metrics(), start = await page.evaluate(() => performance.now());
++      await page.waitForTimeout(duration); const end = await page.evaluate(() => performance.now()), after = await metrics();
++      windows.push({ name, start, end, before, after });
++    };
++    await sample("baseline", 2500);
++    hub.broadcast({ type: "session.start", at: Date.now(), sessionId: "p162-perf" });
++    hub.broadcast({ type: "state.change", at: Date.now(), from: "waking", to: "listening", turn: 0 });
++    await expect(page.locator(".overlay-root")).toHaveAttribute("data-motion", mode);
++    if (process.env.P162_EARLY !== "1") await page.waitForTimeout(1000);
++    const fixture = task12Card("region_shipments", "normal");
++    hub.broadcast({ type: "state.change", at: Date.now(), from: "listening", to: "thinking", turn: 0 });
++    hub.broadcast({ type: "answer.delta", at: Date.now(), seq: 0, text: fixture.spoken, full: true, card: fixture });
++    hub.broadcast({ type: "state.change", at: Date.now(), from: "thinking", to: "answering", turn: 0 });
++    await expect(page.locator(".overlay-card")).toHaveCount(1);
++    const launchAt = Number(await page.locator(".overlay-card").getAttribute("data-launch-at"));
++    await sample("transient", 2500);
++    const steadyAt = launchAt + Math.max(3500, 650 + fixture.spoken.length / 26 * 1000 + 1000);
++    await page.waitForTimeout(Math.max(0, steadyAt - await page.evaluate(() => performance.now())));
++    await sample("settled", 2500);
++    const raw = await page.evaluate(() => ({ raf: (window as any).__p162Raf, profile: (window as any).__p162Profile ?? null,
++      dpr: devicePixelRatio, canvas: [...document.querySelectorAll("canvas")].map(c => ({ width: c.width, height: c.height })) }));
++    expect(Boolean(raw.profile)).toBe(process.env.P162_EXPECT_PROFILE === "1");
++    const session = await browser.newBrowserCDPSession(); const gpu = await session.send("SystemInfo.getInfo"); await session.detach();
++    const file = path.join(root, label, `r${round}-${width}-${mode}.json`); mkdirSync(path.dirname(file), { recursive: true });
++    writeFileSync(file, JSON.stringify({ round, width, mode, label, launchAt, earlyAnswer: process.env.P162_EARLY === "1", fixture, seed: 713, windows,
++      browser: browser.version(), gpu, constants: { PARTICLE_BUDGET, DPR_CAP, RESOLUTION_SCALE, tickerCapHz: 60 }, raw }));
++    expect(raw.raf.callbacks.filter((sample: any) => sample.start >= windows[2].start && sample.start < windows[2].end).length).toBeGreaterThan(30);
++    await context.close();
++  });
++}
+diff --git a/e2e/p1-6-2-regression.config.ts b/e2e/p1-6-2-regression.config.ts
+new file mode 100644
+index 0000000..9930d36
+--- /dev/null
++++ b/e2e/p1-6-2-regression.config.ts
+@@ -0,0 +1,10 @@
++import { defineConfig } from "@playwright/test";
++import base from "./p1-6-1-regression.config";
++import path from "node:path";
++const label = process.env.P162_REPORT ?? `${process.env.P161_OVERLAY_MODE ?? "legacy"}-regression`;
++const evidence = process.env.P162_EVIDENCE_ROOT ?? path.resolve("docs/nexus-p1-6-2/evidence");
++process.env.P162_CARD_EVIDENCE_DIR = path.resolve(`.review/p1-6-2/card-evidence/${label}`);
++export default defineConfig({ ...base,
++  outputDir: path.resolve(`.review/p1-6-2/${label}`),
++  reporter: [["list"], ["json", { outputFile: path.join(evidence, `${label}.json`) }]],
++});
+diff --git a/e2e/p1-6-2.config.ts b/e2e/p1-6-2.config.ts
+new file mode 100644
+index 0000000..8fb1477
+--- /dev/null
++++ b/e2e/p1-6-2.config.ts
+@@ -0,0 +1,9 @@
++import { defineConfig } from "@playwright/test";
++import base from "./p1-6-1.config";
++import path from "node:path";
++process.env.P16_OUTPUT_DIR = ".review/p1-6-2/p16";
++const report = process.env.P162_SPECIAL_REPORT ?? "special";
++export default defineConfig({ ...base, testMatch: ["p1-6.spec.ts", "p1-6-1.spec.ts", "p1-6-2.spec.ts"],
++  outputDir: path.resolve(`.review/p1-6-2/${report}`),
++  reporter: [["list"], ["json", { outputFile: path.resolve(`docs/nexus-p1-6-2/evidence/${report}.json`) }]],
++});
+diff --git a/e2e/p1-6-2.spec.ts b/e2e/p1-6-2.spec.ts
+new file mode 100644
+index 0000000..6a77553
+--- /dev/null
++++ b/e2e/p1-6-2.spec.ts
+@@ -0,0 +1,94 @@
++import { test, expect, type Page } from "@playwright/test";
++import { readFileSync } from "node:fs";
++import { startVoiceHub, type VoiceHubServer } from "../services/voice-orchestrator/src/ws/ws-server";
++import type { AnswerCardData } from "../src/lib/voice/session-machine";
++const pcm = [0, 1].map(index => readFileSync(`docs/nexus-p1-6/audio/${index}.pcm`));
++const first = "本期新增客户十二家。", second = "客户总数为一百二十家。";
++const card: AnswerCardData = { kind: "brief", title: "读屏与可见正文隔离验收", lines: [], spoken: first + second };
++let hub: VoiceHubServer, failed = false, turn = 0;
++const reports: string[] = [];
++const emit = (event: object) => hub.broadcast({ at: Date.now(), ...event });
++const state = (from: string, to: string) => emit({ type: "state.change", from, to, turn });
++test.beforeAll(async () => {
++  hub = await startVoiceHub({ host: "127.0.0.1", port: 0,
++    onHttpRequest: (req, res) => {
++      res.setHeader("access-control-allow-origin", String(req.headers.origin ?? "*"));
++      res.setHeader("access-control-expose-headers", "x-sample-rate,x-channels,x-sample-format");
++      const index = Number(/\/voice\/audio\/[^/]+\/(\d+)$/.exec(req.url ?? "")?.[1]);
++      if (failed || !pcm[index]) { res.writeHead(503); res.end(); return; }
++      res.writeHead(200, { "content-type": "audio/pcm", "x-sample-rate": "24000", "x-channels": "1", "x-sample-format": "s16le" }); res.end(pcm[index]);
++    },
++    onMessage: (conn, raw) => {
++      const event = JSON.parse(raw); if (event.type === "console.hello") conn.role = "screen";
++      if (event.type.startsWith("playback.")) reports.push(event.type);
++      if (event.type === "playback.drained") state("answering", "followup");
++    },
++  });
++});
++test.afterAll(async () => { await hub.close(); });
++test.beforeEach(() => { failed = false; turn = 0; reports.length = 0; });
++declare global { interface Window { p162Notices: Array<{ text: string; at: number }> } }
++async function open(page: Page, mode: string, reduced = false, owner = true) {
++  await page.emulateMedia({ reducedMotion: reduced ? "reduce" : "no-preference" });
++  await page.addInitScript(() => {
++    window.p162Notices = [];
++    new MutationObserver(records => {
++      for (const region of document.querySelectorAll(".overlay-card [aria-live]")) {
++        if (records.some(record => record.target === region || region.contains(record.target))) window.p162Notices.push({ text: region.textContent ?? "", at: performance.now() });
++      }
++    }).observe(document, { subtree: true, childList: true, characterData: true });
++  });
++  await page.goto(`/screen/sales?voiceLive=1&xiaochuanMotion=${mode}&hub=${encodeURIComponent(`ws://127.0.0.1:${hub.port}`)}`);
++  await expect.poll(() => hub.counts().screens).toBe(1); await page.mouse.click(40, 40);
++  emit({ type: "session.start", sessionId: "p162-a11y", ...(owner ? {} : { screenId: "00000000-0000-4000-8000-999999999999" }) }); state("waking", "listening");
++  await expect(page.locator(".overlay-root")).toHaveAttribute("data-motion", mode);
++}
++async function answer(page: Page, value = card, speech = false) {
++  state("listening", "thinking"); turn++;
++  emit({ type: "answer.delta", seq: 0, full: true, text: value.spoken, card: value, ...(speech ? { speech: { turnId: `00000000-0000-4000-8000-${String(turn).padStart(12, "0")}`, sentences: [{ index: 0, displayStart: 0, displayEnd: first.length }, { index: 1, displayStart: first.length, displayEnd: card.spoken.length }] } } : {}) });
++  state("thinking", "answering"); await expect(page.locator(".overlay-root")).toHaveAttribute("data-state", "answering");
++}
++async function notices(page: Page) { return page.evaluate(() => window.p162Notices.filter(item => item.text).map(item => item.text)); }
++for (const mode of ["legacy", "gsap"]) {
++  test(`${mode} visible full text and complete-sentence compatibility notifications stay independent`, async ({ page }) => {
++    await open(page, mode); await answer(page);
++    if (mode === "gsap") await expect(page.locator(".overlay-card-spoken")).toHaveText(card.spoken, { timeout: 1000 });
++    await expect(page.locator(".overlay-card [aria-live]")).toHaveText(first);
++    await expect(page.locator(".overlay-card [aria-live]")).toHaveText(second);
++    expect(await notices(page)).toEqual([first, second]);
++  });
++  for (const reduced of [false, true]) test(`${mode} PCM completion owns notifications with reduced=${reduced}`, async ({ page }) => {
++    await open(page, mode, reduced); await answer(page, card, true);
++    await expect(page.locator(".overlay-sentence-active")).toHaveText(first);
++    expect(await notices(page)).toEqual([]);
++    await expect(page.locator(".overlay-sentence-active")).toHaveText(second, { timeout: 7000 });
++    await expect(page.locator(".overlay-card [aria-live]")).toHaveText(first);
++    await expect.poll(() => reports.includes("playback.drained"), { timeout: 10000 }).toBe(true);
++    await expect(page.locator(".overlay-card [aria-live]")).toHaveText(second);
++    expect(await notices(page)).toEqual([first, second]);
++  });
++  test(`${mode} interruption, replacement and folding never republish the old answer`, async ({ page }) => {
++    await open(page, mode); await answer(page); state("answering", "listening");
++    await page.waitForTimeout(300);
++    const next: AnswerCardData = { kind: "brief", title: "新回答", lines: [], spoken: "这是新的完整回答。下一句也必须等到时机。" };
++    const before = (await notices(page)).length;
++    await answer(page, next); await expect(page.locator(".overlay-card [aria-live]")).toHaveText("这是新的完整回答。");
++    state("answering", "closing"); await expect(page.locator(".overlay-root")).toHaveCount(0);
++    await page.waitForTimeout(700);
++    expect((await notices(page)).slice(before)).toEqual(["这是新的完整回答。"]);
++  });
++  test(`${mode} unavailable audio keeps safe complete notifications and reduced text access`, async ({ page }) => {
++    failed = true; await open(page, mode); await answer(page, card, true);
++    await expect(page.locator(".overlay-audio-notice")).toContainText("查看卡片");
++    await expect(page.locator(".overlay-card [aria-live]")).toHaveText(first);
++    await expect(page.locator(".overlay-card [aria-live]")).toHaveText(second);
++    expect(await notices(page)).toEqual([first, second]);
++  });
++  test(`${mode} passive screen with metadata but no local PCM retains safe accessibility`, async ({ page }) => {
++    await open(page, mode, false, false); await answer(page, card, true);
++    await expect(page.locator(".overlay-card [aria-live]")).toHaveText(first);
++    await expect(page.locator(".overlay-card [aria-live]")).toHaveText(second);
++    expect(await notices(page)).toEqual([first, second]);
++    expect(reports.includes("playback.started")).toBe(false);
++  });
++}
+diff --git a/e2e/voice-cards.spec.ts b/e2e/voice-cards.spec.ts
+index e9f0f95..6ba24e9 100644
+--- a/e2e/voice-cards.spec.ts
++++ b/e2e/voice-cards.spec.ts
+@@ -18 +18,5 @@ test.beforeAll(async () => {
+-test.afterAll(async()=>{await hub?.close(); await writeFile(join(output,"voice-cards-calibration.json"),JSON.stringify(evidence,null,2)+"\n");});
++test.afterAll(async()=>{
++  await hub?.close(); const bytes=JSON.stringify(evidence,null,2)+"\n";
++  await writeFile(join(output,"voice-cards-calibration.json"),bytes);
++  if(process.env.P162_CARD_EVIDENCE_DIR){await mkdir(process.env.P162_CARD_EVIDENCE_DIR,{recursive:true});await writeFile(join(process.env.P162_CARD_EVIDENCE_DIR,`worker-${process.pid}.json`),bytes);}
++});
+@@ -130,0 +135,4 @@ test("demo automatically completes launch, answer and withdrawal for seven cards
++type OriginalCpuCallback = { timestamp: number; start: number; ms: number };
++type OriginalCpuWindow = { start: number; end: number; frames: Array<[number, number]>; callbacks: OriginalCpuCallback[] };
++declare global { interface Window { p162OriginalCpu: { depth: number; callbacks: OriginalCpuCallback[]; windows: OriginalCpuWindow[]; start: number; offset: number } } }
++
+@@ -139,2 +147,3 @@ test("overlay RAF callback CPU increment stays within 8ms at both resolutions",a
+-      Object.assign(window,{task12Frames:frames});
+-      window.requestAnimationFrame=(callback)=>native(now=>{const start=performance.now(); try{callback(now);} finally {frames.set(now,(frames.get(now)??0)+performance.now()-start);}});
++      const probe = { depth: (window.p162OriginalCpu?.depth ?? 0) + 1, callbacks: [] as OriginalCpuCallback[], windows: [] as OriginalCpuWindow[], start: 0, offset: 0 };
++      Object.assign(window,{task12Frames:frames,p162OriginalCpu:probe});
++      window.requestAnimationFrame=(callback)=>native(now=>{const start=performance.now(); try{callback(now);} finally {frames.set(now,(frames.get(now)??0)+performance.now()-start);probe.callbacks.push({timestamp:now,start,ms:performance.now()-start});}});
+@@ -145 +154,2 @@ test("overlay RAF callback CPU increment stays within 8ms at both resolutions",a
+-      await page.evaluate(()=>((window as unknown as {task12Frames:Map<number,number>}).task12Frames).clear());
++      await page.evaluate(()=>{ ((window as unknown as {task12Frames:Map<number,number>}).task12Frames).clear();
++        window.p162OriginalCpu.start=performance.now();window.p162OriginalCpu.offset=window.p162OriginalCpu.callbacks.length; });
+@@ -147 +157,2 @@ test("overlay RAF callback CPU increment stays within 8ms at both resolutions",a
+-      return page.evaluate(()=>[...(window as unknown as {task12Frames:Map<number,number>}).task12Frames.values()]);
++      return page.evaluate(()=>{ const frames=(window as unknown as {task12Frames:Map<number,number>}).task12Frames,p=window.p162OriginalCpu;
++        p.windows.push({ start:p.start,end:performance.now(),frames:[...frames.entries()],callbacks:p.callbacks.slice(p.offset) }); return [...frames.values()]; });
+@@ -157 +168,2 @@ test("overlay RAF callback CPU increment stays within 8ms at both resolutions",a
+-    evidence.push({performance:record}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);
++    const raw = await page.evaluate(()=>({depth:window.p162OriginalCpu.depth,windows:window.p162OriginalCpu.windows,launchAt:Number(document.querySelector<HTMLElement>(".overlay-card")?.dataset.launchAt),profile:(window as Window & {__p162Profile?:unknown}).__p162Profile??null}));
++    evidence.push({performance:record,raw}); expect(active.length).toBeGreaterThan(30);expect(record.incrementP95).toBeLessThanOrEqual(8);
+diff --git a/playwright.config.ts b/playwright.config.ts
+index 49f9e2d..bb32483 100644
+--- a/playwright.config.ts
++++ b/playwright.config.ts
+@@ -9 +9 @@ export default defineConfig({
+-  testIgnore: ["**/p1-6.spec.ts", "**/p1-6-1.spec.ts", "**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
++  testIgnore: ["**/p1-6.spec.ts", "**/p1-6-1.spec.ts", "**/p1-6-2*.spec.ts", "**/nexus.spec.ts", "**/nexus-motion.spec.ts", "**/p1-5-c*.spec.ts", "**/gsap-poc.spec.ts", "**/p1-5-b.spec.ts"],
+diff --git a/scripts/p1-6-2-delivery-inventory.py b/scripts/p1-6-2-delivery-inventory.py
+new file mode 100644
+index 0000000..82a03a6
+--- /dev/null
++++ b/scripts/p1-6-2-delivery-inventory.py
+@@ -0,0 +1,39 @@
++"""Metadata inventory only; never delete, stage or upload inherited evidence."""
++from pathlib import Path
++import subprocess,json
++root=Path(__file__).resolve().parents[1];out=root/'docs/nexus-p1-6-2/evidence';out.mkdir(parents=True,exist_ok=True)
++def category(name):
++    if name.startswith('public/'):return 'runtime-asset'
++    if name.startswith('src/data/'):return 'map-dataset'
++    if name.endswith('.pcm'):return 'test-audio-fixture'
++    if name.startswith(('.review/','test-results/')):return 'local-debug-evidence'
++    if name.startswith('docs/'):return 'review-evidence'
++    return 'other-large-file'
++tracked=[]
++for record in subprocess.check_output(['git','ls-tree','-r','-l','-z','HEAD'],cwd=root).split(b'\0'):
++    if not record:continue
++    header,path=record.split(b'\t',1);parts=header.decode().split();size=int(parts[3]);name=path.decode()
++    if size>=1000000 or name.lower().endswith(('.mp4','.webm','.zip','.pcm','.trace','.patch')):
++        tracked.append({'path':name,'bytes':size,'gitBlob':parts[2],'category':category(name),'extension':Path(name).suffix,'alreadyInBaselineHistory':True})
++local=[]
++objects=subprocess.check_output(['git','rev-list','--objects','HEAD','--not','--remotes'],cwd=root,text=True).splitlines()
++names={line.split(' ',1)[0]:line.split(' ',1)[1]if' 'in line else''for line in objects}
++info=subprocess.run(['git','cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],cwd=root,input='\n'.join(names)+('\n' if names else ''),text=True,capture_output=True,check=True).stdout
++unpublished=[]
++for line in info.splitlines():
++    sha,kind,size=line.split();name=names[sha]
++    if kind=='blob'and(int(size)>=1000000 or Path(name).suffix.lower()in['.webm','.mp4','.zip','.pcm','.patch']):
++        unpublished.append({'path':name,'bytes':int(size),'gitBlob':sha,'category':category(name)})
++for directory in [root/'.review',root/'test-results']:
++    if not directory.exists():continue
++    for p in directory.rglob('*'):
++        if p.is_file():
++            size=p.stat().st_size
++            if size>=1000000 or p.suffix.lower()in['.mp4','.webm','.zip','.pcm','.patch']:
++                local.append({'path':str(p.relative_to(root)),'bytes':size,'category':category(str(p.relative_to(root))),'extension':p.suffix,'tracked':False})
++(out/'large-evidence-inventory.json').write_text(json.dumps({'baseline':'5ac9cff6398839d776ee5f92ac4fc34da92c9b3b','scope':'This repository baseline history + this task worktree local evidence; other worktrees are not altered.',
++    'thresholdBytes':1000000,'tracked':tracked,'local':local,'summary':{'trackedFiles':len(tracked),'trackedBytes':sum(x['bytes']for x in tracked),'localFiles':len(local),'localBytes':sum(x['bytes']for x in local)},
++    'unpublishedReachableLargeBlobs':unpublished,'unpublishedReachableLargeBytes':sum(x['bytes']for x in unpublished),
++    'trackedBytesByCategory':{c:sum(x['bytes']for x in tracked if x['category']==c)for c in sorted(set(x['category']for x in tracked))},
++    'publicPushApproved':False},ensure_ascii=False,indent=2)+'\n')
++print(json.dumps({'trackedFiles':len(tracked),'trackedBytes':sum(x['bytes']for x in tracked),'localFiles':len(local),'localBytes':sum(x['bytes']for x in local)}))
+diff --git a/scripts/p1-6-2-final-evidence.py b/scripts/p1-6-2-final-evidence.py
+new file mode 100644
+index 0000000..4a64ece
+--- /dev/null
++++ b/scripts/p1-6-2-final-evidence.py
+@@ -0,0 +1,92 @@
++"""Read final reports and retained geometry; never mutate test results."""
++from pathlib import Path
++import hashlib
++import json
++
++root = Path(__file__).resolve().parents[1]
++out = root / 'docs/nexus-p1-6-2/evidence'
++
++
++def digest(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def save(name, data):
++    (out / name).write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
++
++
++build = json.loads((out / 'final-build-source.json').read_text())
++for name, sha in build['productFiles'].items():
++    assert digest(root / name) == sha, f'Product changed after final build: {name}'
++protected = json.loads((out / 'protected-source-manifest.json').read_text())
++for item in protected['unchanged']:
++    assert digest(root / item['path']) == item['sha256'], item['path']
++
++reports = {}
++for label in ('gsap-regression', 'legacy-regression', 'special', 'legacy-prefinal'):
++    path = out / f'{label}.json'
++    data = json.loads(path.read_text())
++    cases = []
++
++    def visit(suite):
++        for spec in suite.get('specs', []):
++            for test in spec['tests']:
++                if test['status'] != 'expected':
++                    cases.append({'title': spec['title'], 'file': spec['file'],
++                                  'status': test['status'],
++                                  'attempts': [r['status'] for r in test['results']]})
++        for child in suite.get('suites', []):
++            visit(child)
++
++    for suite in data['suites']:
++        visit(suite)
++    reports[label] = {'stats': data['stats'], 'nonExpected': cases,
++                      'sha256': digest(path)}
++save('test-summary.json', {'build': build, 'reports': reports,
++                           'protectedSourceFilesUnchanged': len(protected['unchanged'])})
++
++cpu = []
++for mode in ('gsap', 'legacy'):
++    directory = root / f'.review/p1-6-2/card-evidence/{mode}-regression'
++    for path in sorted(directory.glob('*.json')):
++        for item in json.loads(path.read_text()):
++            if 'performance' not in item:
++                continue
++            cpu.append({'mode': mode, 'record': item['performance'],
++                        'collectorDepth': item['raw']['depth'],
++                        'rawFile': str(path.relative_to(root)), 'sha256': digest(path),
++                        'passesUnchanged8msOracle': item['performance']['incrementP95'] <= 8})
++save('final-original-cpu.json', cpu)
++
++geometry = {}
++raw = {}
++for mode in ('gsap', 'legacy'):
++    directory = root / f'.review/p1-6-2/p13-{mode}/after'
++    entries = {p.name: json.loads(p.read_text()) for p in sorted(directory.glob('*.json'))}
++    assert entries, f'No geometry: {directory}'
++    raw[mode] = entries
++    geometry[mode] = {'records': len(entries),
++                      'violations': sum(len(v['violations']) for v in entries.values()),
++                      'textFailures': sum(len(v['textFailures']) for v in entries.values()),
++                      'files': [{'path': str(p.relative_to(root)), 'sha256': digest(p)}
++                                for p in sorted(directory.glob('*')) if p.is_file()]}
++differences = []
++for name in sorted(raw['gsap'].keys() & raw['legacy'].keys()):
++    for selector, a in raw['gsap'][name]['rects'].items():
++        b = raw['legacy'][name]['rects'][selector]
++        if a is None or b is None:
++            if a != b:
++                differences.append({'file': name, 'selector': selector, 'presence': [a, b]})
++            continue
++        delta = max(abs(a[k] - b[k]) for k in ('x', 'y', 'width', 'height'))
++        if delta > 0.5:
++            differences.append({'file': name, 'selector': selector, 'maxDeltaPx': delta})
++save('geometry-summary.json', {'viewports': [1280, 1792, 1920, 3840],
++                               'modes': geometry, 'rectTolerancePx': 0.5,
++                               'rectDifferencesBeyondTolerance': differences,
++                               'onlyInGsap': sorted(raw['gsap'].keys() - raw['legacy'].keys()),
++                               'onlyInLegacy': sorted(raw['legacy'].keys() - raw['gsap'].keys())})
++print(json.dumps({'tests': {k: v['stats'] for k, v in reports.items()},
++                  'geometry': {k: {a: b for a, b in v.items() if a != 'files'}
++                               for k, v in geometry.items()},
++                  'rectDifferencesBeyondTolerance': len(differences)}, indent=2))
+diff --git a/scripts/p1-6-2-original-cpu.py b/scripts/p1-6-2-original-cpu.py
+new file mode 100644
+index 0000000..1fe8823
+--- /dev/null
++++ b/scripts/p1-6-2-original-cpu.py
+@@ -0,0 +1,14 @@
++"""Repeat the original 8ms oracle three times; keep failures and raw callback windows."""
++from pathlib import Path
++import os,subprocess,sys,json,shutil
++worktree=Path(sys.argv[1]).resolve();label=sys.argv[2]
++source=Path(__file__).resolve().parents[1];root=source/'.review/p1-6-2/performance'/label;root.mkdir(parents=True,exist_ok=True)
++results=[]
++for round in [1,2,3]:
++    name=f'{label}-r{round}';env=dict(os.environ,P161_OVERLAY_MODE='gsap',P162_REPORT=name,P162_EVIDENCE_ROOT=str(root))
++    cmd=['pnpm','exec','playwright','test','--config','e2e/p1-6-2-regression.config.ts','--grep','overlay RAF callback CPU increment']
++    with (root/f'{name}.txt').open('w')as log:r=subprocess.run(cmd,cwd=worktree,env=env,stdout=log,stderr=subprocess.STDOUT)
++    samples=worktree/'test-results/design-polish/voice-cards-calibration.json'
++    if samples.exists():shutil.copy2(samples,root/f'{name}-samples.json')
++    item={'round':round,'exitCode':r.returncode,'worktree':str(worktree),'command':cmd};results.append(item);print(json.dumps(item),flush=True)
++(root/'runs.json').write_text(json.dumps(results,indent=2)+'\n')
+diff --git a/scripts/p1-6-2-perf-run.py b/scripts/p1-6-2-perf-run.py
+new file mode 100644
+index 0000000..c3c9b07
+--- /dev/null
++++ b/scripts/p1-6-2-perf-run.py
+@@ -0,0 +1,19 @@
++"""Three independent Playwright/browser-process repetitions, always serial."""
++import argparse, os, subprocess, json
++from pathlib import Path
++
++p=argparse.ArgumentParser()
++p.add_argument('worktree');p.add_argument('label');p.add_argument('--headed',action='store_true');p.add_argument('--profile',action='store_true');p.add_argument('--early',action='store_true')
++p.add_argument('--round',type=int,choices=[1,2,3])
++a=p.parse_args();source=Path(__file__).resolve().parents[1];root=source/'.review/p1-6-2/performance';root.mkdir(parents=True,exist_ok=True)
++if not (Path(a.worktree)/'.next/BUILD_ID').is_file():raise SystemExit('A successful production build is required before sampling')
++results=[]
++for round in ([a.round] if a.round else [1,2,3]):
++    label=f'{a.label}-r{round}';env=dict(os.environ,P162_ROUND=str(round),P162_PERF_LABEL=label,P162_PERF_ROOT=str(root),P162_EXPECT_PROFILE='1' if a.profile else '0',P162_EARLY='1'if a.early else '0')
++    cmd=['pnpm','exec','playwright','test','--config','e2e/p1-6-2-performance.config.ts']+(['--headed']if a.headed else [])
++    with (root/f'{label}.txt').open('w')as f:r=subprocess.run(cmd,cwd=a.worktree,env=env,stdout=f,stderr=subprocess.STDOUT)
++    results.append({'round':round,'label':label,'exitCode':r.returncode,'command':cmd,'worktree':str(Path(a.worktree).resolve())})
++    print(json.dumps(results[-1]),flush=True)
++    if r.returncode:break
++(root/f'{a.label}-runs.json').write_text(json.dumps(results,indent=2)+'\n')
++raise SystemExit(any(item['exitCode']for item in results))
+diff --git a/scripts/p1-6-2-performance-summary.py b/scripts/p1-6-2-performance-summary.py
+new file mode 100644
+index 0000000..8668a0f
+--- /dev/null
++++ b/scripts/p1-6-2-performance-summary.py
+@@ -0,0 +1,71 @@
++"""Summarize preserved samples without discarding failing/low-quality frames."""
++from pathlib import Path
++import json, csv, collections, hashlib
++root=Path(__file__).resolve().parents[1]
++rawroot=root/'.review/p1-6-2/performance';out=root/'docs/nexus-p1-6-2/evidence';out.mkdir(parents=True,exist_ok=True)
++def stats(values):
++    v=sorted(values)
++    return {'n':len(v),'p50':round(v[min(len(v)-1,int(len(v)*.5))],4),'p95':round(v[min(len(v)-1,int(len(v)*.95))],4),'max':round(v[-1],4),'sum':round(sum(v),4)}if v else {'n':0,'p50':None,'p95':None,'max':None,'sum':0}
++def frames(callbacks,start,end):
++    f=collections.defaultdict(float)
++    for s in callbacks:
++        if start<=s['start']<end:f[s['timestamp']]+=s['ms']
++    return list(f.values())
++rows=[]; attribution=[];environments={};manifest=[];excluded=[]; original=[]
++for p in sorted(rawroot.rglob('*.json')):
++    if any(part.startswith('invalid-')for part in p.parts):
++        excluded.append({'path':str(p.relative_to(root)),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()});continue
++    data=json.loads(p.read_text())
++    manifest.append({'path':str(p.relative_to(root)),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
++    if isinstance(data,list) and p.name.endswith('-samples.json'):
++        for item in data:
++            r=item['raw'];rec=item['performance'];windows=r['windows']
++            entry={'series':p.parent.name,'file':str(p.relative_to(root)),'viewport':rec['viewport'],'collectorDepth':r['depth'],
++                'baseline':stats([v for _,v in windows[0]['frames']]),'active':stats([v for _,v in windows[1]['frames']]),
++                'incrementP95':rec['incrementP95'],'activeStartsAfterAnswerMs':windows[1]['start']-r['launchAt'],
++                'passesUnchanged8msOracle':rec['incrementP95']<=8,
++                'callbackQueueMs':stats([s['start']-s['timestamp']for s in windows[1]['callbacks']])}
++            original.append(entry)
++            profile=r.get('profile')
++            if profile:attribution.append({'series':p.parent.name,'width':rec['viewport']['width'],'mode':'gsap','phase':'original-active',
++                **{'components':{name:stats([s['ms']for s in profile['spans']if s['name']==name and windows[1]['start']<=s['start']<windows[1]['end']])for name in set(s['name']for s in profile['spans'])}},
++                'canvas':[]})
++            if profile:
++                render=[s for s in profile['spans']if s['name']=='canvas-renderer'and windows[1]['start']<=s['start']<windows[1]['end']]
++                native=collections.defaultdict(list);counts=collections.defaultdict(list)
++                for s in render:
++                    for name,value in s.get('canvas',{}).get('ms',{}).items():native[name].append(value)
++                    for name,value in s.get('canvas',{}).get('count',{}).items():counts[name].append(value)
++                attribution[-1]['canvas']={'renderer':stats([s['ms']for s in render]),'fullQualityFrames':sum(s['meta']['ambientStride']==1 and not s['meta']['coreHalf']for s in render),
++                    'totalFrames':len(render),'nativeApiMs':{k:stats(v)for k,v in native.items()},'nativeApiCounts':{k:stats(v)for k,v in counts.items()}}
++        continue
++    if not isinstance(data,dict)or 'launchAt'not in data or 'gpu'not in data:continue
++    gpu=data['gpu']['gpu'];device=gpu['devices'][0]['deviceString'];features=gpu.get('featureStatus',{})
++    env={'browser':data['browser'],'device':device,'featureStatus':features,'dpr':data['raw']['dpr'],'constants':data['constants']}
++    envkey=('SwiftShader'if'SwiftShader'in device else'Metal'if'Metal'in device else device)
++    environments[envkey]=env
++    callbacks=data['raw']['raf']['callbacks'];profile=data['raw']['profile'];base=data['windows'][0]
++    b=stats(frames(callbacks,base['start'],base['end']))
++    for window in data['windows']:
++        values=stats(frames(callbacks,window['start'],window['end']))
++        row={'series':data['label'].rsplit('-r',1)[0],'round':data['round'],'backend':envkey,'width':data['width'],'mode':data['mode'],'phase':window['name'],
++            'earlyAnswer':data.get('earlyAnswer',False),'n':values['n'],'p50Ms':values['p50'],'p95Ms':values['p95'],
++            'deltaP50Ms':round(max(0,values['p50']-b['p50']),4),'deltaP95Ms':round(max(0,values['p95']-b['p95']),4),'startAfterAnswerMs':round(window['start']-data['launchAt'],2),
++            'visualCompleteAfterAnswerMs':round(data['raw']['raf']['visualCompleteAt']-data['launchAt'],2),
++            'queueP95Ms':stats([s['queueMs']for s in callbacks if window['start']<=s['start']<window['end']])['p95'],
++            'layoutTotalMs':round((window['after'].get('LayoutDuration',0)-window['before'].get('LayoutDuration',0))*1000,4),
++            'styleTotalMs':round((window['after'].get('RecalcStyleDuration',0)-window['before'].get('RecalcStyleDuration',0))*1000,4),
++            'rafIntervalP50Ms':stats([s['ms']for s in data['raw']['raf']['frames']if window['start']<=s['at']<window['end']])['p50']}
++        row['caseRafRegistrationP95Ms']=stats(data['raw']['raf']['registrations'])['p95']
++        rows.append(row)
++        if profile:
++            spans=[s for s in profile['spans']if window['start']<=s['start']<window['end']]
++            attribution.append({'series':row['series'],'round':data['round'],'width':data['width'],'mode':data['mode'],'phase':window['name'],
++                'components':{name:{'inclusiveInvocationMs':stats([s['ms']for s in spans if s['name']==name]),'exclusiveInvocationMs':stats([s['selfMs']for s in spans if s['name']==name])}for name in set(s['name']for s in spans)}})
++with (out/'performance-windows.csv').open('w')as f:
++    writer=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');writer.writeheader();writer.writerows(rows)
++(out/'performance-summary.json').write_text(json.dumps({'units':'ms. CPU invocation/frame costs; Layout/Style totals per window; no GPU utilization or presentation FPS claims.',
++    'environments':environments,'windows':rows,'original8msOracle':original,'attribution':attribution},ensure_ascii=False,indent=2)+'\n')
++(out/'performance-raw-manifest.json').write_text(json.dumps({'root':str(root),'retention':'Keep raw local samples until architecture review. No upload authorization.',
++    'files':manifest,'excludedFilesRetained':excluded},ensure_ascii=False,indent=2)+'\n')
++print(json.dumps({'windows':len(rows),'originalSamples':len(original),'environments':list(environments),'rawFiles':len(manifest),'rawBytes':sum(x['bytes']for x in manifest)},indent=2))
+diff --git a/scripts/p1-6-2-profile-build.py b/scripts/p1-6-2-profile-build.py
+new file mode 100644
+index 0000000..ed6b9e6
+--- /dev/null
++++ b/scripts/p1-6-2-profile-build.py
+@@ -0,0 +1,83 @@
++"""Create a disposable, locally instrumented worktree. Never change release sources."""
++from pathlib import Path
++import subprocess, sys, json
++
++source = Path(__file__).resolve().parents[1]
++target = Path(sys.argv[1]).resolve()
++if '--refresh' in sys.argv:
++    proof=json.loads((source/'.review/p1-6-2/profile-build.json').read_text())
++    if proof['target']!=str(target):raise ValueError('Not this task profiling worktree')
++else:
++    subprocess.run(['git', 'worktree', 'add', '--detach', str(target), '5ac9cff6398839d776ee5f92ac4fc34da92c9b3b'], cwd=source, check=True)
++for name in ['src/components/overlay/AnswerCard.tsx', 'src/components/overlay/OverlayStage.tsx',
++             'src/components/overlay/sentence-announcements.ts', 'src/components/overlay/JarvisCore.tsx',
++             'src/components/overlay/motion/XiaochuanTimeline.ts', 'src/components/screen/motion/GsapTickerOwner.ts',
++             'e2e/p1-6-2-performance.spec.ts', 'e2e/p1-6-2-performance.config.ts', 'e2e/p1-6-2-regression.config.ts', 'e2e/voice-cards.spec.ts']:
++    (target/name).write_bytes((source/name).read_bytes())
++
++(target/'src/lib/p162-local-profile.ts').write_text('''
++type Meta = Record<string, number | boolean | string>;
++type Api = { ms: Record<string, number>; count: Record<string, number> };
++type Entry = { name: string; start: number; child: number; api?: Api };
++type Profile = { stack: Entry[]; canvas?: Api; spans: Array<{ name: string; parent: string | null; start: number; end: number; ms: number; selfMs: number; meta: Meta; canvas?: Api }> };
++declare global { interface Window { __p162Profile?: Profile } }
++let installed = false;
++function installCanvasProbe(p: Profile) {
++  if(installed) return; installed = true;
++  const proto = CanvasRenderingContext2D.prototype as unknown as Record<string, (...args: unknown[]) => unknown>;
++  for(const name of ["drawImage","fillRect","stroke","fill","arc","beginPath","moveTo","lineTo"]) {
++    const native = proto[name];
++    proto[name] = function(this: CanvasRenderingContext2D, ...args: unknown[]) {
++      const api = p.canvas; if(!api) return Reflect.apply(native,this,args);
++      const start = performance.now(); try { return Reflect.apply(native,this,args); }
++      finally { api.ms[name] = (api.ms[name] ?? 0) + performance.now()-start; api.count[name] = (api.count[name] ?? 0)+1; }
++    };
++  }
++}
++export function profileSpan(name: string, meta: Meta = {}) {
++  const p = window.__p162Profile ??= { stack: [], spans: [] };
++  if(name === "canvas-renderer") installCanvasProbe(p);
++  const parent = p.stack.at(-1), entry: Entry = { name, start: performance.now(), child: 0 };
++  if(name === "canvas-renderer") p.canvas = entry.api = { ms: {}, count: {} };
++  p.stack.push(entry);
++  return () => { const end = performance.now(), ms = end-entry.start;
++    p.stack.pop(); if(parent) parent.child += ms;
++    if(entry.api) p.canvas = undefined;
++    p.spans.push({ name, parent: parent?.name ?? null, start: entry.start, end, ms, selfMs: Math.max(0,ms-entry.child), meta, canvas: entry.api }); };
++}
++''')
++
++def edit(name, replacements):
++    p=target/name; s=p.read_text()
++    probe='import { profileSpan } from "@/lib/p162-local-profile";\n'
++    s=s.replace('"use client";', '"use client";\n'+probe, 1) if s.startswith('"use client";') else probe+s
++    for old,new in replacements:
++        if s.count(old)!=1: raise ValueError((name, old, s.count(old)))
++        s=s.replace(old,new)
++    p.write_text(s)
++
++edit('src/components/overlay/JarvisCore.tsx', [
++ ('      if (!reduced) raf = requestAnimationFrame(loop);', '      const endSpan = profileSpan("canvas-renderer", { timestamp: now, ambientStride, coreHalf, quality, dpr, beam: PARTICLE_BUDGET.beam, state: frameRef.current.name });\n      try {\n      if (!reduced) raf = requestAnimationFrame(loop);'),
++ ('      coreHalf = quality === "lite" || costEma > FRAME_BUDGET_MS * 1.5;', '      coreHalf = quality === "lite" || costEma > FRAME_BUDGET_MS * 1.5;\n      } finally { endSpan(); }'),
++])
++edit('src/components/overlay/AnswerCard.tsx', [
++ ('      if (disposed) return;', '      if (disposed) return;\n      const endSpan = profileSpan("answer-dom");\n      try {'),
++ ('      if (!motion) raf = requestAnimationFrame(paint);\n    };', '      if (!motion) raf = requestAnimationFrame(paint);\n      } finally { endSpan(); }\n    };'),
++])
++edit('src/components/overlay/motion/XiaochuanTimeline.ts', [
++ ('  private emit() { this.subscribers.forEach(fn => fn()); }', '  private emit() { const end = profileSpan("subscribers"); try { this.subscribers.forEach(fn => fn()); } finally { end(); } }'),
++ ('      track.timeline.totalTime(Math.min(elapsed, track.duration) / 1000, true);', '      const end = profileSpan("timeline-seek"); try { track.timeline.totalTime(Math.min(elapsed, track.duration) / 1000, true); } finally { end(); }'),
++])
++edit('src/components/screen/motion/GsapTickerOwner.ts', [
++ ('  const tick = () => {', '  const tick = () => {\n    const endSpan = profileSpan("ticker-dispatch"); try {'),
++ ('    if (!jobs.size) detach();\n  };', '    if (!jobs.size) detach();\n    } finally { endSpan(); }\n  };'),
++ ('    request: fn => {', '    request: fn => {\n      const endSpan = profileSpan("host-request"); try {'),
++ ('      return id;\n    },', '      return id;\n      } finally { endSpan(); }\n    },'),
++])
++# Keep the product gate, all particles, choreography and 60Hz cap byte-for-byte;
++# only timing scopes surround the named functions in this disposable build.
++patch=subprocess.check_output(['git','diff','--unified=0','--','src'],cwd=target)
++out=source/'.review/p1-6-2';out.mkdir(parents=True,exist_ok=True)
++(out/'profile-instrumentation.patch').write_bytes(patch)
++(out/'profile-build.json').write_text(json.dumps({'source':str(source),'target':str(target),'base':'5ac9cff6398839d776ee5f92ac4fc34da92c9b3b','note':'Instrumentation only. Never use these durations as the uninstrumented 8ms gate.'},indent=2))
++print(target)
+diff --git a/src/components/overlay/AnswerCard.tsx b/src/components/overlay/AnswerCard.tsx
+index 5d2f183..5ce0a67 100644
+--- a/src/components/overlay/AnswerCard.tsx
++++ b/src/components/overlay/AnswerCard.tsx
+@@ -24,0 +25 @@ import { CARD_TIERS, renderCardTemplate } from "./cards/registry";
++import { SentenceAnnouncements, type PlaybackSentenceEvidence } from "./sentence-announcements";
+@@ -50,0 +52 @@ export const AnswerCard = memo(function AnswerCard({
++  announcementEvidenceRef,
+@@ -65,0 +68 @@ export const AnswerCard = memo(function AnswerCard({
++  announcementEvidenceRef?: RefObject<PlaybackSentenceEvidence>;
+@@ -68 +71 @@ export const AnswerCard = memo(function AnswerCard({
+-  const announcedRef = useRef<{ card: AnswerCardData | null; index: number }>({card:null,index:-1});
++  const announcerRef = useRef<{ card: AnswerCardData; launchAt: number; announcer: SentenceAnnouncements } | null>(null);
+@@ -144,0 +148,22 @@ export const AnswerCard = memo(function AnswerCard({
++  // Accessibility has its own complete-sentence clock, independent of painter,
++  // GSAP seek, pagination and the visible full-text policy.
++  useEffect(() => {
++    if (!announcerRef.current || announcerRef.current.card !== card || announcerRef.current.launchAt !== launchAt) {
++      announcerRef.current = { card, launchAt, announcer: new SentenceAnnouncements(displaySpoken(card.spoken), config) };
++    }
++    const announcer = announcerRef.current.announcer;
++    let timer: number | null = null;
++    const update = () => {
++      const text = announcer.next(performance.now() - launchAt, { reduced,
++        paused: playbackPaused || document.hidden, finished: playbackFinished, folded: foldAt !== null,
++        evidence: announcementEvidenceRef?.current });
++      if ((foldAt !== null || announcementEvidenceRef?.current.status === "cancelled") && liveRef.current?.textContent) liveRef.current.textContent = "";
++      if (text !== null && liveRef.current) liveRef.current.textContent = text;
++      if (announcer.done && timer !== null) { window.clearInterval(timer); timer = null; }
++    };
++    update();
++    if (!announcer.done) timer = window.setInterval(update, 50);
++    document.addEventListener("visibilitychange", update);
++    return () => { if (timer !== null) window.clearInterval(timer); document.removeEventListener("visibilitychange", update); };
++  }, [card, launchAt, config, reduced, foldAt, playbackPaused, playbackFinished, sentenceVersion, announcementEvidenceRef]);
++
+@@ -162,2 +187,7 @@ export const AnswerCard = memo(function AnswerCard({
+-    const sentences = buildSpokenSentences(displaySpoken(card.spoken));
+-    if (announcedRef.current.card !== card) announcedRef.current = { card, index: -1 };
++    // These nodes are stable for this effect; unchanged snapshots need no style writes.
++    const root = body.parentElement!;
++    const layers = ([
++      [".overlay-card-header", "header"], [".overlay-card-data", "metricsContent"],
++      [".overlay-spoken-section", "spoken"], [".overlay-followups", "followups"],
++    ] as const).map(([selector, key]) => ({ node: body.querySelector<HTMLElement>(selector), key, last: null as number | null }));
++    let lastPresence: number | null = null;
+@@ -190,8 +220,6 @@ export const AnswerCard = memo(function AnswerCard({
+-        const root = body.parentElement!;
+-        root.style.opacity = String(motion.visual.presence);
+-        for (const [selector, progress] of [
+-          [".overlay-card-header", motion.visual.header], [".overlay-card-data", motion.visual.metricsContent],
+-          [".overlay-spoken-section", motion.visual.spoken], [".overlay-followups", motion.visual.followups],
+-        ] as const) {
+-          const layer = body.querySelector<HTMLElement>(selector);
+-          if (layer) { layer.style.opacity = String(progress); layer.style.transform = `translateY(${(1-progress)*8}px)`; }
++        if (lastPresence !== motion.visual.presence) { root.style.opacity = String(motion.visual.presence); lastPresence = motion.visual.presence; }
++        for (const layer of layers) {
++          const progress = motion.visual[layer.key];
++          if (layer.node && layer.last !== progress) {
++            layer.node.style.opacity = String(progress); layer.node.style.transform = `translateY(${(1-progress)*8}px)`; layer.last = progress;
++          }
+@@ -249,5 +276,0 @@ export const AnswerCard = memo(function AnswerCard({
+-        const completed = sentences.findLastIndex(s => s.displayEnd <= typed);
+-        if (completed > announcedRef.current.index && liveRef.current) {
+-          liveRef.current.textContent = sentences.slice(announcedRef.current.index + 1, completed + 1).map(s => s.text).join("");
+-          announcedRef.current.index = completed;
+-        }
+diff --git a/src/components/overlay/OverlayStage.tsx b/src/components/overlay/OverlayStage.tsx
+index 1f909b5..c8d258d 100644
+--- a/src/components/overlay/OverlayStage.tsx
++++ b/src/components/overlay/OverlayStage.tsx
+@@ -10,0 +11 @@ import { amplitudeSource } from "./motion/amplitude-source";
++import { PlaybackSentenceEvidence } from "./sentence-announcements";
+@@ -116,0 +118 @@ export function OverlayStage({
++  const announcementEvidenceRef = useRef(new PlaybackSentenceEvidence(false));
+@@ -151,0 +154 @@ export function OverlayStage({
++      if (next.name !== "followup" || announcementEvidenceRef.current.status !== "drained") announcementEvidenceRef.current.cancel();
+@@ -277,0 +281 @@ export function OverlayStage({
++      announcementEvidenceRef.current = new PlaybackSentenceEvidence(live && ownsSessionRef.current && !!speechRef.current);
+@@ -298,0 +303 @@ export function OverlayStage({
++            announcementEvidenceRef.current.start(index);
+@@ -304,0 +310 @@ export function OverlayStage({
++            announcementEvidenceRef.current.skip(sentenceIndex);
+@@ -311,0 +318 @@ export function OverlayStage({
++            announcementEvidenceRef.current.drain();
+@@ -318,0 +326 @@ export function OverlayStage({
++            announcementEvidenceRef.current.fail();
+@@ -447 +455 @@ export function OverlayStage({
+-        if (event.accepted || event.reason === "rate_limited") { getPlayer().stop(); fixedIdRef.current = null; playingIdRef.current = null; setBargePaused(false); }
++        if (event.accepted || event.reason === "rate_limited") { announcementEvidenceRef.current.cancel(); getPlayer().stop(); fixedIdRef.current = null; playingIdRef.current = null; setBargePaused(false); }
+@@ -548 +556 @@ export function OverlayStage({
+-      playingIdRef.current = null; sentenceRef.current = null; speechRef.current = null;
++      announcementEvidenceRef.current.cancel(); playingIdRef.current = null; sentenceRef.current = null; speechRef.current = null;
+@@ -645,0 +654 @@ export function OverlayStage({
++          announcementEvidenceRef={announcementEvidenceRef}
+diff --git a/src/components/overlay/sentence-announcements.test.ts b/src/components/overlay/sentence-announcements.test.ts
+new file mode 100644
+index 0000000..346170c
+--- /dev/null
++++ b/src/components/overlay/sentence-announcements.test.ts
+@@ -0,0 +1,74 @@
++import { describe, expect, it } from "vitest";
++import { PlaybackSentenceEvidence, SentenceAnnouncements } from "./sentence-announcements";
++import { LAUNCH } from "@/lib/voice/params";
++const text = "第一句完整。第二句话完整。";
++const options = { reduced: false, paused: false, finished: false, folded: false };
++const at = (characters: number) => LAUNCH.unfoldStartMs + LAUNCH.unfoldMs + characters / LAUNCH.typeCps * 1000 + 1;
++describe("complete sentence announcements independent of GSAP visual progress", () => {
++  it("publishes only whole sentences on the compatibility clock", () => {
++    const a = new SentenceAnnouncements(text, LAUNCH);
++    expect(a.next(at(5), options)).toBeNull();
++    expect(a.next(at(6), options)).toBe("第一句完整。");
++    expect(a.next(at(8), options)).toBeNull();
++    expect(a.next(at(text.length), options)).toBe("第二句话完整。");
++    expect(a.next(at(100), options)).toBeNull();
++  });
++  it("PCM metadata wins over the clock and reduced motion; next start completes the prior sentence", () => {
++    const a = new SentenceAnnouncements(text, LAUNCH), evidence = new PlaybackSentenceEvidence(true);
++    const o = { ...options, reduced: true, evidence };
++    expect(a.next(10000, o)).toBeNull(); evidence.start(0);
++    expect(a.next(10001, o)).toBeNull(); evidence.start(1);
++    expect(a.next(10002, o)).toBe("第一句完整。"); evidence.drain();
++    expect(a.next(10003, { ...o, finished: true })).toBe("第二句话完整。");
++    expect(a.next(10004, o)).toBeNull();
++  });
++  it("does not announce an incomplete/skipped PCM sentence", () => {
++    const a = new SentenceAnnouncements(text, LAUNCH), evidence = new PlaybackSentenceEvidence(true);
++    evidence.start(0); evidence.skip(0); evidence.start(1);
++    expect(a.next(10000, { ...options, evidence })).toBeNull(); evidence.drain();
++    expect(a.next(10001, { ...options, evidence })).toBe("第二句话完整。");
++  });
++  it("a paused completion waits for resume, without announcing twice", () => {
++    const a = new SentenceAnnouncements(text, LAUNCH), evidence = new PlaybackSentenceEvidence(true);
++    evidence.start(0); evidence.start(1);
++    expect(a.next(1000, { ...options, evidence, paused: true })).toBeNull();
++    expect(a.next(2000, { ...options, evidence })).toBe("第一句完整。");
++    expect(a.next(3000, { ...options, evidence })).toBeNull();
++  });
++  it("cancellation, finished compatibility turns and folded old cards cannot publish late", () => {
++    for (const end of [{ finished: true }, { folded: true }]) {
++      const a = new SentenceAnnouncements(text, LAUNCH);
++      expect(a.next(100, { ...options, ...end })).toBeNull();
++      expect(a.next(10000, options)).toBeNull();
++    }
++    const a = new SentenceAnnouncements(text, LAUNCH), evidence = new PlaybackSentenceEvidence(true);
++    evidence.start(0); evidence.cancel(); evidence.drain(); evidence.start(1);
++    expect(a.next(10000, { ...options, evidence })).toBeNull();
++  });
++  it("audio failure uses the safe full-sentence clock, retaining previously published indices", () => {
++    const a = new SentenceAnnouncements(text, LAUNCH), evidence = new PlaybackSentenceEvidence(true);
++    evidence.start(0); evidence.start(1);
++    expect(a.next(at(6), { ...options, evidence })).toBe("第一句完整。"); evidence.fail();
++    expect(a.next(at(8), { ...options, evidence })).toBeNull();
++    expect(a.next(at(text.length), { ...options, evidence })).toBe("第二句话完整。");
++  });
++  it("reduced motion without PCM preserves the complete accessible answer", () => {
++    const a = new SentenceAnnouncements(text, LAUNCH);
++    expect(a.next(0, { ...options, reduced: true })).toBe(text);
++  });
++  it("a new answer has its own publication ledger", () => {
++    const old = new SentenceAnnouncements(text, LAUNCH), next = new SentenceAnnouncements(text, LAUNCH);
++    expect(old.next(at(6), options)).toBe("第一句完整。");
++    old.next(10000, { ...options, folded: true });
++    expect(next.next(at(6), options)).toBe("第一句完整。"); expect(old.next(10000, options)).toBeNull();
++  });
++  it("duplicate, out-of-order and late PCM starts cannot complete a sentence early", () => {
++    const evidence = new PlaybackSentenceEvidence(true), a = new SentenceAnnouncements(text, LAUNCH);
++    evidence.start(0); evidence.start(0);
++    expect(a.next(1000, { ...options, evidence })).toBeNull();
++    evidence.start(1); evidence.start(0);
++    expect(a.next(1001, { ...options, evidence })).toBe("第一句完整。");
++    evidence.fail(); evidence.start(1); evidence.drain();
++    expect(evidence.status).toBe("failed"); expect(evidence.completed.has(1)).toBe(false);
++  });
++});
+diff --git a/src/components/overlay/sentence-announcements.ts b/src/components/overlay/sentence-announcements.ts
+new file mode 100644
+index 0000000..1c90360
+--- /dev/null
++++ b/src/components/overlay/sentence-announcements.ts
+@@ -0,0 +1,47 @@
++import { buildSpokenSentences } from "@/lib/voice/spoken-normalize";
++import { launchPhase, typedChars, type LaunchConfig } from "@/lib/voice/params";
++
++/** Observes existing PCM callbacks only; never schedules or controls audio. */
++export class PlaybackSentenceEvidence {
++  readonly completed = new Set<number>();
++  private readonly skipped = new Set<number>();
++  private active: number | null = null;
++  status: "pending" | "playing" | "drained" | "failed" | "cancelled" = "pending";
++  constructor(readonly metadata: boolean) {}
++  start(index: number) {
++    if (!["pending", "playing"].includes(this.status) || index === this.active || (this.active !== null && index < this.active)) return;
++    this.completeActive(); this.active = index; this.status = "playing";
++  }
++  skip(index: number) { this.skipped.add(index); this.completed.delete(index); }
++  drain() { if (!["pending", "playing"].includes(this.status)) return; this.completeActive(); this.active = null; this.status = "drained"; }
++  fail() { if (this.status !== "cancelled") { this.active = null; this.status = "failed"; } }
++  cancel() { this.active = null; this.status = "cancelled"; }
++  private completeActive() { if (this.active !== null && !this.skipped.has(this.active)) this.completed.add(this.active); }
++}
++
++/** Independent complete-sentence publication clock. Visual text may already be full. */
++export class SentenceAnnouncements {
++  private readonly sentences;
++  private readonly published = new Set<number>();
++  private stopped = false;
++  private lastElapsed = 0;
++  private pausedMs = 0;
++  private wasPaused = false;
++  constructor(private readonly text: string, private readonly config: LaunchConfig) {
++    this.sentences = buildSpokenSentences(text);
++  }
++  get done() { return this.stopped || this.published.size === this.sentences.length; }
++  next(elapsed: number, options: { reduced: boolean; paused: boolean; finished: boolean; folded: boolean; evidence?: PlaybackSentenceEvidence }): string | null {
++    const { evidence, reduced, paused, finished, folded } = options;
++    if (folded || evidence?.status === "cancelled" || (finished && evidence?.status !== "drained")) this.stopped = true;
++    if (paused || this.wasPaused) this.pausedMs += Math.max(0, elapsed - this.lastElapsed);
++    this.lastElapsed = elapsed; this.wasPaused = paused;
++    if (this.stopped || paused) return null;
++    const actual = evidence?.metadata && evidence.status !== "failed";
++    const typed = reduced ? this.text.length : typedChars(this.text, launchPhase(Math.max(0, elapsed - this.pausedMs), this.config).typingMs, this.config.typeCps);
++    const ready = this.sentences.filter(sentence => !this.published.has(sentence.index)
++      && (actual ? evidence.completed.has(sentence.index) : sentence.displayEnd <= typed));
++    ready.forEach(sentence => this.published.add(sentence.index));
++    return ready.length ? ready.map(sentence => sentence.text).join("") : null;
++  }
++}

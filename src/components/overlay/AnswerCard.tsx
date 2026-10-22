@@ -22,6 +22,7 @@ import {
 import type { AnswerCardData } from "@/lib/voice/session-machine";
 import { spokenNodes, useSpokenPages } from "./spoken-pages";
 import { CARD_TIERS, renderCardTemplate } from "./cards/registry";
+import { SentenceAnnouncements, type PlaybackSentenceEvidence } from "./sentence-announcements";
 
 /**
  * 答案卡发射编排(plan §7,总时长约 700ms,时序参数在 LaunchConfig)。
@@ -48,6 +49,7 @@ export const AnswerCard = memo(function AnswerCard({
   sentenceVersion = 0,
   playbackPaused = false,
   playbackFinished = false,
+  announcementEvidenceRef,
 }: {
   card: AnswerCardData;
   motion?: XiaochuanTimeline | null;
@@ -63,9 +65,10 @@ export const AnswerCard = memo(function AnswerCard({
   sentenceRef?: RefObject<{ start: number; end: number } | null>;
   playbackPaused?: boolean;
   playbackFinished?: boolean;
+  announcementEvidenceRef?: RefObject<PlaybackSentenceEvidence>;
 }) {
   const reduced = useReducedMotion();
-  const announcedRef = useRef<{ card: AnswerCardData | null; index: number }>({card:null,index:-1});
+  const announcerRef = useRef<{ card: AnswerCardData; launchAt: number; announcer: SentenceAnnouncements } | null>(null);
   const liveRef = useRef<HTMLParagraphElement>(null);
   const lineRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<HTMLDivElement | null>(null);
@@ -142,6 +145,28 @@ export const AnswerCard = memo(function AnswerCard({
     rect.setAttribute("d", `M ${c} 1 L ${w-c} 1 L ${w-1} ${c} L ${w-1} ${h-c} L ${w-c} ${h-1} L ${c} ${h-1} L 1 ${h-c} L 1 ${c} Z`);
   }, [card.kind, geometry.cardAnchor.width, geometry.scale, audioNotice]);
 
+  // Accessibility has its own complete-sentence clock, independent of painter,
+  // GSAP seek, pagination and the visible full-text policy.
+  useEffect(() => {
+    if (!announcerRef.current || announcerRef.current.card !== card || announcerRef.current.launchAt !== launchAt) {
+      announcerRef.current = { card, launchAt, announcer: new SentenceAnnouncements(displaySpoken(card.spoken), config) };
+    }
+    const announcer = announcerRef.current.announcer;
+    let timer: number | null = null;
+    const update = () => {
+      const text = announcer.next(performance.now() - launchAt, { reduced,
+        paused: playbackPaused || document.hidden, finished: playbackFinished, folded: foldAt !== null,
+        evidence: announcementEvidenceRef?.current });
+      if ((foldAt !== null || announcementEvidenceRef?.current.status === "cancelled") && liveRef.current?.textContent) liveRef.current.textContent = "";
+      if (text !== null && liveRef.current) liveRef.current.textContent = text;
+      if (announcer.done && timer !== null) { window.clearInterval(timer); timer = null; }
+    };
+    update();
+    if (!announcer.done) timer = window.setInterval(update, 50);
+    document.addEventListener("visibilitychange", update);
+    return () => { if (timer !== null) window.clearInterval(timer); document.removeEventListener("visibilitychange", update); };
+  }, [card, launchAt, config, reduced, foldAt, playbackPaused, playbackFinished, sentenceVersion, announcementEvidenceRef]);
+
   /* 编排主循环:rAF 写 DOM,打字完毕即停。
      bar(进度条)只存在于 target-progress 模板——其余模板无进度条,
      缺 ref 不阻断编排(8b 起 5 种模板共用本管线)。 */
@@ -159,8 +184,13 @@ export const AnswerCard = memo(function AnswerCard({
     let lastTyped = -1;
     let lastHighlight = "";
     let barSet = false;
-    const sentences = buildSpokenSentences(displaySpoken(card.spoken));
-    if (announcedRef.current.card !== card) announcedRef.current = { card, index: -1 };
+    // These nodes are stable for this effect; unchanged snapshots need no style writes.
+    const root = body.parentElement!;
+    const layers = ([
+      [".overlay-card-header", "header"], [".overlay-card-data", "metricsContent"],
+      [".overlay-spoken-section", "spoken"], [".overlay-followups", "followups"],
+    ] as const).map(([selector, key]) => ({ node: body.querySelector<HTMLElement>(selector), key, last: null as number | null }));
+    let lastPresence: number | null = null;
 
     const paint = (now: number) => {
       if (disposed) return;
@@ -187,14 +217,12 @@ export const AnswerCard = memo(function AnswerCard({
       const u = ph.unfold;
 
       if (motion) {
-        const root = body.parentElement!;
-        root.style.opacity = String(motion.visual.presence);
-        for (const [selector, progress] of [
-          [".overlay-card-header", motion.visual.header], [".overlay-card-data", motion.visual.metricsContent],
-          [".overlay-spoken-section", motion.visual.spoken], [".overlay-followups", motion.visual.followups],
-        ] as const) {
-          const layer = body.querySelector<HTMLElement>(selector);
-          if (layer) { layer.style.opacity = String(progress); layer.style.transform = `translateY(${(1-progress)*8}px)`; }
+        if (lastPresence !== motion.visual.presence) { root.style.opacity = String(motion.visual.presence); lastPresence = motion.visual.presence; }
+        for (const layer of layers) {
+          const progress = motion.visual[layer.key];
+          if (layer.node && layer.last !== progress) {
+            layer.node.style.opacity = String(progress); layer.node.style.transform = `translateY(${(1-progress)*8}px)`; layer.last = progress;
+          }
         }
       }
       /* ③ 细线先横向生长(占展开前 40%),随后卡体纵向展开 */
@@ -245,11 +273,6 @@ export const AnswerCard = memo(function AnswerCard({
             mark.append(spokenNodes(text.slice(start,end)));
             spoken.replaceChildren(spokenNodes(text.slice(0,start)),mark,spokenNodes(text.slice(end)));
           } else spoken.replaceChildren(spokenNodes(text));
-        }
-        const completed = sentences.findLastIndex(s => s.displayEnd <= typed);
-        if (completed > announcedRef.current.index && liveRef.current) {
-          liveRef.current.textContent = sentences.slice(announcedRef.current.index + 1, completed + 1).map(s => s.text).join("");
-          announcedRef.current.index = completed;
         }
         if (typed >= card.spoken.length && u >= 1) return; // 编排完成,停帧
       }

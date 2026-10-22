@@ -1,0 +1,52 @@
+[WebServer] (node:45137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45139) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45141) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45143) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 35 tests using 1 worker
+
+(node:45149) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/p1-6-1.spec.ts:22:34 › 3067 denies URL-only GSAP despite debug, review/quality flags and forged headers (596ms)
+  ✓   2 e2e/p1-6-1.spec.ts:22:34 › 3068 denies URL-only GSAP despite debug, review/quality flags and forged headers (448ms)
+  ✓   3 e2e/p1-6-1.spec.ts:30:1 › attested service requires one exact GSAP parameter; default/old/repeated values fail closed (161ms)
+  ✓   4 e2e/p1-6-1.spec.ts:38:1 › forwarded requests cannot acquire the trusted server context (145ms)
+  ✓   5 e2e/p1-6-1.spec.ts:45:1 › review fixture stays private to the attested local launcher (52ms)
+  ✓   6 e2e/p1-6-1.spec.ts:50:1 › authorized non-debug GSAP does not publish a global audit (488ms)
+  ✓   7 e2e/p1-6-1.spec.ts:59:1 › rapid client route/mode switches revoke old closures and leave one live controller (1.9s)
+  ✓   8 e2e/p1-6-2.spec.ts:53:3 › legacy visible full text and complete-sentence compatibility notifications stay independent (1.9s)
+  ✓   9 e2e/p1-6-2.spec.ts:60:40 › legacy PCM completion owns notifications with reduced=false (5.0s)
+  ✓  10 e2e/p1-6-2.spec.ts:60:40 › legacy PCM completion owns notifications with reduced=true (4.8s)
+  ✓  11 e2e/p1-6-2.spec.ts:70:3 › legacy interruption, replacement and folding never republish the old answer (4.7s)
+  ✓  12 e2e/p1-6-2.spec.ts:80:3 › legacy unavailable audio keeps safe complete notifications and reduced text access (1.9s)
+  ✓  13 e2e/p1-6-2.spec.ts:87:3 › legacy passive screen with metadata but no local PCM retains safe accessibility (1.9s)
+  ✓  14 e2e/p1-6-2.spec.ts:53:3 › gsap visible full text and complete-sentence compatibility notifications stay independent (1.9s)
+  ✓  15 e2e/p1-6-2.spec.ts:60:40 › gsap PCM completion owns notifications with reduced=false (5.0s)
+  ✓  16 e2e/p1-6-2.spec.ts:60:40 › gsap PCM completion owns notifications with reduced=true (4.8s)
+  ✓  17 e2e/p1-6-2.spec.ts:70:3 › gsap interruption, replacement and folding never republish the old answer (4.6s)
+  ✓  18 e2e/p1-6-2.spec.ts:80:3 › gsap unavailable audio keeps safe complete notifications and reduced text access (1.9s)
+  ✓  19 e2e/p1-6-2.spec.ts:87:3 › gsap passive screen with metadata but no local PCM retains safe accessibility (1.9s)
+  ✓  20 e2e/p1-6.spec.ts:87:3 › legacy full interaction film (22.1s)
+  ✓  21 e2e/p1-6.spec.ts:109:5 › legacy 1280 geometry and performance (10.5s)
+  ✓  22 e2e/p1-6.spec.ts:109:5 › legacy 1792 geometry and performance (10.6s)
+  ✓  23 e2e/p1-6.spec.ts:109:5 › legacy 1920 geometry and performance (11.1s)
+  ✓  24 e2e/p1-6.spec.ts:109:5 › legacy 3840 geometry and performance (12.2s)
+  ✓  25 e2e/p1-6.spec.ts:122:3 › legacy audio failure reduced motion and repeated wake exit (10.0s)
+  ✓  26 e2e/p1-6.spec.ts:128:3 › legacy hidden restore early interruption navigation and reentry (11.3s)
+  ✓  27 e2e/p1-6.spec.ts:87:3 › gsap full interaction film (21.9s)
+  ✓  28 e2e/p1-6.spec.ts:109:5 › gsap 1280 geometry and performance (10.5s)
+  ✓  29 e2e/p1-6.spec.ts:109:5 › gsap 1792 geometry and performance (10.7s)
+  ✓  30 e2e/p1-6.spec.ts:109:5 › gsap 1920 geometry and performance (11.2s)
+  ✓  31 e2e/p1-6.spec.ts:109:5 › gsap 3840 geometry and performance (12.9s)
+  ✓  32 e2e/p1-6.spec.ts:122:3 › gsap audio failure reduced motion and repeated wake exit (10.1s)
+  ✓  33 e2e/p1-6.spec.ts:128:3 › gsap hidden restore early interruption navigation and reentry (11.6s)
+  ✓  34 e2e/p1-6.spec.ts:153:1 › main GSAP and overlay share the existing ticker owner without altering its cap (3.1s)
+  ✓  35 e2e/p1-6.spec.ts:161:1 › gsap P1.3 normal and long templates retain layout and spoken pagination (27.6s)
+
+  35 passed (4.3m)

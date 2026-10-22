@@ -1,0 +1,78 @@
+[
+  {
+    "mode": "gsap",
+    "record": {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 151,
+      "overlayFrames": 150,
+      "baselineP95": 0.4000000059604645,
+      "overlayP95": 3.5,
+      "incrementP95": 3.0999999940395355
+    },
+    "collectorDepth": 1,
+    "rawFile": ".review/p1-6-2/card-evidence/gsap-regression/worker-38551.json",
+    "sha256": "4cf61896ec934ff9ac6e6ccf425a98b7b69682a311679debe0038893dcca3825",
+    "passesUnchanged8msOracle": true
+  },
+  {
+    "mode": "gsap",
+    "record": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 150,
+      "overlayFrames": 152,
+      "baselineP95": 0.30000001192092896,
+      "overlayP95": 9.799999997019768,
+      "incrementP95": 9.499999985098839
+    },
+    "collectorDepth": 2,
+    "rawFile": ".review/p1-6-2/card-evidence/gsap-regression/worker-38551.json",
+    "sha256": "4cf61896ec934ff9ac6e6ccf425a98b7b69682a311679debe0038893dcca3825",
+    "passesUnchanged8msOracle": false
+  },
+  {
+    "mode": "legacy",
+    "record": {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 151,
+      "overlayFrames": 155,
+      "baselineP95": 0.30000001192092896,
+      "overlayP95": 1.6000000089406967,
+      "incrementP95": 1.2999999970197678
+    },
+    "collectorDepth": 1,
+    "rawFile": ".review/p1-6-2/card-evidence/legacy-regression/worker-39695.json",
+    "sha256": "da97b6b951a0d81c83e76785f647de2241e31b7083ab4da95ffc104f09c701e6",
+    "passesUnchanged8msOracle": true
+  },
+  {
+    "mode": "legacy",
+    "record": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "metric": "summed JS + Canvas CPU cost of RAF callbacks per timestamp; excludes compositor/GPU",
+      "baselineFrames": 150,
+      "overlayFrames": 151,
+      "baselineP95": 0.29999999701976776,
+      "overlayP95": 1.5999999940395355,
+      "incrementP95": 1.2999999970197678
+    },
+    "collectorDepth": 2,
+    "rawFile": ".review/p1-6-2/card-evidence/legacy-regression/worker-39695.json",
+    "sha256": "da97b6b951a0d81c83e76785f647de2241e31b7083ab4da95ffc104f09c701e6",
+    "passesUnchanged8msOracle": true
+  }
+]

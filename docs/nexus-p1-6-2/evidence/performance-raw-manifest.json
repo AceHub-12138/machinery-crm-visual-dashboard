@@ -1,0 +1,548 @@
+{
+  "root": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2",
+  "retention": "Keep raw local samples until architecture review. No upload authorization.",
+  "files": [
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r1/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r1/r1-1280-gsap.json",
+      "bytes": 113935,
+      "sha256": "16a8c74c69e82936551c992365ca78ffe5a6ce149826974bd3e78fd4cb65ff32"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r1/r1-1280-legacy.json",
+      "bytes": 125221,
+      "sha256": "6104f19453bb00893d06b0682ab8b6466c24e7716eee8ac80563a70a3711a9ea"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r1/r1-1920-gsap.json",
+      "bytes": 115783,
+      "sha256": "edd6b00edd52e40c2483eb0ceaaa878da0e9320cac10cee1f058e1d963fa3384"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r1/r1-1920-legacy.json",
+      "bytes": 125108,
+      "sha256": "a7eeaa14710ded8b6dd387f9932a086c54ac47ea08a581f0d949564f7ff4d96f"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r1/results.json",
+      "bytes": 6339,
+      "sha256": "89b5f6c10c0d1a37aeb09f0fe95e9c82ae838177d7d7da4997ddecd5d0e05f24"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r2/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r2/r2-1280-gsap.json",
+      "bytes": 114819,
+      "sha256": "8e9c811a20d403ccda563118c91ddd29fc6ffdaeecb47b6377f02680e1202d0d"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r2/r2-1280-legacy.json",
+      "bytes": 126640,
+      "sha256": "1fca2e4ad906f5644282abcf3299221cbb770ab6dea20b878e6f403d9856175d"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r2/r2-1920-gsap.json",
+      "bytes": 115186,
+      "sha256": "0dd03d786cb61c52ef0b233ddb28b4aff031c2d70f4cb03b682e9f6083843a88"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r2/r2-1920-legacy.json",
+      "bytes": 125602,
+      "sha256": "7635fb3476e5946eba4f16b0949da0b3bb7b3233b528925b86cae0567f2628d2"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r2/results.json",
+      "bytes": 6330,
+      "sha256": "cfc33aac2ade8477e67d04774069c1a37482dc3ef378bf9cb4fa373a8a1d1f23"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r3/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r3/r3-1280-gsap.json",
+      "bytes": 115250,
+      "sha256": "6529f4a00cca91d0dd00e396e23e0ba1c6ba90834800059489fc15a337765dd2"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r3/r3-1280-legacy.json",
+      "bytes": 123882,
+      "sha256": "04e8b12e60bc8060c3d6b7f6e2591c50aa65cc8ea9420d6380d6e9f66a437511"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r3/r3-1920-gsap.json",
+      "bytes": 115161,
+      "sha256": "da18996a8b84d419ab0cb2f962ac004b9b64df05ed2d93ec95d0f29273420513"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r3/r3-1920-legacy.json",
+      "bytes": 126791,
+      "sha256": "d3c9d80c70029cd7202cb02749da2624725d38918539e4edd14165387b90b4a1"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-r3/results.json",
+      "bytes": 6330,
+      "sha256": "786221345d01ee24d90970b0a4f8d371b123769cf861bc38af4d6f2c127fb307"
+    },
+    {
+      "path": ".review/p1-6-2/performance/control-headless-runs.json",
+      "bytes": 927,
+      "sha256": "61179604d061aea7dc4a03ba3cafb03479fa94b84c765ea9ec7177076836dad9"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r1/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r1/r1-1280-gsap.json",
+      "bytes": 154503,
+      "sha256": "351236a9dd9c9b65eeaddff5977a4ce5c212245e6ee2467249390fbdc997ee1f"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r1/r1-1280-legacy.json",
+      "bytes": 180238,
+      "sha256": "5273d769dea3ad615e893533cae178a1f1fc7d7f1c461d2278c44f991385a31a"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r1/r1-1920-gsap.json",
+      "bytes": 154122,
+      "sha256": "0ba9555fe6576a415eef9145ed7e921a03a82a688d57ab6c726521511af61be8"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r1/r1-1920-legacy.json",
+      "bytes": 176434,
+      "sha256": "cc1fe65afabc0e670d8158a0eec6f61e893339c86badf6fdeb606982be882f24"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r1/results.json",
+      "bytes": 6349,
+      "sha256": "712af414233f9ed2bb20bf0aa23db36f4195a1c8cd4536f5b0b6ab5aa081a36a"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r2/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r2/r2-1280-gsap.json",
+      "bytes": 157724,
+      "sha256": "0af460b8de4188b4bc296535da82b6299bdeac195cd1008aa930e7a7f545dabe"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r2/r2-1280-legacy.json",
+      "bytes": 179819,
+      "sha256": "fa625ed69bf9a2f7c8d70b4805fc86d9bb2498ebcf2305d6794a1e2286231d3b"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r2/r2-1920-gsap.json",
+      "bytes": 152756,
+      "sha256": "fcb2e026d38f990b91bdd92e15eada255ed002fc4158e1d357fc9a39b59dd8f6"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r2/r2-1920-legacy.json",
+      "bytes": 179064,
+      "sha256": "f3ad44eee93d9a3c99c434f0400c1d59cdcc1ac544dab1f3ab33da8e43ddbfe3"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-r2/results.json",
+      "bytes": 6340,
+      "sha256": "3656f8ece4c80c25336805e8b38540bbd9ffa2d64af3b274c2d96c383836be63"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-recheck-r3/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-recheck-r3/r3-1280-gsap.json",
+      "bytes": 158389,
+      "sha256": "37cc59cefecbb495cc1e6a5a3d40d51d5f4608ba21d45b1fc75cc776a330433a"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-recheck-r3/r3-1280-legacy.json",
+      "bytes": 180286,
+      "sha256": "133c47872905f094c8b06243fe0c6e0e2f69072955828716025d999a31e27976"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-recheck-r3/r3-1920-gsap.json",
+      "bytes": 150309,
+      "sha256": "744272dbd4a90cb1d128149de69c06499bb27f8a9e0431451a39bfcba8342fdd"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-recheck-r3/r3-1920-legacy.json",
+      "bytes": 176419,
+      "sha256": "e36fd2f8304e8334208692beddc1d9c64e972e54eb9fefe50ec19a0cfdad8c26"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-recheck-r3/results.json",
+      "bytes": 6365,
+      "sha256": "50b56c2467159efd2a22c2883df09efe55d5025265506e47f04d80e0ac53b9a1"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-recheck-runs.json",
+      "bytes": 333,
+      "sha256": "3dfffec7d81b1b260d4b44699838ca8e90e54f1771942af212dd1caea230bc24"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headed-runs.json",
+      "bytes": 969,
+      "sha256": "7156c5e9c40e62004b34c3e56e796477e74f3b58263f4e6878df7a3011228fb9"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r1/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r1/r1-1280-gsap.json",
+      "bytes": 102320,
+      "sha256": "a340e632fcb46ca1bcde78209801db86106b6d4b6672127391c54acde5cdc89a"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r1/r1-1280-legacy.json",
+      "bytes": 114973,
+      "sha256": "168301dc6407e7bf91b5c4d1e34919ed61eda9666c62f6e26a060f34d3f9940c"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r1/r1-1920-gsap.json",
+      "bytes": 102174,
+      "sha256": "b9b2f7ae00c9248738e439335e11c94e252111fcc7b8d71775b6d8f62767d82f"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r1/r1-1920-legacy.json",
+      "bytes": 115531,
+      "sha256": "2dbd0524d88d8435ace59a77674297cdece53250d63af2cbf7f9e69a70d0076c"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r1/results.json",
+      "bytes": 6326,
+      "sha256": "8c797718d239d3534764c558aedb78a37634f900291bc9656ee085678ff98f2d"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r2/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r2/r2-1280-gsap.json",
+      "bytes": 102276,
+      "sha256": "5ca112c3646b2ab8ead7c0397a4c6977be86493f980c6007d9068d1ef27a0ffd"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r2/r2-1280-legacy.json",
+      "bytes": 113154,
+      "sha256": "9c463971750d2818b03206f6373c89ff847c1580f06a081950562de100220329"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r2/r2-1920-gsap.json",
+      "bytes": 104144,
+      "sha256": "6e8b55d3a66bcbea9bea405e77ad816ffb0b3cde3b9735038ca3c827f20860b8"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r2/r2-1920-legacy.json",
+      "bytes": 115661,
+      "sha256": "0e94d472c1f25ca18dee0baa61699fe8e8ace46abc2da9797e69663e7570f425"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r2/results.json",
+      "bytes": 6326,
+      "sha256": "8c911e307bd666f6a6c2011076461be842f50252cbc5a14e409bb241cbafc13c"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r3/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r3/r3-1280-gsap.json",
+      "bytes": 102748,
+      "sha256": "705f5cd3fb2055d7bfebb7f7f08ab219cc8675d5a866c03dce4c4a01338953f0"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r3/r3-1280-legacy.json",
+      "bytes": 115042,
+      "sha256": "7387958c14fef89a8879b2e773e751a12037a9f990db7155e64d275d37d22a7c"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r3/r3-1920-gsap.json",
+      "bytes": 102598,
+      "sha256": "f6441f317950b974edb7e61fb7563d0ea64ef1dd76e2f77df78d5ae4420dc5fa"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r3/r3-1920-legacy.json",
+      "bytes": 117125,
+      "sha256": "2a864b87d9a4e587507f9e02f525aaa742bbb457e2d6399f3b8ca591e867af9d"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-r3/results.json",
+      "bytes": 6335,
+      "sha256": "20bec6e69e375b220b3180cf42e88e0bc2f41e579bc4bcc6f15d3508b942f871"
+    },
+    {
+      "path": ".review/p1-6-2/performance/early-headless-runs.json",
+      "bytes": 921,
+      "sha256": "2846ca604cda2a32841bb0d40bf59261a9c4141207a0f828fa09ce59494b22c1"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-control/original-control-r1-samples.json",
+      "bytes": 156956,
+      "sha256": "19fcdbd6d54fcb1a9eb079d7a6720491e3c698cf41493670841152c813e88eec"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-control/original-control-r1.json",
+      "bytes": 8163,
+      "sha256": "9977ea8cc14b9c81ffab2bf1bd03b528be153bbe0e098c6de1f439ef9c39572c"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-control/original-control-r2-samples.json",
+      "bytes": 157392,
+      "sha256": "c4fe7f1f1f523eb643bece76a648d0b5848263f22a18d3816e1dd18e0294eaaa"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-control/original-control-r2.json",
+      "bytes": 8163,
+      "sha256": "85d8f0536da6384bc85ba5bce7b515e1c342d0f78b13518db551bc6388eec381"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-control/original-control-r3-samples.json",
+      "bytes": 156978,
+      "sha256": "b55be493d28b2c555503c09c4aa42b4ad6da9287bf1784e9172c32948e1c5e85"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-control/original-control-r3.json",
+      "bytes": 8214,
+      "sha256": "8f85aa5aa585bcf954ae1479eb59e6a781898edcaa5102197616d8db64736aef"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-control/runs.json",
+      "bytes": 996,
+      "sha256": "93661d18d01157ef94a0b76c5ebacb51a362f92c8ea716009423c98015f60f41"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-native-profile/original-native-profile-r1-samples.json",
+      "bytes": 791991,
+      "sha256": "882a398d8dd90a31e6e32187ca7289fb3930f9935bc625d322bd4b9b0234ee07"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-native-profile/original-native-profile-r1.json",
+      "bytes": 8354,
+      "sha256": "748d68efc9b8b1753464e2ecb01c13bf443fffac151018f95afcce87f5003283"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-native-profile/original-native-profile-r2-samples.json",
+      "bytes": 782212,
+      "sha256": "03b9b0f4945b27dd2b67c737fe7c075bb61600fe1a76160b7cc5c5da0682c8e7"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-native-profile/original-native-profile-r2.json",
+      "bytes": 8354,
+      "sha256": "a9154168161d7664a4ddfd1acfc31515dc4262974f1eb6ab6ea1fe570720e008"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-native-profile/original-native-profile-r3-samples.json",
+      "bytes": 794784,
+      "sha256": "a2c606117fe24a422f3bdef97393deadc384ad2df287e5609236f42faaec3094"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-native-profile/original-native-profile-r3.json",
+      "bytes": 8354,
+      "sha256": "64a347591d19b88acb3229aebc9f2e1afb6b7e2f0372c371a2e528777bbfbc03"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-native-profile/runs.json",
+      "bytes": 1020,
+      "sha256": "5f39bee5f34b7dfdd66730935a69804f1bbf3b40e01d65198c5f88ef37fec8ce"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-profile/original-profile-r1-samples.json",
+      "bytes": 616841,
+      "sha256": "5cbb3ad35c6846f42d309b12b46a4984838e48805a830deefbbe084b71d3b5da"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-profile/original-profile-r1.json",
+      "bytes": 8318,
+      "sha256": "cf70bc7ffb5f010ad6d6a116a907726ad4649a0f7fe92770132939dae596c4e8"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-profile/original-profile-r2-samples.json",
+      "bytes": 614007,
+      "sha256": "06f6bb89ce2550be5e826e30584d8041f1838e064a01f925d09692659baad191"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-profile/original-profile-r2.json",
+      "bytes": 8309,
+      "sha256": "1da7a86a0777b0a522b0d81a180215fe3458ef257cfd262b5afde770eec10c5f"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-profile/original-profile-r3-samples.json",
+      "bytes": 298507,
+      "sha256": "e09685aa318cb0be0ee890fa31844213ee1240724fbc8602d4eab6f9c32ed232"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-profile/original-profile-r3.json",
+      "bytes": 8310,
+      "sha256": "bb2e3d992ea1c1252236ebb5895cdcf974517addd842494d0f487027cc732f04"
+    },
+    {
+      "path": ".review/p1-6-2/performance/original-profile/runs.json",
+      "bytes": 1020,
+      "sha256": "5f39bee5f34b7dfdd66730935a69804f1bbf3b40e01d65198c5f88ef37fec8ce"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r1/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r1/r1-1280-gsap.json",
+      "bytes": 330417,
+      "sha256": "b07f87a42769b28f9871050e404f65b40e90212947476d46d06891ffb3e5fa18"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r1/r1-1280-legacy.json",
+      "bytes": 255832,
+      "sha256": "1aa6e41630d597783b1a01d5271d38e614c85960df6862c3c07606c5995c2943"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r1/r1-1920-gsap.json",
+      "bytes": 327963,
+      "sha256": "d8abd566f0c61384a6170545ab07c93815f8628a42317ad0488157f16f261d83"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r1/r1-1920-legacy.json",
+      "bytes": 255840,
+      "sha256": "abf9f2b6c0c38ae6557aadb35a6bf6d82fa02fa1f7d5dcd2d0ae68b499b78c63"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r1/results.json",
+      "bytes": 6371,
+      "sha256": "2b155f82dea31e637de7c4f3aa53eedccb7ed0c4b0c54ce897d65304283e54cd"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r2/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r2/r2-1280-gsap.json",
+      "bytes": 311486,
+      "sha256": "0041150c4cb3e4815e398819c1352bb3362330ec6ce1383221b012d3da1ecaf1"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r2/r2-1280-legacy.json",
+      "bytes": 251634,
+      "sha256": "255e3d698a890b63173880b2c13aae30e6841e0671ab080322354701bdd10d80"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r2/r2-1920-gsap.json",
+      "bytes": 330122,
+      "sha256": "399357dc8bb5c4d5b675d39f4097b916ae1a77d4dfcc008b318bdbc6409562ef"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r2/r2-1920-legacy.json",
+      "bytes": 253043,
+      "sha256": "aaff61b4c0b5331bac880cc5ebeedddd458349ddfe8e3408b1022894119df3ca"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r2/results.json",
+      "bytes": 6362,
+      "sha256": "4680cabf02199eb77b3173f3765f43fc13093416aff97d6b93f4e172aa55287f"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r3/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r3/r3-1280-gsap.json",
+      "bytes": 322796,
+      "sha256": "7257d82d1842de9081b6adcc9a7631b493ac807af1a37514703e3e3a565b1c52"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r3/r3-1280-legacy.json",
+      "bytes": 252149,
+      "sha256": "9e6e35330c8733cd90a7a6ee553c5e177e08d8e03e967da1d0d0863b76f5127c"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r3/r3-1920-gsap.json",
+      "bytes": 325111,
+      "sha256": "ec1171f0990b7cb016409ed69c016d5820eeed116a20ee226263a7907eff1c4d"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r3/r3-1920-legacy.json",
+      "bytes": 257388,
+      "sha256": "1f2a71b90eb8d0ee22e2c5c736487c9d2a62e0d0621e78e2d38ef61b07fbdd0f"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-r3/results.json",
+      "bytes": 6362,
+      "sha256": "f4c60492ae867c239625bd6e8b2e3c4d3c3f688aaab01603aafe4ddecdbb6c33"
+    },
+    {
+      "path": ".review/p1-6-2/performance/profile-headless-runs.json",
+      "bytes": 951,
+      "sha256": "b226182b38c5e5e1e9ef3768d0d8b0508fdc81de14a7428b3b8787fae74b6fc4"
+    }
+  ],
+  "excludedFilesRetained": [
+    {
+      "path": ".review/p1-6-2/performance/invalid-build-start/control-headless-r1/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "e22df5d0991eb28c09093b1e678b3fa8cd1fab48185d38e67cf79fb6e63ad5ea"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-build-start/control-headless-r1/results.json",
+      "bytes": 2205,
+      "sha256": "2d057dbc2fabb142cdfeae25307ad29496e0c2f3c2b8337901046efcfc064eb7"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-build-start/control-headless-runs.json",
+      "bytes": 311,
+      "sha256": "f536530dd56d8902c2fe19340780f5bbab96529b7dafade387700c73c07e0fd9"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-unit-overlap/early-headed-r3/playwright/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-unit-overlap/early-headed-r3/r3-1280-gsap.json",
+      "bytes": 160084,
+      "sha256": "5d867d1dd1689ec5c1979b48b35269f854ecf7ce8ff62e055a25b241b9094c0a"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-unit-overlap/early-headed-r3/r3-1280-legacy.json",
+      "bytes": 179739,
+      "sha256": "cdd324c71b34dffe697a5f1598da054873d5b9281b5cbf3b0307bf0a4ea1eb57"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-unit-overlap/early-headed-r3/r3-1920-gsap.json",
+      "bytes": 154122,
+      "sha256": "09c19a0a0f351a2dd67123b9ad092728b2c56af53116826cc10fec7d1503e846"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-unit-overlap/early-headed-r3/r3-1920-legacy.json",
+      "bytes": 176834,
+      "sha256": "e3b784d1a3ad8638329e386e06672fae01e506fab585cff09e90c7574809f064"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-unit-overlap/early-headed-r3/results.json",
+      "bytes": 6349,
+      "sha256": "6ebb4cc54f095b23e01b990c7beeed13238d77a2a623737e97dc3ad1906042ee"
+    },
+    {
+      "path": ".review/p1-6-2/performance/invalid-unit-overlap/reason.json",
+      "bytes": 229,
+      "sha256": "fcacc174d104300489dd1b77f834fffbe6f56242c98e940f74b7dddf906fd39c"
+    }
+  ]
+}

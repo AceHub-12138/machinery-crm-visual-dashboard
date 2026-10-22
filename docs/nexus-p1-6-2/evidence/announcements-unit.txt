@@ -1,0 +1,9 @@
+
+ RUN  v3.2.7 /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2
+
+ ✓ src/components/overlay/sentence-announcements.test.ts (8 tests) 3ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  14:11:20
+   Duration  318ms (transform 43ms, setup 0ms, collect 49ms, tests 3ms, environment 0ms, prepare 50ms)

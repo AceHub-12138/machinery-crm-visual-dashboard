@@ -1,0 +1,240 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "e2e/p1-6-2.config.ts",
+      "e2e/p1-6-2.spec.ts",
+      "--grep",
+      "passive screen"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/red-passive",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "p1-6.spec.ts",
+          "p1-6-1.spec.ts",
+          "p1-6-2.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/docs/nexus-p1-6-2/evidence/red-passive.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "p1-6-2.spec.ts",
+      "file": "p1-6-2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "legacy passive screen with metadata but no local PCM retains safe accessibility",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5685,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"本期新增客户十二家。\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"本期新增客户十二家。\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts:89:61",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts",
+                      "column": 61,
+                      "line": 89
+                    },
+                    "snippet": "  87 |   test(`${mode} passive screen with metadata but no local PCM retains safe accessibility`, async ({ page }) => {\n  88 |     await open(page, mode, false, false); await answer(page, card, true);\n> 89 |     await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(first);\n     |                                                             ^\n  90 |     await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(second);\n  91 |     expect(await notices(page)).toEqual([first, second]);\n  92 |     expect(reports.includes(\"playback.started\")).toBe(false);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts",
+                        "column": 61,
+                        "line": 89
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"本期新增客户十二家。\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  87 |   test(`${mode} passive screen with metadata but no local PCM retains safe accessibility`, async ({ page }) => {\n  88 |     await open(page, mode, false, false); await answer(page, card, true);\n> 89 |     await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(first);\n     |                                                             ^\n  90 |     await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(second);\n  91 |     expect(await notices(page)).toEqual([first, second]);\n  92 |     expect(reports.includes(\"playback.started\")).toBe(false);\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts:89:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T23:59:26.367Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/red-passive/p1-6-2-legacy-passive-scre-05630--retains-safe-accessibility/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/red-passive/p1-6-2-legacy-passive-scre-05630--retains-safe-accessibility/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/red-passive/p1-6-2-legacy-passive-scre-05630--retains-safe-accessibility/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts",
+                    "column": 61,
+                    "line": 89
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17ef04665061914c2333-c637c316682a25368685",
+          "file": "p1-6-2.spec.ts",
+          "line": 87,
+          "column": 3
+        },
+        {
+          "title": "gsap passive screen with metadata but no local PCM retains safe accessibility",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5662,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"本期新增客户十二家。\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"本期新增客户十二家。\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts:89:61",
+                    "location": {
+                      "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts",
+                      "column": 61,
+                      "line": 89
+                    },
+                    "snippet": "  87 |   test(`${mode} passive screen with metadata but no local PCM retains safe accessibility`, async ({ page }) => {\n  88 |     await open(page, mode, false, false); await answer(page, card, true);\n> 89 |     await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(first);\n     |                                                             ^\n  90 |     await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(second);\n  91 |     expect(await notices(page)).toEqual([first, second]);\n  92 |     expect(reports.includes(\"playback.started\")).toBe(false);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts",
+                        "column": 61,
+                        "line": 89
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.overlay-card [aria-live]')\nExpected: \u001b[32m\"本期新增客户十二家。\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.overlay-card [aria-live]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.overlay-card [aria-live]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p class=\"sr-only\" aria-live=\"polite\" aria-atomic=\"true\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  87 |   test(`${mode} passive screen with metadata but no local PCM retains safe accessibility`, async ({ page }) => {\n  88 |     await open(page, mode, false, false); await answer(page, card, true);\n> 89 |     await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(first);\n     |                                                             ^\n  90 |     await expect(page.locator(\".overlay-card [aria-live]\")).toHaveText(second);\n  91 |     expect(await notices(page)).toEqual([first, second]);\n  92 |     expect(reports.includes(\"playback.started\")).toBe(false);\n    at /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts:89:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T23:59:32.553Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/red-passive/p1-6-2-gsap-passive-screen-e4020--retains-safe-accessibility/error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/red-passive/p1-6-2-gsap-passive-screen-e4020--retains-safe-accessibility/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/red-passive/p1-6-2-gsap-passive-screen-e4020--retains-safe-accessibility/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2.spec.ts",
+                    "column": 61,
+                    "line": 89
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17ef04665061914c2333-82068be1256579096a8c",
+          "file": "p1-6-2.spec.ts",
+          "line": 87,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T23:59:24.070Z",
+    "duration": 14426.413999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

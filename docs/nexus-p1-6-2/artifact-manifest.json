@@ -1,0 +1,307 @@
+{
+  "algorithm": "SHA-256",
+  "base": "5ac9cff6398839d776ee5f92ac4fc34da92c9b3b",
+  "selfExcluded": "docs/nexus-p1-6-2/artifact-manifest.json",
+  "files": [
+    {
+      "path": "docs/nexus-p1-6-2/PERFORMANCE.md",
+      "bytes": 8527,
+      "sha256": "3e326b3a279cd70c0392883b7e7f947be66d304f9dae884d3579bca302576ac7"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/PR-MATERIALS.md",
+      "bytes": 3437,
+      "sha256": "c426966e33c58df305ae89276d76adcb9b0d3c1510c7fd4fd44ffb4f60a0115d"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/README.md",
+      "bytes": 9993,
+      "sha256": "9bee7dec7a35f465f38b6d19713073141e111943ca952436874dc426c0fe7066"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/changed-files.txt",
+      "bytes": 2623,
+      "sha256": "59babb25f13915ce799d7256ca6f16c445360d353acbe406efbc233d87e768f2"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/code-diff.patch",
+      "bytes": 59212,
+      "sha256": "33ce6f7eab1c6b15aafabe1086c569d359ac4a2fc856989966ff73018dfecffe"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/announcements-browser.json",
+      "bytes": 12773,
+      "sha256": "0874083bcbea63ef1b5cd09a531d5594805a3b9b5b88707cf92b198ecd471217"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/announcements-browser.txt",
+      "bytes": 2343,
+      "sha256": "bcbc64bf75e1e4c469282c5d0edf16ebb2b8e740899ece7d22de763e20e503ce"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/announcements-unit.txt",
+      "bytes": 331,
+      "sha256": "16bf5c100b03d5ffdcf42ad730f8b14f277cb1045b43f8e3a69dd8f36cffd638"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/baseline-build.txt",
+      "bytes": 1038,
+      "sha256": "b6a084801b9e7d839ae0c1be67f0d2b8e80a1f729224953093bc23c9af7d1591"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/build-initial-test-type-error.txt",
+      "bytes": 1315,
+      "sha256": "988267ee2f920ad5796e13c4ff089e380ce7735c4526b38f88f4beeff4b9af34"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/build.txt",
+      "bytes": 1040,
+      "sha256": "2f100d326cd907491f987d723ee890eb5b6ebbeaf9eaaa99e90430720d56079a"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/final-build-source.json",
+      "bytes": 736,
+      "sha256": "dfdc3cb581eae8f7532ba5c4ac5e3344d249d0aae15ddab10e5c9e1eb7bcf0bd"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/final-original-cpu.json",
+      "bytes": 2532,
+      "sha256": "3f382534ffe9d47ca2f23da5b96f649b5f7f53b03c51f862c44a07e8fa528a79"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/geometry-summary.json",
+      "bytes": 92361,
+      "sha256": "1e3e0cdbbf19fcc822bfe1b81863b26b02505ca9be80e7f3a539b8a244a4c493"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/git-baseline.json",
+      "bytes": 1637,
+      "sha256": "a3055f9142600ce37f2b6f2512bdc569019fc72406238f2ea1979b86b9945b79"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/green-existing-aria.json",
+      "bytes": 3309,
+      "sha256": "f330dcdfdc44e60b919f709dab9dd386e496b682b942edd83457f599e9fa043a"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/green-existing-aria.txt",
+      "bytes": 702,
+      "sha256": "18b7b1b9ed5912303cbf64aa2b52f9b1ba7212d69285a93879d5169d8b4764ae"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/gsap-regression.json",
+      "bytes": 155836,
+      "sha256": "80d611d291c5a2cb49d4f248b4c6194c19735ce59a8449fcd165d9f4865e08ef"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/gsap-regression.txt",
+      "bytes": 17014,
+      "sha256": "d73af64edea4085cf9e3429910513cf0225e7f59d029a870e776ae1e9fb0b791"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/inventory-script-failure.txt",
+      "bytes": 285,
+      "sha256": "3607ace2526d63a718b9e33bbb44e1c605b6b5f8c64b80cd77ca290cce8d8d1a"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/large-evidence-inventory-initial.json",
+      "bytes": 51423,
+      "sha256": "de0a81e51abac715e17baa7e86958a00efdbb86ae5d263a1d614548f93f1464f"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/large-evidence-inventory.json",
+      "bytes": 67323,
+      "sha256": "a7251c171f67b176c687099e4bc89722965a9679d07c4859bef27e1ee5a4b876"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/legacy-prefinal.json",
+      "bytes": 150987,
+      "sha256": "b5d74798996db5b441af1cf90ba2beb75c9ac4d7ef35957650cf67bf68e99096"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/legacy-prefinal.txt",
+      "bytes": 14455,
+      "sha256": "425045dda210dd8e50679bf811697bdabfc9b24a9a05d8c2dba1a1f3b170ce4a"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/legacy-regression.json",
+      "bytes": 150995,
+      "sha256": "01c1729db6a1e02de8c6825b3af85b176af237af41fa5988fe1401c01e4238da"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/legacy-regression.txt",
+      "bytes": 14454,
+      "sha256": "fa8c8873c23975043c879e11b6034421b2b1aba96638d790767a8dba42ea00d4"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/lint.txt",
+      "bytes": 552,
+      "sha256": "a7cbfd5e752c62fda24c8d7dc99b0724deb656a3b7d424163e14eac79badc6ca"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/performance-raw-manifest.json",
+      "bytes": 22127,
+      "sha256": "88e60e7aecd19103ac895f8e51a2e3b28fdeda0e4b333a24a01df3194d338073"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/performance-summary.json",
+      "bytes": 146943,
+      "sha256": "df30a724049f86dd569a4da40c9e6fa9b829e91994c79d3ebf6799538329aa3f"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/performance-windows.csv",
+      "bytes": 15754,
+      "sha256": "041c41e80aa62e222265855c75e0b9d35a224a6b47acc540866808b7cd7ee388"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/profiling-build-manifest.json",
+      "bytes": 1537,
+      "sha256": "79e1af1799645493c2a958203142112e3075f832cbf8dd8deff04bb306578292"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/protected-source-manifest.json",
+      "bytes": 13136,
+      "sha256": "4b8684aec0bef559c9147b57f6b6991dbf2fa88ae89a91b602fb7e3a4d0c590a"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/red-existing.json",
+      "bytes": 15332,
+      "sha256": "2480645a09e5c41ef9346fbd655948a1279fc1376fb3639be8319645bfb2a1f8"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/red-existing.txt",
+      "bytes": 5877,
+      "sha256": "aa42e2797acd59cdf6ec9da270b71351d82a1c6622070bbd7a4889b6bfc318a6"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/red-passive.json",
+      "bytes": 15390,
+      "sha256": "2202b62f1e9f354031dc230d84a3d3ebb33309f6e7b9e7c571e16742860523c9"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/red-passive.txt",
+      "bytes": 6406,
+      "sha256": "6ec699c26a73dfcccf919891c64cead95278e7d0341323d37a41263b18cd64fd"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/shared-ref-drift.json",
+      "bytes": 916,
+      "sha256": "66576377519ef5bd3c3fa1e5254a8eb2b9ee46130bad31759360abc215209e01"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/special.json",
+      "bytes": 38962,
+      "sha256": "959765aee5050ee511e36acc97406b5e98206a1d144f1fde37847dd1288dff9a"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/special.txt",
+      "bytes": 4882,
+      "sha256": "df2e81b3aaab21ed4017f7ae49857c9ca52aa1051d562e169b28e682c193d031"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/test-summary.json",
+      "bytes": 2453,
+      "sha256": "014c36156365a9e807f34287ed8bcd47347aa6e3bf7089fbe1f7f2b7d254e3aa"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/typecheck.txt",
+      "bytes": 87,
+      "sha256": "cc44c8a3c97593c68cc6a8c6fa38b4b05813e46c9a588883ac100fc9e8d72a3c"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/unit-all.txt",
+      "bytes": 4210,
+      "sha256": "d6aa62df69bbd20c706215b9eff6d928485a3bb93b0f4b7a2d0a0ad2d462b772"
+    },
+    {
+      "path": "docs/nexus-p1-6-2/evidence/unpushed-baseline.txt",
+      "bytes": 992,
+      "sha256": "ee5da7e70d138acbbe930ea003546c3c4ec9e00836e6d396d8e6bda729316887"
+    },
+    {
+      "path": "e2e/p1-6-2-performance.config.ts",
+      "bytes": 1181,
+      "sha256": "498a5cea6fa092f8a04e613b94a2e5d18b72ec0560bc92a6efb62383b585d053"
+    },
+    {
+      "path": "e2e/p1-6-2-performance.spec.ts",
+      "bytes": 5598,
+      "sha256": "e9875f481ee12ceee79cc7ef78b49e7d5b7c73352b050db74dcc34c2c0b9364e"
+    },
+    {
+      "path": "e2e/p1-6-2-regression.config.ts",
+      "bytes": 598,
+      "sha256": "9dee2a82b7542cc87210e7ce995317a796ded42fa30198725c9e7c0f5fd15fe0"
+    },
+    {
+      "path": "e2e/p1-6-2.config.ts",
+      "bytes": 499,
+      "sha256": "9461bc5bffe5bb6169aa5d20df56a153c13391b78b67b9121dada8b5e9502dca"
+    },
+    {
+      "path": "e2e/p1-6-2.spec.ts",
+      "bytes": 6824,
+      "sha256": "8753e4c74e28b955dd908f0aece27dc0c521380588567192767da1fdb526807f"
+    },
+    {
+      "path": "e2e/voice-cards.spec.ts",
+      "bytes": 18799,
+      "sha256": "aea574a592000cf6de56f267c7498c4f765c7af1a69feb21b28a9dd7390e3197"
+    },
+    {
+      "path": "playwright.config.ts",
+      "bytes": 1322,
+      "sha256": "29bc777ad91e9d6262e6eef3ba5a1edbc4d916b42d602dca655c3e44f964a940"
+    },
+    {
+      "path": "scripts/p1-6-2-delivery-inventory.py",
+      "bytes": 3206,
+      "sha256": "9f56a9f560281ba70f0d72d180f76e93c6bb2b568040e47ed59061f57dd88d7c"
+    },
+    {
+      "path": "scripts/p1-6-2-final-evidence.py",
+      "bytes": 4324,
+      "sha256": "ee501caf8d8cbb7b5bd3c93b3600ae783672d0db1b91f02c7def3b31bacfe5b4"
+    },
+    {
+      "path": "scripts/p1-6-2-original-cpu.py",
+      "bytes": 1112,
+      "sha256": "7467af31f22bf320179bb24fcaad6b47e1b6b8e9b5716d9d4cde722cab0903cc"
+    },
+    {
+      "path": "scripts/p1-6-2-perf-run.py",
+      "bytes": 1534,
+      "sha256": "774fb533a4728cc5a50ef9e84ac3a53c33b78cbcc761fc0391600ba859d363f4"
+    },
+    {
+      "path": "scripts/p1-6-2-performance-summary.py",
+      "bytes": 6557,
+      "sha256": "a8ca1223fc013f5bc1f3bd6f5a40cbd338a1a3b7252bc79624df155f74e468bb"
+    },
+    {
+      "path": "scripts/p1-6-2-profile-build.py",
+      "bytes": 5914,
+      "sha256": "c18f54691713d1515a2d74e321d95d90d1faf94b97fe73f3a1dd1fc0b5b35ebe"
+    },
+    {
+      "path": "src/components/overlay/AnswerCard.tsx",
+      "bytes": 18042,
+      "sha256": "44742c1e49b41d63b9d4ba080190646fb7519d20d7271a122e893fba5c8d1b00"
+    },
+    {
+      "path": "src/components/overlay/OverlayStage.tsx",
+      "bytes": 34816,
+      "sha256": "cac24e215c5bf6d252fdfd28a970ef94336907b718d2f64968f41c568eb4cee8"
+    },
+    {
+      "path": "src/components/overlay/sentence-announcements.test.ts",
+      "bytes": 4670,
+      "sha256": "f017ff3f04b63e0d4bbb72153f14ee27b9313ebf50c49023ac3495eb067f3ec2"
+    },
+    {
+      "path": "src/components/overlay/sentence-announcements.ts",
+      "bytes": 2925,
+      "sha256": "1512d5caca627fc257829cefe4fc1195d5f305932e32bb854fa33a5ca231f1e3"
+    }
+  ]
+}

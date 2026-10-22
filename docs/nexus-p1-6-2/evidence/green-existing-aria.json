@@ -1,0 +1,124 @@
+{
+  "config": {
+    "argv": [
+      "/Users/apple/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "e2e/p1-6-2-regression.config.ts",
+      "--grep",
+      "normal motion live region"
+    ],
+    "configFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e/p1-6-2-regression.config.ts",
+    "rootDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/.review/p1-6-2/green-existing-aria",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "voice-*.spec.ts",
+          "p1-3.spec.ts"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2/docs/nexus-p1-6-2/evidence/green-existing-aria.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "voice-cards.spec.ts",
+      "file": "voice-cards.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "normal motion live region never announces a partial sentence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2772,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T08:43:34.578Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea44e424961dccc97d05-c05bd87d173a3ed399d3",
+          "file": "voice-cards.spec.ts",
+          "line": 195,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T08:43:33.599Z",
+    "duration": 3924.281,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

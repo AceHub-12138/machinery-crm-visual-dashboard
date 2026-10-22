@@ -1,0 +1,73 @@
+
+> dachuan-crm-visual-dashboard@0.1.0 test /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2
+> vitest run
+
+
+ RUN  v3.2.7 /Users/apple/Desktop/Codex/machinery-crm-visual-dashboard-p1-6-2
+
+ ✓ src/lib/layout.test.ts (32 tests) 12ms
+ ✓ src/lib/geo.test.ts (13 tests) 16ms
+ ✓ src/lib/screen-snapshot.test.ts (4 tests) 8ms
+ ✓ services/voice-orchestrator/test/http-input.test.ts (6 tests) 53ms
+ ✓ src/lib/voice/input.test.ts (13 tests) 36ms
+ ✓ src/lib/voice/card-builders.test.ts (13 tests) 25ms
+ ✓ src/components/overlay/JarvisCore.test.tsx (2 tests) 105ms
+ ✓ services/voice-orchestrator/test/utterance.test.ts (3 tests) 49ms
+ ✓ src/server/local-quality-boundary.test.ts (21 tests) 348ms
+ ✓ src/lib/screen-map-routes.test.ts (8 tests) 72ms
+ ✓ src/components/screen/motion/MotionDirector.test.ts (19 tests) 35ms
+ ✓ src/lib/nexus-p2-visual.test.tsx (4 tests) 76ms
+ ✓ services/voice-orchestrator/test/datasource.test.ts (7 tests) 9ms
+ ✓ services/voice-orchestrator/test/scripted.test.ts (12 tests) 51ms
+ ✓ src/components/screen/motion/DeferredRecalibration.test.ts (16 tests) 26ms
+ ✓ src/lib/public-screen-payload.test.ts (3 tests) 67ms
+ ✓ src/lib/voice/pcm-player.test.ts (26 tests) 328ms
+ ✓ src/lib/voice/task12.test.ts (15 tests) 44ms
+ ✓ src/lib/voice/params.test.ts (28 tests) 26ms
+ ✓ services/voice-orchestrator/test/trace.test.ts (23 tests) 9ms
+ ✓ src/lib/freshness.test.ts (2 tests) 22ms
+ ✓ src/lib/voice/screen-data-reconcile.test.ts (40 tests) 140ms
+ ✓ src/lib/font-scale.test.ts (5 tests) 42ms
+ ✓ src/lib/format.test.ts (6 tests) 14ms
+ ✓ services/voice-orchestrator/test/orchestrator.test.ts (33 tests) 397ms
+ ✓ services/voice-orchestrator/test/inject-context.test.ts (10 tests) 67ms
+ ✓ src/components/overlay/motion/useXiaochuanMotion.test.ts (5 tests) 13ms
+ ✓ src/lib/feed-mask.test.ts (2 tests) 11ms
+ ✓ src/lib/nexus-fields.test.tsx (9 tests) 402ms
+ ✓ src/lib/mock.test.ts (3 tests) 4ms
+ ✓ src/lib/voice/microphone-barge.test.ts (9 tests) 16ms
+ ✓ src/lib/voice/protocol.test.ts (24 tests) 10ms
+ ✓ services/voice-orchestrator/test/llm.test.ts (11 tests) 18ms
+ ✓ src/components/screen/motion/GsapScene.test.ts (3 tests) 9ms
+ ✓ src/lib/text-layout.test.ts (5 tests) 6ms
+ ✓ src/components/overlay/motion/XiaochuanTimeline.test.ts (7 tests) 11ms
+ ✓ src/lib/voice/echo-similarity.test.ts (12 tests) 5ms
+ ✓ services/voice-orchestrator/test/platform-mcp.test.ts (6 tests) 7ms
+ ✓ src/components/screen/motion/QualityPolicy.test.ts (28 tests) 8ms
+ ✓ src/lib/voice/spoken-normalize.test.ts (35 tests) 5ms
+ ✓ src/lib/voice/live-source.test.ts (9 tests) 5ms
+ ✓ src/components/screen/motion/calibrateRaf.test.ts (4 tests) 4ms
+ ✓ src/components/screen/motion/GsapTickerOwner.test.ts (4 tests) 4ms
+ ✓ src/components/screen/motion/quality-permission.test.ts (16 tests) 3ms
+ ✓ src/lib/voice/session-machine.test.ts (11 tests) 5ms
+ ✓ src/components/overlay/sentence-announcements.test.ts (9 tests) 4ms
+ ✓ src/components/overlay/motion/permission.test.ts (21 tests) 5ms
+ ✓ src/lib/voice/intents.test.ts (39 tests) 3ms
+ ✓ services/voice-orchestrator/test/config.test.ts (9 tests) 10ms
+ ✓ services/voice-orchestrator/test/ws-server.test.ts (19 tests) 1053ms
+   ✓ ws hub — 2026-09-30 审核修复 > 已声明角色的连接不受 hello 截止影响  404ms
+   ✓ ws hub — 2026-09-30 审核修复 > 心跳:idleTimeoutMs 内无任何入站数据 → 断开(审核 M5)  305ms
+ ✓ src/lib/region-zone.test.ts (1 test) 2ms
+ ✓ src/lib/voice/microphone-mode.test.ts (1 test) 2ms
+ ✓ src/lib/voice/card-presentation.test.ts (4 tests) 3ms
+ ✓ src/lib/target.test.ts (2 tests) 1ms
+ ✓ services/voice-orchestrator/test/secrets.test.ts (1 test) 2ms
+ ✓ scripts/voice-echo-metrics.test.ts (4 tests) 2ms
+ ✓ src/components/overlay/motion/amplitude-source.test.ts (1 test) 1ms
+ ✓ services/voice-orchestrator/test/listen-repair.test.ts (40 tests) 1215ms
+ ✓ services/voice-orchestrator/test/audio.test.ts (29 tests) 1226ms
+
+ Test Files  59 passed (59)
+      Tests  747 passed (747)
+   Start at  05:44:54
+   Duration  1.95s (transform 2.73s, setup 0ms, collect 8.41s, tests 6.15s, environment 12ms, prepare 4.30s)

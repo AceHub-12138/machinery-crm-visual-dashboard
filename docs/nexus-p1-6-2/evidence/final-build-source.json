@@ -1,0 +1,17 @@
+{
+  "createdAt": "2026-10-22T00:15:48.522550+00:00",
+  "buildId": "MeX7Jq5OSQjb09zYkxmTL",
+  "base": "5ac9cff6398839d776ee5f92ac4fc34da92c9b3b",
+  "branch": "codex/nexus-p1-6-2-gsap-compatibility",
+  "productFiles": {
+    "src/components/overlay/AnswerCard.tsx": "44742c1e49b41d63b9d4ba080190646fb7519d20d7271a122e893fba5c8d1b00",
+    "src/components/overlay/OverlayStage.tsx": "cac24e215c5bf6d252fdfd28a970ef94336907b718d2f64968f41c568eb4cee8",
+    "src/components/overlay/sentence-announcements.ts": "1512d5caca627fc257829cefe4fc1195d5f305932e32bb854fa33a5ca231f1e3"
+  },
+  "testSequence": [
+    "GSAP complete 144",
+    "Legacy complete 144",
+    "P1.6 + P1.6.1 + P1.6.2 complete 35"
+  ],
+  "noProductEditsAfterThisSnapshot": true
+}

@@ -1,0 +1,27 @@
+[WebServer] (node:26044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:26045) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:26046) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:26048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:26049) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:26055) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/p1-6-2.spec.ts:53:3 › legacy visible full text and complete-sentence compatibility notifications stay independent (2.1s)
+  ✓   2 e2e/p1-6-2.spec.ts:61:40 › legacy PCM completion owns notifications with reduced=false (5.0s)
+  ✓   3 e2e/p1-6-2.spec.ts:61:40 › legacy PCM completion owns notifications with reduced=true (4.8s)
+  ✓   4 e2e/p1-6-2.spec.ts:71:3 › legacy interruption, replacement and folding never republish the old answer (4.6s)
+  ✓   5 e2e/p1-6-2.spec.ts:81:3 › legacy unavailable audio keeps safe complete notifications and reduced text access (2.0s)
+  ✓   6 e2e/p1-6-2.spec.ts:53:3 › gsap visible full text and complete-sentence compatibility notifications stay independent (1.9s)
+  ✓   7 e2e/p1-6-2.spec.ts:61:40 › gsap PCM completion owns notifications with reduced=false (5.0s)
+  ✓   8 e2e/p1-6-2.spec.ts:61:40 › gsap PCM completion owns notifications with reduced=true (4.8s)
+  ✓   9 e2e/p1-6-2.spec.ts:71:3 › gsap interruption, replacement and folding never republish the old answer (4.6s)
+  ✓  10 e2e/p1-6-2.spec.ts:81:3 › gsap unavailable audio keeps safe complete notifications and reduced text access (1.9s)
+
+  10 passed (39.4s)

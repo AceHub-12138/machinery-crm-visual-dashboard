@@ -1,0 +1,345 @@
+{
+  "base": "5ac9cff6398839d776ee5f92ac4fc34da92c9b3b",
+  "unchanged": [
+    {
+      "path": "services/voice-local/.env.example",
+      "sha256": "7ccc56ed6bb889fc6190502d6a6a145476aa61e1f3d9d8948a183cc1e5fb8830"
+    },
+    {
+      "path": "services/voice-local/README.md",
+      "sha256": "a94c117e8bfd232e73bbb2ac15be936bd5932c0e0e425494c012498e638f4bcf"
+    },
+    {
+      "path": "services/voice-local/calibrate.py",
+      "sha256": "93e3cafe828a63fbdf3095c58a2f93ab53f8c5af55b5f45b90fb7fb99dd75ff5"
+    },
+    {
+      "path": "services/voice-local/core.py",
+      "sha256": "f53723255c46e3c313500f046e42e11648dc67ea0db5d6a981370d64779aa629"
+    },
+    {
+      "path": "services/voice-local/decoder_prime.py",
+      "sha256": "257b132fc0d5f9f89d91081bc056b6b67965c160939501e5ed480f8be8a181b7"
+    },
+    {
+      "path": "services/voice-local/evaluate_styles.py",
+      "sha256": "d776809c03d6070ee916a37fb9d157af5cb63529c77ece56bedb8c1758c9e846"
+    },
+    {
+      "path": "services/voice-local/gpu_queue.py",
+      "sha256": "9a9d630fe158b6ab9a479eb572640c8dbc8907b39e1b269a169bb9590a6d76fe"
+    },
+    {
+      "path": "services/voice-local/requirements.lock.txt",
+      "sha256": "81727fd4b509ac057c7bb906cd247b34fa7555b4bc74ef9f802be673f2a2262a"
+    },
+    {
+      "path": "services/voice-local/requirements.txt",
+      "sha256": "b8a0a8dc675376d4ee8bee75af4c4c2b0c373bfe4f2a91d682e43657cecb1d5f"
+    },
+    {
+      "path": "services/voice-local/run.py",
+      "sha256": "63e548072eb091d1226eb78269156ff900d99ec1c7b15a097d07105706d5429a"
+    },
+    {
+      "path": "services/voice-local/server.py",
+      "sha256": "67832da692d332513e505ee1cc18a3465ebdb198004ddf9110e76dc74a175bb6"
+    },
+    {
+      "path": "services/voice-local/test_decoder_prime.py",
+      "sha256": "a68e0ca17e467b2a58a447eb39f967b3526c4a1a9d2485694b52e79b21ad087e"
+    },
+    {
+      "path": "services/voice-local/test_gpu_queue.py",
+      "sha256": "38a9515cbcf1d2625d72af17e10600326550f34c29da23decbc33f688463efc2"
+    },
+    {
+      "path": "services/voice-local/test_mlx_cancel.py",
+      "sha256": "28819dd9d06008ec1be29f5ec6d9ea47372dd27b8133ddd61c26ebc6779557d4"
+    },
+    {
+      "path": "services/voice-local/test_voice_local.py",
+      "sha256": "237734cacc307578e5ceb8d6f5338d28a21fcb570b4209d95f6e4bd537a9f75c"
+    },
+    {
+      "path": "services/voice-local/verify_decoder_prime.py",
+      "sha256": "237946c4b759ee41f1c16a47474f699e4b0fca44614f367ef2fe2742d9e269c5"
+    },
+    {
+      "path": "services/voice-orchestrator/src/config.ts",
+      "sha256": "36dcb371f4f8b089be648fed4070a236a20fe1b22feb54b80af7b423d8f2dfa3"
+    },
+    {
+      "path": "services/voice-orchestrator/src/datasource/index.ts",
+      "sha256": "dac6ae7243e465a0a9e702c7958de77ea05f64650d30e2ade808a50dfdc268e2"
+    },
+    {
+      "path": "services/voice-orchestrator/src/datasource/inject-context.ts",
+      "sha256": "a538af58814f23bbdedc049a496ce505ba8be8a81d4aa507ea603969d1b9fbbc"
+    },
+    {
+      "path": "services/voice-orchestrator/src/datasource/platform-mcp.ts",
+      "sha256": "6a9b54f1dc77cc74111b70b21c497b9384126f9dfb7844124305ff873d5c70af"
+    },
+    {
+      "path": "services/voice-orchestrator/src/guard/redaction.ts",
+      "sha256": "490e21346005b557515382ef93356cad8ddf22422c59b6f2275e03a276cfe13b"
+    },
+    {
+      "path": "services/voice-orchestrator/src/guard/token.ts",
+      "sha256": "9a1f9dd73579d7579581a7ee195a2d45cf345194866362ee57cef433dbb6ac1a"
+    },
+    {
+      "path": "services/voice-orchestrator/src/http-input.ts",
+      "sha256": "70c18c33908dfd18b7b6a55e619d26a69ee952076b46c3bf92b1b549334d4eb8"
+    },
+    {
+      "path": "services/voice-orchestrator/src/listen-window.ts",
+      "sha256": "9703eb57468ebe94a46809f5e1f3be2b7de95e153f8f1de40b357b116c1438e1"
+    },
+    {
+      "path": "services/voice-orchestrator/src/llm/scripted.ts",
+      "sha256": "b5a1362dafccc550cc942adf3d4d9c78ee43688836288ad8ba0176c4e05da8c1"
+    },
+    {
+      "path": "services/voice-orchestrator/src/llm/types.ts",
+      "sha256": "54138611dda9e8061a94b1151c752be11f2c23fc2f00651acc54df727b3896b2"
+    },
+    {
+      "path": "services/voice-orchestrator/src/llm/zhipu.ts",
+      "sha256": "0e07855eabff8b8734708d45a1a4aa30a6cb95cf24ac70bca243d839ed8a71de"
+    },
+    {
+      "path": "services/voice-orchestrator/src/main.ts",
+      "sha256": "e1e6996c092c56ae90b174d07a271e297ef0ddce6d87d8f25ca3182e25beba3d"
+    },
+    {
+      "path": "services/voice-orchestrator/src/orchestrator.ts",
+      "sha256": "d80256dca98b3551620cbe580e2a1999f34abb6d3f614463bf758be069382892"
+    },
+    {
+      "path": "services/voice-orchestrator/src/trace/metrics.ts",
+      "sha256": "198e9157784d06a0b04b21649e911a399b5af7863a205293aa7ea007fab0d3c9"
+    },
+    {
+      "path": "services/voice-orchestrator/src/tts/audio-store.ts",
+      "sha256": "de13299053fb65d86d8396ce7c15b96c5c1dca9cd27d9d849a20b3a4d5909e69"
+    },
+    {
+      "path": "services/voice-orchestrator/src/tts/fixed-lines.ts",
+      "sha256": "fd37a53cb2479734cf3b96818ea67ef212744497f55673b03bcf9c80d387f253"
+    },
+    {
+      "path": "services/voice-orchestrator/src/tts/http-audio.ts",
+      "sha256": "d0293e484d0efeaba31dce04dcf71cbdc61d13ae07488013c459fbcee1d4d5d9"
+    },
+    {
+      "path": "services/voice-orchestrator/src/tts/voice-local-client.ts",
+      "sha256": "51b04852c0b7d74b83f9a9b756f382b966dfa821b7ad67c76ccd5ff4029710a7"
+    },
+    {
+      "path": "services/voice-orchestrator/src/ws/codec.ts",
+      "sha256": "49794f1c0e7dee89e9755beb5143f6ce7c4f6dcb3db2278223e6fdfc0a3cb149"
+    },
+    {
+      "path": "services/voice-orchestrator/src/ws/ws-server.ts",
+      "sha256": "7690ba61a422a49c0d7b321bdbfbf9b341ec20c4e04d44ee5d7e835c69d85711"
+    },
+    {
+      "path": "src/app/poc/xiaochuan/page.tsx",
+      "sha256": "9504a7dcbd1afce9ccd6ba02b1bd6d990d9a3d26430761cb3e5a0f98842afd26"
+    },
+    {
+      "path": "src/app/screen/sales/page.tsx",
+      "sha256": "a8e5cefb789f924ba45e48d661429ec2900d27828abf862b708a916a6fa660d3"
+    },
+    {
+      "path": "src/components/overlay/JarvisCore.tsx",
+      "sha256": "7fca9ff67e4b0d8d4e4f9920f5f9c7db017701b2ba006fb710e86afe6d8b0fda"
+    },
+    {
+      "path": "src/components/overlay/cards/BriefCard.tsx",
+      "sha256": "322a1590b6692e811724eb51a70de19fb506ca6ce004facd619c47d27135c1aa"
+    },
+    {
+      "path": "src/components/overlay/cards/CardMetrics.tsx",
+      "sha256": "f5ac92b907eccf37bff406937a60702c9e78377087886a5ad38bc82a1a6b06fe"
+    },
+    {
+      "path": "src/components/overlay/cards/CompletionRingCard.tsx",
+      "sha256": "8d9ddc5378efc0caeb70aafcee7cf0d6167431196c7329a129f1e046a8455594"
+    },
+    {
+      "path": "src/components/overlay/cards/CustomersShipmentsCard.tsx",
+      "sha256": "aa751d487ccf0772ccedece7ad7718259f1f84448cb96e98b0a7f4701dd8aafe"
+    },
+    {
+      "path": "src/components/overlay/cards/ProgressCard.tsx",
+      "sha256": "387c53b6528d4c3a66876dae1adbad95d18fc44723d00084385c166b1dabee3e"
+    },
+    {
+      "path": "src/components/overlay/cards/RegionCard.tsx",
+      "sha256": "986df01fbbe90576b741a7ecc469d46e4d4d5e83e58ac41b29ff5077ff33c580"
+    },
+    {
+      "path": "src/components/overlay/cards/registry.tsx",
+      "sha256": "d71d3a553e5957c9d7ad16aa1b7c4cf3b25e1fc5ea27ff9cbad99409432a7292"
+    },
+    {
+      "path": "src/components/overlay/motion/XiaochuanTimeline.ts",
+      "sha256": "01db510bd8ced32b9c54a6eef2835c7909c630c02129610c6526b1a1d2d48446"
+    },
+    {
+      "path": "src/components/overlay/motion/amplitude-source.ts",
+      "sha256": "82af2c5fda8e715fd3b202a85bd91b3250c236237d1851fe3634a85e28e376af"
+    },
+    {
+      "path": "src/components/overlay/motion/permission.ts",
+      "sha256": "080b09608c9767b577a1aef14a4ee783c5da3a8c70ad65b173f996e4a79fc382"
+    },
+    {
+      "path": "src/components/overlay/motion/useXiaochuanMotion.ts",
+      "sha256": "ac7565164504257beeaa2c1a69be1914d7c4ea041e48df7494e3cb7b7730436f"
+    },
+    {
+      "path": "src/components/overlay/overlay.css",
+      "sha256": "f8de49a7b37425f2c6ae3db1d1879d82379b616dc658c3a73b461e349d24c9c5"
+    },
+    {
+      "path": "src/components/screen/motion/DeferredRecalibration.ts",
+      "sha256": "ff9d4e17997572ba59735598848af29a5ee7227123856a51f3fd37328282e0bf"
+    },
+    {
+      "path": "src/components/screen/motion/GsapMotionProvider.tsx",
+      "sha256": "701d216116e3a07874f194f741e92b782e713bd53460fed6f1e99d94d24f51c5"
+    },
+    {
+      "path": "src/components/screen/motion/GsapScene.ts",
+      "sha256": "9c74f7b52f6a6c8ad1e4a9617cde2c8de42123f85e278bdd5d84f1d2263aedb6"
+    },
+    {
+      "path": "src/components/screen/motion/GsapTickerOwner.ts",
+      "sha256": "97bce4c0e00f8af53ca446f257d772583ee776243d088dfa4141974e14ae227c"
+    },
+    {
+      "path": "src/components/screen/motion/MotionDirector.ts",
+      "sha256": "214a5b500bdec4cb30f549c30ab57dc1a9dc00c307f00a06e99a72124d8adc90"
+    },
+    {
+      "path": "src/components/screen/motion/MotionProvider.tsx",
+      "sha256": "514a5bf042042ee65e0093d1ae32c4d683ec6ddb63716f242f4e0b84d99e5fdd"
+    },
+    {
+      "path": "src/components/screen/motion/QualityPolicy.ts",
+      "sha256": "677c616f48bd3395fe191a448f93d8251270bda8ac4538415c30958790373dc1"
+    },
+    {
+      "path": "src/components/screen/motion/calibrateRaf.ts",
+      "sha256": "f5ddfde9bf3aebfff1e95b8124498f51101a350195cec7409fa46b250eadea03"
+    },
+    {
+      "path": "src/components/screen/motion/config.ts",
+      "sha256": "85db4484ecd198a08929581e9389a3c08646d4e119bdedcb8e3e16538a380fb0"
+    },
+    {
+      "path": "src/components/screen/motion/quality-permission.ts",
+      "sha256": "434aac231421ece93cc4e8f4e68a2c99b2f25ac2d51a37dd13327fa67db15d06"
+    },
+    {
+      "path": "src/components/screen/motion/useSceneMotion.ts",
+      "sha256": "e4a60ea9ea93f44fec2970680a76723e343745ca23dbf5c2272c5af70c69c240"
+    },
+    {
+      "path": "src/lib/public-screen-payload.ts",
+      "sha256": "27c41a197da3f6b71a753fe193cfcff39ff9320ff457fd20897d84170e714759"
+    },
+    {
+      "path": "src/lib/voice/asr-text.ts",
+      "sha256": "b977262d8e108e5399cb750bbf25bc3d5f82e0b7325d5fb4f47622da221e23b6"
+    },
+    {
+      "path": "src/lib/voice/card-builders.ts",
+      "sha256": "56e8391b612c18078c2d535e9810cb1f3833090de6e0a427b9d7fca9f05e0ecc"
+    },
+    {
+      "path": "src/lib/voice/card-presentation.ts",
+      "sha256": "cf05758a5d8960e3c564254aa306dcadf2ea474b5252adceb2fa7f6888cc9e06"
+    },
+    {
+      "path": "src/lib/voice/deadline.ts",
+      "sha256": "3988949e025b7f9733fe330bec45d41c12a0cd8c05371701ac9521f456f407e6"
+    },
+    {
+      "path": "src/lib/voice/demo-questions.ts",
+      "sha256": "ee9475f12f9b2fdb7a5bfd79cbb9c04f91ad3b557c2ac4828916a6d2eb3cae1f"
+    },
+    {
+      "path": "src/lib/voice/demo-script.ts",
+      "sha256": "948f675c5e17a87e6fdd9edff1f8a4edbc4a56cab02b7f3fbafe8a436b44ea72"
+    },
+    {
+      "path": "src/lib/voice/echo-similarity.ts",
+      "sha256": "243da4504468562dab519a95ee9250320e53e7f8910b38d2eaf903a28ab264e5"
+    },
+    {
+      "path": "src/lib/voice/intent-answers.ts",
+      "sha256": "03f6e96b66b0e5deff5345c121dcca45d96467f0baa48bed04c16f67bcc309ee"
+    },
+    {
+      "path": "src/lib/voice/intent-cases.ts",
+      "sha256": "0909c4daaff647501b31cdee831d0cc882f5ea7e9b31c5c8bb7b666644d9c429"
+    },
+    {
+      "path": "src/lib/voice/intents.ts",
+      "sha256": "36e227c927e8c31c8bd4bd55e411642172de1c446869435b9e9c8cfc00feff09"
+    },
+    {
+      "path": "src/lib/voice/live-source.ts",
+      "sha256": "6add095d4031c3cf296e2423845ebecb5b8c1f3dddfa4cb1c486deb9736c7afe"
+    },
+    {
+      "path": "src/lib/voice/microphone.ts",
+      "sha256": "a2cb87d51bc103cead713f14a778448aadaa4e1a8b245642b310fa610404441d"
+    },
+    {
+      "path": "src/lib/voice/params.ts",
+      "sha256": "aa751d2ee295425e65a186e819bab3c6bda70cdf52db058fd11dc0307d6d0df5"
+    },
+    {
+      "path": "src/lib/voice/pcm-player.ts",
+      "sha256": "cd3bf4684e6fe753f0e371ee1b0b234fd15860257cd9cbcf3565654fc64b1788"
+    },
+    {
+      "path": "src/lib/voice/playback-timing.ts",
+      "sha256": "4cf712dad67587b846a43762cd5bc3f16d4fd18a1071b1a22177b3e2161529a4"
+    },
+    {
+      "path": "src/lib/voice/protocol.ts",
+      "sha256": "8155472b19d44f88f8aa506353b7a3208568d4f81a0f318d262498f810f66015"
+    },
+    {
+      "path": "src/lib/voice/public-payload.ts",
+      "sha256": "bc0aca479152dbeb38d52638bf21518ab64f845f8a7b30f8811a31829ff934bd"
+    },
+    {
+      "path": "src/lib/voice/session-machine.ts",
+      "sha256": "83bfd974b1390fb3bec75bfd41a769d2bac98d30cf7a5ad3e77655e80dc7257d"
+    },
+    {
+      "path": "src/lib/voice/speech-style.ts",
+      "sha256": "061d08e05baa367af375708b63a59f81b07345cf1e15e204417e88d830817079"
+    },
+    {
+      "path": "src/lib/voice/spoken-normalize.ts",
+      "sha256": "80700b45709e809e9db059d05b5fadeeac4be83193d1f7370f265ae1244fa91e"
+    },
+    {
+      "path": "src/server/local-quality-boundary.mjs",
+      "sha256": "820af2708bc451f0bc09828e3ea42dd5ef57c5e6999a024bac44b349c1f92344"
+    },
+    {
+      "path": "src/server/local-quality-request.ts",
+      "sha256": "3bcd0f538a45d2693cc6d2ab49d47a2ef78cb6209ec35f8c0d760c65e4126845"
+    }
+  ]
+}
